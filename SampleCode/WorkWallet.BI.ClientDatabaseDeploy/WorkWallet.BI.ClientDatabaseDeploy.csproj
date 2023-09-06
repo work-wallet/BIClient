@@ -1,0 +1,183 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="appsettings.json" />
+    <None Remove="Scripts\Clean\DropStoredProcedures.sql" />
+    <None Remove="Scripts\Schema\0001 - Common.sql" />
+    <None Remove="Scripts\Schema\0002 - CommonPatch.sql" />
+    <None Remove="Scripts\Schema\0003 - SiteAudits.sql" />
+    <None Remove="Scripts\Schema\0004 - ReportedIssues.sql" />
+    <None Remove="Scripts\Schema\0005 - Inductions.sql" />
+    <None Remove="Scripts\Schema\0006 - Permits.sql" />
+    <None Remove="Scripts\Schema\0007 - Actions.sql" />
+    <None Remove="Scripts\StoredProcedures\mart.ETL_DeleteActionFacts.sql" />
+    <None Remove="Scripts\StoredProcedures\mart.ETL_DeleteInductionFacts.sql" />
+    <None Remove="Scripts\StoredProcedures\mart.ETL_DeletePermitFacts.sql" />
+    <None Remove="Scripts\StoredProcedures\mart.ETL_DeleteReportedIssueFacts.sql" />
+    <None Remove="Scripts\StoredProcedures\mart.ETL_DeleteSiteAuditFacts.sql" />
+    <None Remove="Scripts\StoredProcedures\mart.ETL_LoadActions.sql" />
+    <None Remove="Scripts\StoredProcedures\mart.ETL_LoadActionUpdates.sql" />
+    <None Remove="Scripts\StoredProcedures\mart.ETL_LoadInductionCustomQuestionFact.sql" />
+    <None Remove="Scripts\StoredProcedures\mart.ETL_LoadInductions.sql" />
+    <None Remove="Scripts\StoredProcedures\mart.ETL_LoadPermitChecklistAnswerFact.sql" />
+    <None Remove="Scripts\StoredProcedures\mart.ETL_LoadPermits.sql" />
+    <None Remove="Scripts\StoredProcedures\mart.ETL_LoadReportedIssueBodyPartFact.sql" />
+    <None Remove="Scripts\StoredProcedures\mart.ETL_LoadReportedIssueBranchOptionFact.sql" />
+    <None Remove="Scripts\StoredProcedures\mart.ETL_LoadReportedIssueOptionSelectFact.sql" />
+    <None Remove="Scripts\StoredProcedures\mart.ETL_LoadReportedIssuePersonFact.sql" />
+    <None Remove="Scripts\StoredProcedures\mart.ETL_LoadReportedIssueRootCauseAnalysisFact.sql" />
+    <None Remove="Scripts\StoredProcedures\mart.ETL_LoadReportedIssues.sql" />
+    <None Remove="Scripts\StoredProcedures\mart.ETL_LoadSiteAuditChecklistFact.sql" />
+    <None Remove="Scripts\StoredProcedures\mart.ETL_LoadSiteAuditChecklistItemFact.sql" />
+    <None Remove="Scripts\StoredProcedures\mart.ETL_LoadSiteAudits.sql" />
+    <None Remove="Scripts\StoredProcedures\mart.ETL_MaintainActionDimension.sql" />
+    <None Remove="Scripts\StoredProcedures\mart.ETL_MaintainInductionCustomQuestionDimension.sql" />
+    <None Remove="Scripts\StoredProcedures\mart.ETL_MaintainInductionDimension.sql" />
+    <None Remove="Scripts\StoredProcedures\mart.ETL_MaintainInductionTakenDimension.sql" />
+    <None Remove="Scripts\StoredProcedures\mart.ETL_MaintainLocationDimension.sql" />
+    <None Remove="Scripts\StoredProcedures\mart.ETL_MaintainPermitCategoryDimension.sql" />
+    <None Remove="Scripts\StoredProcedures\mart.ETL_MaintainPermitChecklistAnswerDimension.sql" />
+    <None Remove="Scripts\StoredProcedures\mart.ETL_MaintainPermitDimension.sql" />
+    <None Remove="Scripts\StoredProcedures\mart.ETL_MaintainReportedIssueBodyPartDimension.sql" />
+    <None Remove="Scripts\StoredProcedures\mart.ETL_MaintainReportedIssueBranchOptionDimension.sql" />
+    <None Remove="Scripts\StoredProcedures\mart.ETL_MaintainReportedIssueCategoryDimension.sql" />
+    <None Remove="Scripts\StoredProcedures\mart.ETL_MaintainReportedIssueDimension.sql" />
+    <None Remove="Scripts\StoredProcedures\mart.ETL_MaintainReportedIssueOptionSelectDimension.sql" />
+    <None Remove="Scripts\StoredProcedures\mart.ETL_MaintainReportedIssuePersonDimension.sql" />
+    <None Remove="Scripts\StoredProcedures\mart.ETL_MaintainSiteAuditChecklistDimension.sql" />
+    <None Remove="Scripts\StoredProcedures\mart.ETL_MaintainSiteAuditChecklistItemDimension.sql" />
+    <None Remove="Scripts\StoredProcedures\mart.ETL_MaintainSiteAuditDimension.sql" />
+    <None Remove="Scripts\StoredProcedures\mart.ETL_MaintainSiteAuditTypeDimension.sql" />
+    <None Remove="Scripts\StoredProcedures\mart.ETL_MaintainWalletDimension.sql" />
+    <None Remove="Scripts\StoredProcedures\mart.ETL_ResetActions.sql" />
+    <None Remove="Scripts\StoredProcedures\mart.ETL_ResetCommon.sql" />
+    <None Remove="Scripts\StoredProcedures\mart.ETL_ResetInductions.sql" />
+    <None Remove="Scripts\StoredProcedures\mart.ETL_ResetPermits.sql" />
+    <None Remove="Scripts\StoredProcedures\mart.ETL_ResetReportedIssues.sql" />
+    <None Remove="Scripts\StoredProcedures\mart.ETL_ResetSiteAudits.sql" />
+    <None Remove="Scripts\StoredProcedures\mart.ETL_UpdateLastSync.sql" />
+    <None Remove="Scripts\Types\mart.ETL_ActionTable.sql" />
+    <None Remove="Scripts\Types\mart.ETL_ActionUpdateTable.sql" />
+    <None Remove="Scripts\Types\mart.ETL_InductionCustomQuestionTable.sql" />
+    <None Remove="Scripts\Types\mart.ETL_InductionTable.sql" />
+    <None Remove="Scripts\Types\mart.ETL_InductionTakenTable.sql" />
+    <None Remove="Scripts\Types\mart.ETL_LocationTable.sql" />
+    <None Remove="Scripts\Types\mart.ETL_PermitToWorkCategoryTable.sql" />
+    <None Remove="Scripts\Types\mart.ETL_PermitToWorkChecklistAnswerTable.sql" />
+    <None Remove="Scripts\Types\mart.ETL_PermitToWorkTable.sql" />
+    <None Remove="Scripts\Types\mart.ETL_ReportedIssueBodyPartTable.sql" />
+    <None Remove="Scripts\Types\mart.ETL_ReportedIssueBranchOptionTable.sql" />
+    <None Remove="Scripts\Types\mart.ETL_ReportedIssueCategoryTable.sql" />
+    <None Remove="Scripts\Types\mart.ETL_ReportedIssueOptionSelectTable.sql" />
+    <None Remove="Scripts\Types\mart.ETL_ReportedIssuePersonTable.sql" />
+    <None Remove="Scripts\Types\mart.ETL_ReportedIssueRootCauseAnalysisTable.sql" />
+    <None Remove="Scripts\Types\mart.ETL_ReportedIssueTable.sql" />
+    <None Remove="Scripts\Types\mart.ETL_SiteAuditChecklistFactTable.sql" />
+    <None Remove="Scripts\Types\mart.ETL_SiteAuditChecklistItemFactTable.sql" />
+    <None Remove="Scripts\Types\mart.ETL_SiteAuditChecklistItemTable.sql" />
+    <None Remove="Scripts\Types\mart.ETL_SiteAuditChecklistTable.sql" />
+    <None Remove="Scripts\Types\mart.ETL_SiteAuditTable.sql" />
+    <None Remove="Scripts\Types\mart.ETL_SiteAuditTypeTable.sql" />
+    <None Remove="Scripts\Types\mart.ETL_WalletTable.sql" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="appsettings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Scripts\Clean\DropStoredProcedures.sql" />
+    <EmbeddedResource Include="Scripts\Schema\0001 - Common.sql" />
+    <EmbeddedResource Include="Scripts\Schema\0002 - CommonPatch.sql" />
+    <EmbeddedResource Include="Scripts\Schema\0003 - SiteAudits.sql" />
+    <EmbeddedResource Include="Scripts\Schema\0004 - ReportedIssues.sql" />
+    <EmbeddedResource Include="Scripts\Schema\0005 - Inductions.sql" />
+    <EmbeddedResource Include="Scripts\Schema\0006 - Permits.sql" />
+    <EmbeddedResource Include="Scripts\Schema\0007 - Actions.sql" />
+    <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_DeleteActionFacts.sql" />
+    <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_DeleteInductionFacts.sql" />
+    <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_DeletePermitFacts.sql" />
+    <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_DeleteReportedIssueFacts.sql" />
+    <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_DeleteSiteAuditFacts.sql" />
+    <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_LoadActions.sql" />
+    <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_LoadActionUpdates.sql" />
+    <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_LoadInductionCustomQuestionFact.sql" />
+    <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_LoadInductions.sql" />
+    <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_LoadPermitChecklistAnswerFact.sql" />
+    <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_LoadPermits.sql" />
+    <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_LoadReportedIssueBodyPartFact.sql" />
+    <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_LoadReportedIssueBranchOptionFact.sql" />
+    <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_LoadReportedIssueOptionSelectFact.sql" />
+    <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_LoadReportedIssuePersonFact.sql" />
+    <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_LoadReportedIssueRootCauseAnalysisFact.sql" />
+    <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_LoadReportedIssues.sql" />
+    <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_LoadSiteAuditChecklistFact.sql" />
+    <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_LoadSiteAuditChecklistItemFact.sql" />
+    <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_LoadSiteAudits.sql" />
+    <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_MaintainActionDimension.sql" />
+    <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_MaintainInductionCustomQuestionDimension.sql" />
+    <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_MaintainInductionDimension.sql" />
+    <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_MaintainInductionTakenDimension.sql" />
+    <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_MaintainLocationDimension.sql" />
+    <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_MaintainPermitCategoryDimension.sql" />
+    <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_MaintainPermitChecklistAnswerDimension.sql" />
+    <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_MaintainPermitDimension.sql" />
+    <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_MaintainReportedIssueBodyPartDimension.sql" />
+    <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_MaintainReportedIssueBranchOptionDimension.sql" />
+    <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_MaintainReportedIssueCategoryDimension.sql" />
+    <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_MaintainReportedIssueDimension.sql" />
+    <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_MaintainReportedIssueOptionSelectDimension.sql" />
+    <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_MaintainReportedIssuePersonDimension.sql" />
+    <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_MaintainSiteAuditChecklistDimension.sql" />
+    <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_MaintainSiteAuditChecklistItemDimension.sql" />
+    <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_MaintainSiteAuditDimension.sql" />
+    <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_MaintainSiteAuditTypeDimension.sql" />
+    <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_MaintainWalletDimension.sql" />
+    <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_ResetActions.sql" />
+    <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_ResetCommon.sql" />
+    <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_ResetInductions.sql" />
+    <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_ResetPermits.sql" />
+    <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_ResetReportedIssues.sql" />
+    <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_ResetSiteAudits.sql" />
+    <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_UpdateLastSync.sql" />
+    <EmbeddedResource Include="Scripts\Types\mart.ETL_ActionTable.sql" />
+    <EmbeddedResource Include="Scripts\Types\mart.ETL_ActionUpdateTable.sql" />
+    <EmbeddedResource Include="Scripts\Types\mart.ETL_InductionCustomQuestionTable.sql" />
+    <EmbeddedResource Include="Scripts\Types\mart.ETL_InductionTable.sql" />
+    <EmbeddedResource Include="Scripts\Types\mart.ETL_InductionTakenTable.sql" />
+    <EmbeddedResource Include="Scripts\Types\mart.ETL_LocationTable.sql" />
+    <EmbeddedResource Include="Scripts\Types\mart.ETL_PermitToWorkCategoryTable.sql" />
+    <EmbeddedResource Include="Scripts\Types\mart.ETL_PermitToWorkChecklistAnswerTable.sql" />
+    <EmbeddedResource Include="Scripts\Types\mart.ETL_PermitToWorkTable.sql" />
+    <EmbeddedResource Include="Scripts\Types\mart.ETL_ReportedIssueBodyPartTable.sql" />
+    <EmbeddedResource Include="Scripts\Types\mart.ETL_ReportedIssueBranchOptionTable.sql" />
+    <EmbeddedResource Include="Scripts\Types\mart.ETL_ReportedIssueCategoryTable.sql" />
+    <EmbeddedResource Include="Scripts\Types\mart.ETL_ReportedIssueOptionSelectTable.sql" />
+    <EmbeddedResource Include="Scripts\Types\mart.ETL_ReportedIssuePersonTable.sql" />
+    <EmbeddedResource Include="Scripts\Types\mart.ETL_ReportedIssueRootCauseAnalysisTable.sql" />
+    <EmbeddedResource Include="Scripts\Types\mart.ETL_ReportedIssueTable.sql" />
+    <EmbeddedResource Include="Scripts\Types\mart.ETL_SiteAuditChecklistFactTable.sql" />
+    <EmbeddedResource Include="Scripts\Types\mart.ETL_SiteAuditChecklistItemFactTable.sql" />
+    <EmbeddedResource Include="Scripts\Types\mart.ETL_SiteAuditChecklistItemTable.sql" />
+    <EmbeddedResource Include="Scripts\Types\mart.ETL_SiteAuditChecklistTable.sql" />
+    <EmbeddedResource Include="Scripts\Types\mart.ETL_SiteAuditTable.sql" />
+    <EmbeddedResource Include="Scripts\Types\mart.ETL_SiteAuditTypeTable.sql" />
+    <EmbeddedResource Include="Scripts\Types\mart.ETL_WalletTable.sql" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="dbup-sqlserver" Version="5.0.8" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="6.0.1" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="6.0.1" />
+  </ItemGroup>
+
+</Project>
