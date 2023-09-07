@@ -71,8 +71,8 @@ All binaries target [.NET 6.0](https://dotnet.microsoft.com/en-us/download/dotne
 
 | Tool | Download URL | Executable | Config. File |
 | --- | --- | --- | --- |
-| Database deployment | [WorkWallet.BI.ClientDatabaseDeploy_2.0.1.0.zip](https://owlfileshare.blob.core.windows.net/share/workwalletbiclient/WorkWallet.BI.ClientDatabaseDeploy_2.0.1.0.zip) | `WorkWallet.BI.ClientDatabaseDeploy.exe` | `appsettings.json` |
-| Client sample | [WorkWallet.BI.ClientSample_2.0.1.0.zip](https://owlfileshare.blob.core.windows.net/share/workwalletbiclient/WorkWallet.BI.ClientSample_2.0.1.0.zip) | `WorkWallet.BI.ClientSample.exe` | `appsettings.json` |
+| Database deployment | [WorkWallet.BI.ClientDatabaseDeploy_2.0.1.0.zip](https://base.azureedge.net/bi-client/WorkWallet.BI.ClientDatabaseDeploy_2.0.1.0.zip) | `WorkWallet.BI.ClientDatabaseDeploy.exe` | `appsettings.json` |
+| Client sample | [WorkWallet.BI.ClientSample_2.0.1.0.zip](https://base.azureedge.net/bi-client/WorkWallet.BI.ClientSample_2.0.1.0.zip) | `WorkWallet.BI.ClientSample.exe` | `appsettings.json` |
 
 ## Creating or Upgrading the Database
 
