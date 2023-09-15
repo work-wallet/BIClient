@@ -75,7 +75,7 @@ namespace WorkWallet.BI.ClientServices.Processor
                 // note that we want to calculate this every iteration (in case server data has been added to)
                 totalPages = (context.FullCount - 1) / context.PageSize + 1;
 
-                _logger.LogInformation("API for {DataType} returned JSON of lenght {Length}", _dataType, json.Length);
+                _logger.LogInformation("API for {DataType} returned JSON of length {Length}", _dataType, json.Length);
                 _logger.LogInformation("Count: {Count}", context.Count);
                 _logger.LogInformation("FullCount: {FullCount}", context.FullCount);
                 _logger.LogInformation("LastSynchronizationVersion: {LastSynchronizationVersion}", context.LastSynchronizationVersion);
