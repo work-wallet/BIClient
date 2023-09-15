@@ -76,7 +76,7 @@ namespace WorkWallet.BI.ClientServices.Processor
                 throw new ApplicationException($"Failed to get token: {tokenResponse.Error}");
             }
 
-            _logger.LogInformation($"API access token obtained from {_options.ApiAccessAuthority} for client {_options.ApiAccessClientId}");
+            _logger.LogInformation("API access token obtained from {ApiAccessAuthority} for client {ApiAccessClientId}", _options.ApiAccessAuthority, _options.ApiAccessClientId);
 
             return tokenResponse;
         }
