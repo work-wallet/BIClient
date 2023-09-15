@@ -24,14 +24,14 @@ namespace WorkWallet.BI.ClientServices.DataStore
 
         public async Task<long?> GetLastSynchronizationVersionAsync(Guid walletId, string logType)
         {
-            _logger.LogInformation($"Obtaining last synchronization version for walletId '{walletId}' and logType '{logType}'");
+            _logger.LogInformation("Obtaining last synchronization version for walletId '{walletId}' and logType '{logType}'", walletId, logType);
 
             string sql = "SELECT LastSynchronizationVersion FROM mart.ETL_ChangeDetection WHERE WalletId = @walletId AND LogType = @logType AND IsLatest = 1";
 
-            using SqlConnection connection = new SqlConnection(ConnectionString);
+            using SqlConnection connection = new(ConnectionString);
             connection.Open();
 
-            using SqlCommand command = new SqlCommand(sql, connection);
+            using SqlCommand command = new(sql, connection);
 
             command.Parameters.Add("@walletId", SqlDbType.UniqueIdentifier).Value = walletId;
             command.Parameters.Add("@logType", SqlDbType.NVarChar).Value = logType;
@@ -40,7 +40,7 @@ namespace WorkWallet.BI.ClientServices.DataStore
 
             if (lastSynchronizationVersion.HasValue)
             {
-                _logger.LogInformation($"Last synchronization version: {lastSynchronizationVersion.Value}");
+                _logger.LogInformation("Last synchronization version: {lastSynchronizationVersion}", lastSynchronizationVersion.Value);
             }
             else
             {
@@ -52,14 +52,14 @@ namespace WorkWallet.BI.ClientServices.DataStore
 
         public async Task LoadAsync(string dataType, string json)
         {
-            using SqlConnection connection = new SqlConnection(ConnectionString);
+            using SqlConnection connection = new(ConnectionString);
             connection.Open();
 
             string sp = $"mart.ETL_Load{dataType}";
 
-            _logger.LogInformation($"Load json data: exec {sp}");
+            _logger.LogInformation("Load json data: exec {sp}", sp);
 
-            using SqlCommand command = new SqlCommand(sp, connection);
+            using SqlCommand command = new(sp, connection);
 
             command.CommandType = CommandType.StoredProcedure;
 
@@ -70,14 +70,14 @@ namespace WorkWallet.BI.ClientServices.DataStore
 
         public async Task UpdateLastSyncAsync(Guid walletId, string logType, long synchronizationVersion, int rowsProcessed)
         {
-            using SqlConnection connection = new SqlConnection(ConnectionString);
+            using SqlConnection connection = new(ConnectionString);
             connection.Open();
 
             string sp = "mart.ETL_UpdateLastSync";
 
-            _logger.LogInformation($"Update last sync: exec {sp} @walletId = '{walletId}' @logType = '{logType}' @synchronizationVersion = {synchronizationVersion} @rowsProcessed = {rowsProcessed}");
+            _logger.LogInformation("Update last sync: exec {sp} @walletId = '{walletId}' @logType = '{logType}' @synchronizationVersion = {synchronizationVersion} @rowsProcessed = {rowsProcessed}", sp, walletId, logType, synchronizationVersion, rowsProcessed);
 
-            using SqlCommand command = new SqlCommand(sp, connection);
+            using SqlCommand command = new(sp, connection);
 
             command.CommandType = CommandType.StoredProcedure;
 
@@ -91,14 +91,14 @@ namespace WorkWallet.BI.ClientServices.DataStore
 
         public async Task ResetAsync(Guid walletId, string dataType)
         {
-            using SqlConnection connection = new SqlConnection(ConnectionString);
+            using SqlConnection connection = new(ConnectionString);
             connection.Open();
 
             string sp = $"mart.ETL_Reset{dataType}";
 
-            _logger.LogInformation($"Reset data: exec {sp} @walletId = '{walletId}'");
+            _logger.LogInformation("Reset data: exec {sp} @walletId = '{walletId}'", sp, walletId);
 
-            using SqlCommand command = new SqlCommand(sp, connection);
+            using SqlCommand command = new(sp, connection);
 
             command.CommandType = CommandType.StoredProcedure;
 

@@ -10,7 +10,7 @@ namespace WorkWallet.BI.ClientDatabaseDeploy.Utils
             // the scriptName is passed in with the name of assembly and folders with '.' replacing the path separator.
             string? assemblyName = Assembly.GetExecutingAssembly().GetName().Name!.Replace("/", ".");
 
-            Regex rx = new Regex($"^{assemblyName}\\.Scripts\\.(Clean|Schema|Types|StoredProcedures)\\..+\\.sql",
+            Regex rx = new($"^{assemblyName}\\.Scripts\\.(Clean|Schema|Types|StoredProcedures)\\..+\\.sql",
                 RegexOptions.Compiled | RegexOptions.IgnoreCase);
             Match m = rx.Match(scriptName);
             if (m.Success)
