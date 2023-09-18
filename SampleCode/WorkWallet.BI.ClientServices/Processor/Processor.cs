@@ -14,7 +14,7 @@ namespace WorkWallet.BI.ClientServices.Processor
     {
         private readonly ILogger<ProcessorService> _logger;
         private readonly ProcessorServiceOptions _options;
-        private IDataStoreService _dataStore;
+        private readonly IDataStoreService _dataStore;
         private readonly string _dataType;
         private readonly string _logType;
         private readonly string _accessToken;
@@ -75,12 +75,12 @@ namespace WorkWallet.BI.ClientServices.Processor
                 // note that we want to calculate this every iteration (in case server data has been added to)
                 totalPages = (context.FullCount - 1) / context.PageSize + 1;
 
-                _logger.LogInformation($"API for {_dataType} returned JSON of lenght {json.Length}");
-                _logger.LogInformation($"Count: {context.Count}");
-                _logger.LogInformation($"FullCount: {context.FullCount}");
-                _logger.LogInformation($"LastSynchronizationVersion: {context.LastSynchronizationVersion}");
-                _logger.LogInformation($"SynchronizationVersion: {context.SynchronizationVersion}");
-                _logger.LogInformation($"PageNumber: {context.PageNumber} / {totalPages}, PageSize: {context.PageSize}");
+                _logger.LogInformation("API for {DataType} returned JSON of length {Length}", _dataType, json.Length);
+                _logger.LogInformation("Count: {Count}", context.Count);
+                _logger.LogInformation("FullCount: {FullCount}", context.FullCount);
+                _logger.LogInformation("LastSynchronizationVersion: {LastSynchronizationVersion}", context.LastSynchronizationVersion);
+                _logger.LogInformation("SynchronizationVersion: {SynchronizationVersion}", context.SynchronizationVersion);
+                _logger.LogInformation("PageNumber: {PageNumber} / {totalPages}, PageSize: {PageSize}", context.PageNumber, totalPages, context.PageSize);
 
                 if (context.Count > 0)
                 {
@@ -96,14 +96,14 @@ namespace WorkWallet.BI.ClientServices.Processor
 
             if (context.FullCount > 0)
             {
-                _logger.LogInformation($"A total of {context.FullCount} {_dataType} records received.");
+                _logger.LogInformation("A total of {FullCount} {DataType} records received.", context.FullCount, _dataType);
 
                 // finally update our change detection / logging table, so we only fetch new and changed data next time
                 await _dataStore.UpdateLastSyncAsync(_options.AgentWalletId, _logType, context.SynchronizationVersion, context.FullCount);
             }
             else
             {
-                _logger.LogInformation($"No {_dataType} records received.");
+                _logger.LogInformation("No {DataType} records received.", _dataType);
             }
         }
 
