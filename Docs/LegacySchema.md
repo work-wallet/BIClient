@@ -4,4 +4,4 @@ If you have an existing installation that predates August 2023 then your databas
 
 The `SchemaVersions` table is used by the deployment tool to record which schema scripts have been run. As this is missing, it is necessary to run a SQL script to record the current state of your database. This must be done before running `WorkWallet.BI.ClientDatabaseDeploy.exe`.
 
-The script may be found in here [DocsInitialiseSchemaVersions.sql](./InitialiseSchemaVersions.sql)
+The script may be found in here [InitialiseSchemaVersions.sql](./InitialiseSchemaVersions.sql)
