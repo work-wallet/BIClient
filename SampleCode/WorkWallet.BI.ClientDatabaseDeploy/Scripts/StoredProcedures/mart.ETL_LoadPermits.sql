@@ -179,7 +179,7 @@ BEGIN
             ,OptionId uniqueidentifier
             ,CategorySectionTypeId int
             ,CategorySectionType nvarchar(50)
-            ,Question nvarchar(100)
+            ,Question nvarchar(1000)
             ,[Option] nvarchar(250)
             ,WalletId uniqueidentifier
         );
