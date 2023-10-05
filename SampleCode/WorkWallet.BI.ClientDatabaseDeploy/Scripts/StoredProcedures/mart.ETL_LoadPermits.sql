@@ -139,7 +139,7 @@ BEGIN
             ,CategoryId uniqueidentifier
             ,CategoryVersion int
             ,SiteLocationId uniqueidentifier
-            ,[Description] nvarchar(70)
+            ,[Description] nvarchar(750)
             ,IssuedToCompanyId uniqueidentifier
             ,IssuedToCompany nvarchar(max)
             ,IssuedOn datetime

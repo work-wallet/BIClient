@@ -19,6 +19,7 @@
     <None Remove="Scripts\Schema\0005 - Inductions.sql" />
     <None Remove="Scripts\Schema\0006 - Permits.sql" />
     <None Remove="Scripts\Schema\0007 - Actions.sql" />
+    <None Remove="Scripts\Schema\0008 - PermitsFix.sql" />
     <None Remove="Scripts\StoredProcedures\mart.ETL_DeleteActionFacts.sql" />
     <None Remove="Scripts\StoredProcedures\mart.ETL_DeleteInductionFacts.sql" />
     <None Remove="Scripts\StoredProcedures\mart.ETL_DeletePermitFacts.sql" />
@@ -104,6 +105,7 @@
     <EmbeddedResource Include="Scripts\Schema\0004 - ReportedIssues.sql" />
     <EmbeddedResource Include="Scripts\Schema\0005 - Inductions.sql" />
     <EmbeddedResource Include="Scripts\Schema\0006 - Permits.sql" />
+    <EmbeddedResource Include="Scripts\Schema\0008 - PermitsFix.sql" />
     <EmbeddedResource Include="Scripts\Schema\0007 - Actions.sql" />
     <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_DeleteActionFacts.sql" />
     <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_DeleteInductionFacts.sql" />
