@@ -134,11 +134,21 @@ The first run can trigger a substantial download. It is recommended that you mon
 
 Ignore this section if not deploying as an Azure Function.
 
+When creating the Azure function:
+
+* Runtime stack: .NET
+* Version: 6 (LTS)
+* Operating System: Windows
+* Enable public access: On
+* Enable Application Insights: Yes
+
+You can use Visual Studio to publish the function to Azure.
+
 The following configuration settings are required:
 
 | Setting | Example | Description |
 | --- | --- | --- |
-| BITimerTriggerSchedule | `0 30 21 * * *` | Cron expression |
+| BITimerTriggerSchedule | `0 30 21 * * *` | [NCRONTAB](https://learn.microsoft.com/en-us/azure/azure-functions/functions-bindings-timer?tabs=python-v2%2Cin-process%2Cnodejs-v4&pivots=programming-language-csharp#ncrontab-expressions) expression |
 | FuncOptions:AgentApiUrl | `https://bi.work-wallet.com` | |
 | FuncOptions:AgentPageSize | `500` | |
 | FuncOptions:AgentWalletId | | |
