@@ -2,6 +2,12 @@
 
 namespace WorkWallet.BI.ClientCore.Options
 {
+    public class AgentWallet
+    {
+        public Guid WalletId { get; set; }
+        public string WalletSecret { get; set; }
+    }
+
     public class ProcessorServiceOptions
     {
         public string ApiAccessAuthority { get; set; }
@@ -10,8 +16,7 @@ namespace WorkWallet.BI.ClientCore.Options
         public string ApiAccessScope { get; set; }
 
         public string AgentApiUrl { get; set; }
-        public Guid AgentWalletId { get; set; }
-        public string AgentWalletSecret { get; set; }
+        public AgentWallet[] AgentWallets { get; set; }
         public int AgentPageSize { get; set; }
     }
 }

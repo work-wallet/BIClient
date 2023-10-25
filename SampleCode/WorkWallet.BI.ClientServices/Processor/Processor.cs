@@ -6,44 +6,49 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web;
 using WorkWallet.BI.ClientCore.Interfaces.Services;
-using WorkWallet.BI.ClientCore.Options;
 
 namespace WorkWallet.BI.ClientServices.Processor
 {
+    internal class ProcessorOptions
+    {
+        public string AccessToken { get; set; }
+        public string ApiUrl { get; set; }
+        public Guid WalletId { get; set; }
+        public string WalletSecret { get; set; }
+        public int PageSize { get; set; }
+    }
+
     internal class Processor
     {
         private readonly ILogger<ProcessorService> _logger;
-        private readonly ProcessorServiceOptions _options;
+        private readonly ProcessorOptions _options;
         private readonly IDataStoreService _dataStore;
         private readonly string _dataType;
         private readonly string _logType;
-        private readonly string _accessToken;
 
         internal Processor(
             ILogger<ProcessorService> logger,
-            ProcessorServiceOptions options,
+            ProcessorOptions options,
             IDataStoreService dataStore,
             string dataType,
-            string logType,
-            string accessToken)
+            string logType)
         {
             _logger = logger;
             _options = options;
             _dataStore = dataStore;
             _dataType = dataType;
             _logType = logType;
-            _accessToken = accessToken;
         }
 
         public async Task Run()
         {
             // obtain our last database change tracking synchronization number (or null if this is the first sync)
-            long? lastSynchronizationVersion = await _dataStore.GetLastSynchronizationVersionAsync(_options.AgentWalletId, _logType);
+            long? lastSynchronizationVersion = await _dataStore.GetLastSynchronizationVersionAsync(_options.WalletId, _logType);
 
             if (!lastSynchronizationVersion.HasValue)
             {
                 // no last synchronization data, treat this as a reset and delete all data
-                await _dataStore.ResetAsync(_options.AgentWalletId, _dataType);
+                await _dataStore.ResetAsync(_options.WalletId, _dataType);
             }
 
             int pageNumber = 0;
@@ -99,7 +104,7 @@ namespace WorkWallet.BI.ClientServices.Processor
                 _logger.LogInformation("A total of {FullCount} {DataType} records received.", context.FullCount, _dataType);
 
                 // finally update our change detection / logging table, so we only fetch new and changed data next time
-                await _dataStore.UpdateLastSyncAsync(_options.AgentWalletId, _logType, context.SynchronizationVersion, context.FullCount);
+                await _dataStore.UpdateLastSyncAsync(_options.WalletId, _logType, context.SynchronizationVersion, context.FullCount);
             }
             else
             {
@@ -109,10 +114,10 @@ namespace WorkWallet.BI.ClientServices.Processor
 
         private async Task<string> CallApiAsync(long? lastSynchronizationVersion, int pageNumber)
         {
-            var url = QueryUrl($"dataextract/{_dataType}", pageNumber, _options.AgentPageSize, lastSynchronizationVersion);
+            var url = QueryUrl($"dataextract/{_dataType}", pageNumber, _options.PageSize, lastSynchronizationVersion);
 
             var apiClient = new HttpClient();
-            apiClient.SetBearerToken(_accessToken);
+            apiClient.SetBearerToken(_options.AccessToken);
 
             var response = await apiClient.GetAsync(url);
             if (!response.IsSuccessStatusCode)
@@ -125,15 +130,15 @@ namespace WorkWallet.BI.ClientServices.Processor
 
         private string QueryUrl(string method, int pageNumber, int pageSize, long? lastSynchronizationVersion)
         {
-            var builder = new UriBuilder(_options.AgentApiUrl)
+            var builder = new UriBuilder(_options.ApiUrl)
             {
                 Path = method
             };
 
             var query = HttpUtility.ParseQueryString(string.Empty);
 
-            query["walletId"] = _options.AgentWalletId.ToString();
-            query["walletSecret"] = _options.AgentWalletSecret;
+            query["walletId"] = _options.WalletId.ToString();
+            query["walletSecret"] = _options.WalletSecret;
             query["pageNumber"] = (pageNumber).ToString();
             query["pageSize"] = (pageSize).ToString();
 
