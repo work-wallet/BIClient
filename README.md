@@ -1,5 +1,17 @@
 # Work Wallet Business Intelligence (BI) Client
 
+## Changelog
+
+### 25th October 2023
+
+The client sample and client function now support processing the data for multiple wallets.
+
+If upgrading from a version of `WorkWallet.BI.ClientSample` older than `3.0.0.0` then review the changes to the `appsettings.config` configuration file.
+
+If using a version of the Azure function `WorkWallet.BI.ClientFunction` older than `3.0.0.0` then review the changes to the Azure function configuration.
+
+## Overview
+
 The [Work Wallet](https://www.work-wallet.com/) Health and Safety solution provides an API to allow organisations to automate the download of their Wallet data. The API is optimised for organisations requiring a regular feed of data for Business Intelligence (BI) purposes.
 
 The datasets currently enabled for download are:
@@ -69,8 +81,8 @@ Once activated, you will be provided with the following settings:
 
 * `ApiAccessClientId`
 * `ApiAccessClientSecret`
-* `AgentWalletId`
-* `AgentWalletSecret`
+* `WalletId`
+* `WalletSecret`
 
 These settings are required to call the API.
 
@@ -83,7 +95,7 @@ All binaries target [.NET 6.0](https://dotnet.microsoft.com/en-us/download/dotne
 | Tool | Download URL | Executable | Config. File |
 | --- | --- | --- | --- |
 | Database deployment | [WorkWallet.BI.ClientDatabaseDeploy_2.0.1.0.zip](https://base.azureedge.net/bi-client/WorkWallet.BI.ClientDatabaseDeploy_2.0.1.0.zip) | `WorkWallet.BI.ClientDatabaseDeploy.exe` | `appsettings.json` |
-| Client sample | [WorkWallet.BI.ClientSample_2.0.1.0.zip](https://base.azureedge.net/bi-client/WorkWallet.BI.ClientSample_2.0.1.0.zip) | `WorkWallet.BI.ClientSample.exe` | `appsettings.json` |
+| Client sample | [WorkWallet.BI.ClientSample_3.0.0.0.zip](https://base.azureedge.net/bi-client/WorkWallet.BI.ClientSample_3.0.0.0.zip) | `WorkWallet.BI.ClientSample.exe` | `appsettings.json` |
 
 ## Creating or Upgrading the Database
 
@@ -112,13 +124,15 @@ If you have an previous version, this will update the database.
 
 Edit `appsettings.json` and enter the required settings:
 
-| Setting | | Description |
-| --- | --- | --- |
-| ClientOptions | ApiAccessClientId | |
-| | ApiAccessClientSecret | |
-| | AgentWalletId | |
-| | AgentWalletSecret | |
+| Setting | | | Description |
+| --- | --- | --- | --- |
+| ClientOptions | | ApiAccessClientId | |
+| ClientOptions | | ApiAccessClientSecret | |
+| ClientOptions | AgentWallets[] | WalletId | |
+| ClientOptions | AgentWallets[] | WalletSecret | |
 | ConnectionStrings | ClientDb | database connection string |
+
+*The application supports the processing multiple wallets by setting multiple entries in the `AgentWallets[]` array.*
 
 Run `WorkWallet.BI.ClientSample.exe` from a command prompt.
 
@@ -151,8 +165,8 @@ The following configuration settings are required:
 | BITimerTriggerSchedule | `0 30 21 * * *` | [NCRONTAB](https://learn.microsoft.com/en-us/azure/azure-functions/functions-bindings-timer?tabs=python-v2%2Cin-process%2Cnodejs-v4&pivots=programming-language-csharp#ncrontab-expressions) expression |
 | FuncOptions:AgentApiUrl | `https://bi.work-wallet.com` | |
 | FuncOptions:AgentPageSize | `500` | |
-| FuncOptions:AgentWalletId | | |
-| FuncOptions:AgentWalletSecret | | |
+| FuncOptions:AgentWallets:[0]:WalletId | | |
+| FuncOptions:AgentWallets:[0]:WalletSecret | | |
 | FuncOptions:ApiAccessAuthority | `https://identity.work-wallet.com` | |
 | FuncOptions:ApiAccessClientId | | |
 | FuncOptions:ApiAccessClientSecret | | |

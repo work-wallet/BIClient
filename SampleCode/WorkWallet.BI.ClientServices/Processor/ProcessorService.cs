@@ -12,16 +12,16 @@ namespace WorkWallet.BI.ClientServices.Processor
     public class ProcessorService : IProcessorService
     {
         private readonly ILogger<ProcessorService> _logger;
-        private readonly ProcessorServiceOptions _options;
+        private readonly ProcessorServiceOptions _serviceOptions;
         private readonly IDataStoreService _dataStore;
 
         public ProcessorService(
             ILogger<ProcessorService> logger,
-            IOptions<ProcessorServiceOptions> options,
+            IOptions<ProcessorServiceOptions> serviceOptions,
             IDataStoreService dataStore)
         {
             _logger = logger;
-            _options = options.Value;
+            _serviceOptions = serviceOptions.Value;
             _dataStore = dataStore;
         }
 
@@ -29,24 +29,36 @@ namespace WorkWallet.BI.ClientServices.Processor
         {
             // obtain an OAuth access token for the client
             // (the API is secured using OAuth client credentials AND a wallet secret passed to the API methods)
-            TokenResponse token = await GetAccessToken();
+             TokenResponse token = await GetAccessToken();
 
-            await ProcessAsync(token.AccessToken, "SiteAudits", "AUDIT_UPDATED");
-            await ProcessAsync(token.AccessToken, "ReportedIssues", "REPORTED_ISSUE_UPDATED");
-            await ProcessAsync(token.AccessToken, "Inductions", "INDUCTION_UPDATED");
-            await ProcessAsync(token.AccessToken, "Permits", "PERMIT_UPDATED");
-            await ProcessAsync(token.AccessToken, "Actions", "ACTION_UPDATED");
+            // loop (supporting multiple wallets)
+            foreach (var agentWallet in _serviceOptions.AgentWallets)
+            {
+                var processorOptions = new ProcessorOptions
+                {
+                    AccessToken = token.AccessToken,
+                    ApiUrl = _serviceOptions.AgentApiUrl,
+                    WalletId = agentWallet.WalletId,
+                    WalletSecret = agentWallet.WalletSecret,
+                    PageSize = _serviceOptions.AgentPageSize
+                };
+
+                await ProcessAsync(processorOptions, "SiteAudits", "AUDIT_UPDATED");
+                await ProcessAsync(processorOptions, "ReportedIssues", "REPORTED_ISSUE_UPDATED");
+                await ProcessAsync(processorOptions, "Inductions", "INDUCTION_UPDATED");
+                await ProcessAsync(processorOptions, "Permits", "PERMIT_UPDATED");
+                await ProcessAsync(processorOptions, "Actions", "ACTION_UPDATED");
+            }
         }
 
-        private async Task ProcessAsync(string accessToken, string dataType, string logType)
+        private async Task ProcessAsync(ProcessorOptions processorOptions, string dataType, string logType)
         {
             var processor = new Processor(
                 logger: _logger,
-                options: _options,
+                options: processorOptions,
                 dataStore: _dataStore,
                 dataType: dataType,
-                logType: logType,
-                accessToken: accessToken);
+                logType: logType);
 
             await processor.Run();
         }
@@ -55,7 +67,7 @@ namespace WorkWallet.BI.ClientServices.Processor
         {
             // discover endpoints from metadata
             var client = new HttpClient();
-            var disco = await client.GetDiscoveryDocumentAsync(_options.ApiAccessAuthority);
+            var disco = await client.GetDiscoveryDocumentAsync(_serviceOptions.ApiAccessAuthority);
             if (disco.IsError)
             {
                 throw new ApplicationException($"Failed to get discovery document: {disco.Error}");
@@ -66,9 +78,9 @@ namespace WorkWallet.BI.ClientServices.Processor
             {
                 Address = disco.TokenEndpoint,
 
-                ClientId = _options.ApiAccessClientId,
-                ClientSecret = _options.ApiAccessClientSecret,
-                Scope = _options.ApiAccessScope
+                ClientId = _serviceOptions.ApiAccessClientId,
+                ClientSecret = _serviceOptions.ApiAccessClientSecret,
+                Scope = _serviceOptions.ApiAccessScope
             });
 
             if (tokenResponse.IsError)
@@ -76,7 +88,7 @@ namespace WorkWallet.BI.ClientServices.Processor
                 throw new ApplicationException($"Failed to get token: {tokenResponse.Error}");
             }
 
-            _logger.LogInformation("API access token obtained from {ApiAccessAuthority} for client {ApiAccessClientId}", _options.ApiAccessAuthority, _options.ApiAccessClientId);
+            _logger.LogInformation("API access token obtained from {ApiAccessAuthority} for client {ApiAccessClientId}", _serviceOptions.ApiAccessAuthority, _serviceOptions.ApiAccessClientId);
 
             return tokenResponse;
         }
