@@ -13,7 +13,7 @@ CREATE TABLE mart.AssetStatus
 INSERT INTO mart.AssetStatus (AssetStatusCode, AssetStatus) VALUES (0, N'Active');
 INSERT INTO mart.AssetStatus (AssetStatusCode, AssetStatus) VALUES (1, N'Out Of Service');
 INSERT INTO mart.AssetStatus (AssetStatusCode, AssetStatus) VALUES (2, N'Decomissioned');
-INSERT INTO mart.AssetStatus (AssetStatusCode, AssetStatus) VALUES (4, N'Deleted');
+INSERT INTO mart.AssetStatus (AssetStatusCode, AssetStatus) VALUES (3, N'Deleted');
 
 -- mart.AssetPropertyType
 CREATE TABLE mart.AssetPropertyType
