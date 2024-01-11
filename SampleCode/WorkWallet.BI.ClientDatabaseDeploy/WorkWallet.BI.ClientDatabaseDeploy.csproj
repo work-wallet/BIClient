@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
@@ -20,6 +20,7 @@
     <None Remove="Scripts\Schema\0006 - Permits.sql" />
     <None Remove="Scripts\Schema\0007 - Actions.sql" />
     <None Remove="Scripts\Schema\0008 - PermitsFix.sql" />
+    <None Remove="Scripts\Schema\0009 - Assets.sql" />
     <None Remove="Scripts\StoredProcedures\mart.ETL_DeleteActionFacts.sql" />
     <None Remove="Scripts\StoredProcedures\mart.ETL_DeleteInductionFacts.sql" />
     <None Remove="Scripts\StoredProcedures\mart.ETL_DeletePermitFacts.sql" />
@@ -68,6 +69,9 @@
     <None Remove="Scripts\StoredProcedures\mart.ETL_UpdateLastSync.sql" />
     <None Remove="Scripts\Types\mart.ETL_ActionTable.sql" />
     <None Remove="Scripts\Types\mart.ETL_ActionUpdateTable.sql" />
+    <None Remove="Scripts\Types\mart.ETL_AssetAssignmentTable.sql" />
+    <None Remove="Scripts\Types\mart.ETL_AssetPropertyTable.sql" />
+    <None Remove="Scripts\Types\mart.ETL_AssetTable.sql" />
     <None Remove="Scripts\Types\mart.ETL_InductionCustomQuestionTable.sql" />
     <None Remove="Scripts\Types\mart.ETL_InductionTable.sql" />
     <None Remove="Scripts\Types\mart.ETL_InductionTakenTable.sql" />
@@ -105,8 +109,9 @@
     <EmbeddedResource Include="Scripts\Schema\0004 - ReportedIssues.sql" />
     <EmbeddedResource Include="Scripts\Schema\0005 - Inductions.sql" />
     <EmbeddedResource Include="Scripts\Schema\0006 - Permits.sql" />
-    <EmbeddedResource Include="Scripts\Schema\0008 - PermitsFix.sql" />
     <EmbeddedResource Include="Scripts\Schema\0007 - Actions.sql" />
+    <EmbeddedResource Include="Scripts\Schema\0008 - PermitsFix.sql" />
+    <EmbeddedResource Include="Scripts\Schema\0009 - Assets.sql" />
     <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_DeleteActionFacts.sql" />
     <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_DeleteInductionFacts.sql" />
     <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_DeletePermitFacts.sql" />
@@ -153,6 +158,9 @@
     <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_ResetReportedIssues.sql" />
     <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_ResetSiteAudits.sql" />
     <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_UpdateLastSync.sql" />
+    <EmbeddedResource Include="Scripts\Types\mart.ETL_AssetAssignmentTable.sql" />
+    <EmbeddedResource Include="Scripts\Types\mart.ETL_AssetPropertyTable.sql" />
+    <EmbeddedResource Include="Scripts\Types\mart.ETL_AssetTable.sql" />
     <EmbeddedResource Include="Scripts\Types\mart.ETL_ActionTable.sql" />
     <EmbeddedResource Include="Scripts\Types\mart.ETL_ActionUpdateTable.sql" />
     <EmbeddedResource Include="Scripts\Types\mart.ETL_InductionCustomQuestionTable.sql" />

@@ -48,6 +48,7 @@ namespace WorkWallet.BI.ClientServices.Processor
                 await ProcessAsync(processorOptions, "Inductions", "INDUCTION_UPDATED");
                 await ProcessAsync(processorOptions, "Permits", "PERMIT_UPDATED");
                 await ProcessAsync(processorOptions, "Actions", "ACTION_UPDATED");
+                await ProcessAsync(processorOptions, "Assets", "ASSET_UPDATED");
             }
         }
 
