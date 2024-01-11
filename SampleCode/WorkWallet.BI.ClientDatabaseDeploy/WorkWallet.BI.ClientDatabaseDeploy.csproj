@@ -28,6 +28,7 @@
     <None Remove="Scripts\StoredProcedures\mart.ETL_DeleteSiteAuditFacts.sql" />
     <None Remove="Scripts\StoredProcedures\mart.ETL_LoadActions.sql" />
     <None Remove="Scripts\StoredProcedures\mart.ETL_LoadActionUpdates.sql" />
+    <None Remove="Scripts\StoredProcedures\mart.ETL_LoadAssets.sql" />
     <None Remove="Scripts\StoredProcedures\mart.ETL_LoadInductionCustomQuestionFact.sql" />
     <None Remove="Scripts\StoredProcedures\mart.ETL_LoadInductions.sql" />
     <None Remove="Scripts\StoredProcedures\mart.ETL_LoadPermitChecklistAnswerFact.sql" />
@@ -61,6 +62,7 @@
     <None Remove="Scripts\StoredProcedures\mart.ETL_MaintainSiteAuditTypeDimension.sql" />
     <None Remove="Scripts\StoredProcedures\mart.ETL_MaintainWalletDimension.sql" />
     <None Remove="Scripts\StoredProcedures\mart.ETL_ResetActions.sql" />
+    <None Remove="Scripts\StoredProcedures\mart.ETL_ResetAssets.sql" />
     <None Remove="Scripts\StoredProcedures\mart.ETL_ResetCommon.sql" />
     <None Remove="Scripts\StoredProcedures\mart.ETL_ResetInductions.sql" />
     <None Remove="Scripts\StoredProcedures\mart.ETL_ResetPermits.sql" />
@@ -112,6 +114,8 @@
     <EmbeddedResource Include="Scripts\Schema\0007 - Actions.sql" />
     <EmbeddedResource Include="Scripts\Schema\0008 - PermitsFix.sql" />
     <EmbeddedResource Include="Scripts\Schema\0009 - Assets.sql" />
+    <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_LoadAssets.sql" />
+    <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_ResetAssets.sql" />
     <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_DeleteActionFacts.sql" />
     <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_DeleteInductionFacts.sql" />
     <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_DeletePermitFacts.sql" />
