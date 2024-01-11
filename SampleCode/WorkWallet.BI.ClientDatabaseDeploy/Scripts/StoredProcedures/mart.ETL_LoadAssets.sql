@@ -58,7 +58,7 @@ BEGIN
 
         EXEC mart.ETL_MaintainAssetDimension @assetTable = @assetTable;
 
-        --EXEC mart.ETL_DeleteAssetFacts @assetTable = @assetTable;
+        EXEC mart.ETL_DeleteAssetFacts @assetTable = @assetTable;
 
         -- load the AssetProperty data
 
@@ -82,7 +82,9 @@ BEGIN
 			,WalletId uniqueidentifier
         );
 
-        -- EXEC mart.ETL_LoadAssetProperties @assetPropertyTable = @assetPropertyTable
+		EXEC mart.ETL_MaintainAssetPropertyDimension @assetPropertyTable = @assetPropertyTable
+
+        EXEC mart.ETL_LoadAssetPropertyFacts @assetPropertyTable = @assetPropertyTable
 
         -- load the AssetAssignment data
 
@@ -114,7 +116,9 @@ BEGIN
 			,WalletId uniqueidentifier
         );
 
-        -- EXEC mart.ETL_LoadAssetAssignments @assetAssignmentTable = @assetAssignmentTable
+		EXEC mart.ETL_MaintainAssetAssignmentDimension @assetAssignmentTable = @assetAssignmentTable
+
+        EXEC mart.ETL_LoadAssetAssignmentFacts @assetAssignmentTable = @assetAssignmentTable
 
         COMMIT TRANSACTION;
     END TRY

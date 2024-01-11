@@ -6,7 +6,7 @@ AS
 BEGIN
     SET NOCOUNT ON;
 
-	WITH cte
+	WITH src
 	AS
 	(
 		SELECT
@@ -22,9 +22,9 @@ BEGIN
 		INNER JOIN mart.AssetStatus AS astat ON a.AssetStatusCode = astat.AssetStatusCode
 		INNER JOIN mart.Wallet AS w ON a.WalletId = w.WalletId
 	)
-	MERGE mart.[Asset] AS tgt
+	MERGE mart.Asset AS tgt
 	USING
-		cte AS src ON tgt.AssetId = src.AssetId
+		src ON tgt.AssetId = src.AssetId
 	WHEN MATCHED AND
 	(
 		tgt.AssetType <> src.AssetType
