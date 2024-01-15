@@ -150,6 +150,7 @@ CREATE TABLE mart.AssetAssignmentFact
     ,Asset_key int NOT NULL
     ,AssetAssignment_key int NOT NULL
 	,AssignedOn datetimeoffset(7) NOT NULL
+	,AssignedEnd datetimeoffset(7) NULL
     ,IsLatest bit NOT NULL
     ,Wallet_key int NOT NULL
     ,_created datetime2(7) NOT NULL CONSTRAINT [DF_mart.AssetAssignmentFact__created] DEFAULT SYSUTCDATETIME()

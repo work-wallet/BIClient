@@ -44,6 +44,7 @@ BEGIN
 		Asset_key
 		,AssetAssignment_key
 		,AssignedOn
+		,AssignedEnd
 		,IsLatest
         ,Wallet_key
     )
@@ -51,6 +52,7 @@ BEGIN
 		cte.Asset_key
 		,cte.AssetAssignment_key
 		,cte.AssignedOn
+		,LEAD(cte.AssignedOn) OVER (PARTITION BY cte.Asset_key ORDER BY cte.AssignedOn) AS AssignedEnd
 		,CASE WHEN ROW_NUMBER() OVER (PARTITION BY cte.Asset_key ORDER BY cte.AssignedOn DESC) = 1 THEN 1 ELSE 0 END AS IsLatest
 		,cte.Wallet_key
 	FROM
