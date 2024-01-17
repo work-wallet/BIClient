@@ -2,6 +2,14 @@
 
 ## Changelog
 
+### 16th January 2024
+
+Added in the **Assets** module.
+
+This includes asset assignments and asset custom fields (properties). Actions associated with assets were already available.
+
+Currently asset inspection histories and defect reports are not included.
+
 ### 25th October 2023
 
 The client sample and client function now support processing the data for multiple wallets.
@@ -21,6 +29,7 @@ The datasets currently enabled for download are:
 * Inductions
 * Permits
 * Actions
+* Assets
 
 The API uses a combination of paging and change tracking to efficiently transfer data from the Work Wallet cloud to your local environment.
 
@@ -194,6 +203,7 @@ The following sample pbix files are available for download:
 | Inductions | [Inductions_reference_2.0.1.0.pbix](https://workwalletcdnorigin.blob.core.windows.net/bi-client/pbix/Inductions_reference_2.0.1.0.pbix) |
 | Permits | [Permits_reference_2.0.1.0.pbix](https://workwalletcdnorigin.blob.core.windows.net/bi-client/pbix/Permits_reference_2.0.1.0.pbix) |
 | Actions | [Actions_reference_2.0.1.0.pbix](https://workwalletcdnorigin.blob.core.windows.net/bi-client/pbix/Actions_reference_2.0.1.0.pbix) |
+| Assets | [Assets_reference_2.0.1.0.pbix](https://workwalletcdnorigin.blob.core.windows.net/bi-client/pbix/Assets_reference_2.0.1.0.pbix) |
 
 The sample files contain data from a demo Wallet.
 To use these files with your own data you need to connect to your local database and refresh the data.
