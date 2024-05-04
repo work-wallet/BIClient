@@ -22,6 +22,8 @@ namespace WorkWallet.BI.ClientServices.Processor
             // loop (supporting multiple wallets)
             foreach (var agentWallet in _serviceOptions.AgentWallets)
             {
+                logger.LogInformation("Processing for wallet {wallet}", agentWallet.WalletId);
+
                 var processorOptions = new ProcessorOptions
                 {
                     AccessToken = token.AccessToken!,

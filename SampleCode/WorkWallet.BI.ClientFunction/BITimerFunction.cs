@@ -9,10 +9,15 @@ namespace WorkWallet.BI.ClientFunction
         ILogger<BITimerFunction> logger)
     {
         [Function("BITimerTrigger")]
-        public async Task Run([TimerTrigger("%BITimerTriggerSchedule%")]TimerInfo _)
+        public async Task Run([TimerTrigger("%BITimerTriggerSchedule%"
+#if DEBUG
+            , RunOnStartup = true
+#endif
+            )]TimerInfo timerInfo)
         {
             try
             {
+                logger.LogInformation("BITimerTrigger invoked");
                 await processorService.RunAsync();
             }
             catch (Exception ex)

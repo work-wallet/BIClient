@@ -39,6 +39,8 @@ namespace WorkWallet.BI.ClientServices.Processor
 
         public async Task Run()
         {
+            _logger.LogInformation("Processing for wallet: {wallet}, data type: {dataType}", _options.WalletId, _dataType);
+
             // obtain our last database change tracking synchronization number (or null if this is the first sync)
             long? lastSynchronizationVersion = await _dataStore.GetLastSynchronizationVersionAsync(_options.WalletId, _logType);
 
@@ -77,12 +79,12 @@ namespace WorkWallet.BI.ClientServices.Processor
                 // note that we want to calculate this every iteration (in case server data has been added to)
                 totalPages = (context.FullCount - 1) / context.PageSize + 1;
 
-                _logger.LogInformation("API for {DataType} returned JSON of length {Length}", _dataType, json.Length);
-                _logger.LogInformation("Count: {Count}", context.Count);
-                _logger.LogInformation("FullCount: {FullCount}", context.FullCount);
-                _logger.LogInformation("LastSynchronizationVersion: {LastSynchronizationVersion}", context.LastSynchronizationVersion);
-                _logger.LogInformation("SynchronizationVersion: {SynchronizationVersion}", context.SynchronizationVersion);
-                _logger.LogInformation("PageNumber: {PageNumber} / {totalPages}, PageSize: {PageSize}", context.PageNumber, totalPages, context.PageSize);
+                _logger.LogDebug("API for {DataType} returned JSON of length {Length}", _dataType, json.Length);
+                _logger.LogDebug("Count: {Count}", context.Count);
+                _logger.LogDebug("FullCount: {FullCount}", context.FullCount);
+                _logger.LogDebug("LastSynchronizationVersion: {LastSynchronizationVersion}", context.LastSynchronizationVersion);
+                _logger.LogDebug("SynchronizationVersion: {SynchronizationVersion}", context.SynchronizationVersion);
+                _logger.LogDebug("PageNumber: {PageNumber} / {totalPages}, PageSize: {PageSize}", context.PageNumber, totalPages, context.PageSize);
 
                 if (context.Count > 0)
                 {
@@ -91,7 +93,7 @@ namespace WorkWallet.BI.ClientServices.Processor
                 }
                 else
                 {
-                    _logger.LogInformation($"No records to load");
+                    _logger.LogDebug($"No records to load");
                 }
 
             } while (pageNumber < totalPages);
