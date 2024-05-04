@@ -24,7 +24,7 @@ namespace WorkWallet.BI.ClientServices.Processor
             {
                 var processorOptions = new ProcessorOptions
                 {
-                    AccessToken = token.AccessToken,
+                    AccessToken = token.AccessToken!,
                     ApiUrl = _serviceOptions.AgentApiUrl,
                     WalletId = agentWallet.WalletId,
                     WalletSecret = agentWallet.WalletSecret,

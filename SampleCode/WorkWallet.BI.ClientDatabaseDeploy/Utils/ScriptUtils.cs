@@ -16,19 +16,14 @@ namespace WorkWallet.BI.ClientDatabaseDeploy.Utils
             if (m.Success)
             {
                 string capture = m.Groups[1].Value.ToLower();
-                switch (capture)
+                return capture switch
                 {
-                    case "clean":
-                        return ScriptFileType.Clean;
-                    case "schema":
-                        return ScriptFileType.Schema;
-                    case "types":
-                        return ScriptFileType.Type;
-                    case "storedprocedures":
-                        return ScriptFileType.StoredProcedure;
-                    default:
-                        throw new ApplicationException($"unexpected script type {m.Value}");
-                }
+                    "clean" => ScriptFileType.Clean,
+                    "schema" => ScriptFileType.Schema,
+                    "types" => ScriptFileType.Type,
+                    "storedprocedures" => ScriptFileType.StoredProcedure,
+                    _ => throw new ApplicationException($"unexpected script type {m.Value}"),
+                };
             }
             else
             {

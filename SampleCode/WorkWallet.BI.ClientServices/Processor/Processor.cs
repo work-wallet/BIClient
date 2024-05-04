@@ -8,11 +8,11 @@ namespace WorkWallet.BI.ClientServices.Processor
 {
     internal class ProcessorOptions
     {
-        public string AccessToken { get; set; }
-        public string ApiUrl { get; set; }
-        public Guid WalletId { get; set; }
-        public string WalletSecret { get; set; }
-        public int PageSize { get; set; }
+        public required string AccessToken { get; set; }
+        public required string ApiUrl { get; set; }
+        public required Guid WalletId { get; set; }
+        public required string WalletSecret { get; set; }
+        public required int PageSize { get; set; }
     }
 
     internal class Processor
@@ -66,11 +66,11 @@ namespace WorkWallet.BI.ClientServices.Processor
                 if (_dataType == "SiteAudits")
                 {
                     // work around non-generic fields returned from the API (fix this in future release)
-                    context = res["Context"].ToObject<SiteAuditsContext>();
+                    context = res["Context"]!.ToObject<SiteAuditsContext>()!;
                 }
                 else
                 {
-                    context = res["Context"].ToObject<Context>();
+                    context = res["Context"]!.ToObject<Context>()!;
                 }
 
                 // now we know how many rows there are in total, we can calculate the total number of pages we need to fetch

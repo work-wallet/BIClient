@@ -51,7 +51,7 @@ namespace WorkWallet.BI.ClientSample
                 .AddProcessorService()
                 .AddSQLService(options =>
                 {
-                    options.SqlDbConnectionString = configuration.GetConnectionString("ClientDb");
+                    options.SqlDbConnectionString = configuration.GetConnectionString("ClientDb")!;
                 });
 
             return services;

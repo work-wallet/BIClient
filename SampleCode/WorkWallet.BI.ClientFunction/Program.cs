@@ -22,7 +22,7 @@ var host = new HostBuilder()
             .AddProcessorService()
             .AddSQLService(options =>
             {
-                options.SqlDbConnectionString = Environment.GetEnvironmentVariable("sqldb_connection");
+                options.SqlDbConnectionString = Environment.GetEnvironmentVariable("sqldb_connection")!;
             });
     })
     .Build();

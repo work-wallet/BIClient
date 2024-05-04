@@ -6,6 +6,7 @@
     <UserSecretsId>9c525a2d-f2ad-48f4-af31-8f9da46f24c5</UserSecretsId>
     <AssemblyVersion>3.0.0.0</AssemblyVersion>
     <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>
