@@ -1,7 +1,5 @@
-using Microsoft.Azure.WebJobs;
+using Microsoft.Azure.Functions.Worker;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Threading.Tasks;
 using WorkWallet.BI.ClientCore.Interfaces.Services;
 
 namespace WorkWallet.BI.ClientFunction
@@ -19,8 +17,8 @@ namespace WorkWallet.BI.ClientFunction
             _logger = logger;
         }
 
-        [FunctionName("BITimerTrigger")]
-        public async Task Run([TimerTrigger("%BITimerTriggerSchedule%")]TimerInfo myTimer)
+        [Function("BITimerTrigger")]
+        public async Task Run([TimerTrigger("%BITimerTriggerSchedule%")]TimerInfo _)
         {
             try
             {
@@ -28,7 +26,7 @@ namespace WorkWallet.BI.ClientFunction
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, $"Function BITimerTrigger threw exception: {ex.Message}");
+                _logger.LogError(ex, "Function BITimerTrigger threw exception: {Message}", ex.Message);
             }
         }
     }

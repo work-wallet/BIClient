@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace WorkWallet.BI.ClientCore.Options
+﻿namespace WorkWallet.BI.ClientCore.Options
 {
     public class AgentWallet
     {

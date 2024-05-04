@@ -1,9 +1,7 @@
 ﻿using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using System;
 using System.Data;
-using System.Threading.Tasks;
 using WorkWallet.BI.ClientCore.Interfaces.Services;
 using WorkWallet.BI.ClientCore.Options;
 

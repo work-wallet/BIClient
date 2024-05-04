@@ -1,5 +1,4 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using System;
 using WorkWallet.BI.ClientCore.Interfaces.Services;
 using WorkWallet.BI.ClientCore.Options;
 using WorkWallet.BI.ClientServices.DataStore;

@@ -1,8 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System;
-using System.Threading.Tasks;
 using WorkWallet.BI.ClientCore.Interfaces.Services;
 using WorkWallet.BI.ClientCore.Options;
 using WorkWallet.BI.ClientServices;

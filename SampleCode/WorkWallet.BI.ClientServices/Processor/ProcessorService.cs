@@ -1,9 +1,6 @@
 ﻿using IdentityModel.Client;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using System;
-using System.Net.Http;
-using System.Threading.Tasks;
 using WorkWallet.BI.ClientCore.Interfaces.Services;
 using WorkWallet.BI.ClientCore.Options;
 
