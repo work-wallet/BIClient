@@ -7,22 +7,15 @@ using WorkWallet.BI.ClientCore.Options;
 
 namespace WorkWallet.BI.ClientServices.DataStore
 {
-    public class SQLService : IDataStoreService
+    public class SQLService(
+        ILogger<SQLService> logger,
+        IOptions<SQLServiceOptions> options) : IDataStoreService
     {
-        private readonly ILogger<SQLService> _logger;
-        private readonly SQLServiceOptions _options;
-
-        public SQLService(
-            ILogger<SQLService> logger,
-            IOptions<SQLServiceOptions> options)
-        {
-            _logger = logger;
-            _options = options.Value;
-        }
+        private readonly SQLServiceOptions _options = options.Value;
 
         public async Task<long?> GetLastSynchronizationVersionAsync(Guid walletId, string logType)
         {
-            _logger.LogInformation("Obtaining last synchronization version for walletId '{walletId}' and logType '{logType}'", walletId, logType);
+            logger.LogInformation("Obtaining last synchronization version for walletId '{walletId}' and logType '{logType}'", walletId, logType);
 
             string sql = "SELECT LastSynchronizationVersion FROM mart.ETL_ChangeDetection WHERE WalletId = @walletId AND LogType = @logType AND IsLatest = 1";
 
@@ -38,11 +31,11 @@ namespace WorkWallet.BI.ClientServices.DataStore
 
             if (lastSynchronizationVersion.HasValue)
             {
-                _logger.LogInformation("Last synchronization version: {lastSynchronizationVersion}", lastSynchronizationVersion.Value);
+                logger.LogInformation("Last synchronization version: {lastSynchronizationVersion}", lastSynchronizationVersion.Value);
             }
             else
             {
-                _logger.LogInformation($"Last synchronization version is null");
+                logger.LogInformation($"Last synchronization version is null");
             }
 
             return lastSynchronizationVersion;
@@ -55,7 +48,7 @@ namespace WorkWallet.BI.ClientServices.DataStore
 
             string sp = $"mart.ETL_Load{dataType}";
 
-            _logger.LogInformation("Load json data: exec {sp}", sp);
+            logger.LogInformation("Load json data: exec {sp}", sp);
 
             using SqlCommand command = new(sp, connection);
 
@@ -73,7 +66,7 @@ namespace WorkWallet.BI.ClientServices.DataStore
 
             string sp = "mart.ETL_UpdateLastSync";
 
-            _logger.LogInformation("Update last sync: exec {sp} @walletId = '{walletId}' @logType = '{logType}' @synchronizationVersion = {synchronizationVersion} @rowsProcessed = {rowsProcessed}", sp, walletId, logType, synchronizationVersion, rowsProcessed);
+            logger.LogInformation("Update last sync: exec {sp} @walletId = '{walletId}' @logType = '{logType}' @synchronizationVersion = {synchronizationVersion} @rowsProcessed = {rowsProcessed}", sp, walletId, logType, synchronizationVersion, rowsProcessed);
 
             using SqlCommand command = new(sp, connection);
 
@@ -94,7 +87,7 @@ namespace WorkWallet.BI.ClientServices.DataStore
 
             string sp = $"mart.ETL_Reset{dataType}";
 
-            _logger.LogInformation("Reset data: exec {sp} @walletId = '{walletId}'", sp, walletId);
+            logger.LogInformation("Reset data: exec {sp} @walletId = '{walletId}'", sp, walletId);
 
             using SqlCommand command = new(sp, connection);
 
