@@ -5,7 +5,12 @@ using WorkWallet.BI.ClientDatabaseDeploy;
 using WorkWallet.BI.ClientDatabaseDeploy.Services;
 
 var hostBuilder = Host.CreateDefaultBuilder(args)
-                .ConfigureAppConfiguration((builder) => builder.AddUserSecrets<Program>())
+                .ConfigureAppConfiguration((builder) =>
+                {
+#if DEBUG
+                    builder.AddUserSecrets<Program>();
+#endif
+                })
                 .ConfigureServices((context, services) =>
                 {
                     services
