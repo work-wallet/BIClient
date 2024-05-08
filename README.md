@@ -125,7 +125,7 @@ Edit `appsettings.json` and enter the required settings:
 | ClientOptions | | ApiAccessClientSecret | |
 | ClientOptions | AgentWallets[] | WalletId | |
 | ClientOptions | AgentWallets[] | WalletSecret | |
-| ConnectionStrings | ClientDb | database connection string |
+| ConnectionStrings | ClientDb | database connection string ||
 
 *The application supports the processing multiple wallets by setting multiple entries in the `AgentWallets[]` array.*
 
