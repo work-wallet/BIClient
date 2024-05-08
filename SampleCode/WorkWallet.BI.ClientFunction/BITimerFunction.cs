@@ -1,34 +1,28 @@
-using Microsoft.Azure.WebJobs;
+using Microsoft.Azure.Functions.Worker;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Threading.Tasks;
 using WorkWallet.BI.ClientCore.Interfaces.Services;
 
 namespace WorkWallet.BI.ClientFunction
 {
-    public class BITimerFunction
+    public class BITimerFunction(
+        IProcessorService processorService,
+        ILogger<BITimerFunction> logger)
     {
-        private readonly IProcessorService _processorService;
-        private readonly ILogger<BITimerFunction> _logger;
-
-        public BITimerFunction(
-            IProcessorService processorService,
-            ILogger<BITimerFunction> logger)
-        {
-            _processorService = processorService;
-            _logger = logger;
-        }
-
-        [FunctionName("BITimerTrigger")]
-        public async Task Run([TimerTrigger("%BITimerTriggerSchedule%")]TimerInfo myTimer)
+        [Function("BITimerTrigger")]
+        public async Task Run([TimerTrigger("%BITimerTriggerSchedule%"
+#if DEBUG
+            , RunOnStartup = true
+#endif
+            )]TimerInfo timerInfo)
         {
             try
             {
-                await _processorService.RunAsync();
+                logger.LogInformation("BITimerTrigger invoked");
+                await processorService.RunAsync();
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, $"Function BITimerTrigger threw exception: {ex.Message}");
+                logger.LogError(ex, "Function BITimerTrigger threw exception: {Message}", ex.Message);
             }
         }
     }

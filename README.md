@@ -2,21 +2,7 @@
 
 ## Changelog
 
-### 16th January 2024
-
-Added in the **Assets** module.
-
-This includes asset assignments and asset custom fields (properties). Actions associated with assets were already available.
-
-Currently asset inspection histories and defect reports are not included.
-
-### 25th October 2023
-
-The client sample and client function now support processing the data for multiple wallets.
-
-If upgrading from a version of `WorkWallet.BI.ClientSample` older than `3.0.0.0` then review the changes to the `appsettings.config` configuration file.
-
-If using a version of the Azure function `WorkWallet.BI.ClientFunction` older than `3.0.0.0` then review the changes to the Azure function configuration.
+Review changes [here](./Docs/ChangeLog.md) if you are upgrading an existing installation.
 
 ## Overview
 
@@ -42,7 +28,7 @@ These instructions assume that the reader is an experienced IT professional fami
 * A SQL Server database server (any recent edition, including Azure SQL, Express, Developer, Standard, etc.)
 * A connection string for the database (suitable for use with the package `Microsoft.Data.SqlClient`)
 * Internet connectivity (with firewall access permitted to the Work Wallet API and authorisation endpoints)
-* An environment suitable for running a .NET Core 6.0 application (or alternatively a Microsoft Azure subscription for running the code as an Azure Function App)
+* An environment suitable for running a .NET 8.0 application (or alternatively a Microsoft Azure subscription for running the code as an Azure Function App)
 * If wishing to use the sample Power BI Desktop files - a local install of Microsoft Power BI Desktop
 * If wishing to build the code, an installation of Microsoft Visual Studio (2022) is recommended.
 
@@ -61,7 +47,7 @@ Power BI is not a prerequisite to use this solution - any BI tool may be used to
 The sample solution provided here is based on the following technology:
 
 * Database - Microsoft SQL Server *(Azure SQL, local instance, Express, etc.)*. Hardware resource requirements are minimal.
-* Application Code - .NET 6.0 / C#
+* Application Code - .NET 8.0 / C#
 * BI Platform - Microsoft Power BI
 
 The API itself is a standard RESTful API that runs over a secure HTTPS/TLS channel.
@@ -99,12 +85,12 @@ The API endpoint is at <https://bi.work-wallet.com> and the [OAuth 2.0](https://
 
 ## Binaries
 
-All binaries target [.NET 6.0](https://dotnet.microsoft.com/en-us/download/dotnet/6.0)
+All binaries target [.NET 8.0](https://dotnet.microsoft.com/en-us/download/dotnet/8.0)
 
 | Tool | Download URL | Executable | Config. File |
 | --- | --- | --- | --- |
-| Database deployment | [WorkWallet.BI.ClientDatabaseDeploy_2.0.1.0.zip](https://base.azureedge.net/bi-client/WorkWallet.BI.ClientDatabaseDeploy_2.0.1.0.zip) | `WorkWallet.BI.ClientDatabaseDeploy.exe` | `appsettings.json` |
-| Client sample | [WorkWallet.BI.ClientSample_3.0.0.0.zip](https://base.azureedge.net/bi-client/WorkWallet.BI.ClientSample_3.0.0.0.zip) | `WorkWallet.BI.ClientSample.exe` | `appsettings.json` |
+| Database deployment | [WorkWallet.BI.ClientDatabaseDeploy_3.1.0.0.zip](https://base.azureedge.net/bi-client/WorkWallet.BI.ClientDatabaseDeploy_3.1.0.0.zip) | `WorkWallet.BI.ClientDatabaseDeploy.exe` | `appsettings.json` |
+| Client sample | [WorkWallet.BI.ClientSample_3.1.0.0.zip](https://base.azureedge.net/bi-client/WorkWallet.BI.ClientSample_3.1.0.0.zip) | `WorkWallet.BI.ClientSample.exe` | `appsettings.json` |
 
 ## Creating or Upgrading the Database
 
@@ -139,7 +125,7 @@ Edit `appsettings.json` and enter the required settings:
 | ClientOptions | | ApiAccessClientSecret | |
 | ClientOptions | AgentWallets[] | WalletId | |
 | ClientOptions | AgentWallets[] | WalletSecret | |
-| ConnectionStrings | ClientDb | database connection string |
+| ConnectionStrings | ClientDb | database connection string ||
 
 *The application supports the processing multiple wallets by setting multiple entries in the `AgentWallets[]` array.*
 
@@ -159,8 +145,7 @@ Ignore this section if not deploying as an Azure Function.
 
 When creating the Azure function:
 
-* Runtime stack: .NET
-* Version: 6 (LTS)
+* Runtime stack: .NET 8 Isolated
 * Operating System: Windows
 * Enable public access: On
 * Enable Application Insights: Yes
@@ -181,6 +166,34 @@ The following configuration settings are required:
 | FuncOptions:ApiAccessClientSecret | | |
 | FuncOptions:ApiAccessScope | `ww_bi_extract` | |
 | sqldb_connection | | database connection string |
+
+When developing locally within Visual Studio you will need a `local.settings.json` file to supply the settings.
+
+Example `local.settings.json`:
+
+```json
+{
+  "IsEncrypted": false,
+  "Values": {
+    "FUNCTIONS_WORKER_RUNTIME": "dotnet-isolated",
+    "APPLICATIONINSIGHTS_CONNECTION_STRING": "[required]",
+    "AzureWebJobsStorage": "UseDevelopmentStorage=true",
+    "BITimerTriggerSchedule": "0 30 21 * * *",
+    "FuncOptions:ApiAccessAuthority": "https://identity.work-wallet.com",
+    "FuncOptions:ApiAccessClientId": "[required]",
+    "FuncOptions:ApiAccessClientSecret": "[required]",
+    "FuncOptions:ApiAccessScope": "ww_bi_extract",
+    "FuncOptions:AgentApiUrl": "https://bi.work-wallet.com",
+    "FuncOptions:AgentWallets:[0]:WalletId": "[required]",
+    "FuncOptions:AgentWallets:[0]:WalletSecret": "[required]",
+    "FuncOptions:AgentPageSize": "500",
+    "sqldb_connection": "Server=(localdb)\\MSSQLLocalDB;Database=WorkWalletBIClient;Integrated Security=true"
+  }
+}
+```
+
+When developing locally it is recommended to connect to an Application Insights instance (`APPLICATIONINSIGHTS_CONNECTION_STRING` above),
+as informational log events are sent here (and don't show in the console).
 
 ## Sample Power BI Desktop Files (.pbix)
 

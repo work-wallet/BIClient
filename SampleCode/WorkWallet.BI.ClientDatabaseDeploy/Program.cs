@@ -1,20 +1,21 @@
 ﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using WorkWallet.BI.ClientDatabaseDeploy;
+using WorkWallet.BI.ClientDatabaseDeploy.Services;
 
-namespace WorkWallet.BI.ClientDatabaseDeploy
-{
-    internal class Program
-    {
-        static async Task Main(string[] args)
-        {
-            var host = CreateHostBuilder(args);
+var hostBuilder = Host.CreateDefaultBuilder(args)
+                .ConfigureAppConfiguration((builder) =>
+                {
+#if DEBUG
+                    builder.AddUserSecrets<Program>();
+#endif
+                })
+                .ConfigureServices((context, services) =>
+                {
+                    services
+                        .Configure<AppSettings>(context.Configuration.GetSection(nameof(AppSettings)))
+                        .AddHostedService<DeployDatabaseService>();
+                });
 
-            await host.RunConsoleAsync();
-        }
-
-        static IHostBuilder CreateHostBuilder(string[] args) =>
-            Host.CreateDefaultBuilder(args)
-                .ConfigureAppConfiguration((builder) => builder.AddUserSecrets<Program>())
-                .UseStartup<Startup>();
-    }
-}
+await hostBuilder.RunConsoleAsync();

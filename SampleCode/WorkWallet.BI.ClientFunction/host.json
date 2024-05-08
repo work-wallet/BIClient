@@ -2,16 +2,15 @@
   "version": "2.0",
   "functionTimeout": "00:10:00",
   "logging": {
+    "logLevel": {
+      "default": "Warning"
+    },
     "applicationInsights": {
       "samplingSettings": {
         "isEnabled": true,
         "excludedTypes": "Request"
-      }
-    },
-    "logLevel": {
-      "WorkWallet.BI.ClientFunction.BITimerFunction": "Information",
-      "WorkWallet.BI.ClientServices.Processor.ProcessorService": "Information",
-      "WorkWallet.BI.ClientServices.DataStore.SQLService": "Information"
+      },
+      "enableLiveMetricsFilters": true
     }
   }
 }

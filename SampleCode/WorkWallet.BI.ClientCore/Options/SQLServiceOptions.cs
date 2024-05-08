@@ -2,6 +2,6 @@
 {
     public class SQLServiceOptions
     {
-        public string SqlDbConnectionString { get; set; }
+        public required string SqlDbConnectionString { get; set; }
     }
 }

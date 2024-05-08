@@ -1,9 +1,6 @@
 ﻿using IdentityModel.Client;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json.Linq;
-using System;
-using System.Net.Http;
-using System.Threading.Tasks;
 using System.Web;
 using WorkWallet.BI.ClientCore.Interfaces.Services;
 
@@ -11,11 +8,11 @@ namespace WorkWallet.BI.ClientServices.Processor
 {
     internal class ProcessorOptions
     {
-        public string AccessToken { get; set; }
-        public string ApiUrl { get; set; }
-        public Guid WalletId { get; set; }
-        public string WalletSecret { get; set; }
-        public int PageSize { get; set; }
+        public required string AccessToken { get; set; }
+        public required string ApiUrl { get; set; }
+        public required Guid WalletId { get; set; }
+        public required string WalletSecret { get; set; }
+        public required int PageSize { get; set; }
     }
 
     internal class Processor
@@ -42,6 +39,8 @@ namespace WorkWallet.BI.ClientServices.Processor
 
         public async Task Run()
         {
+            _logger.LogInformation("Processing for wallet: {wallet}, data type: {dataType}", _options.WalletId, _dataType);
+
             // obtain our last database change tracking synchronization number (or null if this is the first sync)
             long? lastSynchronizationVersion = await _dataStore.GetLastSynchronizationVersionAsync(_options.WalletId, _logType);
 
@@ -69,23 +68,23 @@ namespace WorkWallet.BI.ClientServices.Processor
                 if (_dataType == "SiteAudits")
                 {
                     // work around non-generic fields returned from the API (fix this in future release)
-                    context = res["Context"].ToObject<SiteAuditsContext>();
+                    context = res["Context"]!.ToObject<SiteAuditsContext>()!;
                 }
                 else
                 {
-                    context = res["Context"].ToObject<Context>();
+                    context = res["Context"]!.ToObject<Context>()!;
                 }
 
                 // now we know how many rows there are in total, we can calculate the total number of pages we need to fetch
                 // note that we want to calculate this every iteration (in case server data has been added to)
                 totalPages = (context.FullCount - 1) / context.PageSize + 1;
 
-                _logger.LogInformation("API for {DataType} returned JSON of length {Length}", _dataType, json.Length);
-                _logger.LogInformation("Count: {Count}", context.Count);
-                _logger.LogInformation("FullCount: {FullCount}", context.FullCount);
-                _logger.LogInformation("LastSynchronizationVersion: {LastSynchronizationVersion}", context.LastSynchronizationVersion);
-                _logger.LogInformation("SynchronizationVersion: {SynchronizationVersion}", context.SynchronizationVersion);
-                _logger.LogInformation("PageNumber: {PageNumber} / {totalPages}, PageSize: {PageSize}", context.PageNumber, totalPages, context.PageSize);
+                _logger.LogDebug("API for {DataType} returned JSON of length {Length}", _dataType, json.Length);
+                _logger.LogDebug("Count: {Count}", context.Count);
+                _logger.LogDebug("FullCount: {FullCount}", context.FullCount);
+                _logger.LogDebug("LastSynchronizationVersion: {LastSynchronizationVersion}", context.LastSynchronizationVersion);
+                _logger.LogDebug("SynchronizationVersion: {SynchronizationVersion}", context.SynchronizationVersion);
+                _logger.LogDebug("PageNumber: {PageNumber} / {totalPages}, PageSize: {PageSize}", context.PageNumber, totalPages, context.PageSize);
 
                 if (context.Count > 0)
                 {
@@ -94,7 +93,7 @@ namespace WorkWallet.BI.ClientServices.Processor
                 }
                 else
                 {
-                    _logger.LogInformation($"No records to load");
+                    _logger.LogDebug($"No records to load");
                 }
 
             } while (pageNumber < totalPages);

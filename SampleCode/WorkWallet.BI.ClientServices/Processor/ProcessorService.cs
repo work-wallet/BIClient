@@ -1,29 +1,17 @@
 ﻿using IdentityModel.Client;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using System;
-using System.Net.Http;
-using System.Threading.Tasks;
 using WorkWallet.BI.ClientCore.Interfaces.Services;
 using WorkWallet.BI.ClientCore.Options;
 
 namespace WorkWallet.BI.ClientServices.Processor
 {
-    public class ProcessorService : IProcessorService
+    public class ProcessorService(
+        ILogger<ProcessorService> logger,
+        IOptions<ProcessorServiceOptions> serviceOptions,
+        IDataStoreService dataStore) : IProcessorService
     {
-        private readonly ILogger<ProcessorService> _logger;
-        private readonly ProcessorServiceOptions _serviceOptions;
-        private readonly IDataStoreService _dataStore;
-
-        public ProcessorService(
-            ILogger<ProcessorService> logger,
-            IOptions<ProcessorServiceOptions> serviceOptions,
-            IDataStoreService dataStore)
-        {
-            _logger = logger;
-            _serviceOptions = serviceOptions.Value;
-            _dataStore = dataStore;
-        }
+        private readonly ProcessorServiceOptions _serviceOptions = serviceOptions.Value;
 
         public async Task RunAsync()
         {
@@ -34,9 +22,11 @@ namespace WorkWallet.BI.ClientServices.Processor
             // loop (supporting multiple wallets)
             foreach (var agentWallet in _serviceOptions.AgentWallets)
             {
+                logger.LogInformation("Processing for wallet {wallet}", agentWallet.WalletId);
+
                 var processorOptions = new ProcessorOptions
                 {
-                    AccessToken = token.AccessToken,
+                    AccessToken = token.AccessToken!,
                     ApiUrl = _serviceOptions.AgentApiUrl,
                     WalletId = agentWallet.WalletId,
                     WalletSecret = agentWallet.WalletSecret,
@@ -55,9 +45,9 @@ namespace WorkWallet.BI.ClientServices.Processor
         private async Task ProcessAsync(ProcessorOptions processorOptions, string dataType, string logType)
         {
             var processor = new Processor(
-                logger: _logger,
+                logger: logger,
                 options: processorOptions,
-                dataStore: _dataStore,
+                dataStore: dataStore,
                 dataType: dataType,
                 logType: logType);
 
@@ -89,7 +79,7 @@ namespace WorkWallet.BI.ClientServices.Processor
                 throw new ApplicationException($"Failed to get token: {tokenResponse.Error}");
             }
 
-            _logger.LogInformation("API access token obtained from {ApiAccessAuthority} for client {ApiAccessClientId}", _serviceOptions.ApiAccessAuthority, _serviceOptions.ApiAccessClientId);
+            logger.LogInformation("API access token obtained from {ApiAccessAuthority} for client {ApiAccessClientId}", _serviceOptions.ApiAccessAuthority, _serviceOptions.ApiAccessClientId);
 
             return tokenResponse;
         }
