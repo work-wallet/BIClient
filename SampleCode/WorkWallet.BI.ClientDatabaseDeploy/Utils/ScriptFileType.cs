@@ -1,10 +1,9 @@
-﻿namespace WorkWallet.BI.ClientDatabaseDeploy.Utils
+﻿namespace WorkWallet.BI.ClientDatabaseDeploy.Utils;
+
+internal enum ScriptFileType
 {
-    internal enum ScriptFileType
-    {
-        Clean,
-        Schema,
-        Type,
-        StoredProcedure
-    }
+    Clean,
+    Schema,
+    Type,
+    StoredProcedure
 }

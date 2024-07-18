@@ -1,7 +1,6 @@
-﻿namespace WorkWallet.BI.ClientCore.Interfaces.Services
+﻿namespace WorkWallet.BI.ClientCore.Interfaces.Services;
+
+public interface IProcessorService
 {
-    public interface IProcessorService
-    {
-        Task RunAsync();
-    }
+    Task RunAsync();
 }

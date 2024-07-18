@@ -1,31 +1,30 @@
-﻿namespace WorkWallet.BI.ClientServices.Processor
+﻿namespace WorkWallet.BI.ClientServices.Processor;
+
+// work around non-generic fields returned from the API (fix this in future release)
+
+public class SiteAuditsContext : Context
 {
-    // work around non-generic fields returned from the API (fix this in future release)
-
-    public class SiteAuditsContext : Context
+    public int SiteAuditCount
     {
-        public int SiteAuditCount
+        get
         {
-            get
-            {
-                return Count;
-            }
-            set
-            {
-                Count = value;
-            } 
+            return Count;
         }
-
-        public int FullSiteAuditCount
+        set
         {
-            get
-            {
-                return FullCount;
-            }
-            set
-            {
-                FullCount = value;
-            }
+            Count = value;
+        } 
+    }
+
+    public int FullSiteAuditCount
+    {
+        get
+        {
+            return FullCount;
+        }
+        set
+        {
+            FullCount = value;
         }
     }
 }
