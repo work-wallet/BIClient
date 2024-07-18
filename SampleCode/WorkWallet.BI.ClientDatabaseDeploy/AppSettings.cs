@@ -1,7 +1,6 @@
-﻿namespace WorkWallet.BI.ClientDatabaseDeploy
+﻿namespace WorkWallet.BI.ClientDatabaseDeploy;
+
+public class AppSettings
 {
-    public class AppSettings
-    {
-        public string? DatabaseConnectionString { get; set; }
-    }
+    public string? DatabaseConnectionString { get; set; }
 }

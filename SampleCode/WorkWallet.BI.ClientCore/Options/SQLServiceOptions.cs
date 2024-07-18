@@ -1,7 +1,6 @@
-﻿namespace WorkWallet.BI.ClientCore.Options
+﻿namespace WorkWallet.BI.ClientCore.Options;
+
+public class SQLServiceOptions
 {
-    public class SQLServiceOptions
-    {
-        public required string SqlDbConnectionString { get; set; }
-    }
+    public required string SqlDbConnectionString { get; set; }
 }
