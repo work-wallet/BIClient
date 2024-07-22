@@ -1,0 +1,281 @@
+{
+  "config": "{\"version\":\"5.37\",\"themeCollection\":{\"baseTheme\":{\"name\":\"CY18SU07\",\"version\":\"3.15\",\"type\":2},\"customTheme\":{\"name\":\"CityPark\",\"version\":\"5.26\",\"type\":2}},\"activeSectionIndex\":0,\"defaultDrillFilterOtherVisuals\":true,\"filterSortOrder\":3,\"linguisticSchemaSyncVersion\":2,\"settings\":{\"useNewFilterPaneExperience\":true,\"allowChangeFilterTypes\":true,\"useStylableVisualContainerHeader\":true,\"exportDataMode\":1,\"useEnhancedTooltips\":true},\"objects\":{\"section\":[{\"properties\":{\"verticalAlignment\":{\"expr\":{\"Literal\":{\"Value\":\"'Top'\"}}}}}],\"outspacePane\":[{\"properties\":{\"expanded\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}}}}]}}",
+  "filters": "[{\"name\":\"Filter87f41cf4696ce549603d\",\"expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"Wallet\"}},\"Property\":\"Wallet\"}},\"filter\":{\"Version\":2,\"From\":[{\"Name\":\"w\",\"Entity\":\"Wallet\",\"Type\":0}],\"Where\":[{\"Condition\":{\"In\":{\"Expressions\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"w\"}},\"Property\":\"Wallet\"}}],\"Values\":[[{\"Literal\":{\"Value\":\"'Work Wallet'\"}}]]}}}]},\"type\":\"Categorical\",\"howCreated\":1,\"objects\":{\"general\":[{\"properties\":{}}]},\"ordinal\":0},{\"name\":\"Filtereea6e04d021604db6470\",\"expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"Location\"}},\"Property\":\"Location Type\"}},\"type\":\"Categorical\",\"howCreated\":1,\"objects\":{\"general\":[{\"properties\":{\"isInvertedSelectionMode\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}}}}]},\"ordinal\":1},{\"name\":\"Filter025c24918d25a0be4d7f\",\"expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"Status\"}},\"Property\":\"Status\"}},\"filter\":{\"Version\":2,\"From\":[{\"Name\":\"s\",\"Entity\":\"Status\",\"Type\":0}],\"Where\":[{\"Condition\":{\"In\":{\"Expressions\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"s\"}},\"Property\":\"Status\"}}],\"Values\":[[{\"Literal\":{\"Value\":\"'Under Investigation'\"}}],[{\"Literal\":{\"Value\":\"'Closed'\"}}],[{\"Literal\":{\"Value\":\"'Deleted'\"}}]]}}}]},\"type\":\"Categorical\",\"howCreated\":1,\"objects\":{\"general\":[{\"properties\":{}}]},\"ordinal\":2}]",
+  "layoutOptimization": 0,
+  "pods": [
+    {
+      "boundSection": "ReportSection7e14f381c0f0362096b5",
+      "config": "{}",
+      "name": "Pod"
+    }
+  ],
+  "resourcePackages": [
+    {
+      "resourcePackage": {
+        "disabled": false,
+        "items": [
+          {
+            "name": "CY18SU07",
+            "path": "BaseThemes/CY18SU07.json",
+            "type": 202
+          },
+          {
+            "name": "CityPark",
+            "path": "BuiltInThemes/CityPark.json",
+            "type": 201
+          }
+        ],
+        "name": "SharedResources",
+        "type": 2
+      }
+    }
+  ],
+  "sections": [
+    {
+      "config": "{\"objects\":{\"outspacePane\":[{\"properties\":{\"width\":{\"expr\":{\"Literal\":{\"Value\":\"370L\"}}}}}]}}",
+      "displayName": "Branch Option",
+      "displayOption": 1,
+      "filters": "[]",
+      "height": 720.00,
+      "name": "ReportSection3878866ddc3f470c82fc",
+      "ordinal": 3,
+      "visualContainers": [
+        {
+          "config": "{\"name\":\"42e7f3d58267c3a10277\",\"layouts\":[{\"id\":0,\"position\":{\"x\":813.1239092495638,\"y\":0,\"z\":2000,\"width\":466.87609075043633,\"height\":91.58813263525306}}],\"singleVisual\":{\"visualType\":\"slicer\",\"projections\":{\"Values\":[{\"queryRef\":\"Branch Option Fact.Workflow Stage (Branch Option)\",\"active\":true}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"b\",\"Entity\":\"Branch Option Fact\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"b\"}},\"Property\":\"Workflow Stage (Branch Option)\"},\"Name\":\"Branch Option Fact.Workflow Stage (Branch Option)\",\"NativeReferenceName\":\"Workflow Stage (Branch Option)\"}]},\"drillFilterOtherVisuals\":true,\"objects\":{\"data\":[{\"properties\":{\"mode\":{\"expr\":{\"Literal\":{\"Value\":\"'Basic'\"}}}}}],\"general\":[{\"properties\":{\"filter\":{\"filter\":{\"Version\":2,\"From\":[{\"Name\":\"b\",\"Entity\":\"Branch Option Fact\",\"Type\":0}],\"Where\":[{\"Condition\":{\"In\":{\"Expressions\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"b\"}},\"Property\":\"Workflow Stage (Branch Option)\"}}],\"Values\":[[{\"Literal\":{\"Value\":\"'Reporting Stage'\"}}]]}}}]}}}}],\"selection\":[{\"properties\":{\"strictSingleSelect\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}}}}]}}}",
+          "filters": "[]",
+          "height": 91.59,
+          "width": 466.88,
+          "x": 813.12,
+          "y": 0.00,
+          "z": 2000.00
+        },
+        {
+          "config": "{\"name\":\"6b82311a80d8d3de14b7\",\"layouts\":[{\"id\":0,\"position\":{\"x\":0,\"y\":0,\"z\":1000,\"width\":813.1239092495638,\"height\":99.40663176265271}}],\"singleVisual\":{\"visualType\":\"slicer\",\"projections\":{\"Values\":[{\"queryRef\":\"Issue.Occurred On\",\"active\":true}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"i\",\"Entity\":\"Issue\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"i\"}},\"Property\":\"Occurred On\"},\"Name\":\"Issue.Occurred On\"}],\"OrderBy\":[{\"Direction\":1,\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"i\"}},\"Property\":\"Occurred On\"}}}]},\"syncGroup\":{\"groupName\":\"Occurred On\",\"fieldChanges\":true,\"filterChanges\":true},\"drillFilterOtherVisuals\":true,\"hasDefaultSort\":true,\"objects\":{\"data\":[{\"properties\":{\"startDate\":{\"expr\":{\"Literal\":{\"Value\":\"datetime'2022-02-26T00:00:00'\"}}},\"endDate\":{\"expr\":{\"Literal\":{\"Value\":\"datetime'2023-09-13T00:00:00'\"}}},\"mode\":{\"expr\":{\"Literal\":{\"Value\":\"'Between'\"}}}}}],\"general\":[{\"properties\":{\"filter\":{\"filter\":{\"Version\":2,\"From\":[{\"Name\":\"i\",\"Entity\":\"Issue\",\"Type\":0}],\"Where\":[{\"Condition\":{\"And\":{\"Left\":{\"Comparison\":{\"ComparisonKind\":2,\"Left\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"i\"}},\"Property\":\"Occurred On\"}},\"Right\":{\"Literal\":{\"Value\":\"datetime'2022-02-26T00:00:00'\"}}}},\"Right\":{\"Comparison\":{\"ComparisonKind\":3,\"Left\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"i\"}},\"Property\":\"Occurred On\"}},\"Right\":{\"Literal\":{\"Value\":\"datetime'2023-09-14T00:00:00'\"}}}}}}}]}}}}]},\"vcObjects\":{\"background\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}},\"color\":{\"solid\":{\"color\":{\"expr\":{\"Literal\":{\"Value\":\"'#FAB230'\"}}}}},\"transparency\":{\"expr\":{\"Literal\":{\"Value\":\"0D\"}}}}}]}}}",
+          "filters": "[]",
+          "height": 99.41,
+          "width": 813.12,
+          "x": 0.00,
+          "y": 0.00,
+          "z": 1000.00
+        },
+        {
+          "config": "{\"name\":\"f45b1afabed954216506\",\"layouts\":[{\"id\":0,\"position\":{\"x\":0,\"y\":98.20401046207498,\"z\":0,\"width\":1280,\"height\":621.586748038361}}],\"singleVisual\":{\"visualType\":\"pivotTable\",\"projections\":{\"Values\":[{\"queryRef\":\"Sum(Issue.Issue Count)\"}],\"Rows\":[{\"queryRef\":\"Branch Option.Branch Option Hierarchy.Branch\",\"active\":true},{\"queryRef\":\"Branch Option.Branch Option Hierarchy.Branch Option\",\"active\":true}],\"Columns\":[{\"queryRef\":\"Severity.Severity\",\"active\":true}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"i\",\"Entity\":\"Issue\",\"Type\":0},{\"Name\":\"b\",\"Entity\":\"Branch Option\",\"Type\":0},{\"Name\":\"s\",\"Entity\":\"Severity\",\"Type\":0}],\"Select\":[{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"i\"}},\"Property\":\"Issue Count\"}},\"Function\":0},\"Name\":\"Sum(Issue.Issue Count)\"},{\"HierarchyLevel\":{\"Expression\":{\"Hierarchy\":{\"Expression\":{\"SourceRef\":{\"Source\":\"b\"}},\"Hierarchy\":\"Branch Option Hierarchy\"}},\"Level\":\"Branch\"},\"Name\":\"Branch Option.Branch Option Hierarchy.Branch\"},{\"HierarchyLevel\":{\"Expression\":{\"Hierarchy\":{\"Expression\":{\"SourceRef\":{\"Source\":\"b\"}},\"Hierarchy\":\"Branch Option Hierarchy\"}},\"Level\":\"Branch Option\"},\"Name\":\"Branch Option.Branch Option Hierarchy.Branch Option\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"s\"}},\"Property\":\"Severity\"},\"Name\":\"Severity.Severity\"}]},\"queryOptions\":{\"keepProjectionOrder\":true},\"drillFilterOtherVisuals\":true,\"objects\":{\"subTotals\":[{\"properties\":{\"columnSubtotals\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}},\"rowSubtotals\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}},\"perRowLevel\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}},\"rowSubtotalsLabel\":{\"expr\":{\"Literal\":{\"Value\":\"'out of a total number of issues'\"}}}}}],\"columnTotal\":[{\"properties\":{\"italic\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}},\"bold\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}}}}]}}}",
+          "filters": "[{\"name\":\"Filter7ff1564bace87b2751e6\",\"expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"Branch Option Fact\"}},\"Property\":\"Workflow Stage (Branch Option)\"}},\"filter\":{\"Version\":2,\"From\":[{\"Name\":\"b\",\"Entity\":\"Branch Option Fact\",\"Type\":0}],\"Where\":[{\"Condition\":{\"In\":{\"Expressions\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"b\"}},\"Property\":\"Workflow Stage (Branch Option)\"}}],\"Values\":[[{\"Literal\":{\"Value\":\"'Reporting Stage'\"}}]]}}}]},\"type\":\"Categorical\",\"howCreated\":1,\"objects\":{}}]",
+          "height": 621.59,
+          "width": 1280.00,
+          "x": 0.00,
+          "y": 98.20,
+          "z": 0.00
+        }
+      ],
+      "width": 1280.00
+    },
+    {
+      "config": "{\"objects\":{\"outspacePane\":[{\"properties\":{\"width\":{\"expr\":{\"Literal\":{\"Value\":\"268L\"}}}}}]}}",
+      "displayName": "Body Part",
+      "displayOption": 1,
+      "filters": "[]",
+      "height": 720.00,
+      "name": "ReportSection4378bbfeb17ea81ec1e8",
+      "ordinal": 2,
+      "visualContainers": [
+        {
+          "config": "{\"name\":\"061f1048c1d7df173d2e\",\"layouts\":[{\"id\":0,\"position\":{\"x\":0,\"y\":0,\"z\":1000,\"width\":749.7435897435897,\"height\":99.48717948717949}}],\"singleVisual\":{\"visualType\":\"slicer\",\"projections\":{\"Values\":[{\"queryRef\":\"Issue.Occurred On\",\"active\":true}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"i\",\"Entity\":\"Issue\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"i\"}},\"Property\":\"Occurred On\"},\"Name\":\"Issue.Occurred On\"}],\"OrderBy\":[{\"Direction\":1,\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"i\"}},\"Property\":\"Occurred On\"}}}]},\"syncGroup\":{\"groupName\":\"Occurred On\",\"fieldChanges\":true,\"filterChanges\":true},\"drillFilterOtherVisuals\":true,\"hasDefaultSort\":true,\"objects\":{\"data\":[{\"properties\":{\"startDate\":{\"expr\":{\"Literal\":{\"Value\":\"datetime'2022-02-26T00:00:00'\"}}},\"endDate\":{\"expr\":{\"Literal\":{\"Value\":\"datetime'2023-09-13T00:00:00'\"}}},\"mode\":{\"expr\":{\"Literal\":{\"Value\":\"'Between'\"}}}}}],\"general\":[{\"properties\":{\"filter\":{\"filter\":{\"Version\":2,\"From\":[{\"Name\":\"i\",\"Entity\":\"Issue\",\"Type\":0}],\"Where\":[{\"Condition\":{\"And\":{\"Left\":{\"Comparison\":{\"ComparisonKind\":2,\"Left\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"i\"}},\"Property\":\"Occurred On\"}},\"Right\":{\"Literal\":{\"Value\":\"datetime'2022-02-26T00:00:00'\"}}}},\"Right\":{\"Comparison\":{\"ComparisonKind\":3,\"Left\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"i\"}},\"Property\":\"Occurred On\"}},\"Right\":{\"Literal\":{\"Value\":\"datetime'2023-09-14T00:00:00'\"}}}}}}}]}}}}]},\"vcObjects\":{\"background\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}},\"color\":{\"solid\":{\"color\":{\"expr\":{\"Literal\":{\"Value\":\"'#FAB230'\"}}}}},\"transparency\":{\"expr\":{\"Literal\":{\"Value\":\"0D\"}}}}}]}}}",
+          "filters": "[]",
+          "height": 99.49,
+          "width": 749.74,
+          "x": 0.00,
+          "y": 0.00,
+          "z": 1000.00
+        },
+        {
+          "config": "{\"name\":\"9a6dd550c3d53a9817be\",\"layouts\":[{\"id\":0,\"position\":{\"x\":749.7435897435897,\"y\":0,\"z\":2000,\"width\":530.2564102564103,\"height\":98.46153846153847}}],\"singleVisual\":{\"visualType\":\"slicer\",\"projections\":{\"Values\":[{\"queryRef\":\"Option Select Fact.Workflow Stage (Option Select)\",\"active\":true}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"o\",\"Entity\":\"Option Select Fact\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"o\"}},\"Property\":\"Workflow Stage (Option Select)\"},\"Name\":\"Option Select Fact.Workflow Stage (Option Select)\",\"NativeReferenceName\":\"Workflow Stage (Option Select)\"}]},\"drillFilterOtherVisuals\":true,\"objects\":{\"data\":[{\"properties\":{\"mode\":{\"expr\":{\"Literal\":{\"Value\":\"'Basic'\"}}}}}],\"general\":[{\"properties\":{\"filter\":{\"filter\":{\"Version\":2,\"From\":[{\"Name\":\"o\",\"Entity\":\"Option Select Fact\",\"Type\":0}],\"Where\":[{\"Condition\":{\"In\":{\"Expressions\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"o\"}},\"Property\":\"Workflow Stage (Option Select)\"}}],\"Values\":[[{\"Literal\":{\"Value\":\"'Reporting Stage'\"}}]]}}}]}}}}],\"selection\":[{\"properties\":{\"strictSingleSelect\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}}}}]}}}",
+          "filters": "[]",
+          "height": 98.46,
+          "width": 530.26,
+          "x": 749.74,
+          "y": 0.00,
+          "z": 2000.00
+        },
+        {
+          "config": "{\"name\":\"ca09febadf26e21c610f\",\"layouts\":[{\"id\":0,\"position\":{\"x\":0,\"y\":98.91808346213291,\"z\":0,\"width\":1280,\"height\":621.2055641421947}}],\"singleVisual\":{\"visualType\":\"pivotTable\",\"projections\":{\"Values\":[{\"queryRef\":\"Sum(Issue.Issue Count)\"}],\"Rows\":[{\"queryRef\":\"Body Part Enum.Body Part Hierarchy.Body Part Group\",\"active\":true},{\"queryRef\":\"Body Part Enum.Body Part Hierarchy.Body Part\",\"active\":true}],\"Columns\":[{\"queryRef\":\"Severity.Severity\",\"active\":true}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"i\",\"Entity\":\"Issue\",\"Type\":0},{\"Name\":\"b\",\"Entity\":\"Body Part Enum\",\"Type\":0},{\"Name\":\"s\",\"Entity\":\"Severity\",\"Type\":0}],\"Select\":[{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"i\"}},\"Property\":\"Issue Count\"}},\"Function\":0},\"Name\":\"Sum(Issue.Issue Count)\"},{\"HierarchyLevel\":{\"Expression\":{\"Hierarchy\":{\"Expression\":{\"SourceRef\":{\"Source\":\"b\"}},\"Hierarchy\":\"Body Part Hierarchy\"}},\"Level\":\"Body Part Group\"},\"Name\":\"Body Part Enum.Body Part Hierarchy.Body Part Group\"},{\"HierarchyLevel\":{\"Expression\":{\"Hierarchy\":{\"Expression\":{\"SourceRef\":{\"Source\":\"b\"}},\"Hierarchy\":\"Body Part Hierarchy\"}},\"Level\":\"Body Part\"},\"Name\":\"Body Part Enum.Body Part Hierarchy.Body Part\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"s\"}},\"Property\":\"Severity\"},\"Name\":\"Severity.Severity\"}]},\"expansionStates\":[{\"roles\":[\"Rows\"],\"levels\":[{\"queryRefs\":[\"Body Part Enum.Body Part Hierarchy.Body Part Group\"],\"isPinned\":true},{\"queryRefs\":[\"Body Part Enum.Body Part Hierarchy.Body Part\"],\"isCollapsed\":true,\"isPinned\":true}],\"root\":{\"identityValues\":null}}],\"drillFilterOtherVisuals\":true,\"objects\":{\"subTotals\":[{\"properties\":{\"columnSubtotals\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}},\"rowSubtotals\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}},\"perRowLevel\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}},\"rowSubtotalsLabel\":{\"expr\":{\"Literal\":{\"Value\":\"'out of a total number of issues'\"}}}}}]}}}",
+          "filters": "[{\"name\":\"Filterf2dc48c517d2734b1709\",\"expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"Body Part Fact\"}},\"Property\":\"Workflow Stage (Body Part)\"}},\"filter\":{\"Version\":2,\"From\":[{\"Name\":\"b\",\"Entity\":\"Body Part Fact\",\"Type\":0}],\"Where\":[{\"Condition\":{\"In\":{\"Expressions\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"b\"}},\"Property\":\"Workflow Stage (Body Part)\"}}],\"Values\":[[{\"Literal\":{\"Value\":\"'Reporting Stage'\"}}]]}}}]},\"type\":\"Categorical\",\"howCreated\":1,\"objects\":{\"general\":[{\"properties\":{}}]}}]",
+          "height": 621.21,
+          "width": 1280.00,
+          "x": 0.00,
+          "y": 98.92,
+          "z": 0.00
+        }
+      ],
+      "width": 1280.00
+    },
+    {
+      "config": "{\"objects\":{\"outspacePane\":[{\"properties\":{\"width\":{\"expr\":{\"Literal\":{\"Value\":\"394L\"}}}}}]}}",
+      "displayName": "Option Select",
+      "displayOption": 1,
+      "filters": "[{\"name\":\"Filterb8786a5835389610500c\",\"expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"Option Select Fact\"}},\"Property\":\"Workflow Stage (Option Select)\"}},\"type\":\"Categorical\",\"howCreated\":1,\"objects\":{}}]",
+      "height": 720.00,
+      "name": "ReportSection510d78fc35145c204cf4",
+      "ordinal": 4,
+      "visualContainers": [
+        {
+          "config": "{\"name\":\"4188b1061e34fff00089\",\"layouts\":[{\"id\":0,\"position\":{\"x\":0,\"y\":98.91808346213291,\"z\":0,\"width\":1280,\"height\":621.2055641421947}}],\"singleVisual\":{\"visualType\":\"pivotTable\",\"projections\":{\"Values\":[{\"queryRef\":\"Sum(Issue.Issue Count)\"}],\"Columns\":[{\"queryRef\":\"Severity.Severity\",\"active\":true}],\"Rows\":[{\"queryRef\":\"Option Select.Option Hierarchy.Option Question\",\"active\":true},{\"queryRef\":\"Option Select.Option Hierarchy.Option\",\"active\":true}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"i\",\"Entity\":\"Issue\",\"Type\":0},{\"Name\":\"s\",\"Entity\":\"Severity\",\"Type\":0},{\"Name\":\"o\",\"Entity\":\"Option Select\",\"Type\":0}],\"Select\":[{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"i\"}},\"Property\":\"Issue Count\"}},\"Function\":0},\"Name\":\"Sum(Issue.Issue Count)\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"s\"}},\"Property\":\"Severity\"},\"Name\":\"Severity.Severity\"},{\"HierarchyLevel\":{\"Expression\":{\"Hierarchy\":{\"Expression\":{\"SourceRef\":{\"Source\":\"o\"}},\"Hierarchy\":\"Option Hierarchy\"}},\"Level\":\"Option Question\"},\"Name\":\"Option Select.Option Hierarchy.Option Question\"},{\"HierarchyLevel\":{\"Expression\":{\"Hierarchy\":{\"Expression\":{\"SourceRef\":{\"Source\":\"o\"}},\"Hierarchy\":\"Option Hierarchy\"}},\"Level\":\"Option\"},\"Name\":\"Option Select.Option Hierarchy.Option\"}]},\"expansionStates\":[{\"roles\":[\"Rows\"],\"levels\":[{\"queryRefs\":[\"Option Select.Option Hierarchy.Option Question\"],\"isPinned\":true},{\"queryRefs\":[\"Option Select.Option Hierarchy.Option\"],\"isCollapsed\":true,\"isPinned\":true}],\"root\":{\"identityValues\":null}}],\"drillFilterOtherVisuals\":true,\"objects\":{\"subTotals\":[{\"properties\":{\"columnSubtotals\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}},\"rowSubtotals\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}},\"perRowLevel\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}},\"rowSubtotalsLabel\":{\"expr\":{\"Literal\":{\"Value\":\"'out of a total number of issues'\"}}}}}]}}}",
+          "filters": "[{\"name\":\"Filter45c1d7084105e571bd76\",\"expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"Option Select Fact\"}},\"Property\":\"Workflow Stage (Option Select)\"}},\"filter\":{\"Version\":2,\"From\":[{\"Name\":\"o\",\"Entity\":\"Option Select Fact\",\"Type\":0}],\"Where\":[{\"Condition\":{\"In\":{\"Expressions\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"o\"}},\"Property\":\"Workflow Stage (Option Select)\"}}],\"Values\":[[{\"Literal\":{\"Value\":\"'Reporting Stage'\"}}]]}}}]},\"type\":\"Categorical\",\"howCreated\":1,\"objects\":{}}]",
+          "height": 621.21,
+          "width": 1280.00,
+          "x": 0.00,
+          "y": 98.92,
+          "z": 0.00
+        },
+        {
+          "config": "{\"name\":\"4cbc1871bc5546128a53\",\"layouts\":[{\"id\":0,\"position\":{\"x\":827.0944741532977,\"y\":0,\"z\":2000,\"width\":452.9055258467023,\"height\":99.25133689839572}}],\"singleVisual\":{\"visualType\":\"slicer\",\"projections\":{\"Values\":[{\"queryRef\":\"Option Select Fact.Workflow Stage (Option Select)\",\"active\":true}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"o\",\"Entity\":\"Option Select Fact\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"o\"}},\"Property\":\"Workflow Stage (Option Select)\"},\"Name\":\"Option Select Fact.Workflow Stage (Option Select)\",\"NativeReferenceName\":\"Workflow Stage (Option Select)\"}]},\"drillFilterOtherVisuals\":true,\"objects\":{\"data\":[{\"properties\":{\"mode\":{\"expr\":{\"Literal\":{\"Value\":\"'Basic'\"}}}}}],\"selection\":[{\"properties\":{\"strictSingleSelect\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}}}}],\"general\":[{\"properties\":{\"filter\":{\"filter\":{\"Version\":2,\"From\":[{\"Name\":\"o\",\"Entity\":\"Option Select Fact\",\"Type\":0}],\"Where\":[{\"Condition\":{\"In\":{\"Expressions\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"o\"}},\"Property\":\"Workflow Stage (Option Select)\"}}],\"Values\":[[{\"Literal\":{\"Value\":\"'Reporting Stage'\"}}]]}}}]}}}}]}}}",
+          "filters": "[]",
+          "height": 99.25,
+          "width": 452.91,
+          "x": 827.09,
+          "y": 0.00,
+          "z": 2000.00
+        },
+        {
+          "config": "{\"name\":\"84dfc8ee1b5e8764eab9\",\"layouts\":[{\"id\":0,\"position\":{\"x\":0,\"y\":0,\"z\":1000,\"width\":827.0944741532977,\"height\":99.25133689839572}}],\"singleVisual\":{\"visualType\":\"slicer\",\"projections\":{\"Values\":[{\"queryRef\":\"Issue.Occurred On\",\"active\":true}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"i\",\"Entity\":\"Issue\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"i\"}},\"Property\":\"Occurred On\"},\"Name\":\"Issue.Occurred On\"}],\"OrderBy\":[{\"Direction\":1,\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"i\"}},\"Property\":\"Occurred On\"}}}]},\"syncGroup\":{\"groupName\":\"Occurred On\",\"fieldChanges\":true,\"filterChanges\":true},\"drillFilterOtherVisuals\":true,\"hasDefaultSort\":true,\"objects\":{\"data\":[{\"properties\":{\"startDate\":{\"expr\":{\"Literal\":{\"Value\":\"datetime'2022-02-26T00:00:00'\"}}},\"mode\":{\"expr\":{\"Literal\":{\"Value\":\"'Between'\"}}},\"endDate\":{\"expr\":{\"Literal\":{\"Value\":\"datetime'2023-09-13T00:00:00'\"}}}}}],\"general\":[{\"properties\":{\"filter\":{\"filter\":{\"Version\":2,\"From\":[{\"Name\":\"i\",\"Entity\":\"Issue\",\"Type\":0}],\"Where\":[{\"Condition\":{\"And\":{\"Left\":{\"Comparison\":{\"ComparisonKind\":2,\"Left\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"i\"}},\"Property\":\"Occurred On\"}},\"Right\":{\"Literal\":{\"Value\":\"datetime'2022-02-26T00:00:00'\"}}}},\"Right\":{\"Comparison\":{\"ComparisonKind\":3,\"Left\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"i\"}},\"Property\":\"Occurred On\"}},\"Right\":{\"Literal\":{\"Value\":\"datetime'2023-09-14T00:00:00'\"}}}}}}}]}}}}]},\"vcObjects\":{\"background\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}},\"color\":{\"solid\":{\"color\":{\"expr\":{\"Literal\":{\"Value\":\"'#FAB230'\"}}}}},\"transparency\":{\"expr\":{\"Literal\":{\"Value\":\"0D\"}}}}}]}}}",
+          "filters": "[]",
+          "height": 99.25,
+          "width": 827.09,
+          "x": 0.00,
+          "y": 0.00,
+          "z": 1000.00
+        }
+      ],
+      "width": 1280.00
+    },
+    {
+      "config": "{\"objects\":{\"outspacePane\":[{\"properties\":{\"width\":{\"expr\":{\"Literal\":{\"Value\":\"410L\"}}}}}]}}",
+      "displayName": "Person",
+      "displayOption": 1,
+      "filters": "[]",
+      "height": 720.00,
+      "name": "ReportSection7a766b97e516517f538b",
+      "ordinal": 5,
+      "visualContainers": [
+        {
+          "config": "{\"name\":\"18f58aacd7263c400645\",\"layouts\":[{\"id\":0,\"position\":{\"x\":840.2169981916818,\"y\":0,\"z\":2000,\"width\":439.78300180831826,\"height\":98.37251356238698}}],\"singleVisual\":{\"visualType\":\"slicer\",\"projections\":{\"Values\":[{\"queryRef\":\"Person Fact.Workflow Stage (Person)\",\"active\":true}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"p\",\"Entity\":\"Person Fact\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"p\"}},\"Property\":\"Workflow Stage (Person)\"},\"Name\":\"Person Fact.Workflow Stage (Person)\",\"NativeReferenceName\":\"Workflow Stage (Person)\"}]},\"drillFilterOtherVisuals\":true,\"objects\":{\"data\":[{\"properties\":{\"mode\":{\"expr\":{\"Literal\":{\"Value\":\"'Basic'\"}}}}}],\"selection\":[{\"properties\":{\"strictSingleSelect\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}}}}],\"general\":[{\"properties\":{\"filter\":{\"filter\":{\"Version\":2,\"From\":[{\"Name\":\"p\",\"Entity\":\"Person Fact\",\"Type\":0}],\"Where\":[{\"Condition\":{\"In\":{\"Expressions\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"p\"}},\"Property\":\"Workflow Stage (Person)\"}}],\"Values\":[[{\"Literal\":{\"Value\":\"'Reporting Stage'\"}}]]}}}]}}}}]}}}",
+          "filters": "[]",
+          "height": 98.37,
+          "width": 439.78,
+          "x": 840.22,
+          "y": 0.00,
+          "z": 2000.00
+        },
+        {
+          "config": "{\"name\":\"944703ba506a1da3c8e5\",\"layouts\":[{\"id\":0,\"position\":{\"x\":0,\"y\":98.91808346213291,\"z\":0,\"width\":1280,\"height\":621.2055641421947}}],\"singleVisual\":{\"visualType\":\"pivotTable\",\"projections\":{\"Values\":[{\"queryRef\":\"Sum(Issue.Issue Count)\"}],\"Columns\":[{\"queryRef\":\"Severity.Severity\",\"active\":true}],\"Rows\":[{\"queryRef\":\"Person.Person Hierarchy.Person Question\",\"active\":true},{\"queryRef\":\"Person.Person Hierarchy.Person\",\"active\":true}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"i\",\"Entity\":\"Issue\",\"Type\":0},{\"Name\":\"s\",\"Entity\":\"Severity\",\"Type\":0},{\"Name\":\"p\",\"Entity\":\"Person\",\"Type\":0}],\"Select\":[{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"i\"}},\"Property\":\"Issue Count\"}},\"Function\":0},\"Name\":\"Sum(Issue.Issue Count)\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"s\"}},\"Property\":\"Severity\"},\"Name\":\"Severity.Severity\"},{\"HierarchyLevel\":{\"Expression\":{\"Hierarchy\":{\"Expression\":{\"SourceRef\":{\"Source\":\"p\"}},\"Hierarchy\":\"Person Hierarchy\"}},\"Level\":\"Person Question\"},\"Name\":\"Person.Person Hierarchy.Person Question\"},{\"HierarchyLevel\":{\"Expression\":{\"Hierarchy\":{\"Expression\":{\"SourceRef\":{\"Source\":\"p\"}},\"Hierarchy\":\"Person Hierarchy\"}},\"Level\":\"Person\"},\"Name\":\"Person.Person Hierarchy.Person\"}]},\"expansionStates\":[{\"roles\":[\"Rows\"],\"levels\":[{\"queryRefs\":[\"Person.Person Hierarchy.Person Question\"],\"isPinned\":true},{\"queryRefs\":[\"Person.Person Hierarchy.Person\"],\"isCollapsed\":true,\"isPinned\":true}],\"root\":{\"identityValues\":null}}],\"queryOptions\":{\"keepProjectionOrder\":true},\"drillFilterOtherVisuals\":true,\"objects\":{\"subTotals\":[{\"properties\":{\"columnSubtotals\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}},\"rowSubtotals\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}},\"perRowLevel\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}},\"rowSubtotalsLabel\":{\"expr\":{\"Literal\":{\"Value\":\"'out of a total number of issues'\"}}}}}]}}}",
+          "filters": "[{\"name\":\"Filterad591134b08053bb624d\",\"expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"Person Fact\"}},\"Property\":\"Workflow Stage (Person)\"}},\"filter\":{\"Version\":2,\"From\":[{\"Name\":\"p\",\"Entity\":\"Person Fact\",\"Type\":0}],\"Where\":[{\"Condition\":{\"In\":{\"Expressions\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"p\"}},\"Property\":\"Workflow Stage (Person)\"}}],\"Values\":[[{\"Literal\":{\"Value\":\"'Reporting Stage'\"}}]]}}}]},\"type\":\"Categorical\",\"howCreated\":1,\"objects\":{}}]",
+          "height": 621.21,
+          "width": 1280.00,
+          "x": 0.00,
+          "y": 98.92,
+          "z": 0.00
+        },
+        {
+          "config": "{\"name\":\"c38c2c1a48cfb1b24235\",\"layouts\":[{\"id\":0,\"position\":{\"x\":0,\"y\":0,\"z\":1000,\"width\":840.2169981916818,\"height\":99.52983725135624}}],\"singleVisual\":{\"visualType\":\"slicer\",\"projections\":{\"Values\":[{\"queryRef\":\"Issue.Occurred On\",\"active\":true}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"i\",\"Entity\":\"Issue\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"i\"}},\"Property\":\"Occurred On\"},\"Name\":\"Issue.Occurred On\"}],\"OrderBy\":[{\"Direction\":1,\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"i\"}},\"Property\":\"Occurred On\"}}}]},\"syncGroup\":{\"groupName\":\"Occurred On\",\"fieldChanges\":true,\"filterChanges\":true},\"drillFilterOtherVisuals\":true,\"hasDefaultSort\":true,\"objects\":{\"data\":[{\"properties\":{\"startDate\":{\"expr\":{\"Literal\":{\"Value\":\"datetime'2022-02-26T00:00:00'\"}}},\"mode\":{\"expr\":{\"Literal\":{\"Value\":\"'Between'\"}}},\"endDate\":{\"expr\":{\"Literal\":{\"Value\":\"datetime'2023-09-13T00:00:00'\"}}}}}],\"general\":[{\"properties\":{\"filter\":{\"filter\":{\"Version\":2,\"From\":[{\"Name\":\"i\",\"Entity\":\"Issue\",\"Type\":0}],\"Where\":[{\"Condition\":{\"And\":{\"Left\":{\"Comparison\":{\"ComparisonKind\":2,\"Left\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"i\"}},\"Property\":\"Occurred On\"}},\"Right\":{\"Literal\":{\"Value\":\"datetime'2022-02-26T00:00:00'\"}}}},\"Right\":{\"Comparison\":{\"ComparisonKind\":3,\"Left\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"i\"}},\"Property\":\"Occurred On\"}},\"Right\":{\"Literal\":{\"Value\":\"datetime'2023-09-14T00:00:00'\"}}}}}}}]}}}}]},\"vcObjects\":{\"background\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}},\"color\":{\"solid\":{\"color\":{\"expr\":{\"Literal\":{\"Value\":\"'#FAB230'\"}}}}},\"transparency\":{\"expr\":{\"Literal\":{\"Value\":\"0D\"}}}}}]}}}",
+          "filters": "[]",
+          "height": 99.53,
+          "width": 840.22,
+          "x": 0.00,
+          "y": 0.00,
+          "z": 1000.00
+        }
+      ],
+      "width": 1280.00
+    },
+    {
+      "config": "{}",
+      "displayName": "Issues",
+      "displayOption": 1,
+      "filters": "[]",
+      "height": 720.00,
+      "name": "ReportSection7e14f381c0f0362096b5",
+      "visualContainers": [
+        {
+          "config": "{\"name\":\"157590454d6a846e6199\",\"layouts\":[{\"id\":0,\"position\":{\"x\":9.72644376899696,\"y\":99.209726443769,\"z\":0,\"width\":1270.273556231003,\"height\":620.5471124620061}}],\"singleVisual\":{\"visualType\":\"tableEx\",\"projections\":{\"Values\":[{\"queryRef\":\"Issue.Issue Reference\"},{\"queryRef\":\"Issue.Occurred On\"},{\"queryRef\":\"Issue.Reported On\"},{\"queryRef\":\"Issue.Reported By\"},{\"queryRef\":\"Status.Status\"},{\"queryRef\":\"Category.Category\"},{\"queryRef\":\"Location.Location\"},{\"queryRef\":\"Issue.Issue Overview\"},{\"queryRef\":\"Severity.Severity\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"i\",\"Entity\":\"Issue\",\"Type\":0},{\"Name\":\"s\",\"Entity\":\"Status\",\"Type\":0},{\"Name\":\"c\",\"Entity\":\"Category\",\"Type\":0},{\"Name\":\"l\",\"Entity\":\"Location\",\"Type\":0},{\"Name\":\"s1\",\"Entity\":\"Severity\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"i\"}},\"Property\":\"Issue Reference\"},\"Name\":\"Issue.Issue Reference\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"i\"}},\"Property\":\"Occurred On\"},\"Name\":\"Issue.Occurred On\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"i\"}},\"Property\":\"Reported On\"},\"Name\":\"Issue.Reported On\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"i\"}},\"Property\":\"Reported By\"},\"Name\":\"Issue.Reported By\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"s\"}},\"Property\":\"Status\"},\"Name\":\"Status.Status\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"c\"}},\"Property\":\"Category\"},\"Name\":\"Category.Category\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"l\"}},\"Property\":\"Location\"},\"Name\":\"Location.Location\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"i\"}},\"Property\":\"Issue Overview\"},\"Name\":\"Issue.Issue Overview\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"s1\"}},\"Property\":\"Severity\"},\"Name\":\"Severity.Severity\"}],\"OrderBy\":[{\"Direction\":1,\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"i\"}},\"Property\":\"Occurred On\"}}}]},\"drillFilterOtherVisuals\":true,\"objects\":{\"columnFormatting\":[{\"properties\":{\"styleValues\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}}},\"selector\":{\"metadata\":\"Issue.Occurred On\"}}],\"columnWidth\":[{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"743.2224643037778D\"}}}},\"selector\":{\"metadata\":\"Issue.Issue Overview\"}}]}}}",
+          "filters": "[]",
+          "height": 620.55,
+          "width": 1270.27,
+          "x": 9.73,
+          "y": 99.21,
+          "z": 0.00
+        },
+        {
+          "config": "{\"name\":\"fc841deedb5a38924b28\",\"layouts\":[{\"id\":0,\"position\":{\"x\":0,\"y\":0,\"z\":1000,\"width\":1280,\"height\":99.209726443769}}],\"singleVisual\":{\"visualType\":\"slicer\",\"projections\":{\"Values\":[{\"queryRef\":\"Issue.Occurred On\",\"active\":true}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"i\",\"Entity\":\"Issue\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"i\"}},\"Property\":\"Occurred On\"},\"Name\":\"Issue.Occurred On\"}],\"OrderBy\":[{\"Direction\":1,\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"i\"}},\"Property\":\"Occurred On\"}}}]},\"syncGroup\":{\"groupName\":\"Occurred On\",\"fieldChanges\":true,\"filterChanges\":true},\"drillFilterOtherVisuals\":true,\"hasDefaultSort\":true,\"objects\":{\"data\":[{\"properties\":{\"startDate\":{\"expr\":{\"Literal\":{\"Value\":\"datetime'2022-02-26T00:00:00'\"}}},\"endDate\":{\"expr\":{\"Literal\":{\"Value\":\"datetime'2023-09-13T00:00:00'\"}}},\"mode\":{\"expr\":{\"Literal\":{\"Value\":\"'Between'\"}}}}}],\"general\":[{\"properties\":{\"filter\":{\"filter\":{\"Version\":2,\"From\":[{\"Name\":\"i\",\"Entity\":\"Issue\",\"Type\":0}],\"Where\":[{\"Condition\":{\"And\":{\"Left\":{\"Comparison\":{\"ComparisonKind\":2,\"Left\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"i\"}},\"Property\":\"Occurred On\"}},\"Right\":{\"Literal\":{\"Value\":\"datetime'2022-02-26T00:00:00'\"}}}},\"Right\":{\"Comparison\":{\"ComparisonKind\":3,\"Left\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"i\"}},\"Property\":\"Occurred On\"}},\"Right\":{\"Literal\":{\"Value\":\"datetime'2023-09-14T00:00:00'\"}}}}}}}]}}}}]},\"vcObjects\":{\"background\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}},\"color\":{\"solid\":{\"color\":{\"expr\":{\"Literal\":{\"Value\":\"'#FAB230'\"}}}}},\"transparency\":{\"expr\":{\"Literal\":{\"Value\":\"0D\"}}}}}]}}}",
+          "filters": "[]",
+          "height": 99.21,
+          "width": 1280.00,
+          "x": 0.00,
+          "y": 0.00,
+          "z": 1000.00
+        }
+      ],
+      "width": 1280.00
+    },
+    {
+      "config": "{}",
+      "displayName": "Issues by Severity",
+      "displayOption": 1,
+      "filters": "[]",
+      "height": 720.00,
+      "name": "ReportSection8b86bcf7ba51584ae66e",
+      "ordinal": 1,
+      "visualContainers": [
+        {
+          "config": "{\"name\":\"085fbe35ea731a42dd4b\",\"layouts\":[{\"id\":0,\"position\":{\"x\":10.215482841181165,\"y\":99.0901835594573,\"z\":0,\"width\":1269.784517158819,\"height\":621.1013567438149}}],\"singleVisual\":{\"visualType\":\"pivotTable\",\"projections\":{\"Rows\":[{\"queryRef\":\"Location.Company Hierarchy.Company\",\"active\":true},{\"queryRef\":\"Location.Company Hierarchy.Site\",\"active\":true},{\"queryRef\":\"Location.Company Hierarchy.Area\"}],\"Values\":[{\"queryRef\":\"Sum(Issue.Issue Count)\"}],\"Columns\":[{\"queryRef\":\"Severity.Severity\",\"active\":true}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"l\",\"Entity\":\"Location\",\"Type\":0},{\"Name\":\"i\",\"Entity\":\"Issue\",\"Type\":0},{\"Name\":\"s\",\"Entity\":\"Severity\",\"Type\":0}],\"Select\":[{\"HierarchyLevel\":{\"Expression\":{\"Hierarchy\":{\"Expression\":{\"SourceRef\":{\"Source\":\"l\"}},\"Hierarchy\":\"Company Hierarchy\"}},\"Level\":\"Company\"},\"Name\":\"Location.Company Hierarchy.Company\"},{\"HierarchyLevel\":{\"Expression\":{\"Hierarchy\":{\"Expression\":{\"SourceRef\":{\"Source\":\"l\"}},\"Hierarchy\":\"Company Hierarchy\"}},\"Level\":\"Site\"},\"Name\":\"Location.Company Hierarchy.Site\"},{\"HierarchyLevel\":{\"Expression\":{\"Hierarchy\":{\"Expression\":{\"SourceRef\":{\"Source\":\"l\"}},\"Hierarchy\":\"Company Hierarchy\"}},\"Level\":\"Area\"},\"Name\":\"Location.Company Hierarchy.Area\"},{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"i\"}},\"Property\":\"Issue Count\"}},\"Function\":0},\"Name\":\"Sum(Issue.Issue Count)\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"s\"}},\"Property\":\"Severity\"},\"Name\":\"Severity.Severity\"}]},\"expansionStates\":[{\"roles\":[\"Rows\"],\"levels\":[{\"queryRefs\":[\"Location.Company Hierarchy.Company\"],\"isPinned\":true},{\"queryRefs\":[\"Location.Company Hierarchy.Site\"],\"isCollapsed\":true,\"isPinned\":true},{\"queryRefs\":[\"Location.Company Hierarchy.Area\"],\"isCollapsed\":true}],\"root\":{\"identityValues\":null}}],\"drillFilterOtherVisuals\":true}}",
+          "filters": "[]",
+          "height": 621.10,
+          "width": 1269.78,
+          "x": 10.22,
+          "y": 99.09,
+          "z": 0.00
+        },
+        {
+          "config": "{\"name\":\"693788dd13d658ccef79\",\"layouts\":[{\"id\":0,\"position\":{\"x\":0,\"y\":0,\"z\":1000,\"width\":1280,\"height\":98.81925522252499}}],\"singleVisual\":{\"visualType\":\"slicer\",\"projections\":{\"Values\":[{\"queryRef\":\"Issue.Occurred On\",\"active\":true}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"i\",\"Entity\":\"Issue\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"i\"}},\"Property\":\"Occurred On\"},\"Name\":\"Issue.Occurred On\"}],\"OrderBy\":[{\"Direction\":1,\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"i\"}},\"Property\":\"Occurred On\"}}}]},\"syncGroup\":{\"groupName\":\"Occurred On\",\"fieldChanges\":true,\"filterChanges\":true},\"drillFilterOtherVisuals\":true,\"hasDefaultSort\":true,\"objects\":{\"data\":[{\"properties\":{\"startDate\":{\"expr\":{\"Literal\":{\"Value\":\"datetime'2022-02-26T00:49:29.805'\"}}},\"endDate\":{\"expr\":{\"Literal\":{\"Value\":\"datetime'2023-09-13T10:08:00'\"}}},\"mode\":{\"expr\":{\"Literal\":{\"Value\":\"'Between'\"}}}}}],\"general\":[{\"properties\":{\"filter\":{\"filter\":{\"Version\":2,\"From\":[{\"Name\":\"i\",\"Entity\":\"Issue\",\"Type\":0}],\"Where\":[{\"Condition\":{\"And\":{\"Left\":{\"Comparison\":{\"ComparisonKind\":2,\"Left\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"i\"}},\"Property\":\"Occurred On\"}},\"Right\":{\"Literal\":{\"Value\":\"datetime'2022-02-26T00:00:00'\"}}}},\"Right\":{\"Comparison\":{\"ComparisonKind\":3,\"Left\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"i\"}},\"Property\":\"Occurred On\"}},\"Right\":{\"Literal\":{\"Value\":\"datetime'2023-09-14T00:00:00'\"}}}}}}}]}}}}]},\"vcObjects\":{\"background\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}},\"color\":{\"solid\":{\"color\":{\"expr\":{\"Literal\":{\"Value\":\"'#FAB230'\"}}}}},\"transparency\":{\"expr\":{\"Literal\":{\"Value\":\"0D\"}}}}}]}}}",
+          "filters": "[]",
+          "height": 98.82,
+          "width": 1280.00,
+          "x": 0.00,
+          "y": 0.00,
+          "z": 1000.00
+        }
+      ],
+      "width": 1280.00
+    },
+    {
+      "config": "{}",
+      "displayName": "Root Cause Analysis",
+      "displayOption": 1,
+      "filters": "[]",
+      "height": 720.00,
+      "name": "ReportSectione3fb0372510a32d3481f",
+      "ordinal": 6,
+      "visualContainers": [
+        {
+          "config": "{\"name\":\"380eb7bd4c07031336c3\",\"layouts\":[{\"id\":0,\"position\":{\"x\":0,\"y\":98.91808346213291,\"z\":0,\"width\":1280,\"height\":621.2055641421947}}],\"singleVisual\":{\"visualType\":\"pivotTable\",\"projections\":{\"Values\":[{\"queryRef\":\"Sum(Issue.Issue Count)\"}],\"Columns\":[{\"queryRef\":\"Severity.Severity\",\"active\":true}],\"Rows\":[{\"queryRef\":\"Root Cause Analysis Type.Root Cause Analysis Type\",\"active\":true},{\"queryRef\":\"Root Cause Analysis Fact.Root Cause Analysis\",\"active\":true}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"i\",\"Entity\":\"Issue\",\"Type\":0},{\"Name\":\"s\",\"Entity\":\"Severity\",\"Type\":0},{\"Name\":\"r\",\"Entity\":\"Root Cause Analysis Type\",\"Type\":0},{\"Name\":\"r1\",\"Entity\":\"Root Cause Analysis Fact\",\"Type\":0}],\"Select\":[{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"i\"}},\"Property\":\"Issue Count\"}},\"Function\":0},\"Name\":\"Sum(Issue.Issue Count)\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"s\"}},\"Property\":\"Severity\"},\"Name\":\"Severity.Severity\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"r\"}},\"Property\":\"Root Cause Analysis Type\"},\"Name\":\"Root Cause Analysis Type.Root Cause Analysis Type\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"r1\"}},\"Property\":\"Root Cause Analysis\"},\"Name\":\"Root Cause Analysis Fact.Root Cause Analysis\"}]},\"expansionStates\":[{\"roles\":[\"Rows\"],\"levels\":[{\"queryRefs\":[\"Root Cause Analysis Type.Root Cause Analysis Type\"],\"isPinned\":true},{\"queryRefs\":[\"Root Cause Analysis Fact.Root Cause Analysis\"],\"isCollapsed\":true,\"isPinned\":true}],\"root\":{\"identityValues\":null}}],\"drillFilterOtherVisuals\":true,\"objects\":{\"subTotals\":[{\"properties\":{\"columnSubtotals\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}},\"rowSubtotals\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}},\"perRowLevel\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}},\"rowSubtotalsLabel\":{\"expr\":{\"Literal\":{\"Value\":\"'out of a total number of issues'\"}}}}}]}}}",
+          "filters": "[]",
+          "height": 621.21,
+          "width": 1280.00,
+          "x": 0.00,
+          "y": 98.92,
+          "z": 0.00
+        },
+        {
+          "config": "{\"name\":\"43917c21248aaaca7bcb\",\"layouts\":[{\"id\":0,\"position\":{\"x\":0,\"y\":0,\"z\":1000,\"width\":1280,\"height\":99.209726443769}}],\"singleVisual\":{\"visualType\":\"slicer\",\"projections\":{\"Values\":[{\"queryRef\":\"Issue.Occurred On\",\"active\":true}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"i\",\"Entity\":\"Issue\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"i\"}},\"Property\":\"Occurred On\"},\"Name\":\"Issue.Occurred On\"}],\"OrderBy\":[{\"Direction\":1,\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"i\"}},\"Property\":\"Occurred On\"}}}]},\"syncGroup\":{\"groupName\":\"Occurred On\",\"fieldChanges\":true,\"filterChanges\":true},\"drillFilterOtherVisuals\":true,\"hasDefaultSort\":true,\"objects\":{\"data\":[{\"properties\":{\"startDate\":{\"expr\":{\"Literal\":{\"Value\":\"datetime'2022-02-26T00:00:00'\"}}},\"mode\":{\"expr\":{\"Literal\":{\"Value\":\"'Between'\"}}},\"endDate\":{\"expr\":{\"Literal\":{\"Value\":\"datetime'2023-09-13T00:00:00'\"}}}}}],\"general\":[{\"properties\":{\"filter\":{\"filter\":{\"Version\":2,\"From\":[{\"Name\":\"i\",\"Entity\":\"Issue\",\"Type\":0}],\"Where\":[{\"Condition\":{\"And\":{\"Left\":{\"Comparison\":{\"ComparisonKind\":2,\"Left\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"i\"}},\"Property\":\"Occurred On\"}},\"Right\":{\"Literal\":{\"Value\":\"datetime'2022-02-26T00:00:00'\"}}}},\"Right\":{\"Comparison\":{\"ComparisonKind\":3,\"Left\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"i\"}},\"Property\":\"Occurred On\"}},\"Right\":{\"Literal\":{\"Value\":\"datetime'2023-09-14T00:00:00'\"}}}}}}}]}}}}]},\"vcObjects\":{\"background\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}},\"color\":{\"solid\":{\"color\":{\"expr\":{\"Literal\":{\"Value\":\"'#FAB230'\"}}}}},\"transparency\":{\"expr\":{\"Literal\":{\"Value\":\"0D\"}}}}}]}}}",
+          "filters": "[]",
+          "height": 99.21,
+          "width": 1280.00,
+          "x": 0.00,
+          "y": 0.00,
+          "z": 1000.00
+        }
+      ],
+      "width": 1280.00
+    }
+  ],
+  "theme": "CityPark"
+}

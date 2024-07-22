@@ -1,0 +1,107 @@
+{
+  "version": "1.1.0",
+  "diagrams": [
+    {
+      "ordinal": 0,
+      "scrollPosition": {
+        "x": 0,
+        "y": 0
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 303.92364957819012,
+            "y": -10
+          },
+          "nodeIndex": "Location",
+          "nodeLineageTag": "187194fd-4417-4e1b-955b-f5ceb409025f",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 299.56021176402248,
+            "y": 347.24856385353155
+          },
+          "nodeIndex": "Permit",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 531.59022653887359,
+            "y": 704.42426389496529
+          },
+          "nodeIndex": "Category",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 590.48654135678942,
+            "y": 61.505845679750564
+          },
+          "nodeIndex": "Checklist Answer",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 821.46316930123646,
+            "y": 554.23613753666314
+          },
+          "nodeIndex": "Checklist Answer Fact",
+          "size": {
+            "height": 176,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 10,
+            "y": 341.74684916549279
+          },
+          "nodeIndex": "Status",
+          "size": {
+            "height": 152,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 593.79722233477082,
+            "y": 313.30271261195571
+          },
+          "nodeIndex": "Wallet",
+          "size": {
+            "height": 152,
+            "width": 234
+          },
+          "zIndex": 0
+        }
+      ],
+      "name": "All tables",
+      "zoomValue": 100,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    }
+  ],
+  "selectedDiagram": "All tables",
+  "defaultDiagram": "All tables"
+}

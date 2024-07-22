@@ -1,0 +1,226 @@
+{
+  "version": "1.1.0",
+  "diagrams": [
+    {
+      "ordinal": 0,
+      "scrollPosition": {
+        "x": 0,
+        "y": 0
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 753.32904793852254,
+            "y": 1135.9065960216972
+          },
+          "nodeIndex": "Location",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 16
+        },
+        {
+          "location": {
+            "x": 566.43966777659375,
+            "y": 931.005094947587
+          },
+          "nodeIndex": "Wallet",
+          "size": {
+            "height": 152,
+            "width": 234
+          },
+          "zIndex": 17
+        },
+        {
+          "location": {
+            "x": 179.25405695273184,
+            "y": 1473.1016314675389
+          },
+          "nodeIndex": "Body Part",
+          "size": {
+            "height": 176,
+            "width": 234
+          },
+          "zIndex": 1
+        },
+        {
+          "location": {
+            "x": 10,
+            "y": 1702.0263051261627
+          },
+          "nodeIndex": "Body Part Enum",
+          "size": {
+            "height": 248,
+            "width": 234
+          },
+          "zIndex": 2
+        },
+        {
+          "location": {
+            "x": 99.2536257598723,
+            "y": 912.66071095668462
+          },
+          "nodeIndex": "Body Part Fact",
+          "size": {
+            "height": 224,
+            "width": 234
+          },
+          "zIndex": 3
+        },
+        {
+          "location": {
+            "x": 1093.9297454617958,
+            "y": 480.77803208377463
+          },
+          "nodeIndex": "Branch Option",
+          "size": {
+            "height": 248,
+            "width": 234
+          },
+          "zIndex": 4
+        },
+        {
+          "location": {
+            "x": 673.28958865177583,
+            "y": 353.94890053500558
+          },
+          "nodeIndex": "Branch Option Fact",
+          "size": {
+            "height": 224,
+            "width": 234
+          },
+          "zIndex": 5
+        },
+        {
+          "location": {
+            "x": 921.773847758303,
+            "y": 782.26812181637729
+          },
+          "nodeIndex": "Category",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 6
+        },
+        {
+          "location": {
+            "x": 386.28931151654916,
+            "y": 578.14864144991134
+          },
+          "nodeIndex": "Issue",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 7
+        },
+        {
+          "location": {
+            "x": 663.37910824043615,
+            "y": 1575.1149517397184
+          },
+          "nodeIndex": "Option Select",
+          "size": {
+            "height": 248,
+            "width": 234
+          },
+          "zIndex": 8
+        },
+        {
+          "location": {
+            "x": 466.37045978412795,
+            "y": 1299.1123831115915
+          },
+          "nodeIndex": "Option Select Fact",
+          "size": {
+            "height": 224,
+            "width": 234
+          },
+          "zIndex": 9
+        },
+        {
+          "location": {
+            "x": 411.61089246083873,
+            "y": -10
+          },
+          "nodeIndex": "Person",
+          "size": {
+            "height": 248,
+            "width": 234
+          },
+          "zIndex": 10
+        },
+        {
+          "location": {
+            "x": 386.92235786868696,
+            "y": 290.33573510750193
+          },
+          "nodeIndex": "Person Fact",
+          "size": {
+            "height": 224,
+            "width": 234
+          },
+          "zIndex": 11
+        },
+        {
+          "location": {
+            "x": 1147.0237841965952,
+            "y": 1133.903430289854
+          },
+          "nodeIndex": "Root Cause Analysis Fact",
+          "size": {
+            "height": 224,
+            "width": 234
+          },
+          "zIndex": 12
+        },
+        {
+          "location": {
+            "x": 1487.7664704030167,
+            "y": 898.54175266923721
+          },
+          "nodeIndex": "Root Cause Analysis Type",
+          "size": {
+            "height": 152,
+            "width": 234
+          },
+          "zIndex": 13
+        },
+        {
+          "location": {
+            "x": 104.35404397814455,
+            "y": 72.03333855775827
+          },
+          "nodeIndex": "Severity",
+          "size": {
+            "height": 152,
+            "width": 234
+          },
+          "zIndex": 14
+        },
+        {
+          "location": {
+            "x": 51.817791636791185,
+            "y": 538.19953044675958
+          },
+          "nodeIndex": "Status",
+          "size": {
+            "height": 152,
+            "width": 234
+          },
+          "zIndex": 15
+        }
+      ],
+      "name": "All tables",
+      "zoomValue": 44.76134407009382,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    }
+  ],
+  "selectedDiagram": "All tables",
+  "defaultDiagram": "All tables"
+}

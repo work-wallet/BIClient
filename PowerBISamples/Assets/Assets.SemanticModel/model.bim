@@ -1,0 +1,2186 @@
+{
+  "compatibilityLevel": 1567,
+  "model": {
+    "annotations": [
+      {
+        "name": "PBI_QueryOrder",
+        "value": "[\"Asset\",\"Assignment\",\"Assignment Fact\",\"Assignment Type\",\"Property\",\"Property Fact\",\"Property Type\",\"Asset Status\",\"Wallet\"]"
+      },
+      {
+        "name": "__PBI_TimeIntelligenceEnabled",
+        "value": "1"
+      },
+      {
+        "name": "PBIDesktopVersion",
+        "value": "2.131.1126.0 (24.07)"
+      },
+      {
+        "name": "PBI_ProTooling",
+        "value": "[\"DevMode\"]"
+      }
+    ],
+    "culture": "en-GB",
+    "cultures": [
+      {
+        "name": "en-GB",
+        "linguisticMetadata": {
+          "content": {
+            "Language": "en-US",
+            "Version": "1.0.0"
+          },
+          "contentType": "json"
+        }
+      }
+    ],
+    "dataAccessOptions": {
+      "legacyRedirects": true,
+      "returnErrorValuesAsNull": true
+    },
+    "defaultPowerBIDataSourceVersion": "powerBI_V3",
+    "relationships": [
+      {
+        "name": "10c11389-33ee-4a59-876a-424adf1193ea",
+        "fromColumn": "Created On",
+        "fromTable": "Asset",
+        "joinOnDateBehavior": "datePartOnly",
+        "toColumn": "Date",
+        "toTable": "LocalDateTable_37a1848f-35ef-46e0-8dbf-84012bdaf89c"
+      },
+      {
+        "name": "814fb15d-06d8-4ce4-a948-315025ed72be",
+        "fromColumn": "From",
+        "fromTable": "Assignment Fact",
+        "joinOnDateBehavior": "datePartOnly",
+        "toColumn": "Date",
+        "toTable": "LocalDateTable_7213fd5e-a0e1-4360-ad5a-4e7a26d063b5"
+      },
+      {
+        "name": "2cc9e861-2519-4afd-a59e-b6a20db322e5",
+        "annotations": [
+          {
+            "name": "PBI_IsFromSource",
+            "value": "FS"
+          }
+        ],
+        "fromColumn": "AssetStatus_key",
+        "fromTable": "Asset",
+        "toColumn": "AssetStatus_key",
+        "toTable": "Asset Status"
+      },
+      {
+        "name": "bea07cc6-c6bf-469a-8af9-4e5afdfe97b5",
+        "annotations": [
+          {
+            "name": "PBI_IsFromSource",
+            "value": "FS"
+          }
+        ],
+        "fromColumn": "Wallet_key",
+        "fromTable": "Asset",
+        "toColumn": "Wallet_key",
+        "toTable": "Wallet"
+      },
+      {
+        "name": "e0f841f4-fb41-4fb0-8a66-8d45f393d279",
+        "annotations": [
+          {
+            "name": "PBI_IsFromSource",
+            "value": "FS"
+          }
+        ],
+        "fromColumn": "AssetAssignmentType_key",
+        "fromTable": "Assignment",
+        "toColumn": "AssetAssignmentType_key",
+        "toTable": "Assignment Type"
+      },
+      {
+        "name": "1de04bcb-c100-4ce0-bc4e-e8ae02938df6",
+        "annotations": [
+          {
+            "name": "PBI_IsFromSource",
+            "value": "FS"
+          }
+        ],
+        "fromColumn": "Wallet_key",
+        "fromTable": "Assignment",
+        "isActive": false,
+        "toColumn": "Wallet_key",
+        "toTable": "Wallet"
+      },
+      {
+        "name": "3f9d6943-13b4-4830-8d8f-8654b299d9d8",
+        "annotations": [
+          {
+            "name": "PBI_IsFromSource",
+            "value": "FS"
+          }
+        ],
+        "crossFilteringBehavior": "bothDirections",
+        "fromColumn": "Asset_key",
+        "fromTable": "Assignment Fact",
+        "toColumn": "Asset_key",
+        "toTable": "Asset"
+      },
+      {
+        "name": "05dcdd69-9bd8-4450-be46-ab994752fc23",
+        "annotations": [
+          {
+            "name": "PBI_IsFromSource",
+            "value": "FS"
+          }
+        ],
+        "crossFilteringBehavior": "bothDirections",
+        "fromColumn": "AssetAssignment_key",
+        "fromTable": "Assignment Fact",
+        "toColumn": "AssetAssignment_key",
+        "toTable": "Assignment"
+      },
+      {
+        "name": "e6a3f135-28cc-4f9b-9a0c-ee55472b84f0",
+        "annotations": [
+          {
+            "name": "PBI_IsFromSource",
+            "value": "FS"
+          }
+        ],
+        "fromColumn": "Wallet_key",
+        "fromTable": "Assignment Fact",
+        "isActive": false,
+        "toColumn": "Wallet_key",
+        "toTable": "Wallet"
+      },
+      {
+        "name": "b417940b-f86b-488c-b261-8b46b3560fe8",
+        "annotations": [
+          {
+            "name": "PBI_IsFromSource",
+            "value": "FS"
+          }
+        ],
+        "fromColumn": "AssetPropertyType_key",
+        "fromTable": "Property",
+        "toColumn": "AssetPropertyType_key",
+        "toTable": "Property Type"
+      },
+      {
+        "name": "fbc5324f-d7a8-4f44-b0a1-3ab739d4f8e6",
+        "annotations": [
+          {
+            "name": "PBI_IsFromSource",
+            "value": "FS"
+          }
+        ],
+        "fromColumn": "Wallet_key",
+        "fromTable": "Property",
+        "isActive": false,
+        "toColumn": "Wallet_key",
+        "toTable": "Wallet"
+      },
+      {
+        "name": "19fe2796-2078-4a85-a2ae-4fb2212c4812",
+        "annotations": [
+          {
+            "name": "PBI_IsFromSource",
+            "value": "FS"
+          }
+        ],
+        "crossFilteringBehavior": "bothDirections",
+        "fromColumn": "Asset_key",
+        "fromTable": "Property Fact",
+        "toColumn": "Asset_key",
+        "toTable": "Asset"
+      },
+      {
+        "name": "b9a879c3-ae27-4152-a3ef-045c860e1d27",
+        "annotations": [
+          {
+            "name": "PBI_IsFromSource",
+            "value": "FS"
+          }
+        ],
+        "crossFilteringBehavior": "bothDirections",
+        "fromColumn": "AssetProperty_key",
+        "fromTable": "Property Fact",
+        "toColumn": "AssetProperty_key",
+        "toTable": "Property"
+      },
+      {
+        "name": "e6a0796d-83f0-4a70-b568-2113c65f2c24",
+        "annotations": [
+          {
+            "name": "PBI_IsFromSource",
+            "value": "FS"
+          }
+        ],
+        "fromColumn": "Wallet_key",
+        "fromTable": "Property Fact",
+        "isActive": false,
+        "toColumn": "Wallet_key",
+        "toTable": "Wallet"
+      },
+      {
+        "name": "5d4ced6d-043b-4bdc-aba4-fb0ff43a7597",
+        "fromColumn": "To",
+        "fromTable": "Assignment Fact",
+        "joinOnDateBehavior": "datePartOnly",
+        "toColumn": "Date",
+        "toTable": "LocalDateTable_9ad9a484-b478-496a-8fab-70e22744f21a"
+      }
+    ],
+    "sourceQueryCulture": "en-GB",
+    "tables": [
+      {
+        "name": "Asset",
+        "annotations": [
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          }
+        ],
+        "columns": [
+          {
+            "name": "Asset_key",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "changedProperties": [
+              {
+                "property": "IsHidden"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "isHidden": true,
+            "lineageTag": "2135c0d1-7bcb-41a1-bae1-6628bea7573a",
+            "sourceColumn": "Asset_key",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "AssetId",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "changedProperties": [
+              {
+                "property": "IsHidden"
+              }
+            ],
+            "dataType": "string",
+            "isHidden": true,
+            "lineageTag": "e1016ea4-192f-4e21-b570-974785bb14ab",
+            "sourceColumn": "AssetId",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Asset Type",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "da46f7ca-2971-4ea1-9208-82e7d3c4dacf",
+            "sourceColumn": "Asset Type",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "AssetStatus_key",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "changedProperties": [
+              {
+                "property": "IsHidden"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "isHidden": true,
+            "lineageTag": "2629575c-5876-424f-aab6-7490d4b041f6",
+            "sourceColumn": "AssetStatus_key",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Reference",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "e4ba0696-0b1a-4d0f-a203-8cba4433274b",
+            "sourceColumn": "Reference",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Asset Name",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "d445a91f-a16a-4cd0-821d-492c931a4d0c",
+            "sourceColumn": "Asset Name",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Asset Notes",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "42071586-7246-443b-a024-3a27bc4e6828",
+            "sourceColumn": "Asset Notes",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Created On",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isDateTimeCustom\":true}"
+              }
+            ],
+            "dataType": "dateTime",
+            "formatString": "dd/mm/yy",
+            "lineageTag": "353e3857-f920-4767-b857-81a04ffac03d",
+            "sourceColumn": "Created On",
+            "summarizeBy": "none",
+            "variations": [
+              {
+                "name": "Variation",
+                "defaultHierarchy": {
+                  "hierarchy": "Date Hierarchy",
+                  "table": "LocalDateTable_37a1848f-35ef-46e0-8dbf-84012bdaf89c"
+                },
+                "isDefault": true,
+                "relationship": "10c11389-33ee-4a59-876a-424adf1193ea"
+              }
+            ]
+          },
+          {
+            "name": "Wallet_key",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "changedProperties": [
+              {
+                "property": "IsHidden"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "isHidden": true,
+            "lineageTag": "4d312161-a638-4c02-8f22-2ac5f3dfe1de",
+            "sourceColumn": "Wallet_key",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Asset Count",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "expression": "1",
+            "formatString": "0",
+            "isDataTypeInferred": true,
+            "lineageTag": "26b70d5a-fc07-4f3a-801b-f18269f49f16",
+            "summarizeBy": "sum",
+            "type": "calculated"
+          }
+        ],
+        "lineageTag": "1fbdd36a-5356-45f3-8c79-63344009ee01",
+        "partitions": [
+          {
+            "name": "Asset",
+            "mode": "import",
+            "source": {
+              "expression": [
+                "let",
+                "    Source = Sql.Database(\"CAKESOFBREAD\", \"WorkWalletBIClient_Demo\"),",
+                "    mart_Asset = Source{[Schema=\"mart\",Item=\"Asset\"]}[Data],",
+                "    #\"Removed Columns\" = Table.RemoveColumns(mart_Asset,{\"_created\", \"_edited\"}),",
+                "    #\"Renamed Columns\" = Table.RenameColumns(#\"Removed Columns\",{{\"Name\", \"Asset Name\"}, {\"Description\", \"Asset Notes\"}, {\"CreatedOn\", \"Created On\"}, {\"AssetType\", \"Asset Type\"}})",
+                "in",
+                "    #\"Renamed Columns\""
+              ],
+              "type": "m"
+            }
+          }
+        ]
+      },
+      {
+        "name": "DateTableTemplate_0c6d385d-5454-474d-88d8-d563a721fbcf",
+        "annotations": [
+          {
+            "name": "__PBI_TemplateDateTable",
+            "value": "true"
+          },
+          {
+            "name": "DefaultItem",
+            "value": "DateHierarchy"
+          }
+        ],
+        "columns": [
+          {
+            "name": "Date",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              }
+            ],
+            "dataCategory": "PaddedDateTableDates",
+            "dataType": "dateTime",
+            "isHidden": true,
+            "isNameInferred": true,
+            "lineageTag": "bb4f1622-d106-4b7f-b10b-2a5d126c7997",
+            "sourceColumn": "[Date]",
+            "summarizeBy": "none",
+            "type": "calculatedTableColumn"
+          },
+          {
+            "name": "Year",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "TemplateId",
+                "value": "Year"
+              }
+            ],
+            "dataCategory": "Years",
+            "dataType": "int64",
+            "expression": "YEAR([Date])",
+            "isHidden": true,
+            "lineageTag": "fc862f18-df04-4aa5-86f5-81ae57072c3b",
+            "summarizeBy": "none",
+            "type": "calculated"
+          },
+          {
+            "name": "MonthNo",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "TemplateId",
+                "value": "MonthNumber"
+              }
+            ],
+            "dataCategory": "MonthOfYear",
+            "dataType": "int64",
+            "expression": "MONTH([Date])",
+            "isHidden": true,
+            "lineageTag": "74cc650e-2dab-4357-b657-96a87c87f59d",
+            "summarizeBy": "none",
+            "type": "calculated"
+          },
+          {
+            "name": "Month",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "TemplateId",
+                "value": "Month"
+              }
+            ],
+            "dataCategory": "Months",
+            "dataType": "string",
+            "expression": "FORMAT([Date], \"MMMM\")",
+            "isHidden": true,
+            "lineageTag": "5a570bde-e075-4b80-b76f-3de8dbb8f197",
+            "sortByColumn": "MonthNo",
+            "summarizeBy": "none",
+            "type": "calculated"
+          },
+          {
+            "name": "QuarterNo",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "TemplateId",
+                "value": "QuarterNumber"
+              }
+            ],
+            "dataCategory": "QuarterOfYear",
+            "dataType": "int64",
+            "expression": "INT(([MonthNo] + 2) / 3)",
+            "isHidden": true,
+            "lineageTag": "7ec8741e-89f9-457a-83c1-ff9c0b40cba7",
+            "summarizeBy": "none",
+            "type": "calculated"
+          },
+          {
+            "name": "Quarter",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "TemplateId",
+                "value": "Quarter"
+              }
+            ],
+            "dataCategory": "Quarters",
+            "dataType": "string",
+            "expression": "\"Qtr \" & [QuarterNo]",
+            "isHidden": true,
+            "lineageTag": "4e282345-2afe-4dc1-87f5-81de082a42d7",
+            "sortByColumn": "QuarterNo",
+            "summarizeBy": "none",
+            "type": "calculated"
+          },
+          {
+            "name": "Day",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "TemplateId",
+                "value": "Day"
+              }
+            ],
+            "dataCategory": "DayOfMonth",
+            "dataType": "int64",
+            "expression": "DAY([Date])",
+            "isHidden": true,
+            "lineageTag": "79cfe643-1f55-4734-8c85-6636120b74f1",
+            "summarizeBy": "none",
+            "type": "calculated"
+          }
+        ],
+        "hierarchies": [
+          {
+            "name": "Date Hierarchy",
+            "annotations": [
+              {
+                "name": "TemplateId",
+                "value": "DateHierarchy"
+              }
+            ],
+            "levels": [
+              {
+                "name": "Year",
+                "column": "Year",
+                "lineageTag": "8f966228-b955-419a-b261-9590da2de2ec",
+                "ordinal": 0
+              },
+              {
+                "name": "Quarter",
+                "column": "Quarter",
+                "lineageTag": "61ce515c-3213-4f0b-a583-fe5f81cca30c",
+                "ordinal": 1
+              },
+              {
+                "name": "Month",
+                "column": "Month",
+                "lineageTag": "0d1b9324-5856-4e89-b676-481bece4b418",
+                "ordinal": 2
+              },
+              {
+                "name": "Day",
+                "column": "Day",
+                "lineageTag": "acb38b82-df06-4e26-8c1b-24eac811a6b1",
+                "ordinal": 3
+              }
+            ],
+            "lineageTag": "56ef19e2-a994-4ef1-805c-8275b8bce62d"
+          }
+        ],
+        "isHidden": true,
+        "isPrivate": true,
+        "lineageTag": "ff167ce1-cb59-481a-9ab5-9c0d35b06d8b",
+        "partitions": [
+          {
+            "name": "DateTableTemplate_0c6d385d-5454-474d-88d8-d563a721fbcf",
+            "mode": "import",
+            "source": {
+              "expression": "Calendar(Date(2015,1,1), Date(2015,1,1))",
+              "type": "calculated"
+            }
+          }
+        ]
+      },
+      {
+        "name": "LocalDateTable_37a1848f-35ef-46e0-8dbf-84012bdaf89c",
+        "annotations": [
+          {
+            "name": "__PBI_LocalDateTable",
+            "value": "true"
+          }
+        ],
+        "columns": [
+          {
+            "name": "Date",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              }
+            ],
+            "dataCategory": "PaddedDateTableDates",
+            "dataType": "dateTime",
+            "isHidden": true,
+            "isNameInferred": true,
+            "lineageTag": "d9045093-e148-4a3f-96c7-4162929d499b",
+            "sourceColumn": "[Date]",
+            "summarizeBy": "none",
+            "type": "calculatedTableColumn"
+          },
+          {
+            "name": "Year",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "TemplateId",
+                "value": "Year"
+              }
+            ],
+            "dataCategory": "Years",
+            "dataType": "int64",
+            "expression": "YEAR([Date])",
+            "isHidden": true,
+            "lineageTag": "9b98d944-d35a-4cc8-a83e-d85c93b115a2",
+            "summarizeBy": "none",
+            "type": "calculated"
+          },
+          {
+            "name": "MonthNo",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "TemplateId",
+                "value": "MonthNumber"
+              }
+            ],
+            "dataCategory": "MonthOfYear",
+            "dataType": "int64",
+            "expression": "MONTH([Date])",
+            "isHidden": true,
+            "lineageTag": "e66c30f0-ebb3-4572-8b7d-91f3e778a567",
+            "summarizeBy": "none",
+            "type": "calculated"
+          },
+          {
+            "name": "Month",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "TemplateId",
+                "value": "Month"
+              }
+            ],
+            "dataCategory": "Months",
+            "dataType": "string",
+            "expression": "FORMAT([Date], \"MMMM\")",
+            "isHidden": true,
+            "lineageTag": "de0133cb-42e0-46a1-825f-f3f25ca01285",
+            "sortByColumn": "MonthNo",
+            "summarizeBy": "none",
+            "type": "calculated"
+          },
+          {
+            "name": "QuarterNo",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "TemplateId",
+                "value": "QuarterNumber"
+              }
+            ],
+            "dataCategory": "QuarterOfYear",
+            "dataType": "int64",
+            "expression": "INT(([MonthNo] + 2) / 3)",
+            "isHidden": true,
+            "lineageTag": "54e34eff-66a2-4129-80e3-eaebeea4a757",
+            "summarizeBy": "none",
+            "type": "calculated"
+          },
+          {
+            "name": "Quarter",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "TemplateId",
+                "value": "Quarter"
+              }
+            ],
+            "dataCategory": "Quarters",
+            "dataType": "string",
+            "expression": "\"Qtr \" & [QuarterNo]",
+            "isHidden": true,
+            "lineageTag": "6ba5c17e-36b6-4330-a1a1-1d09e82d7e66",
+            "sortByColumn": "QuarterNo",
+            "summarizeBy": "none",
+            "type": "calculated"
+          },
+          {
+            "name": "Day",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "TemplateId",
+                "value": "Day"
+              }
+            ],
+            "dataCategory": "DayOfMonth",
+            "dataType": "int64",
+            "expression": "DAY([Date])",
+            "isHidden": true,
+            "lineageTag": "fa2a7f85-9edb-4939-9ff2-47bf983bcc37",
+            "summarizeBy": "none",
+            "type": "calculated"
+          }
+        ],
+        "hierarchies": [
+          {
+            "name": "Date Hierarchy",
+            "annotations": [
+              {
+                "name": "TemplateId",
+                "value": "DateHierarchy"
+              }
+            ],
+            "levels": [
+              {
+                "name": "Year",
+                "column": "Year",
+                "lineageTag": "680f9ec3-c2a8-43e6-b2b2-b484c8ffe55d",
+                "ordinal": 0
+              },
+              {
+                "name": "Quarter",
+                "column": "Quarter",
+                "lineageTag": "81b62662-273a-4401-90da-ed03da800c83",
+                "ordinal": 1
+              },
+              {
+                "name": "Month",
+                "column": "Month",
+                "lineageTag": "39790444-cdf9-4dcf-b19c-7e25882d795a",
+                "ordinal": 2
+              },
+              {
+                "name": "Day",
+                "column": "Day",
+                "lineageTag": "026d965d-43dd-4d59-997e-738ea3a230d0",
+                "ordinal": 3
+              }
+            ],
+            "lineageTag": "ae7e108e-76d8-42d8-82a6-c310db66343f"
+          }
+        ],
+        "isHidden": true,
+        "lineageTag": "f239b55c-15fa-4fb7-b250-6d1e01879a85",
+        "partitions": [
+          {
+            "name": "LocalDateTable_37a1848f-35ef-46e0-8dbf-84012bdaf89c",
+            "mode": "import",
+            "source": {
+              "expression": "Calendar(Date(Year(MIN('Asset'[Created On])), 1, 1), Date(Year(MAX('Asset'[Created On])), 12, 31))",
+              "type": "calculated"
+            }
+          }
+        ],
+        "showAsVariationsOnly": true
+      },
+      {
+        "name": "Assignment",
+        "annotations": [
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          }
+        ],
+        "columns": [
+          {
+            "name": "AssetAssignment_key",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "changedProperties": [
+              {
+                "property": "IsHidden"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "isHidden": true,
+            "lineageTag": "cc754e51-fd90-4581-8b9b-ee63e3901753",
+            "sourceColumn": "AssetAssignment_key",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "AssetAssignmentType_key",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "changedProperties": [
+              {
+                "property": "IsHidden"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "isHidden": true,
+            "lineageTag": "c8184734-91d5-4ae0-bc89-6b4efc9c20da",
+            "sourceColumn": "AssetAssignmentType_key",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Assigned To",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "6e3aa4a4-4273-48cb-8411-d16e04b581ed",
+            "sourceColumn": "Assigned To",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "CompanyId",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "changedProperties": [
+              {
+                "property": "IsHidden"
+              }
+            ],
+            "dataType": "string",
+            "isHidden": true,
+            "lineageTag": "fbb21f1c-c240-403c-a759-eaa3236d913b",
+            "sourceColumn": "CompanyId",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Company",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "ab2d194a-2722-4f13-a7a6-4911d8ca9fb9",
+            "sourceColumn": "Company",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "SiteId",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "changedProperties": [
+              {
+                "property": "IsHidden"
+              }
+            ],
+            "dataType": "string",
+            "isHidden": true,
+            "lineageTag": "3b94356c-3305-4e9b-81dd-5729a4175f20",
+            "sourceColumn": "SiteId",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Site",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "4a9f6572-f78d-4c60-b1a2-746d9c8fdb6f",
+            "sourceColumn": "Site",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Wallet_key",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              }
+            ],
+            "changedProperties": [
+              {
+                "property": "IsHidden"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "isHidden": true,
+            "lineageTag": "bc996707-902d-4672-afbd-bb9bae0d2c25",
+            "sourceColumn": "Wallet_key",
+            "summarizeBy": "none"
+          }
+        ],
+        "hierarchies": [
+          {
+            "name": "Company Hierarchy",
+            "levels": [
+              {
+                "name": "Company",
+                "column": "Company",
+                "lineageTag": "e657d9ae-0306-4e14-8a50-e626deb12ac0",
+                "ordinal": 0
+              },
+              {
+                "name": "Site",
+                "column": "Site",
+                "lineageTag": "48f8db64-350d-4a52-bf6b-d4eea9ca6fbd",
+                "ordinal": 1
+              }
+            ],
+            "lineageTag": "ca781ade-8b56-43e6-bf0a-b335c6f21a12"
+          }
+        ],
+        "lineageTag": "d946195a-3aed-4bc3-871a-c4015c4a28c6",
+        "partitions": [
+          {
+            "name": "Assignment",
+            "mode": "import",
+            "source": {
+              "expression": [
+                "let",
+                "    Source = Sql.Database(\"CAKESOFBREAD\", \"WorkWalletBIClient_Demo\"),",
+                "    mart_AssetAssignment = Source{[Schema=\"mart\",Item=\"AssetAssignment\"]}[Data],",
+                "    #\"Removed Columns\" = Table.RemoveColumns(mart_AssetAssignment,{\"_created\", \"_edited\"}),",
+                "    #\"Renamed Columns\" = Table.RenameColumns(#\"Removed Columns\",{{\"AssignedTo\", \"Assigned To\"}})",
+                "in",
+                "    #\"Renamed Columns\""
+              ],
+              "type": "m"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Assignment Fact",
+        "annotations": [
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          }
+        ],
+        "columns": [
+          {
+            "name": "AssetAssignmentFact_key",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              }
+            ],
+            "changedProperties": [
+              {
+                "property": "IsHidden"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "isHidden": true,
+            "lineageTag": "496570e4-7403-4032-97bf-aa045be7ab24",
+            "sourceColumn": "AssetAssignmentFact_key",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Asset_key",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "changedProperties": [
+              {
+                "property": "IsHidden"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "isHidden": true,
+            "lineageTag": "c94b6058-236e-48aa-85c9-c52a87a0715d",
+            "sourceColumn": "Asset_key",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "AssetAssignment_key",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "changedProperties": [
+              {
+                "property": "IsHidden"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "isHidden": true,
+            "lineageTag": "d0871200-9dca-4db1-9022-9ccc187f2749",
+            "sourceColumn": "AssetAssignment_key",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "From",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isDateTimeCustom\":true}"
+              }
+            ],
+            "dataType": "dateTime",
+            "formatString": "dd/mm/yy",
+            "lineageTag": "de86299b-2eca-4d58-9b28-1b0bc4896794",
+            "sourceColumn": "From",
+            "summarizeBy": "none",
+            "variations": [
+              {
+                "name": "Variation",
+                "defaultHierarchy": {
+                  "hierarchy": "Date Hierarchy",
+                  "table": "LocalDateTable_7213fd5e-a0e1-4360-ad5a-4e7a26d063b5"
+                },
+                "isDefault": true,
+                "relationship": "814fb15d-06d8-4ce4-a948-315025ed72be"
+              }
+            ]
+          },
+          {
+            "name": "Is Latest",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "boolean",
+            "formatString": "\"TRUE\";\"TRUE\";\"FALSE\"",
+            "lineageTag": "0d969e46-fa48-4ff3-8857-62c54449ee4c",
+            "sourceColumn": "Is Latest",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Wallet_key",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              }
+            ],
+            "changedProperties": [
+              {
+                "property": "IsHidden"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "isHidden": true,
+            "lineageTag": "d26a3305-ece5-4ee7-9e14-202ef049a4bb",
+            "sourceColumn": "Wallet_key",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "To",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isDateTimeCustom\":true}"
+              }
+            ],
+            "dataType": "dateTime",
+            "formatString": "dd/mm/yyyy",
+            "lineageTag": "d55d33dc-9d1f-40c9-9399-2f96401d8874",
+            "sourceColumn": "To",
+            "summarizeBy": "none",
+            "variations": [
+              {
+                "name": "Variation",
+                "defaultHierarchy": {
+                  "hierarchy": "Date Hierarchy",
+                  "table": "LocalDateTable_9ad9a484-b478-496a-8fab-70e22744f21a"
+                },
+                "isDefault": true,
+                "relationship": "5d4ced6d-043b-4bdc-aba4-fb0ff43a7597"
+              }
+            ]
+          },
+          {
+            "name": "Is Latest (int)",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "changedProperties": [
+              {
+                "property": "IsHidden"
+              }
+            ],
+            "dataType": "int64",
+            "expression": "IF('Assignment Fact'[Is Latest] = TRUE(), 1, IF('Assignment Fact'[Is Latest] = FALSE(), 0))",
+            "formatString": "0",
+            "isDataTypeInferred": true,
+            "isHidden": true,
+            "lineageTag": "1773e635-d921-4daa-9825-a8e9ce78663a",
+            "summarizeBy": "sum",
+            "type": "calculated"
+          },
+          {
+            "name": "Days",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "changedProperties": [
+              {
+                "property": "DataType"
+              }
+            ],
+            "dataType": "double",
+            "expression": "IF('Assignment Fact'[Is Latest] = FALSE(),'Assignment Fact'[To] - 'Assignment Fact'[From], BLANK())",
+            "formatString": "0.0",
+            "lineageTag": "ea5a2574-8f86-4a04-b573-e1b12fd14c8e",
+            "summarizeBy": "sum",
+            "type": "calculated"
+          },
+          {
+            "name": "Assignment Number",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "1c68c98f-9c1d-48f4-9938-7934e9ffb728",
+            "sourceColumn": "Assignment Number",
+            "summarizeBy": "none"
+          }
+        ],
+        "lineageTag": "548151e7-60a0-4a50-93fc-62cb8c8e3c33",
+        "partitions": [
+          {
+            "name": "Assignment Fact",
+            "mode": "import",
+            "source": {
+              "expression": [
+                "let",
+                "    Source = Sql.Database(\"CAKESOFBREAD\", \"WorkWalletBIClient_Demo\"),",
+                "    mart_AssetAssignmentFact = Source{[Schema=\"mart\",Item=\"AssetAssignmentFact\"]}[Data],",
+                "    #\"Removed Columns\" = Table.RemoveColumns(mart_AssetAssignmentFact,{\"_created\"}),",
+                "    #\"Renamed Columns\" = Table.RenameColumns(#\"Removed Columns\",{{\"AssignedOn\", \"From\"}, {\"IsLatest\", \"Is Latest\"}, {\"AssignedEnd\", \"To\"}, {\"AssignmentNumber\", \"Assignment Number\"}})",
+                "in",
+                "    #\"Renamed Columns\""
+              ],
+              "type": "m"
+            }
+          }
+        ]
+      },
+      {
+        "name": "LocalDateTable_7213fd5e-a0e1-4360-ad5a-4e7a26d063b5",
+        "annotations": [
+          {
+            "name": "__PBI_LocalDateTable",
+            "value": "true"
+          }
+        ],
+        "columns": [
+          {
+            "name": "Date",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              }
+            ],
+            "dataCategory": "PaddedDateTableDates",
+            "dataType": "dateTime",
+            "isHidden": true,
+            "isNameInferred": true,
+            "lineageTag": "d7baa723-00a4-42c2-9412-0399ce991960",
+            "sourceColumn": "[Date]",
+            "summarizeBy": "none",
+            "type": "calculatedTableColumn"
+          },
+          {
+            "name": "Year",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "TemplateId",
+                "value": "Year"
+              }
+            ],
+            "dataCategory": "Years",
+            "dataType": "int64",
+            "expression": "YEAR([Date])",
+            "isHidden": true,
+            "lineageTag": "866be42e-8639-4649-9837-8264b5d2fd08",
+            "summarizeBy": "none",
+            "type": "calculated"
+          },
+          {
+            "name": "MonthNo",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "TemplateId",
+                "value": "MonthNumber"
+              }
+            ],
+            "dataCategory": "MonthOfYear",
+            "dataType": "int64",
+            "expression": "MONTH([Date])",
+            "isHidden": true,
+            "lineageTag": "b1b424b2-470b-47e1-a933-7c83a30ceb2e",
+            "summarizeBy": "none",
+            "type": "calculated"
+          },
+          {
+            "name": "Month",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "TemplateId",
+                "value": "Month"
+              }
+            ],
+            "dataCategory": "Months",
+            "dataType": "string",
+            "expression": "FORMAT([Date], \"MMMM\")",
+            "isHidden": true,
+            "lineageTag": "a7115f84-24ed-4800-96d8-2783d8abc8b7",
+            "sortByColumn": "MonthNo",
+            "summarizeBy": "none",
+            "type": "calculated"
+          },
+          {
+            "name": "QuarterNo",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "TemplateId",
+                "value": "QuarterNumber"
+              }
+            ],
+            "dataCategory": "QuarterOfYear",
+            "dataType": "int64",
+            "expression": "INT(([MonthNo] + 2) / 3)",
+            "isHidden": true,
+            "lineageTag": "5504bdde-bbc7-42f6-bf0f-e150641a1154",
+            "summarizeBy": "none",
+            "type": "calculated"
+          },
+          {
+            "name": "Quarter",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "TemplateId",
+                "value": "Quarter"
+              }
+            ],
+            "dataCategory": "Quarters",
+            "dataType": "string",
+            "expression": "\"Qtr \" & [QuarterNo]",
+            "isHidden": true,
+            "lineageTag": "f320aec1-4b7e-41d1-b464-62d3a147e41b",
+            "sortByColumn": "QuarterNo",
+            "summarizeBy": "none",
+            "type": "calculated"
+          },
+          {
+            "name": "Day",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "TemplateId",
+                "value": "Day"
+              }
+            ],
+            "dataCategory": "DayOfMonth",
+            "dataType": "int64",
+            "expression": "DAY([Date])",
+            "isHidden": true,
+            "lineageTag": "8b09a6f6-9846-47fb-8e01-2f1f1c953947",
+            "summarizeBy": "none",
+            "type": "calculated"
+          }
+        ],
+        "hierarchies": [
+          {
+            "name": "Date Hierarchy",
+            "annotations": [
+              {
+                "name": "TemplateId",
+                "value": "DateHierarchy"
+              }
+            ],
+            "levels": [
+              {
+                "name": "Year",
+                "column": "Year",
+                "lineageTag": "9b59ad47-4af8-4c0b-ad8d-3ad86caae5ba",
+                "ordinal": 0
+              },
+              {
+                "name": "Quarter",
+                "column": "Quarter",
+                "lineageTag": "148fb980-9b1b-4b4d-bddb-f2f8e0a37d40",
+                "ordinal": 1
+              },
+              {
+                "name": "Month",
+                "column": "Month",
+                "lineageTag": "4a14e48b-8ff3-4a32-9afd-cb9a8104c716",
+                "ordinal": 2
+              },
+              {
+                "name": "Day",
+                "column": "Day",
+                "lineageTag": "be291040-1bb5-40ed-8e6f-d23d8345b383",
+                "ordinal": 3
+              }
+            ],
+            "lineageTag": "16590527-cd83-46a8-abf4-a1fd7344d4c1"
+          }
+        ],
+        "isHidden": true,
+        "lineageTag": "1dd4ffa4-58cc-47d1-90c5-23553bd8d811",
+        "partitions": [
+          {
+            "name": "LocalDateTable_7213fd5e-a0e1-4360-ad5a-4e7a26d063b5",
+            "mode": "import",
+            "source": {
+              "expression": "Calendar(Date(Year(MIN('Assignment Fact'[From])), 1, 1), Date(Year(MAX('Assignment Fact'[From])), 12, 31))",
+              "type": "calculated"
+            }
+          }
+        ],
+        "showAsVariationsOnly": true
+      },
+      {
+        "name": "Assignment Type",
+        "annotations": [
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          }
+        ],
+        "columns": [
+          {
+            "name": "AssetAssignmentType_key",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "changedProperties": [
+              {
+                "property": "IsHidden"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "isHidden": true,
+            "lineageTag": "a944ef2f-c690-4c8b-96d9-ffa221e28b65",
+            "sourceColumn": "AssetAssignmentType_key",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Assignment Type",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "5df062dd-4156-4d82-bd00-540e64f2f24e",
+            "sourceColumn": "Assignment Type",
+            "summarizeBy": "none"
+          }
+        ],
+        "lineageTag": "961c8f59-215c-463f-a8b0-6f40aa3a0a22",
+        "partitions": [
+          {
+            "name": "Assignment Type",
+            "mode": "import",
+            "source": {
+              "expression": [
+                "let",
+                "    Source = Sql.Database(\"CAKESOFBREAD\", \"WorkWalletBIClient_Demo\"),",
+                "    mart_AssetAssignmentType = Source{[Schema=\"mart\",Item=\"AssetAssignmentType\"]}[Data],",
+                "    #\"Renamed Columns\" = Table.RenameColumns(mart_AssetAssignmentType,{{\"AssetAssignmentType\", \"Assignment Type\"}})",
+                "in",
+                "    #\"Renamed Columns\""
+              ],
+              "type": "m"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Property",
+        "annotations": [
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          }
+        ],
+        "columns": [
+          {
+            "name": "AssetProperty_key",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              }
+            ],
+            "changedProperties": [
+              {
+                "property": "IsHidden"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "isHidden": true,
+            "lineageTag": "7d81514a-403b-4b33-b332-0c1557d91b86",
+            "sourceColumn": "AssetProperty_key",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "AssetPropertyType_key",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "changedProperties": [
+              {
+                "property": "IsHidden"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "isHidden": true,
+            "lineageTag": "3eff2e35-1e44-43fb-be5d-09bf956b4316",
+            "sourceColumn": "AssetPropertyType_key",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Property",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "07dae0b3-a9c1-483d-a60d-496273a91a75",
+            "sourceColumn": "Property",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Wallet_key",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              }
+            ],
+            "changedProperties": [
+              {
+                "property": "IsHidden"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "isHidden": true,
+            "lineageTag": "206277c4-31ab-4ec6-b33f-1674c61ba350",
+            "sourceColumn": "Wallet_key",
+            "summarizeBy": "none"
+          }
+        ],
+        "lineageTag": "dcb8f146-d342-4136-9533-da977752de34",
+        "partitions": [
+          {
+            "name": "Property",
+            "mode": "import",
+            "source": {
+              "expression": [
+                "let",
+                "    Source = Sql.Database(\"CAKESOFBREAD\", \"WorkWalletBIClient_Demo\"),",
+                "    mart_AssetProperty = Source{[Schema=\"mart\",Item=\"AssetProperty\"]}[Data],",
+                "    #\"Removed Columns\" = Table.RemoveColumns(mart_AssetProperty,{\"_created\"})",
+                "in",
+                "    #\"Removed Columns\""
+              ],
+              "type": "m"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Property Fact",
+        "annotations": [
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          }
+        ],
+        "columns": [
+          {
+            "name": "AssetPropertyFact_key",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              }
+            ],
+            "changedProperties": [
+              {
+                "property": "IsHidden"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "isHidden": true,
+            "lineageTag": "0202a6fa-f8d6-40b3-8f3e-9ef4ee8ce7d0",
+            "sourceColumn": "AssetPropertyFact_key",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Asset_key",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "changedProperties": [
+              {
+                "property": "IsHidden"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "isHidden": true,
+            "lineageTag": "c919c39f-7387-4437-ada9-9b01081209fc",
+            "sourceColumn": "Asset_key",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "AssetProperty_key",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              }
+            ],
+            "changedProperties": [
+              {
+                "property": "IsHidden"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "isHidden": true,
+            "lineageTag": "d5bfd903-7466-4eea-b5cd-369e36d2dfcc",
+            "sourceColumn": "AssetProperty_key",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Property Value",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "91a42be9-6f2c-4824-bb6b-2b6ca2e722b8",
+            "sourceColumn": "Property Value",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Wallet_key",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              }
+            ],
+            "changedProperties": [
+              {
+                "property": "IsHidden"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "isHidden": true,
+            "lineageTag": "d6d23e95-90d0-40bd-94a4-19e9af3ad9c7",
+            "sourceColumn": "Wallet_key",
+            "summarizeBy": "none"
+          }
+        ],
+        "lineageTag": "a6e4ff47-c73e-4fac-bf89-f0ff44eb028d",
+        "partitions": [
+          {
+            "name": "Property Fact",
+            "mode": "import",
+            "source": {
+              "expression": [
+                "let",
+                "    Source = Sql.Database(\"CAKESOFBREAD\", \"WorkWalletBIClient_Demo\"),",
+                "    mart_AssetPropertyFact = Source{[Schema=\"mart\",Item=\"AssetPropertyFact\"]}[Data],",
+                "    #\"Removed Columns\" = Table.RemoveColumns(mart_AssetPropertyFact,{\"_created\"}),",
+                "    #\"Renamed Columns\" = Table.RenameColumns(#\"Removed Columns\",{{\"Value\", \"Property Value\"}})",
+                "in",
+                "    #\"Renamed Columns\""
+              ],
+              "type": "m"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Property Type",
+        "annotations": [
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          }
+        ],
+        "columns": [
+          {
+            "name": "AssetPropertyType_key",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "changedProperties": [
+              {
+                "property": "IsHidden"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "isHidden": true,
+            "lineageTag": "7592d2e7-36dc-4606-b680-131104d879e6",
+            "sourceColumn": "AssetPropertyType_key",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Property Type",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "c8f5f2c6-97db-4437-a4d6-d005c995bd8d",
+            "sourceColumn": "Property Type",
+            "summarizeBy": "none"
+          }
+        ],
+        "lineageTag": "c2b7a152-612c-4020-98f8-28f0366e5cba",
+        "partitions": [
+          {
+            "name": "Property Type",
+            "mode": "import",
+            "source": {
+              "expression": [
+                "let",
+                "    Source = Sql.Database(\"CAKESOFBREAD\", \"WorkWalletBIClient_Demo\"),",
+                "    mart_AssetPropertyType = Source{[Schema=\"mart\",Item=\"AssetPropertyType\"]}[Data],",
+                "    #\"Renamed Columns\" = Table.RenameColumns(mart_AssetPropertyType,{{\"AssetPropertyType\", \"Property Type\"}})",
+                "in",
+                "    #\"Renamed Columns\""
+              ],
+              "type": "m"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Asset Status",
+        "annotations": [
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          }
+        ],
+        "columns": [
+          {
+            "name": "AssetStatus_key",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "changedProperties": [
+              {
+                "property": "IsHidden"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "isHidden": true,
+            "lineageTag": "9d9c11e9-715c-4dc0-a262-612bcf2a59ab",
+            "sourceColumn": "AssetStatus_key",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "AssetStatusCode",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              }
+            ],
+            "changedProperties": [
+              {
+                "property": "IsHidden"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "isHidden": true,
+            "lineageTag": "88c277a9-1e4c-4cbe-9c63-32c30eed6596",
+            "sourceColumn": "AssetStatusCode",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Asset Status",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "bd4c877e-9b69-4926-b077-458a8bfb9bd8",
+            "sourceColumn": "Asset Status",
+            "summarizeBy": "none"
+          }
+        ],
+        "lineageTag": "36224508-1e80-4ff9-a562-7a442a8360d9",
+        "partitions": [
+          {
+            "name": "Asset Status",
+            "mode": "import",
+            "source": {
+              "expression": [
+                "let",
+                "    Source = Sql.Database(\"CAKESOFBREAD\", \"WorkWalletBIClient_Demo\"),",
+                "    mart_AssetStatus = Source{[Schema=\"mart\",Item=\"AssetStatus\"]}[Data],",
+                "    #\"Removed Columns\" = Table.RemoveColumns(mart_AssetStatus,{\"_created\", \"_edited\"}),",
+                "    #\"Renamed Columns\" = Table.RenameColumns(#\"Removed Columns\",{{\"AssetStatus\", \"Asset Status\"}})",
+                "in",
+                "    #\"Renamed Columns\""
+              ],
+              "type": "m"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Wallet",
+        "annotations": [
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          }
+        ],
+        "columns": [
+          {
+            "name": "Wallet_key",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "changedProperties": [
+              {
+                "property": "IsHidden"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "isHidden": true,
+            "lineageTag": "20c4167d-4b1e-4c97-bafe-da974c161a6a",
+            "sourceColumn": "Wallet_key",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "WalletId",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "changedProperties": [
+              {
+                "property": "IsHidden"
+              }
+            ],
+            "dataType": "string",
+            "isHidden": true,
+            "lineageTag": "6480746c-e778-47af-855d-5b89167b15ab",
+            "sourceColumn": "WalletId",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Wallet",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "423ada68-0b93-4f00-91b2-8097f0f11843",
+            "sourceColumn": "Wallet",
+            "summarizeBy": "none"
+          }
+        ],
+        "lineageTag": "2f42e078-c6e8-4260-a864-b66ef4dd9319",
+        "partitions": [
+          {
+            "name": "Wallet",
+            "mode": "import",
+            "source": {
+              "expression": [
+                "let",
+                "    Source = Sql.Database(\"CAKESOFBREAD\", \"WorkWalletBIClient_Demo\"),",
+                "    mart_Wallet = Source{[Schema=\"mart\",Item=\"Wallet\"]}[Data],",
+                "    #\"Removed Columns\" = Table.RemoveColumns(mart_Wallet,{\"_created\", \"_edited\"})",
+                "in",
+                "    #\"Removed Columns\""
+              ],
+              "type": "m"
+            }
+          }
+        ]
+      },
+      {
+        "name": "LocalDateTable_9ad9a484-b478-496a-8fab-70e22744f21a",
+        "annotations": [
+          {
+            "name": "__PBI_LocalDateTable",
+            "value": "true"
+          }
+        ],
+        "columns": [
+          {
+            "name": "Date",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              }
+            ],
+            "dataCategory": "PaddedDateTableDates",
+            "dataType": "dateTime",
+            "isHidden": true,
+            "isNameInferred": true,
+            "lineageTag": "3255fa63-74ff-4ca9-b0f4-822a62d7d101",
+            "sourceColumn": "[Date]",
+            "summarizeBy": "none",
+            "type": "calculatedTableColumn"
+          },
+          {
+            "name": "Year",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "TemplateId",
+                "value": "Year"
+              }
+            ],
+            "dataCategory": "Years",
+            "dataType": "int64",
+            "expression": "YEAR([Date])",
+            "isHidden": true,
+            "lineageTag": "da458055-6882-443e-939e-554f17ddece5",
+            "summarizeBy": "none",
+            "type": "calculated"
+          },
+          {
+            "name": "MonthNo",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "TemplateId",
+                "value": "MonthNumber"
+              }
+            ],
+            "dataCategory": "MonthOfYear",
+            "dataType": "int64",
+            "expression": "MONTH([Date])",
+            "isHidden": true,
+            "lineageTag": "60c437ed-2b65-4610-a060-17ea9234a5d4",
+            "summarizeBy": "none",
+            "type": "calculated"
+          },
+          {
+            "name": "Month",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "TemplateId",
+                "value": "Month"
+              }
+            ],
+            "dataCategory": "Months",
+            "dataType": "string",
+            "expression": "FORMAT([Date], \"MMMM\")",
+            "isHidden": true,
+            "lineageTag": "fe8aa1b2-c028-4597-a2ec-4c270530b339",
+            "sortByColumn": "MonthNo",
+            "summarizeBy": "none",
+            "type": "calculated"
+          },
+          {
+            "name": "QuarterNo",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "TemplateId",
+                "value": "QuarterNumber"
+              }
+            ],
+            "dataCategory": "QuarterOfYear",
+            "dataType": "int64",
+            "expression": "INT(([MonthNo] + 2) / 3)",
+            "isHidden": true,
+            "lineageTag": "8169e773-592b-47ca-9328-9c9771ef73d3",
+            "summarizeBy": "none",
+            "type": "calculated"
+          },
+          {
+            "name": "Quarter",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "TemplateId",
+                "value": "Quarter"
+              }
+            ],
+            "dataCategory": "Quarters",
+            "dataType": "string",
+            "expression": "\"Qtr \" & [QuarterNo]",
+            "isHidden": true,
+            "lineageTag": "9a0b9e7d-af61-42dd-8e1c-9852ddc2ca4a",
+            "sortByColumn": "QuarterNo",
+            "summarizeBy": "none",
+            "type": "calculated"
+          },
+          {
+            "name": "Day",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "TemplateId",
+                "value": "Day"
+              }
+            ],
+            "dataCategory": "DayOfMonth",
+            "dataType": "int64",
+            "expression": "DAY([Date])",
+            "isHidden": true,
+            "lineageTag": "c0220b61-2f32-446c-bd62-efb59fb2b5d8",
+            "summarizeBy": "none",
+            "type": "calculated"
+          }
+        ],
+        "hierarchies": [
+          {
+            "name": "Date Hierarchy",
+            "annotations": [
+              {
+                "name": "TemplateId",
+                "value": "DateHierarchy"
+              }
+            ],
+            "levels": [
+              {
+                "name": "Year",
+                "column": "Year",
+                "lineageTag": "b270581d-26e4-45ff-bb42-045010424c9f",
+                "ordinal": 0
+              },
+              {
+                "name": "Quarter",
+                "column": "Quarter",
+                "lineageTag": "244db1d0-b0f0-4617-99b8-d78700add779",
+                "ordinal": 1
+              },
+              {
+                "name": "Month",
+                "column": "Month",
+                "lineageTag": "82517f85-ee59-4568-a8c5-4115e734af9a",
+                "ordinal": 2
+              },
+              {
+                "name": "Day",
+                "column": "Day",
+                "lineageTag": "83cf1704-d832-4e05-823b-eaff92f504d9",
+                "ordinal": 3
+              }
+            ],
+            "lineageTag": "662a6b86-3b90-4996-8d1c-d18cfcca9afa"
+          }
+        ],
+        "isHidden": true,
+        "lineageTag": "91f60cf7-5f73-49ae-bb78-9254c24d029d",
+        "partitions": [
+          {
+            "name": "LocalDateTable_9ad9a484-b478-496a-8fab-70e22744f21a",
+            "mode": "import",
+            "source": {
+              "expression": "Calendar(Date(Year(MIN('Assignment Fact'[To])), 1, 1), Date(Year(MAX('Assignment Fact'[To])), 12, 31))",
+              "type": "calculated"
+            }
+          }
+        ],
+        "showAsVariationsOnly": true
+      }
+    ]
+  }
+}
