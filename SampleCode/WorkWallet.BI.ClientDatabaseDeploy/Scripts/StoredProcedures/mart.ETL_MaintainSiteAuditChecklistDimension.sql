@@ -6,74 +6,81 @@ AS
 BEGIN
     SET NOCOUNT ON;
 
-    -- type 1 changes (do first, before inserting new)
-    UPDATE mart.SiteAuditChecklist
-    SET
-        ChecklistName = a.ChecklistName
-        ,ChecklistDescription = a.ChecklistDescription
-        ,NumberOfResponseOptions = a.NumberOfResponseOptions
-        ,ScoringEnabled = a.ScoringEnabled
-        ,PassStatus = a.PassStatus
-        ,ChecklistWeighting = a.ChecklistWeighting
-        ,FailedItemScoring = a.FailedItemScoring
-        ,FailedItemsCountTowardsAverageScore = a.FailedItemsCountTowardsAverageScore
-        ,FailedItemsSetTheChecklistScoreToZero = a.FailedItemsSetTheChecklistScoreToZero
-        ,Wallet_key = w.Wallet_key
-        ,_edited = SYSUTCDATETIME()
-    FROM
-        @siteAuditChecklistTable AS a
-        INNER JOIN mart.Wallet AS w ON a.WalletId = w.WalletId
-        INNER JOIN mart.SiteAuditChecklist AS b ON a.SiteAuditChecklistId = b.SiteAuditChecklistId AND a.SiteAuditChecklistVersion = b.SiteAuditChecklistVersion
-    WHERE /* only where the data has changed */
-        a.ChecklistName <> b.ChecklistName
-        OR a.ChecklistDescription <> b.ChecklistDescription
-        OR a.NumberOfResponseOptions <> b.NumberOfResponseOptions
-        OR a.ScoringEnabled <> b.ScoringEnabled
-        OR a.PassStatus <> b.PassStatus
-        OR a.ChecklistWeighting <> b.ChecklistWeighting
-        OR a.FailedItemScoring <> b.FailedItemScoring
-        OR a.FailedItemsCountTowardsAverageScore <> b.FailedItemsCountTowardsAverageScore
-        OR a.FailedItemsSetTheChecklistScoreToZero <> b.FailedItemsSetTheChecklistScoreToZero
-        OR w.Wallet_key <> b.Wallet_key;
+    MERGE mart.SiteAuditChecklist AS target
+    USING (
+        SELECT
+            a.SiteAuditChecklistId,
+            a.SiteAuditChecklistVersion,
+            a.ChecklistName,
+            a.ChecklistDescription,
+            a.NumberOfResponseOptions,
+            a.ScoringEnabled,
+            a.PassStatus,
+            a.ChecklistWeighting,
+            a.FailedItemScoring,
+            a.FailedItemsCountTowardsAverageScore,
+            a.FailedItemsSetTheChecklistScoreToZero,
+            w.Wallet_key
+        FROM
+            @siteAuditChecklistTable AS a
+            INNER JOIN mart.Wallet AS w ON a.WalletId = w.WalletId
+    ) AS source
+    ON
+        target.SiteAuditChecklistId = source.SiteAuditChecklistId
+        AND target.SiteAuditChecklistVersion = source.SiteAuditChecklistVersion
+    WHEN MATCHED AND (
+        source.ChecklistName <> target.ChecklistName OR
+        source.ChecklistDescription <> target.ChecklistDescription OR
+        source.NumberOfResponseOptions <> target.NumberOfResponseOptions OR
+        source.ScoringEnabled <> target.ScoringEnabled OR
+        source.PassStatus <> target.PassStatus OR
+        source.ChecklistWeighting <> target.ChecklistWeighting OR
+        source.FailedItemScoring <> target.FailedItemScoring OR
+        source.FailedItemsCountTowardsAverageScore <> target.FailedItemsCountTowardsAverageScore OR
+        source.FailedItemsSetTheChecklistScoreToZero <> target.FailedItemsSetTheChecklistScoreToZero OR
+        source.Wallet_key <> target.Wallet_key
+    ) THEN
+        UPDATE SET
+            ChecklistName = source.ChecklistName,
+            ChecklistDescription = source.ChecklistDescription,
+            NumberOfResponseOptions = source.NumberOfResponseOptions,
+            ScoringEnabled = source.ScoringEnabled,
+            PassStatus = source.PassStatus,
+            ChecklistWeighting = source.ChecklistWeighting,
+            FailedItemScoring = source.FailedItemScoring,
+            FailedItemsCountTowardsAverageScore = source.FailedItemsCountTowardsAverageScore,
+            FailedItemsSetTheChecklistScoreToZero = source.FailedItemsSetTheChecklistScoreToZero,
+            Wallet_key = source.Wallet_key,
+            _edited = SYSUTCDATETIME()
+    WHEN NOT MATCHED BY TARGET THEN
+        INSERT (
+            SiteAuditChecklistId,
+            SiteAuditChecklistVersion,
+            ChecklistName,
+            ChecklistDescription,
+            NumberOfResponseOptions,
+            ScoringEnabled,
+            PassStatus,
+            ChecklistWeighting,
+            FailedItemScoring,
+            FailedItemsCountTowardsAverageScore,
+            FailedItemsSetTheChecklistScoreToZero,
+            Wallet_key
+        ) VALUES (
+            source.SiteAuditChecklistId,
+            source.SiteAuditChecklistVersion,
+            source.ChecklistName,
+            source.ChecklistDescription,
+            source.NumberOfResponseOptions,
+            source.ScoringEnabled,
+            source.PassStatus,
+            source.ChecklistWeighting,
+            source.FailedItemScoring,
+            source.FailedItemsCountTowardsAverageScore,
+            source.FailedItemsSetTheChecklistScoreToZero,
+            source.Wallet_key
+        );
 
-    PRINT 'UPDATE mart.SiteAuditChecklist, number of rows = ' + CAST(@@ROWCOUNT AS varchar);
-
-    -- insert missing entries
-    INSERT INTO mart.SiteAuditChecklist
-    (
-        SiteAuditChecklistId
-        ,SiteAuditChecklistVersion
-        ,ChecklistName
-        ,ChecklistDescription
-        ,NumberOfResponseOptions
-        ,ScoringEnabled
-        ,PassStatus
-        ,ChecklistWeighting
-        ,FailedItemScoring
-        ,FailedItemsCountTowardsAverageScore
-        ,FailedItemsSetTheChecklistScoreToZero
-        ,Wallet_key
-    )
-    SELECT
-        a.SiteAuditChecklistId
-        ,a.SiteAuditChecklistVersion
-        ,a.ChecklistName
-        ,a.ChecklistDescription
-        ,a.NumberOfResponseOptions
-        ,a.ScoringEnabled
-        ,a.PassStatus
-        ,a.ChecklistWeighting
-        ,a.FailedItemScoring
-        ,a.FailedItemsCountTowardsAverageScore
-        ,a.FailedItemsSetTheChecklistScoreToZero
-        ,w.Wallet_key
-    FROM
-        @siteAuditChecklistTable AS a
-        INNER JOIN mart.Wallet AS w ON a.WalletId = w.WalletId
-        LEFT OUTER JOIN mart.SiteAuditChecklist AS b ON a.SiteAuditChecklistId = b.SiteAuditChecklistId AND a.SiteAuditChecklistVersion = b.SiteAuditChecklistVersion
-    WHERE
-        b.SiteAuditChecklistId IS NULL;
-
-    PRINT 'INSERT mart.SiteAuditChecklist, number of rows = ' + CAST(@@ROWCOUNT AS varchar);
+    PRINT 'MERGE mart.SiteAuditChecklist, number of rows = ' + CAST(@@ROWCOUNT AS varchar);
 END
 GO

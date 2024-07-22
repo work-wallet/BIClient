@@ -6,36 +6,30 @@ AS
 BEGIN
     SET NOCOUNT ON;
 
-	WITH src
-	AS
-	(
+	MERGE mart.AssetProperty AS target
+	USING (
 		SELECT DISTINCT
 			apt.AssetPropertyType_key
 			,a.Property
 			,w.Wallet_key
-		FROM @assetPropertyTable AS a
-		INNER JOIN mart.AssetPropertyType AS apt ON a.PropertyType = apt.AssetPropertyType
-		INNER JOIN mart.Wallet AS w ON a.WalletId = w.WalletId
-	)
-	MERGE mart.AssetProperty AS tgt
-	USING
-		src ON
-			tgt.AssetPropertyType_key = src.AssetPropertyType_key
-			AND tgt.Property = src.Property
-			AND tgt.Wallet_key = src.Wallet_key
-	WHEN NOT MATCHED
-	THEN
-		INSERT
-		(
+		FROM
+			@assetPropertyTable AS a
+			INNER JOIN mart.AssetPropertyType AS apt ON a.PropertyType = apt.AssetPropertyType
+			INNER JOIN mart.Wallet AS w ON a.WalletId = w.WalletId
+	) AS source
+	ON
+		target.AssetPropertyType_key = source.AssetPropertyType_key
+		AND target.Property = source.Property
+		AND target.Wallet_key = source.Wallet_key
+	WHEN NOT MATCHED BY TARGET THEN
+		INSERT (
 			AssetPropertyType_key
 			,Property
 			,Wallet_key
-		)
-		VALUES
-		(
-			src.AssetPropertyType_key
-			,src.Property
-			,src.Wallet_key
+		) VALUES (
+			source.AssetPropertyType_key
+			,source.Property
+			,source.Wallet_key
 		);
 
     PRINT 'MERGE mart.AssetProperty, number of rows = ' + CAST(@@ROWCOUNT AS varchar);

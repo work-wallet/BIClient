@@ -6,27 +6,32 @@ AS
 BEGIN
     SET NOCOUNT ON;
 
-    -- insert missing entries
-    INSERT INTO mart.ReportedIssueOptionSelect
-    (
-        Question
-        ,[Option]
-        ,Wallet_key
-    )
-    SELECT DISTINCT
-        a.Question
-        ,a.[Option]
-        ,w.Wallet_key
-    FROM
-        @reportedIssueOptionSelectTable AS a
-        INNER JOIN mart.Wallet AS w ON a.WalletId = w.WalletId
-        LEFT OUTER JOIN mart.ReportedIssueOptionSelect AS b ON
-            w.Wallet_key = b.Wallet_key
-            AND a.Question = b.Question
-            AND a.[Option] = b.[Option]
-    WHERE
-        b.Question IS NULL;
+    MERGE mart.ReportedIssueOptionSelect AS target
+    USING (
+        SELECT DISTINCT
+            a.Question,
+            a.[Option],
+            w.Wallet_key
+        FROM
+            @reportedIssueOptionSelectTable AS a
+            INNER JOIN mart.Wallet AS w ON a.WalletId = w.WalletId
+    ) AS source
+    ON
+        target.Question = source.Question
+        AND target.[Option] = source.[Option]
+        AND target.Wallet_key = source.Wallet_key
+    WHEN NOT MATCHED BY TARGET THEN
+        INSERT (
+            Question,
+            [Option],
+            Wallet_key
+        )
+        VALUES (
+            source.Question,
+            source.[Option],
+            source.Wallet_key
+        );
 
-    PRINT 'INSERT mart.ReportedIssueOptionSelect, number of rows = ' + CAST(@@ROWCOUNT AS varchar);
+    PRINT 'MERGE mart.ReportedIssueOptionSelect, number of rows = ' + CAST(@@ROWCOUNT AS varchar);
 END
 GO

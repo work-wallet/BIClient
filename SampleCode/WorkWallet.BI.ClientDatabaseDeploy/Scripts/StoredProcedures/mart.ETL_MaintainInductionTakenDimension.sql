@@ -6,72 +6,69 @@ AS
 BEGIN
     SET NOCOUNT ON;
 
-    -- type 1 changes (do first, before inserting new)
-    UPDATE mart.InductionTaken
-    SET
-        Induction_key = i.Induction_key
-        ,ContactId = a.ContactId
-        ,[Name] = a.[Name]
-        ,CompanyName = a.CompanyName
-        ,TakenOn = a.TakenOn
-        ,CorrectTestQuestionCount = a.CorrectTestQuestionCount
-        ,InductionTakenStatus_key = its.InductionTakenStatus_key
-        ,Wallet_key = w.Wallet_key
-        ,_edited = SYSUTCDATETIME()
-    FROM
-        @InductionTakenTable AS a
-        INNER JOIN mart.Induction AS i ON
-            a.InductionId = i.InductionId
-            AND a.InductionVersion = i.InductionVersion
-        INNER JOIN mart.InductionTakenStatus AS its ON a.InductionTakenStatusId = its.InductionTakenStatusCode
-        INNER JOIN mart.Wallet AS w ON a.WalletId = w.WalletId
-        LEFT OUTER JOIN mart.InductionTaken AS b ON a.InductionTakenId = b.InductionTakenId
-    WHERE /* only where the data has changed */
-        i.Induction_key <> b.Induction_key
-        OR a.ContactId <> b.ContactId
-        OR a.[Name] <> b.[Name]
-        OR a.CompanyName <> b.CompanyName
-        OR a.TakenOn <> b.TakenOn
-        OR a.CorrectTestQuestionCount <> b.CorrectTestQuestionCount
-        OR its.InductionTakenStatus_key <> b.InductionTakenStatus_key
-        OR w.Wallet_key <> b.Wallet_key;
+    MERGE mart.InductionTaken AS target
+    USING (
+        SELECT
+            a.InductionTakenId,
+            i.Induction_key,
+            a.ContactId,
+            a.[Name],
+            a.CompanyName,
+            a.TakenOn,
+            a.CorrectTestQuestionCount,
+            its.InductionTakenStatus_key,
+            w.Wallet_key
+        FROM
+            @InductionTakenTable AS a
+            INNER JOIN mart.Induction AS i ON a.InductionId = i.InductionId AND a.InductionVersion = i.InductionVersion
+            INNER JOIN mart.InductionTakenStatus AS its ON a.InductionTakenStatusId = its.InductionTakenStatusCode
+            INNER JOIN mart.Wallet AS w ON a.WalletId = w.WalletId
+    ) AS source
+    ON target.InductionTakenId = source.InductionTakenId
+    WHEN MATCHED AND (
+        target.Induction_key <> source.Induction_key
+        OR target.ContactId <> source.ContactId
+        OR target.[Name] <> source.[Name]
+        OR target.CompanyName <> source.CompanyName
+        OR target.TakenOn <> source.TakenOn
+        OR target.CorrectTestQuestionCount <> source.CorrectTestQuestionCount
+        OR target.InductionTakenStatus_key <> source.InductionTakenStatus_key
+        OR target.Wallet_key <> source.Wallet_key
+    ) THEN
+        UPDATE SET
+            target.Induction_key = source.Induction_key,
+            target.ContactId = source.ContactId,
+            target.[Name] = source.[Name],
+            target.CompanyName = source.CompanyName,
+            target.TakenOn = source.TakenOn,
+            target.CorrectTestQuestionCount = source.CorrectTestQuestionCount,
+            target.InductionTakenStatus_key = source.InductionTakenStatus_key,
+            target.Wallet_key = source.Wallet_key,
+            target._edited = SYSUTCDATETIME()
+    WHEN NOT MATCHED BY TARGET THEN
+        INSERT (
+            InductionTakenId,
+            Induction_key,
+            ContactId,
+            [Name],
+            CompanyName,
+            TakenOn,
+            CorrectTestQuestionCount,
+            InductionTakenStatus_key,
+            Wallet_key
+        )
+        VALUES (
+            source.InductionTakenId,
+            source.Induction_key,
+            source.ContactId,
+            source.[Name],
+            source.CompanyName,
+            source.TakenOn,
+            source.CorrectTestQuestionCount,
+            source.InductionTakenStatus_key,
+            source.Wallet_key
+        );
 
-    PRINT 'UPDATE mart.InductionTaken, number of rows = ' + CAST(@@ROWCOUNT AS varchar);
-
-    -- insert missing entries
-    INSERT INTO mart.InductionTaken
-    (
-        InductionTakenId
-        ,Induction_key
-        ,ContactId
-        ,[Name]
-        ,CompanyName
-        ,TakenOn
-        ,CorrectTestQuestionCount
-        ,InductionTakenStatus_key
-        ,Wallet_key
-    )
-    SELECT
-        a.InductionTakenId
-        ,i.Induction_key
-        ,a.ContactId
-        ,a.[Name]
-        ,a.CompanyName
-        ,a.TakenOn
-        ,a.CorrectTestQuestionCount
-        ,its.InductionTakenStatus_key
-        ,w.Wallet_key
-    FROM
-        @InductionTakenTable AS a
-        INNER JOIN mart.Induction AS i ON
-            a.InductionId = i.InductionId
-            AND a.InductionVersion = i.InductionVersion
-        INNER JOIN mart.InductionTakenStatus AS its ON a.InductionTakenStatusId = its.InductionTakenStatusCode
-        INNER JOIN mart.Wallet AS w ON a.WalletId = w.WalletId
-        LEFT OUTER JOIN mart.InductionTaken AS b ON a.InductionTakenId = b.InductionTakenId
-    WHERE
-        b.InductionTakenId IS NULL;
-
-    PRINT 'INSERT mart.InductionTaken, number of rows = ' + CAST(@@ROWCOUNT AS varchar);
+    PRINT 'MERGE mart.InductionTaken, number of rows = ' + CAST(@@ROWCOUNT AS varchar);
 END
 GO

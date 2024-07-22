@@ -6,9 +6,8 @@ AS
 BEGIN
     SET NOCOUNT ON;
 
-	WITH src
-	AS
-	(
+	MERGE mart.AssetAssignment AS target
+	USING (
 		SELECT DISTINCT
 			a.AssignmentType
 			,aat.AssetAssignmentType_key
@@ -18,48 +17,44 @@ BEGIN
 			,a.SiteId
 			,a.[Site]
 			,w.Wallet_key
-		FROM @assetAssignmentTable AS a
-		INNER JOIN mart.AssetAssignmentType AS aat ON a.AssignmentType = aat.AssetAssignmentType
-		INNER JOIN mart.Wallet AS w ON a.WalletId = w.WalletId
-	)
-	MERGE mart.AssetAssignment AS tgt
-	USING
-		src ON
-			tgt.AssetAssignmentType_key = src.AssetAssignmentType_key
-			AND tgt.Wallet_key = src.Wallet_key
-			AND
-			(
-				(
-					src.AssignmentType = N'Site'
-					AND tgt.CompanyId = src.CompanyId
-					AND tgt.SiteId = src.SiteId
-				)
-				OR
-				(
-					src.AssignmentType <> N'Site'
-					AND tgt.AssignedTo = src.AssignedTo
-				)
-			)
-	WHEN MATCHED AND
-	(
-		src.AssignmentType = N'Site'
+		FROM
+			@assetAssignmentTable AS a
+			INNER JOIN mart.AssetAssignmentType AS aat ON a.AssignmentType = aat.AssetAssignmentType
+			INNER JOIN mart.Wallet AS w ON a.WalletId = w.WalletId
+	) AS source
+	ON
+		target.AssetAssignmentType_key = source.AssetAssignmentType_key
+		AND target.Wallet_key = source.Wallet_key
 		AND
 		(
-			tgt.AssignedTo <> src.AssignedTo
-			OR tgt.Company <> src.Company
-			OR tgt.[Site] <> src.[Site]
+			(
+				source.AssignmentType = N'Site'
+				AND target.CompanyId = source.CompanyId
+				AND target.SiteId = source.SiteId
+			)
+			OR
+			(
+				source.AssignmentType <> N'Site'
+				AND target.AssignedTo = source.AssignedTo
+			)
+		)
+	WHEN MATCHED AND (
+		source.AssignmentType = N'Site'
+		AND
+		(
+			target.AssignedTo <> source.AssignedTo
+			OR target.Company <> source.Company
+			OR target.[Site] <> source.[Site]
 		)
 	)
-	THEN UPDATE
-		SET
-			AssignedTo = src.AssignedTo
-			,Company = src.Company
-			,[Site] = src.[Site]
-			,_edited = SYSUTCDATETIME()
-	WHEN NOT MATCHED
 	THEN
-		INSERT
-		(
+		UPDATE SET
+			AssignedTo = source.AssignedTo
+			,Company = source.Company
+			,[Site] = source.[Site]
+			,_edited = SYSUTCDATETIME()
+	WHEN NOT MATCHED BY TARGET THEN
+		INSERT (
 			AssetAssignmentType_key
 			,AssignedTo
 			,CompanyId
@@ -67,16 +62,14 @@ BEGIN
 			,SiteId
 			,[Site]
 			,Wallet_key
-		)
-		VALUES
-		(
-			src.AssetAssignmentType_key
-			,src.AssignedTo
-			,src.CompanyId
-			,src.Company
-			,src.SiteId
-			,src.[Site]
-			,src.Wallet_key
+		) VALUES (
+			source.AssetAssignmentType_key
+			,source.AssignedTo
+			,source.CompanyId
+			,source.Company
+			,source.SiteId
+			,source.[Site]
+			,source.Wallet_key
 		);
 
     PRINT 'MERGE mart.AssetAssignment, number of rows = ' + CAST(@@ROWCOUNT AS varchar);

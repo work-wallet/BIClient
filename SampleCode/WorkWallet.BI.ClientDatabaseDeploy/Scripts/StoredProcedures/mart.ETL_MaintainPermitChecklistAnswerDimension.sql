@@ -6,29 +6,34 @@ AS
 BEGIN
     SET NOCOUNT ON;
 
-    -- insert missing entries
-    INSERT INTO mart.PermitChecklistAnswer
-    (
-        CategorySectionType
-        ,Question
-        ,[Option]
-        ,Wallet_key
-    )
-    SELECT DISTINCT
-        a.CategorySectionType
-        ,a.Question
-        ,a.[Option]
-        ,w.Wallet_key
-    FROM
-        @permitToWorkChecklistAnswerTable AS a
-        INNER JOIN mart.Wallet AS w ON a.WalletId = w.WalletId
-        LEFT OUTER JOIN mart.PermitChecklistAnswer AS b ON
-            w.Wallet_key = b.Wallet_key
-            AND a.Question = b.Question
-            AND a.[Option] = b.[Option]
-    WHERE
-        b.Question IS NULL;
+    MERGE mart.PermitChecklistAnswer AS target
+    USING (
+        SELECT DISTINCT
+            a.CategorySectionType,
+            a.Question,
+            a.[Option],
+            w.Wallet_key
+        FROM
+            @permitToWorkChecklistAnswerTable AS a
+            INNER JOIN mart.Wallet AS w ON a.WalletId = w.WalletId
+    ) AS source
+    ON
+        target.Wallet_key = source.Wallet_key
+        AND target.Question = source.Question
+        AND target.[Option] = source.[Option]
+    WHEN NOT MATCHED BY TARGET THEN
+        INSERT (
+            CategorySectionType,
+            Question,
+            [Option],
+            Wallet_key
+        ) VALUES (
+            source.CategorySectionType,
+            source.Question,
+            source.[Option],
+            source.Wallet_key
+        );
 
-    PRINT 'INSERT mart.PermitChecklistAnswer, number of rows = ' + CAST(@@ROWCOUNT AS varchar);
+    PRINT 'MERGE mart.PermitChecklistAnswer, number of rows = ' + CAST(@@ROWCOUNT AS varchar);
 END
 GO
