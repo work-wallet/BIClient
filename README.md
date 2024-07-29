@@ -1,9 +1,5 @@
 # Work Wallet Business Intelligence (BI) Client
 
-## Changelog
-
-Review changes [here](./Docs/ChangeLog.md) if you are upgrading an existing installation.
-
 ## Overview
 
 The [Work Wallet](https://www.work-wallet.com/) Health and Safety solution provides an API to allow organisations to automate the download of their Wallet data. The API is optimised for organisations requiring a regular feed of data for Business Intelligence (BI) purposes.
@@ -87,10 +83,12 @@ The API endpoint is at <https://bi.work-wallet.com> and the [OAuth 2.0](https://
 
 All binaries target [.NET 8.0](https://dotnet.microsoft.com/en-us/download/dotnet/8.0)
 
-| Tool | Download URL | Executable | Config. File |
-| --- | --- | --- | --- |
-| Database deployment | [WorkWallet.BI.ClientDatabaseDeploy_3.1.0.0.zip](https://base.azureedge.net/bi-client/WorkWallet.BI.ClientDatabaseDeploy_3.1.0.0.zip) | `WorkWallet.BI.ClientDatabaseDeploy.exe` | `appsettings.json` |
-| Client sample | [WorkWallet.BI.ClientSample_3.1.0.0.zip](https://base.azureedge.net/bi-client/WorkWallet.BI.ClientSample_3.1.0.0.zip) | `WorkWallet.BI.ClientSample.exe` | `appsettings.json` |
+Pre-built binaries can be downloaded from the [releases](https://github.com/work-wallet/BIClient/releases) section on GitHub.
+
+| Tool | Executable | Config. File |
+| --- | --- | --- |
+| Database deployment | `WorkWallet.BI.ClientDatabaseDeploy.exe` | `appsettings.json` |
+| Client sample | `WorkWallet.BI.ClientSample.exe` | `appsettings.json` |
 
 ## Creating or Upgrading the Database
 
