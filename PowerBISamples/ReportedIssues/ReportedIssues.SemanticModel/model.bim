@@ -4,7 +4,7 @@
     "annotations": [
       {
         "name": "PBIDesktopVersion",
-        "value": "2.131.1126.0 (24.07)"
+        "value": "2.131.1203.0 (24.07)"
       },
       {
         "name": "PBI_QueryOrder",
@@ -4059,7 +4059,7 @@
             "source": {
               "expression": [
                 "let",
-                "    Source = Sql.Database(\"(LocalDB)\\MSSQLLocalDB\", \"WorkWalletBIClient\"),",
+                "    Source = Sql.Database(\"CAKESOFBREAD\", \"WorkWalletBIClient_Demo\"),",
                 "    mart_Location = Source{[Schema=\"mart\",Item=\"Location\"]}[Data],",
                 "    #\"Removed Columns\" = Table.RemoveColumns(mart_Location,{\"_created\", \"_edited\"}),",
                 "    #\"Renamed Columns\" = Table.RenameColumns(#\"Removed Columns\",{{\"LocationType\", \"Location Type\"}})",
@@ -4353,7 +4353,7 @@
             "source": {
               "expression": [
                 "let",
-                "    Source = Sql.Database(\"(LocalDB)\\MSSQLLocalDB\", \"WorkWalletBIClient\"),",
+                "    Source = Sql.Database(\"CAKESOFBREAD\", \"WorkWalletBIClient_Demo\"),",
                 "    mart_Wallet = Source{[Schema=\"mart\",Item=\"Wallet\"]}[Data],",
                 "    #\"Removed Columns\" = Table.RemoveColumns(mart_Wallet,{\"_created\", \"_edited\"})",
                 "in",
@@ -4669,7 +4669,7 @@
             "source": {
               "expression": [
                 "let",
-                "    Source = Sql.Database(\"(LocalDB)\\MSSQLLocalDB\", \"WorkWalletBIClient\"),",
+                "    Source = Sql.Database(\"CAKESOFBREAD\", \"WorkWalletBIClient_Demo\"),",
                 "    mart_ReportedIssue = Source{[Schema=\"mart\",Item=\"ReportedIssue\"]}[Data],",
                 "    #\"Removed Columns\" = Table.RemoveColumns(mart_ReportedIssue,{\"_created\", \"_edited\"}),",
                 "    #\"Renamed Columns\" = Table.RenameColumns(#\"Removed Columns\",{{\"ReportedIssueReference\", \"Issue Reference\"}, {\"OccurredOn\", \"Occurred On\"}, {\"ReportedOn\", \"Reported On\"}, {\"ReportedBy\", \"Reported By\"}, {\"ReportedIssueOverview\", \"Issue Overview\"}, {\"CloseDate\", \"Close Date\"}})",
@@ -5396,7 +5396,7 @@
             "source": {
               "expression": [
                 "let",
-                "    Source = Sql.Database(\"(LocalDB)\\MSSQLLocalDB\", \"WorkWalletBIClient\"),",
+                "    Source = Sql.Database(\"CAKESOFBREAD\", \"WorkWalletBIClient_Demo\"),",
                 "    mart_ReportedIssueBodyPart = Source{[Schema=\"mart\",Item=\"ReportedIssueBodyPart\"]}[Data],",
                 "    #\"Removed Columns\" = Table.RemoveColumns(mart_ReportedIssueBodyPart,{\"_created\", \"_edited\"}),",
                 "    #\"Renamed Columns\" = Table.RenameColumns(#\"Removed Columns\",{{\"Question\", \"Body Part Question\"}})",
@@ -5512,7 +5512,7 @@
             "source": {
               "expression": [
                 "let",
-                "    Source = Sql.Database(\"(LocalDB)\\MSSQLLocalDB\", \"WorkWalletBIClient\"),",
+                "    Source = Sql.Database(\"CAKESOFBREAD\", \"WorkWalletBIClient_Demo\"),",
                 "    mart_ReportedIssueBodyPartEnum = Source{[Schema=\"mart\",Item=\"ReportedIssueBodyPartEnum\"]}[Data],",
                 "    #\"Removed Columns\" = Table.RemoveColumns(mart_ReportedIssueBodyPartEnum,{\"_created\", \"_edited\"}),",
                 "    #\"Renamed Columns\" = Table.RenameColumns(#\"Removed Columns\",{{\"BodyPart\", \"Body Part\"}, {\"Group\", \"Body Part Group\"}})",
@@ -5653,7 +5653,7 @@
             "source": {
               "expression": [
                 "let",
-                "    Source = Sql.Database(\"(LocalDB)\\MSSQLLocalDB\", \"WorkWalletBIClient\"),",
+                "    Source = Sql.Database(\"CAKESOFBREAD\", \"WorkWalletBIClient_Demo\"),",
                 "    mart_ReportedIssueBodyPartFact = Source{[Schema=\"mart\",Item=\"ReportedIssueBodyPartFact\"]}[Data],",
                 "    #\"Removed Columns\" = Table.RemoveColumns(mart_ReportedIssueBodyPartFact,{\"_created\", \"_edited\"})",
                 "in",
@@ -5768,7 +5768,7 @@
             "source": {
               "expression": [
                 "let",
-                "    Source = Sql.Database(\"(LocalDB)\\MSSQLLocalDB\", \"WorkWalletBIClient\"),",
+                "    Source = Sql.Database(\"CAKESOFBREAD\", \"WorkWalletBIClient_Demo\"),",
                 "    mart_ReportedIssueBranchOption = Source{[Schema=\"mart\",Item=\"ReportedIssueBranchOption\"]}[Data],",
                 "    #\"Removed Columns\" = Table.RemoveColumns(mart_ReportedIssueBranchOption,{\"_created\", \"_edited\"}),",
                 "    #\"Renamed Columns\" = Table.RenameColumns(#\"Removed Columns\",{{\"Option\", \"Branch Option\"}})",
@@ -5909,7 +5909,7 @@
             "source": {
               "expression": [
                 "let",
-                "    Source = Sql.Database(\"(LocalDB)\\MSSQLLocalDB\", \"WorkWalletBIClient\"),",
+                "    Source = Sql.Database(\"CAKESOFBREAD\", \"WorkWalletBIClient_Demo\"),",
                 "    mart_ReportedIssueBranchOptionFact = Source{[Schema=\"mart\",Item=\"ReportedIssueBranchOptionFact\"]}[Data],",
                 "    #\"Removed Columns\" = Table.RemoveColumns(mart_ReportedIssueBranchOptionFact,{\"_created\", \"_edited\"})",
                 "in",
@@ -6109,7 +6109,7 @@
             "source": {
               "expression": [
                 "let",
-                "    Source = Sql.Database(\"(LocalDB)\\MSSQLLocalDB\", \"WorkWalletBIClient\"),",
+                "    Source = Sql.Database(\"CAKESOFBREAD\", \"WorkWalletBIClient_Demo\"),",
                 "    mart_ReportedIssueCategory = Source{[Schema=\"mart\",Item=\"ReportedIssueCategory\"]}[Data],",
                 "    #\"Removed Columns\" = Table.RemoveColumns(mart_ReportedIssueCategory,{\"_created\", \"_edited\"}),",
                 "    #\"Renamed Columns\" = Table.RenameColumns(#\"Removed Columns\",{{\"CategoryName\", \"Category\"}, {\"CategoryDescription\", \"Category Description\"}, {\"SubcategoryName\", \"Subcategory\"}, {\"SubcategoryDescription\", \"Subcategory Description\"}})",
@@ -6225,7 +6225,7 @@
             "source": {
               "expression": [
                 "let",
-                "    Source = Sql.Database(\"(LocalDB)\\MSSQLLocalDB\", \"WorkWalletBIClient\"),",
+                "    Source = Sql.Database(\"CAKESOFBREAD\", \"WorkWalletBIClient_Demo\"),",
                 "    mart_ReportedIssueOptionSelect = Source{[Schema=\"mart\",Item=\"ReportedIssueOptionSelect\"]}[Data],",
                 "    #\"Removed Columns\" = Table.RemoveColumns(mart_ReportedIssueOptionSelect,{\"_created\", \"_edited\"}),",
                 "    #\"Renamed Columns\" = Table.RenameColumns(#\"Removed Columns\",{{\"Question\", \"Option Question\"}, {\"Option\", \"Option\"}})",
@@ -6360,7 +6360,7 @@
             "source": {
               "expression": [
                 "let",
-                "    Source = Sql.Database(\"(LocalDB)\\MSSQLLocalDB\", \"WorkWalletBIClient\"),",
+                "    Source = Sql.Database(\"CAKESOFBREAD\", \"WorkWalletBIClient_Demo\"),",
                 "    mart_ReportedIssueOptionSelectFact = Source{[Schema=\"mart\",Item=\"ReportedIssueOptionSelectFact\"]}[Data],",
                 "    #\"Removed Columns\" = Table.RemoveColumns(mart_ReportedIssueOptionSelectFact,{\"_created\", \"_edited\"})",
                 "in",
@@ -6475,7 +6475,7 @@
             "source": {
               "expression": [
                 "let",
-                "    Source = Sql.Database(\"(LocalDB)\\MSSQLLocalDB\", \"WorkWalletBIClient\"),",
+                "    Source = Sql.Database(\"CAKESOFBREAD\", \"WorkWalletBIClient_Demo\"),",
                 "    mart_ReportedIssuePerson = Source{[Schema=\"mart\",Item=\"ReportedIssuePerson\"]}[Data],",
                 "    #\"Removed Columns\" = Table.RemoveColumns(mart_ReportedIssuePerson,{\"_created\", \"_edited\"}),",
                 "    #\"Renamed Columns\" = Table.RenameColumns(#\"Removed Columns\",{{\"Question\", \"Person Question\"}, {\"Option\", \"Person\"}})",
@@ -6610,7 +6610,7 @@
             "source": {
               "expression": [
                 "let",
-                "    Source = Sql.Database(\"(LocalDB)\\MSSQLLocalDB\", \"WorkWalletBIClient\"),",
+                "    Source = Sql.Database(\"CAKESOFBREAD\", \"WorkWalletBIClient_Demo\"),",
                 "    mart_ReportedIssuePersonFact = Source{[Schema=\"mart\",Item=\"ReportedIssuePersonFact\"]}[Data],",
                 "    #\"Removed Columns\" = Table.RemoveColumns(mart_ReportedIssuePersonFact,{\"_created\", \"_edited\"})",
                 "in",
@@ -6745,7 +6745,7 @@
             "source": {
               "expression": [
                 "let",
-                "    Source = Sql.Database(\"(LocalDB)\\MSSQLLocalDB\", \"WorkWalletBIClient\"),",
+                "    Source = Sql.Database(\"CAKESOFBREAD\", \"WorkWalletBIClient_Demo\"),",
                 "    mart_ReportedIssueRootCauseAnalysisFact = Source{[Schema=\"mart\",Item=\"ReportedIssueRootCauseAnalysisFact\"]}[Data],",
                 "    #\"Removed Columns\" = Table.RemoveColumns(mart_ReportedIssueRootCauseAnalysisFact,{\"_created\", \"_edited\"}),",
                 "    #\"Renamed Columns\" = Table.RenameColumns(#\"Removed Columns\",{{\"RootCauseAnalysis\", \"Root Cause Analysis\"}, {\"RootCauseAnalysisDescription\", \"Root Cause Analysis Description\"}})",
@@ -6828,7 +6828,7 @@
             "source": {
               "expression": [
                 "let",
-                "    Source = Sql.Database(\"(LocalDB)\\MSSQLLocalDB\", \"WorkWalletBIClient\"),",
+                "    Source = Sql.Database(\"CAKESOFBREAD\", \"WorkWalletBIClient_Demo\"),",
                 "    mart_ReportedIssueRootCauseAnalysisType = Source{[Schema=\"mart\",Item=\"ReportedIssueRootCauseAnalysisType\"]}[Data],",
                 "    #\"Removed Columns\" = Table.RemoveColumns(mart_ReportedIssueRootCauseAnalysisType,{\"_created\", \"_edited\"}),",
                 "    #\"Renamed Columns\" = Table.RenameColumns(#\"Removed Columns\",{{\"ReportedIssueRootCauseAnalysisType\", \"Root Cause Analysis Type\"}})",
@@ -6917,7 +6917,7 @@
             "source": {
               "expression": [
                 "let",
-                "    Source = Sql.Database(\"(LocalDB)\\MSSQLLocalDB\", \"WorkWalletBIClient\"),",
+                "    Source = Sql.Database(\"CAKESOFBREAD\", \"WorkWalletBIClient_Demo\"),",
                 "    mart_ReportedIssueSeverity = Source{[Schema=\"mart\",Item=\"ReportedIssueSeverity\"]}[Data],",
                 "    #\"Removed Columns\" = Table.RemoveColumns(mart_ReportedIssueSeverity,{\"_created\", \"_edited\"}),",
                 "    #\"Renamed Columns\" = Table.RenameColumns(#\"Removed Columns\",{{\"ReportedIssueSeverity\", \"Severity\"}}),",
@@ -7007,7 +7007,7 @@
             "source": {
               "expression": [
                 "let",
-                "    Source = Sql.Database(\"(LocalDB)\\MSSQLLocalDB\", \"WorkWalletBIClient\"),",
+                "    Source = Sql.Database(\"CAKESOFBREAD\", \"WorkWalletBIClient_Demo\"),",
                 "    mart_ReportedIssueStatus = Source{[Schema=\"mart\",Item=\"ReportedIssueStatus\"]}[Data],",
                 "    #\"Removed Columns\" = Table.RemoveColumns(mart_ReportedIssueStatus,{\"_created\", \"_edited\"}),",
                 "    #\"Renamed Columns\" = Table.RenameColumns(#\"Removed Columns\",{{\"ReportedIssueStatus\", \"Status\"}})",

@@ -12,7 +12,7 @@
       },
       {
         "name": "PBIDesktopVersion",
-        "value": "2.131.1126.0 (24.07)"
+        "value": "2.131.1203.0 (24.07)"
       },
       {
         "name": "PBI_ProTooling",
@@ -184,10 +184,6 @@
           {
             "name": "PBI_ResultType",
             "value": "Table"
-          },
-          {
-            "name": "PBI_NavigationStepName",
-            "value": "Navigation"
           }
         ],
         "columns": [
@@ -403,7 +399,7 @@
             "source": {
               "expression": [
                 "let",
-                "    Source = Sql.Database(\"(LocalDB)\\MSSQLLocalDB\", \"WorkWalletBIClient\"),",
+                "    Source = Sql.Database(\"CAKESOFBREAD\", \"WorkWalletBIClient_Demo\"),",
                 "    mart_Induction = Source{[Schema=\"mart\",Item=\"Induction\"]}[Data],",
                 "    #\"Removed Columns\" = Table.RemoveColumns(mart_Induction,{\"_created\", \"_edited\"}),",
                 "    #\"Renamed Columns\" = Table.RenameColumns(#\"Removed Columns\",{{\"InductionVersion\", \"Induction Version\"}, {\"InductionName\", \"Induction\"}, {\"ValidForDays\", \"Valid For Days\"}, {\"CreatedOn\", \"Created On\"}, {\"TestPassMark\", \"Test Pass Mark\"}, {\"TestQuestionCount\", \"Test Question Count\"}})",
@@ -827,10 +823,6 @@
           {
             "name": "PBI_ResultType",
             "value": "Table"
-          },
-          {
-            "name": "PBI_NavigationStepName",
-            "value": "Navigation"
           }
         ],
         "columns": [
@@ -909,7 +901,7 @@
             "source": {
               "expression": [
                 "let",
-                "    Source = Sql.Database(\"(LocalDB)\\MSSQLLocalDB\", \"WorkWalletBIClient\"),",
+                "    Source = Sql.Database(\"CAKESOFBREAD\", \"WorkWalletBIClient_Demo\"),",
                 "    mart_InductionCustomQuestion = Source{[Schema=\"mart\",Item=\"InductionCustomQuestion\"]}[Data],",
                 "    #\"Removed Columns\" = Table.RemoveColumns(mart_InductionCustomQuestion,{\"_created\", \"_edited\"}),",
                 "    #\"Renamed Columns\" = Table.RenameColumns(#\"Removed Columns\",{{\"Title\", \"Question\"}, {\"Value\", \"Answer\"}})",
@@ -927,10 +919,6 @@
           {
             "name": "PBI_ResultType",
             "value": "Table"
-          },
-          {
-            "name": "PBI_NavigationStepName",
-            "value": "Navigation"
           }
         ],
         "columns": [
@@ -1019,7 +1007,7 @@
             "source": {
               "expression": [
                 "let",
-                "    Source = Sql.Database(\"(LocalDB)\\MSSQLLocalDB\", \"WorkWalletBIClient\"),",
+                "    Source = Sql.Database(\"CAKESOFBREAD\", \"WorkWalletBIClient_Demo\"),",
                 "    mart_InductionCustomQuestionFact = Source{[Schema=\"mart\",Item=\"InductionCustomQuestionFact\"]}[Data],",
                 "    #\"Removed Columns\" = Table.RemoveColumns(mart_InductionCustomQuestionFact,{\"_created\", \"_edited\"})",
                 "in",
@@ -1036,10 +1024,6 @@
           {
             "name": "PBI_ResultType",
             "value": "Table"
-          },
-          {
-            "name": "PBI_NavigationStepName",
-            "value": "Navigation"
           }
         ],
         "columns": [
@@ -1105,7 +1089,7 @@
             "source": {
               "expression": [
                 "let",
-                "    Source = Sql.Database(\"(LocalDB)\\MSSQLLocalDB\", \"WorkWalletBIClient\"),",
+                "    Source = Sql.Database(\"CAKESOFBREAD\", \"WorkWalletBIClient_Demo\"),",
                 "    mart_InductionStatus = Source{[Schema=\"mart\",Item=\"InductionStatus\"]}[Data],",
                 "    #\"Removed Columns\" = Table.RemoveColumns(mart_InductionStatus,{\"_created\", \"_edited\"}),",
                 "    #\"Renamed Columns\" = Table.RenameColumns(#\"Removed Columns\",{{\"InductionStatus\", \"Induction Status\"}})",
@@ -1123,10 +1107,6 @@
           {
             "name": "PBI_ResultType",
             "value": "Table"
-          },
-          {
-            "name": "PBI_NavigationStepName",
-            "value": "Navigation"
           }
         ],
         "columns": [
@@ -1338,7 +1318,7 @@
             "source": {
               "expression": [
                 "let",
-                "    Source = Sql.Database(\"(LocalDB)\\MSSQLLocalDB\", \"WorkWalletBIClient\"),",
+                "    Source = Sql.Database(\"CAKESOFBREAD\", \"WorkWalletBIClient_Demo\"),",
                 "    mart_InductionTaken = Source{[Schema=\"mart\",Item=\"InductionTaken\"]}[Data],",
                 "    #\"Removed Columns\" = Table.RemoveColumns(mart_InductionTaken,{\"_created\", \"_edited\"}),",
                 "    #\"Renamed Columns\" = Table.RenameColumns(#\"Removed Columns\",{{\"CompanyName\", \"Company\"}, {\"TakenOn\", \"Taken On\"}, {\"CorrectTestQuestionCount\", \"Correct Test Question Count\"}, {\"Name\", \"Person\"}})",
@@ -1557,10 +1537,6 @@
           {
             "name": "PBI_ResultType",
             "value": "Table"
-          },
-          {
-            "name": "PBI_NavigationStepName",
-            "value": "Navigation"
           }
         ],
         "columns": [
@@ -1626,7 +1602,7 @@
             "source": {
               "expression": [
                 "let",
-                "    Source = Sql.Database(\"(LocalDB)\\MSSQLLocalDB\", \"WorkWalletBIClient\"),",
+                "    Source = Sql.Database(\"CAKESOFBREAD\", \"WorkWalletBIClient_Demo\"),",
                 "    mart_InductionTakenStatus = Source{[Schema=\"mart\",Item=\"InductionTakenStatus\"]}[Data],",
                 "    #\"Removed Columns\" = Table.RemoveColumns(mart_InductionTakenStatus,{\"_created\", \"_edited\"}),",
                 "    #\"Renamed Columns\" = Table.RenameColumns(#\"Removed Columns\",{{\"InductionTakenStatus\", \"Taken Status\"}})",
@@ -1644,10 +1620,6 @@
           {
             "name": "PBI_ResultType",
             "value": "Table"
-          },
-          {
-            "name": "PBI_NavigationStepName",
-            "value": "Navigation"
           }
         ],
         "columns": [
@@ -1712,7 +1684,7 @@
             "source": {
               "expression": [
                 "let",
-                "    Source = Sql.Database(\"(LocalDB)\\MSSQLLocalDB\", \"WorkWalletBIClient\"),",
+                "    Source = Sql.Database(\"CAKESOFBREAD\", \"WorkWalletBIClient_Demo\"),",
                 "    mart_Wallet = Source{[Schema=\"mart\",Item=\"Wallet\"]}[Data],",
                 "    #\"Removed Columns\" = Table.RemoveColumns(mart_Wallet,{\"_created\", \"_edited\"})",
                 "in",

@@ -12,7 +12,7 @@
       },
       {
         "name": "PBIDesktopVersion",
-        "value": "2.131.1126.0 (24.07)"
+        "value": "2.131.1203.0 (24.07)"
       },
       {
         "name": "PBI_ProTooling",
@@ -205,10 +205,6 @@
           {
             "name": "PBI_ResultType",
             "value": "Table"
-          },
-          {
-            "name": "PBI_NavigationStepName",
-            "value": "Navigation"
           }
         ],
         "columns": [
@@ -512,7 +508,7 @@
             "source": {
               "expression": [
                 "let",
-                "    Source = Sql.Database(\"(LocalDB)\\MSSQLLocalDB\", \"WorkWalletBIClient\"),",
+                "    Source = Sql.Database(\"CAKESOFBREAD\", \"WorkWalletBIClient_Demo\"),",
                 "    mart_Location = Source{[Schema=\"mart\",Item=\"Location\"]}[Data],",
                 "    #\"Removed Columns\" = Table.RemoveColumns(mart_Location,{\"_created\", \"_edited\"}),",
                 "    #\"Renamed Columns\" = Table.RenameColumns(#\"Removed Columns\",{{\"LocationType\", \"Location Type\"}})",
@@ -735,10 +731,6 @@
           {
             "name": "PBI_ResultType",
             "value": "Table"
-          },
-          {
-            "name": "PBI_NavigationStepName",
-            "value": "Navigation"
           }
         ],
         "columns": [
@@ -1061,7 +1053,7 @@
             "source": {
               "expression": [
                 "let",
-                "    Source = Sql.Database(\"(LocalDB)\\MSSQLLocalDB\", \"WorkWalletBIClient\"),",
+                "    Source = Sql.Database(\"CAKESOFBREAD\", \"WorkWalletBIClient_Demo\"),",
                 "    mart_Permit = Source{[Schema=\"mart\",Item=\"Permit\"]}[Data],",
                 "    #\"Removed Columns\" = Table.RemoveColumns(mart_Permit,{\"_created\", \"_edited\"}),",
                 "    #\"Renamed Columns\" = Table.RenameColumns(#\"Removed Columns\",{{\"PermitReference\", \"Reference\"}, {\"PermitDescription\", \"Permit\"}, {\"IssuedToCompany\", \"Issued To Company\"}, {\"IssuedOn\", \"Issued On\"}, {\"IssuedForMinutes\", \"Issued For Minutes\"}, {\"IssuedExpiry\", \"Issued Expiry\"}, {\"ClosedOn\", \"Closed On\"}, {\"HasBeenExpired\", \"Has Been Expired\"}, {\"HasBeenClosed\", \"Has Been Closed\"}})",
@@ -1682,10 +1674,6 @@
           {
             "name": "PBI_ResultType",
             "value": "Table"
-          },
-          {
-            "name": "PBI_NavigationStepName",
-            "value": "Navigation"
           }
         ],
         "columns": [
@@ -1897,7 +1885,7 @@
             "source": {
               "expression": [
                 "let",
-                "    Source = Sql.Database(\"(LocalDB)\\MSSQLLocalDB\", \"WorkWalletBIClient\"),",
+                "    Source = Sql.Database(\"CAKESOFBREAD\", \"WorkWalletBIClient_Demo\"),",
                 "    mart_PermitCategory = Source{[Schema=\"mart\",Item=\"PermitCategory\"]}[Data],",
                 "    #\"Removed Columns\" = Table.RemoveColumns(mart_PermitCategory,{\"_created\", \"_edited\"}),",
                 "    #\"Renamed Columns\" = Table.RenameColumns(#\"Removed Columns\",{{\"CategoryVersion\", \"Category Version\"}, {\"CategoryName\", \"Category\"}, {\"ExpiryType\", \"Expiry\"}, {\"ValidityPeriod\", \"Validity Period\"}, {\"ValidityPeriodMinutes\", \"Validity Period Minutes\"}, {\"IssueType\", \"Issue Type\"}})",
@@ -1915,10 +1903,6 @@
           {
             "name": "PBI_ResultType",
             "value": "Table"
-          },
-          {
-            "name": "PBI_NavigationStepName",
-            "value": "Navigation"
           }
         ],
         "columns": [
@@ -2010,7 +1994,7 @@
             "source": {
               "expression": [
                 "let",
-                "    Source = Sql.Database(\"(LocalDB)\\MSSQLLocalDB\", \"WorkWalletBIClient\"),",
+                "    Source = Sql.Database(\"CAKESOFBREAD\", \"WorkWalletBIClient_Demo\"),",
                 "    mart_PermitChecklistAnswer = Source{[Schema=\"mart\",Item=\"PermitChecklistAnswer\"]}[Data],",
                 "    #\"Removed Columns\" = Table.RemoveColumns(mart_PermitChecklistAnswer,{\"_edited\", \"_created\"}),",
                 "    #\"Renamed Columns\" = Table.RenameColumns(#\"Removed Columns\",{{\"CategorySectionType\", \"Section Type\"}, {\"Option\", \"Answer\"}})",
@@ -2028,10 +2012,6 @@
           {
             "name": "PBI_ResultType",
             "value": "Table"
-          },
-          {
-            "name": "PBI_NavigationStepName",
-            "value": "Navigation"
           }
         ],
         "columns": [
@@ -2120,7 +2100,7 @@
             "source": {
               "expression": [
                 "let",
-                "    Source = Sql.Database(\"(LocalDB)\\MSSQLLocalDB\", \"WorkWalletBIClient\"),",
+                "    Source = Sql.Database(\"CAKESOFBREAD\", \"WorkWalletBIClient_Demo\"),",
                 "    mart_PermitChecklistAnswerFact = Source{[Schema=\"mart\",Item=\"PermitChecklistAnswerFact\"]}[Data],",
                 "    #\"Removed Columns\" = Table.RemoveColumns(mart_PermitChecklistAnswerFact,{\"_created\", \"_edited\"})",
                 "in",
@@ -2137,10 +2117,6 @@
           {
             "name": "PBI_ResultType",
             "value": "Table"
-          },
-          {
-            "name": "PBI_NavigationStepName",
-            "value": "Navigation"
           }
         ],
         "columns": [
@@ -2212,7 +2188,7 @@
             "source": {
               "expression": [
                 "let",
-                "    Source = Sql.Database(\"(LocalDB)\\MSSQLLocalDB\", \"WorkWalletBIClient\"),",
+                "    Source = Sql.Database(\"CAKESOFBREAD\", \"WorkWalletBIClient_Demo\"),",
                 "    mart_PermitStatus = Source{[Schema=\"mart\",Item=\"PermitStatus\"]}[Data],",
                 "    #\"Removed Columns\" = Table.RemoveColumns(mart_PermitStatus,{\"_created\", \"_edited\"}),",
                 "    #\"Renamed Columns\" = Table.RenameColumns(#\"Removed Columns\",{{\"PermitStatus\", \"Status\"}})",
@@ -2230,10 +2206,6 @@
           {
             "name": "PBI_ResultType",
             "value": "Table"
-          },
-          {
-            "name": "PBI_NavigationStepName",
-            "value": "Navigation"
           }
         ],
         "columns": [
@@ -2298,7 +2270,7 @@
             "source": {
               "expression": [
                 "let",
-                "    Source = Sql.Database(\"(LocalDB)\\MSSQLLocalDB\", \"WorkWalletBIClient\"),",
+                "    Source = Sql.Database(\"CAKESOFBREAD\", \"WorkWalletBIClient_Demo\"),",
                 "    mart_Wallet = Source{[Schema=\"mart\",Item=\"Wallet\"]}[Data],",
                 "    #\"Removed Columns\" = Table.RemoveColumns(mart_Wallet,{\"_created\", \"_edited\"})",
                 "in",
