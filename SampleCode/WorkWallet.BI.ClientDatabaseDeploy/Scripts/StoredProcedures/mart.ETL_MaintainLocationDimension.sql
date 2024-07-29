@@ -6,88 +6,97 @@ AS
 BEGIN
     SET NOCOUNT ON;
 
-    -- type 1 changes (do first, before inserting new)
-    UPDATE mart.[Location]
-    SET
-        LocationTypeCode = a.LocationTypeCode
-        ,LocationType = a.LocationType
-        ,[Location] = a.[Location]
-        ,CompanyId = a.CompanyId
-        ,Company = a.Company
-        ,SiteId = a.SiteId
-        ,[Site] = a.[Site]
-        ,AreaId = a.AreaId
-        ,Area = a.Area
-        ,JobId = a.JobId
-        ,Job = a.Job
-        ,SiteLocationId = a.SiteLocationId
-        ,Department = a.Department
-        ,Wallet_key = w.Wallet_key
-        ,_edited = SYSUTCDATETIME()
-    FROM
-        @locationTable AS a
-        INNER JOIN mart.Wallet AS w ON a.WalletId = w.WalletId
-        INNER JOIN mart.[Location] AS b ON a.LocationId = b.LocationId
-    WHERE /* only where the data has changed */
-        a.LocationTypeCode <> b.LocationTypeCode
-        OR a.LocationType <> b.LocationType
-        OR a.[Location] <> b.[Location]
-        OR a.CompanyId <> b.CompanyId
-        OR a.Company <> b.Company
-        OR a.SiteId <> b.SiteId
-        OR a.[Site] <> b.[Site]
-        OR a.AreaId <> b.AreaId
-        OR a.Area <> b.Area
-        OR a.JobId <> b.JobId
-        OR a.Job <> b.Job
-        OR a.SiteLocationId <> b.SiteLocationId
-        OR a.Department <> b.Department
-        OR w.Wallet_key <> b.Wallet_key;
+    MERGE mart.[Location] AS target
+    USING (
+        SELECT
+            a.LocationId,
+            a.LocationTypeCode,
+            a.LocationType,
+            a.[Location],
+            a.CompanyId,
+            a.Company,
+            a.SiteId,
+            a.[Site],
+            a.AreaId,
+            a.Area,
+            a.JobId,
+            a.Job,
+            a.SiteLocationId,
+            a.Department,
+            w.Wallet_key
+        FROM
+            @locationTable AS a
+            INNER JOIN mart.Wallet AS w ON a.WalletId = w.WalletId
+    ) AS source
+    ON target.LocationId = source.LocationId
+    WHEN MATCHED AND (
+        target.LocationTypeCode <> source.LocationTypeCode
+        OR target.LocationType <> source.LocationType
+        OR target.[Location] <> source.[Location]
+        OR target.CompanyId <> source.CompanyId
+        OR target.Company <> source.Company
+        OR target.SiteId <> source.SiteId
+        OR target.[Site] <> source.[Site]
+        OR target.AreaId <> source.AreaId
+        OR target.Area <> source.Area
+        OR target.JobId <> source.JobId
+        OR target.Job <> source.Job
+        OR target.SiteLocationId <> source.SiteLocationId
+        OR target.Department <> source.Department
+        OR target.Wallet_key <> source.Wallet_key
+    ) THEN
+        UPDATE SET
+            target.LocationTypeCode = source.LocationTypeCode,
+            target.LocationType = source.LocationType,
+            target.[Location] = source.[Location],
+            target.CompanyId = source.CompanyId,
+            target.Company = source.Company,
+            target.SiteId = source.SiteId,
+            target.[Site] = source.[Site],
+            target.AreaId = source.AreaId,
+            target.Area = source.Area,
+            target.JobId = source.JobId,
+            target.Job = source.Job,
+            target.SiteLocationId = source.SiteLocationId,
+            target.Department = source.Department,
+            target.Wallet_key = source.Wallet_key,
+            target._edited = SYSUTCDATETIME()
+    WHEN NOT MATCHED BY TARGET THEN
+        INSERT (
+            LocationId,
+            LocationTypeCode,
+            LocationType,
+            [Location],
+            CompanyId,
+            Company,
+            SiteId,
+            [Site],
+            AreaId,
+            Area,
+            JobId,
+            Job,
+            SiteLocationId,
+            Department,
+            Wallet_key
+        )
+        VALUES (
+            source.LocationId,
+            source.LocationTypeCode,
+            source.LocationType,
+            source.[Location],
+            source.CompanyId,
+            source.Company,
+            source.SiteId,
+            source.[Site],
+            source.AreaId,
+            source.Area,
+            source.JobId,
+            source.Job,
+            source.SiteLocationId,
+            source.Department,
+            source.Wallet_key
+        );
 
-    PRINT 'UPDATE mart.[Location], number of rows = ' + CAST(@@ROWCOUNT AS varchar);
-
-    -- insert missing entries
-    INSERT INTO mart.[Location]
-    (
-        LocationId
-        ,LocationTypeCode
-        ,LocationType
-        ,[Location]
-        ,CompanyId
-        ,Company
-        ,SiteId
-        ,[Site]
-        ,AreaId
-        ,Area
-        ,JobId
-        ,Job
-        ,SiteLocationId
-        ,Department
-        ,Wallet_key
-    )
-    SELECT
-        a.LocationId
-        ,a.LocationTypeCode
-        ,a.LocationType
-        ,a.[Location]
-        ,a.CompanyId
-        ,a.Company
-        ,a.SiteId
-        ,a.[Site]
-        ,a.AreaId
-        ,a.Area
-        ,a.JobId
-        ,a.Job
-        ,a.SiteLocationId
-        ,a.Department
-        ,w.Wallet_key
-    FROM
-        @locationTable AS a
-        INNER JOIN mart.Wallet AS w ON a.WalletId = w.WalletId
-        LEFT OUTER JOIN mart.[Location] AS b ON a.LocationId = b.LocationId
-    WHERE
-        b.LocationId IS NULL;
-
-    PRINT 'INSERT mart.[Location], number of rows = ' + CAST(@@ROWCOUNT AS varchar);
+    PRINT 'MERGE mart.[Location], number of rows = ' + CAST(@@ROWCOUNT AS varchar);
 END
 GO

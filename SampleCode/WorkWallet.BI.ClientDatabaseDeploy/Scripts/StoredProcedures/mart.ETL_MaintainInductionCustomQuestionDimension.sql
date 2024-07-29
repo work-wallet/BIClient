@@ -6,27 +6,32 @@ AS
 BEGIN
     SET NOCOUNT ON;
 
-    -- insert missing entries
-    INSERT INTO mart.InductionCustomQuestion
-    (
-        Title
-        ,[Value]
-        ,Wallet_key
-    )
-    SELECT DISTINCT
-        a.Title
-        ,a.[Value]
-        ,w.Wallet_key
-    FROM
-        @inductionCustomQuestionTable AS a
-        INNER JOIN mart.Wallet AS w ON a.WalletId = w.WalletId
-        LEFT OUTER JOIN mart.InductionCustomQuestion AS b ON
-            w.Wallet_key = b.Wallet_key
-            AND a.Title = b.Title
-            AND a.[Value] = b.[Value]
-    WHERE
-        b.Title IS NULL;
+    MERGE mart.InductionCustomQuestion AS target
+    USING (
+        SELECT DISTINCT
+            a.Title,
+            a.[Value],
+            w.Wallet_key
+        FROM
+            @inductionCustomQuestionTable AS a
+            INNER JOIN mart.Wallet AS w ON a.WalletId = w.WalletId
+    ) AS source
+    ON
+        target.Wallet_key = source.Wallet_key
+        AND target.Title = source.Title
+        AND target.[Value] = source.[Value]
+    WHEN NOT MATCHED BY TARGET THEN
+        INSERT (
+            Title,
+            [Value],
+            Wallet_key
+        )
+        VALUES (
+            source.Title,
+            source.[Value],
+            source.Wallet_key
+        );
 
-    PRINT 'INSERT mart.InductionCustomQuestion, number of rows = ' + CAST(@@ROWCOUNT AS varchar);
+    PRINT 'MERGE mart.InductionCustomQuestion, number of rows = ' + CAST(@@ROWCOUNT AS varchar);
 END
 GO

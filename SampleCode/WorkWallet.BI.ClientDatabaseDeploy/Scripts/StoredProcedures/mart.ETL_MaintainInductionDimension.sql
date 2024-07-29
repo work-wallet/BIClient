@@ -6,70 +6,73 @@ AS
 BEGIN
     SET NOCOUNT ON;
 
-    -- type 1 changes (do first, before inserting new)
-    UPDATE mart.Induction
-    SET
-        InductionName = a.InductionName
-        ,ValidForDays = a.ValidForDays
-        ,CreatedOn = a.CreatedOn
-        ,Active = a.Active
-        ,InductionStatus_key = istat.InductionStatus_key
-        ,TestPassMark = a.TestPassMark
-        ,TestQuestionCount = a.TestQuestionCount
-        ,Wallet_key = w.Wallet_key
-        ,_edited = SYSUTCDATETIME()
-    FROM
-        @InductionTable AS a
-        INNER JOIN mart.InductionStatus AS istat ON a.InductionStatusCode = istat.InductionStatusCode
-        INNER JOIN mart.Wallet AS w ON a.WalletId = w.WalletId
-        LEFT OUTER JOIN mart.Induction AS b ON a.InductionId = b.InductionId
-    WHERE /* only where the data has changed */
-        a.InductionName <> b.InductionName
-        OR a.ValidForDays <> b.ValidForDays
-        OR a.CreatedOn <> b.CreatedOn
-        OR a.Active <> b.Active
-        OR istat.InductionStatus_key <> b.InductionStatus_key
-        OR a.TestPassMark <> b.TestPassMark
-        OR a.TestQuestionCount <> b.TestQuestionCount
-        OR w.Wallet_key <> b.Wallet_key;
+    MERGE mart.Induction AS target
+    USING (
+        SELECT
+            a.InductionId,
+            a.InductionVersion,
+            a.InductionName,
+            a.ValidForDays,
+            a.CreatedOn,
+            a.Active,
+            istat.InductionStatus_key,
+            a.TestPassMark,
+            a.TestQuestionCount,
+            w.Wallet_key
+        FROM
+            @InductionTable AS a
+            INNER JOIN mart.InductionStatus AS istat ON a.InductionStatusCode = istat.InductionStatusCode
+            INNER JOIN mart.Wallet AS w ON a.WalletId = w.WalletId
+    ) AS source
+    ON
+        target.InductionId = source.InductionId
+        AND target.InductionVersion = source.InductionVersion
+    WHEN MATCHED AND (
+        target.InductionName <> source.InductionName
+        OR target.ValidForDays <> source.ValidForDays
+        OR target.CreatedOn <> source.CreatedOn
+        OR target.Active <> source.Active
+        OR target.InductionStatus_key <> source.InductionStatus_key
+        OR target.TestPassMark <> source.TestPassMark
+        OR target.TestQuestionCount <> source.TestQuestionCount
+        OR target.Wallet_key <> source.Wallet_key
+    ) THEN
+        UPDATE SET
+            target.InductionName = source.InductionName,
+            target.ValidForDays = source.ValidForDays,
+            target.CreatedOn = source.CreatedOn,
+            target.Active = source.Active,
+            target.InductionStatus_key = source.InductionStatus_key,
+            target.TestPassMark = source.TestPassMark,
+            target.TestQuestionCount = source.TestQuestionCount,
+            target.Wallet_key = source.Wallet_key,
+            target._edited = SYSUTCDATETIME()
+    WHEN NOT MATCHED BY TARGET THEN
+        INSERT (
+            InductionId,
+            InductionVersion,
+            InductionName,
+            ValidForDays,
+            CreatedOn,
+            Active,
+            InductionStatus_key,
+            TestPassMark,
+            TestQuestionCount,
+            Wallet_key
+        )
+        VALUES (
+            source.InductionId,
+            source.InductionVersion,
+            source.InductionName,
+            source.ValidForDays,
+            source.CreatedOn,
+            source.Active,
+            source.InductionStatus_key,
+            source.TestPassMark,
+            source.TestQuestionCount,
+            source.Wallet_key
+        );
 
-    PRINT 'UPDATE mart.Induction, number of rows = ' + CAST(@@ROWCOUNT AS varchar);
-
-    -- insert missing entries
-    INSERT INTO mart.Induction
-    (
-        InductionId
-        ,InductionVersion
-        ,InductionName
-        ,ValidForDays
-        ,CreatedOn
-        ,Active
-        ,InductionStatus_key
-        ,TestPassMark
-        ,TestQuestionCount
-        ,Wallet_key
-    )
-    SELECT
-        a.InductionId
-        ,a.InductionVersion
-        ,a.InductionName
-        ,a.ValidForDays
-        ,a.CreatedOn
-        ,a.Active
-        ,istat.InductionStatus_key
-        ,a.TestPassMark
-        ,a.TestQuestionCount
-        ,w.Wallet_key
-    FROM
-        @InductionTable AS a
-        INNER JOIN mart.InductionStatus AS istat ON a.InductionStatusCode = istat.InductionStatusCode
-        INNER JOIN mart.Wallet AS w ON a.WalletId = w.WalletId
-        LEFT OUTER JOIN mart.Induction AS b ON
-            a.InductionId = b.InductionId
-            AND a.InductionVersion = b.InductionVersion
-    WHERE
-        b.InductionId IS NULL;
-
-    PRINT 'INSERT mart.Induction, number of rows = ' + CAST(@@ROWCOUNT AS varchar);
+    PRINT 'MERGE mart.Induction, number of rows = ' + CAST(@@ROWCOUNT AS varchar);
 END
 GO

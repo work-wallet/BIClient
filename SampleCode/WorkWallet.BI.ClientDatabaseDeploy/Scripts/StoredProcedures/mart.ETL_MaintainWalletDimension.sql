@@ -6,34 +6,31 @@ AS
 BEGIN
     SET NOCOUNT ON;
 
-    -- type 1 changes (do first, before inserting new)
-    UPDATE mart.Wallet
-    SET
-        Wallet = a.Wallet
-        ,_edited = SYSUTCDATETIME()
-    FROM
-        @walletTable AS a
-        INNER JOIN mart.Wallet AS b ON a.WalletId = b.WalletId
-    WHERE /* only where the data has changed */
-        a.Wallet <> b.Wallet;
-
-    PRINT 'UPDATE mart.Wallet, number of rows = ' + CAST(@@ROWCOUNT AS varchar);
-
-    -- insert missing entries
-    INSERT INTO mart.Wallet
-    (
-        WalletId
-        ,Wallet
+    MERGE mart.Wallet AS target
+    USING (
+        SELECT
+            a.WalletId,
+            a.Wallet
+        FROM
+            @walletTable AS a
+    ) AS source
+    ON target.WalletId = source.WalletId
+    WHEN MATCHED AND (
+        target.Wallet <> source.Wallet
     )
-    SELECT
-        a.WalletId
-        ,a.Wallet
-    FROM
-        @walletTable AS a
-        LEFT OUTER JOIN mart.Wallet AS b ON a.WalletId = b.WalletId
-    WHERE
-        b.WalletId IS NULL;
+    THEN
+        UPDATE SET
+            Wallet = source.Wallet,
+            _edited = SYSUTCDATETIME()
+    WHEN NOT MATCHED BY TARGET THEN
+        INSERT (
+            WalletId,
+            Wallet
+        ) VALUES (
+            source.WalletId,
+            source.Wallet
+        );
 
-    PRINT 'INSERT mart.Wallet, number of rows = ' + CAST(@@ROWCOUNT AS varchar);
+    PRINT 'MERGE mart.Wallet, number of rows = ' + CAST(@@ROWCOUNT AS varchar);
 END
 GO

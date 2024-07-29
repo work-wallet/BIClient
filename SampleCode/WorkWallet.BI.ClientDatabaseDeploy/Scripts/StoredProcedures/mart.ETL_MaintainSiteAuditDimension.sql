@@ -6,86 +6,90 @@ AS
 BEGIN
     SET NOCOUNT ON;
 
-    -- type 1 changes (do first, before inserting new)
-    UPDATE mart.SiteAudit
-    SET
-        AuditReference = a.AuditReference
-        ,DateAndTimeOfInspection = a.DateAndTimeOfInspection
-        ,SiteAuditStatus_key = sas.SiteAuditStatus_key
-        ,SiteAuditType_key = sat.SiteAuditType_key
-        ,Location_key = ol.Location_key
-        ,AuditSummary = a.AuditSummary
-        ,HasScore = a.HasScore
-        ,Passed = a.Passed
-        ,ActualScore = a.ActualScore
-        ,PotentialScore = a.PotentialScore
-        ,[Percent] = a.[Percent]
-        ,Wallet_key = w.Wallet_key
-        ,_edited = SYSUTCDATETIME()
-    FROM
-        @siteAuditTable AS a
-        INNER JOIN mart.SiteAuditStatus AS sas ON a.SiteAuditStatusCode = sas.SiteAuditStatusCode
-        INNER JOIN mart.SiteAuditType AS sat ON a.SiteAuditTypeId = sat.SiteAuditTypeId
-        INNER JOIN mart.[Location] AS ol ON a.LocationId = ol.LocationId
-        INNER JOIN mart.Wallet AS w ON a.WalletId = w.WalletId
-        INNER JOIN mart.SiteAudit AS b ON a.SiteAuditId = b.SiteAuditId
-    WHERE /* only where the data has changed */
-        a.AuditReference <> b.AuditReference
-        OR a.DateAndTimeOfInspection <> b.DateAndTimeOfInspection
-        OR sas.SiteAuditStatus_key <> b.SiteAuditStatus_key
-        OR sat.SiteAuditType_key <> b.SiteAuditType_key
-        OR ol.Location_key <> b.Location_key
-        OR a.AuditSummary <> b.AuditSummary
-        OR a.HasScore <> b.HasScore
-        OR a.Passed <> b.Passed
-        OR a.ActualScore <> b.ActualScore
-        OR a.PotentialScore <> b.PotentialScore
-        OR a.[Percent] <> b.[Percent]
-        OR w.Wallet_key <> b.Wallet_key;
-
-    PRINT 'UPDATE mart.SiteAudit, number of rows = ' + CAST(@@ROWCOUNT AS varchar);
-
-    -- insert missing entries
-    INSERT INTO mart.SiteAudit
-    (
-        SiteAuditId
-        ,AuditReference
-        ,DateAndTimeOfInspection
-        ,SiteAuditStatus_key
-        ,SiteAuditType_key
-        ,Location_key
-        ,AuditSummary
-        ,HasScore
-        ,Passed
-        ,ActualScore
-        ,PotentialScore
-        ,[Percent]
-        ,Wallet_key
+    MERGE mart.SiteAudit AS target
+    USING (
+        SELECT
+            a.SiteAuditId,
+            a.AuditReference,
+            a.DateAndTimeOfInspection,
+            sas.SiteAuditStatus_key,
+            sat.SiteAuditType_key,
+            ol.Location_key,
+            a.AuditSummary,
+            a.HasScore,
+            a.Passed,
+            a.ActualScore,
+            a.PotentialScore,
+            a.[Percent],
+            w.Wallet_key
+        FROM
+            @siteAuditTable AS a
+            INNER JOIN mart.SiteAuditStatus AS sas ON a.SiteAuditStatusCode = sas.SiteAuditStatusCode
+            INNER JOIN mart.SiteAuditType AS sat ON a.SiteAuditTypeId = sat.SiteAuditTypeId
+            INNER JOIN mart.[Location] AS ol ON a.LocationId = ol.LocationId
+            INNER JOIN mart.Wallet AS w ON a.WalletId = w.WalletId
+    ) AS source
+    ON target.SiteAuditId = source.SiteAuditId
+    WHEN MATCHED AND (
+        target.AuditReference <> source.AuditReference
+        OR target.DateAndTimeOfInspection <> source.DateAndTimeOfInspection
+        OR target.SiteAuditStatus_key <> source.SiteAuditStatus_key
+        OR target.SiteAuditType_key <> source.SiteAuditType_key
+        OR target.Location_key <> source.Location_key
+        OR target.AuditSummary <> source.AuditSummary
+        OR target.HasScore <> source.HasScore
+        OR target.Passed <> source.Passed
+        OR target.ActualScore <> source.ActualScore
+        OR target.PotentialScore <> source.PotentialScore
+        OR target.[Percent] <> source.[Percent]
+        OR target.Wallet_key <> source.Wallet_key
     )
-    SELECT
-        a.SiteAuditId
-        ,a.AuditReference
-        ,a.DateAndTimeOfInspection
-        ,sas.SiteAuditStatus_key
-        ,sat.SiteAuditType_key
-        ,ol.Location_key
-        ,a.AuditSummary
-        ,a.HasScore
-        ,a.Passed
-        ,a.ActualScore
-        ,a.PotentialScore
-        ,a.[Percent]
-        ,w.Wallet_key
-    FROM
-        @siteAuditTable AS a
-        INNER JOIN mart.SiteAuditStatus AS sas ON a.SiteAuditStatusCode = sas.SiteAuditStatusCode
-        INNER JOIN mart.SiteAuditType AS sat ON a.SiteAuditTypeId = sat.SiteAuditTypeId
-        INNER JOIN mart.[Location] AS ol ON a.LocationId = ol.LocationId
-        INNER JOIN mart.Wallet AS w ON a.WalletId = w.WalletId
-        LEFT OUTER JOIN mart.SiteAudit AS b ON a.SiteAuditId = b.SiteAuditId
-    WHERE
-        b.SiteAuditId IS NULL;
+    THEN
+        UPDATE SET
+            AuditReference = source.AuditReference,
+            DateAndTimeOfInspection = source.DateAndTimeOfInspection,
+            SiteAuditStatus_key = source.SiteAuditStatus_key,
+            SiteAuditType_key = source.SiteAuditType_key,
+            Location_key = source.Location_key,
+            AuditSummary = source.AuditSummary,
+            HasScore = source.HasScore,
+            Passed = source.Passed,
+            ActualScore = source.ActualScore,
+            PotentialScore = source.PotentialScore,
+            [Percent] = source.[Percent],
+            Wallet_key = source.Wallet_key,
+            _edited = SYSUTCDATETIME()
+    WHEN NOT MATCHED BY TARGET THEN
+        INSERT (
+            SiteAuditId,
+            AuditReference,
+            DateAndTimeOfInspection,
+            SiteAuditStatus_key,
+            SiteAuditType_key,
+            Location_key,
+            AuditSummary,
+            HasScore,
+            Passed,
+            ActualScore,
+            PotentialScore,
+            [Percent],
+            Wallet_key
+        ) VALUES (
+            source.SiteAuditId,
+            source.AuditReference,
+            source.DateAndTimeOfInspection,
+            source.SiteAuditStatus_key,
+            source.SiteAuditType_key,
+            source.Location_key,
+            source.AuditSummary,
+            source.HasScore,
+            source.Passed,
+            source.ActualScore,
+            source.PotentialScore,
+            source.[Percent],
+            source.Wallet_key
+        );
 
-    PRINT 'INSERT mart.SiteAudit, number of rows = ' + CAST(@@ROWCOUNT AS varchar);
+    PRINT 'MERGE mart.SiteAudit, number of rows = ' + CAST(@@ROWCOUNT AS varchar);
 END
 GO
