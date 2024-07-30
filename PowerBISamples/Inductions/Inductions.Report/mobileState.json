@@ -1,0 +1,5 @@
+{
+  "objectId": "",
+  "type": 4,
+  "explorationState": "{\"version\":\"1.8\",\"activeSection\":\"\",\"sections\":{\"ReportSection\":{\"visualContainers\":{\"fa075aaa8172d56a607b\":{\"singleVisual\":{\"visualType\":\"pivotTable\",\"mobileObjects\":{\"rowHeaders\":[{\"properties\":{\"wordWrap\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}},\"fontSize\":{\"expr\":{\"Literal\":{\"Value\":\"8D\"}}}}}],\"values\":[{\"properties\":{\"fontSize\":{\"expr\":{\"Literal\":{\"Value\":\"8D\"}}}}}]}}}}},\"ReportSection68f2fd7620e3000284d0\":{\"visualContainers\":{\"29e38ab3a0068749b690\":{\"singleVisual\":{\"visualType\":\"pivotTable\",\"mobileObjects\":{\"rowHeaders\":[{\"properties\":{\"wordWrap\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}},\"fontSize\":{\"expr\":{\"Literal\":{\"Value\":\"8D\"}}}}}],\"values\":[{\"properties\":{\"fontSize\":{\"expr\":{\"Literal\":{\"Value\":\"8D\"}}}}}]}}}}}}}"
+}
