@@ -451,7 +451,7 @@
             "source": {
               "expression": [
                 "let",
-                "    Source = Sql.Database(\"CAKESOFBREAD\", \"WorkWalletBIClient_Demo\"),",
+                "    Source = Sql.Database(\"ww-powerbi-demo.database.windows.net\", \"powerbi\"),",
                 "    mart_Action = Source{[Schema=\"mart\",Item=\"Action\"]}[Data],",
                 "    #\"Removed Columns\" = Table.RemoveColumns(mart_Action,{\"_created\", \"_edited\"}),",
                 "    #\"Renamed Columns\" = Table.RenameColumns(#\"Removed Columns\",{{\"TargetReference\", \"Target Reference\"}, {\"AssignedTo\", \"Assigned To\"}, {\"DueOn\", \"Due On\"}, {\"CreatedOn\", \"Created On\"}})",
@@ -1147,7 +1147,7 @@
             "source": {
               "expression": [
                 "let",
-                "    Source = Sql.Database(\"CAKESOFBREAD\", \"WorkWalletBIClient_Demo\"),",
+                "    Source = Sql.Database(\"ww-powerbi-demo.database.windows.net\", \"powerbi\"),",
                 "    mart_ActionPriority = Source{[Schema=\"mart\",Item=\"ActionPriority\"]}[Data],",
                 "    #\"Removed Columns\" = Table.RemoveColumns(mart_ActionPriority,{\"_created\", \"_edited\"}),",
                 "    #\"Renamed Columns\" = Table.RenameColumns(#\"Removed Columns\",{{\"ActionPriority\", \"Priority\"}})",
@@ -1236,7 +1236,7 @@
             "source": {
               "expression": [
                 "let",
-                "    Source = Sql.Database(\"CAKESOFBREAD\", \"WorkWalletBIClient_Demo\"),",
+                "    Source = Sql.Database(\"ww-powerbi-demo.database.windows.net\", \"powerbi\"),",
                 "    mart_ActionStatus = Source{[Schema=\"mart\",Item=\"ActionStatus\"]}[Data],",
                 "    #\"Removed Columns\" = Table.RemoveColumns(mart_ActionStatus,{\"_created\", \"_edited\"}),",
                 "    #\"Renamed Columns\" = Table.RenameColumns(#\"Removed Columns\",{{\"ActionStatus\", \"Status\"}})",
@@ -1325,7 +1325,7 @@
             "source": {
               "expression": [
                 "let",
-                "    Source = Sql.Database(\"CAKESOFBREAD\", \"WorkWalletBIClient_Demo\"),",
+                "    Source = Sql.Database(\"ww-powerbi-demo.database.windows.net\", \"powerbi\"),",
                 "    mart_ActionType = Source{[Schema=\"mart\",Item=\"ActionType\"]}[Data],",
                 "    #\"Removed Columns\" = Table.RemoveColumns(mart_ActionType,{\"_created\", \"_edited\"}),",
                 "    #\"Renamed Columns\" = Table.RenameColumns(#\"Removed Columns\",{{\"ActionType\", \"Type\"}})",
@@ -1537,7 +1537,7 @@
             "source": {
               "expression": [
                 "let",
-                "    Source = Sql.Database(\"CAKESOFBREAD\", \"WorkWalletBIClient_Demo\"),",
+                "    Source = Sql.Database(\"ww-powerbi-demo.database.windows.net\", \"powerbi\"),",
                 "    mart_ActionUpdate = Source{[Schema=\"mart\",Item=\"ActionUpdate\"]}[Data],",
                 "    #\"Removed Columns\" = Table.RemoveColumns(mart_ActionUpdate,{\"_created\", \"_edited\"}),",
                 "    #\"Renamed Columns\" = Table.RenameColumns(#\"Removed Columns\",{{\"CreatedOn\", \"Created On\"}})",
@@ -1820,7 +1820,7 @@
             "source": {
               "expression": [
                 "let",
-                "    Source = Sql.Database(\"CAKESOFBREAD\", \"WorkWalletBIClient_Demo\"),",
+                "    Source = Sql.Database(\"ww-powerbi-demo.database.windows.net\", \"powerbi\"),",
                 "    mart_Wallet = Source{[Schema=\"mart\",Item=\"Wallet\"]}[Data],",
                 "    #\"Removed Columns\" = Table.RemoveColumns(mart_Wallet,{\"_created\", \"_edited\"})",
                 "in",

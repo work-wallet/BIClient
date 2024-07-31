@@ -15441,7 +15441,7 @@
             "source": {
               "expression": [
                 "let",
-                "    Source = Sql.Database(\"CAKESOFBREAD\", \"WorkWalletBIClient_Demo\"),",
+                "    Source = Sql.Database(\"ww-powerbi-demo.database.windows.net\", \"powerbi\"),",
                 "    mart_Location = Source{[Schema=\"mart\",Item=\"Location\"]}[Data],",
                 "    #\"Removed Columns\" = Table.RemoveColumns(mart_Location,{\"_created\", \"_edited\"}),",
                 "    #\"Renamed Columns\" = Table.RenameColumns(#\"Removed Columns\",{{\"LocationType\", \"Location Type\"}})",
@@ -15959,7 +15959,7 @@
             "source": {
               "expression": [
                 "let",
-                "    Source = Sql.Database(\"CAKESOFBREAD\", \"WorkWalletBIClient_Demo\"),",
+                "    Source = Sql.Database(\"ww-powerbi-demo.database.windows.net\", \"powerbi\"),",
                 "    mart_SiteAudit = Source{[Schema=\"mart\",Item=\"SiteAudit\"]}[Data],",
                 "    #\"Removed Columns\" = Table.RemoveColumns(mart_SiteAudit,{\"_created\", \"_edited\"}),",
                 "    #\"Renamed Columns\" = Table.RenameColumns(#\"Removed Columns\",{{\"HasScore\", \"Audit Has Score\"}, {\"DateAndTimeOfInspection\", \"Time Of Inspection\"}, {\"AuditReference\", \"Audit Reference\"}, {\"AuditSummary\", \"Audit Summary\"}, {\"ActualScore\", \"Audit Actual Score\"}, {\"PotentialScore\", \"Audit Potential Score\"}, {\"Percent\", \"Audit %\"}, {\"Passed\", \"Audit Passed\"}})",
@@ -16184,7 +16184,7 @@
         "annotations": [
           {
             "name": "PBI_ResultType",
-            "value": "Table"
+            "value": "Exception"
           }
         ],
         "columns": [
@@ -16436,7 +16436,7 @@
             "source": {
               "expression": [
                 "let",
-                "    Source = Sql.Database(\"CAKESOFBREAD\", \"WorkWalletBIClient_Demo\"),",
+                "    Source = Sql.Database(\"ww-powerbi-demo.database.windows.net\", \"powerbi\"),",
                 "    mart_SiteAuditChecklist = Source{[Schema=\"mart\",Item=\"SiteAuditChecklist\"]}[Data],",
                 "    #\"Removed Columns\" = Table.RemoveColumns(mart_SiteAuditChecklist,{\"_created\", \"_edited\"}),",
                 "    #\"Renamed Columns\" = Table.RenameColumns(#\"Removed Columns\",{{\"ChecklistName\", \"Checklist\"}, {\"ChecklistDescription\", \"Checklist Description\"}, {\"ScoringEnabled\", \"Scoring Enabled\"}})",
@@ -16734,7 +16734,7 @@
             "source": {
               "expression": [
                 "let",
-                "    Source = Sql.Database(\"CAKESOFBREAD\", \"WorkWalletBIClient_Demo\"),",
+                "    Source = Sql.Database(\"ww-powerbi-demo.database.windows.net\", \"powerbi\"),",
                 "    mart_SiteAuditChecklistFact = Source{[Schema=\"mart\",Item=\"SiteAuditChecklistFact\"]}[Data],",
                 "    #\"Renamed Columns\" = Table.RenameColumns(mart_SiteAuditChecklistFact,{{\"HasScore\", \"Checklist Has Score\"}, {\"PotentialScore\", \"Checklist Potential Score\"}, {\"Score\", \"Checklist Score\"}, {\"Passed\", \"Checklist Passed\"}, {\"Percent\", \"Checklist %\"}})",
                 "in",
@@ -16915,7 +16915,7 @@
             "source": {
               "expression": [
                 "let",
-                "    Source = Sql.Database(\"CAKESOFBREAD\", \"WorkWalletBIClient_Demo\"),",
+                "    Source = Sql.Database(\"ww-powerbi-demo.database.windows.net\", \"powerbi\"),",
                 "    mart_SiteAuditChecklistItem = Source{[Schema=\"mart\",Item=\"SiteAuditChecklistItem\"]}[Data],",
                 "    #\"Removed Columns\" = Table.RemoveColumns(mart_SiteAuditChecklistItem,{\"_created\", \"_edited\"}),",
                 "    #\"Renamed Columns\" = Table.RenameColumns(#\"Removed Columns\",{{\"ChecklistItemTitle\", \"Checklist Item\"}})",
@@ -16932,7 +16932,7 @@
         "annotations": [
           {
             "name": "PBI_ResultType",
-            "value": "Table"
+            "value": "Exception"
           }
         ],
         "columns": [
@@ -16998,7 +16998,7 @@
             "source": {
               "expression": [
                 "let",
-                "    Source = Sql.Database(\"CAKESOFBREAD\", \"WorkWalletBIClient_Demo\"),",
+                "    Source = Sql.Database(\"ww-powerbi-demo.database.windows.net\", \"powerbi\"),",
                 "    mart_SiteAuditStatus = Source{[Schema=\"mart\",Item=\"SiteAuditStatus\"]}[Data],",
                 "    #\"Removed Columns\" = Table.RemoveColumns(mart_SiteAuditStatus,{\"_created\", \"_edited\"}),",
                 "    #\"Renamed Columns\" = Table.RenameColumns(#\"Removed Columns\",{{\"SiteAuditStatus\", \"Audit Status\"}})",
@@ -17228,7 +17228,7 @@
             "source": {
               "expression": [
                 "let",
-                "    Source = Sql.Database(\"CAKESOFBREAD\", \"WorkWalletBIClient_Demo\"),",
+                "    Source = Sql.Database(\"ww-powerbi-demo.database.windows.net\", \"powerbi\"),",
                 "    mart_SiteAuditType = Source{[Schema=\"mart\",Item=\"SiteAuditType\"]}[Data],",
                 "    #\"Removed Columns\" = Table.RemoveColumns(mart_SiteAuditType,{\"_created\", \"_edited\"}),",
                 "    #\"Renamed Columns\" = Table.RenameColumns(#\"Removed Columns\",{{\"SiteAuditType\", \"Audit Type\"}, {\"DisplayScoring\", \"Display Scoring\"}, {\"ScoringMethod\", \"Scoring Method\"}})",
@@ -17310,7 +17310,7 @@
             "source": {
               "expression": [
                 "let",
-                "    Source = Sql.Database(\"CAKESOFBREAD\", \"WorkWalletBIClient_Demo\"),",
+                "    Source = Sql.Database(\"ww-powerbi-demo.database.windows.net\", \"powerbi\"),",
                 "    mart_Wallet = Source{[Schema=\"mart\",Item=\"Wallet\"]}[Data],",
                 "    #\"Removed Columns\" = Table.RemoveColumns(mart_Wallet,{\"_created\", \"_edited\"})",
                 "in",
@@ -17581,7 +17581,7 @@
             "source": {
               "expression": [
                 "let",
-                "    Source = Sql.Database(\"CAKESOFBREAD\", \"WorkWalletBIClient_Demo\"),",
+                "    Source = Sql.Database(\"ww-powerbi-demo.database.windows.net\", \"powerbi\"),",
                 "    mart_SiteAuditChecklistItemFact = Source{[Schema=\"mart\",Item=\"SiteAuditChecklistItemFact\"]}[Data],",
                 "    #\"Renamed Columns\" = Table.RenameColumns(mart_SiteAuditChecklistItemFact,{{\"ChecklistItemStatus\", \"ChecklistItemStatus\"}, {\"ChecklistItemStatusName\", \"ChecklistItemStatusName\"}})",
                 "in",

@@ -399,7 +399,7 @@
             "source": {
               "expression": [
                 "let",
-                "    Source = Sql.Database(\"CAKESOFBREAD\", \"WorkWalletBIClient_Demo\"),",
+                "    Source = Sql.Database(\"ww-powerbi-demo.database.windows.net\", \"powerbi\"),",
                 "    mart_Induction = Source{[Schema=\"mart\",Item=\"Induction\"]}[Data],",
                 "    #\"Removed Columns\" = Table.RemoveColumns(mart_Induction,{\"_created\", \"_edited\"}),",
                 "    #\"Renamed Columns\" = Table.RenameColumns(#\"Removed Columns\",{{\"InductionVersion\", \"Induction Version\"}, {\"InductionName\", \"Induction\"}, {\"ValidForDays\", \"Valid For Days\"}, {\"CreatedOn\", \"Created On\"}, {\"TestPassMark\", \"Test Pass Mark\"}, {\"TestQuestionCount\", \"Test Question Count\"}})",
@@ -901,7 +901,7 @@
             "source": {
               "expression": [
                 "let",
-                "    Source = Sql.Database(\"CAKESOFBREAD\", \"WorkWalletBIClient_Demo\"),",
+                "    Source = Sql.Database(\"ww-powerbi-demo.database.windows.net\", \"powerbi\"),",
                 "    mart_InductionCustomQuestion = Source{[Schema=\"mart\",Item=\"InductionCustomQuestion\"]}[Data],",
                 "    #\"Removed Columns\" = Table.RemoveColumns(mart_InductionCustomQuestion,{\"_created\", \"_edited\"}),",
                 "    #\"Renamed Columns\" = Table.RenameColumns(#\"Removed Columns\",{{\"Title\", \"Question\"}, {\"Value\", \"Answer\"}})",
@@ -1007,7 +1007,7 @@
             "source": {
               "expression": [
                 "let",
-                "    Source = Sql.Database(\"CAKESOFBREAD\", \"WorkWalletBIClient_Demo\"),",
+                "    Source = Sql.Database(\"ww-powerbi-demo.database.windows.net\", \"powerbi\"),",
                 "    mart_InductionCustomQuestionFact = Source{[Schema=\"mart\",Item=\"InductionCustomQuestionFact\"]}[Data],",
                 "    #\"Removed Columns\" = Table.RemoveColumns(mart_InductionCustomQuestionFact,{\"_created\", \"_edited\"})",
                 "in",
@@ -1089,7 +1089,7 @@
             "source": {
               "expression": [
                 "let",
-                "    Source = Sql.Database(\"CAKESOFBREAD\", \"WorkWalletBIClient_Demo\"),",
+                "    Source = Sql.Database(\"ww-powerbi-demo.database.windows.net\", \"powerbi\"),",
                 "    mart_InductionStatus = Source{[Schema=\"mart\",Item=\"InductionStatus\"]}[Data],",
                 "    #\"Removed Columns\" = Table.RemoveColumns(mart_InductionStatus,{\"_created\", \"_edited\"}),",
                 "    #\"Renamed Columns\" = Table.RenameColumns(#\"Removed Columns\",{{\"InductionStatus\", \"Induction Status\"}})",
@@ -1318,7 +1318,7 @@
             "source": {
               "expression": [
                 "let",
-                "    Source = Sql.Database(\"CAKESOFBREAD\", \"WorkWalletBIClient_Demo\"),",
+                "    Source = Sql.Database(\"ww-powerbi-demo.database.windows.net\", \"powerbi\"),",
                 "    mart_InductionTaken = Source{[Schema=\"mart\",Item=\"InductionTaken\"]}[Data],",
                 "    #\"Removed Columns\" = Table.RemoveColumns(mart_InductionTaken,{\"_created\", \"_edited\"}),",
                 "    #\"Renamed Columns\" = Table.RenameColumns(#\"Removed Columns\",{{\"CompanyName\", \"Company\"}, {\"TakenOn\", \"Taken On\"}, {\"CorrectTestQuestionCount\", \"Correct Test Question Count\"}, {\"Name\", \"Person\"}})",
@@ -1602,7 +1602,7 @@
             "source": {
               "expression": [
                 "let",
-                "    Source = Sql.Database(\"CAKESOFBREAD\", \"WorkWalletBIClient_Demo\"),",
+                "    Source = Sql.Database(\"ww-powerbi-demo.database.windows.net\", \"powerbi\"),",
                 "    mart_InductionTakenStatus = Source{[Schema=\"mart\",Item=\"InductionTakenStatus\"]}[Data],",
                 "    #\"Removed Columns\" = Table.RemoveColumns(mart_InductionTakenStatus,{\"_created\", \"_edited\"}),",
                 "    #\"Renamed Columns\" = Table.RenameColumns(#\"Removed Columns\",{{\"InductionTakenStatus\", \"Taken Status\"}})",
@@ -1684,7 +1684,7 @@
             "source": {
               "expression": [
                 "let",
-                "    Source = Sql.Database(\"CAKESOFBREAD\", \"WorkWalletBIClient_Demo\"),",
+                "    Source = Sql.Database(\"ww-powerbi-demo.database.windows.net\", \"powerbi\"),",
                 "    mart_Wallet = Source{[Schema=\"mart\",Item=\"Wallet\"]}[Data],",
                 "    #\"Removed Columns\" = Table.RemoveColumns(mart_Wallet,{\"_created\", \"_edited\"})",
                 "in",

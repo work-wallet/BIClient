@@ -423,7 +423,7 @@
             "source": {
               "expression": [
                 "let",
-                "    Source = Sql.Database(\"CAKESOFBREAD\", \"WorkWalletBIClient_Demo\"),",
+                "    Source = Sql.Database(\"ww-powerbi-demo.database.windows.net\", \"powerbi\"),",
                 "    mart_Asset = Source{[Schema=\"mart\",Item=\"Asset\"]}[Data],",
                 "    #\"Removed Columns\" = Table.RemoveColumns(mart_Asset,{\"_created\", \"_edited\"}),",
                 "    #\"Renamed Columns\" = Table.RenameColumns(#\"Removed Columns\",{{\"Name\", \"Asset Name\"}, {\"Description\", \"Asset Notes\"}, {\"CreatedOn\", \"Created On\"}, {\"AssetType\", \"Asset Type\"}})",
@@ -1016,7 +1016,7 @@
             "source": {
               "expression": [
                 "let",
-                "    Source = Sql.Database(\"CAKESOFBREAD\", \"WorkWalletBIClient_Demo\"),",
+                "    Source = Sql.Database(\"ww-powerbi-demo.database.windows.net\", \"powerbi\"),",
                 "    mart_AssetAssignment = Source{[Schema=\"mart\",Item=\"AssetAssignment\"]}[Data],",
                 "    #\"Removed Columns\" = Table.RemoveColumns(mart_AssetAssignment,{\"_created\", \"_edited\"}),",
                 "    #\"Renamed Columns\" = Table.RenameColumns(#\"Removed Columns\",{{\"AssignedTo\", \"Assigned To\"}})",
@@ -1254,7 +1254,7 @@
             "source": {
               "expression": [
                 "let",
-                "    Source = Sql.Database(\"CAKESOFBREAD\", \"WorkWalletBIClient_Demo\"),",
+                "    Source = Sql.Database(\"ww-powerbi-demo.database.windows.net\", \"powerbi\"),",
                 "    mart_AssetAssignmentFact = Source{[Schema=\"mart\",Item=\"AssetAssignmentFact\"]}[Data],",
                 "    #\"Removed Columns\" = Table.RemoveColumns(mart_AssetAssignmentFact,{\"_created\"}),",
                 "    #\"Renamed Columns\" = Table.RenameColumns(#\"Removed Columns\",{{\"AssignedOn\", \"From\"}, {\"IsLatest\", \"Is Latest\"}, {\"AssignedEnd\", \"To\"}, {\"AssignmentNumber\", \"Assignment Number\"}})",
@@ -1518,7 +1518,7 @@
             "source": {
               "expression": [
                 "let",
-                "    Source = Sql.Database(\"CAKESOFBREAD\", \"WorkWalletBIClient_Demo\"),",
+                "    Source = Sql.Database(\"ww-powerbi-demo.database.windows.net\", \"powerbi\"),",
                 "    mart_AssetAssignmentType = Source{[Schema=\"mart\",Item=\"AssetAssignmentType\"]}[Data],",
                 "    #\"Renamed Columns\" = Table.RenameColumns(mart_AssetAssignmentType,{{\"AssetAssignmentType\", \"Assignment Type\"}})",
                 "in",
@@ -1620,7 +1620,7 @@
             "source": {
               "expression": [
                 "let",
-                "    Source = Sql.Database(\"CAKESOFBREAD\", \"WorkWalletBIClient_Demo\"),",
+                "    Source = Sql.Database(\"ww-powerbi-demo.database.windows.net\", \"powerbi\"),",
                 "    mart_AssetProperty = Source{[Schema=\"mart\",Item=\"AssetProperty\"]}[Data],",
                 "    #\"Removed Columns\" = Table.RemoveColumns(mart_AssetProperty,{\"_created\"})",
                 "in",
@@ -1742,7 +1742,7 @@
             "source": {
               "expression": [
                 "let",
-                "    Source = Sql.Database(\"CAKESOFBREAD\", \"WorkWalletBIClient_Demo\"),",
+                "    Source = Sql.Database(\"ww-powerbi-demo.database.windows.net\", \"powerbi\"),",
                 "    mart_AssetPropertyFact = Source{[Schema=\"mart\",Item=\"AssetPropertyFact\"]}[Data],",
                 "    #\"Removed Columns\" = Table.RemoveColumns(mart_AssetPropertyFact,{\"_created\"}),",
                 "    #\"Renamed Columns\" = Table.RenameColumns(#\"Removed Columns\",{{\"Value\", \"Property Value\"}})",
@@ -1805,7 +1805,7 @@
             "source": {
               "expression": [
                 "let",
-                "    Source = Sql.Database(\"CAKESOFBREAD\", \"WorkWalletBIClient_Demo\"),",
+                "    Source = Sql.Database(\"ww-powerbi-demo.database.windows.net\", \"powerbi\"),",
                 "    mart_AssetPropertyType = Source{[Schema=\"mart\",Item=\"AssetPropertyType\"]}[Data],",
                 "    #\"Renamed Columns\" = Table.RenameColumns(mart_AssetPropertyType,{{\"AssetPropertyType\", \"Property Type\"}})",
                 "in",
@@ -1887,7 +1887,7 @@
             "source": {
               "expression": [
                 "let",
-                "    Source = Sql.Database(\"CAKESOFBREAD\", \"WorkWalletBIClient_Demo\"),",
+                "    Source = Sql.Database(\"ww-powerbi-demo.database.windows.net\", \"powerbi\"),",
                 "    mart_AssetStatus = Source{[Schema=\"mart\",Item=\"AssetStatus\"]}[Data],",
                 "    #\"Removed Columns\" = Table.RemoveColumns(mart_AssetStatus,{\"_created\", \"_edited\"}),",
                 "    #\"Renamed Columns\" = Table.RenameColumns(#\"Removed Columns\",{{\"AssetStatus\", \"Asset Status\"}})",
@@ -1969,7 +1969,7 @@
             "source": {
               "expression": [
                 "let",
-                "    Source = Sql.Database(\"CAKESOFBREAD\", \"WorkWalletBIClient_Demo\"),",
+                "    Source = Sql.Database(\"ww-powerbi-demo.database.windows.net\", \"powerbi\"),",
                 "    mart_Wallet = Source{[Schema=\"mart\",Item=\"Wallet\"]}[Data],",
                 "    #\"Removed Columns\" = Table.RemoveColumns(mart_Wallet,{\"_created\", \"_edited\"})",
                 "in",
