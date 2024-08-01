@@ -79,6 +79,8 @@ These settings are required to call the API.
 
 The API endpoint is at <https://bi.work-wallet.com> and the [OAuth 2.0](https://oauth.net/2/) authorisation server is at <https://identity.work-wallet.com>.
 
+To integrate with the API directly (not recommended) see the documentation [here](./Docs/API.md).
+
 ## Binaries
 
 All binaries target [.NET 8.0](https://dotnet.microsoft.com/en-us/download/dotnet/8.0)
