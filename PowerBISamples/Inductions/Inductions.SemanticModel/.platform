@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "SemanticModel",
+    "displayName": "Inductions"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "135a5851-c03c-4c73-a96a-df44436b75a2"
+  }
+}

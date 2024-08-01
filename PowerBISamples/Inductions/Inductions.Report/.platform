@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Report",
+    "displayName": "Inductions"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "722d3584-95dc-4d97-9ef8-a8a1c87851b6"
+  }
+}

@@ -34,7 +34,7 @@ The sample solution comprises:
 
 * Scripts to create a SQL Server database that receives the data from the API. The database has a [star schema](https://en.wikipedia.org/wiki/Star_schema) optimised as a data mart.
 * A console application that calls the API and stores the returned data in the database. The application can be scheduled (using your preferred scheduler) to run on a periodic basis (e.g. daily) in order to fully automate the feed. *(The code is also available as an [Azure Function](https://azure.microsoft.com/en-gb/products/functions/).)*
-* [Sample Power BI Desktop Files](#sample-power-bi-desktop-files-pbix) that import the data from the database and provide rich analytical capabilities. The reports are viewed using the free [Power BI Desktop](https://powerbi.microsoft.com/en-us/desktop/) application from Microsoft. These reports can be customised, data can be combined with other (non-Work Wallet) datasets etc.. Organisations with Power BI Pro licences can publish auto-updating reports to their intranet, and benefit from a full suite of collaborative features.
+* [Sample Power BI Desktop project files](#sample-power-bi-desktop-project-files) that import the data from the database and provide rich analytical capabilities. The reports are viewed using the free [Power BI Desktop](https://powerbi.microsoft.com/en-us/desktop/) application from Microsoft. These reports can be customised, data can be combined with other (non-Work Wallet) datasets etc.. Organisations with Power BI Pro licences can publish auto-updating reports to their intranet, and benefit from a full suite of collaborative features.
 
 Power BI is not a prerequisite to use this solution - any BI tool may be used to read and process the data held within the data mart (database).
 
@@ -195,30 +195,22 @@ Example `local.settings.json`:
 When developing locally it is recommended to connect to an Application Insights instance (`APPLICATIONINSIGHTS_CONNECTION_STRING` above),
 as informational log events are sent here (and don't show in the console).
 
-## Sample Power BI Desktop Files (.pbix)
+## Sample Power BI Desktop Project Files
 
-Work Wallet provides sample Power BI Desktop (`.pbix`) files.
-These files may be downloaded and used with your own Wallet data, and modified as required.
+Work Wallet provides sample Power BI Desktop project (`.pbib`) files.
+These files may be used with your own Wallet data, and modified as required.
 The files may alternatively be used simply to help inform your own BI model and reporting designs.
 
 Power BI Desktop is available as a free [download](https://powerbi.microsoft.com/en-us/desktop/) from Microsoft.
 
+[Power BI Desktop projects](https://learn.microsoft.com/en-us/power-bi/developer/projects/projects-overview) can be refreshed with data and then saved and shared as standalone (`.pbix`) files.
+
 If you have a [Power BI Pro licence](https://powerbi.microsoft.com/en-gb/power-bi-pro/) then you can benefit from auto-updating reports plus full distribution and collaboration features.
 
-(Note that any BI or reporting solution may be used - it is not necessary to use Power BI with the Work Wallet BI interface. If using an alternative, you may use the Power BI model as a reference design.)
+*Note that any BI or reporting solution may be used - it is not necessary to use Power BI with the Work Wallet BI interface. If using an alternative, you may use the Power BI model as a reference design.*
 
-The following sample pbix files are available for download:
+The sample Power BI Desktop project files can be found in the `PowerBISamples` folder.
 
-| Data Area | Download URL |
-| --- | --- |
-| Site Audits | [SiteAudits_reference_2.0.1.0.pbix](https://workwalletcdnorigin.blob.core.windows.net/bi-client/pbix/SiteAudits_reference_2.0.1.0.pbix) |
-| Reported Issues | [ReportedIssues_reference_2.0.1.0.pbix](https://workwalletcdnorigin.blob.core.windows.net/bi-client/pbix/ReportedIssues_reference_2.0.1.0.pbix) |
-| Inductions | [Inductions_reference_2.0.1.0.pbix](https://workwalletcdnorigin.blob.core.windows.net/bi-client/pbix/Inductions_reference_2.0.1.0.pbix) |
-| Permits | [Permits_reference_2.0.1.0.pbix](https://workwalletcdnorigin.blob.core.windows.net/bi-client/pbix/Permits_reference_2.0.1.0.pbix) |
-| Actions | [Actions_reference_2.0.1.0.pbix](https://workwalletcdnorigin.blob.core.windows.net/bi-client/pbix/Actions_reference_2.0.1.0.pbix) |
-| Assets | [Assets_reference_2.0.1.0.pbix](https://workwalletcdnorigin.blob.core.windows.net/bi-client/pbix/Assets_reference_2.0.1.0.pbix) |
-
-The sample files contain data from a demo Wallet.
 To use these files with your own data you need to connect to your local database and refresh the data.
 
 ### Connecting to the Database
@@ -243,6 +235,6 @@ To refresh the data, press the `Refresh` button on the `Home` tab.
 
 After refreshing the Power BI model with your data, it is necessary to check and adjust the filters on the reports (otherwise no data may be shown).
 
-For instance, in the example below it is necessary to change the filters for the `Wallet` and `Checklist`.
+For instance, in the example below it is necessary to change the filter for `Checklist`.
 
 ![Power BI Filters](Docs/Images/PowerBIFilters.png)
