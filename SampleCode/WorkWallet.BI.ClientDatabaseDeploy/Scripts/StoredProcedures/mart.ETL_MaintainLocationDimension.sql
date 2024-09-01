@@ -23,6 +23,7 @@ BEGIN
             a.Job,
             a.SiteLocationId,
             a.Department,
+            a.ExternalIdentifier,
             w.Wallet_key
         FROM
             @locationTable AS a
@@ -43,6 +44,7 @@ BEGIN
         OR target.Job <> source.Job
         OR target.SiteLocationId <> source.SiteLocationId
         OR target.Department <> source.Department
+        OR target.ExternalIdentifier <> source.ExternalIdentifier
         OR target.Wallet_key <> source.Wallet_key
     ) THEN
         UPDATE SET
@@ -59,6 +61,7 @@ BEGIN
             target.Job = source.Job,
             target.SiteLocationId = source.SiteLocationId,
             target.Department = source.Department,
+            target.ExternalIdentifier = source.ExternalIdentifier,
             target.Wallet_key = source.Wallet_key,
             target._edited = SYSUTCDATETIME()
     WHEN NOT MATCHED BY TARGET THEN
@@ -77,6 +80,7 @@ BEGIN
             Job,
             SiteLocationId,
             Department,
+            ExternalIdentifier,
             Wallet_key
         )
         VALUES (
@@ -94,6 +98,7 @@ BEGIN
             source.Job,
             source.SiteLocationId,
             source.Department,
+            source.ExternalIdentifier,
             source.Wallet_key
         );
 

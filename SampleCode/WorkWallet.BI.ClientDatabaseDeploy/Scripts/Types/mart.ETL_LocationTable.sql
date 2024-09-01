@@ -17,6 +17,7 @@ CREATE TYPE mart.ETL_LocationTable AS TABLE
     ,Job nvarchar(50) NOT NULL
     ,SiteLocationId uniqueidentifier NOT NULL
     ,Department nvarchar(30) NOT NULL
+    ,ExternalIdentifier nvarchar(255) NOT NULL
     ,WalletId uniqueidentifier NOT NULL
     ,PRIMARY KEY (LocationId)
 );

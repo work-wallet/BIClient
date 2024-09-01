@@ -48,6 +48,7 @@ BEGIN
             ,Job
             ,SiteLocationId
             ,Department
+            ,ExternalIdentifier
             ,WalletId
         )
         SELECT * FROM OPENJSON(@json, '$.Locations')
@@ -67,6 +68,7 @@ BEGIN
             ,Job nvarchar(50)
             ,SiteLocationId uniqueidentifier
             ,Department nvarchar(30)
+            ,ExternalIdentifier nvarchar(255)
             ,WalletId uniqueidentifier
         );
 
