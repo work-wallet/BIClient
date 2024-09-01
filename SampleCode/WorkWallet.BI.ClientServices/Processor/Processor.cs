@@ -64,16 +64,7 @@ internal class Processor
 
             // extract the context information (this is included at the top of the JSON)
             var res = JObject.Parse(json);
-
-            if (_dataType == "SiteAudits")
-            {
-                // work around non-generic fields returned from the API (fix this in future release)
-                context = res["Context"]!.ToObject<SiteAuditsContext>()!;
-            }
-            else
-            {
-                context = res["Context"]!.ToObject<Context>()!;
-            }
+            context = res["Context"]!.ToObject<Context>()!;
 
             // now we know how many rows there are in total, we can calculate the total number of pages we need to fetch
             // note that we want to calculate this every iteration (in case server data has been added to)
