@@ -45,6 +45,7 @@ CREATE TABLE mart.[Location]
     ,Job nvarchar(50) NOT NULL
     ,SiteLocationId uniqueidentifier NOT NULL
     ,Department nvarchar(30) NOT NULL
+	,ExternalIdentifier nvarchar(255) NOT NULL
     ,Wallet_key int NOT NULL
     ,_created datetime2(7) NOT NULL CONSTRAINT [DF_mart.Location__created] DEFAULT SYSUTCDATETIME()
     ,_edited datetime2(7) NULL

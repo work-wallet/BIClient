@@ -1,4 +1,5 @@
 -- remove the erroneous "dbo." for all the constraint names in the mart schema
+-- this has been back-fixed into the preceding scripts
 
 DECLARE @name nvarchar(128);
 
@@ -23,7 +24,7 @@ BEGIN
 		DECLARE @oldConstraintName nvarchar(255) = N'mart.[' + @name + N']';
 		DECLARE @newName nvarchar(128) = REPLACE(@name, N'dbo.mart', N'mart');
 
-		EXEC sp_rename @oldConstraintName , @newName, N'OBJECT';
+		EXEC sp_rename @oldConstraintName, @newName, N'OBJECT';
 	END
 
 	FETCH NEXT FROM db_cursor INTO @name;
@@ -31,3 +32,5 @@ END
 
 CLOSE db_cursor;
 DEALLOCATE db_cursor;
+
+GO

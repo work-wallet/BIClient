@@ -56,7 +56,7 @@ CREATE TABLE mart.Permit
     ,PermitReference nvarchar(50) NOT NULL
     ,PermitCategory_key int NOT NULL
     ,Location_key int NOT NULL
-    ,PermitDescription nvarchar(70) NOT NULL
+    ,PermitDescription nvarchar(750) NOT NULL
     ,IssuedToCompanyId uniqueidentifier NOT NULL
     ,IssuedToCompany nvarchar(max) NOT NULL
     ,IssuedOn datetime NOT NULL
