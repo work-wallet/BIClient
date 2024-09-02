@@ -39,7 +39,7 @@ CREATE TABLE mart.PermitCategory
     ,_edited datetime2(7) NULL
     ,CONSTRAINT [PK_mart.PermitCategory] PRIMARY KEY (PermitCategory_key)
     ,CONSTRAINT [UQ_mart.PermitCategory_CategoryId_CategoryVersion] UNIQUE(CategoryId, CategoryVersion)
-)
+);
 GO
 
 ALTER TABLE mart.PermitCategory WITH CHECK ADD CONSTRAINT [FK_mart.PermitCategory_dbo.mart.Wallet_Wallet_key] FOREIGN KEY(Wallet_key)
@@ -71,7 +71,7 @@ CREATE TABLE mart.Permit
     ,_edited datetime2(7) NULL
     ,CONSTRAINT [PK_mart.Permit] PRIMARY KEY (Permit_key)
     ,CONSTRAINT [UQ_mart.Permit_PermitId] UNIQUE(PermitId)
-)
+);
 GO
 
 ALTER TABLE mart.Permit WITH CHECK ADD CONSTRAINT [FK_mart.Permit_dbo.mart.PermitCategory_PermitCategory_key] FOREIGN KEY(PermitCategory_key)
@@ -109,7 +109,7 @@ CREATE TABLE mart.PermitChecklistAnswer
     ,_created datetime2(7) NOT NULL CONSTRAINT [DF_mart.PermitChecklistAnswer__created] DEFAULT SYSUTCDATETIME()
     ,_edited datetime2(7) NULL
     ,CONSTRAINT [PK_mart.PermitChecklistAnswer] PRIMARY KEY (PermitChecklistAnswer_key)
-)
+);
 GO
 
 ALTER TABLE mart.PermitChecklistAnswer WITH CHECK ADD CONSTRAINT [FK_mart.PermitChecklistAnswer_dbo.mart.Wallet_Wallet_key] FOREIGN KEY(Wallet_key)
@@ -127,7 +127,7 @@ CREATE TABLE mart.PermitChecklistAnswerFact
     ,_created datetime2(7) NOT NULL CONSTRAINT [DF_mart.PermitChecklistAnswerFact__created] DEFAULT SYSUTCDATETIME()
     ,_edited datetime2(7) NULL
     ,CONSTRAINT [PK_mart.PermitChecklistAnswerFact] PRIMARY KEY (Permit_key, PermitChecklistAnswer_key)
-)
+);
 GO
 
 ALTER TABLE mart.PermitChecklistAnswerFact WITH CHECK ADD CONSTRAINT [FK_mart.PermitChecklistAnswerFact_dbo.mart.Permit_Permit_key] FOREIGN KEY(Permit_key)

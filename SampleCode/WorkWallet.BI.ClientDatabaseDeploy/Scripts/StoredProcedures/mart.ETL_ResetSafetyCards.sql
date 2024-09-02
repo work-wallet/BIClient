@@ -12,7 +12,11 @@ BEGIN
 
     DECLARE @rows int = 0;
 
-    -- todo
+    DELETE FROM mart.SafetyCard WHERE Wallet_key = @wallet_key;
+    SET @rows = @rows + @@ROWCOUNT;
+
+    DELETE FROM mart.SafetyCardCategory WHERE Wallet_key = @wallet_key;
+    SET @rows = @rows + @@ROWCOUNT;
 
     PRINT 'RESET (deleting old data), total number of rows deleted = ' + CAST(@rows AS varchar);
 
