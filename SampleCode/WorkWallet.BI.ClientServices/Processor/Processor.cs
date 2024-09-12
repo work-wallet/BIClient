@@ -66,6 +66,17 @@ internal class Processor
             var res = JObject.Parse(json);
             context = res["Context"]!.ToObject<Context>()!;
 
+            // check for errors
+            if (context.Error == "Invalid LastSynchronizationVersion")
+            {
+                throw new ApplicationException($"Error '{context.Error}' (requested {lastSynchronizationVersion} minimum {context.MinValidSynchronizationVersion}) - most likely caused by a significant number of days elapsed since last synchronisation.");
+            }
+
+            if (context.Error.Length != 0)
+            {
+                throw new ApplicationException($"Error '{context.Error}'");
+            }
+
             // now we know how many rows there are in total, we can calculate the total number of pages we need to fetch
             // note that we want to calculate this every iteration (in case server data has been added to)
             totalPages = (context.FullCount - 1) / context.PageSize + 1;

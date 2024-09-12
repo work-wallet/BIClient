@@ -9,4 +9,6 @@ public class Context
     public int PageSize { get; set; }
     public long? LastSynchronizationVersion { get; set; }
     public long SynchronizationVersion { get; set; }
+    public required string Error { get; set; }
+    public int MinValidSynchronizationVersion { get; set; }
 }
