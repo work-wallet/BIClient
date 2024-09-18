@@ -74,6 +74,77 @@ BEGIN
 
         EXEC mart.ETL_MaintainLocationDimension @locationTable = @locationTable;
 
+        -- maintain SafetyCardCategory dimension
+
+        DECLARE @safetyCardCategoryTable mart.ETL_SafetyCardCategoryTable;
+
+        INSERT INTO @safetyCardCategoryTable
+        (
+			SafetyCardCategoryId
+			,CategoryName
+			,CategoryReference
+			,WalletId
+        )
+        SELECT * FROM OPENJSON(@json, '$.SafetyCardCategories')
+        WITH
+        (
+			SafetyCardCategoryId uniqueidentifier
+			,CategoryName nvarchar(500)
+			,CategoryReference nvarchar(50)
+			,WalletId uniqueidentifier
+        );
+
+        EXEC mart.ETL_MaintainSafetyCardCategoryDimension @safetyCardCategoryTable = @safetyCardCategoryTable;
+
+        -- maintain the Permits table
+
+        DECLARE @safetyCardTable mart.ETL_SafetyCardTable;
+
+        INSERT INTO @safetyCardTable
+        (
+			SafetyCardId
+			,SafetyCardReference
+			,SafetyCardTypeCode
+			,ReportedByUser
+			,ReportedDateTime
+			,SafetyCardCategoryId
+			,Employer
+			,Employee
+			,InductionNumber
+			,ReportDetails
+			,SafetyCardStatusCode
+			,HasSignature
+			,SignatureDate
+			,Occupation
+			,OccupationRoleCode
+			,LocationId
+			,ExternalIdentifier
+			,WalletId
+        )
+        SELECT * FROM OPENJSON(@json, '$.SafetyCards')
+        WITH
+        (
+			SafetyCardId uniqueidentifier
+			,SafetyCardReference nvarchar(50)
+			,SafetyCardTypeCode int
+			,ReportedByUser nvarchar(100)
+			,ReportedDateTime datetime
+			,SafetyCardCategoryId uniqueidentifier
+			,Employer nvarchar(max)
+			,Employee nvarchar(max)
+			,InductionNumber nvarchar(500)
+			,ReportDetails nvarchar(max)
+			,SafetyCardStatusCode int
+			,HasSignature bit
+			,SignatureDate datetime
+			,Occupation nvarchar(255)
+			,OccupationRoleCode int
+			,LocationId uniqueidentifier
+			,ExternalIdentifier nvarchar(255)
+			,WalletId uniqueidentifier
+        );
+
+        EXEC mart.ETL_MaintainSafetyCardDimension @safetyCardTable = @safetyCardTable;
         COMMIT TRANSACTION;
     END TRY
     BEGIN CATCH

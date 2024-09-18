@@ -88,6 +88,8 @@ CREATE TABLE mart.SafetyCard
 	,Location_key int NOT NULL
 	,ExternalIdentifier nvarchar(255) NOT NULL
     ,Wallet_key int NOT NULL
+    ,_created datetime2(7) NOT NULL CONSTRAINT [DF_mart.SafetyCard__created] DEFAULT SYSUTCDATETIME()
+    ,_edited datetime2(7) NULL
 	,CONSTRAINT [PK_mart.SafetyCard] PRIMARY KEY (SafetyCard_key)
     ,CONSTRAINT [UQ_mart.SafetyCard_SafetyCardId] UNIQUE(SafetyCardId)
 	,CONSTRAINT [FK_mart.SafetyCard_mart.SafetyCardType_SafetyCardType_key] FOREIGN KEY (SafetyCardType_key) REFERENCES mart.SafetyCardType
