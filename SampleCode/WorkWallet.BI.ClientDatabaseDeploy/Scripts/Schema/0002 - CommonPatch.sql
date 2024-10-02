@@ -5,7 +5,7 @@ BEGIN
     ADD Department nvarchar(30) NOT NULL
     CONSTRAINT DF_Location_Department DEFAULT N'' WITH VALUES;
 
-	ALTER TABLE mart.[Location] DROP CONSTRAINT DF_Location_Department;
+    ALTER TABLE mart.[Location] DROP CONSTRAINT DF_Location_Department;
 END
 
 GO

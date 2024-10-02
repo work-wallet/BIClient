@@ -80,18 +80,18 @@ BEGIN
 
         INSERT INTO @safetyCardCategoryTable
         (
-			SafetyCardCategoryId
-			,CategoryName
-			,CategoryReference
-			,WalletId
+            SafetyCardCategoryId
+            ,CategoryName
+            ,CategoryReference
+            ,WalletId
         )
         SELECT * FROM OPENJSON(@json, '$.SafetyCardCategories')
         WITH
         (
-			SafetyCardCategoryId uniqueidentifier
-			,CategoryName nvarchar(500)
-			,CategoryReference nvarchar(50)
-			,WalletId uniqueidentifier
+            SafetyCardCategoryId uniqueidentifier
+            ,CategoryName nvarchar(500)
+            ,CategoryReference nvarchar(50)
+            ,WalletId uniqueidentifier
         );
 
         EXEC mart.ETL_MaintainSafetyCardCategoryDimension @safetyCardCategoryTable = @safetyCardCategoryTable;
@@ -102,46 +102,46 @@ BEGIN
 
         INSERT INTO @safetyCardTable
         (
-			SafetyCardId
-			,SafetyCardReference
-			,SafetyCardTypeCode
-			,ReportedByUser
-			,ReportedDateTime
-			,SafetyCardCategoryId
-			,Employer
-			,Employee
-			,InductionNumber
-			,ReportDetails
-			,SafetyCardStatusCode
-			,HasSignature
-			,SignatureDate
-			,Occupation
-			,OccupationRoleCode
-			,LocationId
-			,ExternalIdentifier
-			,WalletId
+            SafetyCardId
+            ,SafetyCardReference
+            ,SafetyCardTypeCode
+            ,ReportedByUser
+            ,ReportedDateTime
+            ,SafetyCardCategoryId
+            ,Employer
+            ,Employee
+            ,InductionNumber
+            ,ReportDetails
+            ,SafetyCardStatusCode
+            ,HasSignature
+            ,SignatureDate
+            ,Occupation
+            ,OccupationRoleCode
+            ,LocationId
+            ,ExternalIdentifier
+            ,WalletId
         )
         SELECT * FROM OPENJSON(@json, '$.SafetyCards')
         WITH
         (
-			SafetyCardId uniqueidentifier
-			,SafetyCardReference nvarchar(50)
-			,SafetyCardTypeCode int
-			,ReportedByUser nvarchar(100)
-			,ReportedDateTime datetime
-			,SafetyCardCategoryId uniqueidentifier
-			,Employer nvarchar(max)
-			,Employee nvarchar(max)
-			,InductionNumber nvarchar(500)
-			,ReportDetails nvarchar(max)
-			,SafetyCardStatusCode int
-			,HasSignature bit
-			,SignatureDate datetime
-			,Occupation nvarchar(255)
-			,OccupationRoleCode int
-			,LocationId uniqueidentifier
-			,ExternalIdentifier nvarchar(255)
-			,WalletId uniqueidentifier
+            SafetyCardId uniqueidentifier
+            ,SafetyCardReference nvarchar(50)
+            ,SafetyCardTypeCode int
+            ,ReportedByUser nvarchar(100)
+            ,ReportedDateTime datetime
+            ,SafetyCardCategoryId uniqueidentifier
+            ,Employer nvarchar(max)
+            ,Employee nvarchar(max)
+            ,InductionNumber nvarchar(500)
+            ,ReportDetails nvarchar(max)
+            ,SafetyCardStatusCode int
+            ,HasSignature bit
+            ,SignatureDate datetime
+            ,Occupation nvarchar(255)
+            ,OccupationRoleCode int
+            ,LocationId uniqueidentifier
+            ,ExternalIdentifier nvarchar(255)
+            ,WalletId uniqueidentifier
         );
 
         EXEC mart.ETL_MaintainSafetyCardDimension @safetyCardTable = @safetyCardTable;

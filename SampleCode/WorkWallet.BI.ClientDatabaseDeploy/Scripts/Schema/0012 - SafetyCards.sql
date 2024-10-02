@@ -55,48 +55,48 @@ GO
 CREATE TABLE mart.SafetyCardCategory
 (
     SafetyCardCategory_key int IDENTITY
-	,SafetyCardCategoryId uniqueidentifier NOT NULL
-	,CategoryName nvarchar(500) NOT NULL
-	,CategoryReference nvarchar(50) NOT NULL
+    ,SafetyCardCategoryId uniqueidentifier NOT NULL
+    ,CategoryName nvarchar(500) NOT NULL
+    ,CategoryReference nvarchar(50) NOT NULL
     ,Wallet_key int NOT NULL
     ,_created datetime2(7) NOT NULL CONSTRAINT [DF_mart.SafetyCardCategory__created] DEFAULT SYSUTCDATETIME()
     ,_edited datetime2(7) NULL
     ,CONSTRAINT [PK_mart.SafetyCardCategory] PRIMARY KEY (SafetyCardCategory_key)
     ,CONSTRAINT [UQ_mart.SafetyCardCategory_SafetyCardCategoryId] UNIQUE(SafetyCardCategoryId)
-	,CONSTRAINT [FK_mart.SafetyCardCategory_mart.Wallet_Wallet_key] FOREIGN KEY (Wallet_key) REFERENCES mart.Wallet
+    ,CONSTRAINT [FK_mart.SafetyCardCategory_mart.Wallet_Wallet_key] FOREIGN KEY (Wallet_key) REFERENCES mart.Wallet
 );
 GO
 
 CREATE TABLE mart.SafetyCard
 (
     SafetyCard_key int IDENTITY
-	,SafetyCardId uniqueidentifier NOT NULL
-	,SafetyCardReference nvarchar(50) NOT NULL
-	,SafetyCardType_key int NOT NULL
-	,ReportedByUser nvarchar(100) NOT NULL
-	,ReportedDateTime datetime NOT NULL
-	,SafetyCardCategory_key int NOT NULL
-	,Employer nvarchar(max) NOT NULL
-	,Employee nvarchar(max) NOT NULL
-	,InductionNumber nvarchar(500) NOT NULL
-	,ReportDetails nvarchar(max) NOT NULL
-	,SafetyCardStatus_key int NOT NULL
-	,HasSignature bit NOT NULL
-	,SignatureDate datetime NOT NULL
-	,Occupation nvarchar(255) NOT NULL
-	,SafetyCardOccupationRole_key int NOT NULL
-	,Location_key int NOT NULL
-	,ExternalIdentifier nvarchar(255) NOT NULL
+    ,SafetyCardId uniqueidentifier NOT NULL
+    ,SafetyCardReference nvarchar(50) NOT NULL
+    ,SafetyCardType_key int NOT NULL
+    ,ReportedByUser nvarchar(100) NOT NULL
+    ,ReportedDateTime datetime NOT NULL
+    ,SafetyCardCategory_key int NOT NULL
+    ,Employer nvarchar(max) NOT NULL
+    ,Employee nvarchar(max) NOT NULL
+    ,InductionNumber nvarchar(500) NOT NULL
+    ,ReportDetails nvarchar(max) NOT NULL
+    ,SafetyCardStatus_key int NOT NULL
+    ,HasSignature bit NOT NULL
+    ,SignatureDate datetime NOT NULL
+    ,Occupation nvarchar(255) NOT NULL
+    ,SafetyCardOccupationRole_key int NOT NULL
+    ,Location_key int NOT NULL
+    ,ExternalIdentifier nvarchar(255) NOT NULL
     ,Wallet_key int NOT NULL
     ,_created datetime2(7) NOT NULL CONSTRAINT [DF_mart.SafetyCard__created] DEFAULT SYSUTCDATETIME()
     ,_edited datetime2(7) NULL
-	,CONSTRAINT [PK_mart.SafetyCard] PRIMARY KEY (SafetyCard_key)
+    ,CONSTRAINT [PK_mart.SafetyCard] PRIMARY KEY (SafetyCard_key)
     ,CONSTRAINT [UQ_mart.SafetyCard_SafetyCardId] UNIQUE(SafetyCardId)
-	,CONSTRAINT [FK_mart.SafetyCard_mart.SafetyCardType_SafetyCardType_key] FOREIGN KEY (SafetyCardType_key) REFERENCES mart.SafetyCardType
-	,CONSTRAINT [FK_mart.SafetyCard_mart.SafetyCardCategory_SafetyCardCategory_key] FOREIGN KEY (SafetyCardCategory_key) REFERENCES mart.SafetyCardCategory
-	,CONSTRAINT [FK_mart.SafetyCard_mart.SafetyCardStatus_SafetyCardStatus_key] FOREIGN KEY (SafetyCardStatus_key) REFERENCES mart.SafetyCardStatus
-	,CONSTRAINT [FK_mart.SafetyCard_mart.SafetyCardOccupationRole_SafetyCardOccupationRole_key] FOREIGN KEY (SafetyCardOccupationRole_key) REFERENCES mart.SafetyCardOccupationRole
-	,CONSTRAINT [FK_mart.SafetyCard_mart.Location_Location_key] FOREIGN KEY (Location_key) REFERENCES mart.[Location]
-	,CONSTRAINT [FK_mart.SafetyCard_mart.Wallet_Wallet_key] FOREIGN KEY (Wallet_key) REFERENCES mart.Wallet
+    ,CONSTRAINT [FK_mart.SafetyCard_mart.SafetyCardType_SafetyCardType_key] FOREIGN KEY (SafetyCardType_key) REFERENCES mart.SafetyCardType
+    ,CONSTRAINT [FK_mart.SafetyCard_mart.SafetyCardCategory_SafetyCardCategory_key] FOREIGN KEY (SafetyCardCategory_key) REFERENCES mart.SafetyCardCategory
+    ,CONSTRAINT [FK_mart.SafetyCard_mart.SafetyCardStatus_SafetyCardStatus_key] FOREIGN KEY (SafetyCardStatus_key) REFERENCES mart.SafetyCardStatus
+    ,CONSTRAINT [FK_mart.SafetyCard_mart.SafetyCardOccupationRole_SafetyCardOccupationRole_key] FOREIGN KEY (SafetyCardOccupationRole_key) REFERENCES mart.SafetyCardOccupationRole
+    ,CONSTRAINT [FK_mart.SafetyCard_mart.Location_Location_key] FOREIGN KEY (Location_key) REFERENCES mart.[Location]
+    ,CONSTRAINT [FK_mart.SafetyCard_mart.Wallet_Wallet_key] FOREIGN KEY (Wallet_key) REFERENCES mart.Wallet
 );
 GO

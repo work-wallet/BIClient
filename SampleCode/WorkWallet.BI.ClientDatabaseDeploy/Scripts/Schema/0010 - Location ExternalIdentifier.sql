@@ -5,7 +5,7 @@ BEGIN
     ADD ExternalIdentifier nvarchar(255) NOT NULL
     CONSTRAINT DF_Location_ExternalIdentifier DEFAULT N'' WITH VALUES;
 
-	ALTER TABLE mart.[Location] DROP CONSTRAINT DF_Location_ExternalIdentifier;
+    ALTER TABLE mart.[Location] DROP CONSTRAINT DF_Location_ExternalIdentifier;
 END
 
 GO

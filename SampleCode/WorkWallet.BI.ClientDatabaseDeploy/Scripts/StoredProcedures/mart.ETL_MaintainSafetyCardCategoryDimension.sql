@@ -9,9 +9,9 @@ BEGIN
     MERGE mart.SafetyCardCategory AS target
     USING (
         SELECT
-			a.SafetyCardCategoryId,
-			a.CategoryName,
-			a.CategoryReference,
+            a.SafetyCardCategoryId,
+            a.CategoryName,
+            a.CategoryReference,
             w.Wallet_key
         FROM
             @safetyCardCategoryTable AS a
@@ -39,7 +39,7 @@ BEGIN
         ) VALUES (
             source.SafetyCardCategoryId,
             source.CategoryName,
-			source.CategoryReference,
+            source.CategoryReference,
             source.Wallet_key
         );
 

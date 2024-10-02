@@ -45,13 +45,13 @@ INSERT INTO mart.AssetAssignmentType (AssetAssignmentType) VALUES (N'Unassigned'
 CREATE TABLE mart.[Asset]
 (
     Asset_key int IDENTITY
-	,AssetId uniqueidentifier NOT NULL /* business key */
-	,AssetType nvarchar(75) NOT NULL
+    ,AssetId uniqueidentifier NOT NULL /* business key */
+    ,AssetType nvarchar(75) NOT NULL
     ,AssetStatus_key int NOT NULL
-	,Reference nvarchar(143) NOT NULL
-	,[Name] nvarchar(75) NOT NULL
-	,[Description] nvarchar(max) NOT NULL
-	,CreatedOn datetimeoffset(7) NOT NULL
+    ,Reference nvarchar(143) NOT NULL
+    ,[Name] nvarchar(75) NOT NULL
+    ,[Description] nvarchar(max) NOT NULL
+    ,CreatedOn datetimeoffset(7) NOT NULL
     ,Wallet_key int NOT NULL
     ,_created datetime2(7) NOT NULL CONSTRAINT [DF_mart.Asset__created] DEFAULT SYSUTCDATETIME()
     ,_edited datetime2(7) NULL
@@ -73,8 +73,8 @@ ALTER TABLE mart.Asset CHECK CONSTRAINT [FK_mart.Asset_dbo.mart.Wallet_Wallet_ke
 CREATE TABLE mart.AssetProperty
 (
     AssetProperty_key int IDENTITY
-	,AssetPropertyType_key int NOT NULL
- 	,Property nvarchar(250) NOT NULL
+    ,AssetPropertyType_key int NOT NULL
+    ,Property nvarchar(250) NOT NULL
     ,Wallet_key int NOT NULL
     ,_created datetime2(7) NOT NULL CONSTRAINT [DF_mart.AssetProperty__created] DEFAULT SYSUTCDATETIME()
     ,CONSTRAINT [PK_mart.AssetProperty] PRIMARY KEY (AssetProperty_key)
@@ -96,7 +96,7 @@ CREATE TABLE mart.AssetPropertyFact
     AssetPropertyFact_key int IDENTITY
     ,Asset_key int NOT NULL
     ,AssetProperty_key int NOT NULL
-	,[Value] nvarchar(max) NOT NULL
+    ,[Value] nvarchar(max) NOT NULL
     ,Wallet_key int NOT NULL
     ,_created datetime2(7) NOT NULL CONSTRAINT [DF_mart.AssetPropertyFact__created] DEFAULT SYSUTCDATETIME()
     ,CONSTRAINT [PK_mart.AssetPropertyFact] PRIMARY KEY (AssetPropertyFact_key)
@@ -121,12 +121,12 @@ ALTER TABLE mart.AssetPropertyFact CHECK CONSTRAINT [FK_mart.AssetPropertyFact_d
 CREATE TABLE mart.AssetAssignment
 (
     AssetAssignment_key int IDENTITY
-	,AssetAssignmentType_key int NOT NULL
-	,AssignedTo nvarchar(max) NOT NULL
-	,CompanyId uniqueidentifier NOT NULL
-	,Company nvarchar(max) NOT NULL
-	,SiteId uniqueidentifier NOT NULL
-	,[Site] nvarchar(max) NOT NULL
+    ,AssetAssignmentType_key int NOT NULL
+    ,AssignedTo nvarchar(max) NOT NULL
+    ,CompanyId uniqueidentifier NOT NULL
+    ,Company nvarchar(max) NOT NULL
+    ,SiteId uniqueidentifier NOT NULL
+    ,[Site] nvarchar(max) NOT NULL
     ,Wallet_key int NOT NULL
     ,_created datetime2(7) NOT NULL CONSTRAINT [DF_mart.AssetAssignment__created] DEFAULT SYSUTCDATETIME()
     ,_edited datetime2(7) NULL
@@ -149,9 +149,9 @@ CREATE TABLE mart.AssetAssignmentFact
     AssetAssignmentFact_key int IDENTITY
     ,Asset_key int NOT NULL
     ,AssetAssignment_key int NOT NULL
-	,AssignedOn datetimeoffset(7) NOT NULL
-	,AssignedEnd datetimeoffset(7) NULL
-	,AssignmentNumber int NOT NULL
+    ,AssignedOn datetimeoffset(7) NOT NULL
+    ,AssignedEnd datetimeoffset(7) NULL
+    ,AssignmentNumber int NOT NULL
     ,IsLatest bit NOT NULL
     ,Wallet_key int NOT NULL
     ,_created datetime2(7) NOT NULL CONSTRAINT [DF_mart.AssetAssignmentFact__created] DEFAULT SYSUTCDATETIME()

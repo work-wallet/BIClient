@@ -34,26 +34,26 @@ BEGIN
 
         INSERT INTO @assetTable
         (
-			AssetId
-			,AssetType
-			,AssetStatusCode
-			,Reference
-			,[Name]
-			,[Description]
-			,CreatedOn
-			,WalletId
+            AssetId
+            ,AssetType
+            ,AssetStatusCode
+            ,Reference
+            ,[Name]
+            ,[Description]
+            ,CreatedOn
+            ,WalletId
         )
         SELECT * FROM OPENJSON(@json, '$.Assets')
         WITH
         (
-			AssetId uniqueidentifier
-			,AssetType nvarchar(75)
-			,AssetStatusCode int
-			,Reference nvarchar(143)
-			,[Name] nvarchar(75)
-			,[Description] nvarchar(max)
-			,CreatedOn datetimeoffset(7)
-			,WalletId uniqueidentifier
+            AssetId uniqueidentifier
+            ,AssetType nvarchar(75)
+            ,AssetStatusCode int
+            ,Reference nvarchar(143)
+            ,[Name] nvarchar(75)
+            ,[Description] nvarchar(max)
+            ,CreatedOn datetimeoffset(7)
+            ,WalletId uniqueidentifier
         );
 
         EXEC mart.ETL_MaintainAssetDimension @assetTable = @assetTable;
@@ -66,23 +66,23 @@ BEGIN
 
         INSERT INTO @assetPropertyTable
         (
-			AssetId
-			,Property
-			,PropertyType
-			,[Value]
-			,WalletId
+            AssetId
+            ,Property
+            ,PropertyType
+            ,[Value]
+            ,WalletId
         )
         SELECT * FROM OPENJSON(@json, '$.Properties')
         WITH
         (
-			AssetId uniqueidentifier
-			,Property nvarchar(250)
-			,PropertyType nvarchar(20)
-			,[Value] nvarchar(max)
-			,WalletId uniqueidentifier
+            AssetId uniqueidentifier
+            ,Property nvarchar(250)
+            ,PropertyType nvarchar(20)
+            ,[Value] nvarchar(max)
+            ,WalletId uniqueidentifier
         );
 
-		EXEC mart.ETL_MaintainAssetPropertyDimension @assetPropertyTable = @assetPropertyTable
+        EXEC mart.ETL_MaintainAssetPropertyDimension @assetPropertyTable = @assetPropertyTable
 
         EXEC mart.ETL_LoadAssetPropertyFacts @assetPropertyTable = @assetPropertyTable
 
@@ -92,31 +92,31 @@ BEGIN
 
         INSERT INTO @assetAssignmentTable
         (
-			AssetId
-			,AssignedOn
-			,AssignmentType
-			,AssignedTo
-			,CompanyId
-			,Company
-			,SiteId
-			,[Site]
-			,WalletId
+            AssetId
+            ,AssignedOn
+            ,AssignmentType
+            ,AssignedTo
+            ,CompanyId
+            ,Company
+            ,SiteId
+            ,[Site]
+            ,WalletId
         )
         SELECT * FROM OPENJSON(@json, '$.Assignments')
         WITH
         (
-			AssetId uniqueidentifier
-			,AssignedOn datetimeoffset(7)
-			,AssignmentType nvarchar(20)
-			,AssignedTo nvarchar(max)
-			,CompanyId uniqueidentifier
-			,Company nvarchar(max)
-			,SiteId uniqueidentifier
-			,[Site] nvarchar(max)
-			,WalletId uniqueidentifier
+            AssetId uniqueidentifier
+            ,AssignedOn datetimeoffset(7)
+            ,AssignmentType nvarchar(20)
+            ,AssignedTo nvarchar(max)
+            ,CompanyId uniqueidentifier
+            ,Company nvarchar(max)
+            ,SiteId uniqueidentifier
+            ,[Site] nvarchar(max)
+            ,WalletId uniqueidentifier
         );
 
-		EXEC mart.ETL_MaintainAssetAssignmentDimension @assetAssignmentTable = @assetAssignmentTable
+        EXEC mart.ETL_MaintainAssetAssignmentDimension @assetAssignmentTable = @assetAssignmentTable
 
         EXEC mart.ETL_LoadAssetAssignmentFacts @assetAssignmentTable = @assetAssignmentTable
 
