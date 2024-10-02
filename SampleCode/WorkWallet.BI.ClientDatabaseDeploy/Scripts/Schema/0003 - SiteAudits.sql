@@ -1,4 +1,3 @@
--- mart.SiteAuditStatus
 CREATE TABLE mart.SiteAuditStatus
 (   SiteAuditStatus_key int IDENTITY
     ,SiteAuditStatusCode int NOT NULL /* business key */
@@ -17,7 +16,6 @@ INSERT INTO mart.SiteAuditStatus (SiteAuditStatusCode, SiteAuditStatus) VALUES (
 INSERT INTO mart.SiteAuditStatus (SiteAuditStatusCode, SiteAuditStatus) VALUES (5, N'Deleted');
 INSERT INTO mart.SiteAuditStatus (SiteAuditStatusCode, SiteAuditStatus) VALUES (6, N'Closed');
 
--- mart.SiteAuditType (type 1 SCD - though possibly should be type 2 due to controls for scoring methods)
 CREATE TABLE mart.SiteAuditType
 (
     SiteAuditType_key int IDENTITY
@@ -35,14 +33,9 @@ CREATE TABLE mart.SiteAuditType
     ,_edited datetime2(7) NULL
     ,CONSTRAINT [PK_mart.SiteAuditType] PRIMARY KEY (SiteAuditType_key)
     ,CONSTRAINT [UQ_mart.SiteAuditType_SiteAuditTypeId] UNIQUE(SiteAuditTypeId)
-)
+    ,CONSTRAINT [FK_mart.SiteAuditType_dbo.mart.Wallet_Wallet_key] FOREIGN KEY(Wallet_key) REFERENCES mart.Wallet
+);
 
-ALTER TABLE mart.SiteAuditType WITH CHECK ADD CONSTRAINT [FK_mart.SiteAuditType_dbo.mart.Wallet_Wallet_key] FOREIGN KEY(Wallet_key)
-REFERENCES mart.[Wallet] (Wallet_key);
-
-ALTER TABLE mart.SiteAuditType CHECK CONSTRAINT [FK_mart.SiteAuditType_dbo.mart.Wallet_Wallet_key];
-
--- mart.SiteAudit
 CREATE TABLE mart.SiteAudit
 (
     SiteAudit_key int IDENTITY
@@ -63,29 +56,12 @@ CREATE TABLE mart.SiteAudit
     ,_edited datetime2(7) NULL
     ,CONSTRAINT [PK_mart.SiteAudit] PRIMARY KEY (SiteAudit_key)
     ,CONSTRAINT [UQ_mart.SiteAudit_SiteAuditId] UNIQUE(SiteAuditId)
-)
+    ,CONSTRAINT [FK_mart.SiteAudit_dbo.mart.SiteAuditStatus_SiteAuditStatus_key] FOREIGN KEY(SiteAuditStatus_key) REFERENCES mart.SiteAuditStatus
+    ,CONSTRAINT [FK_mart.SiteAudit_dbo.mart.SiteAuditType_SiteAuditType_key] FOREIGN KEY(SiteAuditType_key) REFERENCES mart.SiteAuditType
+    ,CONSTRAINT [FK_mart.SiteAudit_dbo.mart.Location_Location_key] FOREIGN KEY(Location_key) REFERENCES mart.[Location]
+    ,CONSTRAINT [FK_mart.SiteAudit_dbo.mart.Wallet_Wallet_key] FOREIGN KEY(Wallet_key) REFERENCES mart.Wallet
+);
 
-ALTER TABLE mart.SiteAudit WITH CHECK ADD CONSTRAINT [FK_mart.SiteAudit_dbo.mart.SiteAuditStatus_SiteAuditStatus_key] FOREIGN KEY(SiteAuditStatus_key)
-REFERENCES mart.SiteAuditStatus (SiteAuditStatus_key);
-
-ALTER TABLE mart.SiteAudit CHECK CONSTRAINT [FK_mart.SiteAudit_dbo.mart.SiteAuditStatus_SiteAuditStatus_key];
-
-ALTER TABLE mart.SiteAudit WITH CHECK ADD CONSTRAINT [FK_mart.SiteAudit_dbo.mart.SiteAuditType_SiteAuditType_key] FOREIGN KEY(SiteAuditType_key)
-REFERENCES mart.SiteAuditType (SiteAuditType_key);
-
-ALTER TABLE mart.SiteAudit CHECK CONSTRAINT [FK_mart.SiteAudit_dbo.mart.SiteAuditType_SiteAuditType_key];
-
-ALTER TABLE mart.SiteAudit WITH CHECK ADD CONSTRAINT [FK_mart.SiteAudit_dbo.mart.Location_Location_key] FOREIGN KEY(Location_key)
-REFERENCES mart.[Location] (Location_key);
-
-ALTER TABLE mart.SiteAudit CHECK CONSTRAINT [FK_mart.SiteAudit_dbo.mart.Location_Location_key];
-
-ALTER TABLE mart.SiteAudit WITH CHECK ADD CONSTRAINT [FK_mart.SiteAudit_dbo.mart.Wallet_Wallet_key] FOREIGN KEY(Wallet_key)
-REFERENCES mart.[Wallet] (Wallet_key);
-
-ALTER TABLE mart.SiteAudit CHECK CONSTRAINT [FK_mart.SiteAudit_dbo.mart.Wallet_Wallet_key];
-
--- mart.SiteAuditChecklist
 CREATE TABLE mart.SiteAuditChecklist
 (
     SiteAuditChecklist_key int IDENTITY
@@ -105,14 +81,9 @@ CREATE TABLE mart.SiteAuditChecklist
     ,_edited datetime2(7) NULL
     ,CONSTRAINT [PK_mart.SiteAuditChecklist] PRIMARY KEY (SiteAuditChecklist_key)
     ,CONSTRAINT [UQ_mart.SiteAuditChecklist_SiteAuditChecklistId_SiteAuditChecklistVersion] UNIQUE(SiteAuditChecklistId, SiteAuditChecklistVersion)
-)
+    ,CONSTRAINT [FK_mart.SiteAuditChecklist_dbo.mart.Wallet_Wallet_key] FOREIGN KEY(Wallet_key) REFERENCES mart.Wallet
+);
 
-ALTER TABLE mart.SiteAuditChecklist WITH CHECK ADD CONSTRAINT [FK_mart.SiteAuditChecklist_dbo.mart.Wallet_Wallet_key] FOREIGN KEY(Wallet_key)
-REFERENCES mart.[Wallet] (Wallet_key);
-
-ALTER TABLE mart.SiteAuditChecklist CHECK CONSTRAINT [FK_mart.SiteAuditChecklist_dbo.mart.Wallet_Wallet_key];
-
--- mart.SiteAuditChecklistItem
 CREATE TABLE mart.SiteAuditChecklistItem
 (
     SiteAuditChecklistItem_key int IDENTITY
@@ -126,19 +97,10 @@ CREATE TABLE mart.SiteAuditChecklistItem
     ,_edited datetime2(7) NULL
     ,CONSTRAINT [PK_mart.SiteAuditChecklistItem] PRIMARY KEY (SiteAuditChecklistItem_key)
     ,CONSTRAINT [UQ_mart.SiteAuditChecklistItem_SiteAuditChecklistItemId] UNIQUE(SiteAuditChecklistItemId)
-)
+    ,CONSTRAINT [FK_mart.SiteAuditChecklistItem_dbo.mart.SiteAuditChecklist_SiteAuditChecklist_key] FOREIGN KEY(SiteAuditChecklist_key) REFERENCES mart.SiteAuditChecklist
+    ,CONSTRAINT [FK_mart.SiteAuditChecklistItem_dbo.mart.Wallet_Wallet_key] FOREIGN KEY(Wallet_key) REFERENCES mart.Wallet
+);
 
-ALTER TABLE mart.SiteAuditChecklistItem WITH CHECK ADD CONSTRAINT [FK_mart.SiteAuditChecklistItem_dbo.mart.SiteAuditChecklist_SiteAuditChecklist_key] FOREIGN KEY(SiteAuditChecklist_key)
-REFERENCES mart.SiteAuditChecklist (SiteAuditChecklist_key);
-
-ALTER TABLE mart.SiteAuditChecklistItem CHECK CONSTRAINT [FK_mart.SiteAuditChecklistItem_dbo.mart.SiteAuditChecklist_SiteAuditChecklist_key];
-
-ALTER TABLE mart.SiteAuditChecklistItem WITH CHECK ADD CONSTRAINT [FK_mart.SiteAuditChecklistItem_dbo.mart.Wallet_Wallet_key] FOREIGN KEY(Wallet_key)
-REFERENCES mart.[Wallet] (Wallet_key);
-
-ALTER TABLE mart.SiteAuditChecklistItem CHECK CONSTRAINT [FK_mart.SiteAuditChecklistItem_dbo.mart.Wallet_Wallet_key];
-
--- mart.SiteAuditChecklistFact
 CREATE TABLE mart.SiteAuditChecklistFact
 (
     -- keys
@@ -157,39 +119,14 @@ CREATE TABLE mart.SiteAuditChecklistFact
     ,Passed bit NOT NULL
     ,PassScore int NOT NULL
     ,CONSTRAINT [PK_mart.SiteAuditChecklistFact] PRIMARY KEY (SiteAudit_key, SiteAuditChecklist_key)
-)
+    ,CONSTRAINT [FK_mart.SiteAuditChecklistFact_dbo.mart.SiteAudit_SiteAudit_key] FOREIGN KEY(SiteAudit_key) REFERENCES mart.SiteAudit
+    ,CONSTRAINT [FK_mart.SiteAuditChecklistFact_dbo.mart.SiteAuditChecklist_SiteAuditChecklist_key] FOREIGN KEY(SiteAuditChecklist_key) REFERENCES mart.SiteAuditChecklist
+    ,CONSTRAINT [FK_mart.SiteAuditChecklistFact_dbo.mart.SiteAuditType_SiteAuditType_key] FOREIGN KEY(SiteAuditType_key) REFERENCES mart.SiteAuditType
+    ,CONSTRAINT [FK_mart.SiteAuditChecklistFact_dbo.mart.Location_Location_key] FOREIGN KEY(Location_key) REFERENCES mart.[Location]
+    ,CONSTRAINT [FK_mart.SiteAuditChecklistFact_dbo.mart.SiteAuditStatus_SiteAuditStatus_key] FOREIGN KEY(SiteAuditStatus_key) REFERENCES mart.SiteAuditStatus
+    ,CONSTRAINT [FK_mart.SiteAuditChecklistFact_dbo.mart.Wallet_Wallet_key] FOREIGN KEY(Wallet_key) REFERENCES mart.Wallet
+);
 
-ALTER TABLE mart.SiteAuditChecklistFact WITH CHECK ADD CONSTRAINT [FK_mart.SiteAuditChecklistFact_dbo.mart.SiteAudit_SiteAudit_key] FOREIGN KEY(SiteAudit_key)
-REFERENCES mart.[SiteAudit] (SiteAudit_key);
-
-ALTER TABLE mart.SiteAuditChecklistFact CHECK CONSTRAINT [FK_mart.SiteAuditChecklistFact_dbo.mart.SiteAudit_SiteAudit_key];
-
-ALTER TABLE mart.SiteAuditChecklistFact WITH CHECK ADD CONSTRAINT [FK_mart.SiteAuditChecklistFact_dbo.mart.SiteAuditChecklist_SiteAuditChecklist_key] FOREIGN KEY(SiteAuditChecklist_key)
-REFERENCES mart.[SiteAuditChecklist] (SiteAuditChecklist_key);
-
-ALTER TABLE mart.SiteAuditChecklistFact CHECK CONSTRAINT [FK_mart.SiteAuditChecklistFact_dbo.mart.SiteAuditChecklist_SiteAuditChecklist_key];
-
-ALTER TABLE mart.SiteAuditChecklistFact WITH CHECK ADD CONSTRAINT [FK_mart.SiteAuditChecklistFact_dbo.mart.SiteAuditType_SiteAuditType_key] FOREIGN KEY(SiteAuditType_key)
-REFERENCES mart.[SiteAuditType] (SiteAuditType_key);
-
-ALTER TABLE mart.SiteAuditChecklistFact CHECK CONSTRAINT [FK_mart.SiteAuditChecklistFact_dbo.mart.SiteAuditType_SiteAuditType_key];
-
-ALTER TABLE mart.SiteAuditChecklistFact WITH CHECK ADD CONSTRAINT [FK_mart.SiteAuditChecklistFact_dbo.mart.Location_Location_key] FOREIGN KEY(Location_key)
-REFERENCES mart.[Location] (Location_key);
-
-ALTER TABLE mart.SiteAuditChecklistFact CHECK CONSTRAINT [FK_mart.SiteAuditChecklistFact_dbo.mart.Location_Location_key];
-
-ALTER TABLE mart.SiteAuditChecklistFact WITH CHECK ADD CONSTRAINT [FK_mart.SiteAuditChecklistFact_dbo.mart.SiteAuditStatus_SiteAuditStatus_key] FOREIGN KEY(SiteAuditStatus_key)
-REFERENCES mart.[SiteAuditStatus] (SiteAuditStatus_key);
-
-ALTER TABLE mart.SiteAuditChecklistFact CHECK CONSTRAINT [FK_mart.SiteAuditChecklistFact_dbo.mart.SiteAuditStatus_SiteAuditStatus_key];
-
-ALTER TABLE mart.SiteAuditChecklistFact WITH CHECK ADD CONSTRAINT [FK_mart.SiteAuditChecklistFact_dbo.mart.Wallet_Wallet_key] FOREIGN KEY(Wallet_key)
-REFERENCES mart.[Wallet] (Wallet_key);
-
-ALTER TABLE mart.SiteAuditChecklistFact CHECK CONSTRAINT [FK_mart.SiteAuditChecklistFact_dbo.mart.Wallet_Wallet_key];
-
--- mart.SiteAuditChecklistFact
 CREATE TABLE mart.SiteAuditChecklistItemFact
 (
     -- keys
@@ -204,41 +141,13 @@ CREATE TABLE mart.SiteAuditChecklistItemFact
     ,ChecklistItemStatusName nvarchar(64) NOT NULL
     ,ChecklistItemStatus int NOT NULL
     ,CONSTRAINT [PK_mart.SiteAuditChecklistItemFact] PRIMARY KEY (SiteAudit_key, SiteAuditChecklist_key, SiteAuditChecklistItem_key)
-)
-
-ALTER TABLE mart.SiteAuditChecklistItemFact WITH CHECK ADD CONSTRAINT [FK_mart.SiteAuditChecklistItemFact_dbo.mart.SiteAudit_SiteAudit_key] FOREIGN KEY(SiteAudit_key)
-REFERENCES mart.[SiteAudit] (SiteAudit_key);
-
-ALTER TABLE mart.SiteAuditChecklistItemFact CHECK CONSTRAINT [FK_mart.SiteAuditChecklistItemFact_dbo.mart.SiteAudit_SiteAudit_key];
-
-ALTER TABLE mart.SiteAuditChecklistItemFact WITH CHECK ADD CONSTRAINT [FK_mart.SiteAuditChecklistItemFact_dbo.mart.SiteAuditChecklist_SiteAuditChecklist_key] FOREIGN KEY(SiteAuditChecklist_key)
-REFERENCES mart.[SiteAuditChecklist] (SiteAuditChecklist_key);
-
-ALTER TABLE mart.SiteAuditChecklistItemFact CHECK CONSTRAINT [FK_mart.SiteAuditChecklistItemFact_dbo.mart.SiteAuditChecklist_SiteAuditChecklist_key];
-
-ALTER TABLE mart.SiteAuditChecklistItemFact WITH CHECK ADD CONSTRAINT [FK_mart.SiteAuditChecklistItemFact_dbo.mart.SiteAuditChecklistItem_SiteAuditChecklistItem_key] FOREIGN KEY(SiteAuditChecklistItem_key)
-REFERENCES mart.[SiteAuditChecklistItem] (SiteAuditChecklistItem_key);
-
-ALTER TABLE mart.SiteAuditChecklistItemFact CHECK CONSTRAINT [FK_mart.SiteAuditChecklistItemFact_dbo.mart.SiteAuditChecklistItem_SiteAuditChecklistItem_key];
-
-ALTER TABLE mart.SiteAuditChecklistItemFact WITH CHECK ADD CONSTRAINT [FK_mart.SiteAuditChecklistItemFact_dbo.mart.SiteAuditType_SiteAuditType_key] FOREIGN KEY(SiteAuditType_key)
-REFERENCES mart.[SiteAuditType] (SiteAuditType_key);
-
-ALTER TABLE mart.SiteAuditChecklistItemFact CHECK CONSTRAINT [FK_mart.SiteAuditChecklistItemFact_dbo.mart.SiteAuditType_SiteAuditType_key];
-
-ALTER TABLE mart.SiteAuditChecklistItemFact WITH CHECK ADD CONSTRAINT [FK_mart.SiteAuditChecklistItemFact_dbo.mart.Location_Location_key] FOREIGN KEY(Location_key)
-REFERENCES mart.[Location] (Location_key);
-
-ALTER TABLE mart.SiteAuditChecklistItemFact CHECK CONSTRAINT [FK_mart.SiteAuditChecklistItemFact_dbo.mart.Location_Location_key];
-
-ALTER TABLE mart.SiteAuditChecklistItemFact WITH CHECK ADD CONSTRAINT [FK_mart.SiteAuditChecklistItemFact_dbo.mart.SiteAuditStatus_SiteAuditStatus_key] FOREIGN KEY(SiteAuditStatus_key)
-REFERENCES mart.[SiteAuditStatus] (SiteAuditStatus_key);
-
-ALTER TABLE mart.SiteAuditChecklistItemFact CHECK CONSTRAINT [FK_mart.SiteAuditChecklistItemFact_dbo.mart.SiteAuditStatus_SiteAuditStatus_key];
-
-ALTER TABLE mart.SiteAuditChecklistItemFact WITH CHECK ADD CONSTRAINT [FK_mart.SiteAuditChecklistItemFact_dbo.mart.Wallet_Wallet_key] FOREIGN KEY(Wallet_key)
-REFERENCES mart.[Wallet] (Wallet_key);
-
-ALTER TABLE mart.SiteAuditChecklistItemFact CHECK CONSTRAINT [FK_mart.SiteAuditChecklistItemFact_dbo.mart.Wallet_Wallet_key];
+    ,CONSTRAINT [FK_mart.SiteAuditChecklistItemFact_dbo.mart.SiteAudit_SiteAudit_key] FOREIGN KEY(SiteAudit_key) REFERENCES mart.SiteAudit
+    ,CONSTRAINT [FK_mart.SiteAuditChecklistItemFact_dbo.mart.SiteAuditChecklist_SiteAuditChecklist_key] FOREIGN KEY(SiteAuditChecklist_key) REFERENCES mart.SiteAuditChecklist
+    ,CONSTRAINT [FK_mart.SiteAuditChecklistItemFact_dbo.mart.SiteAuditChecklistItem_SiteAuditChecklistItem_key] FOREIGN KEY(SiteAuditChecklistItem_key) REFERENCES mart.SiteAuditChecklistItem
+    ,CONSTRAINT [FK_mart.SiteAuditChecklistItemFact_dbo.mart.SiteAuditType_SiteAuditType_key] FOREIGN KEY(SiteAuditType_key) REFERENCES mart.SiteAuditType
+    ,CONSTRAINT [FK_mart.SiteAuditChecklistItemFact_dbo.mart.Location_Location_key] FOREIGN KEY(Location_key) REFERENCES mart.[Location]
+    ,CONSTRAINT [FK_mart.SiteAuditChecklistItemFact_dbo.mart.SiteAuditStatus_SiteAuditStatus_key] FOREIGN KEY(SiteAuditStatus_key) REFERENCES mart.SiteAuditStatus
+    ,CONSTRAINT [FK_mart.SiteAuditChecklistItemFact_dbo.mart.Wallet_Wallet_key] FOREIGN KEY(Wallet_key) REFERENCES mart.Wallet
+);
 
 GO

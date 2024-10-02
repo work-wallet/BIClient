@@ -12,7 +12,6 @@ CREATE TABLE mart.SafetyCardStatus
 INSERT INTO mart.SafetyCardStatus (SafetyCardStatusCode, SafetyCardStatus) VALUES (0, N'Active');
 INSERT INTO mart.SafetyCardStatus (SafetyCardStatusCode, SafetyCardStatus) VALUES (1, N'Archived');
 INSERT INTO mart.SafetyCardStatus (SafetyCardStatusCode, SafetyCardStatus) VALUES (3, N'Deleted');
-GO
 
 CREATE TABLE mart.SafetyCardType
 (
@@ -28,7 +27,6 @@ CREATE TABLE mart.SafetyCardType
 INSERT INTO mart.SafetyCardType (SafetyCardTypeCode, SafetyCardType) VALUES (0, N'Green');
 INSERT INTO mart.SafetyCardType (SafetyCardTypeCode, SafetyCardType) VALUES (1, N'Yellow');
 INSERT INTO mart.SafetyCardType (SafetyCardTypeCode, SafetyCardType) VALUES (2, N'Red');
-GO
 
 CREATE TABLE mart.SafetyCardOccupationRole
 (
@@ -50,7 +48,6 @@ INSERT INTO mart.SafetyCardOccupationRole (OccupationRoleCode, OccupationRole) V
 INSERT INTO mart.SafetyCardOccupationRole (OccupationRoleCode, OccupationRole) VALUES (5, N'Contracts Manager / Engineer');
 INSERT INTO mart.SafetyCardOccupationRole (OccupationRoleCode, OccupationRole) VALUES (6, N'Director');
 INSERT INTO mart.SafetyCardOccupationRole (OccupationRoleCode, OccupationRole) VALUES (7, N'General Operative');
-GO
 
 CREATE TABLE mart.SafetyCardCategory
 (
@@ -65,7 +62,6 @@ CREATE TABLE mart.SafetyCardCategory
     ,CONSTRAINT [UQ_mart.SafetyCardCategory_SafetyCardCategoryId] UNIQUE(SafetyCardCategoryId)
     ,CONSTRAINT [FK_mart.SafetyCardCategory_mart.Wallet_Wallet_key] FOREIGN KEY (Wallet_key) REFERENCES mart.Wallet
 );
-GO
 
 CREATE TABLE mart.SafetyCard
 (
@@ -99,4 +95,5 @@ CREATE TABLE mart.SafetyCard
     ,CONSTRAINT [FK_mart.SafetyCard_mart.Location_Location_key] FOREIGN KEY (Location_key) REFERENCES mart.[Location]
     ,CONSTRAINT [FK_mart.SafetyCard_mart.Wallet_Wallet_key] FOREIGN KEY (Wallet_key) REFERENCES mart.Wallet
 );
+
 GO
