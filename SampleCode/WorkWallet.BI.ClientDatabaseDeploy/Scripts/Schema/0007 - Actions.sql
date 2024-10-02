@@ -1,4 +1,3 @@
--- mart.ActionPriority
 CREATE TABLE mart.ActionPriority
 (
     ActionPriority_key int IDENTITY
@@ -15,7 +14,6 @@ INSERT INTO mart.ActionPriority (ActionPriorityCode, ActionPriority) VALUES (2, 
 INSERT INTO mart.ActionPriority (ActionPriorityCode, ActionPriority) VALUES (4, N'High');
 INSERT INTO mart.ActionPriority (ActionPriorityCode, ActionPriority) VALUES (8, N'Critical');
 
--- mart.ActionStatus
 CREATE TABLE mart.ActionStatus
 (
     ActionStatus_key int IDENTITY
@@ -31,7 +29,6 @@ INSERT INTO mart.ActionStatus (ActionStatusCode, ActionStatus) VALUES (1, N'Open
 INSERT INTO mart.ActionStatus (ActionStatusCode, ActionStatus) VALUES (2, N'In Progress');
 INSERT INTO mart.ActionStatus (ActionStatusCode, ActionStatus) VALUES (4, N'Closed');
 
--- mart.ActionType
 CREATE TABLE mart.ActionType
 (
     ActionType_key int IDENTITY
@@ -49,7 +46,6 @@ INSERT INTO mart.ActionType (ActionTypeCode, ActionType) VALUES (4, N'Safety Car
 INSERT INTO mart.ActionType (ActionTypeCode, ActionType) VALUES (8, N'Asset');
 INSERT INTO mart.ActionType (ActionTypeCode, ActionType) VALUES (16, N'Briefing');
 
--- mart.Action
 CREATE TABLE mart.[Action]
 (
     Action_key int IDENTITY
@@ -70,29 +66,12 @@ CREATE TABLE mart.[Action]
     ,_edited datetime2(7) NULL
     ,CONSTRAINT [PK_mart.Action] PRIMARY KEY (Action_key)
     ,CONSTRAINT [UQ_mart.Action_ActionId] UNIQUE(ActionId)
-)
+    ,CONSTRAINT [FK_mart.Action_dbo.mart.ActionType_ActionType_key] FOREIGN KEY(ActionType_key) REFERENCES mart.ActionType
+    ,CONSTRAINT [FK_mart.Action_dbo.mart.ActionStatus_ActionStatus_key] FOREIGN KEY(ActionStatus_key) REFERENCES mart.ActionStatus
+    ,CONSTRAINT [FK_mart.Action_dbo.mart.ActionPriority_ActionPriority_key] FOREIGN KEY(ActionPriority_key) REFERENCES mart.ActionPriority
+    ,CONSTRAINT [FK_mart.Action_dbo.mart.Wallet_Wallet_key] FOREIGN KEY(Wallet_key) REFERENCES mart.Wallet
+);
 
-ALTER TABLE mart.[Action] WITH CHECK ADD CONSTRAINT [FK_mart.Action_dbo.mart.ActionType_ActionType_key] FOREIGN KEY(ActionType_key)
-REFERENCES mart.ActionType (ActionType_key);
-
-ALTER TABLE mart.[Action] CHECK CONSTRAINT [FK_mart.Action_dbo.mart.ActionType_ActionType_key];
-
-ALTER TABLE mart.[Action] WITH CHECK ADD CONSTRAINT [FK_mart.Action_dbo.mart.ActionStatus_ActionStatus_key] FOREIGN KEY(ActionStatus_key)
-REFERENCES mart.ActionStatus (ActionStatus_key);
-
-ALTER TABLE mart.[Action] CHECK CONSTRAINT [FK_mart.Action_dbo.mart.ActionStatus_ActionStatus_key];
-
-ALTER TABLE mart.[Action] WITH CHECK ADD CONSTRAINT [FK_mart.Action_dbo.mart.ActionPriority_ActionPriority_key] FOREIGN KEY(ActionPriority_key)
-REFERENCES mart.ActionPriority (ActionPriority_key);
-
-ALTER TABLE mart.[Action] CHECK CONSTRAINT [FK_mart.Action_dbo.mart.ActionPriority_ActionPriority_key];
-
-ALTER TABLE mart.Action WITH CHECK ADD CONSTRAINT [FK_mart.Action_dbo.mart.Wallet_Wallet_key] FOREIGN KEY(Wallet_key)
-REFERENCES mart.[Wallet] (Wallet_key);
-
-ALTER TABLE mart.Action CHECK CONSTRAINT [FK_mart.Action_dbo.mart.Wallet_Wallet_key];
-
--- mart.ActionUpdate
 CREATE TABLE mart.ActionUpdate
 (
     ActionUpdate_key int IDENTITY
@@ -106,21 +85,9 @@ CREATE TABLE mart.ActionUpdate
     ,_created datetime2(7) NOT NULL CONSTRAINT [DF_mart.ActionUpdate__created] DEFAULT SYSUTCDATETIME()
     ,_edited datetime2(7) NULL
     ,CONSTRAINT [PK_mart.ActionUpdate] PRIMARY KEY (ActionUpdate_key)
-)
-
-ALTER TABLE mart.ActionUpdate WITH CHECK ADD CONSTRAINT [FK_mart.ActionUpdate_dbo.mart.Action_Action_key] FOREIGN KEY(Action_key)
-REFERENCES mart.[Action] (Action_key);
-
-ALTER TABLE mart.ActionUpdate CHECK CONSTRAINT [FK_mart.ActionUpdate_dbo.mart.Action_Action_key];
-
-ALTER TABLE mart.ActionUpdate WITH CHECK ADD CONSTRAINT [FK_mart.ActionUpdate_dbo.mart.ActionStatus_ActionStatus_key] FOREIGN KEY(ActionStatus_key)
-REFERENCES mart.ActionStatus (ActionStatus_key);
-
-ALTER TABLE mart.ActionUpdate CHECK CONSTRAINT [FK_mart.ActionUpdate_dbo.mart.ActionStatus_ActionStatus_key];
-
-ALTER TABLE mart.ActionUpdate WITH CHECK ADD CONSTRAINT [FK_mart.ActionUpdate_dbo.mart.Wallet_Wallet_key] FOREIGN KEY(Wallet_key)
-REFERENCES mart.[Wallet] (Wallet_key);
-
-ALTER TABLE mart.ActionUpdate CHECK CONSTRAINT [FK_mart.ActionUpdate_dbo.mart.Wallet_Wallet_key];
+    ,CONSTRAINT [FK_mart.ActionUpdate_dbo.mart.Action_Action_key] FOREIGN KEY(Action_key) REFERENCES mart.[Action]
+    ,CONSTRAINT [FK_mart.ActionUpdate_dbo.mart.ActionStatus_ActionStatus_key] FOREIGN KEY(ActionStatus_key) REFERENCES mart.ActionStatus
+    ,CONSTRAINT [FK_mart.ActionUpdate_dbo.mart.Wallet_Wallet_key] FOREIGN KEY(Wallet_key) REFERENCES mart.Wallet
+);
 
 GO

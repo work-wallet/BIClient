@@ -12,6 +12,7 @@ The datasets currently enabled for download are:
 * Permits
 * Actions
 * Assets
+* Safety Cards
 
 The API uses a combination of paging and change tracking to efficiently transfer data from the Work Wallet cloud to your local environment.
 

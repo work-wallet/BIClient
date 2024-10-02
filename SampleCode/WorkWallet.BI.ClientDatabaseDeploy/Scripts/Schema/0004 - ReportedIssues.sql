@@ -1,4 +1,3 @@
--- mart.ReportedIssueStatus
 CREATE TABLE mart.ReportedIssueStatus
 (
     ReportedIssueStatus_key int IDENTITY
@@ -16,7 +15,6 @@ INSERT INTO mart.ReportedIssueStatus (ReportedIssueStatusCode, ReportedIssueStat
 INSERT INTO mart.ReportedIssueStatus (ReportedIssueStatusCode, ReportedIssueStatus) VALUES (6, N'Closed (Archived)');
 INSERT INTO mart.ReportedIssueStatus (ReportedIssueStatusCode, ReportedIssueStatus) VALUES (8, N'Deleted');
 
--- mart.ReportedIssueSeverity
 CREATE TABLE mart.ReportedIssueSeverity
 (
     ReportedIssueSeverity_key int IDENTITY
@@ -34,7 +32,6 @@ INSERT INTO mart.ReportedIssueSeverity (ReportedIssueSeverityCode, ReportedIssue
 INSERT INTO mart.ReportedIssueSeverity (ReportedIssueSeverityCode, ReportedIssueSeverity) VALUES (4, N'High');
 INSERT INTO mart.ReportedIssueSeverity (ReportedIssueSeverityCode, ReportedIssueSeverity) VALUES (8, N'Critical');
 
--- mart.ReportedIssueBodyPart
 CREATE TABLE mart.ReportedIssueBodyPartEnum
 (
     ReportedIssueBodyPartEnum_key int IDENTITY
@@ -87,7 +84,6 @@ INSERT INTO mart.ReportedIssueBodyPartEnum (MaskIndex, [Group], BodyPart) VALUES
 INSERT INTO mart.ReportedIssueBodyPartEnum (MaskIndex, [Group], BodyPart) VALUES (36, N'Upper Body', N'Finger(s) - Right');
 INSERT INTO mart.ReportedIssueBodyPartEnum (MaskIndex, [Group], BodyPart) VALUES (37, N'Lower Body', N'Toe(s) - Right');
 
--- mart.ReportedIssueRootCauseAnalysisType
 CREATE TABLE mart.ReportedIssueRootCauseAnalysisType
 (   ReportedIssueRootCauseAnalysisType_key int IDENTITY
     ,ReportedIssueRootCauseAnalysisTypeCode int NOT NULL /* business key */
@@ -101,7 +97,6 @@ CREATE TABLE mart.ReportedIssueRootCauseAnalysisType
 INSERT INTO mart.ReportedIssueRootCauseAnalysisType (ReportedIssueRootCauseAnalysisTypeCode, ReportedIssueRootCauseAnalysisType) VALUES (1, N'Root Cause');
 INSERT INTO mart.ReportedIssueRootCauseAnalysisType (ReportedIssueRootCauseAnalysisTypeCode, ReportedIssueRootCauseAnalysisType) VALUES (2, N'Immediate Cause');
 
--- mart.ReportedIssueCategory
 CREATE TABLE mart.ReportedIssueCategory
 (
     ReportedIssueCategory_key int IDENTITY
@@ -117,14 +112,9 @@ CREATE TABLE mart.ReportedIssueCategory
     ,_edited datetime2(7) NULL
     ,CONSTRAINT [PK_mart.ReportedIssueCategory] PRIMARY KEY (ReportedIssueCategory_key)
     ,CONSTRAINT [UQ_mart.ReportedIssueCategory_SubcategoryId_CategoryVersion] UNIQUE(SubcategoryId, CategoryVersion)
-)
+    ,CONSTRAINT [FK_mart.ReportedIssueCategory_dbo.mart.Wallet_Wallet_key] FOREIGN KEY(Wallet_key) REFERENCES mart.Wallet
+);
 
-ALTER TABLE mart.ReportedIssueCategory WITH CHECK ADD CONSTRAINT [FK_mart.ReportedIssueCategory_dbo.mart.Wallet_Wallet_key] FOREIGN KEY(Wallet_key)
-REFERENCES mart.[Wallet] (Wallet_key);
-
-ALTER TABLE mart.ReportedIssueCategory CHECK CONSTRAINT [FK_mart.ReportedIssueCategory_dbo.mart.Wallet_Wallet_key];
-
--- mart.ReportedIssue
 CREATE TABLE mart.ReportedIssue
 (
     ReportedIssue_key int IDENTITY
@@ -144,34 +134,13 @@ CREATE TABLE mart.ReportedIssue
     ,_edited datetime2(7) NULL
     ,CONSTRAINT [PK_mart.ReportedIssue] PRIMARY KEY (ReportedIssue_key)
     ,CONSTRAINT [UQ_mart.ReportedIssue_ReportedIssueId] UNIQUE(ReportedIssueId)
-)
+    ,CONSTRAINT [FK_mart.ReportedIssue_dbo.mart.ReportedIssueStatus_ReportedIssueStatus_key] FOREIGN KEY(ReportedIssueStatus_key) REFERENCES mart.ReportedIssueStatus
+    ,CONSTRAINT [FK_mart.ReportedIssue_dbo.mart.ReportedIssueCategory_ReportedIssueCategory_key] FOREIGN KEY(ReportedIssueCategory_key) REFERENCES mart.ReportedIssueCategory
+    ,CONSTRAINT [FK_mart.ReportedIssue_dbo.mart.ReportedIssueSeverity_ReportedIssueSeverity_key] FOREIGN KEY(ReportedIssueSeverity_key) REFERENCES mart.ReportedIssueSeverity
+    ,CONSTRAINT [FK_mart.ReportedIssue_dbo.mart.Location_Location_key] FOREIGN KEY(Location_key) REFERENCES mart.[Location]
+    ,CONSTRAINT [FK_mart.ReportedIssue_dbo.mart.Wallet_Wallet_key] FOREIGN KEY(Wallet_key) REFERENCES mart.Wallet
+);
 
-ALTER TABLE mart.ReportedIssue WITH CHECK ADD CONSTRAINT [FK_mart.ReportedIssue_dbo.mart.ReportedIssueStatus_ReportedIssueStatus_key] FOREIGN KEY(ReportedIssueStatus_key)
-REFERENCES mart.ReportedIssueStatus (ReportedIssueStatus_key);
-
-ALTER TABLE mart.ReportedIssue CHECK CONSTRAINT [FK_mart.ReportedIssue_dbo.mart.ReportedIssueStatus_ReportedIssueStatus_key];
-
-ALTER TABLE mart.ReportedIssue WITH CHECK ADD CONSTRAINT [FK_mart.ReportedIssue_dbo.mart.ReportedIssueCategory_ReportedIssueCategory_key] FOREIGN KEY(ReportedIssueCategory_key)
-REFERENCES mart.ReportedIssueCategory (ReportedIssueCategory_key);
-
-ALTER TABLE mart.ReportedIssue CHECK CONSTRAINT [FK_mart.ReportedIssue_dbo.mart.ReportedIssueCategory_ReportedIssueCategory_key];
-
-ALTER TABLE mart.ReportedIssue WITH CHECK ADD CONSTRAINT [FK_mart.ReportedIssue_dbo.mart.ReportedIssueSeverity_ReportedIssueSeverity_key] FOREIGN KEY(ReportedIssueSeverity_key)
-REFERENCES mart.ReportedIssueSeverity (ReportedIssueSeverity_key);
-
-ALTER TABLE mart.ReportedIssue CHECK CONSTRAINT [FK_mart.ReportedIssue_dbo.mart.ReportedIssueSeverity_ReportedIssueSeverity_key];
-
-ALTER TABLE mart.ReportedIssue WITH CHECK ADD CONSTRAINT [FK_mart.ReportedIssue_dbo.mart.Location_Location_key] FOREIGN KEY(Location_key)
-REFERENCES mart.[Location] (Location_key);
-
-ALTER TABLE mart.ReportedIssue CHECK CONSTRAINT [FK_mart.ReportedIssue_dbo.mart.Location_Location_key];
-
-ALTER TABLE mart.ReportedIssue WITH CHECK ADD CONSTRAINT [FK_mart.ReportedIssue_dbo.mart.Wallet_Wallet_key] FOREIGN KEY(Wallet_key)
-REFERENCES mart.[Wallet] (Wallet_key);
-
-ALTER TABLE mart.ReportedIssue CHECK CONSTRAINT [FK_mart.ReportedIssue_dbo.mart.Wallet_Wallet_key];
-
--- mart.ReportedIssueRootCauseAnalysisFact
 CREATE TABLE mart.ReportedIssueRootCauseAnalysisFact
 (
     ReportedIssue_key int NOT NULL
@@ -183,24 +152,11 @@ CREATE TABLE mart.ReportedIssueRootCauseAnalysisFact
     ,_created datetime2(7) NOT NULL CONSTRAINT [DF_mart.ReportedIssueRootCauseAnalysis__created] DEFAULT SYSUTCDATETIME()
     ,_edited datetime2(7) NULL
     /* no primary key specified as we can get duplicate data */
-)
+    ,CONSTRAINT [FK_mart.ReportedIssueRootCauseAnalysisFact_dbo.mart.ReportedIssue_ReportedIssue_key] FOREIGN KEY(ReportedIssue_key) REFERENCES mart.ReportedIssue
+    ,CONSTRAINT [FK_mart.ReportedIssueRootCauseAnalysisFact_dbo.mart.ReportedIssueRootCauseAnalysisType_ReportedIssueRootCauseAnalysisType_key] FOREIGN KEY(ReportedIssueRootCauseAnalysisType_key) REFERENCES mart.ReportedIssueRootCauseAnalysisType
+    ,CONSTRAINT [FK_mart.ReportedIssueRootCauseAnalysisFact_dbo.mart.Wallet_Wallet_key] FOREIGN KEY(Wallet_key) REFERENCES mart.Wallet
+);
 
-ALTER TABLE mart.ReportedIssueRootCauseAnalysisFact WITH CHECK ADD CONSTRAINT [FK_mart.ReportedIssueRootCauseAnalysisFact_dbo.mart.ReportedIssue_ReportedIssue_key] FOREIGN KEY(ReportedIssue_key)
-REFERENCES mart.ReportedIssue (ReportedIssue_key);
-
-ALTER TABLE mart.ReportedIssueRootCauseAnalysisFact CHECK CONSTRAINT [FK_mart.ReportedIssueRootCauseAnalysisFact_dbo.mart.ReportedIssue_ReportedIssue_key];
-
-ALTER TABLE mart.ReportedIssueRootCauseAnalysisFact WITH CHECK ADD CONSTRAINT [FK_mart.ReportedIssueRootCauseAnalysisFact_dbo.mart.ReportedIssueRootCauseAnalysisType_ReportedIssueRootCauseAnalysisType_key] FOREIGN KEY(ReportedIssueRootCauseAnalysisType_key)
-REFERENCES mart.ReportedIssueRootCauseAnalysisType (ReportedIssueRootCauseAnalysisType_key);
-
-ALTER TABLE mart.ReportedIssueRootCauseAnalysisFact CHECK CONSTRAINT [FK_mart.ReportedIssueRootCauseAnalysisFact_dbo.mart.ReportedIssueRootCauseAnalysisType_ReportedIssueRootCauseAnalysisType_key];
-
-ALTER TABLE mart.ReportedIssueRootCauseAnalysisFact WITH CHECK ADD CONSTRAINT [FK_mart.ReportedIssueRootCauseAnalysisFact_dbo.mart.Wallet_Wallet_key] FOREIGN KEY(Wallet_key)
-REFERENCES mart.[Wallet] (Wallet_key);
-
-ALTER TABLE mart.ReportedIssueRootCauseAnalysisFact CHECK CONSTRAINT [FK_mart.ReportedIssueRootCauseAnalysisFact_dbo.mart.Wallet_Wallet_key];
-
--- mart.ReportedIssueBranchOption
 CREATE TABLE mart.ReportedIssueBranchOption
 (
     ReportedIssueBranchOption_key int IDENTITY
@@ -211,14 +167,9 @@ CREATE TABLE mart.ReportedIssueBranchOption
     ,_edited datetime2(7) NULL
     ,CONSTRAINT [PK_mart.ReportedIssueBranchOption] PRIMARY KEY (ReportedIssueBranchOption_key)
     ,CONSTRAINT [UQ_mart.ReportedIssueBranchOption_Wallet_key_Branch_Option] UNIQUE(Wallet_key, Branch, [Option])
-)
+    ,CONSTRAINT [FK_mart.ReportedIssueBranchOption_dbo.mart.Wallet_Wallet_key] FOREIGN KEY(Wallet_key) REFERENCES mart.Wallet
+);
 
-ALTER TABLE mart.ReportedIssueBranchOption WITH CHECK ADD CONSTRAINT [FK_mart.ReportedIssueBranchOption_dbo.mart.Wallet_Wallet_key] FOREIGN KEY(Wallet_key)
-REFERENCES mart.[Wallet] (Wallet_key);
-
-ALTER TABLE mart.ReportedIssueBranchOption CHECK CONSTRAINT [FK_mart.ReportedIssueBranchOption_dbo.mart.Wallet_Wallet_key];
-
--- mart.ReportedIssueBranchOptionFact
 CREATE TABLE mart.ReportedIssueBranchOptionFact
 (
     ReportedIssue_key int NOT NULL
@@ -228,24 +179,11 @@ CREATE TABLE mart.ReportedIssueBranchOptionFact
     ,_created datetime2(7) NOT NULL CONSTRAINT [DF_mart.ReportedIssueBranchOptionFact__created] DEFAULT SYSUTCDATETIME()
     ,_edited datetime2(7) NULL
     ,CONSTRAINT [PK_mart.ReportedIssueBranchOptionFact] PRIMARY KEY (ReportedIssue_key, ReportedIssueBranchOption_key, Investigation)
-)
+    ,CONSTRAINT [FK_mart.ReportedIssueBranchOptionFact_dbo.mart.ReportedIssue_ReportedIssue_key] FOREIGN KEY(ReportedIssue_key) REFERENCES mart.ReportedIssue
+    ,CONSTRAINT [FK_mart.ReportedIssueBranchOptionFact_dbo.mart.ReportedIssueBranchOption_ReportedIssueBranchOption_key] FOREIGN KEY(ReportedIssueBranchOption_key) REFERENCES mart.ReportedIssueBranchOption
+    ,CONSTRAINT [FK_mart.ReportedIssueBranchOptionFact_dbo.mart.Wallet_Wallet_key] FOREIGN KEY(Wallet_key) REFERENCES mart.Wallet
+);
 
-ALTER TABLE mart.ReportedIssueBranchOptionFact WITH CHECK ADD CONSTRAINT [FK_mart.ReportedIssueBranchOptionFact_dbo.mart.ReportedIssue_ReportedIssue_key] FOREIGN KEY(ReportedIssue_key)
-REFERENCES mart.ReportedIssue (ReportedIssue_key);
-
-ALTER TABLE mart.ReportedIssueBranchOptionFact CHECK CONSTRAINT [FK_mart.ReportedIssueBranchOptionFact_dbo.mart.ReportedIssue_ReportedIssue_key];
-
-ALTER TABLE mart.ReportedIssueBranchOptionFact WITH CHECK ADD CONSTRAINT [FK_mart.ReportedIssueBranchOptionFact_dbo.mart.ReportedIssueBranchOption_ReportedIssueBranchOption_key] FOREIGN KEY(ReportedIssueBranchOption_key)
-REFERENCES mart.[ReportedIssueBranchOption] (ReportedIssueBranchOption_key);
-
-ALTER TABLE mart.ReportedIssueBranchOptionFact CHECK CONSTRAINT [FK_mart.ReportedIssueBranchOptionFact_dbo.mart.ReportedIssueBranchOption_ReportedIssueBranchOption_key];
-
-ALTER TABLE mart.ReportedIssueBranchOptionFact WITH CHECK ADD CONSTRAINT [FK_mart.ReportedIssueBranchOptionFact_dbo.mart.Wallet_Wallet_key] FOREIGN KEY(Wallet_key)
-REFERENCES mart.[Wallet] (Wallet_key);
-
-ALTER TABLE mart.ReportedIssueBranchOptionFact CHECK CONSTRAINT [FK_mart.ReportedIssueBranchOptionFact_dbo.mart.Wallet_Wallet_key];
-
--- mart.ReportedIssueBodyPart
 CREATE TABLE mart.ReportedIssueBodyPart
 (
     ReportedIssueBodyPart_key int IDENTITY
@@ -256,19 +194,10 @@ CREATE TABLE mart.ReportedIssueBodyPart
     ,_edited datetime2(7) NULL
     ,CONSTRAINT [PK_mart.ReportedIssueBodyPart] PRIMARY KEY (ReportedIssueBodyPart_key)
     ,CONSTRAINT [UQ_mart.ReportedIssueBodyPart_Wallet_key_ReportedIssueBodyPartEnum_key_Question] UNIQUE(Wallet_key, ReportedIssueBodyPartEnum_key, Question)
-)
+    ,CONSTRAINT [FK_mart.ReportedIssueBodyPart_dbo.mart.ReportedIssueBodyPartEnum_ReportedIssueBodyPartEnum_key] FOREIGN KEY(ReportedIssueBodyPartEnum_key) REFERENCES mart.ReportedIssueBodyPartEnum
+    ,CONSTRAINT [FK_mart.ReportedIssueBodyPart_dbo.mart.Wallet_Wallet_key] FOREIGN KEY(Wallet_key) REFERENCES mart.Wallet
+);
 
-ALTER TABLE mart.ReportedIssueBodyPart WITH CHECK ADD CONSTRAINT [FK_mart.ReportedIssueBodyPart_dbo.mart.Wallet_Wallet_key] FOREIGN KEY(Wallet_key)
-REFERENCES mart.[Wallet] (Wallet_key);
-
-ALTER TABLE mart.ReportedIssueBodyPart CHECK CONSTRAINT [FK_mart.ReportedIssueBodyPart_dbo.mart.Wallet_Wallet_key];
-
-ALTER TABLE mart.ReportedIssueBodyPart WITH CHECK ADD CONSTRAINT [FK_mart.ReportedIssueBodyPart_dbo.mart.ReportedIssueBodyPartEnum_ReportedIssueBodyPartEnum_key] FOREIGN KEY(ReportedIssueBodyPartEnum_key)
-REFERENCES mart.[ReportedIssueBodyPartEnum] (ReportedIssueBodyPartEnum_key);
-
-ALTER TABLE mart.ReportedIssueBodyPart CHECK CONSTRAINT [FK_mart.ReportedIssueBodyPart_dbo.mart.ReportedIssueBodyPartEnum_ReportedIssueBodyPartEnum_key];
-
--- mart.ReportedIssueBodyPartFact
 CREATE TABLE mart.ReportedIssueBodyPartFact
 (
     ReportedIssue_key int NOT NULL
@@ -278,24 +207,11 @@ CREATE TABLE mart.ReportedIssueBodyPartFact
     ,_created datetime2(7) NOT NULL CONSTRAINT [DF_mart.ReportedIssueBodyPartFact__created] DEFAULT SYSUTCDATETIME()
     ,_edited datetime2(7) NULL
     ,CONSTRAINT [PK_mart.ReportedIssueBodyPartFact] PRIMARY KEY (ReportedIssue_key, ReportedIssueBodyPart_key, Investigation)
-)
+    ,CONSTRAINT [FK_mart.ReportedIssueBodyPartFact_dbo.mart.ReportedIssue_ReportedIssue_key] FOREIGN KEY(ReportedIssue_key) REFERENCES mart.ReportedIssue
+    ,CONSTRAINT [FK_mart.ReportedIssueBodyPartFact_dbo.mart.ReportedIssueBodyPart_ReportedIssueBodyPart_key] FOREIGN KEY(ReportedIssueBodyPart_key) REFERENCES mart.ReportedIssueBodyPart
+    ,CONSTRAINT [FK_mart.ReportedIssueBodyPartFact_dbo.mart.Wallet_Wallet_key] FOREIGN KEY(Wallet_key) REFERENCES mart.Wallet
+);
 
-ALTER TABLE mart.ReportedIssueBodyPartFact WITH CHECK ADD CONSTRAINT [FK_mart.ReportedIssueBodyPartFact_dbo.mart.ReportedIssue_ReportedIssue_key] FOREIGN KEY(ReportedIssue_key)
-REFERENCES mart.ReportedIssue (ReportedIssue_key);
-
-ALTER TABLE mart.ReportedIssueBodyPartFact CHECK CONSTRAINT [FK_mart.ReportedIssueBodyPartFact_dbo.mart.ReportedIssue_ReportedIssue_key];
-
-ALTER TABLE mart.ReportedIssueBodyPartFact WITH CHECK ADD CONSTRAINT [FK_mart.ReportedIssueBodyPartFact_dbo.mart.ReportedIssueBodyPart_ReportedIssueBodyPart_key] FOREIGN KEY(ReportedIssueBodyPart_key)
-REFERENCES mart.[ReportedIssueBodyPart] (ReportedIssueBodyPart_key);
-
-ALTER TABLE mart.ReportedIssueBodyPartFact CHECK CONSTRAINT [FK_mart.ReportedIssueBodyPartFact_dbo.mart.ReportedIssueBodyPart_ReportedIssueBodyPart_key];
-
-ALTER TABLE mart.ReportedIssueBodyPartFact WITH CHECK ADD CONSTRAINT [FK_mart.ReportedIssueBodyPartFact_dbo.mart.Wallet_Wallet_key] FOREIGN KEY(Wallet_key)
-REFERENCES mart.[Wallet] (Wallet_key);
-
-ALTER TABLE mart.ReportedIssueBodyPartFact CHECK CONSTRAINT [FK_mart.ReportedIssueBodyPartFact_dbo.mart.Wallet_Wallet_key];
-
--- mart.ReportedIssueOptionSelect
 CREATE TABLE mart.ReportedIssueOptionSelect
 (
     ReportedIssueOptionSelect_key int IDENTITY
@@ -306,14 +222,9 @@ CREATE TABLE mart.ReportedIssueOptionSelect
     ,_edited datetime2(7) NULL
     ,CONSTRAINT [PK_mart.ReportedIssueOptionSelect] PRIMARY KEY (ReportedIssueOptionSelect_key)
     ,CONSTRAINT [UQ_mart.ReportedIssueOptionSelect_Wallet_key_Question_Option] UNIQUE(Wallet_key, Question, [Option])
-)
+    ,CONSTRAINT [FK_mart.ReportedIssueOptionSelect_dbo.mart.Wallet_Wallet_key] FOREIGN KEY(Wallet_key) REFERENCES mart.Wallet
+);
 
-ALTER TABLE mart.ReportedIssueOptionSelect WITH CHECK ADD CONSTRAINT [FK_mart.ReportedIssueOptionSelect_dbo.mart.Wallet_Wallet_key] FOREIGN KEY(Wallet_key)
-REFERENCES mart.[Wallet] (Wallet_key);
-
-ALTER TABLE mart.ReportedIssueOptionSelect CHECK CONSTRAINT [FK_mart.ReportedIssueOptionSelect_dbo.mart.Wallet_Wallet_key];
-
--- mart.ReportedIssueOptionSelectFact
 CREATE TABLE mart.ReportedIssueOptionSelectFact
 (
     ReportedIssue_key int NOT NULL
@@ -323,24 +234,11 @@ CREATE TABLE mart.ReportedIssueOptionSelectFact
     ,_created datetime2(7) NOT NULL CONSTRAINT [DF_mart.ReportedIssueOptionSelectFact__created] DEFAULT SYSUTCDATETIME()
     ,_edited datetime2(7) NULL
     ,CONSTRAINT [PK_mart.ReportedIssueOptionSelectFact] PRIMARY KEY (ReportedIssue_key, ReportedIssueOptionSelect_key, Investigation)
-)
+    ,CONSTRAINT [FK_mart.ReportedIssueOptionSelectFact_dbo.mart.ReportedIssue_ReportedIssue_key] FOREIGN KEY(ReportedIssue_key) REFERENCES mart.ReportedIssue
+    ,CONSTRAINT [FK_mart.ReportedIssueOptionSelectFact_dbo.mart.ReportedIssueOptionSelect_ReportedIssueOptionSelect_key] FOREIGN KEY(ReportedIssueOptionSelect_key) REFERENCES mart.ReportedIssueOptionSelect
+    ,CONSTRAINT [FK_mart.ReportedIssueOptionSelectFact_dbo.mart.Wallet_Wallet_key] FOREIGN KEY(Wallet_key) REFERENCES mart.Wallet
+);
 
-ALTER TABLE mart.ReportedIssueOptionSelectFact WITH CHECK ADD CONSTRAINT [FK_mart.ReportedIssueOptionSelectFact_dbo.mart.ReportedIssue_ReportedIssue_key] FOREIGN KEY(ReportedIssue_key)
-REFERENCES mart.ReportedIssue (ReportedIssue_key);
-
-ALTER TABLE mart.ReportedIssueOptionSelectFact CHECK CONSTRAINT [FK_mart.ReportedIssueOptionSelectFact_dbo.mart.ReportedIssue_ReportedIssue_key];
-
-ALTER TABLE mart.ReportedIssueOptionSelectFact WITH CHECK ADD CONSTRAINT [FK_mart.ReportedIssueOptionSelectFact_dbo.mart.ReportedIssueOptionSelect_ReportedIssueOptionSelect_key] FOREIGN KEY(ReportedIssueOptionSelect_key)
-REFERENCES mart.[ReportedIssueOptionSelect] (ReportedIssueOptionSelect_key);
-
-ALTER TABLE mart.ReportedIssueOptionSelectFact CHECK CONSTRAINT [FK_mart.ReportedIssueOptionSelectFact_dbo.mart.ReportedIssueOptionSelect_ReportedIssueOptionSelect_key];
-
-ALTER TABLE mart.ReportedIssueOptionSelectFact WITH CHECK ADD CONSTRAINT [FK_mart.ReportedIssueOptionSelectFact_dbo.mart.Wallet_Wallet_key] FOREIGN KEY(Wallet_key)
-REFERENCES mart.[Wallet] (Wallet_key);
-
-ALTER TABLE mart.ReportedIssueOptionSelectFact CHECK CONSTRAINT [FK_mart.ReportedIssueOptionSelectFact_dbo.mart.Wallet_Wallet_key];
-
--- mart.ReportedIssuePerson
 CREATE TABLE mart.ReportedIssuePerson
 (
     ReportedIssuePerson_key int IDENTITY
@@ -351,14 +249,9 @@ CREATE TABLE mart.ReportedIssuePerson
     ,_edited datetime2(7) NULL
     ,CONSTRAINT [PK_mart.ReportedIssuePerson] PRIMARY KEY (ReportedIssuePerson_key)
     ,CONSTRAINT [UQ_mart.ReportedIssuePerson_Wallet_key_Question_Option] UNIQUE(Wallet_key, Question, [Option])
-)
+    ,CONSTRAINT [FK_mart.ReportedIssuePerson_dbo.mart.Wallet_Wallet_key] FOREIGN KEY(Wallet_key) REFERENCES mart.Wallet
+);
 
-ALTER TABLE mart.ReportedIssuePerson WITH CHECK ADD CONSTRAINT [FK_mart.ReportedIssuePerson_dbo.mart.Wallet_Wallet_key] FOREIGN KEY(Wallet_key)
-REFERENCES mart.[Wallet] (Wallet_key);
-
-ALTER TABLE mart.ReportedIssuePerson CHECK CONSTRAINT [FK_mart.ReportedIssuePerson_dbo.mart.Wallet_Wallet_key];
-
--- mart.ReportedIssuePersonFact
 CREATE TABLE mart.ReportedIssuePersonFact
 (
     ReportedIssue_key int NOT NULL
@@ -368,21 +261,9 @@ CREATE TABLE mart.ReportedIssuePersonFact
     ,_created datetime2(7) NOT NULL CONSTRAINT [DF_mart.ReportedIssuePersonFact__created] DEFAULT SYSUTCDATETIME()
     ,_edited datetime2(7) NULL
     ,CONSTRAINT [PK_mart.ReportedIssuePersonFact] PRIMARY KEY (ReportedIssue_key, ReportedIssuePerson_key, Investigation)
-)
-
-ALTER TABLE mart.ReportedIssuePersonFact WITH CHECK ADD CONSTRAINT [FK_mart.ReportedIssuePersonFact_dbo.mart.ReportedIssue_ReportedIssue_key] FOREIGN KEY(ReportedIssue_key)
-REFERENCES mart.ReportedIssue (ReportedIssue_key);
-
-ALTER TABLE mart.ReportedIssuePersonFact CHECK CONSTRAINT [FK_mart.ReportedIssuePersonFact_dbo.mart.ReportedIssue_ReportedIssue_key];
-
-ALTER TABLE mart.ReportedIssuePersonFact WITH CHECK ADD CONSTRAINT [FK_mart.ReportedIssuePersonFact_dbo.mart.ReportedIssuePerson_ReportedIssuePerson_key] FOREIGN KEY(ReportedIssuePerson_key)
-REFERENCES mart.[ReportedIssuePerson] (ReportedIssuePerson_key);
-
-ALTER TABLE mart.ReportedIssuePersonFact CHECK CONSTRAINT [FK_mart.ReportedIssuePersonFact_dbo.mart.ReportedIssuePerson_ReportedIssuePerson_key];
-
-ALTER TABLE mart.ReportedIssuePersonFact WITH CHECK ADD CONSTRAINT [FK_mart.ReportedIssuePersonFact_dbo.mart.Wallet_Wallet_key] FOREIGN KEY(Wallet_key)
-REFERENCES mart.[Wallet] (Wallet_key);
-
-ALTER TABLE mart.ReportedIssuePersonFact CHECK CONSTRAINT [FK_mart.ReportedIssuePersonFact_dbo.mart.Wallet_Wallet_key];
+    ,CONSTRAINT [FK_mart.ReportedIssuePersonFact_dbo.mart.ReportedIssue_ReportedIssue_key] FOREIGN KEY(ReportedIssue_key) REFERENCES mart.ReportedIssue
+    ,CONSTRAINT [FK_mart.ReportedIssuePersonFact_dbo.mart.ReportedIssuePerson_ReportedIssuePerson_key] FOREIGN KEY(ReportedIssuePerson_key) REFERENCES mart.ReportedIssuePerson
+    ,CONSTRAINT [FK_mart.ReportedIssuePersonFact_dbo.mart.Wallet_Wallet_key] FOREIGN KEY(Wallet_key) REFERENCES mart.Wallet
+);
 
 GO

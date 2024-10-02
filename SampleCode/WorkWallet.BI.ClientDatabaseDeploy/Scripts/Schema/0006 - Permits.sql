@@ -1,4 +1,3 @@
--- mart.PermitStatus
 CREATE TABLE mart.PermitStatus
 (
     PermitStatus_key int IDENTITY
@@ -9,7 +8,6 @@ CREATE TABLE mart.PermitStatus
     ,CONSTRAINT [PK_mart.PermitStatus] PRIMARY KEY (PermitStatus_key)
     ,CONSTRAINT [UQ_mart.PermitStatus_Code] UNIQUE(PermitStatusCode)
 );
-GO
 
 INSERT INTO mart.PermitStatus (PermitStatusCode, PermitStatus) VALUES (1, N'Draft');
 INSERT INTO mart.PermitStatus (PermitStatusCode, PermitStatus) VALUES (2, N'Pending');
@@ -18,9 +16,7 @@ INSERT INTO mart.PermitStatus (PermitStatusCode, PermitStatus) VALUES (4, N'Expi
 INSERT INTO mart.PermitStatus (PermitStatusCode, PermitStatus) VALUES (5, N'Closed');
 INSERT INTO mart.PermitStatus (PermitStatusCode, PermitStatus) VALUES (6, N'Archived');
 INSERT INTO mart.PermitStatus (PermitStatusCode, PermitStatus) VALUES (7, N'Deleted');
-GO
 
--- mart.PermitCategory
 CREATE TABLE mart.PermitCategory
 (
     PermitCategory_key int IDENTITY
@@ -39,16 +35,9 @@ CREATE TABLE mart.PermitCategory
     ,_edited datetime2(7) NULL
     ,CONSTRAINT [PK_mart.PermitCategory] PRIMARY KEY (PermitCategory_key)
     ,CONSTRAINT [UQ_mart.PermitCategory_CategoryId_CategoryVersion] UNIQUE(CategoryId, CategoryVersion)
-)
-GO
+    ,CONSTRAINT [FK_mart.PermitCategory_dbo.mart.Wallet_Wallet_key] FOREIGN KEY(Wallet_key) REFERENCES mart.Wallet
+);
 
-ALTER TABLE mart.PermitCategory WITH CHECK ADD CONSTRAINT [FK_mart.PermitCategory_dbo.mart.Wallet_Wallet_key] FOREIGN KEY(Wallet_key)
-REFERENCES mart.[Wallet] (Wallet_key);
-GO
-ALTER TABLE mart.PermitCategory CHECK CONSTRAINT [FK_mart.PermitCategory_dbo.mart.Wallet_Wallet_key];
-GO
-
--- mart.Permit
 CREATE TABLE mart.Permit
 (
     Permit_key int IDENTITY
@@ -56,7 +45,7 @@ CREATE TABLE mart.Permit
     ,PermitReference nvarchar(50) NOT NULL
     ,PermitCategory_key int NOT NULL
     ,Location_key int NOT NULL
-    ,PermitDescription nvarchar(70) NOT NULL
+    ,PermitDescription nvarchar(750) NOT NULL
     ,IssuedToCompanyId uniqueidentifier NOT NULL
     ,IssuedToCompany nvarchar(max) NOT NULL
     ,IssuedOn datetime NOT NULL
@@ -71,34 +60,12 @@ CREATE TABLE mart.Permit
     ,_edited datetime2(7) NULL
     ,CONSTRAINT [PK_mart.Permit] PRIMARY KEY (Permit_key)
     ,CONSTRAINT [UQ_mart.Permit_PermitId] UNIQUE(PermitId)
-)
-GO
+    ,CONSTRAINT [FK_mart.Permit_dbo.mart.PermitCategory_PermitCategory_key] FOREIGN KEY(PermitCategory_key) REFERENCES mart.PermitCategory
+    ,CONSTRAINT [FK_mart.Permit_dbo.mart.Location_Location_key] FOREIGN KEY(Location_key) REFERENCES mart.[Location]
+    ,CONSTRAINT [FK_mart.Permit_dbo.mart.PermitStatus_PermitStatus_key] FOREIGN KEY(PermitStatus_key) REFERENCES mart.PermitStatus
+    ,CONSTRAINT [FK_mart.Permit_dbo.mart.Wallet_Wallet_key] FOREIGN KEY(Wallet_key) REFERENCES mart.Wallet
+);
 
-ALTER TABLE mart.Permit WITH CHECK ADD CONSTRAINT [FK_mart.Permit_dbo.mart.PermitCategory_PermitCategory_key] FOREIGN KEY(PermitCategory_key)
-REFERENCES mart.PermitCategory (PermitCategory_key);
-GO
-ALTER TABLE mart.Permit CHECK CONSTRAINT [FK_mart.Permit_dbo.mart.PermitCategory_PermitCategory_key];
-GO
-
-ALTER TABLE mart.Permit WITH CHECK ADD CONSTRAINT [FK_mart.Permit_dbo.mart.Location_Location_key] FOREIGN KEY(Location_key)
-REFERENCES mart.[Location] (Location_key);
-GO
-ALTER TABLE mart.Permit CHECK CONSTRAINT [FK_mart.Permit_dbo.mart.Location_Location_key];
-GO
-
-ALTER TABLE mart.Permit WITH CHECK ADD CONSTRAINT [FK_mart.Permit_dbo.mart.PermitStatus_PermitStatus_key] FOREIGN KEY(PermitStatus_key)
-REFERENCES mart.PermitStatus (PermitStatus_key);
-GO
-ALTER TABLE mart.Permit CHECK CONSTRAINT [FK_mart.Permit_dbo.mart.PermitStatus_PermitStatus_key];
-GO
-
-ALTER TABLE mart.Permit WITH CHECK ADD CONSTRAINT [FK_mart.Permit_dbo.mart.Wallet_Wallet_key] FOREIGN KEY(Wallet_key)
-REFERENCES mart.[Wallet] (Wallet_key);
-GO
-ALTER TABLE mart.Permit CHECK CONSTRAINT [FK_mart.Permit_dbo.mart.Wallet_Wallet_key];
-GO
-
--- mart.PermitChecklistAnswer
 CREATE TABLE mart.PermitChecklistAnswer
 (
     PermitChecklistAnswer_key int IDENTITY
@@ -109,16 +76,9 @@ CREATE TABLE mart.PermitChecklistAnswer
     ,_created datetime2(7) NOT NULL CONSTRAINT [DF_mart.PermitChecklistAnswer__created] DEFAULT SYSUTCDATETIME()
     ,_edited datetime2(7) NULL
     ,CONSTRAINT [PK_mart.PermitChecklistAnswer] PRIMARY KEY (PermitChecklistAnswer_key)
-)
-GO
+    ,CONSTRAINT [FK_mart.PermitChecklistAnswer_dbo.mart.Wallet_Wallet_key] FOREIGN KEY(Wallet_key) REFERENCES mart.Wallet
+);
 
-ALTER TABLE mart.PermitChecklistAnswer WITH CHECK ADD CONSTRAINT [FK_mart.PermitChecklistAnswer_dbo.mart.Wallet_Wallet_key] FOREIGN KEY(Wallet_key)
-REFERENCES mart.[Wallet] (Wallet_key);
-GO
-ALTER TABLE mart.PermitChecklistAnswer CHECK CONSTRAINT [FK_mart.PermitChecklistAnswer_dbo.mart.Wallet_Wallet_key];
-GO
-
--- mart.PermitChecklistAnswerFact
 CREATE TABLE mart.PermitChecklistAnswerFact
 (
     Permit_key int NOT NULL
@@ -127,24 +87,9 @@ CREATE TABLE mart.PermitChecklistAnswerFact
     ,_created datetime2(7) NOT NULL CONSTRAINT [DF_mart.PermitChecklistAnswerFact__created] DEFAULT SYSUTCDATETIME()
     ,_edited datetime2(7) NULL
     ,CONSTRAINT [PK_mart.PermitChecklistAnswerFact] PRIMARY KEY (Permit_key, PermitChecklistAnswer_key)
-)
-GO
+    ,CONSTRAINT [FK_mart.PermitChecklistAnswerFact_dbo.mart.Permit_Permit_key] FOREIGN KEY(Permit_key) REFERENCES mart.Permit
+    ,CONSTRAINT [FK_mart.PermitChecklistAnswerFact_dbo.mart.PermitChecklistAnswer_PermitChecklistAnswer_key] FOREIGN KEY(PermitChecklistAnswer_key) REFERENCES mart.PermitChecklistAnswer
+    ,CONSTRAINT [FK_mart.PermitChecklistAnswerFact_dbo.mart.Wallet_Wallet_key] FOREIGN KEY(Wallet_key) REFERENCES mart.Wallet
+);
 
-ALTER TABLE mart.PermitChecklistAnswerFact WITH CHECK ADD CONSTRAINT [FK_mart.PermitChecklistAnswerFact_dbo.mart.Permit_Permit_key] FOREIGN KEY(Permit_key)
-REFERENCES mart.Permit (Permit_key);
 GO
-ALTER TABLE mart.PermitChecklistAnswerFact CHECK CONSTRAINT [FK_mart.PermitChecklistAnswerFact_dbo.mart.Permit_Permit_key];
-GO
-
-ALTER TABLE mart.PermitChecklistAnswerFact WITH CHECK ADD CONSTRAINT [FK_mart.PermitChecklistAnswerFact_dbo.mart.PermitChecklistAnswer_PermitChecklistAnswer_key] FOREIGN KEY(PermitChecklistAnswer_key)
-REFERENCES mart.[PermitChecklistAnswer] (PermitChecklistAnswer_key);
-GO
-ALTER TABLE mart.PermitChecklistAnswerFact CHECK CONSTRAINT [FK_mart.PermitChecklistAnswerFact_dbo.mart.PermitChecklistAnswer_PermitChecklistAnswer_key];
-GO
-
-ALTER TABLE mart.PermitChecklistAnswerFact WITH CHECK ADD CONSTRAINT [FK_mart.PermitChecklistAnswerFact_dbo.mart.Wallet_Wallet_key] FOREIGN KEY(Wallet_key)
-REFERENCES mart.[Wallet] (Wallet_key);
-GO
-ALTER TABLE mart.PermitChecklistAnswerFact CHECK CONSTRAINT [FK_mart.PermitChecklistAnswerFact_dbo.mart.Wallet_Wallet_key];
-GO
-

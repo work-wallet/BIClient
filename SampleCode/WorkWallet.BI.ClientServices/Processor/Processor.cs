@@ -64,15 +64,17 @@ internal class Processor
 
             // extract the context information (this is included at the top of the JSON)
             var res = JObject.Parse(json);
+            context = res["Context"]!.ToObject<Context>()!;
 
-            if (_dataType == "SiteAudits")
+            // check for errors
+            if (context.Error == "Invalid LastSynchronizationVersion")
             {
-                // work around non-generic fields returned from the API (fix this in future release)
-                context = res["Context"]!.ToObject<SiteAuditsContext>()!;
+                throw new ApplicationException($"Error '{context.Error}' (requested {lastSynchronizationVersion} minimum {context.MinValidSynchronizationVersion}) - most likely caused by a significant number of days elapsed since last synchronisation.");
             }
-            else
+
+            if (context.Error.Length != 0)
             {
-                context = res["Context"]!.ToObject<Context>()!;
+                throw new ApplicationException($"Error '{context.Error}'");
             }
 
             // now we know how many rows there are in total, we can calculate the total number of pages we need to fetch
@@ -98,12 +100,14 @@ internal class Processor
 
         } while (pageNumber < totalPages);
 
+        // update our change detection / logging table, so we only fetch new and changed data next time
+        // (must do this, even if no rows are obtained as lastSynchronizationVersion can otherwise become invalid)
+        await _dataStore.UpdateLastSyncAsync(_options.WalletId, _logType, context.SynchronizationVersion, context.FullCount);
+
         if (context.FullCount > 0)
         {
             _logger.LogInformation("A total of {FullCount} {DataType} records received.", context.FullCount, _dataType);
 
-            // finally update our change detection / logging table, so we only fetch new and changed data next time
-            await _dataStore.UpdateLastSyncAsync(_options.WalletId, _logType, context.SynchronizationVersion, context.FullCount);
         }
         else
         {

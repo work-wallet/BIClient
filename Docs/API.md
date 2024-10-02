@@ -37,12 +37,13 @@ Currently supported data types:
 * Permits
 * Actions
 * Assets
+* SafetyCards
 
 When you call the API an Authorization header with value: `Bearer [token]` is required.
 
 Note that `pageSize` must not be set too high. Recommended maximum is around 500. Setting a high value will cause performance issues and create very large payloads. Instead, your solution should implement paging. Review the sample C# code ([Processor.cs](https://github.com/work-wallet/BIClient/blob/main/SampleCode/WorkWallet.BI.ClientServices/Processor/Processor.cs)), which you can consider as pseudo-code to guide your implementation.
 
-The returned JSON includes a `Context` block that gives information about the total number of data rows available. (SiteAudits has a slightly non-standard naming of the context attributes for historical reasons.)
+The returned JSON includes a `Context` block that gives information about the total number of data rows available.
 
 It is also necessary to implement change detection, so that you only pull data that has changed since you last called the API. You should store the `SynchronizationVersion` value returned (a big integer) for each data type. You should then include an additional parameter, `lastSynchronizationVersion`, in all your API calls:
 

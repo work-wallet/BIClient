@@ -1,0 +1,75 @@
+{
+  "config": "{\"version\":\"5.47\",\"themeCollection\":{\"baseTheme\":{\"name\":\"CY23SU08\",\"version\":\"5.48\",\"type\":2},\"customTheme\":{\"name\":\"NoWalls_Analytics21488826438024944.json\",\"version\":\"5.56\",\"type\":1}},\"activeSectionIndex\":0,\"defaultDrillFilterOtherVisuals\":true,\"linguisticSchemaSyncVersion\":2,\"settings\":{\"useNewFilterPaneExperience\":true,\"allowChangeFilterTypes\":true,\"useStylableVisualContainerHeader\":true,\"queryLimitOption\":6,\"exportDataMode\":1,\"useDefaultAggregateDisplayName\":true,\"useEnhancedTooltips\":true},\"objects\":{\"section\":[{\"properties\":{\"verticalAlignment\":{\"expr\":{\"Literal\":{\"Value\":\"'Top'\"}}}}}],\"outspacePane\":[{\"properties\":{\"expanded\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}}}}]}}",
+  "layoutOptimization": 1,
+  "resourcePackages": [
+    {
+      "resourcePackage": {
+        "disabled": false,
+        "items": [
+          {
+            "name": "CY23SU08",
+            "path": "BaseThemes/CY23SU08.json",
+            "type": 202
+          }
+        ],
+        "name": "SharedResources",
+        "type": 2
+      }
+    },
+    {
+      "resourcePackage": {
+        "disabled": false,
+        "items": [
+          {
+            "name": "NoWalls_Analytics21488826438024944.json",
+            "path": "NoWalls_Analytics21488826438024944.json",
+            "type": 201
+          }
+        ],
+        "name": "RegisteredResources",
+        "type": 1
+      }
+    }
+  ],
+  "sections": [
+    {
+      "config": "{\"objects\":{}}",
+      "displayName": "Safety Cards",
+      "displayOption": 1,
+      "filters": "[{\"name\":\"56db5ff53f05478bd9fc\",\"expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"Status\"}},\"Property\":\"Status\"}},\"filter\":{\"Version\":2,\"From\":[{\"Name\":\"s\",\"Entity\":\"Status\",\"Type\":0}],\"Where\":[{\"Condition\":{\"In\":{\"Expressions\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"s\"}},\"Property\":\"Status\"}}],\"Values\":[[{\"Literal\":{\"Value\":\"'Active'\"}}]]}}}]},\"type\":\"Categorical\",\"howCreated\":1,\"objects\":{}}]",
+      "height": 720.00,
+      "name": "ReportSectionf50385b0c7e80dea38dc",
+      "visualContainers": [
+        {
+          "config": "{\"name\":\"3e1a55ff2e1baebbcdb9\",\"layouts\":[{\"id\":0,\"position\":{\"x\":0,\"y\":102.7402862985685,\"z\":0,\"width\":1280,\"height\":617.0961145194274,\"tabOrder\":0}},{\"id\":1,\"position\":{\"x\":0,\"y\":170,\"z\":3,\"width\":324,\"height\":379}}],\"singleVisual\":{\"visualType\":\"tableEx\",\"projections\":{\"Values\":[{\"queryRef\":\"Safety Card.Reference\"},{\"queryRef\":\"Safety Card.Reported Time\"},{\"queryRef\":\"Category.Category\"},{\"queryRef\":\"Type.Type\"},{\"queryRef\":\"Location.Location\"},{\"queryRef\":\"Safety Card.Employer\"},{\"queryRef\":\"Safety Card.Employee\"},{\"queryRef\":\"Safety Card.Report Details\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"s\",\"Entity\":\"Safety Card\",\"Type\":0},{\"Name\":\"t\",\"Entity\":\"Type\",\"Type\":0},{\"Name\":\"c\",\"Entity\":\"Category\",\"Type\":0},{\"Name\":\"l\",\"Entity\":\"Location\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"s\"}},\"Property\":\"Reference\"},\"Name\":\"Safety Card.Reference\",\"NativeReferenceName\":\"Reference\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"s\"}},\"Property\":\"Reported Time\"},\"Name\":\"Safety Card.Reported Time\",\"NativeReferenceName\":\"Reported Time\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"s\"}},\"Property\":\"Employer\"},\"Name\":\"Safety Card.Employer\",\"NativeReferenceName\":\"Employer\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"s\"}},\"Property\":\"Employee\"},\"Name\":\"Safety Card.Employee\",\"NativeReferenceName\":\"Employee\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"t\"}},\"Property\":\"Type\"},\"Name\":\"Type.Type\",\"NativeReferenceName\":\"Type\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"s\"}},\"Property\":\"Report Details\"},\"Name\":\"Safety Card.Report Details\",\"NativeReferenceName\":\"Report Details\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"c\"}},\"Property\":\"Category\"},\"Name\":\"Category.Category\",\"NativeReferenceName\":\"Category\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"l\"}},\"Property\":\"Location\"},\"Name\":\"Location.Location\",\"NativeReferenceName\":\"Location\"}],\"OrderBy\":[{\"Direction\":2,\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"s\"}},\"Property\":\"Reported Time\"}}}]},\"drillFilterOtherVisuals\":true,\"objects\":{\"columnWidth\":[{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"82D\"}}}},\"selector\":{\"metadata\":\"Safety Card.Reference\"}},{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"40D\"}}}},\"selector\":{\"metadata\":\"Safety Card.Reported Time.Variation.Date Hierarchy.Year\"}},{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"48D\"}}}},\"selector\":{\"metadata\":\"Safety Card.Reported Time.Variation.Date Hierarchy.Quarter\"}},{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"71D\"}}}},\"selector\":{\"metadata\":\"Safety Card.Reported Time.Variation.Date Hierarchy.Month\"}},{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"29D\"}}}},\"selector\":{\"metadata\":\"Safety Card.Reported Time.Variation.Date Hierarchy.Day\"}},{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"126D\"}}}},\"selector\":{\"metadata\":\"Safety Card.Reported Time\"}},{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"146D\"}}}},\"selector\":{\"metadata\":\"Safety Card.Employer\"}},{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"147D\"}}}},\"selector\":{\"metadata\":\"Safety Card.Employee\"}},{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"76.12462006079028D\"}}}},\"selector\":{\"metadata\":\"Type.Type\"}},{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"263.626462052258D\"}}}},\"selector\":{\"metadata\":\"Safety Card.Report Details\"}},{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"303.3881413641665D\"}}}},\"selector\":{\"metadata\":\"Category.Category\"}},{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"322.4258760107817D\"}}}},\"selector\":{\"metadata\":\"Location.Location\"}}],\"values\":[{\"properties\":{\"backColor\":{\"solid\":{\"color\":{\"expr\":{\"Conditional\":{\"Cases\":[{\"Condition\":{\"Comparison\":{\"ComparisonKind\":0,\"Left\":{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"Type\"}},\"Property\":\"Type\"}},\"Function\":3}},\"Right\":{\"Literal\":{\"Value\":\"'Green'\"}}},\"Annotations\":{\"PowerBI.SQExprEvaluationKind\":1,\"PowerBI.SQExprTextOperatorOption\":2}},\"Value\":{\"Literal\":{\"Value\":\"'#99DD55'\"}}},{\"Condition\":{\"Comparison\":{\"ComparisonKind\":0,\"Left\":{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"Type\"}},\"Property\":\"Type\"}},\"Function\":3}},\"Right\":{\"Literal\":{\"Value\":\"'Yellow'\"}}},\"Annotations\":{\"PowerBI.SQExprEvaluationKind\":1,\"PowerBI.SQExprTextOperatorOption\":2}},\"Value\":{\"Literal\":{\"Value\":\"'#EEDD00'\"}}},{\"Condition\":{\"Comparison\":{\"ComparisonKind\":0,\"Left\":{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"Type\"}},\"Property\":\"Type\"}},\"Function\":3}},\"Right\":{\"Literal\":{\"Value\":\"'Red'\"}}},\"Annotations\":{\"PowerBI.SQExprEvaluationKind\":1,\"PowerBI.SQExprTextOperatorOption\":2}},\"Value\":{\"Literal\":{\"Value\":\"'#CC6666'\"}}}]}}}}}},\"selector\":{\"data\":[{\"dataViewWildcard\":{\"matchingOption\":1}}],\"metadata\":\"Type.Type\"}}],\"columnFormatting\":[{\"properties\":{\"fontColor\":{\"solid\":{\"color\":{\"expr\":{\"ThemeDataColor\":{\"ColorId\":1,\"Percent\":0}}}}}},\"selector\":{\"metadata\":\"Type.Type\"}}],\"total\":[{\"properties\":{\"totals\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}}}}]},\"vcObjects\":{\"background\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}}}}]}}}",
+          "filters": "[]",
+          "height": 617.10,
+          "width": 1280.00,
+          "x": 0.00,
+          "y": 102.74,
+          "z": 0.00
+        },
+        {
+          "config": "{\"name\":\"c7b2df40e38641b7758c\",\"layouts\":[{\"id\":0,\"position\":{\"x\":0,\"y\":0,\"z\":1000,\"width\":419.3693212185997,\"height\":102.61892036344202,\"tabOrder\":1000}},{\"id\":1,\"position\":{\"x\":0,\"y\":0,\"z\":1,\"width\":324,\"height\":96}}],\"singleVisual\":{\"visualType\":\"slicer\",\"projections\":{\"Values\":[{\"queryRef\":\"Safety Card.Reported Time\",\"active\":true}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"s\",\"Entity\":\"Safety Card\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"s\"}},\"Property\":\"Reported Time\"},\"Name\":\"Safety Card.Reported Time\",\"NativeReferenceName\":\"Reported Time\"}],\"OrderBy\":[{\"Direction\":1,\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"s\"}},\"Property\":\"Reported Time\"}}}]},\"drillFilterOtherVisuals\":true,\"hasDefaultSort\":true,\"objects\":{\"data\":[{\"properties\":{\"mode\":{\"expr\":{\"Literal\":{\"Value\":\"'Relative'\"}}},\"relativeRange\":{\"expr\":{\"Literal\":{\"Value\":\"'Last'\"}}},\"relativeDuration\":{\"expr\":{\"Literal\":{\"Value\":\"1D\"}}},\"relativePeriod\":{\"expr\":{\"Literal\":{\"Value\":\"'Years'\"}}}}}],\"general\":[{\"properties\":{\"filter\":{\"filter\":{\"Version\":2,\"From\":[{\"Name\":\"s\",\"Entity\":\"Safety Card\",\"Type\":0}],\"Where\":[{\"Condition\":{\"Between\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"s\"}},\"Property\":\"Reported Time\"}},\"LowerBound\":{\"DateSpan\":{\"Expression\":{\"DateAdd\":{\"Expression\":{\"DateAdd\":{\"Expression\":{\"Now\":{}},\"Amount\":1,\"TimeUnit\":0}},\"Amount\":-1,\"TimeUnit\":3}},\"TimeUnit\":0}},\"UpperBound\":{\"DateSpan\":{\"Expression\":{\"Now\":{}},\"TimeUnit\":0}}}}}]}}}}],\"dateRange\":[{\"properties\":{\"includeToday\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}}}}]},\"vcObjects\":{}}}",
+          "filters": "[]",
+          "height": 102.62,
+          "width": 419.37,
+          "x": 0.00,
+          "y": 0.00,
+          "z": 1000.00
+        },
+        {
+          "config": "{\"name\":\"ee2f79ac4b4b4b306de0\",\"layouts\":[{\"id\":0,\"position\":{\"x\":419.3693212185997,\"y\":0,\"z\":2000,\"width\":283.91234633885625,\"height\":102.61892036344202,\"tabOrder\":2000}},{\"id\":1,\"position\":{\"x\":0,\"y\":96,\"z\":2,\"width\":324,\"height\":74}}],\"singleVisual\":{\"visualType\":\"slicer\",\"projections\":{\"Values\":[{\"queryRef\":\"Type.Type\",\"active\":true}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"t\",\"Entity\":\"Type\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"t\"}},\"Property\":\"Type\"},\"Name\":\"Type.Type\",\"NativeReferenceName\":\"Type\"}]},\"drillFilterOtherVisuals\":true,\"objects\":{\"data\":[{\"properties\":{\"isInvertedSelectionMode\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}},\"mode\":{\"expr\":{\"Literal\":{\"Value\":\"'Dropdown'\"}}}}}],\"general\":[{\"properties\":{}}]},\"vcObjects\":{}}}",
+          "filters": "[]",
+          "height": 102.62,
+          "width": 283.91,
+          "x": 419.37,
+          "y": 0.00,
+          "z": 2000.00
+        }
+      ],
+      "width": 1280.00
+    }
+  ],
+  "theme": "NoWalls_Analytics21488826438024944.json"
+}

@@ -3,7 +3,6 @@ IF NOT EXISTS ( SELECT  *
                 WHERE   name = N'mart' )
     EXEC('CREATE SCHEMA [mart]');
 
--- mart.ETL_ChangeDetection
 CREATE TABLE mart.ETL_ChangeDetection
 (
     WalletId uniqueidentifier NOT NULL
@@ -15,7 +14,6 @@ CREATE TABLE mart.ETL_ChangeDetection
     ,CONSTRAINT [PK_mart.ETL_ChangeDetection] PRIMARY KEY (WalletId, IsLatest, LogType, LastProcessedTime )
 );
 
--- mart.Wallet
 CREATE TABLE mart.Wallet
 (
     Wallet_key int IDENTITY
@@ -27,7 +25,6 @@ CREATE TABLE mart.Wallet
     ,CONSTRAINT [UQ_mart.Wallet_WalletId] UNIQUE(WalletId)
 );
 
--- mart.Location
 CREATE TABLE mart.[Location]
 (
     Location_key int IDENTITY
@@ -45,16 +42,12 @@ CREATE TABLE mart.[Location]
     ,Job nvarchar(50) NOT NULL
     ,SiteLocationId uniqueidentifier NOT NULL
     ,Department nvarchar(30) NOT NULL
+    ,ExternalIdentifier nvarchar(255) NOT NULL
     ,Wallet_key int NOT NULL
     ,_created datetime2(7) NOT NULL CONSTRAINT [DF_mart.Location__created] DEFAULT SYSUTCDATETIME()
     ,_edited datetime2(7) NULL
     ,CONSTRAINT [PK_mart.Location] PRIMARY KEY (Location_key)
     ,CONSTRAINT [UQ_mart.Location_LocationId] UNIQUE(LocationId)
-)
-
-ALTER TABLE mart.[Location] WITH CHECK ADD CONSTRAINT [FK_mart.Location_dbo.mart.Wallet_Wallet_key] FOREIGN KEY(Wallet_key)
-REFERENCES mart.[Wallet] (Wallet_key);
-
-ALTER TABLE mart.[Location] CHECK CONSTRAINT [FK_mart.Location_dbo.mart.Wallet_Wallet_key];
-
+    ,CONSTRAINT [FK_mart.Location_dbo.mart.Wallet_Wallet_key] FOREIGN KEY (Wallet_key) REFERENCES mart.Wallet
+);
 GO
