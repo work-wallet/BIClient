@@ -100,12 +100,14 @@ internal class Processor
 
         } while (pageNumber < totalPages);
 
+        // update our change detection / logging table, so we only fetch new and changed data next time
+        // (must do this, even if no rows are obtained as lastSynchronizationVersion can otherwise become invalid)
+        await _dataStore.UpdateLastSyncAsync(_options.WalletId, _logType, context.SynchronizationVersion, context.FullCount);
+
         if (context.FullCount > 0)
         {
             _logger.LogInformation("A total of {FullCount} {DataType} records received.", context.FullCount, _dataType);
 
-            // finally update our change detection / logging table, so we only fetch new and changed data next time
-            await _dataStore.UpdateLastSyncAsync(_options.WalletId, _logType, context.SynchronizationVersion, context.FullCount);
         }
         else
         {
