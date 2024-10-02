@@ -4,7 +4,7 @@
     "annotations": [
       {
         "name": "PBIDesktopVersion",
-        "value": "2.131.1203.0 (24.07)"
+        "value": "2.136.1202.0 (24.09)"
       },
       {
         "name": "PBI_QueryOrder",
@@ -3756,6 +3756,10 @@
           {
             "name": "PBI_ResultType",
             "value": "Table"
+          },
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navigation"
           }
         ],
         "columns": [
@@ -4023,6 +4027,19 @@
             "lineageTag": "14c0ece8-917e-4421-8388-71ba58b9b0f6",
             "sourceColumn": "Department",
             "summarizeBy": "none"
+          },
+          {
+            "name": "Location External Identifier",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "2b5fb9f9-2c8d-4e0e-a4fe-925f0a3ed6d2",
+            "sourceColumn": "Location External Identifier",
+            "summarizeBy": "none"
           }
         ],
         "hierarchies": [
@@ -4062,7 +4079,7 @@
                 "    Source = Sql.Database(\"ww-powerbi-demo.database.windows.net\", \"powerbi\"),",
                 "    mart_Location = Source{[Schema=\"mart\",Item=\"Location\"]}[Data],",
                 "    #\"Removed Columns\" = Table.RemoveColumns(mart_Location,{\"_created\", \"_edited\"}),",
-                "    #\"Renamed Columns\" = Table.RenameColumns(#\"Removed Columns\",{{\"LocationType\", \"Location Type\"}})",
+                "    #\"Renamed Columns\" = Table.RenameColumns(#\"Removed Columns\",{{\"LocationType\", \"Location Type\"}, {\"ExternalIdentifier\", \"Location External Identifier\"}})",
                 "in",
                 "    #\"Renamed Columns\""
               ],
