@@ -1,0 +1,112 @@
+{
+  "version": "1.1.0",
+  "diagrams": [
+    {
+      "ordinal": 0,
+      "scrollPosition": {
+        "x": 0,
+        "y": 0
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 653.39233384001841,
+            "y": 445.85306182621969
+          },
+          "nodeIndex": "Location",
+          "nodeLineageTag": "187194fd-4417-4e1b-955b-f5ceb409025f",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 653.35464337102269,
+            "y": 241.5504191497169
+          },
+          "nodeIndex": "Wallet",
+          "size": {
+            "height": 152,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 431.19286924194608,
+            "y": -10
+          },
+          "nodeIndex": "Category",
+          "nodeLineageTag": "33416e20-5919-4d5b-b859-9f313e8f5f3a",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 79.236592387907422,
+            "y": 511.01610593757829
+          },
+          "nodeIndex": "Occupation Role",
+          "nodeLineageTag": "872828d3-e36a-4f6e-9c46-e18a28b223b9",
+          "size": {
+            "height": 152,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 366.3175530832965,
+            "y": 314.18201656790632
+          },
+          "nodeIndex": "Safety Card",
+          "nodeLineageTag": "53255aa4-be37-4d64-b53e-1b27126e4ad1",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 366.31575384534722,
+            "y": 724.78518107972252
+          },
+          "nodeIndex": "Status",
+          "nodeLineageTag": "84425ed7-13f5-4c96-83b9-b4fd8e59bc9d",
+          "size": {
+            "height": 152,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 10,
+            "y": 69.472733732883171
+          },
+          "nodeIndex": "Type",
+          "nodeLineageTag": "11f39b7f-717b-4c60-8580-56918dd88a5c",
+          "size": {
+            "height": 152,
+            "width": 234
+          },
+          "zIndex": 0
+        }
+      ],
+      "name": "All tables",
+      "zoomValue": 89.697437883892789,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    }
+  ],
+  "selectedDiagram": "All tables",
+  "defaultDiagram": "All tables"
+}
