@@ -49,8 +49,8 @@ CREATE TABLE mart.Induction
     ,_edited datetime2(7) NULL
     ,CONSTRAINT [PK_mart.Induction] PRIMARY KEY (Induction_key)
     ,CONSTRAINT [UQ_mart.Induction_InductionId_InductionVersion] UNIQUE(InductionId, InductionVersion)
-    ,CONSTRAINT [FK_mart.Induction_dbo.mart.InductionStatus_InductionStatus_key] FOREIGN KEY(InductionStatus_key) REFERENCES mart.InductionStatus
-    ,CONSTRAINT [FK_mart.Induction_dbo.mart.Wallet_Wallet_key] FOREIGN KEY(Wallet_key) REFERENCES mart.[Wallet]
+    ,CONSTRAINT [FK_mart.Induction_mart.InductionStatus_InductionStatus_key] FOREIGN KEY(InductionStatus_key) REFERENCES mart.InductionStatus
+    ,CONSTRAINT [FK_mart.Induction_mart.Wallet_Wallet_key] FOREIGN KEY(Wallet_key) REFERENCES mart.[Wallet]
 );
 
 CREATE TABLE mart.InductionTaken
@@ -69,9 +69,9 @@ CREATE TABLE mart.InductionTaken
     ,_edited datetime2(7) NULL
     ,CONSTRAINT [PK_mart.InductionTaken] PRIMARY KEY (InductionTaken_key)
     ,CONSTRAINT [UQ_mart.InductionTaken_InductionTakenId] UNIQUE(InductionTakenId)
-    ,CONSTRAINT [FK_mart.InductionTaken_dbo.mart.InductionTakenStatus_InductionTakenStatus_key] FOREIGN KEY(InductionTakenStatus_key) REFERENCES mart.InductionTakenStatus
-    ,CONSTRAINT [FK_mart.InductionTaken_dbo.mart.Induction_Induction_key] FOREIGN KEY(Induction_key) REFERENCES mart.Induction
-    ,CONSTRAINT [FK_mart.InductionTaken_dbo.mart.Wallet_Wallet_key] FOREIGN KEY(Wallet_key) REFERENCES mart.Wallet
+    ,CONSTRAINT [FK_mart.InductionTaken_mart.InductionTakenStatus_InductionTakenStatus_key] FOREIGN KEY(InductionTakenStatus_key) REFERENCES mart.InductionTakenStatus
+    ,CONSTRAINT [FK_mart.InductionTaken_mart.Induction_Induction_key] FOREIGN KEY(Induction_key) REFERENCES mart.Induction
+    ,CONSTRAINT [FK_mart.InductionTaken_mart.Wallet_Wallet_key] FOREIGN KEY(Wallet_key) REFERENCES mart.Wallet
 );
 
 CREATE TABLE mart.InductionCustomQuestion
@@ -84,7 +84,7 @@ CREATE TABLE mart.InductionCustomQuestion
     ,_edited datetime2(7) NULL
     ,CONSTRAINT [PK_mart.InductionCustomQuestion] PRIMARY KEY (InductionCustomQuestion_key)
     ,CONSTRAINT [UQ_mart.InductionCustomQuestion_Wallet_key_Title_Value] UNIQUE(Wallet_key, Title, [Value])
-    ,CONSTRAINT [FK_mart.InductionCustomQuestion_dbo.mart.Wallet_Wallet_key] FOREIGN KEY(Wallet_key) REFERENCES mart.[Wallet]
+    ,CONSTRAINT [FK_mart.InductionCustomQuestion_mart.Wallet_Wallet_key] FOREIGN KEY(Wallet_key) REFERENCES mart.[Wallet]
 );
 
 CREATE TABLE mart.InductionCustomQuestionFact
@@ -95,9 +95,9 @@ CREATE TABLE mart.InductionCustomQuestionFact
     ,_created datetime2(7) NOT NULL CONSTRAINT [DF_mart.InductionCustomQuestionFact__created] DEFAULT SYSUTCDATETIME()
     ,_edited datetime2(7) NULL
     ,CONSTRAINT [PK_mart.InductionCustomQuestionFact] PRIMARY KEY (InductionTaken_key, InductionCustomQuestion_key)
-    ,CONSTRAINT [FK_mart.InductionCustomQuestionFact_dbo.mart.InductionTaken_InductionTaken_key] FOREIGN KEY(InductionTaken_key) REFERENCES mart.InductionTaken
-    ,CONSTRAINT [FK_mart.InductionCustomQuestionFact_dbo.mart.InductionCustomQuestion_InductionCustomQuestion_key] FOREIGN KEY(InductionCustomQuestion_key) REFERENCES mart.InductionCustomQuestion
-    ,CONSTRAINT [FK_mart.InductionCustomQuestionFact_dbo.mart.Wallet_Wallet_key] FOREIGN KEY(Wallet_key) REFERENCES mart.Wallet
+    ,CONSTRAINT [FK_mart.InductionCustomQuestionFact_mart.InductionTaken_InductionTaken_key] FOREIGN KEY(InductionTaken_key) REFERENCES mart.InductionTaken
+    ,CONSTRAINT [FK_mart.InductionCustomQuestionFact_mart.InductionCustomQuestion_InductionCustomQuestion_key] FOREIGN KEY(InductionCustomQuestion_key) REFERENCES mart.InductionCustomQuestion
+    ,CONSTRAINT [FK_mart.InductionCustomQuestionFact_mart.Wallet_Wallet_key] FOREIGN KEY(Wallet_key) REFERENCES mart.Wallet
 );
 
 GO

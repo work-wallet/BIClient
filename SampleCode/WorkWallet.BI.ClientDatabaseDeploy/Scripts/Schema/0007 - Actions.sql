@@ -66,10 +66,10 @@ CREATE TABLE mart.[Action]
     ,_edited datetime2(7) NULL
     ,CONSTRAINT [PK_mart.Action] PRIMARY KEY (Action_key)
     ,CONSTRAINT [UQ_mart.Action_ActionId] UNIQUE(ActionId)
-    ,CONSTRAINT [FK_mart.Action_dbo.mart.ActionType_ActionType_key] FOREIGN KEY(ActionType_key) REFERENCES mart.ActionType
-    ,CONSTRAINT [FK_mart.Action_dbo.mart.ActionStatus_ActionStatus_key] FOREIGN KEY(ActionStatus_key) REFERENCES mart.ActionStatus
-    ,CONSTRAINT [FK_mart.Action_dbo.mart.ActionPriority_ActionPriority_key] FOREIGN KEY(ActionPriority_key) REFERENCES mart.ActionPriority
-    ,CONSTRAINT [FK_mart.Action_dbo.mart.Wallet_Wallet_key] FOREIGN KEY(Wallet_key) REFERENCES mart.Wallet
+    ,CONSTRAINT [FK_mart.Action_mart.ActionType_ActionType_key] FOREIGN KEY(ActionType_key) REFERENCES mart.ActionType
+    ,CONSTRAINT [FK_mart.Action_mart.ActionStatus_ActionStatus_key] FOREIGN KEY(ActionStatus_key) REFERENCES mart.ActionStatus
+    ,CONSTRAINT [FK_mart.Action_mart.ActionPriority_ActionPriority_key] FOREIGN KEY(ActionPriority_key) REFERENCES mart.ActionPriority
+    ,CONSTRAINT [FK_mart.Action_mart.Wallet_Wallet_key] FOREIGN KEY(Wallet_key) REFERENCES mart.Wallet
 );
 
 CREATE TABLE mart.ActionUpdate
@@ -85,9 +85,9 @@ CREATE TABLE mart.ActionUpdate
     ,_created datetime2(7) NOT NULL CONSTRAINT [DF_mart.ActionUpdate__created] DEFAULT SYSUTCDATETIME()
     ,_edited datetime2(7) NULL
     ,CONSTRAINT [PK_mart.ActionUpdate] PRIMARY KEY (ActionUpdate_key)
-    ,CONSTRAINT [FK_mart.ActionUpdate_dbo.mart.Action_Action_key] FOREIGN KEY(Action_key) REFERENCES mart.[Action]
-    ,CONSTRAINT [FK_mart.ActionUpdate_dbo.mart.ActionStatus_ActionStatus_key] FOREIGN KEY(ActionStatus_key) REFERENCES mart.ActionStatus
-    ,CONSTRAINT [FK_mart.ActionUpdate_dbo.mart.Wallet_Wallet_key] FOREIGN KEY(Wallet_key) REFERENCES mart.Wallet
+    ,CONSTRAINT [FK_mart.ActionUpdate_mart.Action_Action_key] FOREIGN KEY(Action_key) REFERENCES mart.[Action]
+    ,CONSTRAINT [FK_mart.ActionUpdate_mart.ActionStatus_ActionStatus_key] FOREIGN KEY(ActionStatus_key) REFERENCES mart.ActionStatus
+    ,CONSTRAINT [FK_mart.ActionUpdate_mart.Wallet_Wallet_key] FOREIGN KEY(Wallet_key) REFERENCES mart.Wallet
 );
 
 GO

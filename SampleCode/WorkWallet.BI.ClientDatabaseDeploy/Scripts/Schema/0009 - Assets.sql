@@ -53,8 +53,8 @@ CREATE TABLE mart.Asset
     ,_edited datetime2(7) NULL
     ,CONSTRAINT [PK_mart.Asset] PRIMARY KEY (Asset_key)
     ,CONSTRAINT [UQ_mart.Asset_AssetId] UNIQUE(AssetId)
-    ,CONSTRAINT [FK_mart.Asset_dbo.mart.AssetStatus_AssetStatus_key] FOREIGN KEY(AssetStatus_key) REFERENCES mart.AssetStatus
-    ,CONSTRAINT [FK_mart.Asset_dbo.mart.Wallet_Wallet_key] FOREIGN KEY(Wallet_key) REFERENCES mart.Wallet
+    ,CONSTRAINT [FK_mart.Asset_mart.AssetStatus_AssetStatus_key] FOREIGN KEY(AssetStatus_key) REFERENCES mart.AssetStatus
+    ,CONSTRAINT [FK_mart.Asset_mart.Wallet_Wallet_key] FOREIGN KEY(Wallet_key) REFERENCES mart.Wallet
 );
 
 CREATE TABLE mart.AssetProperty
@@ -65,8 +65,8 @@ CREATE TABLE mart.AssetProperty
     ,Wallet_key int NOT NULL
     ,_created datetime2(7) NOT NULL CONSTRAINT [DF_mart.AssetProperty__created] DEFAULT SYSUTCDATETIME()
     ,CONSTRAINT [PK_mart.AssetProperty] PRIMARY KEY (AssetProperty_key)
-    ,CONSTRAINT [FK_mart.AssetProperty_dbo.mart.AssetPropertyType_AssetPropertyType_key] FOREIGN KEY(AssetPropertyType_key) REFERENCES mart.AssetPropertyType
-    ,CONSTRAINT [FK_mart.AssetProperty_dbo.mart.Wallet_Wallet_key] FOREIGN KEY(Wallet_key) REFERENCES mart.Wallet
+    ,CONSTRAINT [FK_mart.AssetProperty_mart.AssetPropertyType_AssetPropertyType_key] FOREIGN KEY(AssetPropertyType_key) REFERENCES mart.AssetPropertyType
+    ,CONSTRAINT [FK_mart.AssetProperty_mart.Wallet_Wallet_key] FOREIGN KEY(Wallet_key) REFERENCES mart.Wallet
 );
 
 CREATE TABLE mart.AssetPropertyFact
@@ -78,9 +78,9 @@ CREATE TABLE mart.AssetPropertyFact
     ,Wallet_key int NOT NULL
     ,_created datetime2(7) NOT NULL CONSTRAINT [DF_mart.AssetPropertyFact__created] DEFAULT SYSUTCDATETIME()
     ,CONSTRAINT [PK_mart.AssetPropertyFact] PRIMARY KEY (AssetPropertyFact_key)
-    ,CONSTRAINT [FK_mart.AssetPropertyFact_dbo.mart.Asset_Asset_key] FOREIGN KEY(Asset_key) REFERENCES mart.Asset
-    ,CONSTRAINT [FK_mart.AssetPropertyFact_dbo.mart.AssetProperty_AssetProperty_key] FOREIGN KEY(AssetProperty_key) REFERENCES mart.AssetProperty
-    ,CONSTRAINT [FK_mart.AssetPropertyFact_dbo.mart.Wallet_Wallet_key] FOREIGN KEY(Wallet_key) REFERENCES mart.Wallet
+    ,CONSTRAINT [FK_mart.AssetPropertyFact_mart.Asset_Asset_key] FOREIGN KEY(Asset_key) REFERENCES mart.Asset
+    ,CONSTRAINT [FK_mart.AssetPropertyFact_mart.AssetProperty_AssetProperty_key] FOREIGN KEY(AssetProperty_key) REFERENCES mart.AssetProperty
+    ,CONSTRAINT [FK_mart.AssetPropertyFact_mart.Wallet_Wallet_key] FOREIGN KEY(Wallet_key) REFERENCES mart.Wallet
 );
 
 CREATE TABLE mart.AssetAssignment
@@ -96,8 +96,8 @@ CREATE TABLE mart.AssetAssignment
     ,_created datetime2(7) NOT NULL CONSTRAINT [DF_mart.AssetAssignment__created] DEFAULT SYSUTCDATETIME()
     ,_edited datetime2(7) NULL
     ,CONSTRAINT [PK_mart.AssetAssignment] PRIMARY KEY (AssetAssignment_key)
-    ,CONSTRAINT [FK_mart.AssetAssignment_dbo.mart.AssetAssignmentType_AssetAssignmentType_key] FOREIGN KEY(AssetAssignmentType_key) REFERENCES mart.AssetAssignmentType
-    ,CONSTRAINT [FK_mart.AssetAssignment_dbo.mart.Wallet_Wallet_key] FOREIGN KEY(Wallet_key) REFERENCES mart.Wallet
+    ,CONSTRAINT [FK_mart.AssetAssignment_mart.AssetAssignmentType_AssetAssignmentType_key] FOREIGN KEY(AssetAssignmentType_key) REFERENCES mart.AssetAssignmentType
+    ,CONSTRAINT [FK_mart.AssetAssignment_mart.Wallet_Wallet_key] FOREIGN KEY(Wallet_key) REFERENCES mart.Wallet
 );
 
 CREATE TABLE mart.AssetAssignmentFact
@@ -112,9 +112,9 @@ CREATE TABLE mart.AssetAssignmentFact
     ,Wallet_key int NOT NULL
     ,_created datetime2(7) NOT NULL CONSTRAINT [DF_mart.AssetAssignmentFact__created] DEFAULT SYSUTCDATETIME()
     ,CONSTRAINT [PK_mart.AssetAssignmentFact] PRIMARY KEY (AssetAssignmentFact_key)
-    ,CONSTRAINT [FK_mart.AssetAssignmentFact_dbo.mart.Asset_Asset_key] FOREIGN KEY(Asset_key) REFERENCES mart.Asset
-    ,CONSTRAINT [FK_mart.AssetAssignmentFact_dbo.mart.AssetAssignment_AssetAssignment_key] FOREIGN KEY(AssetAssignment_key) REFERENCES mart.AssetAssignment
-    ,CONSTRAINT [FK_mart.AssetAssignmentFact_dbo.mart.Wallet_Wallet_key] FOREIGN KEY(Wallet_key) REFERENCES mart.Wallet
+    ,CONSTRAINT [FK_mart.AssetAssignmentFact_mart.Asset_Asset_key] FOREIGN KEY(Asset_key) REFERENCES mart.Asset
+    ,CONSTRAINT [FK_mart.AssetAssignmentFact_mart.AssetAssignment_AssetAssignment_key] FOREIGN KEY(AssetAssignment_key) REFERENCES mart.AssetAssignment
+    ,CONSTRAINT [FK_mart.AssetAssignmentFact_mart.Wallet_Wallet_key] FOREIGN KEY(Wallet_key) REFERENCES mart.Wallet
 );
 
 GO

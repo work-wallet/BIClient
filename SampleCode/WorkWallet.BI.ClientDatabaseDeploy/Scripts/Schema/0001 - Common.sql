@@ -11,7 +11,7 @@ CREATE TABLE mart.ETL_ChangeDetection
     ,LastProcessedTime datetimeoffset(7) NOT NULL
     ,LastSynchronizationVersion bigint NOT NULL
     ,RowsProcessed int NOT NULL
-    ,CONSTRAINT [PK_mart.ETL_ChangeDetection] PRIMARY KEY (WalletId, IsLatest, LogType, LastProcessedTime )
+    ,CONSTRAINT [PK_mart.ETL_ChangeDetection] PRIMARY KEY (WalletId, IsLatest, LogType, LastProcessedTime)
 );
 
 CREATE TABLE mart.Wallet
@@ -48,6 +48,6 @@ CREATE TABLE mart.[Location]
     ,_edited datetime2(7) NULL
     ,CONSTRAINT [PK_mart.Location] PRIMARY KEY (Location_key)
     ,CONSTRAINT [UQ_mart.Location_LocationId] UNIQUE(LocationId)
-    ,CONSTRAINT [FK_mart.Location_dbo.mart.Wallet_Wallet_key] FOREIGN KEY (Wallet_key) REFERENCES mart.Wallet
+    ,CONSTRAINT [FK_mart.Location_mart.Wallet_Wallet_key] FOREIGN KEY (Wallet_key) REFERENCES mart.Wallet
 );
 GO
