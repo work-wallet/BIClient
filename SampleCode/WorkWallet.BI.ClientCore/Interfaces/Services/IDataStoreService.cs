@@ -6,4 +6,5 @@ public interface IDataStoreService
     public Task LoadAsync(string dataType, string json);
     public Task UpdateLastSyncAsync(Guid walletId, string logType, long synchronizationVersion, int rowsProcessed);
     public Task ResetAsync(Guid walletId, string dataType);
+    public Task PostProcessAsync(Guid walletId, string dataType);
 }

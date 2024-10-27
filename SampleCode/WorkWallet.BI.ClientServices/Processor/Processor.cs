@@ -113,6 +113,9 @@ internal class Processor
         {
             _logger.LogInformation("No {DataType} records received.", _dataType);
         }
+
+        // perform any post processing
+        await _dataStore.PostProcessAsync(_options.WalletId, _dataType);
     }
 
     private async Task<string> CallApiAsync(long? lastSynchronizationVersion, int pageNumber)

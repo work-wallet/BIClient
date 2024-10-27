@@ -5,7 +5,7 @@ namespace WorkWallet.BI.ClientDatabaseDeploy.Utils;
 
 internal class ScriptUtils
 {
-    internal static ScriptFileType ParseScriptType(string scriptName)
+    internal static ScriptFileType ParseScriptFileType(string scriptName)
     {
         // the scriptName is passed in with the name of assembly and folders with '.' replacing the path separator.
         string? assemblyName = Assembly.GetExecutingAssembly().GetName().Name!.Replace("/", ".");

@@ -5,7 +5,7 @@
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <AssemblyVersion>3.2.0.0</AssemblyVersion>
+    <AssemblyVersion>3.2.1.0</AssemblyVersion>
     <UserSecretsId>a745c317-cecd-4df8-877a-5f2fdd497e26</UserSecretsId>
   </PropertyGroup>
 
@@ -73,6 +73,13 @@
     <None Remove="Scripts\StoredProcedures\mart.ETL_MaintainSiteAuditDimension.sql" />
     <None Remove="Scripts\StoredProcedures\mart.ETL_MaintainSiteAuditTypeDimension.sql" />
     <None Remove="Scripts\StoredProcedures\mart.ETL_MaintainWalletDimension.sql" />
+    <None Remove="Scripts\StoredProcedures\mart.ETL_PostProcessActions.sql" />
+    <None Remove="Scripts\StoredProcedures\mart.ETL_PostProcessAssets.sql" />
+    <None Remove="Scripts\StoredProcedures\mart.ETL_PostProcessInductions.sql" />
+    <None Remove="Scripts\StoredProcedures\mart.ETL_PostProcessPermits.sql" />
+    <None Remove="Scripts\StoredProcedures\mart.ETL_PostProcessReportedIssues.sql" />
+    <None Remove="Scripts\StoredProcedures\mart.ETL_PostProcessSafetyCards.sql" />
+    <None Remove="Scripts\StoredProcedures\mart.ETL_PostProcessSiteAudits.sql" />
     <None Remove="Scripts\StoredProcedures\mart.ETL_ResetActions.sql" />
     <None Remove="Scripts\StoredProcedures\mart.ETL_ResetAssets.sql" />
     <None Remove="Scripts\StoredProcedures\mart.ETL_ResetCommon.sql" />
@@ -132,6 +139,13 @@
     <EmbeddedResource Include="Scripts\Schema\0007 - Actions.sql" />
     <EmbeddedResource Include="Scripts\Schema\0008 - PermitsFix.sql" />
     <EmbeddedResource Include="Scripts\Schema\0009 - Assets.sql" />
+    <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_PostProcessSiteAudits.sql" />
+    <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_PostProcessActions.sql" />
+    <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_PostProcessAssets.sql" />
+    <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_PostProcessInductions.sql" />
+    <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_PostProcessPermits.sql" />
+    <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_PostProcessReportedIssues.sql" />
+    <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_PostProcessSafetyCards.sql" />
     <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_MaintainSafetyCardDimension.sql" />
     <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_MaintainSafetyCardCategoryDimension.sql" />
     <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_LoadSafetyCards.sql" />
@@ -221,9 +235,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="dbup-sqlserver" Version="5.0.40" />
+    <PackageReference Include="dbup-sqlserver" Version="6.0.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="8.0.0" />
-    <PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.1" />
   </ItemGroup>
 
 </Project>
