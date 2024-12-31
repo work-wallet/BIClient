@@ -129,6 +129,7 @@
     <EmbeddedResource Include="Scripts\Clean\DropStoredProcedures.sql" />
     <EmbeddedResource Include="Scripts\Schema\0001 - Common.sql" />
     <EmbeddedResource Include="Scripts\Schema\0011 - Rename FK constraints.sql" />
+    <EmbeddedResource Include="Scripts\Schema\0013 - ReportedIssuesFix.sql" />
     <EmbeddedResource Include="Scripts\Schema\0012 - SafetyCards.sql" />
     <EmbeddedResource Include="Scripts\Schema\0010 - Location ExternalIdentifier.sql" />
     <EmbeddedResource Include="Scripts\Schema\0002 - CommonPatch.sql" />
