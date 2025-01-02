@@ -140,6 +140,8 @@
     <EmbeddedResource Include="Scripts\Schema\0007 - Actions.sql" />
     <EmbeddedResource Include="Scripts\Schema\0008 - PermitsFix.sql" />
     <EmbeddedResource Include="Scripts\Schema\0009 - Assets.sql" />
+    <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_LoadAudits.sql" />
+    <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_ResetAudits.sql" />
     <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_PostProcessSiteAudits.sql" />
     <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_PostProcessActions.sql" />
     <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_PostProcessAssets.sql" />
