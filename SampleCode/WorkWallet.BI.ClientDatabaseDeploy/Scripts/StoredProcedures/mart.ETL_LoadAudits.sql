@@ -80,7 +80,7 @@ BEGIN
 
         INSERT INTO @auditTypeTable
         (
-		    AuditTypeId
+            AuditTypeId
             ,AuditTypeVersion
             ,AuditType
             ,[Description]
@@ -93,12 +93,12 @@ BEGIN
             ,GradingSetIsScore
             ,ReportingEnabled
             ,ReportingAbbreviation
-		    ,WalletId
+            ,WalletId
         )
         SELECT * FROM OPENJSON(@json, '$.AuditTypes')
         WITH
         (
-		    AuditTypeId uniqueidentifier
+            AuditTypeId uniqueidentifier
             ,AuditTypeVersion int
             ,AuditType nvarchar(500)
             ,[Description] nvarchar(2000)
@@ -111,10 +111,62 @@ BEGIN
             ,GradingSetIsScore bit
             ,ReportingEnabled bit
             ,ReportingAbbreviation nvarchar(4)
-		    ,WalletId uniqueidentifier
+            ,WalletId uniqueidentifier
         );
 
         EXEC mart.ETL_MaintainAuditTypeDimension @auditTypeTable = @auditTypeTable;
+
+        -- maintain Audit dimension
+
+        DECLARE @auditTable mart.ETL_AuditTable;
+
+        INSERT INTO @auditTable
+        (
+            AuditId
+            ,Reference
+            ,AuditReference
+            ,AuditGroup
+            ,AuditStatusCode
+            ,AuditTypeId
+            ,AuditTypeVersion
+            ,LocationId
+            ,InspectedOn
+            ,[Description]
+            ,TotalScore
+            ,TotalPotentialScore
+            ,AverageScore
+            ,AveragePotentialScore
+            ,PercentageScore
+            ,Flags
+            ,GradingSetOption
+            ,ExternalIdentifier
+            ,WalletId
+        )
+        SELECT * FROM OPENJSON(@json, '$.Audits')
+        WITH
+        (
+            AuditId uniqueidentifier
+            ,Reference int
+            ,AuditReference nvarchar(50)
+            ,AuditGroup nvarchar(40)
+            ,AuditStatusCode int
+            ,AuditTypeId uniqueidentifier
+            ,AuditTypeVersion int
+            ,LocationId uniqueidentifier
+            ,InspectedOn datetime
+            ,[Description] nvarchar(max)
+            ,TotalScore int
+            ,TotalPotentialScore int
+            ,AverageScore decimal(38,6)
+            ,AveragePotentialScore decimal(38,6)
+            ,PercentageScore decimal(7,6)
+            ,Flags int
+            ,GradingSetOption nvarchar(250)
+            ,ExternalIdentifier nvarchar(255)
+            ,WalletId uniqueidentifier
+        );
+
+        EXEC mart.ETL_MaintainAuditDimension @auditTable = @auditTable;
 
         COMMIT TRANSACTION;
     END TRY

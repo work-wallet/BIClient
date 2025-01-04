@@ -141,6 +141,7 @@
     <EmbeddedResource Include="Scripts\Schema\0007 - Actions.sql" />
     <EmbeddedResource Include="Scripts\Schema\0008 - PermitsFix.sql" />
     <EmbeddedResource Include="Scripts\Schema\0009 - Assets.sql" />
+    <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_MaintainAuditDimension.sql" />
     <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_MaintainAuditTypeDimension.sql" />
     <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_PostProcessAudits.sql" />
     <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_LoadAudits.sql" />
@@ -210,6 +211,7 @@
     <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_ResetReportedIssues.sql" />
     <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_ResetSiteAudits.sql" />
     <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_UpdateLastSync.sql" />
+    <EmbeddedResource Include="Scripts\Types\mart.ETL_AuditTable.sql" />
     <EmbeddedResource Include="Scripts\Types\mart.ETL_AuditTypeTable.sql" />
     <EmbeddedResource Include="Scripts\Types\mart.ETL_SafetyCardTable.sql" />
     <EmbeddedResource Include="Scripts\Types\mart.ETL_SafetyCardCategoryTable.sql" />
