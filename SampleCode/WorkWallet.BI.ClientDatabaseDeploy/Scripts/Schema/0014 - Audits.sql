@@ -66,4 +66,28 @@ INSERT INTO mart.Unit (UnitCode, [Group], Unit, UnitAcronym) VALUES (31, N'Misce
 INSERT INTO mart.Unit (UnitCode, [Group], Unit, UnitAcronym) VALUES (32, N'Miscellaneous', N'Percent',                N'%');
 INSERT INTO mart.Unit (UnitCode, [Group], Unit, UnitAcronym) VALUES (33, N'Miscellaneous', N'Pounds Per Square Inch', N'psi');
 
+CREATE TABLE mart.AuditType
+(
+    AuditType_key int IDENTITY
+    ,AuditTypeId uniqueidentifier NOT NULL /* business key */
+    ,AuditTypeVersion int NOT NULL         /* business key */
+    ,AuditType nvarchar(500) NOT NULL
+    ,[Description] nvarchar(2000) NOT NULL
+    ,ScoringEnabled bit NOT NULL
+    ,DisplayPercentage bit NOT NULL
+    ,DisplayTotalScore bit NOT NULL
+    ,DisplayAverageScore bit NOT NULL
+    ,GradingSet nvarchar(100) NOT NULL
+    ,GradingSetIsPercentage bit NOT NULL
+    ,GradingSetIsScore bit NOT NULL
+    ,ReportingEnabled bit NOT NULL
+    ,ReportingAbbreviation nvarchar(4) NOT NULL
+    ,Wallet_key int NOT NULL
+    ,_created datetime2(7) NOT NULL CONSTRAINT [DF_mart.AuditType__created] DEFAULT SYSUTCDATETIME()
+    ,_edited datetime2(7) NULL
+    ,CONSTRAINT [PK_mart.AuditType] PRIMARY KEY (AuditType_key)
+    ,CONSTRAINT [UQ_mart.AuditType_AuditTypeId_AuditTypeVersion] UNIQUE(AuditTypeId, AuditTypeVersion)
+    ,CONSTRAINT [FK_mart.AuditType_mart.Wallet_Wallet_key] FOREIGN KEY(Wallet_key) REFERENCES mart.Wallet
+);
+
 GO

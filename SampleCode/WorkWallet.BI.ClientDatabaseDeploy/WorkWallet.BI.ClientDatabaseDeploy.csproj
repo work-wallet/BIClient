@@ -129,6 +129,7 @@
     <EmbeddedResource Include="Scripts\Clean\DropStoredProcedures.sql" />
     <EmbeddedResource Include="Scripts\Schema\0001 - Common.sql" />
     <EmbeddedResource Include="Scripts\Schema\0011 - Rename FK constraints.sql" />
+    <EmbeddedResource Include="Scripts\Schema\0014 - Audits.sql" />
     <EmbeddedResource Include="Scripts\Schema\0013 - ReportedIssuesFix.sql" />
     <EmbeddedResource Include="Scripts\Schema\0012 - SafetyCards.sql" />
     <EmbeddedResource Include="Scripts\Schema\0010 - Location ExternalIdentifier.sql" />
@@ -140,6 +141,7 @@
     <EmbeddedResource Include="Scripts\Schema\0007 - Actions.sql" />
     <EmbeddedResource Include="Scripts\Schema\0008 - PermitsFix.sql" />
     <EmbeddedResource Include="Scripts\Schema\0009 - Assets.sql" />
+    <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_MaintainAuditTypeDimension.sql" />
     <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_PostProcessAudits.sql" />
     <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_LoadAudits.sql" />
     <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_ResetAudits.sql" />
@@ -208,6 +210,7 @@
     <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_ResetReportedIssues.sql" />
     <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_ResetSiteAudits.sql" />
     <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_UpdateLastSync.sql" />
+    <EmbeddedResource Include="Scripts\Types\mart.ETL_AuditTypeTable.sql" />
     <EmbeddedResource Include="Scripts\Types\mart.ETL_SafetyCardTable.sql" />
     <EmbeddedResource Include="Scripts\Types\mart.ETL_SafetyCardCategoryTable.sql" />
     <EmbeddedResource Include="Scripts\Types\mart.ETL_AssetAssignmentTable.sql" />

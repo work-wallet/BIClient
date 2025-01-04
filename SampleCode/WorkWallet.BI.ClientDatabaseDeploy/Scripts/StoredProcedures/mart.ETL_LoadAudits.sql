@@ -74,6 +74,48 @@ BEGIN
 
         EXEC mart.ETL_MaintainLocationDimension @locationTable = @locationTable;
 
+        -- maintain AuditType dimension
+
+        DECLARE @auditTypeTable mart.ETL_AuditTypeTable;
+
+        INSERT INTO @auditTypeTable
+        (
+		    AuditTypeId
+            ,AuditTypeVersion
+            ,AuditType
+            ,[Description]
+            ,ScoringEnabled
+            ,DisplayPercentage
+            ,DisplayTotalScore
+            ,DisplayAverageScore
+            ,GradingSet
+            ,GradingSetIsPercentage
+            ,GradingSetIsScore
+            ,ReportingEnabled
+            ,ReportingAbbreviation
+		    ,WalletId
+        )
+        SELECT * FROM OPENJSON(@json, '$.AuditTypes')
+        WITH
+        (
+		    AuditTypeId uniqueidentifier
+            ,AuditTypeVersion int
+            ,AuditType nvarchar(500)
+            ,[Description] nvarchar(2000)
+            ,ScoringEnabled bit
+            ,DisplayPercentage bit
+            ,DisplayTotalScore bit
+            ,DisplayAverageScore bit
+            ,GradingSet nvarchar(100)
+            ,GradingSetIsPercentage bit
+            ,GradingSetIsScore bit
+            ,ReportingEnabled bit
+            ,ReportingAbbreviation nvarchar(4)
+		    ,WalletId uniqueidentifier
+        );
+
+        EXEC mart.ETL_MaintainAuditTypeDimension @auditTypeTable = @auditTypeTable;
+
         COMMIT TRANSACTION;
     END TRY
     BEGIN CATCH
