@@ -166,6 +166,7 @@ BEGIN
             ,WalletId uniqueidentifier
         );
 
+        EXEC mart.ETL_MaintainAuditGroupDimension @auditTable = @auditTable;
         EXEC mart.ETL_MaintainAuditDimension @auditTable = @auditTable;
 
         COMMIT TRANSACTION;

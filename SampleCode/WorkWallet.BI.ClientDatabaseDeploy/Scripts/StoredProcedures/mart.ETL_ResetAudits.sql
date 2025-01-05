@@ -12,7 +12,14 @@ BEGIN
 
     DECLARE @rows int = 0;
 
-    -- TODO
+    DELETE FROM mart.[Audit] WHERE Wallet_key = @wallet_key;
+    SET @rows = @rows + @@ROWCOUNT;
+
+    DELETE FROM mart.AuditGroup WHERE Wallet_key = @wallet_key;
+    SET @rows = @rows + @@ROWCOUNT;
+
+    DELETE FROM mart.AuditType WHERE Wallet_key = @wallet_key;
+    SET @rows = @rows + @@ROWCOUNT;
 
     PRINT 'RESET (deleting old data), total number of rows deleted = ' + CAST(@rows AS varchar);
 

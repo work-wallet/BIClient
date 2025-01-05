@@ -90,13 +90,25 @@ CREATE TABLE mart.AuditType
     ,CONSTRAINT [FK_mart.AuditType_mart.Wallet_Wallet_key] FOREIGN KEY(Wallet_key) REFERENCES mart.Wallet
 );
 
+CREATE TABLE mart.AuditGroup
+(
+    AuditGroup_key int IDENTITY
+    ,AuditGroup nvarchar(40) NOT NULL /* business key */
+    ,Wallet_key int NOT NULL /* business key */
+    ,_created datetime2(7) NOT NULL CONSTRAINT [DF_mart.AuditGroup__created] DEFAULT SYSUTCDATETIME()
+    ,_edited datetime2(7) NULL
+    ,CONSTRAINT [PK_mart.AuditGroup] PRIMARY KEY (AuditGroup_key)
+    ,CONSTRAINT [UQ_mart.AuditGroup_AuditGroup] UNIQUE(Wallet_key, AuditGroup)
+    ,CONSTRAINT [FK_mart.AuditGroup_mart.Wallet_Wallet_key] FOREIGN KEY(Wallet_key) REFERENCES mart.Wallet
+);
+
 CREATE TABLE mart.[Audit]
 (
     Audit_key int IDENTITY
     ,AuditId uniqueidentifier NOT NULL /* business key */
     ,Reference int NOT NULL
     ,AuditReference nvarchar(50) NOT NULL
-    ,AuditGroup nvarchar(40) NOT NULL
+    ,AuditGroup_key int NOT NULL
     ,AuditStatus_key int NOT NULL
     ,AuditType_key int NOT NULL
     ,Location_key int NOT NULL
@@ -115,6 +127,7 @@ CREATE TABLE mart.[Audit]
     ,_edited datetime2(7) NULL
     ,CONSTRAINT [PK_mart.Audit] PRIMARY KEY (Audit_key)
     ,CONSTRAINT [UQ_mart.Audit_AuditId] UNIQUE(AuditId)
+    ,CONSTRAINT [FK_mart.Audit_mart.AuditGroup_AuditGroup_key] FOREIGN KEY(AuditGroup_key) REFERENCES mart.AuditGroup
     ,CONSTRAINT [FK_mart.Audit_mart.AuditStatus_AuditStatus_key] FOREIGN KEY(AuditStatus_key) REFERENCES mart.AuditStatus
     ,CONSTRAINT [FK_mart.Audit_mart.AuditType_AuditType_key] FOREIGN KEY(AuditType_key) REFERENCES mart.AuditType
     ,CONSTRAINT [FK_mart.Audit_mart.Location_Location_key] FOREIGN KEY(Location_key) REFERENCES mart.[Location]

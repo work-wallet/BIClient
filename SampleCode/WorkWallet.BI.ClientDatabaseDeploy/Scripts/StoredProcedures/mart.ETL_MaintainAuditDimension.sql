@@ -6,13 +6,13 @@ AS
 BEGIN
     SET NOCOUNT ON;
 
-    MERGE mart.Audit AS target
+    MERGE mart.[Audit] AS target
     USING (
         SELECT
             a.AuditId,
             a.Reference,
             a.AuditReference,
-            a.AuditGroup,
+            g.AuditGroup_key,
             s.AuditStatus_key,
             t.AuditType_key,
             ol.Location_key,
@@ -33,12 +33,13 @@ BEGIN
             INNER JOIN mart.AuditType AS t ON a.AuditTypeId = t.AuditTypeId AND a.AuditTypeVersion = t.AuditTypeVersion
             INNER JOIN mart.[Location] AS ol ON a.LocationId = ol.LocationId
             INNER JOIN mart.Wallet AS w ON a.WalletId = w.WalletId
+            INNER JOIN mart.AuditGroup AS g ON w.Wallet_key = g.Wallet_key AND a.AuditGroup = g.AuditGroup
     ) AS source
     ON target.AuditId = source.AuditId
     WHEN MATCHED AND (
         target.Reference <> source.Reference
         OR target.AuditReference <> source.AuditReference
-        OR target.AuditGroup <> source.AuditGroup
+        OR target.AuditGroup_key <> source.AuditGroup_key
         OR target.AuditStatus_key <> source.AuditStatus_key
         OR target.AuditType_key <> source.AuditType_key
         OR target.Location_key <> source.Location_key
@@ -58,7 +59,7 @@ BEGIN
         UPDATE SET
             Reference = source.Reference,
             AuditReference = source.AuditReference,
-            AuditGroup = source.AuditGroup,
+            AuditGroup_key = source.AuditGroup_key,
             AuditStatus_key = source.AuditStatus_key,
             AuditType_key = source.AuditType_key,
             Location_key = source.Location_key,
@@ -79,7 +80,7 @@ BEGIN
             AuditId,
             Reference,
             AuditReference,
-            AuditGroup,
+            AuditGroup_key,
             AuditStatus_key,
             AuditType_key,
             Location_key,
@@ -98,7 +99,7 @@ BEGIN
             source.AuditId,
             source.Reference,
             source.AuditReference,
-            source.AuditGroup,
+            source.AuditGroup_key,
             source.AuditStatus_key,
             source.AuditType_key,
             source.Location_key,
