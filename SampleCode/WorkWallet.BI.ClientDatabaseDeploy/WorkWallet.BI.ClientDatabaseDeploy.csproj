@@ -141,6 +141,9 @@
     <EmbeddedResource Include="Scripts\Schema\0007 - Actions.sql" />
     <EmbeddedResource Include="Scripts\Schema\0008 - PermitsFix.sql" />
     <EmbeddedResource Include="Scripts\Schema\0009 - Assets.sql" />
+    <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_DeleteAuditFacts.sql" />
+    <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_LoadAuditInspectedByFact.sql" />
+    <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_MaintainContactDimension.sql" />
     <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_MaintainAuditGroupDimension.sql" />
     <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_MaintainAuditDimension.sql" />
     <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_MaintainAuditTypeDimension.sql" />
@@ -212,6 +215,7 @@
     <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_ResetReportedIssues.sql" />
     <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_ResetSiteAudits.sql" />
     <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_UpdateLastSync.sql" />
+    <EmbeddedResource Include="Scripts\Types\mart.ETL_ContactTable.sql" />
     <EmbeddedResource Include="Scripts\Types\mart.ETL_AuditInspectedByTable.sql" />
     <EmbeddedResource Include="Scripts\Types\mart.ETL_AuditTable.sql" />
     <EmbeddedResource Include="Scripts\Types\mart.ETL_AuditTypeTable.sql" />

@@ -1,7 +1,7 @@
 DROP PROCEDURE IF EXISTS mart.ETL_MaintainAuditDimension;
 GO
 
-CREATE PROCEDURE mart.ETL_MaintainAuditDimension @AuditTable mart.ETL_AuditTable READONLY
+CREATE PROCEDURE mart.ETL_MaintainAuditDimension @auditTable mart.ETL_AuditTable READONLY
 AS
 BEGIN
     SET NOCOUNT ON;
@@ -28,7 +28,7 @@ BEGIN
             a.ExternalIdentifier,
             w.Wallet_key
         FROM
-            @AuditTable AS a
+            @auditTable AS a
             INNER JOIN mart.AuditGroup AS g ON a.AuditGroupId = g.AuditGroupId
             INNER JOIN mart.AuditStatus AS s ON a.AuditStatusCode = s.AuditStatusCode
             INNER JOIN mart.AuditType AS t ON a.AuditTypeId = t.AuditTypeId AND a.AuditTypeVersion = t.AuditTypeVersion

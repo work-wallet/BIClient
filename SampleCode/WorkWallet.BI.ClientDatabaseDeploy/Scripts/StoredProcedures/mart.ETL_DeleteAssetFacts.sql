@@ -11,7 +11,6 @@ BEGIN
     INNER JOIN mart.Asset ON apf.Asset_key = Asset.Asset_key
     INNER JOIN @assetTable AS a ON Asset.AssetId = a.AssetId;
 
-
     PRINT 'DELETE mart.AssetPropertyFact, number of rows = ' + CAST(@@ROWCOUNT AS varchar);
 
     DELETE mart.AssetAssignmentFact

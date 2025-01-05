@@ -171,9 +171,12 @@ BEGIN
         EXEC mart.ETL_MaintainAuditGroupDimension @auditTable = @auditTable;
         EXEC mart.ETL_MaintainAuditDimension @auditTable = @auditTable;
 
+        EXEC mart.ETL_DeleteAuditFacts @auditTable = @auditTable;
+
         -- maintain AuditInspectedBy dimension
 
         DECLARE @auditInspectedByTable mart.ETL_AuditInspectedByTable;
+        DECLARE @contactTable mart.ETL_ContactTable;
 
         INSERT INTO @auditInspectedByTable
         (
@@ -191,7 +194,20 @@ BEGIN
             ,WalletId uniqueidentifier
         );
 
-        --EXEC mart.ETL_MaintainAuditInspectedByDimension @auditInspectedByTable = @auditInspectedByTable;
+        INSERT INTO @contactTable
+        (
+            ContactId
+            ,[Name]
+            ,WalletId
+        )
+        SELECT DISTINCT
+            ContactId
+            ,[Name]
+            ,WalletId
+        FROM @auditInspectedByTable;
+
+        EXEC mart.ETL_MaintainContactDimension @contactTable = @contactTable;
+        EXEC mart.ETL_LoadAuditInspectedByFact @auditInspectedByTable = @auditInspectedByTable;
 
         COMMIT TRANSACTION;
     END TRY
