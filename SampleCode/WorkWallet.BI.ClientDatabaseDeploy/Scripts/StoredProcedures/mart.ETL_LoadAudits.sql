@@ -302,6 +302,35 @@ BEGIN
         EXEC mart.ETL_MaintainAuditChecklistOptionDimension @auditChecklistAnswerTable = @auditChecklistAnswerTable;
         EXEC mart.ETL_LoadAuditChecklistAnswerFact @auditChecklistAnswerTable = @auditChecklistAnswerTable;
 
+        -- load the AuditBranchOption data
+
+        DECLARE @auditBranchOptionTable mart.ETL_AuditBranchOptionTable;
+
+        INSERT INTO @auditBranchOptionTable
+        (
+            AuditId
+            ,BranchId
+            ,OptionId
+            ,Branch
+            ,[Value]
+            ,[Order]
+            ,WalletId
+        )
+        SELECT * FROM OPENJSON(@json, '$.AuditBranchOptions')
+        WITH
+        (
+            AuditId uniqueidentifier
+            ,BranchId uniqueidentifier
+            ,OptionId uniqueidentifier
+            ,Branch nvarchar(100)
+            ,[Value] nvarchar(250)
+            ,[Order] int
+            ,WalletId uniqueidentifier
+        );
+
+        EXEC mart.ETL_MaintainAuditBranchOptionDimension @auditBranchOptionTable = @auditBranchOptionTable;
+        EXEC mart.ETL_LoadAuditBranchOptionFact @auditBranchOptionTable = @auditBranchOptionTable;
+
         COMMIT TRANSACTION;
     END TRY
     BEGIN CATCH

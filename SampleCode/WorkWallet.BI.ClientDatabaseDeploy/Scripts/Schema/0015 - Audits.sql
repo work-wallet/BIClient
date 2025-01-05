@@ -160,6 +160,7 @@ CREATE TABLE mart.AuditNumericQuestion
     ,_created datetime2(7) NOT NULL CONSTRAINT [DF_mart.AuditNumericQuestion__created] DEFAULT SYSUTCDATETIME()
     ,_edited datetime2(7) NULL
     ,CONSTRAINT [PK_mart.AuditNumericQuestion] PRIMARY KEY (AuditNumericQuestion_key)
+    ,CONSTRAINT [UQ_mart.AuditNumericQuestion_QuestionId] UNIQUE(QuestionId)
     ,CONSTRAINT [FK_mart.AuditNumericQuestion_mart.Unit_Unit_key] FOREIGN KEY(Unit_key) REFERENCES mart.Unit
     ,CONSTRAINT [FK_mart.AuditNumericQuestion_mart.Wallet_Wallet_key] FOREIGN KEY(Wallet_key) REFERENCES mart.Wallet
 );
@@ -189,6 +190,7 @@ CREATE TABLE mart.AuditDateTimeQuestion
     ,_created datetime2(7) NOT NULL CONSTRAINT [DF_mart.AuditDateTimeQuestion__created] DEFAULT SYSUTCDATETIME()
     ,_edited datetime2(7) NULL
     ,CONSTRAINT [PK_mart.AuditDateTimeQuestion] PRIMARY KEY (AuditDateTimeQuestion_key)
+    ,CONSTRAINT [UQ_mart.AuditDateTimeQuestion_QuestionId] UNIQUE(QuestionId)
     ,CONSTRAINT [FK_mart.AuditDateTimeQuestion_mart.Wallet_Wallet_key] FOREIGN KEY(Wallet_key) REFERENCES mart.Wallet
 );
 
@@ -220,6 +222,7 @@ CREATE TABLE mart.AuditChecklistOption
     ,_created datetime2(7) NOT NULL CONSTRAINT [DF_mart.AuditChecklistOption__created] DEFAULT SYSUTCDATETIME()
     ,_edited datetime2(7) NULL
     ,CONSTRAINT [PK_mart.AuditChecklistOption] PRIMARY KEY (AuditChecklistOption_key)
+    ,CONSTRAINT [UQ_mart.AuditChecklistOption_ChecklistId_OptionId] UNIQUE(ChecklistId, OptionId)
     ,CONSTRAINT [FK_mart.AuditChecklistOption_mart.Wallet_Wallet_key] FOREIGN KEY(Wallet_key) REFERENCES mart.Wallet
 );
 
@@ -233,6 +236,34 @@ CREATE TABLE mart.AuditChecklistAnswerFact
     ,CONSTRAINT [PK_mart.AuditChecklistAnswerFact] PRIMARY KEY (Audit_key, AuditChecklistOption_key)
     ,CONSTRAINT [FK_mart.AuditChecklistAnswerFact_mart.AuditChecklistOption_AuditChecklistOption_key] FOREIGN KEY(AuditChecklistOption_key) REFERENCES mart.AuditChecklistOption
     ,CONSTRAINT [FK_mart.AuditChecklistAnswerFact_mart.Wallet_Wallet_key] FOREIGN KEY(Wallet_key) REFERENCES mart.Wallet
+);
+
+CREATE TABLE mart.AuditBranchOption
+(
+    AuditBranchOption_key int IDENTITY
+    ,BranchId uniqueidentifier NOT NULL
+    ,OptionId uniqueidentifier NOT NULL
+    ,Branch nvarchar(100) NOT NULL
+    ,[Value] nvarchar(250) NOT NULL
+    ,[Order] int NOT NULL
+    ,Wallet_key int NOT NULL
+    ,_created datetime2(7) NOT NULL CONSTRAINT [DF_mart.AuditBranchOption__created] DEFAULT SYSUTCDATETIME()
+    ,_edited datetime2(7) NULL
+    ,CONSTRAINT [PK_mart.AuditBranchOption] PRIMARY KEY (AuditBranchOption_key)
+    ,CONSTRAINT [UQ_mart.AuditBranchOption_BranchId_OptionId] UNIQUE(BranchId, OptionId)
+    ,CONSTRAINT [FK_mart.AuditBranchOption_mart.Wallet_Wallet_key] FOREIGN KEY(Wallet_key) REFERENCES mart.Wallet
+);
+
+CREATE TABLE mart.AuditBranchOptionFact
+(
+    Audit_key int NOT NULL
+    ,AuditBranchOption_key int NOT NULL
+    ,Wallet_key int NOT NULL
+    ,_created datetime2(7) NOT NULL CONSTRAINT [DF_mart.AuditBranchOptionFact__created] DEFAULT SYSUTCDATETIME()
+    ,_edited datetime2(7) NULL
+    ,CONSTRAINT [PK_mart.AuditBranchOptionFact] PRIMARY KEY (Audit_key, AuditBranchOption_key)
+    ,CONSTRAINT [FK_mart.AuditBranchOptionFact_mart.AuditBranchOption_AuditBranchOption_key] FOREIGN KEY(AuditBranchOption_key) REFERENCES mart.AuditBranchOption
+    ,CONSTRAINT [FK_mart.AuditBranchOptionFact_mart.Wallet_Wallet_key] FOREIGN KEY(Wallet_key) REFERENCES mart.Wallet
 );
 
 GO
