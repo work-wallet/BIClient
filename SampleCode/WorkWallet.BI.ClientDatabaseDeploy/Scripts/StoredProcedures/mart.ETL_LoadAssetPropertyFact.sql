@@ -1,7 +1,8 @@
+DROP PROCEDURE IF EXISTS mart.ETL_LoadAssetPropertyFact;
 DROP PROCEDURE IF EXISTS mart.ETL_LoadAssetPropertyFacts;
 GO
 
-CREATE PROCEDURE mart.ETL_LoadAssetPropertyFacts
+CREATE PROCEDURE mart.ETL_LoadAssetPropertyFact
     @assetPropertyTable mart.ETL_AssetPropertyTable READONLY
 AS
 BEGIN

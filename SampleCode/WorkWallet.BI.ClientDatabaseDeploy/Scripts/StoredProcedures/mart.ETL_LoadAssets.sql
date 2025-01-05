@@ -84,7 +84,7 @@ BEGIN
 
         EXEC mart.ETL_MaintainAssetPropertyDimension @assetPropertyTable = @assetPropertyTable
 
-        EXEC mart.ETL_LoadAssetPropertyFacts @assetPropertyTable = @assetPropertyTable
+        EXEC mart.ETL_LoadAssetPropertyFact @assetPropertyTable = @assetPropertyTable
 
         -- load the AssetAssignment data
 
@@ -118,7 +118,7 @@ BEGIN
 
         EXEC mart.ETL_MaintainAssetAssignmentDimension @assetAssignmentTable = @assetAssignmentTable
 
-        EXEC mart.ETL_LoadAssetAssignmentFacts @assetAssignmentTable = @assetAssignmentTable
+        EXEC mart.ETL_LoadAssetAssignmentFact @assetAssignmentTable = @assetAssignmentTable
 
         COMMIT TRANSACTION;
     END TRY

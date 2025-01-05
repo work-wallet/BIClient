@@ -32,8 +32,6 @@
     <None Remove="Scripts\StoredProcedures\mart.ETL_DeleteSiteAuditFacts.sql" />
     <None Remove="Scripts\StoredProcedures\mart.ETL_LoadActions.sql" />
     <None Remove="Scripts\StoredProcedures\mart.ETL_LoadActionUpdates.sql" />
-    <None Remove="Scripts\StoredProcedures\mart.ETL_LoadAssetAssignmentFacts.sql" />
-    <None Remove="Scripts\StoredProcedures\mart.ETL_LoadAssetPropertyFacts.sql" />
     <None Remove="Scripts\StoredProcedures\mart.ETL_LoadAssets.sql" />
     <None Remove="Scripts\StoredProcedures\mart.ETL_LoadInductionCustomQuestionFact.sql" />
     <None Remove="Scripts\StoredProcedures\mart.ETL_LoadInductions.sql" />
@@ -161,10 +159,10 @@
     <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_MaintainSafetyCardCategoryDimension.sql" />
     <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_LoadSafetyCards.sql" />
     <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_ResetSafetyCards.sql" />
-    <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_LoadAssetAssignmentFacts.sql" />
+    <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_LoadAssetAssignmentFact.sql" />
     <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_MaintainAssetAssignmentDimension.sql" />
     <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_MaintainAssetPropertyDimension.sql" />
-    <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_LoadAssetPropertyFacts.sql" />
+    <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_LoadAssetPropertyFact.sql" />
     <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_DeleteAssetFacts.sql" />
     <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_MaintainAssetDimension.sql" />
     <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_LoadAssets.sql" />
