@@ -12,6 +12,9 @@ BEGIN
 
     DECLARE @rows int = 0;
 
+    DELETE FROM mart.AuditInspectedByFact WHERE Wallet_key = @wallet_key;
+    SET @rows = @rows + @@ROWCOUNT;
+
     DELETE FROM mart.[Audit] WHERE Wallet_key = @wallet_key;
     SET @rows = @rows + @@ROWCOUNT;
 
