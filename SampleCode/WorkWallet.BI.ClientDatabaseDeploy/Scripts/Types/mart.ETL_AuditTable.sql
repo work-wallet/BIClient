@@ -6,6 +6,7 @@ CREATE TYPE mart.ETL_AuditTable AS TABLE
     AuditId uniqueidentifier NOT NULL
     ,Reference int NOT NULL
     ,AuditReference nvarchar(50) NOT NULL
+    ,AuditGroupId uniqueidentifier NOT NULL
     ,AuditGroup nvarchar(40) NOT NULL
     ,AuditStatusCode int NOT NULL
     ,AuditTypeId uniqueidentifier NOT NULL

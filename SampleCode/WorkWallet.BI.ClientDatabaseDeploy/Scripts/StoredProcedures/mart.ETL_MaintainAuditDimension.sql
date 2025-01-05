@@ -29,11 +29,11 @@ BEGIN
             w.Wallet_key
         FROM
             @AuditTable AS a
+            INNER JOIN mart.AuditGroup AS g ON a.AuditGroupId = g.AuditGroupId
             INNER JOIN mart.AuditStatus AS s ON a.AuditStatusCode = s.AuditStatusCode
             INNER JOIN mart.AuditType AS t ON a.AuditTypeId = t.AuditTypeId AND a.AuditTypeVersion = t.AuditTypeVersion
             INNER JOIN mart.[Location] AS ol ON a.LocationId = ol.LocationId
             INNER JOIN mart.Wallet AS w ON a.WalletId = w.WalletId
-            INNER JOIN mart.AuditGroup AS g ON w.Wallet_key = g.Wallet_key AND a.AuditGroup = g.AuditGroup
     ) AS source
     ON target.AuditId = source.AuditId
     WHEN MATCHED AND (

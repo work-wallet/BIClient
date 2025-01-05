@@ -93,12 +93,13 @@ CREATE TABLE mart.AuditType
 CREATE TABLE mart.AuditGroup
 (
     AuditGroup_key int IDENTITY
-    ,AuditGroup nvarchar(40) NOT NULL /* business key */
-    ,Wallet_key int NOT NULL /* business key */
+    ,AuditGroupId uniqueidentifier NOT NULL /* business key */
+    ,AuditGroup nvarchar(40) NOT NULL
+    ,Wallet_key int NOT NULL
     ,_created datetime2(7) NOT NULL CONSTRAINT [DF_mart.AuditGroup__created] DEFAULT SYSUTCDATETIME()
     ,_edited datetime2(7) NULL
     ,CONSTRAINT [PK_mart.AuditGroup] PRIMARY KEY (AuditGroup_key)
-    ,CONSTRAINT [UQ_mart.AuditGroup_AuditGroup] UNIQUE(Wallet_key, AuditGroup)
+    ,CONSTRAINT [UQ_mart.AuditGroup_AuditGroupId] UNIQUE(AuditGroupId)
     ,CONSTRAINT [FK_mart.AuditGroup_mart.Wallet_Wallet_key] FOREIGN KEY(Wallet_key) REFERENCES mart.Wallet
 );
 

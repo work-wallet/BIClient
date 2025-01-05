@@ -125,6 +125,7 @@ BEGIN
             AuditId
             ,Reference
             ,AuditReference
+            ,AuditGroupId
             ,AuditGroup
             ,AuditStatusCode
             ,AuditTypeId
@@ -148,6 +149,7 @@ BEGIN
             AuditId uniqueidentifier
             ,Reference int
             ,AuditReference nvarchar(50)
+            ,AuditGroupId uniqueidentifier
             ,AuditGroup nvarchar(40)
             ,AuditStatusCode int
             ,AuditTypeId uniqueidentifier
@@ -168,6 +170,28 @@ BEGIN
 
         EXEC mart.ETL_MaintainAuditGroupDimension @auditTable = @auditTable;
         EXEC mart.ETL_MaintainAuditDimension @auditTable = @auditTable;
+
+        -- maintain AuditInspectedBy dimension
+
+        DECLARE @auditInspectedByTable mart.ETL_AuditInspectedByTable;
+
+        INSERT INTO @auditInspectedByTable
+        (
+            AuditId
+            ,ContactId
+            ,[Name]
+            ,WalletId
+        )
+        SELECT * FROM OPENJSON(@json, '$.AuditInspectors')
+        WITH
+        (
+            AuditId uniqueidentifier
+            ,ContactId uniqueidentifier
+            ,[Name] nvarchar(max)
+            ,WalletId uniqueidentifier
+        );
+
+        --EXEC mart.ETL_MaintainAuditInspectedByDimension @auditInspectedByTable = @auditInspectedByTable;
 
         COMMIT TRANSACTION;
     END TRY
