@@ -148,4 +148,32 @@ CREATE TABLE mart.AuditInspectedByFact
     ,CONSTRAINT [FK_mart.AuditInspectedByFact_mart.Wallet_Wallet_key] FOREIGN KEY(Wallet_key) REFERENCES mart.Wallet
 );
 
+CREATE TABLE mart.AuditNumericQuestion
+(
+    AuditNumericQuestion_key int IDENTITY
+    ,QuestionId uniqueidentifier NOT NULL
+    ,Question nvarchar(500) NOT NULL
+    ,Mandatory bit NOT NULL
+    ,Scale int NOT NULL
+    ,Unit_key int NOT NULL
+    ,Wallet_key int NOT NULL
+    ,_created datetime2(7) NOT NULL CONSTRAINT [DF_mart.AuditNumericQuestion__created] DEFAULT SYSUTCDATETIME()
+    ,_edited datetime2(7) NULL
+    ,CONSTRAINT [PK_mart.AuditNumericQuestion] PRIMARY KEY (AuditNumericQuestion_key)
+    ,CONSTRAINT [FK_mart.AuditNumericQuestion_mart.Wallet_Wallet_key] FOREIGN KEY(Wallet_key) REFERENCES mart.Wallet
+);
+
+CREATE TABLE mart.AuditNumericAnswerFact
+(
+    Audit_key int NOT NULL
+    ,AuditNumericQuestion_key int NOT NULL
+    ,Answer decimal(35,6) NOT NULL
+    ,Wallet_key int NOT NULL
+    ,_created datetime2(7) NOT NULL CONSTRAINT [DF_mart.AuditNumericAnswerFact__created] DEFAULT SYSUTCDATETIME()
+    ,_edited datetime2(7) NULL
+    ,CONSTRAINT [PK_mart.AuditNumericAnswerFact] PRIMARY KEY (Audit_key, AuditNumericQuestion_key)
+    ,CONSTRAINT [FK_mart.AuditNumericAnswerFact_mart.AuditNumericQuestion_AuditNumericQuestion_key] FOREIGN KEY(AuditNumericQuestion_key) REFERENCES mart.AuditNumericQuestion
+    ,CONSTRAINT [FK_mart.AuditNumericAnswerFact_mart.Wallet_Wallet_key] FOREIGN KEY(Wallet_key) REFERENCES mart.Wallet
+);
+
 GO

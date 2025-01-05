@@ -11,6 +11,11 @@ BEGIN
     INNER JOIN mart.[Audit] AS a ON f.Audit_key = a.Audit_key
     INNER JOIN @auditTable AS x ON a.AuditId = x.AuditId;
 
+    DELETE mart.AuditNumericAnswerFact
+    FROM mart.AuditNumericAnswerFact AS f
+    INNER JOIN mart.[Audit] AS a ON f.Audit_key = a.Audit_key
+    INNER JOIN @auditTable AS x ON a.AuditId = x.AuditId;
+
     PRINT 'DELETE mart.AuditInspectedByFact, number of rows = ' + CAST(@@ROWCOUNT AS varchar);
 END
 GO

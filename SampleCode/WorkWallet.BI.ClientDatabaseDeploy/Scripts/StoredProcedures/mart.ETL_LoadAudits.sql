@@ -173,7 +173,7 @@ BEGIN
 
         EXEC mart.ETL_DeleteAuditFacts @auditTable = @auditTable;
 
-        -- maintain AuditInspectedBy dimension
+        -- load the AuditInspectedBy data
 
         DECLARE @auditInspectedByTable mart.ETL_AuditInspectedByTable;
         DECLARE @contactTable mart.ETL_ContactTable;
@@ -208,6 +208,37 @@ BEGIN
 
         EXEC mart.ETL_MaintainContactDimension @contactTable = @contactTable;
         EXEC mart.ETL_LoadAuditInspectedByFact @auditInspectedByTable = @auditInspectedByTable;
+
+        -- load the AuditNumericQuestion data
+
+        DECLARE @auditNumbericAnswerTable mart.ETL_AuditNumericAnswerTable;
+
+        INSERT INTO @auditNumbericAnswerTable
+        (
+            AuditId
+            ,QuestionId
+            ,Question
+            ,Mandatory
+            ,Scale
+            ,UnitCode
+            ,Answer
+            ,WalletId
+        )
+        SELECT * FROM OPENJSON(@json, '$.AuditNumericAnswers')
+        WITH
+        (
+            AuditId uniqueidentifier
+            ,QuestionId uniqueidentifier
+            ,Question nvarchar(500)
+            ,Mandatory bit
+            ,Scale int
+            ,UnitCode int
+            ,Answer decimal(35,6)
+            ,WalletId uniqueidentifier
+        );
+
+        EXEC mart.ETL_MaintainAuditNumericQuestionDimension @auditNumbericAnswerTable = @auditNumbericAnswerTable;
+        EXEC mart.ETL_LoadAuditNumericAnswerFact @auditNumbericAnswerTable = @auditNumbericAnswerTable;
 
         COMMIT TRANSACTION;
     END TRY

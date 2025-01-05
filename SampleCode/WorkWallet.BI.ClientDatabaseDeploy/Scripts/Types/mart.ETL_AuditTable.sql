@@ -23,6 +23,6 @@ CREATE TYPE mart.ETL_AuditTable AS TABLE
     ,GradingSetOption nvarchar(250) NOT NULL
     ,ExternalIdentifier nvarchar(255) NOT NULL
     ,WalletId uniqueidentifier NOT NULL
-    ,PRIMARY KEY (AuditId)
+    ,PRIMARY KEY (Reference, AuditId) -- putting Reference first to order the data load
 );
 GO
