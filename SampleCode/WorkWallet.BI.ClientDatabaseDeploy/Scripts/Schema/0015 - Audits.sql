@@ -151,7 +151,7 @@ CREATE TABLE mart.AuditInspectedByFact
 CREATE TABLE mart.AuditNumericQuestion
 (
     AuditNumericQuestion_key int IDENTITY
-    ,QuestionId uniqueidentifier NOT NULL
+    ,QuestionId uniqueidentifier NOT NULL  /* business key */
     ,Question nvarchar(500) NOT NULL
     ,Mandatory bit NOT NULL
     ,Scale int NOT NULL
@@ -181,7 +181,7 @@ CREATE TABLE mart.AuditNumericAnswerFact
 CREATE TABLE mart.AuditDateTimeQuestion
 (
     AuditDateTimeQuestion_key int IDENTITY
-    ,QuestionId uniqueidentifier NOT NULL
+    ,QuestionId uniqueidentifier NOT NULL  /* business key */
     ,Question nvarchar(500) NOT NULL
     ,Mandatory bit NOT NULL
     ,[Date] bit NOT NULL
@@ -212,8 +212,8 @@ CREATE TABLE mart.AuditDateTimeAnswerFact
 CREATE TABLE mart.AuditChecklistOption
 (
     AuditChecklistOption_key int IDENTITY
-    ,ChecklistId uniqueidentifier NOT NULL
-    ,OptionId uniqueidentifier NOT NULL
+    ,ChecklistId uniqueidentifier NOT NULL  /* business key */
+    ,OptionId uniqueidentifier NOT NULL     /* business key */
     ,Question nvarchar(100) NOT NULL
     ,[Value] nvarchar(250) NOT NULL
     ,Mandatory bit NOT NULL
@@ -241,8 +241,8 @@ CREATE TABLE mart.AuditChecklistAnswerFact
 CREATE TABLE mart.AuditBranchOption
 (
     AuditBranchOption_key int IDENTITY
-    ,BranchId uniqueidentifier NOT NULL
-    ,OptionId uniqueidentifier NOT NULL
+    ,BranchId uniqueidentifier NOT NULL  /* business key */
+    ,OptionId uniqueidentifier NOT NULL /* business key */
     ,Branch nvarchar(100) NOT NULL
     ,[Value] nvarchar(250) NOT NULL
     ,[Order] int NOT NULL
@@ -264,6 +264,54 @@ CREATE TABLE mart.AuditBranchOptionFact
     ,CONSTRAINT [PK_mart.AuditBranchOptionFact] PRIMARY KEY (Audit_key, AuditBranchOption_key)
     ,CONSTRAINT [FK_mart.AuditBranchOptionFact_mart.AuditBranchOption_AuditBranchOption_key] FOREIGN KEY(AuditBranchOption_key) REFERENCES mart.AuditBranchOption
     ,CONSTRAINT [FK_mart.AuditBranchOptionFact_mart.Wallet_Wallet_key] FOREIGN KEY(Wallet_key) REFERENCES mart.Wallet
+);
+
+CREATE TABLE mart.AuditScoredResponse
+(
+    AuditScoredResponse_key int IDENTITY
+    ,BranchId uniqueidentifier NOT NULL  /* business key */
+    ,OptionId uniqueidentifier NOT NULL  /* business key */
+    ,Branch nvarchar(100) NOT NULL
+    ,[Value] nvarchar(250) NOT NULL
+    ,[Order] int NOT NULL
+    ,Wallet_key int NOT NULL
+    ,_created datetime2(7) NOT NULL CONSTRAINT [DF_mart.AuditScoredResponse__created] DEFAULT SYSUTCDATETIME()
+    ,_edited datetime2(7) NULL
+    ,CONSTRAINT [PK_mart.AuditScoredResponse] PRIMARY KEY (AuditScoredResponse_key)
+    ,CONSTRAINT [UQ_mart.AuditScoredResponse_BranchId_OptionId] UNIQUE(BranchId, OptionId)
+    ,CONSTRAINT [FK_mart.AuditScoredResponse_mart.Wallet_Wallet_key] FOREIGN KEY(Wallet_key) REFERENCES mart.Wallet
+);
+
+CREATE TABLE mart.AuditGradingSetOption
+(
+    AuditGradingSetOption_key int IDENTITY
+    ,GradingSetOptionId uniqueidentifier NOT NULL /* business key */
+    ,GradingSet nvarchar(100) NOT NULL
+    ,GradingSetOption nvarchar(250) NOT NULL
+    ,Wallet_key int NOT NULL
+    ,_created datetime2(7) NOT NULL CONSTRAINT [DF_mart.AuditGradingSetOption__created] DEFAULT SYSUTCDATETIME()
+    ,_edited datetime2(7) NULL
+    ,CONSTRAINT [PK_mart.AuditGradingSetOption] PRIMARY KEY (AuditGradingSetOption_key)
+    ,CONSTRAINT [UQ_mart.AuditGradingSetOption_GradingSet_GradingSetOptionId] UNIQUE(GradingSetOptionId)
+    ,CONSTRAINT [FK_mart.AuditGradingSetOption_mart.Wallet_Wallet_key] FOREIGN KEY(Wallet_key) REFERENCES mart.Wallet
+);
+
+CREATE TABLE mart.AuditScoredResponseFact
+(
+    Audit_key int NOT NULL
+    ,AuditScoredResponse_key int NOT NULL
+    ,TotalScore int NOT NULL
+    ,TotalPotentialScore int NOT NULL
+    ,PercentageScore decimal(7,6) NOT NULL
+    ,Flag bit NOT NULL
+    ,AuditGradingSet_key int NOT NULL
+    ,Wallet_key int NOT NULL
+    ,_created datetime2(7) NOT NULL CONSTRAINT [DF_mart.AuditScoredResponseFact__created] DEFAULT SYSUTCDATETIME()
+    ,_edited datetime2(7) NULL
+    ,CONSTRAINT [PK_mart.AuditScoredResponseFact] PRIMARY KEY (Audit_key, AuditScoredResponse_key)
+    ,CONSTRAINT [FK_mart.AuditScoredResponseFact_mart.AuditScoredResponse_AuditScoredResponse_key] FOREIGN KEY(AuditScoredResponse_key) REFERENCES mart.AuditScoredResponse
+    ,CONSTRAINT [FK_mart.AuditScoredResponseFact_mart.AuditGradingSetOption_AuditGradingSet_key] FOREIGN KEY(AuditGradingSet_key) REFERENCES mart.AuditGradingSetOption
+    ,CONSTRAINT [FK_mart.AuditScoredResponseFact_mart.Wallet_Wallet_key] FOREIGN KEY(Wallet_key) REFERENCES mart.Wallet
 );
 
 GO

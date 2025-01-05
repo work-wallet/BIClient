@@ -331,6 +331,63 @@ BEGIN
         EXEC mart.ETL_MaintainAuditBranchOptionDimension @auditBranchOptionTable = @auditBranchOptionTable;
         EXEC mart.ETL_LoadAuditBranchOptionFact @auditBranchOptionTable = @auditBranchOptionTable;
 
+        -- load the AuditScoredResponse data
+
+        DECLARE @auditScoredResponseTable mart.ETL_AuditScoredResponseTable;
+        DECLARE @auditGradingSetOptionTable mart.ETL_AuditGradingSetOptionTable;
+
+        INSERT INTO @auditScoredResponseTable
+        (
+            AuditId
+            ,BranchId
+            ,OptionId
+            ,Branch
+            ,[Value]
+            ,[Order]
+            ,TotalScore
+            ,TotalPotentialScore
+            ,PercentageScore
+            ,Flag
+            ,GradingSetOptionId
+            ,GradingSetOption
+            ,WalletId
+        )
+        SELECT * FROM OPENJSON(@json, '$.AuditScoredResponses')
+        WITH
+        (
+            AuditId uniqueidentifier
+            ,BranchId uniqueidentifier
+            ,OptionId uniqueidentifier
+            ,Branch nvarchar(500)
+            ,[Value] nvarchar(100)
+            ,[Order] int
+            ,TotalScore int
+            ,TotalPotentialScore int
+            ,PercentageScore decimal(7,6)
+            ,Flag bit
+            ,GradingSetOptionId uniqueidentifier
+            ,GradingSetOption nvarchar(250)
+            ,WalletId uniqueidentifier
+        );
+
+        INSERT INTO @auditGradingSetOptionTable
+        (
+            AuditId
+            ,GradingSetOptionId
+            ,GradingSetOption
+            ,WalletId
+        )
+        SELECT DISTINCT
+            AuditId
+            ,GradingSetOptionId
+            ,GradingSetOption
+            ,WalletId
+        FROM @auditScoredResponseTable;
+
+        EXEC mart.ETL_MaintainAuditScoredResponseDimension @auditScoredResponseTable = @auditScoredResponseTable;
+        EXEC mart.ETL_MaintainAuditGradingSetOptionDimension @auditGradingSetOptionTable = @auditGradingSetOptionTable;
+        EXEC mart.ETL_LoadAuditScoredResponseFact @auditScoredResponseTable = @auditScoredResponseTable;
+
         COMMIT TRANSACTION;
     END TRY
     BEGIN CATCH
