@@ -211,9 +211,9 @@ BEGIN
 
         -- load the AuditNumericQuestion data
 
-        DECLARE @auditNumbericAnswerTable mart.ETL_AuditNumericAnswerTable;
+        DECLARE @auditNumericAnswerTable mart.ETL_AuditNumericAnswerTable;
 
-        INSERT INTO @auditNumbericAnswerTable
+        INSERT INTO @auditNumericAnswerTable
         (
             AuditId
             ,QuestionId
@@ -237,8 +237,39 @@ BEGIN
             ,WalletId uniqueidentifier
         );
 
-        EXEC mart.ETL_MaintainAuditNumericQuestionDimension @auditNumbericAnswerTable = @auditNumbericAnswerTable;
-        EXEC mart.ETL_LoadAuditNumericAnswerFact @auditNumbericAnswerTable = @auditNumbericAnswerTable;
+        EXEC mart.ETL_MaintainAuditNumericQuestionDimension @auditNumericAnswerTable = @auditNumericAnswerTable;
+        EXEC mart.ETL_LoadAuditNumericAnswerFact @auditNumericAnswerTable = @auditNumericAnswerTable;
+
+        -- load the AuditDateTimeQuestion data
+
+        DECLARE @auditDateTimeAnswerTable mart.ETL_AuditDateTimeAnswerTable;
+
+        INSERT INTO @auditDateTimeAnswerTable
+        (
+            AuditId
+            ,QuestionId
+            ,Question
+            ,Mandatory
+            ,[Date]
+            ,[Time]
+            ,Answer
+            ,WalletId
+        )
+        SELECT * FROM OPENJSON(@json, '$.AuditDateTimeAnswers')
+        WITH
+        (
+            AuditId uniqueidentifier
+            ,QuestionId uniqueidentifier
+            ,Question nvarchar(500)
+            ,Mandatory bit
+            ,[Date] bit
+            ,[Time] bit
+            ,Answer datetime
+            ,WalletId uniqueidentifier
+        );
+
+        EXEC mart.ETL_MaintainAuditDateTimeQuestionDimension @auditDateTimeAnswerTable = @auditDateTimeAnswerTable;
+        EXEC mart.ETL_LoadAuditDateTimeAnswerFact @auditDateTimeAnswerTable = @auditDateTimeAnswerTable;
 
         COMMIT TRANSACTION;
     END TRY

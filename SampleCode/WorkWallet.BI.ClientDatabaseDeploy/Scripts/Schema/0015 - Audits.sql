@@ -160,6 +160,7 @@ CREATE TABLE mart.AuditNumericQuestion
     ,_created datetime2(7) NOT NULL CONSTRAINT [DF_mart.AuditNumericQuestion__created] DEFAULT SYSUTCDATETIME()
     ,_edited datetime2(7) NULL
     ,CONSTRAINT [PK_mart.AuditNumericQuestion] PRIMARY KEY (AuditNumericQuestion_key)
+    ,CONSTRAINT [FK_mart.AuditNumericQuestion_mart.Unit_Unit_key] FOREIGN KEY(Unit_key) REFERENCES mart.Unit
     ,CONSTRAINT [FK_mart.AuditNumericQuestion_mart.Wallet_Wallet_key] FOREIGN KEY(Wallet_key) REFERENCES mart.Wallet
 );
 
@@ -174,6 +175,36 @@ CREATE TABLE mart.AuditNumericAnswerFact
     ,CONSTRAINT [PK_mart.AuditNumericAnswerFact] PRIMARY KEY (Audit_key, AuditNumericQuestion_key)
     ,CONSTRAINT [FK_mart.AuditNumericAnswerFact_mart.AuditNumericQuestion_AuditNumericQuestion_key] FOREIGN KEY(AuditNumericQuestion_key) REFERENCES mart.AuditNumericQuestion
     ,CONSTRAINT [FK_mart.AuditNumericAnswerFact_mart.Wallet_Wallet_key] FOREIGN KEY(Wallet_key) REFERENCES mart.Wallet
+);
+
+CREATE TABLE mart.AuditDateTimeQuestion
+(
+    AuditDateTimeQuestion_key int IDENTITY
+    ,QuestionId uniqueidentifier NOT NULL
+    ,Question nvarchar(500) NOT NULL
+    ,Mandatory bit NOT NULL
+    ,[Date] bit NOT NULL
+    ,[Time] bit NOT NULL
+    ,Wallet_key int NOT NULL
+    ,_created datetime2(7) NOT NULL CONSTRAINT [DF_mart.AuditDateTimeQuestion__created] DEFAULT SYSUTCDATETIME()
+    ,_edited datetime2(7) NULL
+    ,CONSTRAINT [PK_mart.AuditDateTimeQuestion] PRIMARY KEY (AuditDateTimeQuestion_key)
+    ,CONSTRAINT [FK_mart.AuditDateTimeQuestion_mart.Wallet_Wallet_key] FOREIGN KEY(Wallet_key) REFERENCES mart.Wallet
+);
+
+CREATE TABLE mart.AuditDateTimeAnswerFact
+(
+    Audit_key int NOT NULL
+    ,AuditDateTimeQuestion_key int NOT NULL
+    ,AnswerDateTime smalldatetime NULL -- allow null
+    ,AnswerDate date NULL -- allow null
+    ,AnswerTime time(0) NULL -- allow null
+    ,Wallet_key int NOT NULL
+    ,_created datetime2(7) NOT NULL CONSTRAINT [DF_mart.AuditDateTimeAnswerFact__created] DEFAULT SYSUTCDATETIME()
+    ,_edited datetime2(7) NULL
+    ,CONSTRAINT [PK_mart.AuditDateTimeAnswerFact] PRIMARY KEY (Audit_key, AuditDateTimeQuestion_key)
+    ,CONSTRAINT [FK_mart.AuditDateTimeAnswerFact_mart.AuditDateTimeQuestion_AuditDateTimeQuestion_key] FOREIGN KEY(AuditDateTimeQuestion_key) REFERENCES mart.AuditDateTimeQuestion
+    ,CONSTRAINT [FK_mart.AuditDateTimeAnswerFact_mart.Wallet_Wallet_key] FOREIGN KEY(Wallet_key) REFERENCES mart.Wallet
 );
 
 GO

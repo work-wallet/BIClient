@@ -2,7 +2,7 @@ DROP PROCEDURE IF EXISTS mart.ETL_LoadAuditNumericAnswerFact;
 GO
 
 CREATE PROCEDURE mart.ETL_LoadAuditNumericAnswerFact
-    @auditNumbericAnswerTable mart.ETL_AuditNumericAnswerTable READONLY
+    @auditNumericAnswerTable mart.ETL_AuditNumericAnswerTable READONLY
 AS
 BEGIN
     SET NOCOUNT ON;
@@ -20,7 +20,7 @@ BEGIN
         ,x.Answer
         ,w.Wallet_key
     FROM
-        @auditNumbericAnswerTable AS x
+        @auditNumericAnswerTable AS x
         INNER JOIN mart.[Audit] AS a ON x.AuditId = a.AuditId
         INNER JOIN mart.AuditNumericQuestion AS q ON x.QuestionId = q.QuestionId
         INNER JOIN mart.Wallet AS w ON x.WalletId = w.WalletId;
