@@ -207,4 +207,32 @@ CREATE TABLE mart.AuditDateTimeAnswerFact
     ,CONSTRAINT [FK_mart.AuditDateTimeAnswerFact_mart.Wallet_Wallet_key] FOREIGN KEY(Wallet_key) REFERENCES mart.Wallet
 );
 
+CREATE TABLE mart.AuditChecklistOption
+(
+    AuditChecklistOption_key int IDENTITY
+    ,ChecklistId uniqueidentifier NOT NULL
+    ,OptionId uniqueidentifier NOT NULL
+    ,Question nvarchar(100) NOT NULL
+    ,[Value] nvarchar(250) NOT NULL
+    ,Mandatory bit NOT NULL
+    ,[Order] int NOT NULL
+    ,Wallet_key int NOT NULL
+    ,_created datetime2(7) NOT NULL CONSTRAINT [DF_mart.AuditChecklistOption__created] DEFAULT SYSUTCDATETIME()
+    ,_edited datetime2(7) NULL
+    ,CONSTRAINT [PK_mart.AuditChecklistOption] PRIMARY KEY (AuditChecklistOption_key)
+    ,CONSTRAINT [FK_mart.AuditChecklistOption_mart.Wallet_Wallet_key] FOREIGN KEY(Wallet_key) REFERENCES mart.Wallet
+);
+
+CREATE TABLE mart.AuditChecklistAnswerFact
+(
+    Audit_key int NOT NULL
+    ,AuditChecklistOption_key int NOT NULL
+    ,Wallet_key int NOT NULL
+    ,_created datetime2(7) NOT NULL CONSTRAINT [DF_mart.AuditChecklistAnswerFact__created] DEFAULT SYSUTCDATETIME()
+    ,_edited datetime2(7) NULL
+    ,CONSTRAINT [PK_mart.AuditChecklistAnswerFact] PRIMARY KEY (Audit_key, AuditChecklistOption_key)
+    ,CONSTRAINT [FK_mart.AuditChecklistAnswerFact_mart.AuditChecklistOption_AuditChecklistOption_key] FOREIGN KEY(AuditChecklistOption_key) REFERENCES mart.AuditChecklistOption
+    ,CONSTRAINT [FK_mart.AuditChecklistAnswerFact_mart.Wallet_Wallet_key] FOREIGN KEY(Wallet_key) REFERENCES mart.Wallet
+);
+
 GO

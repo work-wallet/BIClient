@@ -209,7 +209,7 @@ BEGIN
         EXEC mart.ETL_MaintainContactDimension @contactTable = @contactTable;
         EXEC mart.ETL_LoadAuditInspectedByFact @auditInspectedByTable = @auditInspectedByTable;
 
-        -- load the AuditNumericQuestion data
+        -- load the AuditNumericAnswer data
 
         DECLARE @auditNumericAnswerTable mart.ETL_AuditNumericAnswerTable;
 
@@ -240,7 +240,7 @@ BEGIN
         EXEC mart.ETL_MaintainAuditNumericQuestionDimension @auditNumericAnswerTable = @auditNumericAnswerTable;
         EXEC mart.ETL_LoadAuditNumericAnswerFact @auditNumericAnswerTable = @auditNumericAnswerTable;
 
-        -- load the AuditDateTimeQuestion data
+        -- load the AuditDateTimeAnswer data
 
         DECLARE @auditDateTimeAnswerTable mart.ETL_AuditDateTimeAnswerTable;
 
@@ -270,6 +270,37 @@ BEGIN
 
         EXEC mart.ETL_MaintainAuditDateTimeQuestionDimension @auditDateTimeAnswerTable = @auditDateTimeAnswerTable;
         EXEC mart.ETL_LoadAuditDateTimeAnswerFact @auditDateTimeAnswerTable = @auditDateTimeAnswerTable;
+
+        -- load the AuditChecklistAnswer data
+
+        DECLARE @auditChecklistAnswerTable mart.ETL_AuditChecklistAnswerTable;
+
+        INSERT INTO @auditChecklistAnswerTable
+        (
+            AuditId
+            ,ChecklistId
+            ,OptionId
+            ,Question
+            ,[Value]
+            ,Mandatory
+            ,[Order]
+            ,WalletId
+        )
+        SELECT * FROM OPENJSON(@json, '$.AuditChecklistAnswers')
+        WITH
+        (
+            AuditId uniqueidentifier
+            ,ChecklistId uniqueidentifier
+            ,OptionId uniqueidentifier
+            ,Question nvarchar(100)
+            ,[Value] nvarchar(250)
+            ,Mandatory bit
+            ,[Order] int
+            ,WalletId uniqueidentifier
+        );
+
+        EXEC mart.ETL_MaintainAuditChecklistOptionDimension @auditChecklistAnswerTable = @auditChecklistAnswerTable;
+        EXEC mart.ETL_LoadAuditChecklistAnswerFact @auditChecklistAnswerTable = @auditChecklistAnswerTable;
 
         COMMIT TRANSACTION;
     END TRY

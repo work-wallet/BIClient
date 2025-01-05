@@ -12,6 +12,12 @@ BEGIN
 
     DECLARE @rows int = 0;
 
+    DELETE FROM mart.AuditChecklistAnswerFact WHERE Wallet_key = @wallet_key;
+    SET @rows = @rows + @@ROWCOUNT;
+
+    DELETE FROM mart.AuditChecklistOption WHERE Wallet_key = @wallet_key;
+    SET @rows = @rows + @@ROWCOUNT;
+
     DELETE FROM mart.AuditDateTimeAnswerFact WHERE Wallet_key = @wallet_key;
     SET @rows = @rows + @@ROWCOUNT;
 
