@@ -351,4 +351,38 @@ CREATE TABLE mart.AuditScoreSectionFact
     ,CONSTRAINT [FK_mart.AuditScoreSectionFact_mart.Wallet_Wallet_key] FOREIGN KEY(Wallet_key) REFERENCES mart.Wallet
 );
 
+CREATE TABLE mart.AuditScoreTag
+(
+    AuditScoreTag_key int IDENTITY
+    ,TagId uniqueidentifier NOT NULL /* business key */
+    ,TagVersion int NOT NULL         /* business key */
+    ,Tag nvarchar(250) NOT NULL
+    ,Wallet_key int NOT NULL
+    ,_created datetime2(7) NOT NULL CONSTRAINT [DF_mart.AuditScoreTag__created] DEFAULT SYSUTCDATETIME()
+    ,_edited datetime2(7) NULL
+    ,CONSTRAINT [PK_mart.AuditScoreTag] PRIMARY KEY (AuditScoreTag_key)
+    ,CONSTRAINT [UQ_mart.AuditScoreTag_TagId_TagVersion] UNIQUE(TagId, TagVersion)
+    ,CONSTRAINT [FK_mart.AuditScoreTag_mart.Wallet_Wallet_key] FOREIGN KEY(Wallet_key) REFERENCES mart.Wallet
+);
+
+CREATE TABLE mart.AuditScoreTagFact
+(
+    Audit_key int NOT NULL
+    ,AuditScoreTag_key int NOT NULL
+    ,TotalScore int NOT NULL
+    ,TotalPotentialScore int NOT NULL
+    ,AverageScore decimal(38,6) NOT NULL
+    ,AveragePotentialScore decimal(38,6) NOT NULL
+    ,PercentageScore decimal(7,6) NOT NULL
+    ,Flags int NOT NULL
+    ,AuditGradingSet_key int NOT NULL
+    ,Wallet_key int NOT NULL
+    ,_created datetime2(7) NOT NULL CONSTRAINT [DF_mart.AuditScoreTagFact__created] DEFAULT SYSUTCDATETIME()
+    ,_edited datetime2(7) NULL
+    ,CONSTRAINT [PK_mart.AuditScoreTagFact] PRIMARY KEY (Audit_key, AuditScoreTag_key)
+    ,CONSTRAINT [FK_mart.AuditScoreTagFact_mart.AuditScoreTag_AuditScoreTag_key] FOREIGN KEY(AuditScoreTag_key) REFERENCES mart.AuditScoreTag
+    ,CONSTRAINT [FK_mart.AuditScoreTagFact_mart.AuditGradingSetOption_AuditGradingSet_key] FOREIGN KEY(AuditGradingSet_key) REFERENCES mart.AuditGradingSetOption
+    ,CONSTRAINT [FK_mart.AuditScoreTagFact_mart.Wallet_Wallet_key] FOREIGN KEY(Wallet_key) REFERENCES mart.Wallet
+);
+
 GO

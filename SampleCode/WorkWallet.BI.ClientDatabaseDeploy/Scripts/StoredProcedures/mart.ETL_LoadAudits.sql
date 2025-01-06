@@ -447,6 +447,63 @@ BEGIN
         EXEC mart.ETL_MaintainAuditGradingSetOptionDimension @auditGradingSetOptionTable = @auditGradingSetOptionTable2;
         EXEC mart.ETL_LoadAuditScoreSectionFact @auditScoreSectionTable = @auditScoreSectionTable;
 
+        -- load the AuditScoreTag data
+
+        DECLARE @auditScoreTagTable mart.ETL_AuditScoreTagTable;
+        DECLARE @auditGradingSetOptionTable3 mart.ETL_AuditGradingSetOptionTable;
+
+        INSERT INTO @auditScoreTagTable
+        (
+            AuditId
+            ,TagId
+            ,TagVersion
+            ,Tag
+            ,TotalScore
+            ,TotalPotentialScore
+            ,AverageScore
+            ,AveragePotentialScore
+            ,PercentageScore
+            ,Flags
+            ,GradingSetOptionId
+            ,GradingSetOption
+            ,WalletId
+        )
+        SELECT * FROM OPENJSON(@json, '$.AuditScoreTags')
+        WITH
+        (
+            AuditId uniqueidentifier
+            ,TagId uniqueidentifier
+            ,TagVersion int
+            ,Tag nvarchar(250)
+            ,TotalScore int
+            ,TotalPotentialScore int
+            ,AverageScore decimal(38,6)
+            ,AveragePotentialScore decimal(38,6)
+            ,PercentageScore decimal(7,6)
+            ,Flags int
+            ,GradingSetOptionId uniqueidentifier
+            ,GradingSetOption nvarchar(250)
+            ,WalletId uniqueidentifier
+        );
+
+        INSERT INTO @auditGradingSetOptionTable3
+        (
+            AuditId
+            ,GradingSetOptionId
+            ,GradingSetOption
+            ,WalletId
+        )
+        SELECT DISTINCT
+            AuditId
+            ,GradingSetOptionId
+            ,GradingSetOption
+            ,WalletId
+        FROM @auditScoreTagTable;
+
+        EXEC mart.ETL_MaintainAuditScoreTagDimension @auditScoreTagTable = @auditScoreTagTable;
+        EXEC mart.ETL_MaintainAuditGradingSetOptionDimension @auditGradingSetOptionTable = @auditGradingSetOptionTable3;
+        --EXEC mart.ETL_LoadAuditScoreTagFact @auditScoreTagTable = @auditScoreTagTable;
+
         COMMIT TRANSACTION;
     END TRY
     BEGIN CATCH

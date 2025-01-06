@@ -140,6 +140,7 @@
     <EmbeddedResource Include="Scripts\Schema\0007 - Actions.sql" />
     <EmbeddedResource Include="Scripts\Schema\0008 - PermitsFix.sql" />
     <EmbeddedResource Include="Scripts\Schema\0009 - Assets.sql" />
+    <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_MaintainAuditScoreTagDimension.sql" />
     <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_LoadAuditScoreSectionFact.sql" />
     <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_MaintainAuditScoreSectionDimension.sql" />
     <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_LoadAuditScoredResponseFact.sql" />
@@ -227,6 +228,7 @@
     <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_ResetReportedIssues.sql" />
     <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_ResetSiteAudits.sql" />
     <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_UpdateLastSync.sql" />
+    <EmbeddedResource Include="Scripts\Types\mart.ETL_AuditScoreTagTable.sql" />
     <EmbeddedResource Include="Scripts\Types\mart.ETL_AuditScoreSectionTable.sql" />
     <EmbeddedResource Include="Scripts\Types\mart.ETL_AuditGradingSetOptionTable.sql" />
     <EmbeddedResource Include="Scripts\Types\mart.ETL_AuditScoredResponseTable.sql" />
