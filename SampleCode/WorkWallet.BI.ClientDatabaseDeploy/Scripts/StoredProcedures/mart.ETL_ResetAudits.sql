@@ -27,10 +27,10 @@ BEGIN
     DELETE FROM mart.AuditScoredResponseFact WHERE Wallet_key = @wallet_key;
     SET @rows = @rows + @@ROWCOUNT;
 
-    DELETE FROM mart.AuditGradingSetOption WHERE Wallet_key = @wallet_key;
+    DELETE FROM mart.AuditScoredResponse WHERE Wallet_key = @wallet_key;
     SET @rows = @rows + @@ROWCOUNT;
 
-    DELETE FROM mart.AuditScoredResponse WHERE Wallet_key = @wallet_key;
+    DELETE FROM mart.AuditGradingSetOption WHERE Wallet_key = @wallet_key;
     SET @rows = @rows + @@ROWCOUNT;
 
     DELETE FROM mart.AuditBranchOptionFact WHERE Wallet_key = @wallet_key;

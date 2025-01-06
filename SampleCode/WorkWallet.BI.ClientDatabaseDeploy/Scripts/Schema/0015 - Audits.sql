@@ -266,6 +266,20 @@ CREATE TABLE mart.AuditBranchOptionFact
     ,CONSTRAINT [FK_mart.AuditBranchOptionFact_mart.Wallet_Wallet_key] FOREIGN KEY(Wallet_key) REFERENCES mart.Wallet
 );
 
+CREATE TABLE mart.AuditGradingSetOption
+(
+    AuditGradingSetOption_key int IDENTITY
+    ,GradingSetOptionId uniqueidentifier NOT NULL /* business key */
+    ,GradingSet nvarchar(100) NOT NULL
+    ,GradingSetOption nvarchar(250) NOT NULL
+    ,Wallet_key int NOT NULL
+    ,_created datetime2(7) NOT NULL CONSTRAINT [DF_mart.AuditGradingSetOption__created] DEFAULT SYSUTCDATETIME()
+    ,_edited datetime2(7) NULL
+    ,CONSTRAINT [PK_mart.AuditGradingSetOption] PRIMARY KEY (AuditGradingSetOption_key)
+    ,CONSTRAINT [UQ_mart.AuditGradingSetOption_GradingSet_GradingSetOptionId] UNIQUE(GradingSetOptionId)
+    ,CONSTRAINT [FK_mart.AuditGradingSetOption_mart.Wallet_Wallet_key] FOREIGN KEY(Wallet_key) REFERENCES mart.Wallet
+);
+
 CREATE TABLE mart.AuditScoredResponse
 (
     AuditScoredResponse_key int IDENTITY
@@ -280,20 +294,6 @@ CREATE TABLE mart.AuditScoredResponse
     ,CONSTRAINT [PK_mart.AuditScoredResponse] PRIMARY KEY (AuditScoredResponse_key)
     ,CONSTRAINT [UQ_mart.AuditScoredResponse_BranchId_OptionId] UNIQUE(BranchId, OptionId)
     ,CONSTRAINT [FK_mart.AuditScoredResponse_mart.Wallet_Wallet_key] FOREIGN KEY(Wallet_key) REFERENCES mart.Wallet
-);
-
-CREATE TABLE mart.AuditGradingSetOption
-(
-    AuditGradingSetOption_key int IDENTITY
-    ,GradingSetOptionId uniqueidentifier NOT NULL /* business key */
-    ,GradingSet nvarchar(100) NOT NULL
-    ,GradingSetOption nvarchar(250) NOT NULL
-    ,Wallet_key int NOT NULL
-    ,_created datetime2(7) NOT NULL CONSTRAINT [DF_mart.AuditGradingSetOption__created] DEFAULT SYSUTCDATETIME()
-    ,_edited datetime2(7) NULL
-    ,CONSTRAINT [PK_mart.AuditGradingSetOption] PRIMARY KEY (AuditGradingSetOption_key)
-    ,CONSTRAINT [UQ_mart.AuditGradingSetOption_GradingSet_GradingSetOptionId] UNIQUE(GradingSetOptionId)
-    ,CONSTRAINT [FK_mart.AuditGradingSetOption_mart.Wallet_Wallet_key] FOREIGN KEY(Wallet_key) REFERENCES mart.Wallet
 );
 
 CREATE TABLE mart.AuditScoredResponseFact

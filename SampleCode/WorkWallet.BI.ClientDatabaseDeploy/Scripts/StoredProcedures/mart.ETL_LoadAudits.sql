@@ -384,8 +384,8 @@ BEGIN
             ,WalletId
         FROM @auditScoredResponseTable;
 
-        EXEC mart.ETL_MaintainAuditScoredResponseDimension @auditScoredResponseTable = @auditScoredResponseTable;
         EXEC mart.ETL_MaintainAuditGradingSetOptionDimension @auditGradingSetOptionTable = @auditGradingSetOptionTable1;
+        EXEC mart.ETL_MaintainAuditScoredResponseDimension @auditScoredResponseTable = @auditScoredResponseTable;
         EXEC mart.ETL_LoadAuditScoredResponseFact @auditScoredResponseTable = @auditScoredResponseTable;
 
         -- load the AuditScoreSection data
@@ -443,8 +443,8 @@ BEGIN
             ,WalletId
         FROM @auditScoreSectionTable;
 
-        EXEC mart.ETL_MaintainAuditScoreSectionDimension @auditScoreSectionTable = @auditScoreSectionTable;
         EXEC mart.ETL_MaintainAuditGradingSetOptionDimension @auditGradingSetOptionTable = @auditGradingSetOptionTable2;
+        EXEC mart.ETL_MaintainAuditScoreSectionDimension @auditScoreSectionTable = @auditScoreSectionTable;
         EXEC mart.ETL_LoadAuditScoreSectionFact @auditScoreSectionTable = @auditScoreSectionTable;
 
         -- load the AuditScoreTag data
@@ -500,8 +500,8 @@ BEGIN
             ,WalletId
         FROM @auditScoreTagTable;
 
-        EXEC mart.ETL_MaintainAuditScoreTagDimension @auditScoreTagTable = @auditScoreTagTable;
         EXEC mart.ETL_MaintainAuditGradingSetOptionDimension @auditGradingSetOptionTable = @auditGradingSetOptionTable3;
+        EXEC mart.ETL_MaintainAuditScoreTagDimension @auditScoreTagTable = @auditScoreTagTable;
         EXEC mart.ETL_LoadAuditScoreTagFact @auditScoreTagTable = @auditScoreTagTable;
 
         COMMIT TRANSACTION;
