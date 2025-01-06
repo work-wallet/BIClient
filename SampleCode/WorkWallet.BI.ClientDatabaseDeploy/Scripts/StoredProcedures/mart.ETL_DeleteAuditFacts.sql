@@ -47,5 +47,11 @@ BEGIN
     INNER JOIN @auditTable AS x ON a.AuditId = x.AuditId;
 
     PRINT 'DELETE mart.AuditScoredResponseFact, number of rows = ' + CAST(@@ROWCOUNT AS varchar);
-END
+
+    DELETE mart.AuditScoreSectionFact
+    FROM mart.AuditScoreSectionFact AS f
+    INNER JOIN mart.[Audit] AS a ON f.Audit_key = a.Audit_key
+    INNER JOIN @auditTable AS x ON a.AuditId = x.AuditId;
+
+    PRINT 'DELETE mart.AuditScoreSectionFact, number of rows = ' + CAST(@@ROWCOUNT AS varchar);END
 GO

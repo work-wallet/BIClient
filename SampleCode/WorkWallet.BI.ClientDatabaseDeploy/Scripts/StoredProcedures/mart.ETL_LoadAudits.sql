@@ -334,7 +334,7 @@ BEGIN
         -- load the AuditScoredResponse data
 
         DECLARE @auditScoredResponseTable mart.ETL_AuditScoredResponseTable;
-        DECLARE @auditGradingSetOptionTable mart.ETL_AuditGradingSetOptionTable;
+        DECLARE @auditGradingSetOptionTable1 mart.ETL_AuditGradingSetOptionTable;
 
         INSERT INTO @auditScoredResponseTable
         (
@@ -370,7 +370,7 @@ BEGIN
             ,WalletId uniqueidentifier
         );
 
-        INSERT INTO @auditGradingSetOptionTable
+        INSERT INTO @auditGradingSetOptionTable1
         (
             AuditId
             ,GradingSetOptionId
@@ -385,8 +385,67 @@ BEGIN
         FROM @auditScoredResponseTable;
 
         EXEC mart.ETL_MaintainAuditScoredResponseDimension @auditScoredResponseTable = @auditScoredResponseTable;
-        EXEC mart.ETL_MaintainAuditGradingSetOptionDimension @auditGradingSetOptionTable = @auditGradingSetOptionTable;
+        EXEC mart.ETL_MaintainAuditGradingSetOptionDimension @auditGradingSetOptionTable = @auditGradingSetOptionTable1;
         EXEC mart.ETL_LoadAuditScoredResponseFact @auditScoredResponseTable = @auditScoredResponseTable;
+
+        -- load the AuditScoreSection data
+
+        DECLARE @auditScoreSectionTable mart.ETL_AuditScoreSectionTable;
+        DECLARE @auditGradingSetOptionTable2 mart.ETL_AuditGradingSetOptionTable;
+
+        INSERT INTO @auditScoreSectionTable
+        (
+            AuditId
+            ,SectionId
+            ,Section
+            ,DisplayScore
+            ,[Order]
+            ,TotalScore
+            ,TotalPotentialScore
+            ,AverageScore
+            ,AveragePotentialScore
+            ,PercentageScore
+            ,Flags
+            ,GradingSetOptionId
+            ,GradingSetOption
+            ,WalletId
+        )
+        SELECT * FROM OPENJSON(@json, '$.AuditScoreSections')
+        WITH
+        (
+            AuditId uniqueidentifier
+            ,SectionId uniqueidentifier
+            ,Section nvarchar(100)
+            ,DisplayScore bit
+            ,[Order] int
+            ,TotalScore int
+            ,TotalPotentialScore int
+            ,AverageScore decimal(38,6)
+            ,AveragePotentialScore decimal(38,6)
+            ,PercentageScore decimal(7,6)
+            ,Flags int
+            ,GradingSetOptionId uniqueidentifier
+            ,GradingSetOption nvarchar(250)
+            ,WalletId uniqueidentifier
+        );
+
+        INSERT INTO @auditGradingSetOptionTable2
+        (
+            AuditId
+            ,GradingSetOptionId
+            ,GradingSetOption
+            ,WalletId
+        )
+        SELECT DISTINCT
+            AuditId
+            ,GradingSetOptionId
+            ,GradingSetOption
+            ,WalletId
+        FROM @auditScoreSectionTable;
+
+        EXEC mart.ETL_MaintainAuditScoreSectionDimension @auditScoreSectionTable = @auditScoreSectionTable;
+        EXEC mart.ETL_MaintainAuditGradingSetOptionDimension @auditGradingSetOptionTable = @auditGradingSetOptionTable2;
+        EXEC mart.ETL_LoadAuditScoreSectionFact @auditScoreSectionTable = @auditScoreSectionTable;
 
         COMMIT TRANSACTION;
     END TRY

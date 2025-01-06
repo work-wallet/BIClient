@@ -314,4 +314,41 @@ CREATE TABLE mart.AuditScoredResponseFact
     ,CONSTRAINT [FK_mart.AuditScoredResponseFact_mart.Wallet_Wallet_key] FOREIGN KEY(Wallet_key) REFERENCES mart.Wallet
 );
 
+CREATE TABLE mart.AuditScoreSection
+(
+    AuditScoreSection_key int IDENTITY
+    ,AuditTypeId uniqueidentifier NOT NULL /* business key */
+    ,AuditTypeVersion int NOT NULL         /* business key */
+    ,SectionId uniqueidentifier NOT NULL   /* business key */
+    ,Section nvarchar(100) NOT NULL
+    ,DisplayScore bit NOT NULL
+    ,[Order] int NOT NULL
+    ,Wallet_key int NOT NULL
+    ,_created datetime2(7) NOT NULL CONSTRAINT [DF_mart.AuditScoreSection__created] DEFAULT SYSUTCDATETIME()
+    ,_edited datetime2(7) NULL
+    ,CONSTRAINT [PK_mart.AuditScoreSection] PRIMARY KEY (AuditScoreSection_key)
+    ,CONSTRAINT [UQ_mart.AuditScoreSection_AuditTypeId_AuditTypeVersion_SectionId] UNIQUE(AuditTypeId, AuditTypeVersion, SectionId)
+    ,CONSTRAINT [FK_mart.AuditScoreSection_mart.Wallet_Wallet_key] FOREIGN KEY(Wallet_key) REFERENCES mart.Wallet
+);
+
+CREATE TABLE mart.AuditScoreSectionFact
+(
+    Audit_key int NOT NULL
+    ,AuditScoreSection_key int NOT NULL
+    ,TotalScore int NOT NULL
+    ,TotalPotentialScore int NOT NULL
+    ,AverageScore decimal(38,6) NOT NULL
+    ,AveragePotentialScore decimal(38,6) NOT NULL
+    ,PercentageScore decimal(7,6) NOT NULL
+    ,Flags int NOT NULL
+    ,AuditGradingSet_key int NOT NULL
+    ,Wallet_key int NOT NULL
+    ,_created datetime2(7) NOT NULL CONSTRAINT [DF_mart.AuditScoreSectionFact__created] DEFAULT SYSUTCDATETIME()
+    ,_edited datetime2(7) NULL
+    ,CONSTRAINT [PK_mart.AuditScoreSectionFact] PRIMARY KEY (Audit_key, AuditScoreSection_key)
+    ,CONSTRAINT [FK_mart.AuditScoreSectionFact_mart.AuditScoreSection_AuditScoreSection_key] FOREIGN KEY(AuditScoreSection_key) REFERENCES mart.AuditScoreSection
+    ,CONSTRAINT [FK_mart.AuditScoreSectionFact_mart.AuditGradingSetOption_AuditGradingSet_key] FOREIGN KEY(AuditGradingSet_key) REFERENCES mart.AuditGradingSetOption
+    ,CONSTRAINT [FK_mart.AuditScoreSectionFact_mart.Wallet_Wallet_key] FOREIGN KEY(Wallet_key) REFERENCES mart.Wallet
+);
+
 GO
