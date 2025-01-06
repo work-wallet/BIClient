@@ -34,8 +34,7 @@ BEGIN
     FROM
         @auditScoreSectionTable AS x
         INNER JOIN mart.[Audit] AS a ON x.AuditId = a.AuditId
-        INNER JOIN mart.AuditType AS t ON a.AuditType_key = t.AuditType_key
-        INNER JOIN mart.AuditScoreSection AS s ON t.AuditTypeId = s.AuditTypeId AND t.AuditTypeVersion = s.AuditTypeVersion AND x.SectionId =s.SectionId
+        INNER JOIN mart.AuditScoreSection AS s ON a.AuditType_key = s.AuditType_key AND x.SectionId =s.SectionId
         INNER JOIN mart.AuditGradingSetOption AS g ON x.GradingSetOptionId = g.GradingSetOptionId
         INNER JOIN mart.Wallet AS w ON x.WalletId = w.WalletId;
 

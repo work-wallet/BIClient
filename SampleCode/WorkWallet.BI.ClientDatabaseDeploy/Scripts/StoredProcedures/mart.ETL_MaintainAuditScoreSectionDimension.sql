@@ -9,8 +9,7 @@ BEGIN
     MERGE mart.AuditScoreSection AS target
     USING (
         SELECT DISTINCT
-            t.AuditTypeId,
-            t.AuditTypeVersion,
+            a.AuditType_key,
             x.SectionId,
             x.Section,
             x.DisplayScore,
@@ -19,10 +18,9 @@ BEGIN
         FROM
             @auditScoreSectionTable AS x
             INNER JOIN mart.[Audit] AS a ON x.AuditId = a.AuditId
-            INNER JOIN mart.AuditType AS t ON a.AuditType_key = t.AuditType_key
             INNER JOIN mart.Wallet AS w ON x.WalletId = w.WalletId
     ) AS source
-    ON target.AuditTypeId = source.AuditTypeId AND target.AuditTypeVersion = source.AuditTypeVersion AND target.SectionId = source.SectionId
+    ON target.AuditType_key = source.AuditType_key AND target.SectionId = source.SectionId
     WHEN MATCHED AND (
         target.Section <> source.Section
         OR target.DisplayScore <> source.DisplayScore
@@ -38,16 +36,14 @@ BEGIN
             _edited = SYSUTCDATETIME()
     WHEN NOT MATCHED BY TARGET THEN
         INSERT (
-            AuditTypeId,
-            AuditTypeVersion,
+            AuditType_key,
             SectionId,
             Section,
             DisplayScore,
             [Order],
             Wallet_key
         ) VALUES (
-            source.AuditTypeId,
-            source.AuditTypeVersion,
+            source.AuditType_key,
             source.SectionId,
             source.Section,
             source.DisplayScore,

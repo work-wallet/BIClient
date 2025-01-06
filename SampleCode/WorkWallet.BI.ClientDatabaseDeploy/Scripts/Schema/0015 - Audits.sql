@@ -317,9 +317,8 @@ CREATE TABLE mart.AuditScoredResponseFact
 CREATE TABLE mart.AuditScoreSection
 (
     AuditScoreSection_key int IDENTITY
-    ,AuditTypeId uniqueidentifier NOT NULL /* business key */
-    ,AuditTypeVersion int NOT NULL         /* business key */
-    ,SectionId uniqueidentifier NOT NULL   /* business key */
+    ,AuditType_key int NOT NULL          /* business key */
+    ,SectionId uniqueidentifier NOT NULL /* business key */
     ,Section nvarchar(100) NOT NULL
     ,DisplayScore bit NOT NULL
     ,[Order] int NOT NULL
@@ -327,7 +326,7 @@ CREATE TABLE mart.AuditScoreSection
     ,_created datetime2(7) NOT NULL CONSTRAINT [DF_mart.AuditScoreSection__created] DEFAULT SYSUTCDATETIME()
     ,_edited datetime2(7) NULL
     ,CONSTRAINT [PK_mart.AuditScoreSection] PRIMARY KEY (AuditScoreSection_key)
-    ,CONSTRAINT [UQ_mart.AuditScoreSection_AuditTypeId_AuditTypeVersion_SectionId] UNIQUE(AuditTypeId, AuditTypeVersion, SectionId)
+    ,CONSTRAINT [UQ_mart.AuditScoreSection_AuditType_key_SectionId] UNIQUE(AuditType_key, SectionId)
     ,CONSTRAINT [FK_mart.AuditScoreSection_mart.Wallet_Wallet_key] FOREIGN KEY(Wallet_key) REFERENCES mart.Wallet
 );
 
