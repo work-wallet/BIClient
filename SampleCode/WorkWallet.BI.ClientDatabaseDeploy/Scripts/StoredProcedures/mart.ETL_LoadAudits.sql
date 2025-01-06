@@ -502,7 +502,7 @@ BEGIN
 
         EXEC mart.ETL_MaintainAuditScoreTagDimension @auditScoreTagTable = @auditScoreTagTable;
         EXEC mart.ETL_MaintainAuditGradingSetOptionDimension @auditGradingSetOptionTable = @auditGradingSetOptionTable3;
-        --EXEC mart.ETL_LoadAuditScoreTagFact @auditScoreTagTable = @auditScoreTagTable;
+        EXEC mart.ETL_LoadAuditScoreTagFact @auditScoreTagTable = @auditScoreTagTable;
 
         COMMIT TRANSACTION;
     END TRY
