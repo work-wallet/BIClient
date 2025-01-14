@@ -3538,6 +3538,7 @@
         ],
         "fromColumn": "Wallet_key",
         "fromTable": "Location",
+        "isActive": false,
         "toColumn": "Wallet_key",
         "toTable": "Wallet"
       },
@@ -3627,7 +3628,6 @@
         ],
         "fromColumn": "Wallet_key",
         "fromTable": "Audit",
-        "isActive": false,
         "toColumn": "Wallet_key",
         "toTable": "Wallet"
       },
@@ -3641,6 +3641,7 @@
         ],
         "fromColumn": "Wallet_key",
         "fromTable": "Branch Option",
+        "isActive": false,
         "toColumn": "Wallet_key",
         "toTable": "Wallet"
       },
@@ -3698,6 +3699,7 @@
         ],
         "fromColumn": "Wallet_key",
         "fromTable": "Checklist Answer Fact",
+        "isActive": false,
         "toColumn": "Wallet_key",
         "toTable": "Wallet"
       },
@@ -3740,6 +3742,7 @@
         ],
         "fromColumn": "Wallet_key",
         "fromTable": "Date Time Answer Fact",
+        "isActive": false,
         "toColumn": "Wallet_key",
         "toTable": "Wallet"
       },
@@ -3767,6 +3770,7 @@
         ],
         "fromColumn": "Wallet_key",
         "fromTable": "Grading Set Option",
+        "isActive": false,
         "toColumn": "Wallet_key",
         "toTable": "Wallet"
       },
@@ -3849,6 +3853,7 @@
         ],
         "fromColumn": "Wallet_key",
         "fromTable": "Numeric Answer Fact",
+        "isActive": false,
         "toColumn": "Wallet_key",
         "toTable": "Wallet"
       },
@@ -3876,6 +3881,7 @@
         ],
         "fromColumn": "Wallet_key",
         "fromTable": "Scored Response",
+        "isActive": false,
         "toColumn": "Wallet_key",
         "toTable": "Wallet"
       },
@@ -3904,7 +3910,6 @@
         "fromCardinality": "one",
         "fromColumn": "AuditScoredResponse_key",
         "fromTable": "Scored Response Fact",
-        "isActive": false,
         "toColumn": "AuditScoredResponse_key",
         "toTable": "Scored Response"
       },
@@ -3932,6 +3937,7 @@
         ],
         "fromColumn": "Wallet_key",
         "fromTable": "Score Section",
+        "isActive": false,
         "toColumn": "Wallet_key",
         "toTable": "Wallet"
       },
@@ -3960,7 +3966,6 @@
         "fromCardinality": "one",
         "fromColumn": "AuditScoreSection_key",
         "fromTable": "Score Section Fact",
-        "isActive": false,
         "toColumn": "AuditScoreSection_key",
         "toTable": "Score Section"
       },
@@ -3988,6 +3993,7 @@
         ],
         "fromColumn": "Wallet_key",
         "fromTable": "Score Tag",
+        "isActive": false,
         "toColumn": "Wallet_key",
         "toTable": "Wallet"
       },
@@ -4660,10 +4666,14 @@
               {
                 "name": "SummarizationSetBy",
                 "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isDateTimeCustom\":true}"
               }
             ],
             "dataType": "dateTime",
-            "formatString": "General Date",
+            "formatString": "dd/mm/yyyy hh:nn",
             "lineageTag": "01d48a76-705f-46d4-8194-31e303bc5476",
             "sourceColumn": "Inspected On",
             "summarizeBy": "none",
@@ -5390,7 +5400,7 @@
             "isHidden": true,
             "lineageTag": "7489fa90-e455-4387-9c1f-688575e8e794",
             "sourceColumn": "Wallet_key",
-            "summarizeBy": "none"
+            "summarizeBy": "sum"
           }
         ],
         "lineageTag": "dfda8400-a442-49a2-a445-7604c0fb2a16",
@@ -5580,7 +5590,7 @@
             "annotations": [
               {
                 "name": "SummarizationSetBy",
-                "value": "Automatic"
+                "value": "User"
               }
             ],
             "changedProperties": [
@@ -5862,10 +5872,14 @@
               {
                 "name": "SummarizationSetBy",
                 "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isDateTimeCustom\":true}"
               }
             ],
             "dataType": "dateTime",
-            "formatString": "General Date",
+            "formatString": "dd/mm/yy hh:nn",
             "lineageTag": "a16a5418-f808-43d0-8757-912a04f00507",
             "sourceColumn": "Date and Time Answer",
             "summarizeBy": "none",
@@ -5891,10 +5905,14 @@
               {
                 "name": "UnderlyingDateTimeDataType",
                 "value": "Date"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isDateTimeCustom\":true}"
               }
             ],
             "dataType": "dateTime",
-            "formatString": "Long Date",
+            "formatString": "dd/mm/yy",
             "lineageTag": "c35734ea-a589-4f4b-aa86-849843565cb9",
             "sourceColumn": "Date Answer",
             "summarizeBy": "none",
@@ -5920,10 +5938,14 @@
               {
                 "name": "UnderlyingDateTimeDataType",
                 "value": "Time"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isDateTimeCustom\":true}"
               }
             ],
             "dataType": "dateTime",
-            "formatString": "Long Time",
+            "formatString": "hh:nn",
             "lineageTag": "a6e5707e-dbd5-4134-b737-aa02e7414b3c",
             "sourceColumn": "Time Answer",
             "summarizeBy": "none"
@@ -5933,7 +5955,7 @@
             "annotations": [
               {
                 "name": "SummarizationSetBy",
-                "value": "Automatic"
+                "value": "User"
               }
             ],
             "changedProperties": [
@@ -6641,7 +6663,7 @@
             "isHidden": true,
             "lineageTag": "3c030539-2820-4a68-809b-1d52bf2e2603",
             "sourceColumn": "Wallet_key",
-            "summarizeBy": "none"
+            "summarizeBy": "sum"
           },
           {
             "name": "Grading Set Option Count",
@@ -6970,7 +6992,7 @@
             "annotations": [
               {
                 "name": "SummarizationSetBy",
-                "value": "Automatic"
+                "value": "User"
               }
             ],
             "changedProperties": [
@@ -7154,6 +7176,36 @@
             "lineageTag": "74692309-a8d3-4c25-b49e-3e9af60ec632",
             "sourceColumn": "Wallet_key",
             "summarizeBy": "none"
+          },
+          {
+            "name": "Unit",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "expression": "RELATED(Unit[Unit])",
+            "isDataTypeInferred": true,
+            "lineageTag": "acbdd418-a5bb-4f4c-9503-f3d422dd5139",
+            "summarizeBy": "none",
+            "type": "calculated"
+          },
+          {
+            "name": "Unit Acronym",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "expression": "RELATED(Unit[Unit Acronym])",
+            "isDataTypeInferred": true,
+            "lineageTag": "4d6e2eb3-bde3-45bb-84b4-1a2ddcef82da",
+            "summarizeBy": "none",
+            "type": "calculated"
           }
         ],
         "lineageTag": "1046a9a6-0c1a-4aba-97d3-908952785237",
@@ -7311,7 +7363,7 @@
             "isHidden": true,
             "lineageTag": "0e44677c-4456-49d3-af78-e845ddfca62a",
             "sourceColumn": "Wallet_key",
-            "summarizeBy": "none"
+            "summarizeBy": "sum"
           }
         ],
         "lineageTag": "0530d395-4153-4658-af7b-13b1611db825",
@@ -7665,7 +7717,7 @@
             "isHidden": true,
             "lineageTag": "6ce3054a-118c-4063-aa28-00c4fbb419d8",
             "sourceColumn": "Wallet_key",
-            "summarizeBy": "none"
+            "summarizeBy": "sum"
           }
         ],
         "lineageTag": "135cd0d2-ed00-402b-9e31-a4882185f272",
@@ -8014,7 +8066,7 @@
             "isHidden": true,
             "lineageTag": "0dfe5094-e685-40b7-91f9-b7aab12507de",
             "sourceColumn": "Wallet_key",
-            "summarizeBy": "none"
+            "summarizeBy": "sum"
           }
         ],
         "lineageTag": "b49bfca3-57a7-4002-80a8-3eccd5880182",
@@ -8321,8 +8373,14 @@
                 "value": "Automatic"
               }
             ],
+            "changedProperties": [
+              {
+                "property": "SortByColumn"
+              }
+            ],
             "dataType": "string",
             "lineageTag": "20e706ab-8835-4f10-9716-e3ac5394db42",
+            "sortByColumn": "AuditStatusCode",
             "sourceColumn": "Audit Status",
             "summarizeBy": "none"
           }
@@ -8728,6 +8786,11 @@
             "value": "Table"
           }
         ],
+        "changedProperties": [
+          {
+            "property": "IsHidden"
+          }
+        ],
         "columns": [
           {
             "name": "Unit_key",
@@ -8777,7 +8840,13 @@
                 "value": "Automatic"
               }
             ],
+            "changedProperties": [
+              {
+                "property": "IsHidden"
+              }
+            ],
             "dataType": "string",
+            "isHidden": true,
             "lineageTag": "7baea313-9386-4377-9645-d34a96ad27b3",
             "sourceColumn": "Unit Group",
             "summarizeBy": "none"
@@ -8790,7 +8859,13 @@
                 "value": "Automatic"
               }
             ],
+            "changedProperties": [
+              {
+                "property": "IsHidden"
+              }
+            ],
             "dataType": "string",
+            "isHidden": true,
             "lineageTag": "b5bcf98b-a12e-4379-97d4-aa2682da61ed",
             "sourceColumn": "Unit",
             "summarizeBy": "none"
@@ -8803,12 +8878,19 @@
                 "value": "Automatic"
               }
             ],
+            "changedProperties": [
+              {
+                "property": "IsHidden"
+              }
+            ],
             "dataType": "string",
+            "isHidden": true,
             "lineageTag": "d07142b2-39f4-4b66-b792-eeadd8164ef9",
             "sourceColumn": "Unit Acronym",
             "summarizeBy": "none"
           }
         ],
+        "isHidden": true,
         "lineageTag": "a27913a2-d5d6-4382-805b-7dc81dac48a6",
         "partitions": [
           {
