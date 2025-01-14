@@ -132,7 +132,6 @@ BEGIN
             ,AuditTypeVersion
             ,LocationId
             ,InspectedOn
-            ,[Description]
             ,TotalScore
             ,TotalPotentialScore
             ,AverageScore
@@ -156,7 +155,6 @@ BEGIN
             ,AuditTypeVersion int
             ,LocationId uniqueidentifier
             ,InspectedOn datetime
-            ,[Description] nvarchar(max)
             ,TotalScore int
             ,TotalPotentialScore int
             ,AverageScore decimal(38,6)

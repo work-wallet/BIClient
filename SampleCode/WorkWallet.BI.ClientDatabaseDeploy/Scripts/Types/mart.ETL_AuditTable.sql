@@ -13,7 +13,6 @@ CREATE TYPE mart.ETL_AuditTable AS TABLE
     ,AuditTypeVersion int NOT NULL
     ,LocationId uniqueidentifier NOT NULL
     ,InspectedOn datetime NOT NULL
-    ,[Description] nvarchar(max) NOT NULL
     ,TotalScore int NOT NULL
     ,TotalPotentialScore int NOT NULL
     ,AverageScore decimal(38,6) NOT NULL

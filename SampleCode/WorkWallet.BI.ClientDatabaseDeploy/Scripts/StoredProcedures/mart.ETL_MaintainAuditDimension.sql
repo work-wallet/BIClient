@@ -17,7 +17,6 @@ BEGIN
             t.AuditType_key,
             ol.Location_key,
             a.InspectedOn,
-            a.[Description],
             a.TotalScore,
             a.TotalPotentialScore,
             a.AverageScore,
@@ -44,7 +43,6 @@ BEGIN
         OR target.AuditType_key <> source.AuditType_key
         OR target.Location_key <> source.Location_key
         OR target.InspectedOn <> source.InspectedOn
-        OR target.[Description] <> source.[Description]
         OR target.TotalScore <> source.TotalScore
         OR target.TotalPotentialScore <> source.TotalPotentialScore
         OR target.AverageScore <> source.AverageScore
@@ -64,7 +62,6 @@ BEGIN
             AuditType_key = source.AuditType_key,
             Location_key = source.Location_key,
             InspectedOn = source.InspectedOn,
-            [Description] = source.[Description],
             TotalScore = source.TotalScore,
             TotalPotentialScore = source.TotalPotentialScore,
             AverageScore = source.AverageScore,
@@ -85,7 +82,6 @@ BEGIN
             AuditType_key,
             Location_key,
             InspectedOn,
-            [Description],
             TotalScore,
             TotalPotentialScore,
             AverageScore,
@@ -104,7 +100,6 @@ BEGIN
             source.AuditType_key,
             source.Location_key,
             source.InspectedOn,
-            source.[Description],
             source.TotalScore,
             source.TotalPotentialScore,
             source.AverageScore,

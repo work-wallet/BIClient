@@ -114,7 +114,6 @@ CREATE TABLE mart.[Audit]
     ,AuditType_key int NOT NULL
     ,Location_key int NOT NULL
     ,InspectedOn datetime NOT NULL
-    ,[Description] nvarchar(max) NOT NULL
     ,TotalScore int NOT NULL
     ,TotalPotentialScore int NOT NULL
     ,AverageScore decimal(38,6) NOT NULL
