@@ -3809,6 +3809,7 @@
             "value": "FS"
           }
         ],
+        "crossFilteringBehavior": "bothDirections",
         "fromColumn": "Contact_key",
         "fromTable": "Inspected By Fact",
         "toColumn": "Contact_key",
@@ -4827,6 +4828,21 @@
             "lineageTag": "7870b9da-06e6-4d2b-b6d7-49670caaeaaf",
             "sourceColumn": "Wallet_key",
             "summarizeBy": "none"
+          },
+          {
+            "name": "Conducted By",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "expression": "CONCATENATEX (RELATEDTABLE(Contact), Contact[Contact Name], \", \", Contact[Contact Name], ASC)",
+            "isDataTypeInferred": true,
+            "lineageTag": "b85c6b45-e32d-426a-a017-c65b1b19a2df",
+            "summarizeBy": "none",
+            "type": "calculated"
           }
         ],
         "lineageTag": "e2381d2a-b787-4eaa-ac59-fbb97f1243ce",
