@@ -4,7 +4,7 @@
     "annotations": [
       {
         "name": "PBIDesktopVersion",
-        "value": "2.138.1452.0 (24.11)"
+        "value": "2.139.1678.0 (24.12)+2a034ab280bddf891eb7bb9ebfe6996f9c3a3196"
       },
       {
         "name": "PBI_QueryOrder",
@@ -4021,7 +4021,6 @@
         ],
         "fromColumn": "AuditScoreTag_key",
         "fromTable": "Score Tag Fact",
-        "isActive": false,
         "toColumn": "AuditScoreTag_key",
         "toTable": "Score Tag"
       },
@@ -4079,6 +4078,41 @@
         "fromTable": "Numeric Question",
         "toColumn": "Unit_key",
         "toTable": "Unit"
+      },
+      {
+        "name": "df6e90e5-f710-62dd-0514-18e3f21f52c1",
+        "fromColumn": "Audit_key",
+        "fromTable": "Score Tag Fact",
+        "toColumn": "Audit_key",
+        "toTable": "Audit"
+      },
+      {
+        "name": "c2cd0ec8-1d1e-9469-8667-899a3f100b92",
+        "fromColumn": "Audit_key",
+        "fromTable": "Branch Option Fact",
+        "toColumn": "Audit_key",
+        "toTable": "Audit"
+      },
+      {
+        "name": "e85d3da2-8b54-74fd-da4b-b49aeb21b743",
+        "fromColumn": "Audit_key",
+        "fromTable": "Checklist Answer Fact",
+        "toColumn": "Audit_key",
+        "toTable": "Audit"
+      },
+      {
+        "name": "4c6fbb7b-5829-d3f3-e7fa-c3b1495c1a06",
+        "fromColumn": "Audit_key",
+        "fromTable": "Score Section Fact",
+        "toColumn": "Audit_key",
+        "toTable": "Audit"
+      },
+      {
+        "name": "d9fddc21-1c9c-7e6c-d782-6a74fe3fb0bc",
+        "fromColumn": "Audit_key",
+        "fromTable": "Scored Response Fact",
+        "toColumn": "Audit_key",
+        "toTable": "Audit"
       }
     ],
     "sourceQueryCulture": "en-GB",
@@ -4758,13 +4792,10 @@
               {
                 "name": "SummarizationSetBy",
                 "value": "User"
-              },
-              {
-                "name": "PBI_FormatHint",
-                "value": "{\"isGeneralNumber\":true}"
               }
             ],
             "dataType": "double",
+            "formatString": "0%;-0%;0%",
             "lineageTag": "aaf52adc-5ea5-4ec3-b857-71b29480f375",
             "sourceColumn": "Percentage Score",
             "summarizeBy": "none"
@@ -4843,6 +4874,49 @@
             "lineageTag": "b85c6b45-e32d-426a-a017-c65b1b19a2df",
             "summarizeBy": "none",
             "type": "calculated"
+          },
+          {
+            "name": "Score Display",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "expression": [
+              "",
+              "VAR DisplayScore =",
+              "    AND(RELATED('Audit Type'[Display Total Score]), Audit[Score] <> -1)",
+              "VAR DisplayPercentage =",
+              "    AND(RELATED('Audit Type'[Display Percentage]), Audit[Percentage Score] <> -1)",
+              "VAR ScoreText =",
+              "    IF(DisplayScore, Audit[Score] & \"/\" & Audit[Potential Score], \"\")",
+              "VAR PercentageText =",
+              "    IF(DisplayPercentage, FORMAT(Audit[Percentage Score], \"#%\"), \"\")",
+              "RETURN",
+              "    IF(",
+              "        RELATED('Audit Type'[Scoring Enabled]),",
+              "        IF(",
+              "            AND(DisplayScore, DisplayPercentage),",
+              "            ScoreText & \" (\" & PercentageText & \")\",",
+              "            IF(",
+              "                DisplayScore,",
+              "                ScoreText,",
+              "                IF(",
+              "                    DisplayPercentage,",
+              "                    PercentageText,",
+              "                    \"\"",
+              "                )",
+              "            )",
+              "        ),",
+              "        \"scoring not enabled\"",
+              "    )"
+            ],
+            "isDataTypeInferred": true,
+            "lineageTag": "c017309e-4cfd-4aab-b272-0d1aadfb1405",
+            "summarizeBy": "none",
+            "type": "calculated"
           }
         ],
         "lineageTag": "e2381d2a-b787-4eaa-ac59-fbb97f1243ce",
@@ -4888,7 +4962,6 @@
             ],
             "dataCategory": "PaddedDateTableDates",
             "dataType": "dateTime",
-            "formatString": "General Date",
             "isHidden": true,
             "isNameInferred": true,
             "lineageTag": "629b1d15-a16c-4731-a6e5-0381076d16f3",
@@ -4911,7 +4984,6 @@
             "dataCategory": "Years",
             "dataType": "int64",
             "expression": "YEAR([Date])",
-            "formatString": "0",
             "isHidden": true,
             "lineageTag": "41665221-7bc9-4540-9216-d6a8dfe4f96c",
             "summarizeBy": "none",
@@ -4932,7 +5004,6 @@
             "dataCategory": "MonthOfYear",
             "dataType": "int64",
             "expression": "MONTH([Date])",
-            "formatString": "0",
             "isHidden": true,
             "lineageTag": "7f9d8da9-12f8-4545-a942-ed25b6470260",
             "summarizeBy": "none",
@@ -4974,7 +5045,6 @@
             "dataCategory": "QuarterOfYear",
             "dataType": "int64",
             "expression": "INT(([MonthNo] + 2) / 3)",
-            "formatString": "0",
             "isHidden": true,
             "lineageTag": "c7771922-be45-4619-938c-a73e21324bbc",
             "summarizeBy": "none",
@@ -5016,7 +5086,6 @@
             "dataCategory": "DayOfMonth",
             "dataType": "int64",
             "expression": "DAY([Date])",
-            "formatString": "0",
             "isHidden": true,
             "lineageTag": "063b2be5-0fa2-4352-a75a-1cf0555b0680",
             "summarizeBy": "none",
@@ -5094,7 +5163,6 @@
             ],
             "dataCategory": "PaddedDateTableDates",
             "dataType": "dateTime",
-            "formatString": "General Date",
             "isHidden": true,
             "isNameInferred": true,
             "lineageTag": "17db3cc3-5042-4f69-9f47-fb6e128ac217",
@@ -5117,7 +5185,6 @@
             "dataCategory": "Years",
             "dataType": "int64",
             "expression": "YEAR([Date])",
-            "formatString": "0",
             "isHidden": true,
             "lineageTag": "3b66a980-e6ab-4aed-8d12-4b49392ced0b",
             "summarizeBy": "none",
@@ -5138,7 +5205,6 @@
             "dataCategory": "MonthOfYear",
             "dataType": "int64",
             "expression": "MONTH([Date])",
-            "formatString": "0",
             "isHidden": true,
             "lineageTag": "0685e825-d751-4851-8e51-3a43d6b5d76d",
             "summarizeBy": "none",
@@ -5180,7 +5246,6 @@
             "dataCategory": "QuarterOfYear",
             "dataType": "int64",
             "expression": "INT(([MonthNo] + 2) / 3)",
-            "formatString": "0",
             "isHidden": true,
             "lineageTag": "33987085-1b81-4f31-971d-ef219e729380",
             "summarizeBy": "none",
@@ -5222,7 +5287,6 @@
             "dataCategory": "DayOfMonth",
             "dataType": "int64",
             "expression": "DAY([Date])",
-            "formatString": "0",
             "isHidden": true,
             "lineageTag": "10931bc1-2a7a-4756-9913-94176616bf1b",
             "summarizeBy": "none",
@@ -6042,7 +6106,6 @@
             ],
             "dataCategory": "PaddedDateTableDates",
             "dataType": "dateTime",
-            "formatString": "General Date",
             "isHidden": true,
             "isNameInferred": true,
             "lineageTag": "22703b14-fc1c-4580-9faf-53d31b50f1b2",
@@ -6065,7 +6128,6 @@
             "dataCategory": "Years",
             "dataType": "int64",
             "expression": "YEAR([Date])",
-            "formatString": "0",
             "isHidden": true,
             "lineageTag": "90151898-6158-47ca-be27-d8c7a2692aaa",
             "summarizeBy": "none",
@@ -6086,7 +6148,6 @@
             "dataCategory": "MonthOfYear",
             "dataType": "int64",
             "expression": "MONTH([Date])",
-            "formatString": "0",
             "isHidden": true,
             "lineageTag": "7e2f4bec-7755-441d-8308-a5dd2ca03005",
             "summarizeBy": "none",
@@ -6128,7 +6189,6 @@
             "dataCategory": "QuarterOfYear",
             "dataType": "int64",
             "expression": "INT(([MonthNo] + 2) / 3)",
-            "formatString": "0",
             "isHidden": true,
             "lineageTag": "7ef2a4a4-4be3-4d76-a76b-842d472eefc7",
             "summarizeBy": "none",
@@ -6170,7 +6230,6 @@
             "dataCategory": "DayOfMonth",
             "dataType": "int64",
             "expression": "DAY([Date])",
-            "formatString": "0",
             "isHidden": true,
             "lineageTag": "5becccea-468f-4106-9f93-70d793bb657a",
             "summarizeBy": "none",
@@ -6248,7 +6307,6 @@
             ],
             "dataCategory": "PaddedDateTableDates",
             "dataType": "dateTime",
-            "formatString": "General Date",
             "isHidden": true,
             "isNameInferred": true,
             "lineageTag": "a08ca4bf-e17f-43f0-9097-23a0a53c679c",
@@ -6271,7 +6329,6 @@
             "dataCategory": "Years",
             "dataType": "int64",
             "expression": "YEAR([Date])",
-            "formatString": "0",
             "isHidden": true,
             "lineageTag": "88474ca9-e101-47c8-a30e-cc896fe9f7d9",
             "summarizeBy": "none",
@@ -6292,7 +6349,6 @@
             "dataCategory": "MonthOfYear",
             "dataType": "int64",
             "expression": "MONTH([Date])",
-            "formatString": "0",
             "isHidden": true,
             "lineageTag": "cc8f7981-b7f8-4e0e-a3b6-0cf1650cdbe9",
             "summarizeBy": "none",
@@ -6334,7 +6390,6 @@
             "dataCategory": "QuarterOfYear",
             "dataType": "int64",
             "expression": "INT(([MonthNo] + 2) / 3)",
-            "formatString": "0",
             "isHidden": true,
             "lineageTag": "2cfea8e8-4653-4a62-a669-4a2c8a2d7c28",
             "summarizeBy": "none",
@@ -6376,7 +6431,6 @@
             "dataCategory": "DayOfMonth",
             "dataType": "int64",
             "expression": "DAY([Date])",
-            "formatString": "0",
             "isHidden": true,
             "lineageTag": "f129820a-6d2c-4e86-99a1-3aaa8e20dc85",
             "summarizeBy": "none",
@@ -6666,7 +6720,7 @@
             "annotations": [
               {
                 "name": "SummarizationSetBy",
-                "value": "Automatic"
+                "value": "User"
               }
             ],
             "changedProperties": [
@@ -6679,7 +6733,7 @@
             "isHidden": true,
             "lineageTag": "3c030539-2820-4a68-809b-1d52bf2e2603",
             "sourceColumn": "Wallet_key",
-            "summarizeBy": "sum"
+            "summarizeBy": "none"
           },
           {
             "name": "Grading Set Option Count",
@@ -8082,7 +8136,7 @@
             "isHidden": true,
             "lineageTag": "0dfe5094-e685-40b7-91f9-b7aab12507de",
             "sourceColumn": "Wallet_key",
-            "summarizeBy": "sum"
+            "summarizeBy": "none"
           }
         ],
         "lineageTag": "b49bfca3-57a7-4002-80a8-3eccd5880182",
@@ -8226,13 +8280,10 @@
               {
                 "name": "SummarizationSetBy",
                 "value": "User"
-              },
-              {
-                "name": "PBI_FormatHint",
-                "value": "{\"isGeneralNumber\":true}"
               }
             ],
             "dataType": "double",
+            "formatString": "0%;-0%;0%",
             "lineageTag": "c0df4b51-69a6-409a-a6dd-562f02afc428",
             "sourceColumn": "Percentage Score",
             "summarizeBy": "none"
@@ -8305,6 +8356,49 @@
             "isDataTypeInferred": true,
             "lineageTag": "c8b53168-0e7e-4735-a579-b1fcec300d02",
             "summarizeBy": "sum",
+            "type": "calculated"
+          },
+          {
+            "name": "Score Display",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "expression": [
+              "",
+              "VAR DisplayScore =",
+              "    AND(RELATED('Audit Type'[Display Total Score]), 'Score Tag Fact'[Score] <> -1)",
+              "VAR DisplayPercentage =",
+              "    AND(RELATED('Audit Type'[Display Percentage]), 'Score Tag Fact'[Percentage Score] <> -1)",
+              "VAR ScoreText =",
+              "    IF(DisplayScore, 'Score Tag Fact'[Score] & \"/\" & 'Score Tag Fact'[Potential Score], \"\")",
+              "VAR PercentageText =",
+              "    IF(DisplayPercentage, FORMAT('Score Tag Fact'[Percentage Score], \"#%\"), \"\")",
+              "RETURN",
+              "    IF(",
+              "        RELATED('Audit Type'[Scoring Enabled]),",
+              "        IF(",
+              "            AND(DisplayScore, DisplayPercentage),",
+              "            ScoreText & \" (\" & PercentageText & \")\",",
+              "            IF(",
+              "                DisplayScore,",
+              "                ScoreText,",
+              "                IF(",
+              "                    DisplayPercentage,",
+              "                    PercentageText,",
+              "                    \"\"",
+              "                )",
+              "            )",
+              "        ),",
+              "        \"scoring not enabled\"",
+              "    )"
+            ],
+            "isDataTypeInferred": true,
+            "lineageTag": "b521e3d6-dc8a-415f-b14e-c2f8ef4d8046",
+            "summarizeBy": "none",
             "type": "calculated"
           }
         ],

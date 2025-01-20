@@ -1,7 +1,19 @@
 {
-  "config": "{\"version\":\"5.55\",\"themeCollection\":{\"baseTheme\":{\"name\":\"CY24SU06\",\"version\":\"5.56\",\"type\":2},\"customTheme\":{\"name\":\"NoWalls_Analytics4439775621304771.json\",\"version\":\"5.56\",\"type\":1}},\"activeSectionIndex\":0,\"defaultDrillFilterOtherVisuals\":true,\"filterSortOrder\":3,\"linguisticSchemaSyncVersion\":2,\"settings\":{\"useNewFilterPaneExperience\":true,\"allowChangeFilterTypes\":true,\"useStylableVisualContainerHeader\":true,\"exportDataMode\":1,\"useEnhancedTooltips\":true},\"objects\":{\"section\":[{\"properties\":{\"verticalAlignment\":{\"expr\":{\"Literal\":{\"Value\":\"'Top'\"}}}}}],\"outspacePane\":[{\"properties\":{\"expanded\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}}}}]}}",
+  "config": "{\"version\":\"5.55\",\"themeCollection\":{\"baseTheme\":{\"name\":\"CY24SU06\",\"version\":\"5.56\",\"type\":2},\"customTheme\":{\"name\":\"NoWalls_Analytics4439775621304771.json\",\"version\":\"5.56\",\"type\":1}},\"activeSectionIndex\":1,\"defaultDrillFilterOtherVisuals\":true,\"filterSortOrder\":3,\"linguisticSchemaSyncVersion\":2,\"settings\":{\"useNewFilterPaneExperience\":true,\"allowChangeFilterTypes\":true,\"useStylableVisualContainerHeader\":true,\"exportDataMode\":1,\"useEnhancedTooltips\":true},\"objects\":{\"section\":[{\"properties\":{\"verticalAlignment\":{\"expr\":{\"Literal\":{\"Value\":\"'Top'\"}}}}}],\"outspacePane\":[{\"properties\":{\"expanded\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}}}}]}}",
   "filters": "[]",
   "layoutOptimization": 0,
+  "pods": [
+    {
+      "boundSection": "80986d72ddb7be8a5e01",
+      "config": "{}",
+      "name": "c79e1c7d4e9344d0bcd7",
+      "parameters": "[{\"name\":\"f8544f5056a100020a00\",\"boundFilter\":\"dfc54ae67b300b410676\",\"fieldExpr\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"Audit\"}},\"Property\":\"Audit Reference\"}}}]",
+      "type": 1
+    }
+  ],
+  "publicCustomVisuals": [
+    "advanceCardE03760C5AB684758B56AA29F9E6C257B"
+  ],
   "resourcePackages": [
     {
       "resourcePackage": {
@@ -42,22 +54,142 @@
       "name": "0e5e0693c4483648cc08",
       "visualContainers": [
         {
-          "config": "{\"name\":\"a9d0a663a162b7d0f458\",\"layouts\":[{\"id\":0,\"position\":{\"x\":0,\"y\":80.98659517426273,\"z\":0,\"width\":1280,\"height\":638.970509383378,\"tabOrder\":0}}],\"singleVisual\":{\"visualType\":\"tableEx\",\"projections\":{\"Values\":[{\"queryRef\":\"Audit.Audit Reference\"},{\"queryRef\":\"Audit Status.Audit Status\"},{\"queryRef\":\"Audit Type.Audit Type\"},{\"queryRef\":\"Audit.Conducted By\"},{\"queryRef\":\"Audit.Inspected On\"},{\"queryRef\":\"Location.Location\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"a\",\"Entity\":\"Audit\",\"Type\":0},{\"Name\":\"l\",\"Entity\":\"Location\",\"Type\":0},{\"Name\":\"a1\",\"Entity\":\"Audit Status\",\"Type\":0},{\"Name\":\"a2\",\"Entity\":\"Audit Type\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"a\"}},\"Property\":\"Audit Reference\"},\"Name\":\"Audit.Audit Reference\",\"NativeReferenceName\":\"Audit Reference\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"l\"}},\"Property\":\"Location\"},\"Name\":\"Location.Location\",\"NativeReferenceName\":\"Location\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"a\"}},\"Property\":\"Inspected On\"},\"Name\":\"Audit.Inspected On\",\"NativeReferenceName\":\"Inspected On\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"a1\"}},\"Property\":\"Audit Status\"},\"Name\":\"Audit Status.Audit Status\",\"NativeReferenceName\":\"Audit Status\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"a2\"}},\"Property\":\"Audit Type\"},\"Name\":\"Audit Type.Audit Type\",\"NativeReferenceName\":\"Audit Type\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"a\"}},\"Property\":\"Conducted By\"},\"Name\":\"Audit.Conducted By\",\"NativeReferenceName\":\"Conducted By\"}],\"OrderBy\":[{\"Direction\":2,\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"a\"}},\"Property\":\"Audit Reference\"}}}]},\"drillFilterOtherVisuals\":true,\"objects\":{\"columnWidth\":[{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"110.70777479892762D\"}}}},\"selector\":{\"metadata\":\"Audit.Audit Reference\"}},{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"393.2323086617995D\"}}}},\"selector\":{\"metadata\":\"Location.Location\"}},{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"40D\"}}}},\"selector\":{\"metadata\":\"Audit.Inspected On.Variation.Date Hierarchy.Year\"}},{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"48D\"}}}},\"selector\":{\"metadata\":\"Audit.Inspected On.Variation.Date Hierarchy.Quarter\"}},{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"70D\"}}}},\"selector\":{\"metadata\":\"Audit.Inspected On.Variation.Date Hierarchy.Month\"}},{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"29D\"}}}},\"selector\":{\"metadata\":\"Audit.Inspected On.Variation.Date Hierarchy.Day\"}},{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"123D\"}}}},\"selector\":{\"metadata\":\"Audit.Inspected On\"}},{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"142.12332439678283D\"}}}},\"selector\":{\"metadata\":\"Audit Status.Audit Status\"}},{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"195.8847058370433D\"}}}},\"selector\":{\"metadata\":\"Audit Type.Audit Type\"}},{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"296.63181067694D\"}}}},\"selector\":{\"metadata\":\"Audit.Conducted By\"}}]}}}",
+          "config": "{\"name\":\"a3f2efeee8c9c842d505\",\"layouts\":[{\"id\":0,\"position\":{\"x\":0,\"y\":0,\"z\":2000,\"width\":419,\"height\":102,\"tabOrder\":2000}}],\"singleVisual\":{\"visualType\":\"slicer\",\"projections\":{\"Values\":[{\"queryRef\":\"Audit.Inspected On\",\"active\":true}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"a\",\"Entity\":\"Audit\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"a\"}},\"Property\":\"Inspected On\"},\"Name\":\"Audit.Inspected On\",\"NativeReferenceName\":\"Inspected On\"}],\"OrderBy\":[{\"Direction\":1,\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"a\"}},\"Property\":\"Inspected On\"}}}]},\"drillFilterOtherVisuals\":true,\"hasDefaultSort\":true,\"objects\":{\"data\":[{\"properties\":{\"mode\":{\"expr\":{\"Literal\":{\"Value\":\"'Relative'\"}}},\"relativeRange\":{\"expr\":{\"Literal\":{\"Value\":\"'Last'\"}}},\"relativeDuration\":{\"expr\":{\"Literal\":{\"Value\":\"1D\"}}},\"relativePeriod\":{\"expr\":{\"Literal\":{\"Value\":\"'Years'\"}}}}}],\"dateRange\":[{\"properties\":{\"includeToday\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}}}}],\"general\":[{\"properties\":{\"filter\":{\"filter\":{\"Version\":2,\"From\":[{\"Name\":\"a\",\"Entity\":\"Audit\",\"Type\":0}],\"Where\":[{\"Condition\":{\"Between\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"a\"}},\"Property\":\"Inspected On\"}},\"LowerBound\":{\"DateSpan\":{\"Expression\":{\"DateAdd\":{\"Expression\":{\"DateAdd\":{\"Expression\":{\"Now\":{}},\"Amount\":1,\"TimeUnit\":0}},\"Amount\":-1,\"TimeUnit\":3}},\"TimeUnit\":0}},\"UpperBound\":{\"DateSpan\":{\"Expression\":{\"Now\":{}},\"TimeUnit\":0}}}}}]}}}}]},\"vcObjects\":{\"title\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}}}}]}}}",
           "filters": "[]",
-          "height": 638.97,
+          "height": 102.00,
+          "width": 419.00,
+          "x": 0.00,
+          "y": 0.00,
+          "z": 2000.00
+        },
+        {
+          "config": "{\"name\":\"a9d0a663a162b7d0f458\",\"layouts\":[{\"id\":0,\"position\":{\"x\":0,\"y\":101.95583596214512,\"z\":0,\"width\":1280,\"height\":617.7917981072555,\"tabOrder\":0}}],\"singleVisual\":{\"visualType\":\"tableEx\",\"projections\":{\"Values\":[{\"queryRef\":\"Audit.Audit Reference\"},{\"queryRef\":\"Audit Status.Audit Status\"},{\"queryRef\":\"Audit Type.Audit Type\"},{\"queryRef\":\"Audit.Conducted By\"},{\"queryRef\":\"Audit.Inspected On\"},{\"queryRef\":\"Location.Location\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"a\",\"Entity\":\"Audit\",\"Type\":0},{\"Name\":\"l\",\"Entity\":\"Location\",\"Type\":0},{\"Name\":\"a1\",\"Entity\":\"Audit Status\",\"Type\":0},{\"Name\":\"a2\",\"Entity\":\"Audit Type\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"a\"}},\"Property\":\"Audit Reference\"},\"Name\":\"Audit.Audit Reference\",\"NativeReferenceName\":\"Audit Reference\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"l\"}},\"Property\":\"Location\"},\"Name\":\"Location.Location\",\"NativeReferenceName\":\"Location\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"a\"}},\"Property\":\"Inspected On\"},\"Name\":\"Audit.Inspected On\",\"NativeReferenceName\":\"Inspected On\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"a1\"}},\"Property\":\"Audit Status\"},\"Name\":\"Audit Status.Audit Status\",\"NativeReferenceName\":\"Audit Status\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"a2\"}},\"Property\":\"Audit Type\"},\"Name\":\"Audit Type.Audit Type\",\"NativeReferenceName\":\"Audit Type\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"a\"}},\"Property\":\"Conducted By\"},\"Name\":\"Audit.Conducted By\",\"NativeReferenceName\":\"Conducted By\"}],\"OrderBy\":[{\"Direction\":2,\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"a\"}},\"Property\":\"Audit Reference\"}}}]},\"drillFilterOtherVisuals\":true,\"objects\":{\"columnWidth\":[{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"110.70777479892762D\"}}}},\"selector\":{\"metadata\":\"Audit.Audit Reference\"}},{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"393.2323086617995D\"}}}},\"selector\":{\"metadata\":\"Location.Location\"}},{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"40D\"}}}},\"selector\":{\"metadata\":\"Audit.Inspected On.Variation.Date Hierarchy.Year\"}},{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"48D\"}}}},\"selector\":{\"metadata\":\"Audit.Inspected On.Variation.Date Hierarchy.Quarter\"}},{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"70D\"}}}},\"selector\":{\"metadata\":\"Audit.Inspected On.Variation.Date Hierarchy.Month\"}},{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"29D\"}}}},\"selector\":{\"metadata\":\"Audit.Inspected On.Variation.Date Hierarchy.Day\"}},{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"123D\"}}}},\"selector\":{\"metadata\":\"Audit.Inspected On\"}},{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"142.12332439678283D\"}}}},\"selector\":{\"metadata\":\"Audit Status.Audit Status\"}},{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"195.8847058370433D\"}}}},\"selector\":{\"metadata\":\"Audit Type.Audit Type\"}},{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"296.63181067694D\"}}}},\"selector\":{\"metadata\":\"Audit.Conducted By\"}}]}}}",
+          "filters": "[]",
+          "height": 617.79,
           "width": 1280.00,
           "x": 0.00,
-          "y": 80.99,
+          "y": 101.96,
           "z": 0.00
         },
         {
-          "config": "{\"name\":\"b506e34e8f7180074b6b\",\"layouts\":[{\"id\":0,\"position\":{\"x\":10.294906166219839,\"y\":0,\"z\":1,\"width\":341.79088471849866,\"height\":80.98659517426273,\"tabOrder\":1}}],\"singleVisual\":{\"visualType\":\"slicer\",\"projections\":{\"Values\":[{\"queryRef\":\"Audit Status.Audit Status\",\"active\":true}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"a\",\"Entity\":\"Audit Status\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"a\"}},\"Property\":\"Audit Status\"},\"Name\":\"Audit Status.Audit Status\",\"NativeReferenceName\":\"Audit Status\"}]},\"drillFilterOtherVisuals\":true,\"objects\":{\"data\":[{\"properties\":{\"mode\":{\"expr\":{\"Literal\":{\"Value\":\"'Dropdown'\"}}}}}],\"general\":[{\"properties\":{\"filter\":{\"filter\":{\"Version\":2,\"From\":[{\"Name\":\"a\",\"Entity\":\"Audit Status\",\"Type\":0}],\"Where\":[{\"Condition\":{\"In\":{\"Expressions\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"a\"}},\"Property\":\"Audit Status\"}}],\"Values\":[[{\"Literal\":{\"Value\":\"'Report In Progress'\"}}],[{\"Literal\":{\"Value\":\"'Ready For Review'\"}}]]}}}]}}}}],\"selection\":[{\"properties\":{\"selectAllCheckboxEnabled\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}}}}]}}}",
+          "config": "{\"name\":\"b506e34e8f7180074b6b\",\"layouts\":[{\"id\":0,\"position\":{\"x\":418.9274447949527,\"y\":0,\"z\":1000,\"width\":283,\"height\":102,\"tabOrder\":1000}}],\"singleVisual\":{\"visualType\":\"slicer\",\"projections\":{\"Values\":[{\"queryRef\":\"Audit Status.Audit Status\",\"active\":true}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"a\",\"Entity\":\"Audit Status\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"a\"}},\"Property\":\"Audit Status\"},\"Name\":\"Audit Status.Audit Status\",\"NativeReferenceName\":\"Audit Status\"}]},\"drillFilterOtherVisuals\":true,\"objects\":{\"data\":[{\"properties\":{\"mode\":{\"expr\":{\"Literal\":{\"Value\":\"'Dropdown'\"}}}}}],\"general\":[{\"properties\":{\"filter\":{\"filter\":{\"Version\":2,\"From\":[{\"Name\":\"a\",\"Entity\":\"Audit Status\",\"Type\":0}],\"Where\":[{\"Condition\":{\"In\":{\"Expressions\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"a\"}},\"Property\":\"Audit Status\"}}],\"Values\":[[{\"Literal\":{\"Value\":\"'Report In Progress'\"}}],[{\"Literal\":{\"Value\":\"'Ready For Review'\"}}]]}}}]}}}}],\"selection\":[{\"properties\":{\"selectAllCheckboxEnabled\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}}}}]}}}",
           "filters": "[]",
-          "height": 80.99,
-          "width": 341.79,
-          "x": 10.29,
+          "height": 102.00,
+          "width": 283.00,
+          "x": 418.93,
           "y": 0.00,
-          "z": 1.00
+          "z": 1000.00
+        }
+      ],
+      "width": 1280.00
+    },
+    {
+      "config": "{\"objects\":{\"outspacePane\":[{\"properties\":{\"width\":{\"expr\":{\"Literal\":{\"Value\":\"229L\"}}}}}]}}",
+      "displayName": "Audit Details",
+      "displayOption": 1,
+      "filters": "[{\"name\":\"dfc54ae67b300b410676\",\"expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"Audit\"}},\"Property\":\"Audit Reference\"}},\"filter\":{\"Version\":2,\"From\":[{\"Name\":\"a\",\"Entity\":\"Audit\",\"Type\":0}],\"Where\":[{\"Condition\":{\"In\":{\"Expressions\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"a\"}},\"Property\":\"Audit Reference\"}}],\"Values\":[[{\"Literal\":{\"Value\":\"'TW-00011'\"}}]]}}}]},\"type\":\"Categorical\",\"howCreated\":5}]",
+      "height": 720.00,
+      "name": "80986d72ddb7be8a5e01",
+      "ordinal": 1,
+      "visualContainers": [
+        {
+          "config": "{\"name\":\"118442673891a19a2827\",\"layouts\":[{\"id\":0,\"position\":{\"x\":0,\"y\":90.62773722627738,\"z\":1000,\"width\":512,\"height\":68,\"tabOrder\":0}}],\"singleVisual\":{\"visualType\":\"card\",\"projections\":{\"Values\":[{\"queryRef\":\"Min(Audit Type.Audit Type)\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"a\",\"Entity\":\"Audit Type\",\"Type\":0}],\"Select\":[{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"a\"}},\"Property\":\"Audit Type\"}},\"Function\":3},\"Name\":\"Min(Audit Type.Audit Type)\",\"NativeReferenceName\":\"Audit Type\"}]},\"columnProperties\":{\"Min(Audit Type.Audit Type)\":{\"displayName\":\"Audit Type\"}},\"drillFilterOtherVisuals\":true,\"objects\":{\"categoryLabels\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}}}}]}}}",
+          "filters": "[]",
+          "height": 68.00,
+          "width": 512.00,
+          "x": 0.00,
+          "y": 90.63,
+          "z": 1000.00
+        },
+        {
+          "config": "{\"name\":\"1c8867ec3d07c100a03c\",\"layouts\":[{\"id\":0,\"position\":{\"x\":883.8540145985402,\"y\":158.83211678832117,\"z\":5000,\"width\":396.1459854014599,\"height\":68.2043795620438,\"tabOrder\":4000}}],\"singleVisual\":{\"visualType\":\"card\",\"projections\":{\"Values\":[{\"queryRef\":\"Min(Audit.Conducted By)\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"a\",\"Entity\":\"Audit\",\"Type\":0}],\"Select\":[{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"a\"}},\"Property\":\"Conducted By\"}},\"Function\":3},\"Name\":\"Min(Audit.Conducted By)\",\"NativeReferenceName\":\"Conducted By\"}]},\"columnProperties\":{\"Min(Audit.Conducted By)\":{\"displayName\":\"Conducted By\"}},\"drillFilterOtherVisuals\":true,\"hasDefaultSort\":true,\"objects\":{\"categoryLabels\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}}}}]}}}",
+          "filters": "[]",
+          "height": 68.20,
+          "width": 396.15,
+          "x": 883.85,
+          "y": 158.83,
+          "z": 5000.00
+        },
+        {
+          "config": "{\"name\":\"2643649d5c5705c78ace\",\"layouts\":[{\"id\":0,\"position\":{\"x\":512,\"y\":90.62773722627738,\"z\":2000,\"width\":469.95620437956205,\"height\":68.2043795620438,\"tabOrder\":1000}}],\"singleVisual\":{\"visualType\":\"card\",\"projections\":{\"Values\":[{\"queryRef\":\"Min(Audit.Grading)\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"a\",\"Entity\":\"Audit\",\"Type\":0}],\"Select\":[{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"a\"}},\"Property\":\"Grading\"}},\"Function\":3},\"Name\":\"Min(Audit.Grading)\",\"NativeReferenceName\":\"Grading\"}]},\"columnProperties\":{\"Min(Audit.Grading)\":{\"displayName\":\"Grading\"}},\"drillFilterOtherVisuals\":true,\"objects\":{\"categoryLabels\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}}}}],\"wordWrap\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}}}}]}}}",
+          "filters": "[]",
+          "height": 68.20,
+          "width": 469.96,
+          "x": 512.00,
+          "y": 90.63,
+          "z": 2000.00
+        },
+        {
+          "config": "{\"name\":\"27c546844c80de011603\",\"layouts\":[{\"id\":0,\"position\":{\"x\":0,\"y\":0,\"width\":100,\"height\":40,\"z\":0,\"tabOrder\":8000}}],\"singleVisual\":{\"visualType\":\"actionButton\",\"drillFilterOtherVisuals\":true,\"objects\":{\"icon\":[{\"properties\":{\"shapeType\":{\"expr\":{\"Literal\":{\"Value\":\"'back'\"}}}},\"selector\":{\"id\":\"default\"}}]},\"vcObjects\":{\"visualLink\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}},\"type\":{\"expr\":{\"Literal\":{\"Value\":\"'Back'\"}}}}}]}},\"howCreated\":\"InsertVisualButton\"}",
+          "filters": "[]",
+          "height": 40.00,
+          "width": 100.00,
+          "x": 0.00,
+          "y": 0.00,
+          "z": 0.00
+        },
+        {
+          "config": "{\"name\":\"37fecc3229b2c6056007\",\"layouts\":[{\"id\":0,\"position\":{\"x\":793.2262773722628,\"y\":0,\"z\":6000,\"width\":298.978102189781,\"height\":66.33576642335767,\"tabOrder\":5000}}],\"singleVisual\":{\"visualType\":\"card\",\"projections\":{\"Values\":[{\"queryRef\":\"Min(Audit Status.Audit Status)\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"a\",\"Entity\":\"Audit Status\",\"Type\":0}],\"Select\":[{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"a\"}},\"Property\":\"Audit Status\"}},\"Function\":3},\"Name\":\"Min(Audit Status.Audit Status)\",\"NativeReferenceName\":\"Status\"}]},\"columnProperties\":{\"Min(Audit Status.Audit Status)\":{\"displayName\":\"Status\"}},\"drillFilterOtherVisuals\":true,\"objects\":{\"categoryLabels\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}}}}]}}}",
+          "filters": "[]",
+          "height": 66.34,
+          "width": 298.98,
+          "x": 793.23,
+          "y": 0.00,
+          "z": 6000.00
+        },
+        {
+          "config": "{\"name\":\"5e489e73708d853192ce\",\"layouts\":[{\"id\":0,\"position\":{\"x\":323.2700729927007,\"y\":158.83211678832117,\"z\":4000,\"width\":560.5839416058394,\"height\":68.2043795620438,\"tabOrder\":3000}}],\"singleVisual\":{\"visualType\":\"card\",\"projections\":{\"Values\":[{\"queryRef\":\"Min(Location.Location)\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"l\",\"Entity\":\"Location\",\"Type\":0}],\"Select\":[{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"l\"}},\"Property\":\"Location\"}},\"Function\":3},\"Name\":\"Min(Location.Location)\",\"NativeReferenceName\":\"Location\"}]},\"columnProperties\":{\"Min(Location.Location)\":{\"displayName\":\"Location\"}},\"drillFilterOtherVisuals\":true,\"hasDefaultSort\":true,\"objects\":{\"categoryLabels\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}}}}]}}}",
+          "filters": "[]",
+          "height": 68.20,
+          "width": 560.58,
+          "x": 323.27,
+          "y": 158.83,
+          "z": 4000.00
+        },
+        {
+          "config": "{\"name\":\"6efcf24fd9dca1851c07\",\"layouts\":[{\"id\":0,\"position\":{\"x\":981.956204379562,\"y\":90.62773722627738,\"z\":7002,\"width\":298.04379562043795,\"height\":68.2043795620438,\"tabOrder\":8002}}],\"singleVisual\":{\"visualType\":\"card\",\"projections\":{\"Values\":[{\"queryRef\":\"Min(Audit.Score Display)\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"a\",\"Entity\":\"Audit\",\"Type\":0}],\"Select\":[{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"a\"}},\"Property\":\"Score Display\"}},\"Function\":3},\"Name\":\"Min(Audit.Score Display)\",\"NativeReferenceName\":\"Score\"}]},\"columnProperties\":{\"Min(Audit.Score Display)\":{\"displayName\":\"Score\"}},\"drillFilterOtherVisuals\":true,\"objects\":{\"categoryLabels\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}}}}],\"wordWrap\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}}}}]}}}",
+          "filters": "[]",
+          "height": 68.20,
+          "width": 298.04,
+          "x": 981.96,
+          "y": 90.63,
+          "z": 7002.00
+        },
+        {
+          "config": "{\"name\":\"7c5e01d3dcb71d3bc16a\",\"layouts\":[{\"id\":0,\"position\":{\"x\":1092.2043795620439,\"y\":0,\"z\":7000,\"width\":187.79562043795622,\"height\":66.33576642335767,\"tabOrder\":6000}}],\"singleVisual\":{\"visualType\":\"card\",\"projections\":{\"Values\":[{\"queryRef\":\"Min(Audit.Audit Reference)\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"a\",\"Entity\":\"Audit\",\"Type\":0}],\"Select\":[{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"a\"}},\"Property\":\"Audit Reference\"}},\"Function\":3},\"Name\":\"Min(Audit.Audit Reference)\",\"NativeReferenceName\":\"Reference\"}]},\"columnProperties\":{\"Min(Audit.Audit Reference)\":{\"displayName\":\"Reference\"}},\"drillFilterOtherVisuals\":true,\"hasDefaultSort\":true,\"objects\":{\"categoryLabels\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}}}}]}}}",
+          "filters": "[]",
+          "height": 66.34,
+          "width": 187.80,
+          "x": 1092.20,
+          "y": 0.00,
+          "z": 7000.00
+        },
+        {
+          "config": "{\"name\":\"a2f43acf5e7528b352d8\",\"layouts\":[{\"id\":0,\"position\":{\"x\":0,\"y\":227.03649635036496,\"z\":7003,\"width\":654.014598540146,\"height\":150.42335766423358,\"tabOrder\":8003}}],\"singleVisual\":{\"visualType\":\"tableEx\",\"projections\":{\"Values\":[{\"queryRef\":\"Score Tag.Tag\"},{\"queryRef\":\"Sum(Score Tag Fact.Flags)\"},{\"queryRef\":\"Score Tag Fact.Score Display\"},{\"queryRef\":\"Grading Set Option.Grading Set Option\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"s\",\"Entity\":\"Score Tag\",\"Type\":0},{\"Name\":\"s1\",\"Entity\":\"Score Tag Fact\",\"Type\":0},{\"Name\":\"g\",\"Entity\":\"Grading Set Option\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"s\"}},\"Property\":\"Tag\"},\"Name\":\"Score Tag.Tag\",\"NativeReferenceName\":\"Tag\"},{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"s1\"}},\"Property\":\"Flags\"}},\"Function\":0},\"Name\":\"Sum(Score Tag Fact.Flags)\",\"NativeReferenceName\":\"Flags\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"s1\"}},\"Property\":\"Score Display\"},\"Name\":\"Score Tag Fact.Score Display\",\"NativeReferenceName\":\"Score Display\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"g\"}},\"Property\":\"Grading Set Option\"},\"Name\":\"Grading Set Option.Grading Set Option\",\"NativeReferenceName\":\"Grading Set Option\"}]},\"drillFilterOtherVisuals\":true,\"objects\":{\"columnWidth\":[{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"221.92368635705657D\"}}}},\"selector\":{\"metadata\":\"Score Tag.Tag\"}},{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"35D\"}}}},\"selector\":{\"metadata\":\"Sum(Score Tag Fact.Flags)\"}},{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"93D\"}}}},\"selector\":{\"metadata\":\"Score Tag Fact.Score Display\"}},{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"112D\"}}}},\"selector\":{\"metadata\":\"Grading Set Option.Grading Set Option\"}}],\"total\":[{\"properties\":{\"totals\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}}}}]},\"vcObjects\":{\"title\":[{\"properties\":{\"text\":{\"expr\":{\"Literal\":{\"Value\":\"'Tags'\"}}}}}]}}}",
+          "filters": "[]",
+          "height": 150.42,
+          "width": 654.01,
+          "x": 0.00,
+          "y": 227.04,
+          "z": 7003.00
+        },
+        {
+          "config": "{\"name\":\"af868d105a836012ee73\",\"layouts\":[{\"id\":0,\"position\":{\"x\":0,\"y\":158.83211678832117,\"z\":3000,\"width\":323.2700729927007,\"height\":68.2043795620438,\"tabOrder\":2000}}],\"singleVisual\":{\"visualType\":\"card\",\"projections\":{\"Values\":[{\"queryRef\":\"Min(Audit.Inspected On)\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"a\",\"Entity\":\"Audit\",\"Type\":0}],\"Select\":[{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"a\"}},\"Property\":\"Inspected On\"}},\"Function\":3},\"Name\":\"Min(Audit.Inspected On)\",\"NativeReferenceName\":\"Inspected On\"}],\"OrderBy\":[{\"Direction\":1,\"Expression\":{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"a\"}},\"Property\":\"Inspected On\"}},\"Function\":3}}}]},\"columnProperties\":{\"Min(Audit.Inspected On)\":{\"displayName\":\"Inspected On\"}},\"drillFilterOtherVisuals\":true,\"hasDefaultSort\":true,\"objects\":{\"categoryLabels\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}}}}]}}}",
+          "filters": "[]",
+          "height": 68.20,
+          "width": 323.27,
+          "x": 0.00,
+          "y": 158.83,
+          "z": 3000.00
+        },
+        {
+          "config": "{\"name\":\"cd04bf219b081e66db6e\",\"layouts\":[{\"id\":0,\"position\":{\"x\":99.97080291970804,\"y\":0,\"z\":7001,\"width\":426.04379562043795,\"height\":40.175182481751825,\"tabOrder\":8001}}],\"singleVisual\":{\"visualType\":\"textbox\",\"drillFilterOtherVisuals\":true,\"objects\":{\"general\":[{\"properties\":{\"paragraphs\":[{\"textRuns\":[{\"value\":\"To use this report, drill from the \"},{\"value\":\"Audits List\",\"textStyle\":{\"fontWeight\":\"bold\"}},{\"value\":\" page.\"}]}]}}]}}}",
+          "filters": "[]",
+          "height": 40.18,
+          "width": 426.04,
+          "x": 99.97,
+          "y": 0.00,
+          "z": 7001.00
         }
       ],
       "width": 1280.00
