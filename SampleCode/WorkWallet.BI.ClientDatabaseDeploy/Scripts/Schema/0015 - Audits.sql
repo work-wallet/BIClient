@@ -284,8 +284,8 @@ CREATE TABLE mart.AuditScoredResponse
     AuditScoredResponse_key int IDENTITY
     ,BranchId uniqueidentifier NOT NULL  /* business key */
     ,OptionId uniqueidentifier NOT NULL  /* business key */
-    ,Branch nvarchar(100) NOT NULL
-    ,[Value] nvarchar(250) NOT NULL
+    ,Branch nvarchar(500) NOT NULL
+    ,[Value] nvarchar(100) NOT NULL
     ,[Order] int NOT NULL
     ,Wallet_key int NOT NULL
     ,_created datetime2(7) NOT NULL CONSTRAINT [DF_mart.AuditScoredResponse__created] DEFAULT SYSUTCDATETIME()
