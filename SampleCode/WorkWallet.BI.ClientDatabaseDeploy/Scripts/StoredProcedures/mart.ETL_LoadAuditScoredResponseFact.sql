@@ -15,7 +15,7 @@ BEGIN
         ,TotalPotentialScore
         ,PercentageScore
         ,Flag
-        ,AuditGradingSet_key
+        ,GradingSetOption_key
         ,Wallet_key
     )
     SELECT DISTINCT
@@ -25,13 +25,13 @@ BEGIN
         ,x.TotalPotentialScore
         ,x.PercentageScore
         ,x.Flag
-        ,g.AuditGradingSetOption_key
+        ,gso.GradingSetOption_key
         ,w.Wallet_key
     FROM
         @auditScoredResponseTable AS x
         INNER JOIN mart.[Audit] AS a ON x.AuditId = a.AuditId
         INNER JOIN mart.AuditScoredResponse AS o ON x.BranchId = o.BranchId AND x.OptionId = o.OptionId
-        INNER JOIN mart.AuditGradingSetOption AS g ON x.GradingSetOptionId = g.GradingSetOptionId
+        INNER JOIN mart.GradingSetOption AS gso ON x.GradingSetOptionId = gso.GradingSetOptionId
         INNER JOIN mart.Wallet AS w ON x.WalletId = w.WalletId;
 
     PRINT 'INSERT mart.AuditScoredResponseFact, number of rows = ' + CAST(@@ROWCOUNT AS varchar);

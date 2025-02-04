@@ -12,6 +12,9 @@ BEGIN
 
     DECLARE @rows int = 0;
 
+    DELETE FROM mart.GradingSetOption WHERE Wallet_key = @wallet_key;
+    SET @rows = @rows + @@ROWCOUNT;
+
     DELETE FROM mart.Contact WHERE Wallet_key = @wallet_key;
     SET @rows = @rows + @@ROWCOUNT;
 

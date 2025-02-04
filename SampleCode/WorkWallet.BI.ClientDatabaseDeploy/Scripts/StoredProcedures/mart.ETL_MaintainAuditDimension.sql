@@ -23,7 +23,7 @@ BEGIN
             a.AveragePotentialScore,
             a.PercentageScore,
             a.Flags,
-            a.GradingSetOption,
+            gso.GradingSetOption_key,
             a.ExternalIdentifier,
             w.Wallet_key
         FROM
@@ -32,6 +32,7 @@ BEGIN
             INNER JOIN mart.AuditStatus AS s ON a.AuditStatusCode = s.AuditStatusCode
             INNER JOIN mart.AuditType AS t ON a.AuditTypeId = t.AuditTypeId AND a.AuditTypeVersion = t.AuditTypeVersion
             INNER JOIN mart.[Location] AS ol ON a.LocationId = ol.LocationId
+            INNER JOIN mart.GradingSetOption AS gso ON a.GradingSetOptionId = gso.GradingSetOptionId
             INNER JOIN mart.Wallet AS w ON a.WalletId = w.WalletId
     ) AS source
     ON target.AuditId = source.AuditId
@@ -49,7 +50,7 @@ BEGIN
         OR target.AveragePotentialScore <> source.AveragePotentialScore
         OR target.PercentageScore <> source.PercentageScore
         OR target.Flags <> source.Flags
-        OR target.GradingSetOption <> source.GradingSetOption
+        OR target.GradingSetOption_key <> source.GradingSetOption_key
         OR target.ExternalIdentifier <> source.ExternalIdentifier
         OR target.Wallet_key <> source.Wallet_key
     )
@@ -68,7 +69,7 @@ BEGIN
             AveragePotentialScore = source.AveragePotentialScore,
             PercentageScore = source.PercentageScore,
             Flags = source.Flags,
-            GradingSetOption = source.GradingSetOption,
+            GradingSetOption_key = source.GradingSetOption_key,
             ExternalIdentifier = source.ExternalIdentifier,
             Wallet_key = source.Wallet_key,
             _edited = SYSUTCDATETIME()
@@ -88,7 +89,7 @@ BEGIN
             AveragePotentialScore,
             PercentageScore,
             Flags,
-            GradingSetOption,
+            GradingSetOption_key,
             ExternalIdentifier,
             Wallet_key
         ) VALUES (
@@ -106,7 +107,7 @@ BEGIN
             source.AveragePotentialScore,
             source.PercentageScore,
             source.Flags,
-            source.GradingSetOption,
+            source.GradingSetOption_key,
             source.ExternalIdentifier,
             source.Wallet_key
         );

@@ -11,6 +11,8 @@ CREATE TYPE mart.ETL_AuditTypeTable AS TABLE
     ,DisplayPercentage bit NOT NULL
     ,DisplayTotalScore bit NOT NULL
     ,DisplayAverageScore bit NOT NULL
+    ,GradingSetId uniqueidentifier NOT NULL
+    ,GradingSetVersion int NOT NULL
     ,GradingSet nvarchar(100) NOT NULL
     ,GradingSetIsPercentage bit NOT NULL
     ,GradingSetIsScore bit NOT NULL

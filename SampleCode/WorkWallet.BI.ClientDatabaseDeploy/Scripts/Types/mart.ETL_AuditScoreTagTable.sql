@@ -14,7 +14,6 @@ CREATE TYPE mart.ETL_AuditScoreTagTable AS TABLE
     ,PercentageScore decimal(7,6) NOT NULL
     ,Flags int NOT NULL
     ,GradingSetOptionId uniqueidentifier NOT NULL
-    ,GradingSetOption nvarchar(250) NOT NULL
     ,WalletId uniqueidentifier NOT NULL
     ,PRIMARY KEY (AuditId, TagId, TagVersion)
 );

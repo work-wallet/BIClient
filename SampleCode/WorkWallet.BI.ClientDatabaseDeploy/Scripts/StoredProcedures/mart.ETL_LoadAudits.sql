@@ -74,6 +74,40 @@ BEGIN
 
         EXEC mart.ETL_MaintainLocationDimension @locationTable = @locationTable;
 
+        -- maintain GradingSetOptionTable dimension
+
+        DECLARE @gradingSetOptionTable mart.ETL_GradingSetOptionTable;
+
+        INSERT INTO @gradingSetOptionTable
+        (
+            GradingSetId
+            ,GradingSetVersion
+            ,GradingSetOptionId
+            ,GradingSet
+            ,GradingSetOption
+            ,[Value]
+            ,ColourHex
+            ,GradingSetIsPercentage
+            ,GradingSetIsScore
+            ,WalletId
+        )
+        SELECT * FROM OPENJSON(@json, '$.GradingSetOptions')
+        WITH
+        (
+            GradingSetId uniqueidentifier
+            ,GradingSetVersion int
+            ,GradingSetOptionId uniqueidentifier
+            ,GradingSet nvarchar(100)
+            ,GradingSetOption nvarchar(250)
+            ,[Value] int
+            ,ColourHex nvarchar(7)
+            ,GradingSetIsPercentage bit
+            ,GradingSetIsScore bit
+            ,WalletId uniqueidentifier
+        );
+
+        EXEC mart.ETL_MaintainGradingSetOptionDimension @gradingSetOptionTable = @gradingSetOptionTable;
+        
         -- maintain AuditType dimension
 
         DECLARE @auditTypeTable mart.ETL_AuditTypeTable;
@@ -88,6 +122,8 @@ BEGIN
             ,DisplayPercentage
             ,DisplayTotalScore
             ,DisplayAverageScore
+            ,GradingSetId
+            ,GradingSetVersion
             ,GradingSet
             ,GradingSetIsPercentage
             ,GradingSetIsScore
@@ -106,6 +142,8 @@ BEGIN
             ,DisplayPercentage bit
             ,DisplayTotalScore bit
             ,DisplayAverageScore bit
+            ,GradingSetId uniqueidentifier
+            ,GradingSetVersion int
             ,GradingSet nvarchar(100)
             ,GradingSetIsPercentage bit
             ,GradingSetIsScore bit
@@ -138,7 +176,7 @@ BEGIN
             ,AveragePotentialScore
             ,PercentageScore
             ,Flags
-            ,GradingSetOption
+            ,GradingSetOptionId
             ,ExternalIdentifier
             ,WalletId
         )
@@ -161,7 +199,7 @@ BEGIN
             ,AveragePotentialScore decimal(38,6)
             ,PercentageScore decimal(7,6)
             ,Flags int
-            ,GradingSetOption nvarchar(250)
+            ,GradingSetOptionId uniqueidentifier
             ,ExternalIdentifier nvarchar(255)
             ,WalletId uniqueidentifier
         );
@@ -332,7 +370,6 @@ BEGIN
         -- load the AuditScoredResponse data
 
         DECLARE @auditScoredResponseTable mart.ETL_AuditScoredResponseTable;
-        DECLARE @auditGradingSetOptionTable1 mart.ETL_AuditGradingSetOptionTable;
 
         INSERT INTO @auditScoredResponseTable
         (
@@ -347,7 +384,6 @@ BEGIN
             ,PercentageScore
             ,Flag
             ,GradingSetOptionId
-            ,GradingSetOption
             ,WalletId
         )
         SELECT * FROM OPENJSON(@json, '$.AuditScoredResponses')
@@ -364,32 +400,15 @@ BEGIN
             ,PercentageScore decimal(7,6)
             ,Flag bit
             ,GradingSetOptionId uniqueidentifier
-            ,GradingSetOption nvarchar(250)
             ,WalletId uniqueidentifier
         );
 
-        INSERT INTO @auditGradingSetOptionTable1
-        (
-            AuditId
-            ,GradingSetOptionId
-            ,GradingSetOption
-            ,WalletId
-        )
-        SELECT DISTINCT
-            AuditId
-            ,GradingSetOptionId
-            ,GradingSetOption
-            ,WalletId
-        FROM @auditScoredResponseTable;
-
-        EXEC mart.ETL_MaintainAuditGradingSetOptionDimension @auditGradingSetOptionTable = @auditGradingSetOptionTable1;
         EXEC mart.ETL_MaintainAuditScoredResponseDimension @auditScoredResponseTable = @auditScoredResponseTable;
         EXEC mart.ETL_LoadAuditScoredResponseFact @auditScoredResponseTable = @auditScoredResponseTable;
 
         -- load the AuditScoreSection data
 
         DECLARE @auditScoreSectionTable mart.ETL_AuditScoreSectionTable;
-        DECLARE @auditGradingSetOptionTable2 mart.ETL_AuditGradingSetOptionTable;
 
         INSERT INTO @auditScoreSectionTable
         (
@@ -405,7 +424,6 @@ BEGIN
             ,PercentageScore
             ,Flags
             ,GradingSetOptionId
-            ,GradingSetOption
             ,WalletId
         )
         SELECT * FROM OPENJSON(@json, '$.AuditScoreSections')
@@ -423,32 +441,15 @@ BEGIN
             ,PercentageScore decimal(7,6)
             ,Flags int
             ,GradingSetOptionId uniqueidentifier
-            ,GradingSetOption nvarchar(250)
             ,WalletId uniqueidentifier
         );
 
-        INSERT INTO @auditGradingSetOptionTable2
-        (
-            AuditId
-            ,GradingSetOptionId
-            ,GradingSetOption
-            ,WalletId
-        )
-        SELECT DISTINCT
-            AuditId
-            ,GradingSetOptionId
-            ,GradingSetOption
-            ,WalletId
-        FROM @auditScoreSectionTable;
-
-        EXEC mart.ETL_MaintainAuditGradingSetOptionDimension @auditGradingSetOptionTable = @auditGradingSetOptionTable2;
         EXEC mart.ETL_MaintainAuditScoreSectionDimension @auditScoreSectionTable = @auditScoreSectionTable;
         EXEC mart.ETL_LoadAuditScoreSectionFact @auditScoreSectionTable = @auditScoreSectionTable;
 
         -- load the AuditScoreTag data
 
         DECLARE @auditScoreTagTable mart.ETL_AuditScoreTagTable;
-        DECLARE @auditGradingSetOptionTable3 mart.ETL_AuditGradingSetOptionTable;
 
         INSERT INTO @auditScoreTagTable
         (
@@ -463,7 +464,6 @@ BEGIN
             ,PercentageScore
             ,Flags
             ,GradingSetOptionId
-            ,GradingSetOption
             ,WalletId
         )
         SELECT * FROM OPENJSON(@json, '$.AuditScoreTags')
@@ -480,25 +480,9 @@ BEGIN
             ,PercentageScore decimal(7,6)
             ,Flags int
             ,GradingSetOptionId uniqueidentifier
-            ,GradingSetOption nvarchar(250)
             ,WalletId uniqueidentifier
         );
 
-        INSERT INTO @auditGradingSetOptionTable3
-        (
-            AuditId
-            ,GradingSetOptionId
-            ,GradingSetOption
-            ,WalletId
-        )
-        SELECT DISTINCT
-            AuditId
-            ,GradingSetOptionId
-            ,GradingSetOption
-            ,WalletId
-        FROM @auditScoreTagTable;
-
-        EXEC mart.ETL_MaintainAuditGradingSetOptionDimension @auditGradingSetOptionTable = @auditGradingSetOptionTable3;
         EXEC mart.ETL_MaintainAuditScoreTagDimension @auditScoreTagTable = @auditScoreTagTable;
         EXEC mart.ETL_LoadAuditScoreTagFact @auditScoreTagTable = @auditScoreTagTable;
 

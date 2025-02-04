@@ -17,6 +17,8 @@ BEGIN
             a.DisplayPercentage,
             a.DisplayTotalScore,
             a.DisplayAverageScore,
+            a.GradingSetId,
+            a.GradingSetVersion,
             a.GradingSet,
             a.GradingSetIsPercentage,
             a.GradingSetIsScore,
@@ -35,6 +37,8 @@ BEGIN
         OR target.DisplayPercentage <> source.DisplayPercentage
         OR target.DisplayTotalScore <> source.DisplayTotalScore
         OR target.DisplayAverageScore <> source.DisplayAverageScore
+        OR target.GradingSetId <> source.GradingSetId
+        OR target.GradingSetVersion <> source.GradingSetVersion
         OR target.GradingSet <> source.GradingSet
         OR target.GradingSetIsPercentage <> source.GradingSetIsPercentage
         OR target.GradingSetIsScore <> source.GradingSetIsScore
@@ -50,6 +54,8 @@ BEGIN
             DisplayPercentage = source.DisplayPercentage,
             DisplayTotalScore = source.DisplayTotalScore,
             DisplayAverageScore = source.DisplayAverageScore,
+            GradingSetId = source.GradingSetId,
+            GradingSetVersion = source.GradingSetVersion,
             GradingSet = source.GradingSet,
             GradingSetIsPercentage = source.GradingSetIsPercentage,
             GradingSetIsScore = source.GradingSetIsScore,
@@ -67,6 +73,8 @@ BEGIN
             DisplayPercentage,
             DisplayTotalScore,
             DisplayAverageScore,
+            GradingSetId,
+            GradingSetVersion,
             GradingSet,
             GradingSetIsPercentage,
             GradingSetIsScore,
@@ -82,6 +90,8 @@ BEGIN
             source.DisplayPercentage,
             source.DisplayTotalScore,
             source.DisplayAverageScore,
+            source.GradingSetId,
+            source.GradingSetVersion,
             source.GradingSet,
             source.GradingSetIsPercentage,
             source.GradingSetIsScore,

@@ -66,6 +66,26 @@ INSERT INTO mart.Unit (UnitCode, [Group], Unit, UnitAcronym) VALUES (31, N'Misce
 INSERT INTO mart.Unit (UnitCode, [Group], Unit, UnitAcronym) VALUES (32, N'Miscellaneous', N'Percent',                N'%');
 INSERT INTO mart.Unit (UnitCode, [Group], Unit, UnitAcronym) VALUES (33, N'Miscellaneous', N'Pounds Per Square Inch', N'psi');
 
+CREATE TABLE mart.GradingSetOption
+(
+    GradingSetOption_key int IDENTITY
+    ,GradingSetId uniqueidentifier NOT NULL       /* business key */
+    ,GradingSetVersion int NOT NULL               /* business key */
+    ,GradingSetOptionId uniqueidentifier NOT NULL /* business key */
+    ,GradingSet nvarchar(100) NOT NULL
+    ,GradingSetOption nvarchar(250) NOT NULL
+    ,[Value] int NOT NULL
+    ,ColourHex nvarchar(7) NOT NULL
+    ,GradingSetIsPercentage bit NOT NULL
+    ,GradingSetIsScore bit NOT NULL
+    ,Wallet_key int NOT NULL
+    ,_created datetime2(7) NOT NULL CONSTRAINT [DF_mart.GradingSetOption__created] DEFAULT SYSUTCDATETIME()
+    ,_edited datetime2(7) NULL
+    ,CONSTRAINT [PK_mart.GradingSetOption] PRIMARY KEY (GradingSetOption_key)
+    ,CONSTRAINT [UQ_mart.GradingSetOption_GradingSet_GradingSetId_GradingSetVersion_GradingSetOptionId] UNIQUE(GradingSetId, GradingSetVersion, GradingSetOptionId)
+    ,CONSTRAINT [FK_mart.GradingSetOption_mart.Wallet_Wallet_key] FOREIGN KEY(Wallet_key) REFERENCES mart.Wallet
+);
+
 CREATE TABLE mart.AuditType
 (
     AuditType_key int IDENTITY
@@ -77,6 +97,8 @@ CREATE TABLE mart.AuditType
     ,DisplayPercentage bit NOT NULL
     ,DisplayTotalScore bit NOT NULL
     ,DisplayAverageScore bit NOT NULL
+    ,GradingSetId uniqueidentifier NOT NULL
+    ,GradingSetVersion int NOT NULL
     ,GradingSet nvarchar(100) NOT NULL
     ,GradingSetIsPercentage bit NOT NULL
     ,GradingSetIsScore bit NOT NULL
@@ -120,7 +142,7 @@ CREATE TABLE mart.[Audit]
     ,AveragePotentialScore decimal(38,6) NOT NULL
     ,PercentageScore decimal(7,6) NOT NULL
     ,Flags int NOT NULL
-    ,GradingSetOption nvarchar(250) NOT NULL
+    ,GradingSetOption_key int NOT NULL
     ,ExternalIdentifier nvarchar(255) NOT NULL
     ,Wallet_key int NOT NULL
     ,_created datetime2(7) NOT NULL CONSTRAINT [DF_mart.Audit__created] DEFAULT SYSUTCDATETIME()
@@ -131,6 +153,7 @@ CREATE TABLE mart.[Audit]
     ,CONSTRAINT [FK_mart.Audit_mart.AuditStatus_AuditStatus_key] FOREIGN KEY(AuditStatus_key) REFERENCES mart.AuditStatus
     ,CONSTRAINT [FK_mart.Audit_mart.AuditType_AuditType_key] FOREIGN KEY(AuditType_key) REFERENCES mart.AuditType
     ,CONSTRAINT [FK_mart.Audit_mart.Location_Location_key] FOREIGN KEY(Location_key) REFERENCES mart.[Location]
+    ,CONSTRAINT [FK_mart.Audit_mart.GradingSetOption_GradingSetOption_key] FOREIGN KEY(GradingSetOption_key) REFERENCES mart.GradingSetOption
     ,CONSTRAINT [FK_mart.Audit_mart.Wallet_Wallet_key] FOREIGN KEY(Wallet_key) REFERENCES mart.Wallet
 );
 
@@ -150,7 +173,7 @@ CREATE TABLE mart.AuditInspectedByFact
 CREATE TABLE mart.AuditNumericQuestion
 (
     AuditNumericQuestion_key int IDENTITY
-    ,QuestionId uniqueidentifier NOT NULL  /* business key */
+    ,QuestionId uniqueidentifier NOT NULL /* business key */
     ,Question nvarchar(500) NOT NULL
     ,Mandatory bit NOT NULL
     ,Scale int NOT NULL
@@ -180,7 +203,7 @@ CREATE TABLE mart.AuditNumericAnswerFact
 CREATE TABLE mart.AuditDateTimeQuestion
 (
     AuditDateTimeQuestion_key int IDENTITY
-    ,QuestionId uniqueidentifier NOT NULL  /* business key */
+    ,QuestionId uniqueidentifier NOT NULL /* business key */
     ,Question nvarchar(500) NOT NULL
     ,Mandatory bit NOT NULL
     ,[Date] bit NOT NULL
@@ -211,8 +234,8 @@ CREATE TABLE mart.AuditDateTimeAnswerFact
 CREATE TABLE mart.AuditChecklistOption
 (
     AuditChecklistOption_key int IDENTITY
-    ,ChecklistId uniqueidentifier NOT NULL  /* business key */
-    ,OptionId uniqueidentifier NOT NULL     /* business key */
+    ,ChecklistId uniqueidentifier NOT NULL /* business key */
+    ,OptionId uniqueidentifier NOT NULL    /* business key */
     ,Question nvarchar(100) NOT NULL
     ,[Value] nvarchar(250) NOT NULL
     ,Mandatory bit NOT NULL
@@ -240,7 +263,7 @@ CREATE TABLE mart.AuditChecklistAnswerFact
 CREATE TABLE mart.AuditBranchOption
 (
     AuditBranchOption_key int IDENTITY
-    ,BranchId uniqueidentifier NOT NULL  /* business key */
+    ,BranchId uniqueidentifier NOT NULL /* business key */
     ,OptionId uniqueidentifier NOT NULL /* business key */
     ,Branch nvarchar(100) NOT NULL
     ,[Value] nvarchar(250) NOT NULL
@@ -265,25 +288,11 @@ CREATE TABLE mart.AuditBranchOptionFact
     ,CONSTRAINT [FK_mart.AuditBranchOptionFact_mart.Wallet_Wallet_key] FOREIGN KEY(Wallet_key) REFERENCES mart.Wallet
 );
 
-CREATE TABLE mart.AuditGradingSetOption
-(
-    AuditGradingSetOption_key int IDENTITY
-    ,GradingSetOptionId uniqueidentifier NOT NULL /* business key */
-    ,GradingSet nvarchar(100) NOT NULL
-    ,GradingSetOption nvarchar(250) NOT NULL
-    ,Wallet_key int NOT NULL
-    ,_created datetime2(7) NOT NULL CONSTRAINT [DF_mart.AuditGradingSetOption__created] DEFAULT SYSUTCDATETIME()
-    ,_edited datetime2(7) NULL
-    ,CONSTRAINT [PK_mart.AuditGradingSetOption] PRIMARY KEY (AuditGradingSetOption_key)
-    ,CONSTRAINT [UQ_mart.AuditGradingSetOption_GradingSet_GradingSetOptionId] UNIQUE(GradingSetOptionId)
-    ,CONSTRAINT [FK_mart.AuditGradingSetOption_mart.Wallet_Wallet_key] FOREIGN KEY(Wallet_key) REFERENCES mart.Wallet
-);
-
 CREATE TABLE mart.AuditScoredResponse
 (
     AuditScoredResponse_key int IDENTITY
-    ,BranchId uniqueidentifier NOT NULL  /* business key */
-    ,OptionId uniqueidentifier NOT NULL  /* business key */
+    ,BranchId uniqueidentifier NOT NULL /* business key */
+    ,OptionId uniqueidentifier NOT NULL /* business key */
     ,Branch nvarchar(500) NOT NULL
     ,[Value] nvarchar(100) NOT NULL
     ,[Order] int NOT NULL
@@ -303,13 +312,13 @@ CREATE TABLE mart.AuditScoredResponseFact
     ,TotalPotentialScore int NOT NULL
     ,PercentageScore decimal(7,6) NOT NULL
     ,Flag bit NOT NULL
-    ,AuditGradingSet_key int NOT NULL
+    ,GradingSetOption_key int NOT NULL
     ,Wallet_key int NOT NULL
     ,_created datetime2(7) NOT NULL CONSTRAINT [DF_mart.AuditScoredResponseFact__created] DEFAULT SYSUTCDATETIME()
     ,_edited datetime2(7) NULL
     ,CONSTRAINT [PK_mart.AuditScoredResponseFact] PRIMARY KEY (Audit_key, AuditScoredResponse_key)
     ,CONSTRAINT [FK_mart.AuditScoredResponseFact_mart.AuditScoredResponse_AuditScoredResponse_key] FOREIGN KEY(AuditScoredResponse_key) REFERENCES mart.AuditScoredResponse
-    ,CONSTRAINT [FK_mart.AuditScoredResponseFact_mart.AuditGradingSetOption_AuditGradingSet_key] FOREIGN KEY(AuditGradingSet_key) REFERENCES mart.AuditGradingSetOption
+    ,CONSTRAINT [FK_mart.AuditScoredResponseFact_mart.GradingSetOption_GradingSetOption_key] FOREIGN KEY(GradingSetOption_key) REFERENCES mart.GradingSetOption
     ,CONSTRAINT [FK_mart.AuditScoredResponseFact_mart.Wallet_Wallet_key] FOREIGN KEY(Wallet_key) REFERENCES mart.Wallet
 );
 
@@ -339,13 +348,13 @@ CREATE TABLE mart.AuditScoreSectionFact
     ,AveragePotentialScore decimal(38,6) NOT NULL
     ,PercentageScore decimal(7,6) NOT NULL
     ,Flags int NOT NULL
-    ,AuditGradingSet_key int NOT NULL
+    ,GradingSetOption_key int NOT NULL
     ,Wallet_key int NOT NULL
     ,_created datetime2(7) NOT NULL CONSTRAINT [DF_mart.AuditScoreSectionFact__created] DEFAULT SYSUTCDATETIME()
     ,_edited datetime2(7) NULL
     ,CONSTRAINT [PK_mart.AuditScoreSectionFact] PRIMARY KEY (Audit_key, AuditScoreSection_key)
     ,CONSTRAINT [FK_mart.AuditScoreSectionFact_mart.AuditScoreSection_AuditScoreSection_key] FOREIGN KEY(AuditScoreSection_key) REFERENCES mart.AuditScoreSection
-    ,CONSTRAINT [FK_mart.AuditScoreSectionFact_mart.AuditGradingSetOption_AuditGradingSet_key] FOREIGN KEY(AuditGradingSet_key) REFERENCES mart.AuditGradingSetOption
+    ,CONSTRAINT [FK_mart.AuditScoreSectionFact_mart.GradingSetOption_GradingSetOption_key] FOREIGN KEY(GradingSetOption_key) REFERENCES mart.GradingSetOption
     ,CONSTRAINT [FK_mart.AuditScoreSectionFact_mart.Wallet_Wallet_key] FOREIGN KEY(Wallet_key) REFERENCES mart.Wallet
 );
 
@@ -373,13 +382,13 @@ CREATE TABLE mart.AuditScoreTagFact
     ,AveragePotentialScore decimal(38,6) NOT NULL
     ,PercentageScore decimal(7,6) NOT NULL
     ,Flags int NOT NULL
-    ,AuditGradingSet_key int NOT NULL
+    ,GradingSetOption_key int NOT NULL
     ,Wallet_key int NOT NULL
     ,_created datetime2(7) NOT NULL CONSTRAINT [DF_mart.AuditScoreTagFact__created] DEFAULT SYSUTCDATETIME()
     ,_edited datetime2(7) NULL
     ,CONSTRAINT [PK_mart.AuditScoreTagFact] PRIMARY KEY (Audit_key, AuditScoreTag_key)
     ,CONSTRAINT [FK_mart.AuditScoreTagFact_mart.AuditScoreTag_AuditScoreTag_key] FOREIGN KEY(AuditScoreTag_key) REFERENCES mart.AuditScoreTag
-    ,CONSTRAINT [FK_mart.AuditScoreTagFact_mart.AuditGradingSetOption_AuditGradingSet_key] FOREIGN KEY(AuditGradingSet_key) REFERENCES mart.AuditGradingSetOption
+    ,CONSTRAINT [FK_mart.AuditScoreTagFact_mart.GradingSetOption_GradingSetOption_key] FOREIGN KEY(GradingSetOption_key) REFERENCES mart.GradingSetOption
     ,CONSTRAINT [FK_mart.AuditScoreTagFact_mart.Wallet_Wallet_key] FOREIGN KEY(Wallet_key) REFERENCES mart.Wallet
 );
 

@@ -19,7 +19,7 @@ CREATE TYPE mart.ETL_AuditTable AS TABLE
     ,AveragePotentialScore decimal(38,6) NOT NULL
     ,PercentageScore decimal(7,6) NOT NULL
     ,Flags int NOT NULL
-    ,GradingSetOption nvarchar(250) NOT NULL
+    ,GradingSetOptionId uniqueidentifier NOT NULL
     ,ExternalIdentifier nvarchar(255) NOT NULL
     ,WalletId uniqueidentifier NOT NULL
     ,PRIMARY KEY (Reference, AuditId) -- putting Reference first to order the data load
