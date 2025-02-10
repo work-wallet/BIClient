@@ -38207,21 +38207,6 @@
         "toTable": "Wallet"
       },
       {
-        "name": "e15ecdf7-5d10-4489-a8d9-c6c9fde2967f",
-        "annotations": [
-          {
-            "name": "PBI_IsFromSource",
-            "value": "FS"
-          }
-        ],
-        "crossFilteringBehavior": "bothDirections",
-        "fromCardinality": "one",
-        "fromColumn": "AuditBranchOption_key",
-        "fromTable": "Branch Option Fact",
-        "toColumn": "AuditBranchOption_key",
-        "toTable": "Branch Option"
-      },
-      {
         "name": "659dcd2f-bd84-41c7-9749-ecdf991680c3",
         "annotations": [
           {
@@ -38234,21 +38219,6 @@
         "isActive": false,
         "toColumn": "Wallet_key",
         "toTable": "Wallet"
-      },
-      {
-        "name": "bbb15b99-4ee0-4d75-aae5-d24f20134a51",
-        "annotations": [
-          {
-            "name": "PBI_IsFromSource",
-            "value": "FS"
-          }
-        ],
-        "crossFilteringBehavior": "bothDirections",
-        "fromCardinality": "one",
-        "fromColumn": "AuditChecklistOption_key",
-        "fromTable": "Checklist Answer Fact",
-        "toColumn": "AuditChecklistOption_key",
-        "toTable": "Checklist Option"
       },
       {
         "name": "dabb785a-4d00-4602-838a-9d9ef26e9ee3",
@@ -38277,21 +38247,6 @@
         "isActive": false,
         "toColumn": "Wallet_key",
         "toTable": "Wallet"
-      },
-      {
-        "name": "187412e3-2817-4ee1-9b8a-c205aac6da43",
-        "annotations": [
-          {
-            "name": "PBI_IsFromSource",
-            "value": "FS"
-          }
-        ],
-        "crossFilteringBehavior": "bothDirections",
-        "fromCardinality": "one",
-        "fromColumn": "AuditDateTimeQuestion_key",
-        "fromTable": "Date Time Answer Fact",
-        "toColumn": "AuditDateTimeQuestion_key",
-        "toTable": "Date Time Question"
       },
       {
         "name": "68b779a1-e223-40c6-8df9-8c98b7b3eceb",
@@ -38357,6 +38312,7 @@
             "value": "FS"
           }
         ],
+        "crossFilteringBehavior": "bothDirections",
         "fromColumn": "Audit_key",
         "fromTable": "Inspected By Fact",
         "toColumn": "Audit_key",
@@ -38370,7 +38326,6 @@
             "value": "FS"
           }
         ],
-        "crossFilteringBehavior": "bothDirections",
         "fromColumn": "Contact_key",
         "fromTable": "Inspected By Fact",
         "toColumn": "Contact_key",
@@ -38389,21 +38344,6 @@
         "isActive": false,
         "toColumn": "Wallet_key",
         "toTable": "Wallet"
-      },
-      {
-        "name": "2d2aa2d5-f25d-4f47-a9fe-67030c9f0a3a",
-        "annotations": [
-          {
-            "name": "PBI_IsFromSource",
-            "value": "FS"
-          }
-        ],
-        "crossFilteringBehavior": "bothDirections",
-        "fromCardinality": "one",
-        "fromColumn": "AuditNumericQuestion_key",
-        "fromTable": "Numeric Answer Fact",
-        "toColumn": "AuditNumericQuestion_key",
-        "toTable": "Numeric Question"
       },
       {
         "name": "e136e814-d15f-4512-be4a-fe124977d7af",
@@ -38448,21 +38388,6 @@
         "toTable": "Wallet"
       },
       {
-        "name": "b6ed7113-a73a-40d5-a69a-f79f81cff7e5",
-        "annotations": [
-          {
-            "name": "PBI_IsFromSource",
-            "value": "FS"
-          }
-        ],
-        "crossFilteringBehavior": "bothDirections",
-        "fromCardinality": "one",
-        "fromColumn": "AuditScoredResponse_key",
-        "fromTable": "Scored Response Fact",
-        "toColumn": "AuditScoredResponse_key",
-        "toTable": "Scored Response"
-      },
-      {
         "name": "a4c8462b-e639-4191-b8ca-4629932d97ff",
         "annotations": [
           {
@@ -38489,21 +38414,6 @@
         "isActive": false,
         "toColumn": "Wallet_key",
         "toTable": "Wallet"
-      },
-      {
-        "name": "a25140ad-b63f-4e7a-9750-a533256ba90f",
-        "annotations": [
-          {
-            "name": "PBI_IsFromSource",
-            "value": "FS"
-          }
-        ],
-        "crossFilteringBehavior": "bothDirections",
-        "fromCardinality": "one",
-        "fromColumn": "AuditScoreSection_key",
-        "fromTable": "Score Section Fact",
-        "toColumn": "AuditScoreSection_key",
-        "toTable": "Score Section"
       },
       {
         "name": "1c48fab8-9771-44f1-b000-3ad05e59d343",
@@ -38603,6 +38513,7 @@
       },
       {
         "name": "df6e90e5-f710-62dd-0514-18e3f21f52c1",
+        "crossFilteringBehavior": "bothDirections",
         "fromColumn": "Audit_key",
         "fromTable": "Score Tag Fact",
         "toColumn": "Audit_key",
@@ -38610,6 +38521,7 @@
       },
       {
         "name": "c2cd0ec8-1d1e-9469-8667-899a3f100b92",
+        "crossFilteringBehavior": "bothDirections",
         "fromColumn": "Audit_key",
         "fromTable": "Branch Option Fact",
         "toColumn": "Audit_key",
@@ -38617,6 +38529,7 @@
       },
       {
         "name": "e85d3da2-8b54-74fd-da4b-b49aeb21b743",
+        "crossFilteringBehavior": "bothDirections",
         "fromColumn": "Audit_key",
         "fromTable": "Checklist Answer Fact",
         "toColumn": "Audit_key",
@@ -38624,6 +38537,7 @@
       },
       {
         "name": "4c6fbb7b-5829-d3f3-e7fa-c3b1495c1a06",
+        "crossFilteringBehavior": "bothDirections",
         "fromColumn": "Audit_key",
         "fromTable": "Score Section Fact",
         "toColumn": "Audit_key",
@@ -38631,6 +38545,7 @@
       },
       {
         "name": "d9fddc21-1c9c-7e6c-d782-6a74fe3fb0bc",
+        "crossFilteringBehavior": "bothDirections",
         "fromColumn": "Audit_key",
         "fromTable": "Scored Response Fact",
         "toColumn": "Audit_key",
@@ -38695,6 +38610,100 @@
         "fromTable": "Scored Response Fact",
         "toColumn": "GradingSetOption_key",
         "toTable": "Scored Response Grading Set Option"
+      },
+      {
+        "name": "a50078dd-1baa-9b58-be3d-6bc9ee110628",
+        "crossFilteringBehavior": "bothDirections",
+        "fromColumn": "Audit_key",
+        "fromTable": "Numeric Answer Fact",
+        "toColumn": "Audit_key",
+        "toTable": "Audit"
+      },
+      {
+        "name": "f0d992a7-2267-b329-e2e0-caebec19c0e4",
+        "annotations": [
+          {
+            "name": "PBI_IsFromSource",
+            "value": "FS"
+          }
+        ],
+        "fromColumn": "AuditNumericQuestion_key",
+        "fromTable": "Numeric Answer Fact",
+        "toColumn": "AuditNumericQuestion_key",
+        "toTable": "Numeric Question"
+      },
+      {
+        "name": "0c6d3582-59ea-1290-7ad0-9c52f506dc92",
+        "annotations": [
+          {
+            "name": "PBI_IsFromSource",
+            "value": "FS"
+          }
+        ],
+        "fromColumn": "AuditDateTimeQuestion_key",
+        "fromTable": "Date Time Answer Fact",
+        "toColumn": "AuditDateTimeQuestion_key",
+        "toTable": "Date Time Question"
+      },
+      {
+        "name": "575ec07f-052b-08af-57f5-f2a4c4e4417c",
+        "crossFilteringBehavior": "bothDirections",
+        "fromColumn": "Audit_key",
+        "fromTable": "Date Time Answer Fact",
+        "toColumn": "Audit_key",
+        "toTable": "Audit"
+      },
+      {
+        "name": "3d964c21-5fda-7328-8164-c3edbab94c71",
+        "annotations": [
+          {
+            "name": "PBI_IsFromSource",
+            "value": "FS"
+          }
+        ],
+        "fromColumn": "AuditChecklistOption_key",
+        "fromTable": "Checklist Answer Fact",
+        "toColumn": "AuditChecklistOption_key",
+        "toTable": "Checklist Option"
+      },
+      {
+        "name": "06b00818-1a3c-2013-fcf1-b4b10bfe6fdf",
+        "annotations": [
+          {
+            "name": "PBI_IsFromSource",
+            "value": "FS"
+          }
+        ],
+        "fromColumn": "AuditBranchOption_key",
+        "fromTable": "Branch Option Fact",
+        "toColumn": "AuditBranchOption_key",
+        "toTable": "Branch Option"
+      },
+      {
+        "name": "91a0df41-17bd-d4a8-a0bd-4e6edebdfb68",
+        "annotations": [
+          {
+            "name": "PBI_IsFromSource",
+            "value": "FS"
+          }
+        ],
+        "fromColumn": "AuditScoredResponse_key",
+        "fromTable": "Scored Response Fact",
+        "toColumn": "AuditScoredResponse_key",
+        "toTable": "Scored Response"
+      },
+      {
+        "name": "615de0d7-63a4-8c52-0da2-2f5f1ff0b851",
+        "annotations": [
+          {
+            "name": "PBI_IsFromSource",
+            "value": "FS"
+          }
+        ],
+        "fromColumn": "AuditScoreSection_key",
+        "fromTable": "Score Section Fact",
+        "toColumn": "AuditScoreSection_key",
+        "toTable": "Score Section"
       }
     ],
     "sourceQueryCulture": "en-GB",
@@ -38704,7 +38713,7 @@
         "annotations": [
           {
             "name": "PBI_ResultType",
-            "value": "Table"
+            "value": "Exception"
           },
           {
             "name": "PBI_NavigationStepName",
@@ -39025,7 +39034,7 @@
             "source": {
               "expression": [
                 "let",
-                "    Source = Sql.Database(\"CAKESOFBREAD\", \"WorkWalletBIClient_Local\"),",
+                "    Source = Sql.Database(\"CAKESOFBREAD\", \"WorkWalletBIClient_Dev_Adam\"),",
                 "    mart_Location = Source{[Schema=\"mart\",Item=\"Location\"]}[Data],",
                 "    #\"Removed Columns\" = Table.RemoveColumns(mart_Location,{\"_created\", \"_edited\"}),",
                 "    #\"Renamed Columns\" = Table.RenameColumns(#\"Removed Columns\",{{\"LocationType\", \"Location Type\"}, {\"ExternalIdentifier\", \"Location External Identifier\"}})",
@@ -39042,7 +39051,16 @@
         "annotations": [
           {
             "name": "PBI_ResultType",
-            "value": "Table"
+            "value": "Exception"
+          },
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navigation"
+          }
+        ],
+        "changedProperties": [
+          {
+            "property": "IsHidden"
           }
         ],
         "columns": [
@@ -39093,6 +39111,11 @@
                 "value": "Automatic"
               }
             ],
+            "changedProperties": [
+              {
+                "property": "IsHidden"
+              }
+            ],
             "dataType": "string",
             "lineageTag": "4729e012-e058-4e4c-ad7c-b93eb77aa180",
             "sourceColumn": "Wallet",
@@ -39107,7 +39130,7 @@
             "source": {
               "expression": [
                 "let",
-                "    Source = Sql.Database(\"CAKESOFBREAD\", \"WorkWalletBIClient_Local\"),",
+                "    Source = Sql.Database(\"CAKESOFBREAD\", \"WorkWalletBIClient_Dev_Adam\"),",
                 "    mart_Wallet = Source{[Schema=\"mart\",Item=\"Wallet\"]}[Data],",
                 "    #\"Removed Columns\" = Table.RemoveColumns(mart_Wallet,{\"_created\", \"_edited\"})",
                 "in",
@@ -39516,7 +39539,7 @@
             "source": {
               "expression": [
                 "let",
-                "    Source = Sql.Database(\"CAKESOFBREAD\", \"WorkWalletBIClient_Local\"),",
+                "    Source = Sql.Database(\"CAKESOFBREAD\", \"WorkWalletBIClient_Dev_Adam\"),",
                 "    mart_Audit = Source{[Schema=\"mart\",Item=\"Audit\"]}[Data],",
                 "    #\"Removed Columns\" = Table.RemoveColumns(mart_Audit,{\"_created\", \"_edited\"}),",
                 "    #\"Renamed Columns\" = Table.RenameColumns(#\"Removed Columns\",{{\"AuditReference\", \"Audit Reference\"}, {\"InspectedOn\", \"Inspected On\"}, {\"TotalScore\", \"Score\"}, {\"TotalPotentialScore\", \"Potential Score\"}, {\"AverageScore\", \"Average Score\"}, {\"AveragePotentialScore\", \"Average Potential Score\"}, {\"PercentageScore\", \"Percentage Score\"}, {\"ExternalIdentifier\", \"External Identifier\"}})",
@@ -40036,7 +40059,7 @@
             "annotations": [
               {
                 "name": "SummarizationSetBy",
-                "value": "Automatic"
+                "value": "User"
               }
             ],
             "changedProperties": [
@@ -40049,14 +40072,14 @@
             "isHidden": true,
             "lineageTag": "ff8bfa3e-056b-415b-8fc7-920fff991eb8",
             "sourceColumn": "Order",
-            "summarizeBy": "sum"
+            "summarizeBy": "none"
           },
           {
             "name": "Wallet_key",
             "annotations": [
               {
                 "name": "SummarizationSetBy",
-                "value": "Automatic"
+                "value": "User"
               }
             ],
             "changedProperties": [
@@ -40069,7 +40092,7 @@
             "isHidden": true,
             "lineageTag": "7489fa90-e455-4387-9c1f-688575e8e794",
             "sourceColumn": "Wallet_key",
-            "summarizeBy": "sum"
+            "summarizeBy": "none"
           }
         ],
         "lineageTag": "dfda8400-a442-49a2-a445-7604c0fb2a16",
@@ -40080,7 +40103,7 @@
             "source": {
               "expression": [
                 "let",
-                "    Source = Sql.Database(\"CAKESOFBREAD\", \"WorkWalletBIClient_Local\"),",
+                "    Source = Sql.Database(\"CAKESOFBREAD\", \"WorkWalletBIClient_Dev_Adam\"),",
                 "    mart_AuditBranchOption = Source{[Schema=\"mart\",Item=\"AuditBranchOption\"]}[Data],",
                 "    #\"Removed Columns\" = Table.RemoveColumns(mart_AuditBranchOption,{\"_created\", \"_edited\"}),",
                 "    #\"Renamed Columns\" = Table.RenameColumns(#\"Removed Columns\",{{\"Value\", \"Branch Option\"}})",
@@ -40190,7 +40213,7 @@
             "source": {
               "expression": [
                 "let",
-                "    Source = Sql.Database(\"CAKESOFBREAD\", \"WorkWalletBIClient_Local\"),",
+                "    Source = Sql.Database(\"CAKESOFBREAD\", \"WorkWalletBIClient_Dev_Adam\"),",
                 "    mart_AuditBranchOptionFact = Source{[Schema=\"mart\",Item=\"AuditBranchOptionFact\"]}[Data],",
                 "    #\"Removed Columns\" = Table.RemoveColumns(mart_AuditBranchOptionFact,{\"_created\", \"_edited\"})",
                 "in",
@@ -40299,7 +40322,7 @@
             "source": {
               "expression": [
                 "let",
-                "    Source = Sql.Database(\"CAKESOFBREAD\", \"WorkWalletBIClient_Local\"),",
+                "    Source = Sql.Database(\"CAKESOFBREAD\", \"WorkWalletBIClient_Dev_Adam\"),",
                 "    mart_AuditChecklistAnswerFact = Source{[Schema=\"mart\",Item=\"AuditChecklistAnswerFact\"]}[Data],",
                 "    #\"Removed Columns\" = Table.RemoveColumns(mart_AuditChecklistAnswerFact,{\"_created\", \"_edited\"})",
                 "in",
@@ -40470,7 +40493,7 @@
             "source": {
               "expression": [
                 "let",
-                "    Source = Sql.Database(\"CAKESOFBREAD\", \"WorkWalletBIClient_Local\"),",
+                "    Source = Sql.Database(\"CAKESOFBREAD\", \"WorkWalletBIClient_Dev_Adam\"),",
                 "    mart_AuditChecklistOption = Source{[Schema=\"mart\",Item=\"AuditChecklistOption\"]}[Data],",
                 "    #\"Removed Columns\" = Table.RemoveColumns(mart_AuditChecklistOption,{\"_created\", \"_edited\"}),",
                 "    #\"Renamed Columns\" = Table.RenameColumns(#\"Removed Columns\",{{\"Value\", \"Checklist Answer\"}, {\"Question\", \"Checklist Question\"}})",
@@ -40520,7 +40543,7 @@
             "annotations": [
               {
                 "name": "SummarizationSetBy",
-                "value": "Automatic"
+                "value": "User"
               }
             ],
             "changedProperties": [
@@ -40664,7 +40687,7 @@
             "source": {
               "expression": [
                 "let",
-                "    Source = Sql.Database(\"CAKESOFBREAD\", \"WorkWalletBIClient_Local\"),",
+                "    Source = Sql.Database(\"CAKESOFBREAD\", \"WorkWalletBIClient_Dev_Adam\"),",
                 "    mart_AuditDateTimeAnswerFact = Source{[Schema=\"mart\",Item=\"AuditDateTimeAnswerFact\"]}[Data],",
                 "    #\"Removed Columns\" = Table.RemoveColumns(mart_AuditDateTimeAnswerFact,{\"_created\", \"_edited\"}),",
                 "    #\"Renamed Columns\" = Table.RenameColumns(#\"Removed Columns\",{{\"AnswerDateTime\", \"Date and Time Answer\"}, {\"AnswerDate\", \"Date Answer\"}, {\"AnswerTime\", \"Time Answer\"}})",
@@ -41096,7 +41119,7 @@
             "annotations": [
               {
                 "name": "SummarizationSetBy",
-                "value": "Automatic"
+                "value": "User"
               }
             ],
             "changedProperties": [
@@ -41214,7 +41237,7 @@
             "source": {
               "expression": [
                 "let",
-                "    Source = Sql.Database(\"CAKESOFBREAD\", \"WorkWalletBIClient_Local\"),",
+                "    Source = Sql.Database(\"CAKESOFBREAD\", \"WorkWalletBIClient_Dev_Adam\"),",
                 "    mart_AuditDateTimeQuestion = Source{[Schema=\"mart\",Item=\"AuditDateTimeQuestion\"]}[Data],",
                 "    #\"Removed Columns\" = Table.RemoveColumns(mart_AuditDateTimeQuestion,{\"_created\", \"_edited\"}),",
                 "    #\"Renamed Columns\" = Table.RenameColumns(#\"Removed Columns\",{{\"Question\", \"Date Time Question\"}})",
@@ -41491,7 +41514,7 @@
             "source": {
               "expression": [
                 "let",
-                "    Source = Sql.Database(\"CAKESOFBREAD\", \"WorkWalletBIClient_Local\"),",
+                "    Source = Sql.Database(\"CAKESOFBREAD\", \"WorkWalletBIClient_Dev_Adam\"),",
                 "    mart_GradingSetOption = Source{[Schema=\"mart\",Item=\"GradingSetOption\"]}[Data],",
                 "    #\"Removed Columns\" = Table.RemoveColumns(mart_GradingSetOption,{\"_created\", \"_edited\"}),",
                 "    #\"Renamed Columns\" = Table.RenameColumns(#\"Removed Columns\",{{\"GradingSet\", \"Grading Set\"}, {\"GradingSetOption\", \"Grading\"}, {\"ColourHex\", \"Grading Colour\"}, {\"GradingSetIsPercentage\", \"Grading Set Is Percentage\"}, {\"GradingSetIsScore\", \"Grading Set Is Score\"}, {\"Value\", \"Grading Value\"}})",
@@ -41597,7 +41620,7 @@
             "source": {
               "expression": [
                 "let",
-                "    Source = Sql.Database(\"CAKESOFBREAD\", \"WorkWalletBIClient_Local\"),",
+                "    Source = Sql.Database(\"CAKESOFBREAD\", \"WorkWalletBIClient_Dev_Adam\"),",
                 "    mart_AuditGroup = Source{[Schema=\"mart\",Item=\"AuditGroup\"]}[Data],",
                 "    #\"Removed Columns\" = Table.RemoveColumns(mart_AuditGroup,{\"_created\", \"_edited\"}),",
                 "    #\"Renamed Columns\" = Table.RenameColumns(#\"Removed Columns\",{{\"AuditGroup\", \"Audit Group\"}})",
@@ -41707,7 +41730,7 @@
             "source": {
               "expression": [
                 "let",
-                "    Source = Sql.Database(\"CAKESOFBREAD\", \"WorkWalletBIClient_Local\"),",
+                "    Source = Sql.Database(\"CAKESOFBREAD\", \"WorkWalletBIClient_Dev_Adam\"),",
                 "    mart_AuditInspectedByFact = Source{[Schema=\"mart\",Item=\"AuditInspectedByFact\"]}[Data],",
                 "    #\"Removed Columns\" = Table.RemoveColumns(mart_AuditInspectedByFact,{\"_created\", \"_edited\"})",
                 "in",
@@ -41756,7 +41779,7 @@
             "annotations": [
               {
                 "name": "SummarizationSetBy",
-                "value": "Automatic"
+                "value": "User"
               }
             ],
             "changedProperties": [
@@ -41833,7 +41856,7 @@
             "source": {
               "expression": [
                 "let",
-                "    Source = Sql.Database(\"CAKESOFBREAD\", \"WorkWalletBIClient_Local\"),",
+                "    Source = Sql.Database(\"CAKESOFBREAD\", \"WorkWalletBIClient_Dev_Adam\"),",
                 "    mart_AuditNumericAnswerFact = Source{[Schema=\"mart\",Item=\"AuditNumericAnswerFact\"]}[Data],",
                 "    #\"Removed Columns\" = Table.RemoveColumns(mart_AuditNumericAnswerFact,{\"_created\", \"_edited\"}),",
                 "    #\"Renamed Columns\" = Table.RenameColumns(#\"Removed Columns\",{{\"Answer\", \"Numeric Answer\"}})",
@@ -41863,7 +41886,7 @@
             "annotations": [
               {
                 "name": "SummarizationSetBy",
-                "value": "Automatic"
+                "value": "User"
               }
             ],
             "changedProperties": [
@@ -42017,7 +42040,7 @@
             "source": {
               "expression": [
                 "let",
-                "    Source = Sql.Database(\"CAKESOFBREAD\", \"WorkWalletBIClient_Local\"),",
+                "    Source = Sql.Database(\"CAKESOFBREAD\", \"WorkWalletBIClient_Dev_Adam\"),",
                 "    mart_AuditNumericQuestion = Source{[Schema=\"mart\",Item=\"AuditNumericQuestion\"]}[Data],",
                 "    #\"Removed Columns\" = Table.RemoveColumns(mart_AuditNumericQuestion,{\"_created\", \"_edited\"}),",
                 "    #\"Renamed Columns\" = Table.RenameColumns(#\"Removed Columns\",{{\"Question\", \"Numeric Question\"}})",
@@ -42151,7 +42174,7 @@
             "annotations": [
               {
                 "name": "SummarizationSetBy",
-                "value": "Automatic"
+                "value": "User"
               }
             ],
             "changedProperties": [
@@ -42164,7 +42187,7 @@
             "isHidden": true,
             "lineageTag": "0e44677c-4456-49d3-af78-e845ddfca62a",
             "sourceColumn": "Wallet_key",
-            "summarizeBy": "sum"
+            "summarizeBy": "none"
           }
         ],
         "lineageTag": "0530d395-4153-4658-af7b-13b1611db825",
@@ -42175,7 +42198,7 @@
             "source": {
               "expression": [
                 "let",
-                "    Source = Sql.Database(\"CAKESOFBREAD\", \"WorkWalletBIClient_Local\"),",
+                "    Source = Sql.Database(\"CAKESOFBREAD\", \"WorkWalletBIClient_Dev_Adam\"),",
                 "    mart_AuditScoredResponse = Source{[Schema=\"mart\",Item=\"AuditScoredResponse\"]}[Data],",
                 "    #\"Removed Columns\" = Table.RemoveColumns(mart_AuditScoredResponse,{\"_created\", \"_edited\"}),",
                 "    #\"Renamed Columns\" = Table.RenameColumns(#\"Removed Columns\",{{\"Branch\", \"Scored Response Question\"}, {\"Value\", \"Scored Response Answer\"}})",
@@ -42196,7 +42219,7 @@
           },
           {
             "name": "PBI_ResultType",
-            "value": "Table"
+            "value": "Exception"
           }
         ],
         "columns": [
@@ -42407,7 +42430,7 @@
             "source": {
               "expression": [
                 "let",
-                "    Source = Sql.Database(\"CAKESOFBREAD\", \"WorkWalletBIClient_Local\"),",
+                "    Source = Sql.Database(\"CAKESOFBREAD\", \"WorkWalletBIClient_Dev_Adam\"),",
                 "    mart_AuditScoredResponseFact = Source{[Schema=\"mart\",Item=\"AuditScoredResponseFact\"]}[Data],",
                 "    #\"Removed Columns\" = Table.RemoveColumns(mart_AuditScoredResponseFact,{\"_created\", \"_edited\"}),",
                 "    #\"Renamed Columns\" = Table.RenameColumns(#\"Removed Columns\",{{\"TotalScore\", \"Score\"}, {\"TotalPotentialScore\", \"Potential Score\"}, {\"PercentageScore\", \"Percentage Score\"}})",
@@ -42548,7 +42571,7 @@
             "annotations": [
               {
                 "name": "SummarizationSetBy",
-                "value": "Automatic"
+                "value": "User"
               }
             ],
             "changedProperties": [
@@ -42561,7 +42584,7 @@
             "isHidden": true,
             "lineageTag": "6ce3054a-118c-4063-aa28-00c4fbb419d8",
             "sourceColumn": "Wallet_key",
-            "summarizeBy": "sum"
+            "summarizeBy": "none"
           }
         ],
         "lineageTag": "135cd0d2-ed00-402b-9e31-a4882185f272",
@@ -42572,7 +42595,7 @@
             "source": {
               "expression": [
                 "let",
-                "    Source = Sql.Database(\"CAKESOFBREAD\", \"WorkWalletBIClient_Local\"),",
+                "    Source = Sql.Database(\"CAKESOFBREAD\", \"WorkWalletBIClient_Dev_Adam\"),",
                 "    mart_AuditScoreSection = Source{[Schema=\"mart\",Item=\"AuditScoreSection\"]}[Data],",
                 "    #\"Removed Columns\" = Table.RemoveColumns(mart_AuditScoreSection,{\"_created\", \"_edited\"}),",
                 "    #\"Renamed Columns\" = Table.RenameColumns(#\"Removed Columns\",{{\"DisplayScore\", \"Display Score\"}})",
@@ -42838,7 +42861,7 @@
             "source": {
               "expression": [
                 "let",
-                "    Source = Sql.Database(\"CAKESOFBREAD\", \"WorkWalletBIClient_Local\"),",
+                "    Source = Sql.Database(\"CAKESOFBREAD\", \"WorkWalletBIClient_Dev_Adam\"),",
                 "    mart_AuditScoreSectionFact = Source{[Schema=\"mart\",Item=\"AuditScoreSectionFact\"]}[Data],",
                 "    #\"Removed Columns\" = Table.RemoveColumns(mart_AuditScoreSectionFact,{\"_created\", \"_edited\"}),",
                 "    #\"Renamed Columns\" = Table.RenameColumns(#\"Removed Columns\",{{\"TotalScore\", \"Score\"}, {\"TotalPotentialScore\", \"Potential Score\"}, {\"AverageScore\", \"Average Score\"}, {\"AveragePotentialScore\", \"Average Potential Score\"}, {\"PercentageScore\", \"Percentage Score\"}})",
@@ -42964,7 +42987,7 @@
             "source": {
               "expression": [
                 "let",
-                "    Source = Sql.Database(\"CAKESOFBREAD\", \"WorkWalletBIClient_Local\"),",
+                "    Source = Sql.Database(\"CAKESOFBREAD\", \"WorkWalletBIClient_Dev_Adam\"),",
                 "    mart_AuditScoreTag = Source{[Schema=\"mart\",Item=\"AuditScoreTag\"]}[Data],",
                 "    #\"Removed Columns\" = Table.RemoveColumns(mart_AuditScoreTag,{\"_created\", \"_edited\"}),",
                 "    #\"Renamed Columns\" = Table.RenameColumns(#\"Removed Columns\",{{\"TagVersion\", \"Tag Version\"}})",
@@ -43227,7 +43250,7 @@
             "source": {
               "expression": [
                 "let",
-                "    Source = Sql.Database(\"CAKESOFBREAD\", \"WorkWalletBIClient_Local\"),",
+                "    Source = Sql.Database(\"CAKESOFBREAD\", \"WorkWalletBIClient_Dev_Adam\"),",
                 "    mart_AuditScoreTagFact = Source{[Schema=\"mart\",Item=\"AuditScoreTagFact\"]}[Data],",
                 "    #\"Removed Columns\" = Table.RemoveColumns(mart_AuditScoreTagFact,{\"_created\", \"_edited\"}),",
                 "    #\"Renamed Columns\" = Table.RenameColumns(#\"Removed Columns\",{{\"TotalPotentialScore\", \"Potential Score\"}, {\"TotalScore\", \"Score\"}, {\"AverageScore\", \"Average Score\"}, {\"AveragePotentialScore\", \"Average Potential Score\"}, {\"PercentageScore\", \"Percentage Score\"}})",
@@ -43320,7 +43343,7 @@
             "source": {
               "expression": [
                 "let",
-                "    Source = Sql.Database(\"CAKESOFBREAD\", \"WorkWalletBIClient_Local\"),",
+                "    Source = Sql.Database(\"CAKESOFBREAD\", \"WorkWalletBIClient_Dev_Adam\"),",
                 "    mart_AuditStatus = Source{[Schema=\"mart\",Item=\"AuditStatus\"]}[Data],",
                 "    #\"Removed Columns\" = Table.RemoveColumns(mart_AuditStatus,{\"_created\", \"_edited\"}),",
                 "    #\"Renamed Columns\" = Table.RenameColumns(#\"Removed Columns\",{{\"AuditStatus\", \"Audit Status\"}})",
@@ -43610,7 +43633,7 @@
             "source": {
               "expression": [
                 "let",
-                "    Source = Sql.Database(\"CAKESOFBREAD\", \"WorkWalletBIClient_Local\"),",
+                "    Source = Sql.Database(\"CAKESOFBREAD\", \"WorkWalletBIClient_Dev_Adam\"),",
                 "    mart_AuditType = Source{[Schema=\"mart\",Item=\"AuditType\"]}[Data],",
                 "    #\"Removed Columns\" = Table.RemoveColumns(mart_AuditType,{\"_created\", \"_edited\"}),",
                 "    #\"Renamed Columns\" = Table.RenameColumns(#\"Removed Columns\",{{\"AuditTypeVersion\", \"Audit Type Version\"}, {\"AuditType\", \"Audit Type\"}, {\"ScoringEnabled\", \"Scoring Enabled\"}, {\"DisplayPercentage\", \"Display Percentage\"}, {\"DisplayTotalScore\", \"Display Total Score\"}, {\"DisplayAverageScore\", \"Display Average Score\"}, {\"GradingSet\", \"Grading Set\"}, {\"Description\", \"Audit Type Description\"}, {\"GradingSetIsPercentage\", \"Grading Set Is Percentage\"}, {\"GradingSetIsScore\", \"Grading Set Is Score\"}, {\"ReportingEnabled\", \"Reporting Enabled\"}, {\"ReportingAbbreviation\", \"Reporting Abbreviation\"}})",
@@ -43716,7 +43739,7 @@
             "source": {
               "expression": [
                 "let",
-                "    Source = Sql.Database(\"CAKESOFBREAD\", \"WorkWalletBIClient_Local\"),",
+                "    Source = Sql.Database(\"CAKESOFBREAD\", \"WorkWalletBIClient_Dev_Adam\"),",
                 "    mart_Contact = Source{[Schema=\"mart\",Item=\"Contact\"]}[Data],",
                 "    #\"Renamed Columns\" = Table.RenameColumns(mart_Contact,{{\"Name\", \"Contact Name\"}}),",
                 "    #\"Removed Columns\" = Table.RemoveColumns(#\"Renamed Columns\",{\"_created\", \"_edited\"})",
@@ -43853,7 +43876,7 @@
             "source": {
               "expression": [
                 "let",
-                "    Source = Sql.Database(\"CAKESOFBREAD\", \"WorkWalletBIClient_Local\"),",
+                "    Source = Sql.Database(\"CAKESOFBREAD\", \"WorkWalletBIClient_Dev_Adam\"),",
                 "    mart_Unit = Source{[Schema=\"mart\",Item=\"Unit\"]}[Data],",
                 "    #\"Removed Columns\" = Table.RemoveColumns(mart_Unit,{\"_created\", \"_edited\"}),",
                 "    #\"Renamed Columns\" = Table.RenameColumns(#\"Removed Columns\",{{\"UnitAcronym\", \"Unit Acronym\"}, {\"Group\", \"Unit Group\"}})",
