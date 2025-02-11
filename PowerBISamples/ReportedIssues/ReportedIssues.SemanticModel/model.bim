@@ -5389,7 +5389,7 @@
             "annotations": [
               {
                 "name": "SummarizationSetBy",
-                "value": "Automatic"
+                "value": "User"
               }
             ],
             "changedProperties": [
@@ -5402,7 +5402,7 @@
             "isHidden": true,
             "lineageTag": "5fc29ab2-2818-4d5a-928e-fffeff61a5a6",
             "sourceColumn": "Wallet_key",
-            "summarizeBy": "sum"
+            "summarizeBy": "none"
           }
         ],
         "lineageTag": "0fb312cf-4b87-4e79-9a2f-899dfee8f8d5",

@@ -31,13 +31,14 @@ The API endpoint takes the form:
 
 Currently supported data types:
 
-* SiteAudits
+* SiteAudits - **LEGACY**
 * ReportedIssues
 * Inductions
 * Permits
 * Actions
 * Assets
 * SafetyCards
+* Audits
 
 When you call the API an Authorization header with value: `Bearer [token]` is required.
 

@@ -6,13 +6,14 @@ The [Work Wallet](https://www.work-wallet.com/) Health and Safety solution provi
 
 The datasets currently enabled for download are:
 
-* Site Audits
+* Site Audits - **LEGACY**
 * Reported Issues
 * Inductions
 * Permits
 * Actions
 * Assets
 * Safety Cards
+* Audits
 
 The API uses a combination of paging and change tracking to efficiently transfer data from the Work Wallet cloud to your local environment.
 
@@ -213,6 +214,8 @@ If you have a [Power BI Pro licence](https://powerbi.microsoft.com/en-gb/power-b
 The sample Power BI Desktop project files can be found in the `PowerBISamples` folder.
 
 To use these files with your own data you need to connect to your local database and refresh the data.
+
+For convenience, the Power BI semantic models are available to peruse [here](Docs/PowerBISamplesModels.md).
 
 ### Connecting to the Database
 

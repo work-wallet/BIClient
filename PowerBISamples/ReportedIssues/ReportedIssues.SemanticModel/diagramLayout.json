@@ -214,13 +214,376 @@
         }
       ],
       "name": "All tables",
-      "zoomValue": 43.856593498464264,
+      "zoomValue": 55.285021771679709,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    },
+    {
+      "ordinal": 1,
+      "scrollPosition": {
+        "x": 0,
+        "y": 0
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 617.20026441479285,
+            "y": 295.18598040094804
+          },
+          "nodeIndex": "Issue",
+          "nodeLineageTag": "ab79b25f-fd82-4d1a-a3dc-b16162ac25df",
+          "size": {
+            "height": 444,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 52.48904260345995,
+            "y": 306.36373350809731
+          },
+          "nodeIndex": "Location",
+          "nodeLineageTag": "0c282e94-763a-47f5-94ca-832dc2919c25",
+          "size": {
+            "height": 637,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 356,
+            "y": 60
+          },
+          "nodeIndex": "Severity",
+          "nodeLineageTag": "ca3fcaeb-056c-46c9-aefd-dcdb65a7c8ab",
+          "size": {
+            "height": 152,
+            "width": 255
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 831.67094049140951,
+            "y": 55
+          },
+          "nodeIndex": "Status",
+          "nodeLineageTag": "cd77312c-4b90-480e-b98e-f76961760deb",
+          "size": {
+            "height": 152,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1045.3953994548688,
+            "y": 432.35310574115942
+          },
+          "nodeIndex": "Category",
+          "nodeLineageTag": "a2fc9b1a-1124-40de-af15-ffdc00e364c9",
+          "size": {
+            "height": 393,
+            "width": 248
+          },
+          "zIndex": 0
+        }
+      ],
+      "name": "Main",
+      "zoomValue": 100,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    },
+    {
+      "ordinal": 2,
+      "scrollPosition": {
+        "x": 0,
+        "y": 0
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 0,
+            "y": 431.11884566681942
+          },
+          "nodeIndex": "Issue",
+          "nodeLineageTag": "ab79b25f-fd82-4d1a-a3dc-b16162ac25df",
+          "size": {
+            "height": 454,
+            "width": 277
+          },
+          "zIndex": 4
+        },
+        {
+          "location": {
+            "x": 399.20225510460875,
+            "y": 434.88668757855504
+          },
+          "nodeIndex": "Body Part Fact",
+          "nodeLineageTag": "d11a4010-c2aa-4126-86fc-2d8d2be870aa",
+          "size": {
+            "height": 233,
+            "width": 258
+          },
+          "zIndex": 1
+        },
+        {
+          "location": {
+            "x": 723.41040181545554,
+            "y": 246.37869776910316
+          },
+          "nodeIndex": "Body Part",
+          "nodeLineageTag": "0fb312cf-4b87-4e79-9a2f-899dfee8f8d5",
+          "size": {
+            "height": 192,
+            "width": 234
+          },
+          "zIndex": 2
+        },
+        {
+          "location": {
+            "x": 1016.6221629171368,
+            "y": 16
+          },
+          "nodeIndex": "Body Part Enum",
+          "nodeLineageTag": "86dab753-cb05-4c89-85ea-c5a922cff69c",
+          "size": {
+            "height": 271,
+            "width": 299
+          },
+          "zIndex": 3
+        }
+      ],
+      "name": "Body Part",
+      "zoomValue": 100,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    },
+    {
+      "ordinal": 3,
+      "scrollPosition": {
+        "x": 0,
+        "y": 0
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 29,
+            "y": 458
+          },
+          "nodeIndex": "Issue",
+          "nodeLineageTag": "ab79b25f-fd82-4d1a-a3dc-b16162ac25df",
+          "size": {
+            "height": 445,
+            "width": 267
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 481,
+            "y": 339
+          },
+          "nodeIndex": "Branch Option Fact",
+          "nodeLineageTag": "d4bc562e-ee29-4148-8441-f4e7b059e98f",
+          "size": {
+            "height": 264,
+            "width": 274
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 894,
+            "y": 102
+          },
+          "nodeIndex": "Branch Option",
+          "nodeLineageTag": "0a090bc6-be7b-43cb-a8a1-b672a96bde1b",
+          "size": {
+            "height": 248,
+            "width": 234
+          },
+          "zIndex": 0
+        }
+      ],
+      "name": "Branch Option",
+      "zoomValue": 100,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    },
+    {
+      "ordinal": 4,
+      "scrollPosition": {
+        "x": 0,
+        "y": 0
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 35,
+            "y": 549
+          },
+          "nodeIndex": "Issue",
+          "nodeLineageTag": "ab79b25f-fd82-4d1a-a3dc-b16162ac25df",
+          "size": {
+            "height": 450,
+            "width": 272
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 446,
+            "y": 345
+          },
+          "nodeIndex": "Option Select Fact",
+          "nodeLineageTag": "73dc840d-58e9-41bf-bfb2-f6d8b50bccae",
+          "size": {
+            "height": 238,
+            "width": 270
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 852,
+            "y": 104
+          },
+          "nodeIndex": "Option Select",
+          "nodeLineageTag": "2042ba1c-1418-4e10-ad33-487de047d368",
+          "size": {
+            "height": 263,
+            "width": 262
+          },
+          "zIndex": 0
+        }
+      ],
+      "name": "Option Select",
+      "zoomValue": 100,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    },
+    {
+      "ordinal": 5,
+      "scrollPosition": {
+        "x": 0,
+        "y": 0
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 98,
+            "y": 487
+          },
+          "nodeIndex": "Issue",
+          "nodeLineageTag": "ab79b25f-fd82-4d1a-a3dc-b16162ac25df",
+          "size": {
+            "height": 452,
+            "width": 256
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 493,
+            "y": 300
+          },
+          "nodeIndex": "Person Fact",
+          "nodeLineageTag": "042b4ea7-046e-406d-9ab1-8f9a4c9168a2",
+          "size": {
+            "height": 248,
+            "width": 254
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 894,
+            "y": 79
+          },
+          "nodeIndex": "Person",
+          "nodeLineageTag": "44afeb98-ad25-4a5f-a84e-2954545f3ee4",
+          "size": {
+            "height": 269,
+            "width": 234
+          },
+          "zIndex": 0
+        }
+      ],
+      "name": "Person",
+      "zoomValue": 100,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    },
+    {
+      "ordinal": 6,
+      "scrollPosition": {
+        "x": 0,
+        "y": 0
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 45,
+            "y": 471
+          },
+          "nodeIndex": "Issue",
+          "nodeLineageTag": "ab79b25f-fd82-4d1a-a3dc-b16162ac25df",
+          "size": {
+            "height": 448,
+            "width": 251
+          },
+          "zIndex": 1
+        },
+        {
+          "location": {
+            "x": 454,
+            "y": 238
+          },
+          "nodeIndex": "Root Cause Analysis Fact",
+          "nodeLineageTag": "76f05306-b9e1-48e0-9b96-d27d0e8a729f",
+          "size": {
+            "height": 236,
+            "width": 327
+          },
+          "zIndex": 2
+        },
+        {
+          "location": {
+            "x": 954,
+            "y": 88
+          },
+          "nodeIndex": "Root Cause Analysis Type",
+          "nodeLineageTag": "217062d4-7493-4de2-bef7-de59de98cdce",
+          "size": {
+            "height": 152,
+            "width": 339
+          },
+          "zIndex": 3
+        }
+      ],
+      "name": "Root Cause Analysis",
+      "zoomValue": 100,
       "pinKeyFieldsToTop": false,
       "showExtraHeaderInfo": false,
       "hideKeyFieldsWhenCollapsed": false,
       "tablesLocked": false
     }
   ],
-  "selectedDiagram": "All tables",
+  "selectedDiagram": "Main",
   "defaultDiagram": "All tables"
 }
