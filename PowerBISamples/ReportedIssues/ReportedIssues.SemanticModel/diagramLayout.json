@@ -389,8 +389,8 @@
         },
         {
           "location": {
-            "x": 481,
-            "y": 339
+            "x": 389,
+            "y": 337
           },
           "nodeIndex": "Branch Option Fact",
           "nodeLineageTag": "d4bc562e-ee29-4148-8441-f4e7b059e98f",
@@ -402,14 +402,14 @@
         },
         {
           "location": {
-            "x": 894,
+            "x": 754,
             "y": 102
           },
           "nodeIndex": "Branch Option",
           "nodeLineageTag": "0a090bc6-be7b-43cb-a8a1-b672a96bde1b",
           "size": {
-            "height": 248,
-            "width": 234
+            "height": 274,
+            "width": 278
           },
           "zIndex": 0
         }
@@ -584,6 +584,6 @@
       "tablesLocked": false
     }
   ],
-  "selectedDiagram": "Main",
+  "selectedDiagram": "Branch Option",
   "defaultDiagram": "All tables"
 }

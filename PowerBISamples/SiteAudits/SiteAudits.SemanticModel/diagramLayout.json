@@ -233,9 +233,9 @@
           "nodeLineageTag": "28a135da-59ee-4691-a700-3b17e30c8403",
           "size": {
             "height": 415,
-            "width": 234
+            "width": 314
           },
-          "zIndex": 5
+          "zIndex": 4
         },
         {
           "location": {
@@ -248,12 +248,12 @@
             "height": 394,
             "width": 234
           },
-          "zIndex": 4
+          "zIndex": 3
         },
         {
           "location": {
-            "x": 963,
-            "y": 409
+            "x": 964,
+            "y": 437
           },
           "nodeIndex": "Checklist Item",
           "nodeLineageTag": "66bf89f7-99d2-4468-889e-c7fffb242e87",
@@ -261,7 +261,7 @@
             "height": 290,
             "width": 234
           },
-          "zIndex": 3
+          "zIndex": 5
         }
       ],
       "name": "Checklists",
