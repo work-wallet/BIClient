@@ -13,6 +13,8 @@ Jump to the relevant section:
 
 * [Site Audits](#site-audits) (legacy module)
 * [Reported Issues](#reported-issues)
+* [Actions](#actions)
+* [Assets](#assets)
 * [Audits](#audits)
 
 ## Site Audits
@@ -52,6 +54,26 @@ Legacy module
 ### Reported Issues - Root Cause Analysis
 
 ![Root Cause Analysis](Images/PowerBIModelDiagrams/ReportedIssues_RootCauseAnalysis.png)
+
+## Actions
+
+### Actions - Main
+
+![Main](Images/PowerBIModelDiagrams/Actions_Main.png)
+
+## Assets
+
+### Assets - Main
+
+![Main](Images/PowerBIModelDiagrams/Assets_Main.png)
+
+### Assets - Assignment
+
+![Assignment](Images/PowerBIModelDiagrams/Assets_Assignment.png)
+
+### Assets - Property
+
+![Property](Images/PowerBIModelDiagrams/Assets_Property.png)
 
 ## Audits
 
