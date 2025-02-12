@@ -1,7 +1,8 @@
 # Power BI Samples - Semantic Models
 
 For convenience the Power BI semantic models used in the sample reports are presented here.
-This information is also available within the Power BI projects in the `Model View`.
+This information is also available within the Power BI projects in the `Model View`
+(and is the most current and accurate).
 
 The diagrams for each area are broken down into multiple layouts for readability.
 The Wallet dimension table is not shown for clarity.
@@ -10,8 +11,21 @@ To fully explore the models it is recommended that you open the relevant sample 
 
 Jump to the relevant section:
 
+* [Site Audits](#site-audits) (legacy module)
 * [Reported Issues](#reported-issues)
 * [Audits](#audits)
+
+## Site Audits
+
+Legacy module
+
+### Site Audits - Main
+
+![Main](Images/PowerBIModelDiagrams/SiteAudits_Main.png)
+
+### Site Audits - Checklists
+
+![Checklists](Images/PowerBIModelDiagrams/SiteAudits_Checklists.png)
 
 ## Reported Issues
 

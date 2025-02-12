@@ -4,7 +4,7 @@
     "annotations": [
       {
         "name": "PBIDesktopVersion",
-        "value": "2.136.1202.0 (24.09)"
+        "value": "2.139.2054.0 (24.12)+334ca1c95b576cc53924655643b0d36f21caac55"
       },
       {
         "name": "PBI_QueryOrder",
@@ -15059,7 +15059,6 @@
             "value": "FS"
           }
         ],
-        "crossFilteringBehavior": "bothDirections",
         "fromColumn": "Location_key",
         "fromTable": "Audit",
         "toColumn": "Location_key",
@@ -16141,6 +16140,10 @@
               {
                 "name": "SummarizationSetBy",
                 "value": "User"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isDecimal\":true}"
               }
             ],
             "changedProperties": [
@@ -16742,7 +16745,7 @@
             "annotations": [
               {
                 "name": "SummarizationSetBy",
-                "value": "Automatic"
+                "value": "User"
               }
             ],
             "changedProperties": [
@@ -16755,14 +16758,14 @@
             "isHidden": true,
             "lineageTag": "f1ad499a-6b67-437c-94d8-69a955d91a4a",
             "sourceColumn": "SiteAuditType_key",
-            "summarizeBy": "sum"
+            "summarizeBy": "none"
           },
           {
             "name": "Location_key",
             "annotations": [
               {
                 "name": "SummarizationSetBy",
-                "value": "Automatic"
+                "value": "User"
               }
             ],
             "changedProperties": [
@@ -16775,14 +16778,14 @@
             "isHidden": true,
             "lineageTag": "99fb753f-c256-42c2-a73b-de9eac1b6298",
             "sourceColumn": "Location_key",
-            "summarizeBy": "sum"
+            "summarizeBy": "none"
           },
           {
             "name": "SiteAuditStatus_key",
             "annotations": [
               {
                 "name": "SummarizationSetBy",
-                "value": "Automatic"
+                "value": "User"
               }
             ],
             "changedProperties": [
@@ -16795,7 +16798,7 @@
             "isHidden": true,
             "lineageTag": "5ae9415e-b9a2-4807-ab34-4a3ac206c45a",
             "sourceColumn": "SiteAuditStatus_key",
-            "summarizeBy": "sum"
+            "summarizeBy": "none"
           },
           {
             "name": "Wallet_key",
@@ -17110,7 +17113,7 @@
             "annotations": [
               {
                 "name": "SummarizationSetBy",
-                "value": "Automatic"
+                "value": "User"
               }
             ],
             "changedProperties": [
@@ -17123,7 +17126,7 @@
             "isHidden": true,
             "lineageTag": "930a4a0a-7cb6-47fe-b7da-6fc2bdbf2ff4",
             "sourceColumn": "Wallet_key",
-            "summarizeBy": "sum"
+            "summarizeBy": "none"
           },
           {
             "name": "Item",
