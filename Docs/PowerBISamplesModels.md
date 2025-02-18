@@ -13,8 +13,11 @@ Jump to the relevant section:
 
 * [Site Audits](#site-audits) (legacy module)
 * [Reported Issues](#reported-issues)
+* [Inductions](#inductions)
+* [Permits](#permits)
 * [Actions](#actions)
 * [Assets](#assets)
+* [Safety Cards](#safety-cards)
 * [Audits](#audits)
 
 ## Site Audits
@@ -55,6 +58,18 @@ Legacy module
 
 ![Root Cause Analysis](Images/PowerBIModelDiagrams/ReportedIssues_RootCauseAnalysis.png)
 
+## Inductions
+
+### Inductions - Main
+
+![Main](Images/PowerBIModelDiagrams/Inductions_Main.png)
+
+## Permits
+
+### Permits - Main
+
+![Main](Images/PowerBIModelDiagrams/Permits_Main.png)
+
 ## Actions
 
 ### Actions - Main
@@ -74,6 +89,12 @@ Legacy module
 ### Assets - Property
 
 ![Property](Images/PowerBIModelDiagrams/Assets_Property.png)
+
+## Safety Cards
+
+### Safety Cards - Main
+
+![Main](Images/PowerBIModelDiagrams/SafetyCards_Main.png)
 
 ## Audits
 
