@@ -5,26 +5,26 @@
       "ordinal": 0,
       "scrollPosition": {
         "x": 0,
-        "y": 150
+        "y": 0
       },
       "nodes": [
         {
           "location": {
-            "x": 819.86706570065166,
-            "y": 966.47346276458234
+            "x": 703.71393095393489,
+            "y": 835.4028639838541
           },
           "nodeIndex": "Asset",
           "nodeLineageTag": "1fbdd36a-5356-45f3-8c79-63344009ee01",
           "size": {
-            "height": 305,
+            "height": 300,
             "width": 234
           },
           "zIndex": 1
         },
         {
           "location": {
-            "x": 815.84208934136109,
-            "y": 170.83607317901124
+            "x": 1078.0181089714374,
+            "y": 170.82329280865451
           },
           "nodeIndex": "Assignment",
           "size": {
@@ -35,68 +35,68 @@
         },
         {
           "location": {
-            "x": 810.44920391552546,
-            "y": 562.27276494368732
+            "x": 1008.5901609882876,
+            "y": 524.51687439576972
           },
           "nodeIndex": "Assignment Fact",
           "nodeLineageTag": "548151e7-60a0-4a50-93fc-62cb8c8e3c33",
           "size": {
-            "height": 248,
+            "height": 300,
             "width": 234
           },
           "zIndex": 9
         },
         {
           "location": {
-            "x": 10,
-            "y": 415.86446094691269
+            "x": 294.92058448281642,
+            "y": 353.95594638852072
           },
           "nodeIndex": "Property",
           "size": {
-            "height": 200,
+            "height": 176,
             "width": 234
           },
           "zIndex": 3
         },
         {
           "location": {
-            "x": 249.06241300153204,
-            "y": 668.64288381442179
+            "x": 489.15869467685746,
+            "y": 582.50232887397965
           },
           "nodeIndex": "Property Fact",
           "size": {
-            "height": 224,
+            "height": 200,
             "width": 234
           },
           "zIndex": 4
         },
         {
           "location": {
-            "x": 592.04425387747438,
-            "y": 1322.3517812541049
+            "x": 773.22336468944934,
+            "y": 1185.6401821355221
           },
           "nodeIndex": "Asset Status",
           "size": {
-            "height": 200,
+            "height": 152,
             "width": 234
           },
           "zIndex": 5
         },
         {
           "location": {
-            "x": 488.01676752723819,
-            "y": 415.87955788343027
+            "x": 722.43518966529552,
+            "y": 378.10795752675131
           },
           "nodeIndex": "Wallet",
           "size": {
-            "height": 200,
+            "height": 152,
             "width": 234
           },
           "zIndex": 6
         },
         {
           "location": {
-            "x": 1052.92564414076,
+            "x": 1353.8254117758438,
             "y": -10
           },
           "nodeIndex": "Assignment Type",
@@ -108,8 +108,8 @@
         },
         {
           "location": {
-            "x": 535.28061563288782,
-            "y": 899.90312611092975
+            "x": 10,
+            "y": 520.84951503991351
           },
           "nodeIndex": "Property Type",
           "size": {
@@ -120,6 +120,181 @@
         }
       ],
       "name": "All tables",
+      "zoomValue": 61.910131970077295,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    },
+    {
+      "ordinal": 1,
+      "scrollPosition": {
+        "x": 0,
+        "y": 0
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 86,
+            "y": 145
+          },
+          "nodeIndex": "Asset",
+          "nodeLineageTag": "1fbdd36a-5356-45f3-8c79-63344009ee01",
+          "size": {
+            "height": 362,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 368,
+            "y": 25
+          },
+          "nodeIndex": "Asset Status",
+          "nodeLineageTag": "36224508-1e80-4ff9-a562-7a442a8360d9",
+          "size": {
+            "height": 152,
+            "width": 234
+          },
+          "zIndex": 0
+        }
+      ],
+      "name": "Main",
+      "zoomValue": 100,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    },
+    {
+      "ordinal": 2,
+      "scrollPosition": {
+        "x": 0,
+        "y": 0
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 0,
+            "y": 459
+          },
+          "nodeIndex": "Asset",
+          "nodeLineageTag": "1fbdd36a-5356-45f3-8c79-63344009ee01",
+          "size": {
+            "height": 353,
+            "width": 234
+          },
+          "zIndex": 1
+        },
+        {
+          "location": {
+            "x": 271,
+            "y": 220
+          },
+          "nodeIndex": "Assignment Fact",
+          "nodeLineageTag": "548151e7-60a0-4a50-93fc-62cb8c8e3c33",
+          "size": {
+            "height": 346,
+            "width": 234
+          },
+          "zIndex": 4
+        },
+        {
+          "location": {
+            "x": 633,
+            "y": 0
+          },
+          "nodeIndex": "Assignment Type",
+          "nodeLineageTag": "961c8f59-215c-463f-a8b0-6f40aa3a0a22",
+          "size": {
+            "height": 128,
+            "width": 234
+          },
+          "zIndex": 2
+        },
+        {
+          "location": {
+            "x": 633,
+            "y": 213
+          },
+          "nodeIndex": "Assignment",
+          "nodeLineageTag": "d946195a-3aed-4bc3-871a-c4015c4a28c6",
+          "size": {
+            "height": 360,
+            "width": 234
+          },
+          "zIndex": 3
+        }
+      ],
+      "name": "Assignment",
+      "zoomValue": 100,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    },
+    {
+      "ordinal": 3,
+      "scrollPosition": {
+        "x": 0,
+        "y": 0
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 66,
+            "y": 414
+          },
+          "nodeIndex": "Asset",
+          "nodeLineageTag": "1fbdd36a-5356-45f3-8c79-63344009ee01",
+          "size": {
+            "height": 334,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 346,
+            "y": 197
+          },
+          "nodeIndex": "Property Fact",
+          "nodeLineageTag": "a6e4ff47-c73e-4fac-bf89-f0ff44eb028d",
+          "size": {
+            "height": 218,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 670,
+            "y": 205
+          },
+          "nodeIndex": "Property",
+          "nodeLineageTag": "dcb8f146-d342-4136-9533-da977752de34",
+          "size": {
+            "height": 202,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 670,
+            "y": 0
+          },
+          "nodeIndex": "Property Type",
+          "nodeLineageTag": "c2b7a152-612c-4020-98f8-28f0366e5cba",
+          "size": {
+            "height": 128,
+            "width": 234
+          },
+          "zIndex": 0
+        }
+      ],
+      "name": "Property",
       "zoomValue": 100,
       "pinKeyFieldsToTop": false,
       "showExtraHeaderInfo": false,
@@ -127,6 +302,6 @@
       "tablesLocked": false
     }
   ],
-  "selectedDiagram": "All tables",
+  "selectedDiagram": "Property",
   "defaultDiagram": "All tables"
 }

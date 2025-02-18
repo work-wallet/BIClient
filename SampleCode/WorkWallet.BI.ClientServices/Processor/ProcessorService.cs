@@ -40,6 +40,7 @@ public class ProcessorService(
             await ProcessAsync(processorOptions, "Actions", "ACTION_UPDATED");
             await ProcessAsync(processorOptions, "Assets", "ASSET_UPDATED");
             await ProcessAsync(processorOptions, "SafetyCards", "SAFETY_CARD_UPDATED");
+            await ProcessAsync(processorOptions, "Audits", "AUDIT2_UPDATED");
         }
     }
 

@@ -100,8 +100,101 @@
       "showExtraHeaderInfo": false,
       "hideKeyFieldsWhenCollapsed": false,
       "tablesLocked": false
+    },
+    {
+      "ordinal": 1,
+      "scrollPosition": {
+        "x": 0,
+        "y": 1
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 519,
+            "y": 322
+          },
+          "nodeIndex": "Permit",
+          "nodeLineageTag": "7d107b65-6f34-4409-a98a-c8bfe9c4b7fb",
+          "size": {
+            "height": 524,
+            "width": 234
+          },
+          "zIndex": 1
+        },
+        {
+          "location": {
+            "x": 519,
+            "y": 1
+          },
+          "nodeIndex": "Status",
+          "nodeLineageTag": "e8eedf73-7f7c-461a-90f1-3a55326d195e",
+          "size": {
+            "height": 152,
+            "width": 234
+          },
+          "zIndex": 4
+        },
+        {
+          "location": {
+            "x": 64,
+            "y": 433
+          },
+          "nodeIndex": "Location",
+          "nodeLineageTag": "187194fd-4417-4e1b-955b-f5ceb409025f",
+          "size": {
+            "height": 626,
+            "width": 234
+          },
+          "zIndex": 2
+        },
+        {
+          "location": {
+            "x": 247,
+            "y": 0
+          },
+          "nodeIndex": "Category",
+          "nodeLineageTag": "498cce36-5b20-4208-8af4-b281b0679e69",
+          "size": {
+            "height": 393,
+            "width": 234
+          },
+          "zIndex": 3
+        },
+        {
+          "location": {
+            "x": 855,
+            "y": 562
+          },
+          "nodeIndex": "Checklist Answer Fact",
+          "nodeLineageTag": "6791d632-1557-432c-924a-a025d353f446",
+          "size": {
+            "height": 183,
+            "width": 234
+          },
+          "zIndex": 5
+        },
+        {
+          "location": {
+            "x": 855,
+            "y": 181
+          },
+          "nodeIndex": "Checklist Answer",
+          "nodeLineageTag": "8e3f3544-12c0-4977-9d51-2046ec21ca3d",
+          "size": {
+            "height": 230,
+            "width": 234
+          },
+          "zIndex": 0
+        }
+      ],
+      "name": "Main",
+      "zoomValue": 100,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
     }
   ],
-  "selectedDiagram": "All tables",
+  "selectedDiagram": "Main",
   "defaultDiagram": "All tables"
 }

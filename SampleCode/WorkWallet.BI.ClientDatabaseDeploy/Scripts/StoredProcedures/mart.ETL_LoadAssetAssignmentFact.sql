@@ -1,7 +1,8 @@
+DROP PROCEDURE IF EXISTS mart.ETL_LoadAssetAssignmentFact;
 DROP PROCEDURE IF EXISTS mart.ETL_LoadAssetAssignmentFacts;
 GO
 
-CREATE PROCEDURE mart.ETL_LoadAssetAssignmentFacts
+CREATE PROCEDURE mart.ETL_LoadAssetAssignmentFact
     @assetAssignmentTable mart.ETL_AssetAssignmentTable READONLY
 AS
 BEGIN

@@ -131,7 +131,7 @@ BEGIN
             ,ReportedIssueReference nvarchar(50)
             ,OccurredOn datetime2(7)
             ,ReportedOn datetime2(7)
-            ,ReportedBy nvarchar(100)
+            ,ReportedBy nvarchar(max)
             ,ReportedIssueStatusCode int
             ,SubcategoryId uniqueidentifier
             ,CategoryVersion int

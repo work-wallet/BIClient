@@ -4,7 +4,7 @@
     "annotations": [
       {
         "name": "PBIDesktopVersion",
-        "value": "2.136.1202.0 (24.09)"
+        "value": "2.139.2054.0 (24.12)+334ca1c95b576cc53924655643b0d36f21caac55"
       },
       {
         "name": "PBI_QueryOrder",
@@ -5389,7 +5389,7 @@
             "annotations": [
               {
                 "name": "SummarizationSetBy",
-                "value": "Automatic"
+                "value": "User"
               }
             ],
             "changedProperties": [
@@ -5402,7 +5402,7 @@
             "isHidden": true,
             "lineageTag": "5fc29ab2-2818-4d5a-928e-fffeff61a5a6",
             "sourceColumn": "Wallet_key",
-            "summarizeBy": "sum"
+            "summarizeBy": "none"
           }
         ],
         "lineageTag": "0fb312cf-4b87-4e79-9a2f-899dfee8f8d5",
