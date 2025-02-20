@@ -1,5 +1,5 @@
-﻿using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
 using WorkWallet.BI.ClientCore.Interfaces.Services;
 using WorkWallet.BI.ClientCore.Options;
 using WorkWallet.BI.ClientServices.DataStore;
@@ -32,31 +32,25 @@ public static class ServiceExtension
     }
 
     public static IServiceCollection AddAPIServices(
-        this IServiceCollection services,
-        IConfiguration configuration,
-        string optionsSection = "ClientOptions")
+        this IServiceCollection services)
     {
-        // Retrieve BluBug config section or throw
-        var blubugServiceOptionsConfig = configuration.GetRequiredSection("ClientOptions");
-
-        var processorServiceOptions = blubugServiceOptionsConfig.Get<ProcessorServiceOptions>()
-            ?? throw new InvalidOperationException($"Could not bind a configuration section named '{optionsSection}' to an instance of {nameof(ProcessorServiceOptions)}");
-
         // register our bearer token handler
         services.AddTransient<BearerTokenHandler>();
         services.AddHttpClient<BearerTokenHandler>("TokenAPI");
 
         // Token Server: Add and configure named HttpClient to be created through IHttpClientFactory
-        services.AddHttpClient("TokenAPI", client =>
+        services.AddHttpClient("TokenAPI", (serviceProvider, client) =>
         {
-            client.BaseAddress = new Uri(processorServiceOptions.ApiAccessAuthority);
+            var options = serviceProvider.GetService<IOptions<ProcessorServiceOptions>>()!.Value;
+            client.BaseAddress = new Uri(options.ApiAccessAuthority);
         });
 
         // API: Add and configure named HttpClient to be created through IHttpClientFactory
-        services.AddHttpClient("WorkWalletAPI", client =>
+        services.AddHttpClient("WorkWalletAPI", (serviceProvider, client) =>
         {
-            client.BaseAddress = new Uri(processorServiceOptions.AgentApiUrl);
-            client.Timeout = TimeSpan.FromSeconds(processorServiceOptions.AgentTimeout);
+            var options = serviceProvider.GetService<IOptions<ProcessorServiceOptions>>()!.Value;
+            client.BaseAddress = new Uri(options.AgentApiUrl);
+            client.Timeout = TimeSpan.FromSeconds(options.AgentTimeout);
         })
         .ConfigurePrimaryHttpMessageHandler<BearerTokenHandler>();
 

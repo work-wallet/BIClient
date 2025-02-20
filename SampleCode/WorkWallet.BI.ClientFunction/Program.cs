@@ -28,8 +28,8 @@ var host = new HostBuilder()
             {
                 configuration.GetSection("FuncOptions").Bind(settings);
             });
-
         services
+            .AddAPIServices()
             .AddProcessorService()
             .AddSQLService(options =>
             {

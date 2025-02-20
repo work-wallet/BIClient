@@ -13,7 +13,7 @@ try
         {
             services
                 .Configure<ProcessorServiceOptions>(context.Configuration.GetSection("ClientOptions"))
-                .AddAPIServices(context.Configuration)
+                .AddAPIServices()
                 .AddProcessorService()
                 .AddSQLService(options =>
                 {
