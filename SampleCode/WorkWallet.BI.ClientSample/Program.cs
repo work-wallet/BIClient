@@ -3,6 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using WorkWallet.BI.ClientCore.Interfaces.Services;
 using WorkWallet.BI.ClientCore.Options;
+using WorkWallet.BI.ClientSample.Services;
 using WorkWallet.BI.ClientServices;
 
 try
@@ -16,7 +17,8 @@ try
                 .AddSQLService(options =>
                 {
                     options.SqlDbConnectionString = context.Configuration.GetConnectionString("ClientDb")!;
-                });
+                })
+                .AddSingleton<IProgressService, ProgressService>();
         })
         .Build();
 
@@ -28,6 +30,9 @@ try
 }
 catch (Exception ex)
 {
+    Console.WriteLine();
+    Console.ForegroundColor = ConsoleColor.Red;
     Console.WriteLine($"Error: {ex.Message}");
+    Console.ResetColor();
     return 1;
 }

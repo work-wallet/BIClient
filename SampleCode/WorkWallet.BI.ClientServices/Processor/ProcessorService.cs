@@ -9,7 +9,8 @@ namespace WorkWallet.BI.ClientServices.Processor;
 public class ProcessorService(
     ILogger<ProcessorService> logger,
     IOptions<ProcessorServiceOptions> serviceOptions,
-    IDataStoreService dataStore) : IProcessorService
+    IDataStoreService dataStore,
+    IProgressService progressService) : IProcessorService
 {
     private readonly ProcessorServiceOptions _serviceOptions = serviceOptions.Value;
 
@@ -22,7 +23,8 @@ public class ProcessorService(
         // loop (supporting multiple wallets)
         foreach (var agentWallet in _serviceOptions.AgentWallets)
         {
-            logger.LogInformation("Processing for wallet {wallet}", agentWallet.WalletId);
+            logger.LogInformation("Start process for wallet {wallet}", agentWallet.WalletId);
+            progressService.WriteWallet($"{agentWallet.WalletId}", "TODO");
 
             var processorOptions = new ProcessorOptions
             {
@@ -50,6 +52,7 @@ public class ProcessorService(
             logger: logger,
             options: processorOptions,
             dataStore: dataStore,
+            progressService: progressService,
             dataType: dataType,
             logType: logType);
 
@@ -81,7 +84,7 @@ public class ProcessorService(
             throw new ApplicationException($"Failed to get token: {tokenResponse.Error}");
         }
 
-        logger.LogInformation("API access token obtained from {ApiAccessAuthority} for client {ApiAccessClientId}", _serviceOptions.ApiAccessAuthority, _serviceOptions.ApiAccessClientId);
+        logger.LogDebug("API access token obtained from {ApiAccessAuthority} for client {ApiAccessClientId}", _serviceOptions.ApiAccessAuthority, _serviceOptions.ApiAccessClientId);
 
         return tokenResponse;
     }

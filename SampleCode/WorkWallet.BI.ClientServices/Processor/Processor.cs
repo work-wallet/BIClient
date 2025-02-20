@@ -20,6 +20,7 @@ internal class Processor
     private readonly ILogger<ProcessorService> _logger;
     private readonly ProcessorOptions _options;
     private readonly IDataStoreService _dataStore;
+    private readonly IProgressService _progressService;
     private readonly string _dataType;
     private readonly string _logType;
 
@@ -27,19 +28,21 @@ internal class Processor
         ILogger<ProcessorService> logger,
         ProcessorOptions options,
         IDataStoreService dataStore,
+        IProgressService progressService,
         string dataType,
         string logType)
     {
         _logger = logger;
         _options = options;
         _dataStore = dataStore;
+        _progressService = progressService;
         _dataType = dataType;
         _logType = logType;
     }
 
     public async Task Run()
     {
-        _logger.LogInformation("Processing for wallet: {wallet}, data type: {dataType}", _options.WalletId, _dataType);
+        _logger.LogDebug("Processing {dataType} for wallet {wallet}", _dataType, _options.WalletId);
 
         // obtain our last database change tracking synchronization number (or null if this is the first sync)
         long? lastSynchronizationVersion = await _dataStore.GetLastSynchronizationVersionAsync(_options.WalletId, _logType);
@@ -55,12 +58,14 @@ internal class Processor
         Context context;
 
         // we support data paging in order to be able to cope with large result sets
+        _progressService.StartShowProgress(_dataType, !lastSynchronizationVersion.HasValue);
         do
         {
             ++pageNumber;
 
             // call the Work Wallet API end point and obtain the results as JSON
             string json = await CallApiAsync(lastSynchronizationVersion, pageNumber);
+            _progressService.ShowProgress();
 
             // extract the context information (this is included at the top of the JSON)
             var res = JObject.Parse(json);
@@ -99,6 +104,7 @@ internal class Processor
             }
 
         } while (pageNumber < totalPages);
+        _progressService.EndShowProgress(context.FullCount);
 
         // update our change detection / logging table, so we only fetch new and changed data next time
         // (must do this, even if no rows are obtained as lastSynchronizationVersion can otherwise become invalid)
@@ -106,14 +112,14 @@ internal class Processor
 
         if (context.FullCount > 0)
         {
-            _logger.LogInformation("A total of {FullCount} {DataType} records received.", context.FullCount, _dataType);
+            _logger.LogDebug("A total of {FullCount} {DataType} records received.", context.FullCount, _dataType);
 
             // perform any post processing
             await _dataStore.PostProcessAsync(_options.WalletId, _dataType);
         }
         else
         {
-            _logger.LogInformation("No {DataType} records received.", _dataType);
+            _logger.LogDebug("No {DataType} records received.", _dataType);
         }
     }
 

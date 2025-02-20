@@ -3,6 +3,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using WorkWallet.BI.ClientCore.Interfaces.Services;
 using WorkWallet.BI.ClientCore.Options;
 using WorkWallet.BI.ClientServices;
 
@@ -33,7 +34,8 @@ var host = new HostBuilder()
             .AddSQLService(options =>
             {
                 options.SqlDbConnectionString = Environment.GetEnvironmentVariable("sqldb_connection")!;
-            });
+            })
+            .AddSingleton<IProgressService, NullProgressService>();
     })
     .ConfigureLogging((hostingContext, logging) =>
     {
