@@ -12,7 +12,8 @@ public class BearerTokenHandler(
     HttpClient httpClient) : HttpClientHandler
 {
     private readonly ProcessorServiceOptions _serviceOptions = serviceOptions.Value;
-    private string? _accessToken = null;
+    private string? _accessToken;
+    private DateTime? _accessTokenExpiryTime;
 
     protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
     {
@@ -22,7 +23,7 @@ public class BearerTokenHandler(
 
     private async Task<string> GetAccessTokenAsync()
     {
-        if (_accessToken is not null)
+        if (_accessToken is not null && _accessTokenExpiryTime.HasValue && _accessTokenExpiryTime > DateTime.UtcNow)
         {
             // already have an access token
             return _accessToken;
@@ -51,6 +52,9 @@ public class BearerTokenHandler(
         }
 
         logger.LogDebug("API access token obtained from {ApiAccessAuthority} for client {ApiAccessClientId}", _serviceOptions.ApiAccessAuthority, _serviceOptions.ApiAccessClientId);
+
+        // calculate expiry based on 90% of the token lifetime (to be on the safe side)
+        _accessTokenExpiryTime = DateTime.UtcNow.AddSeconds(tokenResponse.ExpiresIn * 0.9);
 
         return _accessToken = tokenResponse.AccessToken!;
     }
