@@ -12,8 +12,25 @@ public static class ServiceExtension
     public static IServiceCollection AddProcessorService(
         this IServiceCollection services)
     {
-        services.AddTransient<IProcessorService, ProcessorService>();
-        services.AddHttpClient<IProcessorService, ProcessorService>("WorkWalletAPI");
+        // register our bearer token handler
+        services.AddHttpClient<BearerTokenHandler>((serviceProvider, client) =>
+        {
+            var options = serviceProvider.GetService<IOptions<ProcessorServiceOptions>>()!.Value;
+            client.BaseAddress = new Uri(options.ApiAccessAuthority);
+        });
+
+        // register the processor service
+        services.AddHttpClient<IProcessorService, ProcessorService>((serviceProvider, client) =>
+        {
+            var options = serviceProvider.GetService<IOptions<ProcessorServiceOptions>>()!.Value;
+            client.BaseAddress = new Uri(options.AgentApiUrl);
+            client.Timeout = TimeSpan.FromSeconds(options.AgentTimeout);
+        })
+        .ConfigurePrimaryHttpMessageHandler<BearerTokenHandler>()
+        // the message handler already handles token expiry, but we additionally want the handler to be replaced in order to pick up DNS changes
+        // (note we will only get a new message handler when a new instance of ProcessorService is instantiated)
+        .SetHandlerLifetime(TimeSpan.FromMinutes(60));
+
         return services;
     }
 
@@ -28,32 +45,6 @@ public static class ServiceExtension
                 @"Please provide options for SQLService.");
         }
         services.Configure(options);
-        return services;
-    }
-
-    public static IServiceCollection AddAPIServices(
-        this IServiceCollection services)
-    {
-        // register our bearer token handler
-        services.AddTransient<BearerTokenHandler>();
-        services.AddHttpClient<BearerTokenHandler>("TokenAPI");
-
-        // Token Server: Add and configure named HttpClient to be created through IHttpClientFactory
-        services.AddHttpClient("TokenAPI", (serviceProvider, client) =>
-        {
-            var options = serviceProvider.GetService<IOptions<ProcessorServiceOptions>>()!.Value;
-            client.BaseAddress = new Uri(options.ApiAccessAuthority);
-        });
-
-        // API: Add and configure named HttpClient to be created through IHttpClientFactory
-        services.AddHttpClient("WorkWalletAPI", (serviceProvider, client) =>
-        {
-            var options = serviceProvider.GetService<IOptions<ProcessorServiceOptions>>()!.Value;
-            client.BaseAddress = new Uri(options.AgentApiUrl);
-            client.Timeout = TimeSpan.FromSeconds(options.AgentTimeout);
-        })
-        .ConfigurePrimaryHttpMessageHandler<BearerTokenHandler>();
-
         return services;
     }
 }
