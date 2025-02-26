@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Web;
 using WorkWallet.BI.ClientCore.Interfaces.Services;
@@ -16,39 +17,47 @@ public class ProcessorService(
 {
     private readonly ProcessorServiceOptions _serviceOptions = serviceOptions.Value;
 
+    private record WalletContext
+    {
+        public Guid Id { get; set; }
+        public required string Name { get; set; }
+        public required string DataRegion { get; set; }
+    }
+
     public async Task RunAsync()
     {
         // loop (supporting multiple wallets)
         foreach (var agentWallet in _serviceOptions.AgentWallets)
         {
+            WalletContext walletContext = await GetWalletContextAsync(agentWallet.WalletId);
             logger.LogInformation("Start process for wallet {wallet}", agentWallet.WalletId);
-            progressService.WriteWallet($"{agentWallet.WalletId}", "TODO");
+            progressService.WriteWallet(walletContext.Name.Trim(), walletContext.DataRegion);
 
-            await ProcessAsync(agentWallet.WalletId, "SiteAudits", "AUDIT_UPDATED");
-            await ProcessAsync(agentWallet.WalletId, "ReportedIssues", "REPORTED_ISSUE_UPDATED");
-            await ProcessAsync(agentWallet.WalletId, "Inductions", "INDUCTION_UPDATED");
-            await ProcessAsync(agentWallet.WalletId, "Permits", "PERMIT_UPDATED");
-            await ProcessAsync(agentWallet.WalletId, "Actions", "ACTION_UPDATED");
-            await ProcessAsync(agentWallet.WalletId, "Assets", "ASSET_UPDATED");
-            await ProcessAsync(agentWallet.WalletId, "SafetyCards", "SAFETY_CARD_UPDATED");
-            await ProcessAsync(agentWallet.WalletId, "Audits", "AUDIT2_UPDATED");
+            await ProcessAsync(walletContext, "SiteAudits", "AUDIT_UPDATED");
+            await ProcessAsync(walletContext, "ReportedIssues", "REPORTED_ISSUE_UPDATED");
+            await ProcessAsync(walletContext, "Inductions", "INDUCTION_UPDATED");
+            await ProcessAsync(walletContext, "Permits", "PERMIT_UPDATED");
+            await ProcessAsync(walletContext, "Actions", "ACTION_UPDATED");
+            await ProcessAsync(walletContext, "Assets", "ASSET_UPDATED");
+            await ProcessAsync(walletContext, "SafetyCards", "SAFETY_CARD_UPDATED");
+            await ProcessAsync(walletContext, "Audits", "AUDIT2_UPDATED");
         }
     }
 
     private async Task ProcessAsync(
-        Guid walletId,
+        WalletContext walletContext,
         string dataType,
         string logType)
     {
-        logger.LogDebug("Processing {dataType} for wallet {wallet}", dataType, walletId);
+        logger.LogDebug("Processing {dataType} for wallet {wallet}", dataType, walletContext.Id);
 
         // obtain our last database change tracking synchronization number (or null if this is the first sync)
-        long? lastSynchronizationVersion = await dataStore.GetLastSynchronizationVersionAsync(walletId, logType);
+        long? lastSynchronizationVersion = await dataStore.GetLastSynchronizationVersionAsync(walletContext.Id, logType);
 
         if (!lastSynchronizationVersion.HasValue)
         {
             // no last synchronization data, treat this as a reset and delete all data
-            await dataStore.ResetAsync(walletId, dataType);
+            await dataStore.ResetAsync(walletContext.Id, dataType);
         }
 
         int pageNumber = 0;
@@ -63,7 +72,7 @@ public class ProcessorService(
 
             // call the Work Wallet API end point and obtain the results as JSON
             string json = await CallApiAsync(
-                walletId,
+                walletContext,
                 dataType,
                 lastSynchronizationVersion,
                 pageNumber);
@@ -111,14 +120,14 @@ public class ProcessorService(
 
         // update our change detection / logging table, so we only fetch new and changed data next time
         // (must do this, even if no rows are obtained as lastSynchronizationVersion can otherwise become invalid)
-        await dataStore.UpdateLastSyncAsync(walletId, logType, context.SynchronizationVersion, context.FullCount);
+        await dataStore.UpdateLastSyncAsync(walletContext.Id, logType, context.SynchronizationVersion, context.FullCount);
 
         if (context.FullCount > 0)
         {
             logger.LogDebug("A total of {FullCount} {DataType} records received.", context.FullCount, dataType);
 
             // perform any post processing
-            await dataStore.PostProcessAsync(walletId, dataType);
+            await dataStore.PostProcessAsync(walletContext.Id, dataType);
         }
         else
         {
@@ -126,16 +135,37 @@ public class ProcessorService(
         }
     }
 
+    private async Task<WalletContext> GetWalletContextAsync(Guid walletId)
+    {
+        var query = HttpUtility.ParseQueryString(string.Empty);
+
+        query["walletId"] = walletId.ToString();
+        query["walletSecret"] = GetSecretForWallet(walletId);
+
+        string url = $"wallet?{query}";
+
+        var response = await httpClient.GetAsync(url);
+        if (!response.IsSuccessStatusCode)
+        {
+            throw new ApplicationException($"Failed to obtain the wallet context: {response.StatusCode}");
+        }
+
+        string content = await response.Content.ReadAsStringAsync();
+
+        // parse the JSON response
+        return JsonConvert.DeserializeObject<WalletContext>(content) ?? throw new ApplicationException($"Failed to parse wallet context response");
+    }
+
     private async Task<string> CallApiAsync(
-        Guid walletId,
+        WalletContext walletContext,
         string dataType,
         long? lastSynchronizationVersion,
         int pageNumber)
     {
         var query = HttpUtility.ParseQueryString(string.Empty);
 
-        query["walletId"] = walletId.ToString();
-        query["walletSecret"] = _serviceOptions.AgentWallets.Single(w => w.WalletId == walletId).WalletSecret;
+        query["walletId"] = walletContext.Id.ToString();
+        query["walletSecret"] = GetSecretForWallet(walletContext.Id);
         query["pageNumber"] = pageNumber.ToString();
         query["pageSize"] = _serviceOptions.AgentPageSize.ToString();
 
@@ -146,12 +176,20 @@ public class ProcessorService(
 
         string url = $"dataextract/{dataType}?{query}";
 
-        var response = await httpClient.GetAsync(url);
+        var request = new HttpRequestMessage(HttpMethod.Get, url);
+        request.Headers.Add("DataRegion", walletContext.DataRegion);
+
+        var response = await httpClient.SendAsync(request);
         if (!response.IsSuccessStatusCode)
         {
             throw new ApplicationException($"Failed to call the API: {response.StatusCode}");
         }
 
         return await response.Content.ReadAsStringAsync();
+    }
+
+    private string GetSecretForWallet(Guid walletId)
+    {
+        return _serviceOptions.AgentWallets.Single(w => w.WalletId == walletId).WalletSecret;
     }
 }
