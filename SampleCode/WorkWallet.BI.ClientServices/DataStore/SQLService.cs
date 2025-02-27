@@ -87,7 +87,6 @@ public class SQLService(
 
         string sp = $"mart.ETL_Reset{dataType}";
 
-        logger.LogInformation("Resetting data for wallet: {wallet}, data type: {dataType}", walletId, dataType);
         logger.LogDebug("Reset data: exec {sp} @walletId = '{walletId}'", sp, walletId);
 
         using SqlCommand command = new(sp, connection);

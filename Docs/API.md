@@ -42,7 +42,7 @@ Currently supported data types:
 
 When you call the API an Authorization header with value: `Bearer [token]` is required.
 
-Note that `pageSize` must not be set too high. Recommended maximum is around 500. Setting a high value will cause performance issues and create very large payloads. Instead, your solution should implement paging. Review the sample C# code ([Processor.cs](https://github.com/work-wallet/BIClient/blob/main/SampleCode/WorkWallet.BI.ClientServices/Processor/Processor.cs)), which you can consider as pseudo-code to guide your implementation.
+Note that `pageSize` must not be set too high. Recommended maximum is around 500. Setting a high value will cause performance issues and create very large payloads. Instead, your solution should implement paging. Review the sample C# code ([Processor.cs](https://github.com/work-wallet/BIClient/blob/main/SampleCode/WorkWallet.BI.ClientServices/Processor/ProcessorService.cs)), which you can consider as pseudo-code to guide your implementation.
 
 The returned JSON includes a `Context` block that gives information about the total number of data rows available.
 
