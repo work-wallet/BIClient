@@ -40,7 +40,7 @@ public class ProcessorService(
             await ProcessAsync(walletContext, "Actions", "ACTION_UPDATED");
             await ProcessAsync(walletContext, "Assets", "ASSET_UPDATED");
             await ProcessAsync(walletContext, "SafetyCards", "SAFETY_CARD_UPDATED");
-            await ProcessAsync(walletContext, "Audits", "AUDIT2_UPDATED");
+            //await ProcessAsync(walletContext, "Audits", "AUDIT2_UPDATED");
         }
     }
 
