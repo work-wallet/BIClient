@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using System.Net.Http.Headers;
+using WorkWallet.BI.ClientCore.Exceptions;
 using WorkWallet.BI.ClientCore.Options;
 
 namespace WorkWallet.BI.ClientServices;
@@ -33,7 +34,7 @@ public class BearerTokenHandler(
         var disco = await httpClient.GetDiscoveryDocumentAsync(_serviceOptions.ApiAccessAuthority);
         if (disco.IsError)
         {
-            throw new ApplicationException($"Failed to get discovery document: {disco.Error}");
+            throw new AuthDiscoveryDocumentException(disco.Error);
         }
 
         // request token
@@ -48,7 +49,7 @@ public class BearerTokenHandler(
 
         if (tokenResponse.IsError)
         {
-            throw new ApplicationException($"Failed to get token: {tokenResponse.Error}");
+            throw new AuthTokenException(tokenResponse.Error);
         }
 
         logger.LogDebug("API access token obtained from {ApiAccessAuthority} for client {ApiAccessClientId}", _serviceOptions.ApiAccessAuthority, _serviceOptions.ApiAccessClientId);

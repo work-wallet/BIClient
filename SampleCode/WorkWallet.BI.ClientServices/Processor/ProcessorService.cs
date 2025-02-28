@@ -2,7 +2,9 @@
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using System.Net;
 using System.Web;
+using WorkWallet.BI.ClientCore.Exceptions;
 using WorkWallet.BI.ClientCore.Interfaces.Services;
 using WorkWallet.BI.ClientCore.Options;
 
@@ -79,19 +81,26 @@ public class ProcessorService(
 
             progressService.ShowProgress();
 
-            // extract the context information (this is included at the top of the JSON)
-            var res = JObject.Parse(json);
-            context = res["Context"]!.ToObject<Context>()!;
+            try
+            {
+                // extract the context information (this is included at the top of the JSON)
+                var res = JObject.Parse(json);
+                context = res["Context"]!.ToObject<Context>()!;
+            }
+            catch (Exception ex)
+            {
+                throw new DeserializeResponseException(typeof(Context), ex.Message, walletContext.Id, dataType);
+            }
 
             // check for errors
             if (context.Error == "Invalid LastSynchronizationVersion")
             {
-                throw new ApplicationException($"Error '{context.Error}' (requested {lastSynchronizationVersion} minimum {context.MinValidSynchronizationVersion}) - most likely caused by a significant number of days elapsed since last synchronisation.");
+                throw new InvalidLastSynchronizationVersionException(lastSynchronizationVersion.Value, context.MinValidSynchronizationVersion, walletContext.Id, dataType);
             }
 
             if (context.Error.Length != 0)
             {
-                throw new ApplicationException($"Error '{context.Error}'");
+                throw new ApiErrorResponseException(context.Error, walletContext.Id, dataType);
             }
 
             // now we know how many rows there are in total, we can calculate the total number of pages we need to fetch
@@ -147,13 +156,13 @@ public class ProcessorService(
         var response = await httpClient.GetAsync(url);
         if (!response.IsSuccessStatusCode)
         {
-            throw new ApplicationException($"Failed to obtain the wallet context: {response.StatusCode}");
+            throw new WalletContextException(response.StatusCode, walletId);
         }
 
         string content = await response.Content.ReadAsStringAsync();
 
         // parse the JSON response
-        return JsonConvert.DeserializeObject<WalletContext>(content) ?? throw new ApplicationException($"Failed to parse wallet context response");
+        return JsonConvert.DeserializeObject<WalletContext>(content) ?? throw new DeserializeResponseException(typeof(WalletContext), walletId);
     }
 
     private async Task<string> CallApiAsync(
@@ -182,7 +191,15 @@ public class ProcessorService(
         var response = await httpClient.SendAsync(request);
         if (!response.IsSuccessStatusCode)
         {
-            throw new ApplicationException($"Failed to call the API: {response.StatusCode}");
+            if (response.StatusCode == HttpStatusCode.BadRequest &&                
+                string.Equals(await response.Content.ReadAsStringAsync(), "Incorrect data region", StringComparison.OrdinalIgnoreCase))
+            {
+                throw new IncorrectDataRegionException(walletContext.DataRegion, walletContext.Id, dataType);
+            }
+            else
+            {
+                throw new ApiException(response.StatusCode, walletContext.Id, dataType);
+            }
         }
 
         return await response.Content.ReadAsStringAsync();
