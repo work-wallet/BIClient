@@ -26,40 +26,41 @@ public class ProcessorService(
         public required string DataRegion { get; set; }
     }
 
-    public async Task RunAsync()
+    public async Task RunAsync(CancellationToken cancellationToken = default)
     {
         // loop (supporting multiple wallets)
         foreach (var agentWallet in _serviceOptions.AgentWallets)
         {
-            WalletContext walletContext = await GetWalletContextAsync(agentWallet.WalletId);
+            WalletContext walletContext = await GetWalletContextAsync(agentWallet.WalletId, cancellationToken);
             logger.LogInformation("Start process for wallet {wallet}", agentWallet.WalletId);
             progressService.WriteWallet(walletContext.Name.Trim(), walletContext.DataRegion);
 
-            await ProcessAsync(walletContext, "SiteAudits", "AUDIT_UPDATED");
-            await ProcessAsync(walletContext, "ReportedIssues", "REPORTED_ISSUE_UPDATED");
-            await ProcessAsync(walletContext, "Inductions", "INDUCTION_UPDATED");
-            await ProcessAsync(walletContext, "Permits", "PERMIT_UPDATED");
-            await ProcessAsync(walletContext, "Actions", "ACTION_UPDATED");
-            await ProcessAsync(walletContext, "Assets", "ASSET_UPDATED");
-            await ProcessAsync(walletContext, "SafetyCards", "SAFETY_CARD_UPDATED");
-            //await ProcessAsync(walletContext, "Audits", "AUDIT2_UPDATED");
+            await ProcessAsync(walletContext, "SiteAudits", "AUDIT_UPDATED", cancellationToken);
+            await ProcessAsync(walletContext, "ReportedIssues", "REPORTED_ISSUE_UPDATED", cancellationToken);
+            await ProcessAsync(walletContext, "Inductions", "INDUCTION_UPDATED", cancellationToken);
+            await ProcessAsync(walletContext, "Permits", "PERMIT_UPDATED", cancellationToken);
+            await ProcessAsync(walletContext, "Actions", "ACTION_UPDATED", cancellationToken);
+            await ProcessAsync(walletContext, "Assets", "ASSET_UPDATED", cancellationToken);
+            await ProcessAsync(walletContext, "SafetyCards", "SAFETY_CARD_UPDATED", cancellationToken);
+            //await ProcessAsync(walletContext, "Audits", "AUDIT2_UPDATED", cancellationToken);
         }
     }
 
     private async Task ProcessAsync(
         WalletContext walletContext,
         string dataType,
-        string logType)
+        string logType,
+        CancellationToken cancellationToken = default)
     {
         logger.LogDebug("Processing {dataType} for wallet {wallet}", dataType, walletContext.Id);
 
         // obtain our last database change tracking synchronization number (or null if this is the first sync)
-        long? lastSynchronizationVersion = await dataStore.GetLastSynchronizationVersionAsync(walletContext.Id, logType);
+        long? lastSynchronizationVersion = await dataStore.GetLastSynchronizationVersionAsync(walletContext.Id, logType, cancellationToken);
 
         if (!lastSynchronizationVersion.HasValue)
         {
             // no last synchronization data, treat this as a reset and delete all data
-            await dataStore.ResetAsync(walletContext.Id, dataType);
+            await dataStore.ResetAsync(walletContext.Id, dataType, cancellationToken);
         }
 
         int pageNumber = 0;
@@ -77,7 +78,8 @@ public class ProcessorService(
                 walletContext,
                 dataType,
                 lastSynchronizationVersion,
-                pageNumber);
+                pageNumber,
+                cancellationToken);
 
             progressService.ShowProgress();
 
@@ -117,7 +119,7 @@ public class ProcessorService(
             if (context.Count > 0)
             {
                 // load into our local database (all the heavy lifting is done in the stored procedure)
-                await dataStore.LoadAsync(dataType, json);
+                await dataStore.LoadAsync(dataType, json, cancellationToken);
             }
             else
             {
@@ -129,14 +131,14 @@ public class ProcessorService(
 
         // update our change detection / logging table, so we only fetch new and changed data next time
         // (must do this, even if no rows are obtained as lastSynchronizationVersion can otherwise become invalid)
-        await dataStore.UpdateLastSyncAsync(walletContext.Id, logType, context.SynchronizationVersion, context.FullCount);
+        await dataStore.UpdateLastSyncAsync(walletContext.Id, logType, context.SynchronizationVersion, context.FullCount, cancellationToken);
 
         if (context.FullCount > 0)
         {
             logger.LogDebug("A total of {FullCount} {DataType} records received.", context.FullCount, dataType);
 
             // perform any post processing
-            await dataStore.PostProcessAsync(walletContext.Id, dataType);
+            await dataStore.PostProcessAsync(walletContext.Id, dataType, cancellationToken);
         }
         else
         {
@@ -144,7 +146,7 @@ public class ProcessorService(
         }
     }
 
-    private async Task<WalletContext> GetWalletContextAsync(Guid walletId)
+    private async Task<WalletContext> GetWalletContextAsync(Guid walletId, CancellationToken cancellationToken = default)
     {
         var query = HttpUtility.ParseQueryString(string.Empty);
 
@@ -153,13 +155,13 @@ public class ProcessorService(
 
         string url = $"wallet?{query}";
 
-        var response = await httpClient.GetAsync(url);
+        var response = await httpClient.GetAsync(url, cancellationToken);
         if (!response.IsSuccessStatusCode)
         {
             throw new WalletContextException(response.StatusCode, walletId);
         }
 
-        string content = await response.Content.ReadAsStringAsync();
+        string content = await response.Content.ReadAsStringAsync(cancellationToken);
 
         // parse the JSON response
         return JsonConvert.DeserializeObject<WalletContext>(content) ?? throw new DeserializeResponseException(typeof(WalletContext), walletId);
@@ -169,7 +171,8 @@ public class ProcessorService(
         WalletContext walletContext,
         string dataType,
         long? lastSynchronizationVersion,
-        int pageNumber)
+        int pageNumber,
+        CancellationToken cancellationToken = default)
     {
         var query = HttpUtility.ParseQueryString(string.Empty);
 
@@ -188,11 +191,11 @@ public class ProcessorService(
         var request = new HttpRequestMessage(HttpMethod.Get, url);
         request.Headers.Add("DataRegion", walletContext.DataRegion);
 
-        var response = await httpClient.SendAsync(request);
+        var response = await httpClient.SendAsync(request, cancellationToken);
         if (!response.IsSuccessStatusCode)
         {
             if (response.StatusCode == HttpStatusCode.BadRequest &&                
-                string.Equals(await response.Content.ReadAsStringAsync(), "Incorrect data region", StringComparison.OrdinalIgnoreCase))
+                string.Equals(await response.Content.ReadAsStringAsync(cancellationToken), "Incorrect data region", StringComparison.OrdinalIgnoreCase))
             {
                 throw new IncorrectDataRegionException(walletContext.DataRegion, walletContext.Id, dataType);
             }
@@ -202,7 +205,7 @@ public class ProcessorService(
             }
         }
 
-        return await response.Content.ReadAsStringAsync();
+        return await response.Content.ReadAsStringAsync(cancellationToken);
     }
 
     private string GetSecretForWallet(Guid walletId)

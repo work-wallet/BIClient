@@ -24,7 +24,7 @@ try
 
     IServiceProvider serviceProvider = host.Services;
 
-    await serviceProvider.GetRequiredService<IProcessorService>().RunAsync();
+    await serviceProvider.GetRequiredService<IProcessorService>().RunAsync(CancellationToken.None);
 
     return 0;
 }

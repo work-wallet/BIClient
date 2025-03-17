@@ -13,12 +13,13 @@ public class BITimerFunction(
 #if DEBUG
         , RunOnStartup = true
 #endif
-        )]TimerInfo timerInfo)
+        )]TimerInfo timerInfo,
+        CancellationToken cancellationToken)
     {
         try
         {
             logger.LogInformation("BITimerTrigger invoked");
-            await processorService.RunAsync();
+            await processorService.RunAsync(cancellationToken);
         }
         catch (Exception ex)
         {

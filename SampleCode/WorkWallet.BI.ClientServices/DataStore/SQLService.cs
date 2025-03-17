@@ -13,7 +13,7 @@ public class SQLService(
 {
     private readonly SQLServiceOptions _options = options.Value;
 
-    public async Task<long?> GetLastSynchronizationVersionAsync(Guid walletId, string logType)
+    public async Task<long?> GetLastSynchronizationVersionAsync(Guid walletId, string logType, CancellationToken cancellationToken = default)
     {
         logger.LogDebug("Obtaining last synchronization version for walletId '{walletId}' and logType '{logType}'", walletId, logType);
 
@@ -27,7 +27,7 @@ public class SQLService(
         command.Parameters.Add("@walletId", SqlDbType.UniqueIdentifier).Value = walletId;
         command.Parameters.Add("@logType", SqlDbType.NVarChar).Value = logType;
 
-        long? lastSynchronizationVersion = (long?)await command.ExecuteScalarAsync();
+        long? lastSynchronizationVersion = (long?)await command.ExecuteScalarAsync(cancellationToken);
 
         if (lastSynchronizationVersion.HasValue)
         {
@@ -41,7 +41,7 @@ public class SQLService(
         return lastSynchronizationVersion;
     }
 
-    public async Task LoadAsync(string dataType, string json)
+    public async Task LoadAsync(string dataType, string json, CancellationToken cancellationToken = default)
     {
         using SqlConnection connection = new(ConnectionString);
         connection.Open();
@@ -56,10 +56,10 @@ public class SQLService(
 
         command.Parameters.Add("json", SqlDbType.NVarChar).Value = json;
 
-        await command.ExecuteNonQueryAsync();
+        await command.ExecuteNonQueryAsync(cancellationToken);
     }
 
-    public async Task UpdateLastSyncAsync(Guid walletId, string logType, long synchronizationVersion, int rowsProcessed)
+    public async Task UpdateLastSyncAsync(Guid walletId, string logType, long synchronizationVersion, int rowsProcessed, CancellationToken cancellationToken = default)
     {
         using SqlConnection connection = new(ConnectionString);
         connection.Open();
@@ -77,10 +77,10 @@ public class SQLService(
         command.Parameters.Add("@synchronizationVersion", SqlDbType.BigInt).Value = synchronizationVersion;
         command.Parameters.Add("@rowsProcessed", SqlDbType.Int).Value = rowsProcessed;
 
-        await command.ExecuteNonQueryAsync();
+        await command.ExecuteNonQueryAsync(cancellationToken);
     }
 
-    public async Task ResetAsync(Guid walletId, string dataType)
+    public async Task ResetAsync(Guid walletId, string dataType, CancellationToken cancellationToken = default)
     {
         using SqlConnection connection = new(ConnectionString);
         connection.Open();
@@ -95,10 +95,10 @@ public class SQLService(
 
         command.Parameters.Add("@walletId", SqlDbType.UniqueIdentifier).Value = walletId;
 
-        await command.ExecuteNonQueryAsync();
+        await command.ExecuteNonQueryAsync(cancellationToken);
     }
 
-    public async Task PostProcessAsync(Guid walletId, string dataType)
+    public async Task PostProcessAsync(Guid walletId, string dataType, CancellationToken cancellationToken = default)
     {
         using SqlConnection connection = new(ConnectionString);
         connection.Open();
@@ -113,7 +113,7 @@ public class SQLService(
 
         command.Parameters.Add("@walletId", SqlDbType.UniqueIdentifier).Value = walletId;
 
-        await command.ExecuteNonQueryAsync();
+        await command.ExecuteNonQueryAsync(cancellationToken);
     }
 
     private string ConnectionString
