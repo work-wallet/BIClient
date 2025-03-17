@@ -35,14 +35,23 @@ public class ProcessorService(
             logger.LogInformation("Start process for wallet {wallet}", agentWallet.WalletId);
             progressService.WriteWallet(walletContext.Name.Trim(), walletContext.DataRegion);
 
-            await ProcessAsync(walletContext, "SiteAudits", "AUDIT_UPDATED", cancellationToken);
-            await ProcessAsync(walletContext, "ReportedIssues", "REPORTED_ISSUE_UPDATED", cancellationToken);
-            await ProcessAsync(walletContext, "Inductions", "INDUCTION_UPDATED", cancellationToken);
-            await ProcessAsync(walletContext, "Permits", "PERMIT_UPDATED", cancellationToken);
-            await ProcessAsync(walletContext, "Actions", "ACTION_UPDATED", cancellationToken);
-            await ProcessAsync(walletContext, "Assets", "ASSET_UPDATED", cancellationToken);
-            await ProcessAsync(walletContext, "SafetyCards", "SAFETY_CARD_UPDATED", cancellationToken);
-            //await ProcessAsync(walletContext, "Audits", "AUDIT2_UPDATED", cancellationToken);
+            // if no dataTypes are provided, then use all the ones that we know about
+            string[] dataSets = _serviceOptions.DataSets.Length > 0 ? _serviceOptions.DataSets : DataSets.Entries.Keys.ToArray();
+
+            // repeat for all the dataSets selected
+            foreach (string dataSet in dataSets)
+            {
+                var entry = DataSets.Entries.FirstOrDefault(dt => dt.Key.Equals(dataSet, StringComparison.OrdinalIgnoreCase));
+
+                // the requested dataType is not in our lookup of expected types
+                if (entry.Equals(default(KeyValuePair<string, string>)))
+                {
+                    throw new UnsupportedDataTypeException(dataSet);
+                }
+
+                // process for this dataType
+                await ProcessAsync(walletContext, entry.Key, entry.Value, cancellationToken);
+            }
         }
     }
 
