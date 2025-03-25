@@ -31,6 +31,8 @@ public class ProcessorService(
         // loop (supporting multiple wallets)
         foreach (var agentWallet in _serviceOptions.AgentWallets)
         {
+            cancellationToken.ThrowIfCancellationRequested();
+
             WalletContext walletContext = await GetWalletContextAsync(agentWallet.WalletId, cancellationToken);
             logger.LogInformation("Start process for wallet {wallet}", agentWallet.WalletId);
             progressService.WriteWallet(walletContext.Name.Trim(), walletContext.DataRegion);
@@ -41,6 +43,8 @@ public class ProcessorService(
             // repeat for all the dataSets selected
             foreach (string dataSet in dataSets)
             {
+                cancellationToken.ThrowIfCancellationRequested();
+
                 var entry = DataSets.Entries.FirstOrDefault(dt => dt.Key.Equals(dataSet, StringComparison.OrdinalIgnoreCase));
 
                 // the requested dataType is not in our lookup of expected types
@@ -64,12 +68,12 @@ public class ProcessorService(
         logger.LogDebug("Processing {dataType} for wallet {wallet}", dataType, walletContext.Id);
 
         // obtain our last database change tracking synchronization number (or null if this is the first sync)
-        long? lastSynchronizationVersion = await dataStore.GetLastSynchronizationVersionAsync(walletContext.Id, logType, cancellationToken);
+        long? lastSynchronizationVersion = await dataStore.GetLastSynchronizationVersionAsync(walletContext.Id, logType);
 
         if (!lastSynchronizationVersion.HasValue)
         {
             // no last synchronization data, treat this as a reset and delete all data
-            await dataStore.ResetAsync(walletContext.Id, dataType, cancellationToken);
+            await dataStore.ResetAsync(walletContext.Id, dataType);
         }
 
         int pageNumber = 0;
@@ -80,6 +84,8 @@ public class ProcessorService(
         progressService.StartShowProgress(dataType, !lastSynchronizationVersion.HasValue);
         do
         {
+            cancellationToken.ThrowIfCancellationRequested();
+
             ++pageNumber;
 
             // call the Work Wallet API end point and obtain the results as JSON
@@ -127,8 +133,10 @@ public class ProcessorService(
 
             if (context.Count > 0)
             {
+                cancellationToken.ThrowIfCancellationRequested();
+
                 // load into our local database (all the heavy lifting is done in the stored procedure)
-                await dataStore.LoadAsync(dataType, json, cancellationToken);
+                await dataStore.LoadAsync(dataType, json);
             }
             else
             {
@@ -140,14 +148,14 @@ public class ProcessorService(
 
         // update our change detection / logging table, so we only fetch new and changed data next time
         // (must do this, even if no rows are obtained as lastSynchronizationVersion can otherwise become invalid)
-        await dataStore.UpdateLastSyncAsync(walletContext.Id, logType, context.SynchronizationVersion, context.FullCount, cancellationToken);
+        await dataStore.UpdateLastSyncAsync(walletContext.Id, logType, context.SynchronizationVersion, context.FullCount);
 
         if (context.FullCount > 0)
         {
             logger.LogDebug("A total of {FullCount} {DataType} records received.", context.FullCount, dataType);
 
             // perform any post processing
-            await dataStore.PostProcessAsync(walletContext.Id, dataType, cancellationToken);
+            await dataStore.PostProcessAsync(walletContext.Id, dataType);
         }
         else
         {
