@@ -85,7 +85,9 @@ To integrate with the API directly (not recommended) see the documentation [here
 
 ## Binaries
 
-All binaries target [.NET 8.0](https://dotnet.microsoft.com/en-us/download/dotnet/8.0)
+All binaries target .NET 8.0
+
+Install the [.NET 8.0](https://dotnet.microsoft.com/en-us/download/dotnet/8.0) runtime (if not already present).
 
 Pre-built binaries can be downloaded from the [releases](https://github.com/work-wallet/BIClient/releases) section on GitHub.
 

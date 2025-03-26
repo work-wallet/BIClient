@@ -31,7 +31,7 @@ The API endpoint takes the form:
 
 Currently supported data types:
 
-* SiteAudits - **LEGACY**
+* SiteAudits - **OBSOLETE**
 * ReportedIssues
 * Inductions
 * Permits
@@ -54,6 +54,34 @@ So your URL becomes:
 
 It is okay omit `lastSynchronizationVersion` on the first call or set the value to 0.
 
+Example response (for Audits, truncated):
+
+```json
+{
+  "Context": {
+    "Version": 1,
+    "Count": 13,
+    "FullCount": 13,
+    "PageNumber": 1,
+    "PageSize": 500,
+    "SynchronizationVersion": 10101,
+    "MinValidSynchronizationVersion": 9000,
+    "Error": "",
+    "UTC": "2025-03-26T14:54:59.127"
+  },
+  "Wallets": [
+    {
+      "WalletId": "E6B2E381-34E7-4999-95A9-34D4909050EE",
+      "Wallet": "Example Wallet"
+    }
+  ],
+  "Locations": [
+    {
+      "LocationId": "F9964471-20D4-49D6-A80D-0CB0F6234ED6",
+      "LocationTypeCode": 2,
+      "LocationType": "Operations Site",
+```
+
 ## Unpacking the JSON Payload
 
 The API returns data in JSON format.
@@ -61,3 +89,31 @@ The API returns data in JSON format.
 The sample [SQL database schema](https://github.com/work-wallet/BIClient/tree/main/SampleCode/WorkWallet.BI.ClientDatabaseDeploy/Scripts/Schema) can be use to guide you in understanding what data to expect from the API (including providing reference data values).
 
 The quick starter solution processes the JSON in (database SQL) stored procedures. You can use these as references. For example for site audits see [here](https://github.com/work-wallet/BIClient/blob/main/SampleCode/WorkWallet.BI.ClientDatabaseDeploy/Scripts/StoredProcedures/mart.ETL_LoadSiteAudits.sql).
+
+## Multi-Region Support
+
+Work Wallet data hosting is available in multiple regions (currently UK/Europe, United States, Australia).
+The data associated with any given Wallet is held in a single region.
+
+When you call the API your request defaults to your local region.
+So, for example, if you make an API request from within the UK you are automatically routed to the UK hosting. If your wallet data is hosted in the UK, then the API call will succeed. If, however, you make a request from the United States, then the call will fail with HTTP response 400 (bad request).
+
+If you need to make cross-region API calls, then it is necessary to add an additional header `DataRegion` to the request.
+
+```text
+Authorization: Bearer [access token]
+DataRegion: GB
+```
+
+The DataRegion code for a Wallet can be obtained from the following API endpoint:
+
+`https://bi.work-wallet.com/wallet?walletId=[id]&walletSecret=[secret]`
+
+Example response:
+
+```json
+{
+  "id": "e6b2e381-34e7-4999-95a9-34d4909050ee",
+  "name": "Example Wallet",
+  "dataRegion": "GB"
+}```
