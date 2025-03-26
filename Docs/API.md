@@ -31,7 +31,6 @@ The API endpoint takes the form:
 
 Currently supported data types:
 
-* SiteAudits - **OBSOLETE**
 * ReportedIssues
 * Inductions
 * Permits
@@ -116,4 +115,5 @@ Example response:
   "id": "e6b2e381-34e7-4999-95a9-34d4909050ee",
   "name": "Example Wallet",
   "dataRegion": "GB"
-}```
+}
+```

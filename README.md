@@ -6,7 +6,6 @@ The [Work Wallet](https://www.work-wallet.com/) Health and Safety solution provi
 
 The datasets currently enabled for download are:
 
-* Site Audits - **LEGACY**
 * Reported Issues
 * Inductions
 * Permits

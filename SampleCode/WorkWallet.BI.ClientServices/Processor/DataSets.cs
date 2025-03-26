@@ -5,7 +5,6 @@ internal static class DataSets
     // dictionary holding all the data sets and associated log types (as used in the database table mart.ETL_ChangeDetection for tracking)
     private static Dictionary<string, string> _entries = new()
     {
-        { "SiteAudits", "AUDIT_UPDATED" },
         { "ReportedIssues", "REPORTED_ISSUE_UPDATED" },
         { "Inductions", "INDUCTION_UPDATED" },
         { "Permits", "PERMIT_UPDATED" },
