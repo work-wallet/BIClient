@@ -37,7 +37,7 @@ internal class DeployDatabaseService(
 
     private void DeployDatabase()
     {
-        var connectionString = _settings.DatabaseConnectionString ?? throw new ApplicationException("No database connection string set");
+        var connectionString = _settings.DatabaseConnectionString ?? throw new ArgumentNullException("Please provide database connection string.");
 
         logger.LogInformation("Ensure database exists");
         EnsureDatabase.For.SqlDatabase(connectionString);

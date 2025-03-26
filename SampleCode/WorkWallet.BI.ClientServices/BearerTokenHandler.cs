@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using System.Net.Http.Headers;
+using WorkWallet.BI.ClientCore.Exceptions;
 using WorkWallet.BI.ClientCore.Options;
 
 namespace WorkWallet.BI.ClientServices;
@@ -17,11 +18,11 @@ public class BearerTokenHandler(
 
     protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
     {
-        request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", await GetAccessTokenAsync());
+        request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", await GetAccessTokenAsync(cancellationToken));
         return await base.SendAsync(request, cancellationToken);
     }
 
-    private async Task<string> GetAccessTokenAsync()
+    private async Task<string> GetAccessTokenAsync(CancellationToken cancellationToken = default)
     {
         if (_accessToken is not null && _accessTokenExpiryTime.HasValue && _accessTokenExpiryTime > DateTime.UtcNow)
         {
@@ -30,25 +31,27 @@ public class BearerTokenHandler(
         }
 
         // discover endpoints from metadata
-        var disco = await httpClient.GetDiscoveryDocumentAsync(_serviceOptions.ApiAccessAuthority);
+        var disco = await httpClient.GetDiscoveryDocumentAsync(_serviceOptions.ApiAccessAuthority, cancellationToken);
         if (disco.IsError)
         {
-            throw new ApplicationException($"Failed to get discovery document: {disco.Error}");
+            throw new AuthDiscoveryDocumentException(disco.Error);
         }
 
         // request token
-        var tokenResponse = await httpClient.RequestClientCredentialsTokenAsync(new ClientCredentialsTokenRequest
-        {
-            Address = disco.TokenEndpoint,
+        var tokenResponse = await httpClient.RequestClientCredentialsTokenAsync(
+            new ClientCredentialsTokenRequest
+            {
+                Address = disco.TokenEndpoint,
 
-            ClientId = _serviceOptions.ApiAccessClientId,
-            ClientSecret = _serviceOptions.ApiAccessClientSecret,
-            Scope = _serviceOptions.ApiAccessScope
-        });
+                ClientId = _serviceOptions.ApiAccessClientId,
+                ClientSecret = _serviceOptions.ApiAccessClientSecret,
+                Scope = _serviceOptions.ApiAccessScope
+            },
+            cancellationToken);
 
         if (tokenResponse.IsError)
         {
-            throw new ApplicationException($"Failed to get token: {tokenResponse.Error}");
+            throw new AuthTokenException(tokenResponse.Error);
         }
 
         logger.LogDebug("API access token obtained from {ApiAccessAuthority} for client {ApiAccessClientId}", _serviceOptions.ApiAccessAuthority, _serviceOptions.ApiAccessClientId);

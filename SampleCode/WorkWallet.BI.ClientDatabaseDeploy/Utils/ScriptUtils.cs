@@ -1,5 +1,6 @@
 ﻿using System.Reflection;
 using System.Text.RegularExpressions;
+using WorkWallet.BI.ClientDatabaseDeploy.Exceptions;
 
 namespace WorkWallet.BI.ClientDatabaseDeploy.Utils;
 
@@ -22,12 +23,12 @@ internal class ScriptUtils
                 "schema" => ScriptFileType.Schema,
                 "types" => ScriptFileType.Type,
                 "storedprocedures" => ScriptFileType.StoredProcedure,
-                _ => throw new ApplicationException($"unexpected script type {m.Value}"),
+                _ => throw new ScriptUnexpectedTypeException(capture, scriptName)
             };
         }
         else
         {
-            throw new ApplicationException($"failed to parse script {scriptName}");
+            throw new ScriptParseException(scriptName);
         }
     }
 }

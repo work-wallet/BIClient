@@ -27,7 +27,7 @@ public class SQLService(
         command.Parameters.Add("@walletId", SqlDbType.UniqueIdentifier).Value = walletId;
         command.Parameters.Add("@logType", SqlDbType.NVarChar).Value = logType;
 
-        long? lastSynchronizationVersion = (long?)await command.ExecuteScalarAsync();
+        long? lastSynchronizationVersion = (long?)await command.ExecuteScalarAsync(CancellationToken.None);
 
         if (lastSynchronizationVersion.HasValue)
         {
@@ -56,7 +56,7 @@ public class SQLService(
 
         command.Parameters.Add("json", SqlDbType.NVarChar).Value = json;
 
-        await command.ExecuteNonQueryAsync();
+        await command.ExecuteNonQueryAsync(CancellationToken.None);
     }
 
     public async Task UpdateLastSyncAsync(Guid walletId, string logType, long synchronizationVersion, int rowsProcessed)
@@ -77,7 +77,7 @@ public class SQLService(
         command.Parameters.Add("@synchronizationVersion", SqlDbType.BigInt).Value = synchronizationVersion;
         command.Parameters.Add("@rowsProcessed", SqlDbType.Int).Value = rowsProcessed;
 
-        await command.ExecuteNonQueryAsync();
+        await command.ExecuteNonQueryAsync(CancellationToken.None);
     }
 
     public async Task ResetAsync(Guid walletId, string dataType)
@@ -95,7 +95,7 @@ public class SQLService(
 
         command.Parameters.Add("@walletId", SqlDbType.UniqueIdentifier).Value = walletId;
 
-        await command.ExecuteNonQueryAsync();
+        await command.ExecuteNonQueryAsync(CancellationToken.None);
     }
 
     public async Task PostProcessAsync(Guid walletId, string dataType)
@@ -113,7 +113,7 @@ public class SQLService(
 
         command.Parameters.Add("@walletId", SqlDbType.UniqueIdentifier).Value = walletId;
 
-        await command.ExecuteNonQueryAsync();
+        await command.ExecuteNonQueryAsync(CancellationToken.None);
     }
 
     private string ConnectionString
