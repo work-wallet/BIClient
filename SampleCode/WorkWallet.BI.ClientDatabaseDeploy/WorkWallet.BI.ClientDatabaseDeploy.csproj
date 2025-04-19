@@ -5,7 +5,7 @@
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <AssemblyVersion>3.2.1.0</AssemblyVersion>
+    <AssemblyVersion>3.4.0.0</AssemblyVersion>
     <UserSecretsId>a745c317-cecd-4df8-877a-5f2fdd497e26</UserSecretsId>
   </PropertyGroup>
 
@@ -32,8 +32,6 @@
     <None Remove="Scripts\StoredProcedures\mart.ETL_DeleteSiteAuditFacts.sql" />
     <None Remove="Scripts\StoredProcedures\mart.ETL_LoadActions.sql" />
     <None Remove="Scripts\StoredProcedures\mart.ETL_LoadActionUpdates.sql" />
-    <None Remove="Scripts\StoredProcedures\mart.ETL_LoadAssetAssignmentFacts.sql" />
-    <None Remove="Scripts\StoredProcedures\mart.ETL_LoadAssetPropertyFacts.sql" />
     <None Remove="Scripts\StoredProcedures\mart.ETL_LoadAssets.sql" />
     <None Remove="Scripts\StoredProcedures\mart.ETL_LoadInductionCustomQuestionFact.sql" />
     <None Remove="Scripts\StoredProcedures\mart.ETL_LoadInductions.sql" />
@@ -129,6 +127,9 @@
     <EmbeddedResource Include="Scripts\Clean\DropStoredProcedures.sql" />
     <EmbeddedResource Include="Scripts\Schema\0001 - Common.sql" />
     <EmbeddedResource Include="Scripts\Schema\0011 - Rename FK constraints.sql" />
+    <EmbeddedResource Include="Scripts\Schema\0014 - Contacts.sql" />
+    <EmbeddedResource Include="Scripts\Schema\0015 - Audits.sql" />
+    <EmbeddedResource Include="Scripts\Schema\0013 - ReportedIssuesFix.sql" />
     <EmbeddedResource Include="Scripts\Schema\0012 - SafetyCards.sql" />
     <EmbeddedResource Include="Scripts\Schema\0010 - Location ExternalIdentifier.sql" />
     <EmbeddedResource Include="Scripts\Schema\0002 - CommonPatch.sql" />
@@ -139,6 +140,30 @@
     <EmbeddedResource Include="Scripts\Schema\0007 - Actions.sql" />
     <EmbeddedResource Include="Scripts\Schema\0008 - PermitsFix.sql" />
     <EmbeddedResource Include="Scripts\Schema\0009 - Assets.sql" />
+    <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_LoadAuditScoreTagFact.sql" />
+    <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_MaintainAuditScoreTagDimension.sql" />
+    <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_LoadAuditScoreSectionFact.sql" />
+    <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_MaintainAuditScoreSectionDimension.sql" />
+    <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_LoadAuditScoredResponseFact.sql" />
+    <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_MaintainGradingSetOptionDimension.sql" />
+    <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_MaintainAuditScoredResponseDimension.sql" />
+    <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_LoadAuditBranchOptionFact.sql" />
+    <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_MaintainAuditBranchOptionDimension.sql" />
+    <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_LoadAuditChecklistAnswerFact.sql" />
+    <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_MaintainAuditChecklistOptionDimension.sql" />
+    <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_LoadAuditDateTimeAnswerFact.sql" />
+    <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_MaintainAuditDateTimeQuestionDimension.sql" />
+    <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_LoadAuditNumericAnswerFact.sql" />
+    <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_MaintainAuditNumericQuestionDimension.sql" />
+    <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_DeleteAuditFacts.sql" />
+    <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_LoadAuditInspectedByFact.sql" />
+    <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_MaintainContactDimension.sql" />
+    <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_MaintainAuditGroupDimension.sql" />
+    <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_MaintainAuditDimension.sql" />
+    <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_MaintainAuditTypeDimension.sql" />
+    <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_PostProcessAudits.sql" />
+    <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_LoadAudits.sql" />
+    <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_ResetAudits.sql" />
     <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_PostProcessSiteAudits.sql" />
     <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_PostProcessActions.sql" />
     <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_PostProcessAssets.sql" />
@@ -150,10 +175,10 @@
     <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_MaintainSafetyCardCategoryDimension.sql" />
     <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_LoadSafetyCards.sql" />
     <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_ResetSafetyCards.sql" />
-    <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_LoadAssetAssignmentFacts.sql" />
+    <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_LoadAssetAssignmentFact.sql" />
     <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_MaintainAssetAssignmentDimension.sql" />
     <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_MaintainAssetPropertyDimension.sql" />
-    <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_LoadAssetPropertyFacts.sql" />
+    <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_LoadAssetPropertyFact.sql" />
     <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_DeleteAssetFacts.sql" />
     <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_MaintainAssetDimension.sql" />
     <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_LoadAssets.sql" />
@@ -204,6 +229,18 @@
     <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_ResetReportedIssues.sql" />
     <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_ResetSiteAudits.sql" />
     <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_UpdateLastSync.sql" />
+    <EmbeddedResource Include="Scripts\Types\mart.ETL_AuditScoreTagTable.sql" />
+    <EmbeddedResource Include="Scripts\Types\mart.ETL_AuditScoreSectionTable.sql" />
+    <EmbeddedResource Include="Scripts\Types\mart.ETL_GradingSetOptionTable.sql" />
+    <EmbeddedResource Include="Scripts\Types\mart.ETL_AuditScoredResponseTable.sql" />
+    <EmbeddedResource Include="Scripts\Types\mart.ETL_AuditBranchOptionTable.sql" />
+    <EmbeddedResource Include="Scripts\Types\mart.ETL_AuditChecklistAnswerTable.sql" />
+    <EmbeddedResource Include="Scripts\Types\mart.ETL_AuditDateTimeAnswerTable.sql" />
+    <EmbeddedResource Include="Scripts\Types\mart.ETL_AuditNumericAnswerTable.sql" />
+    <EmbeddedResource Include="Scripts\Types\mart.ETL_ContactTable.sql" />
+    <EmbeddedResource Include="Scripts\Types\mart.ETL_AuditInspectedByTable.sql" />
+    <EmbeddedResource Include="Scripts\Types\mart.ETL_AuditTable.sql" />
+    <EmbeddedResource Include="Scripts\Types\mart.ETL_AuditTypeTable.sql" />
     <EmbeddedResource Include="Scripts\Types\mart.ETL_SafetyCardTable.sql" />
     <EmbeddedResource Include="Scripts\Types\mart.ETL_SafetyCardCategoryTable.sql" />
     <EmbeddedResource Include="Scripts\Types\mart.ETL_AssetAssignmentTable.sql" />

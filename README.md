@@ -6,13 +6,13 @@ The [Work Wallet](https://www.work-wallet.com/) Health and Safety solution provi
 
 The datasets currently enabled for download are:
 
-* Site Audits
 * Reported Issues
 * Inductions
 * Permits
 * Actions
 * Assets
 * Safety Cards
+* Audits
 
 The API uses a combination of paging and change tracking to efficiently transfer data from the Work Wallet cloud to your local environment.
 
@@ -84,7 +84,9 @@ To integrate with the API directly (not recommended) see the documentation [here
 
 ## Binaries
 
-All binaries target [.NET 8.0](https://dotnet.microsoft.com/en-us/download/dotnet/8.0)
+All binaries target .NET 8.0
+
+Install the [.NET 8.0](https://dotnet.microsoft.com/en-us/download/dotnet/8.0) runtime (if not already present).
 
 Pre-built binaries can be downloaded from the [releases](https://github.com/work-wallet/BIClient/releases) section on GitHub.
 
@@ -126,7 +128,8 @@ Edit `appsettings.json` and enter the required settings:
 | ClientOptions | | ApiAccessClientSecret | |
 | ClientOptions | AgentWallets[] | WalletId | |
 | ClientOptions | AgentWallets[] | WalletSecret | |
-| ConnectionStrings | ClientDb | database connection string ||
+| ClientOptions | DataSets[] | | the data sets to process |
+| ConnectionStrings | ClientDb | | database connection string |
 
 *The application supports the processing multiple wallets by setting multiple entries in the `AgentWallets[]` array.*
 
@@ -213,6 +216,8 @@ If you have a [Power BI Pro licence](https://powerbi.microsoft.com/en-gb/power-b
 The sample Power BI Desktop project files can be found in the `PowerBISamples` folder.
 
 To use these files with your own data you need to connect to your local database and refresh the data.
+
+For convenience, the Power BI semantic models are available to peruse [here](Docs/PowerBISamplesModels.md).
 
 ### Connecting to the Database
 

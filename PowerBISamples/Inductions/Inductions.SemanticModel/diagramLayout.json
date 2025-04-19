@@ -94,7 +94,100 @@
         }
       ],
       "name": "All tables",
-      "zoomValue": 83,
+      "zoomValue": 85.974575149964124,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    },
+    {
+      "ordinal": 1,
+      "scrollPosition": {
+        "x": 0,
+        "y": 0
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 58,
+            "y": 626
+          },
+          "nodeIndex": "Induction",
+          "nodeLineageTag": "6e1a15d5-e594-42b4-bf1b-14886a90b2b5",
+          "size": {
+            "height": 399,
+            "width": 234
+          },
+          "zIndex": 1
+        },
+        {
+          "location": {
+            "x": 449,
+            "y": 476
+          },
+          "nodeIndex": "Taken By",
+          "nodeLineageTag": "d1c39eb9-26d7-4578-8a92-f5277ee0bc30",
+          "size": {
+            "height": 381,
+            "width": 234
+          },
+          "zIndex": 4
+        },
+        {
+          "location": {
+            "x": 449,
+            "y": 199
+          },
+          "nodeIndex": "Taken Status",
+          "nodeLineageTag": "2f658f03-ab11-43c9-af1e-06d19a216afd",
+          "size": {
+            "height": 152,
+            "width": 234
+          },
+          "zIndex": 6
+        },
+        {
+          "location": {
+            "x": 58,
+            "y": 354
+          },
+          "nodeIndex": "Induction Status",
+          "nodeLineageTag": "6f45f30e-0240-4cef-b7f1-b3acbfac9612",
+          "size": {
+            "height": 152,
+            "width": 234
+          },
+          "zIndex": 2
+        },
+        {
+          "location": {
+            "x": 816,
+            "y": 579
+          },
+          "nodeIndex": "Custom Question Fact",
+          "nodeLineageTag": "6c16818b-37c8-4bb1-a2d1-ac0aa04be04c",
+          "size": {
+            "height": 176,
+            "width": 234
+          },
+          "zIndex": 5
+        },
+        {
+          "location": {
+            "x": 816,
+            "y": 236
+          },
+          "nodeIndex": "Custom Question",
+          "nodeLineageTag": "2cde93b0-9f3a-47bd-ae2b-296e2fa527be",
+          "size": {
+            "height": 203,
+            "width": 234
+          },
+          "zIndex": 3
+        }
+      ],
+      "name": "Main",
+      "zoomValue": 100,
       "pinKeyFieldsToTop": false,
       "showExtraHeaderInfo": false,
       "hideKeyFieldsWhenCollapsed": false,

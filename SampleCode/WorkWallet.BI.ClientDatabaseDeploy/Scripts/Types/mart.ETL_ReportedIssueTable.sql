@@ -7,7 +7,7 @@ CREATE TYPE mart.ETL_ReportedIssueTable AS TABLE
     ,ReportedIssueReference nvarchar(50) NOT NULL
     ,OccurredOn datetime2(7) NOT NULL
     ,ReportedOn datetime2(7) NOT NULL
-    ,ReportedBy nvarchar(100) NOT NULL
+    ,ReportedBy nvarchar(max) NOT NULL
     ,ReportedIssueStatusCode int NOT NULL
     ,SubcategoryId uniqueidentifier NOT NULL
     ,CategoryVersion int NOT NULL

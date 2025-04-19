@@ -2,5 +2,5 @@
 
 public interface IProcessorService
 {
-    Task RunAsync();
+    Task RunAsync(CancellationToken cancellationToken = default);
 }

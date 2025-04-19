@@ -1,6 +1,10 @@
-﻿using IdentityModel.Client;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System.Net;
+using System.Web;
+using WorkWallet.BI.ClientCore.Exceptions;
 using WorkWallet.BI.ClientCore.Interfaces.Services;
 using WorkWallet.BI.ClientCore.Options;
 
@@ -9,79 +13,220 @@ namespace WorkWallet.BI.ClientServices.Processor;
 public class ProcessorService(
     ILogger<ProcessorService> logger,
     IOptions<ProcessorServiceOptions> serviceOptions,
-    IDataStoreService dataStore) : IProcessorService
+    HttpClient httpClient,
+    IDataStoreService dataStore,
+    IProgressService progressService) : IProcessorService
 {
     private readonly ProcessorServiceOptions _serviceOptions = serviceOptions.Value;
 
-    public async Task RunAsync()
+    private record WalletContext
     {
-        // obtain an OAuth access token for the client
-        // (the API is secured using OAuth client credentials AND a wallet secret passed to the API methods)
-         TokenResponse token = await GetAccessToken();
+        public Guid Id { get; set; }
+        public required string Name { get; set; }
+        public required string DataRegion { get; set; }
+    }
 
+    public async Task RunAsync(CancellationToken cancellationToken = default)
+    {
         // loop (supporting multiple wallets)
         foreach (var agentWallet in _serviceOptions.AgentWallets)
         {
-            logger.LogInformation("Processing for wallet {wallet}", agentWallet.WalletId);
+            cancellationToken.ThrowIfCancellationRequested();
 
-            var processorOptions = new ProcessorOptions
+            WalletContext walletContext = await GetWalletContextAsync(agentWallet.WalletId, cancellationToken);
+            logger.LogInformation("Start process for wallet {wallet}", agentWallet.WalletId);
+            progressService.WriteWallet(walletContext.Name.Trim(), walletContext.DataRegion);
+
+            // if no dataTypes are provided, then use all the ones that we know about
+            string[] dataSets = _serviceOptions.DataSets.Length > 0 ? _serviceOptions.DataSets : DataSets.Entries.Keys.ToArray();
+
+            // repeat for all the dataSets selected
+            foreach (string dataSet in dataSets)
             {
-                AccessToken = token.AccessToken!,
-                ApiUrl = _serviceOptions.AgentApiUrl,
-                WalletId = agentWallet.WalletId,
-                WalletSecret = agentWallet.WalletSecret,
-                PageSize = _serviceOptions.AgentPageSize
-            };
+                cancellationToken.ThrowIfCancellationRequested();
 
-            await ProcessAsync(processorOptions, "SiteAudits", "AUDIT_UPDATED");
-            await ProcessAsync(processorOptions, "ReportedIssues", "REPORTED_ISSUE_UPDATED");
-            await ProcessAsync(processorOptions, "Inductions", "INDUCTION_UPDATED");
-            await ProcessAsync(processorOptions, "Permits", "PERMIT_UPDATED");
-            await ProcessAsync(processorOptions, "Actions", "ACTION_UPDATED");
-            await ProcessAsync(processorOptions, "Assets", "ASSET_UPDATED");
-            await ProcessAsync(processorOptions, "SafetyCards", "SAFETY_CARD_UPDATED");
+                var entry = DataSets.Entries.FirstOrDefault(dt => dt.Key.Equals(dataSet, StringComparison.OrdinalIgnoreCase));
+
+                // the requested dataType is not in our lookup of expected types
+                if (entry.Equals(default(KeyValuePair<string, string>)))
+                {
+                    throw new UnsupportedDataTypeException(dataSet);
+                }
+
+                // process for this dataType
+                await ProcessAsync(walletContext, entry.Key, entry.Value, cancellationToken);
+            }
         }
     }
 
-    private async Task ProcessAsync(ProcessorOptions processorOptions, string dataType, string logType)
+    private async Task ProcessAsync(
+        WalletContext walletContext,
+        string dataType,
+        string logType,
+        CancellationToken cancellationToken = default)
     {
-        var processor = new Processor(
-            logger: logger,
-            options: processorOptions,
-            dataStore: dataStore,
-            dataType: dataType,
-            logType: logType);
+        logger.LogDebug("Processing {dataType} for wallet {wallet}", dataType, walletContext.Id);
 
-        await processor.Run();
+        // obtain our last database change tracking synchronization number (or null if this is the first sync)
+        long? lastSynchronizationVersion = await dataStore.GetLastSynchronizationVersionAsync(walletContext.Id, logType);
+
+        if (!lastSynchronizationVersion.HasValue)
+        {
+            // no last synchronization data, treat this as a reset and delete all data
+            await dataStore.ResetAsync(walletContext.Id, dataType);
+        }
+
+        int pageNumber = 0;
+        int totalPages;
+        Context context;
+
+        // we support data paging in order to be able to cope with large result sets
+        progressService.StartShowProgress(dataType, !lastSynchronizationVersion.HasValue);
+        do
+        {
+            cancellationToken.ThrowIfCancellationRequested();
+
+            ++pageNumber;
+
+            // call the Work Wallet API end point and obtain the results as JSON
+            string json = await CallApiAsync(
+                walletContext,
+                dataType,
+                lastSynchronizationVersion,
+                pageNumber,
+                cancellationToken);
+
+            progressService.ShowProgress();
+
+            try
+            {
+                // extract the context information (this is included at the top of the JSON)
+                var res = JObject.Parse(json);
+                context = res["Context"]!.ToObject<Context>()!;
+            }
+            catch (Exception ex)
+            {
+                throw new DeserializeResponseException(typeof(Context), ex.Message, walletContext.Id, dataType);
+            }
+
+            // check for errors
+            if (context.Error == "Invalid LastSynchronizationVersion")
+            {
+                throw new InvalidLastSynchronizationVersionException(lastSynchronizationVersion.Value, context.MinValidSynchronizationVersion, walletContext.Id, dataType);
+            }
+
+            if (context.Error.Length != 0)
+            {
+                throw new ApiErrorResponseException(context.Error, walletContext.Id, dataType);
+            }
+
+            // now we know how many rows there are in total, we can calculate the total number of pages we need to fetch
+            // note that we want to calculate this every iteration (in case server data has been added to)
+            totalPages = (context.FullCount - 1) / context.PageSize + 1;
+
+            logger.LogDebug("API for {DataType} returned JSON of length {Length}", dataType, json.Length);
+            logger.LogDebug("Count: {Count}", context.Count);
+            logger.LogDebug("FullCount: {FullCount}", context.FullCount);
+            logger.LogDebug("LastSynchronizationVersion: {LastSynchronizationVersion}", context.LastSynchronizationVersion);
+            logger.LogDebug("SynchronizationVersion: {SynchronizationVersion}", context.SynchronizationVersion);
+            logger.LogDebug("PageNumber: {PageNumber} / {totalPages}, PageSize: {PageSize}", context.PageNumber, totalPages, context.PageSize);
+
+            if (context.Count > 0)
+            {
+                cancellationToken.ThrowIfCancellationRequested();
+
+                // load into our local database (all the heavy lifting is done in the stored procedure)
+                await dataStore.LoadAsync(dataType, json);
+            }
+            else
+            {
+                logger.LogDebug($"No records to load");
+            }
+
+        } while (pageNumber < totalPages);
+        progressService.EndShowProgress(context.FullCount);
+
+        // update our change detection / logging table, so we only fetch new and changed data next time
+        // (must do this, even if no rows are obtained as lastSynchronizationVersion can otherwise become invalid)
+        await dataStore.UpdateLastSyncAsync(walletContext.Id, logType, context.SynchronizationVersion, context.FullCount);
+
+        if (context.FullCount > 0)
+        {
+            logger.LogDebug("A total of {FullCount} {DataType} records received.", context.FullCount, dataType);
+
+            // perform any post processing
+            await dataStore.PostProcessAsync(walletContext.Id, dataType);
+        }
+        else
+        {
+            logger.LogDebug("No {DataType} records received.", dataType);
+        }
     }
 
-    private async Task<TokenResponse> GetAccessToken()
+    private async Task<WalletContext> GetWalletContextAsync(Guid walletId, CancellationToken cancellationToken = default)
     {
-        // discover endpoints from metadata
-        var client = new HttpClient();
-        var disco = await client.GetDiscoveryDocumentAsync(_serviceOptions.ApiAccessAuthority);
-        if (disco.IsError)
+        var query = HttpUtility.ParseQueryString(string.Empty);
+
+        query["walletId"] = walletId.ToString();
+        query["walletSecret"] = GetSecretForWallet(walletId);
+
+        string url = $"wallet?{query}";
+
+        var response = await httpClient.GetAsync(url, cancellationToken);
+        if (!response.IsSuccessStatusCode)
         {
-            throw new ApplicationException($"Failed to get discovery document: {disco.Error}");
+            throw new WalletContextException(response.StatusCode, walletId);
         }
 
-        // request token
-        var tokenResponse = await client.RequestClientCredentialsTokenAsync(new ClientCredentialsTokenRequest
-        {
-            Address = disco.TokenEndpoint,
+        string content = await response.Content.ReadAsStringAsync(cancellationToken);
 
-            ClientId = _serviceOptions.ApiAccessClientId,
-            ClientSecret = _serviceOptions.ApiAccessClientSecret,
-            Scope = _serviceOptions.ApiAccessScope
-        });
+        // parse the JSON response
+        return JsonConvert.DeserializeObject<WalletContext>(content) ?? throw new DeserializeResponseException(typeof(WalletContext), walletId);
+    }
 
-        if (tokenResponse.IsError)
+    private async Task<string> CallApiAsync(
+        WalletContext walletContext,
+        string dataType,
+        long? lastSynchronizationVersion,
+        int pageNumber,
+        CancellationToken cancellationToken = default)
+    {
+        var query = HttpUtility.ParseQueryString(string.Empty);
+
+        query["walletId"] = walletContext.Id.ToString();
+        query["walletSecret"] = GetSecretForWallet(walletContext.Id);
+        query["pageNumber"] = pageNumber.ToString();
+        query["pageSize"] = _serviceOptions.AgentPageSize.ToString();
+
+        if (lastSynchronizationVersion.HasValue)
         {
-            throw new ApplicationException($"Failed to get token: {tokenResponse.Error}");
+            query["lastSynchronizationVersion"] = (lastSynchronizationVersion.Value).ToString();
         }
 
-        logger.LogInformation("API access token obtained from {ApiAccessAuthority} for client {ApiAccessClientId}", _serviceOptions.ApiAccessAuthority, _serviceOptions.ApiAccessClientId);
+        string url = $"dataextract/{dataType}?{query}";
 
-        return tokenResponse;
+        var request = new HttpRequestMessage(HttpMethod.Get, url);
+        request.Headers.Add("DataRegion", walletContext.DataRegion);
+
+        var response = await httpClient.SendAsync(request, cancellationToken);
+        if (!response.IsSuccessStatusCode)
+        {
+            if (response.StatusCode == HttpStatusCode.BadRequest &&                
+                string.Equals(await response.Content.ReadAsStringAsync(cancellationToken), "Incorrect data region", StringComparison.OrdinalIgnoreCase))
+            {
+                throw new IncorrectDataRegionException(walletContext.DataRegion, walletContext.Id, dataType);
+            }
+            else
+            {
+                throw new ApiException(response.StatusCode, walletContext.Id, dataType);
+            }
+        }
+
+        return await response.Content.ReadAsStringAsync(cancellationToken);
+    }
+
+    private string GetSecretForWallet(Guid walletId)
+    {
+        return _serviceOptions.AgentWallets.Single(w => w.WalletId == walletId).WalletSecret;
     }
 }

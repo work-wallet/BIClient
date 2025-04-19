@@ -3,6 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using WorkWallet.BI.ClientCore.Interfaces.Services;
 using WorkWallet.BI.ClientCore.Options;
+using WorkWallet.BI.ClientSample.Services;
 using WorkWallet.BI.ClientServices;
 
 try
@@ -16,18 +17,43 @@ try
                 .AddSQLService(options =>
                 {
                     options.SqlDbConnectionString = context.Configuration.GetConnectionString("ClientDb")!;
-                });
+                })
+                .AddSingleton<IProgressService, ProgressService>();
         })
         .Build();
 
     IServiceProvider serviceProvider = host.Services;
 
-    await serviceProvider.GetRequiredService<IProcessorService>().RunAsync();
+    Console.WriteLine("Press ESC to cancel . . .");
+    var tokenSource = new CancellationTokenSource();
+
+    // create a task to listen to keyboard key presses
+    var keyBoardTask = Task.Run(() =>
+    {
+        var key = Console.ReadKey(true);
+        if (key.Key == ConsoleKey.Escape)
+        {
+            tokenSource.Cancel();
+        }
+    });
+
+    await serviceProvider.GetRequiredService<IProcessorService>().RunAsync(tokenSource.Token);
 
     return 0;
 }
+catch (OperationCanceledException)
+{
+    Console.WriteLine();
+    Console.ForegroundColor = ConsoleColor.DarkYellow;
+    Console.WriteLine("Cancelled");
+    Console.ResetColor();
+    return 2;
+}
 catch (Exception ex)
 {
+    Console.WriteLine();
+    Console.ForegroundColor = ConsoleColor.Red;
     Console.WriteLine($"Error: {ex.Message}");
+    Console.ResetColor();
     return 1;
 }

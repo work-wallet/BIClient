@@ -100,13 +100,106 @@
         }
       ],
       "name": "All tables",
-      "zoomValue": 89.697437883892789,
+      "zoomValue": 100,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    },
+    {
+      "ordinal": 1,
+      "scrollPosition": {
+        "x": 0,
+        "y": 1
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 384,
+            "y": 252
+          },
+          "nodeIndex": "Safety Card",
+          "nodeLineageTag": "53255aa4-be37-4d64-b53e-1b27126e4ad1",
+          "size": {
+            "height": 580,
+            "width": 234
+          },
+          "zIndex": 3
+        },
+        {
+          "location": {
+            "x": 0,
+            "y": 386
+          },
+          "nodeIndex": "Location",
+          "nodeLineageTag": "187194fd-4417-4e1b-955b-f5ceb409025f",
+          "size": {
+            "height": 628,
+            "width": 234
+          },
+          "zIndex": 2
+        },
+        {
+          "location": {
+            "x": 217,
+            "y": 60
+          },
+          "nodeIndex": "Status",
+          "nodeLineageTag": "84425ed7-13f5-4c96-83b9-b4fd8e59bc9d",
+          "size": {
+            "height": 152,
+            "width": 234
+          },
+          "zIndex": 1
+        },
+        {
+          "location": {
+            "x": 575,
+            "y": 60
+          },
+          "nodeIndex": "Type",
+          "nodeLineageTag": "11f39b7f-717b-4c60-8580-56918dd88a5c",
+          "size": {
+            "height": 152,
+            "width": 234
+          },
+          "zIndex": 4
+        },
+        {
+          "location": {
+            "x": 749,
+            "y": 755
+          },
+          "nodeIndex": "Category",
+          "nodeLineageTag": "33416e20-5919-4d5b-b859-9f313e8f5f3a",
+          "size": {
+            "height": 236,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 732,
+            "y": 284
+          },
+          "nodeIndex": "Occupation Role",
+          "nodeLineageTag": "872828d3-e36a-4f6e-9c46-e18a28b223b9",
+          "size": {
+            "height": 152,
+            "width": 269
+          },
+          "zIndex": 0
+        }
+      ],
+      "name": "Main",
+      "zoomValue": 100,
       "pinKeyFieldsToTop": false,
       "showExtraHeaderInfo": false,
       "hideKeyFieldsWhenCollapsed": false,
       "tablesLocked": false
     }
   ],
-  "selectedDiagram": "All tables",
+  "selectedDiagram": "Main",
   "defaultDiagram": "All tables"
 }
