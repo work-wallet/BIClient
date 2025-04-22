@@ -5,7 +5,7 @@ CREATE TYPE mart.ETL_AuditScoreSectionTable AS TABLE
 (
     AuditId uniqueidentifier NOT NULL
     ,SectionId uniqueidentifier NOT NULL
-    ,Section nvarchar(100) NOT NULL
+    ,Section nvarchar(250) NOT NULL
     ,DisplayScore bit NOT NULL
     ,[Order] int NOT NULL
     ,TotalScore int NOT NULL

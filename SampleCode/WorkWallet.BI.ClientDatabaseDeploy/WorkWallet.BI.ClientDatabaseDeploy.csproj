@@ -128,6 +128,7 @@
     <EmbeddedResource Include="Scripts\Schema\0001 - Common.sql" />
     <EmbeddedResource Include="Scripts\Schema\0011 - Rename FK constraints.sql" />
     <EmbeddedResource Include="Scripts\Schema\0014 - Contacts.sql" />
+    <EmbeddedResource Include="Scripts\Schema\0016 - AuditsPatch.sql" />
     <EmbeddedResource Include="Scripts\Schema\0015 - Audits.sql" />
     <EmbeddedResource Include="Scripts\Schema\0013 - ReportedIssuesFix.sql" />
     <EmbeddedResource Include="Scripts\Schema\0012 - SafetyCards.sql" />
