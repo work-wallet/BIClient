@@ -431,7 +431,7 @@ BEGIN
         (
             AuditId uniqueidentifier
             ,SectionId uniqueidentifier
-            ,Section nvarchar(100)
+            ,Section nvarchar(250)
             ,DisplayScore bit
             ,[Order] int
             ,TotalScore int

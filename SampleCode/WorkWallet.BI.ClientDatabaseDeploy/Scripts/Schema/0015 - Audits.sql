@@ -327,7 +327,7 @@ CREATE TABLE mart.AuditScoreSection
     AuditScoreSection_key int IDENTITY
     ,AuditType_key int NOT NULL          /* business key */
     ,SectionId uniqueidentifier NOT NULL /* business key */
-    ,Section nvarchar(100) NOT NULL
+    ,Section nvarchar(250) NOT NULL
     ,DisplayScore bit NOT NULL
     ,[Order] int NOT NULL
     ,Wallet_key int NOT NULL
