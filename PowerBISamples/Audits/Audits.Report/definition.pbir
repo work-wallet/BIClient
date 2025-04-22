@@ -3,7 +3,6 @@
   "datasetReference": {
     "byPath": {
       "path": "../Audits.SemanticModel"
-    },
-    "byConnection": null
+    }
   }
 }
