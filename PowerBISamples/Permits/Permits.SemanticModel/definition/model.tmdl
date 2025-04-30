@@ -1,0 +1,30 @@
+model Model
+	culture: en-GB
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-GB
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation PBI_QueryOrder = ["Location","Permit","Category","Checklist Answer","Checklist Answer Fact","Status","Wallet"]
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBIDesktopVersion = 2.142.928.0 (25.04)+de52df9f0bb74ad93a80d89c52d63fe6d07e0e1b
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table Location
+ref table DateTableTemplate_242da05f-93b6-4a6a-bd65-a9445b21c8de
+ref table Permit
+ref table LocalDateTable_55b7fdf5-ca9f-42af-a60a-4aef862a76d8
+ref table LocalDateTable_1849e61a-88cf-4015-aad3-d07751c2d5c7
+ref table LocalDateTable_5994158e-734d-437f-b126-414813922861
+ref table Category
+ref table 'Checklist Answer'
+ref table 'Checklist Answer Fact'
+ref table Status
+ref table Wallet
+
+ref cultureInfo en-GB
+

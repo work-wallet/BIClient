@@ -1,0 +1,59 @@
+table Property
+	lineageTag: dcb8f146-d342-4136-9533-da977752de34
+
+	column AssetProperty_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 7d81514a-403b-4b33-b332-0c1557d91b86
+		summarizeBy: none
+		sourceColumn: AssetProperty_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column AssetPropertyType_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 3eff2e35-1e44-43fb-be5d-09bf956b4316
+		summarizeBy: none
+		sourceColumn: AssetPropertyType_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Property
+		dataType: string
+		lineageTag: 07dae0b3-a9c1-483d-a60d-496273a91a75
+		summarizeBy: none
+		sourceColumn: Property
+
+		annotation SummarizationSetBy = Automatic
+
+	column Wallet_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 206277c4-31ab-4ec6-b33f-1674c61ba350
+		summarizeBy: none
+		sourceColumn: Wallet_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	partition Property = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("ww-powerbi-demo.database.windows.net", "powerbi"),
+				    mart_AssetProperty = Source{[Schema="mart",Item="AssetProperty"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(mart_AssetProperty,{"_created"})
+				in
+				    #"Removed Columns"
+
+	annotation PBI_ResultType = Table
+

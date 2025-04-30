@@ -1,0 +1,80 @@
+table 'Root Cause Analysis Fact'
+	lineageTag: 76f05306-b9e1-48e0-9b96-d27d0e8a729f
+
+	column ReportedIssue_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 8e87c89c-3237-4b79-a5d0-a11bfd1476d2
+		summarizeBy: none
+		sourceColumn: ReportedIssue_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column ReportedIssueRootCauseAnalysisType_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: e0b9c332-17df-4207-b333-1b6451518b64
+		summarizeBy: none
+		sourceColumn: ReportedIssueRootCauseAnalysisType_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Root Cause Analysis'
+		dataType: string
+		lineageTag: 3927ccda-cd37-4982-9ca8-02f11f9ebee2
+		summarizeBy: none
+		sourceColumn: Root Cause Analysis
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Root Cause Analysis Description'
+		dataType: string
+		lineageTag: 9016c571-d4c0-471f-998c-30637dcad58d
+		summarizeBy: none
+		sourceColumn: Root Cause Analysis Description
+
+		annotation SummarizationSetBy = Automatic
+
+	column RootCauseAnalysisOrder
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 7a7c99f2-052c-4a46-adc0-bcb977ed3507
+		summarizeBy: none
+		sourceColumn: RootCauseAnalysisOrder
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column Wallet_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 35b36c58-2452-470a-9589-426de90121b8
+		summarizeBy: none
+		sourceColumn: Wallet_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	partition 'Root Cause Analysis Fact-ee34e466-3a96-40dd-a9fd-236f1a7373d7' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("ww-powerbi-demo.database.windows.net", "powerbi"),
+				    mart_ReportedIssueRootCauseAnalysisFact = Source{[Schema="mart",Item="ReportedIssueRootCauseAnalysisFact"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(mart_ReportedIssueRootCauseAnalysisFact,{"_created", "_edited"}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"RootCauseAnalysis", "Root Cause Analysis"}, {"RootCauseAnalysisDescription", "Root Cause Analysis Description"}})
+				in
+				    #"Renamed Columns"
+
+	annotation PBI_ResultType = Table
+

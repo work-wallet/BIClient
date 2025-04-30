@@ -1,0 +1,118 @@
+table Category
+	lineageTag: a2fc9b1a-1124-40de-af15-ffdc00e364c9
+
+	column ReportedIssueCategory_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: a7c7137e-b36b-4a8c-a250-a8e1492f7891
+		summarizeBy: none
+		sourceColumn: ReportedIssueCategory_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column SubcategoryId
+		dataType: string
+		isHidden
+		lineageTag: 8f897411-a65b-4f9d-98e4-7cbae704da90
+		summarizeBy: none
+		sourceColumn: SubcategoryId
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column CategoryVersion
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 74c39c10-145f-4f98-8170-63eeae3871ea
+		summarizeBy: none
+		sourceColumn: CategoryVersion
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column Category
+		dataType: string
+		lineageTag: 76d83bab-ce72-4f5f-8215-9b246e361eeb
+		summarizeBy: none
+		sourceColumn: Category
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Category Description'
+		dataType: string
+		lineageTag: be1962ae-b52c-4284-a189-bcf79de008df
+		summarizeBy: none
+		sourceColumn: Category Description
+
+		annotation SummarizationSetBy = Automatic
+
+	column Subcategory
+		dataType: string
+		lineageTag: 5f5459e3-28e4-4ab6-8091-0ec643ce1e44
+		summarizeBy: none
+		sourceColumn: Subcategory
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Subcategory Description'
+		dataType: string
+		lineageTag: bf568196-3efe-4578-8102-a05d60625988
+		summarizeBy: none
+		sourceColumn: Subcategory Description
+
+		annotation SummarizationSetBy = Automatic
+
+	column SubcategoryOrder
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: d97a106c-459a-47fe-9196-412c28b4073d
+		summarizeBy: none
+		sourceColumn: SubcategoryOrder
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column Wallet_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: cfc10424-fa9c-46a2-9c39-1b1c42c76e73
+		summarizeBy: none
+		sourceColumn: Wallet_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	hierarchy 'Category Hierarchy'
+		lineageTag: dd5d79f6-6816-4ed6-8c68-68453346109f
+
+		level Category
+			lineageTag: 3278e777-b39f-435e-872b-19638954ecbb
+			column: Category
+
+		level Subcategory
+			lineageTag: 056d46a1-41ab-426d-86a0-71e9e8614a92
+			column: Subcategory
+
+	partition Category-18f48a66-b762-471a-b8ef-a8af5e6650c5 = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("ww-powerbi-demo.database.windows.net", "powerbi"),
+				    mart_ReportedIssueCategory = Source{[Schema="mart",Item="ReportedIssueCategory"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(mart_ReportedIssueCategory,{"_created", "_edited"}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"CategoryName", "Category"}, {"CategoryDescription", "Category Description"}, {"SubcategoryName", "Subcategory"}, {"SubcategoryDescription", "Subcategory Description"}})
+				in
+				    #"Renamed Columns"
+
+	annotation PBI_ResultType = Table
+

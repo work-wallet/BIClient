@@ -1,0 +1,51 @@
+model Model
+	culture: en-GB
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-GB
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation PBIDesktopVersion = 2.142.928.0 (25.04)+de52df9f0bb74ad93a80d89c52d63fe6d07e0e1b
+
+annotation PBI_QueryOrder = ["Location","Wallet","Audit","Branch Option","Branch Option Fact","Checklist Answer Fact","Checklist Option","Date Time Answer Fact","Date Time Question","Grading Set Option","Audit Group","Inspected By Fact","Numeric Answer Fact","Numeric Question","Scored Response","Scored Response Fact","Score Section","Score Section Fact","Score Tag","Score Tag Fact","Audit Status","Audit Type","Contact","Unit","Audit Grading Set Option","Score Tag Grading Set Option","Score Section Grading Set Option","Scored Response Grading Set Option"]
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table Location
+ref table Wallet
+ref table Audit
+ref table DateTableTemplate_ceb8e268-435b-4c30-9e5d-524e53bcc032
+ref table LocalDateTable_7ce7b00e-94c4-470d-90cb-c5a5a678fcc4
+ref table 'Branch Option'
+ref table 'Branch Option Fact'
+ref table 'Checklist Answer Fact'
+ref table 'Checklist Option'
+ref table 'Date Time Answer Fact'
+ref table LocalDateTable_7ef8035e-357b-4b15-b518-4c8691a6c936
+ref table LocalDateTable_c4db13f9-0b56-4937-94a5-cbc70a59eb25
+ref table 'Date Time Question'
+ref table 'Grading Set Option'
+ref table 'Audit Group'
+ref table 'Inspected By Fact'
+ref table 'Numeric Answer Fact'
+ref table 'Numeric Question'
+ref table 'Scored Response'
+ref table 'Scored Response Fact'
+ref table 'Score Section'
+ref table 'Score Section Fact'
+ref table 'Score Tag'
+ref table 'Score Tag Fact'
+ref table 'Audit Status'
+ref table 'Audit Type'
+ref table Contact
+ref table Unit
+ref table 'Audit Grading Set Option'
+ref table 'Score Tag Grading Set Option'
+ref table 'Score Section Grading Set Option'
+ref table 'Scored Response Grading Set Option'
+
+ref cultureInfo en-GB
+

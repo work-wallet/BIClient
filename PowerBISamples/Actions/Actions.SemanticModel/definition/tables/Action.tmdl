@@ -1,0 +1,176 @@
+table Action
+	lineageTag: 12176f96-9cf3-4217-974c-5a09a67864cc
+
+	column Action_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: f18a0410-821f-4694-b6b9-eb7bad3c6a2e
+		summarizeBy: none
+		sourceColumn: Action_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column ActionId
+		dataType: string
+		isHidden
+		lineageTag: ed2d2fac-c93d-4879-9d62-4894de3318ed
+		summarizeBy: none
+		sourceColumn: ActionId
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column ActionType_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: d0d4932d-8b52-4e4f-bb6b-ddf2aa99c36e
+		summarizeBy: none
+		sourceColumn: ActionType_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column TargetId
+		dataType: string
+		isHidden
+		lineageTag: 30b74cef-0ba7-4a2f-ad39-7f62e4da78a5
+		summarizeBy: none
+		sourceColumn: TargetId
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Target Reference'
+		dataType: string
+		lineageTag: dd11b738-360a-481d-8b91-dade105630d9
+		summarizeBy: none
+		sourceColumn: Target Reference
+
+		annotation SummarizationSetBy = Automatic
+
+	column Title
+		dataType: string
+		lineageTag: 95a49552-7ae5-4f05-b169-99f1ab813449
+		summarizeBy: none
+		sourceColumn: Title
+
+		annotation SummarizationSetBy = Automatic
+
+	column Description
+		dataType: string
+		lineageTag: 051fcc7a-4098-4ca3-87e4-b8105699e95a
+		summarizeBy: none
+		sourceColumn: Description
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Assigned To'
+		dataType: string
+		lineageTag: bd0ed0dc-3cee-4066-a420-507b0aacd3d9
+		summarizeBy: none
+		sourceColumn: Assigned To
+
+		annotation SummarizationSetBy = Automatic
+
+	column ActionPriority_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 46658ab3-c126-4b19-bf8d-b890786efc02
+		summarizeBy: none
+		sourceColumn: ActionPriority_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Due On'
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: 31b505e6-1007-4021-b14c-dfa9e57120d8
+		summarizeBy: none
+		sourceColumn: Due On
+
+		variation Variation
+			isDefault
+			relationship: a664852e-57b3-4471-8280-e32f09bd7a85
+			defaultHierarchy: LocalDateTable_1a68d81b-af39-45d7-9ca1-d622f61db5ef.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column ActionStatus_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 04ad6614-01fd-4101-b096-e4f619ee9442
+		summarizeBy: none
+		sourceColumn: ActionStatus_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Deleted
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 57ce35b3-d3eb-48ae-b850-f5f0d130b951
+		summarizeBy: none
+		sourceColumn: Deleted
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Created On'
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: 2628d251-a6dc-49c3-a177-0504ccad9d6f
+		summarizeBy: none
+		sourceColumn: Created On
+
+		variation Variation
+			isDefault
+			relationship: 6b9ef040-d7fd-44f5-82e3-c4c32931516a
+			defaultHierarchy: LocalDateTable_63dc6543-5454-4316-966c-21e8d90c28e3.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column Wallet_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 3dcd8984-7681-48ef-bdf1-9dd4e4c7f190
+		summarizeBy: none
+		sourceColumn: Wallet_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Action Count' = 1
+		formatString: 0
+		lineageTag: 76ba0474-5f14-4771-9d9f-5ffac9f9f3a7
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Action = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("ww-powerbi-demo.database.windows.net", "powerbi"),
+				    mart_Action = Source{[Schema="mart",Item="Action"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(mart_Action,{"_created", "_edited"}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"TargetReference", "Target Reference"}, {"AssignedTo", "Assigned To"}, {"DueOn", "Due On"}, {"CreatedOn", "Created On"}})
+				in
+				    #"Renamed Columns"
+
+	annotation PBI_ResultType = Table
+

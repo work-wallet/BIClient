@@ -1,0 +1,119 @@
+table 'Action Update'
+	lineageTag: 42e497ec-68cb-424a-ba56-053747a9e19b
+
+	column ActionUpdate_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 94c6ad5e-bb60-4c3a-b087-58009d49c9fd
+		summarizeBy: none
+		sourceColumn: ActionUpdate_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column ActionUpdateId
+		dataType: string
+		isHidden
+		lineageTag: 5dd2d25c-f416-4cde-8d49-90292a1056f1
+		summarizeBy: none
+		sourceColumn: ActionUpdateId
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Action_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: ca9da6cf-b3c6-46ce-ba6d-db9de31efef0
+		summarizeBy: none
+		sourceColumn: Action_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Comments
+		dataType: string
+		lineageTag: 6de24ce6-3038-4477-9605-fead22f456ef
+		summarizeBy: none
+		sourceColumn: Comments
+
+		annotation SummarizationSetBy = Automatic
+
+	column ActionStatus_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: c4156a3e-ae04-4a0a-a6a9-a7f6a8a854b4
+		summarizeBy: none
+		sourceColumn: ActionStatus_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column Deleted
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 9d678539-1f44-4cb9-9295-3c6bb0a9e5c6
+		summarizeBy: none
+		sourceColumn: Deleted
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Created On'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 3b7b3854-186d-4fbb-8924-d10d11fe8274
+		summarizeBy: none
+		sourceColumn: Created On
+
+		variation Variation
+			isDefault
+			relationship: f32b18bd-d9b9-4998-86d0-459de9df78f1
+			defaultHierarchy: LocalDateTable_b400b2e2-7e47-4c0d-b8da-bd1adbaec555.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column Wallet_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 0007926f-cda9-4373-9a79-42181eec00a4
+		summarizeBy: none
+		sourceColumn: Wallet_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column 'Action Update Status' = LOOKUPVALUE('Status'[Status], 'Status'[ActionStatus_key], [ActionStatus_key])
+		lineageTag: 50cd175f-0197-4434-9b8c-b9ea208d99f3
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Action Update Count' = 1
+		formatString: 0
+		lineageTag: e446f09e-4c55-4169-b95e-39dfcf58ee39
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Action Update' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("ww-powerbi-demo.database.windows.net", "powerbi"),
+				    mart_ActionUpdate = Source{[Schema="mart",Item="ActionUpdate"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(mart_ActionUpdate,{"_created", "_edited"}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"CreatedOn", "Created On"}})
+				in
+				    #"Renamed Columns"
+
+	annotation PBI_ResultType = Table
+

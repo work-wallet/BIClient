@@ -1,0 +1,51 @@
+table Status
+	lineageTag: cd77312c-4b90-480e-b98e-f76961760deb
+
+	column ReportedIssueStatus_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 19ef13ee-b875-485e-bf54-410dbb61ce3a
+		summarizeBy: none
+		sourceColumn: ReportedIssueStatus_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column ReportedIssueStatusCode
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: aa5075b1-a0d5-49b0-8a20-29bac05149e2
+		summarizeBy: none
+		sourceColumn: ReportedIssueStatusCode
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column Status
+		dataType: string
+		lineageTag: be93921f-7d03-4726-bc1d-0998b89d733e
+		summarizeBy: none
+		sourceColumn: Status
+		sortByColumn: ReportedIssueStatusCode
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Status-22486212-dc18-4e50-a222-d04853e8706d = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("ww-powerbi-demo.database.windows.net", "powerbi"),
+				    mart_ReportedIssueStatus = Source{[Schema="mart",Item="ReportedIssueStatus"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(mart_ReportedIssueStatus,{"_created", "_edited"}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"ReportedIssueStatus", "Status"}})
+				in
+				    #"Renamed Columns"
+
+	annotation PBI_ResultType = Table
+

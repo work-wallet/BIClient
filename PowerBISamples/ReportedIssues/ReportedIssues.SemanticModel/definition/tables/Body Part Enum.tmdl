@@ -1,0 +1,67 @@
+table 'Body Part Enum'
+	lineageTag: 86dab753-cb05-4c89-85ea-c5a922cff69c
+
+	column ReportedIssueBodyPartEnum_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: e733526e-15c8-49df-9a6b-7ba93e490a95
+		summarizeBy: none
+		sourceColumn: ReportedIssueBodyPartEnum_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column MaskIndex
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: a42a23ad-c1e1-467f-81dd-4ce3bcafe527
+		summarizeBy: none
+		sourceColumn: MaskIndex
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column 'Body Part Group'
+		dataType: string
+		lineageTag: b5149fa2-7c10-4234-8be6-de6db44645bb
+		summarizeBy: none
+		sourceColumn: Body Part Group
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Body Part'
+		dataType: string
+		lineageTag: 7af46f2b-232b-48c8-a294-4af24b04a34e
+		summarizeBy: none
+		sourceColumn: Body Part
+
+		annotation SummarizationSetBy = Automatic
+
+	hierarchy 'Body Part Hierarchy'
+		lineageTag: eb3cbc54-64cc-44a8-9c66-644ed0d57aa0
+
+		level 'Body Part Group'
+			lineageTag: 3ba3f0c1-2052-41e2-ba33-cb3c7153f51f
+			column: 'Body Part Group'
+
+		level 'Body Part'
+			lineageTag: 127f9c8d-c309-4735-ad34-bef2f5544594
+			column: 'Body Part'
+
+	partition 'Body Part Enum-efba4a4e-9fe1-49c5-875f-c0979b633a99' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("ww-powerbi-demo.database.windows.net", "powerbi"),
+				    mart_ReportedIssueBodyPartEnum = Source{[Schema="mart",Item="ReportedIssueBodyPartEnum"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(mart_ReportedIssueBodyPartEnum,{"_created", "_edited"}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"BodyPart", "Body Part"}, {"Group", "Body Part Group"}})
+				in
+				    #"Renamed Columns"
+
+	annotation PBI_ResultType = Table
+

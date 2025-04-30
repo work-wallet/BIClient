@@ -1,0 +1,51 @@
+table Priority
+	lineageTag: 4032f1a5-adc4-433d-921e-96584b1b539b
+
+	column ActionPriority_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 20d86bc5-1a6e-4c84-b4d4-53720fa6f3fa
+		summarizeBy: none
+		sourceColumn: ActionPriority_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column ActionPriorityCode
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: e1532216-de21-4783-8c1e-9c36297d9698
+		summarizeBy: none
+		sourceColumn: ActionPriorityCode
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column Priority
+		dataType: string
+		lineageTag: 629e37ca-462e-422b-9685-5efcddfc61a9
+		summarizeBy: none
+		sourceColumn: Priority
+		sortByColumn: ActionPriorityCode
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Priority = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("ww-powerbi-demo.database.windows.net", "powerbi"),
+				    mart_ActionPriority = Source{[Schema="mart",Item="ActionPriority"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(mart_ActionPriority,{"_created", "_edited"}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"ActionPriority", "Priority"}})
+				in
+				    #"Renamed Columns"
+
+	annotation PBI_ResultType = Table
+

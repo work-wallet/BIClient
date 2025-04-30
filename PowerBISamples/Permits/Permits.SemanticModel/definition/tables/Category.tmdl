@@ -1,0 +1,137 @@
+table Category
+	lineageTag: 498cce36-5b20-4208-8af4-b281b0679e69
+
+	column PermitCategory_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 167a3681-19db-4362-bbbc-f38f5ca3f4e1
+		summarizeBy: none
+		sourceColumn: PermitCategory_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column CategoryId
+		dataType: string
+		isHidden
+		lineageTag: 6ad6accc-cbac-421a-a36d-3c6c11cf4a20
+		summarizeBy: none
+		sourceColumn: CategoryId
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Category Version'
+		dataType: int64
+		formatString: 0
+		lineageTag: d56f1c81-fb3f-4e90-a871-5870759031bb
+		summarizeBy: none
+		sourceColumn: Category Version
+
+		annotation SummarizationSetBy = User
+
+	column Category
+		dataType: string
+		lineageTag: 764a33f7-f350-4532-9c1e-24578265b9df
+		summarizeBy: none
+		sourceColumn: Category
+
+		annotation SummarizationSetBy = Automatic
+
+	column ExpiryTypeId
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 82bc81c9-1342-480a-95c6-b85b942edca1
+		summarizeBy: none
+		sourceColumn: ExpiryTypeId
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column Expiry
+		dataType: string
+		lineageTag: 99624833-1dc3-464e-aa4f-d891ea899bd2
+		summarizeBy: none
+		sourceColumn: Expiry
+
+		annotation SummarizationSetBy = Automatic
+
+	column ValidityPeriodId
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: ad6eef96-694f-424b-9ec9-de0e192fac12
+		summarizeBy: none
+		sourceColumn: ValidityPeriodId
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column 'Validity Period'
+		dataType: string
+		lineageTag: 5efce011-b23b-4d4f-8a43-470b89a7db35
+		summarizeBy: none
+		sourceColumn: Validity Period
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Validity Period Minutes'
+		dataType: int64
+		formatString: 0
+		lineageTag: 41864bdb-d986-4634-a320-68114ec57639
+		summarizeBy: none
+		sourceColumn: Validity Period Minutes
+
+		annotation SummarizationSetBy = User
+
+	column IssueTypeId
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: a7e02013-c868-48fe-ba69-0c567eb98438
+		summarizeBy: none
+		sourceColumn: IssueTypeId
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column 'Issue Type'
+		dataType: string
+		lineageTag: dd964dcc-4da0-4b1c-929e-d15d9ea3b45a
+		summarizeBy: none
+		sourceColumn: Issue Type
+
+		annotation SummarizationSetBy = Automatic
+
+	column Wallet_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 54d85fa4-285e-4516-b42c-ff3a567fe4fd
+		summarizeBy: none
+		sourceColumn: Wallet_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	partition Category = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("ww-powerbi-demo.database.windows.net", "powerbi"),
+				    mart_PermitCategory = Source{[Schema="mart",Item="PermitCategory"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(mart_PermitCategory,{"_created", "_edited"}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"CategoryVersion", "Category Version"}, {"CategoryName", "Category"}, {"ExpiryType", "Expiry"}, {"ValidityPeriod", "Validity Period"}, {"ValidityPeriodMinutes", "Validity Period Minutes"}, {"IssueType", "Issue Type"}})
+				in
+				    #"Renamed Columns"
+
+	annotation PBI_ResultType = Table
+

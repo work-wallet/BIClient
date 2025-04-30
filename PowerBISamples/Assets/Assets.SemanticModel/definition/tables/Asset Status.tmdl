@@ -1,0 +1,48 @@
+table 'Asset Status'
+	lineageTag: 36224508-1e80-4ff9-a562-7a442a8360d9
+
+	column AssetStatus_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 9d9c11e9-715c-4dc0-a262-612bcf2a59ab
+		summarizeBy: none
+		sourceColumn: AssetStatus_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column AssetStatusCode
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 88c277a9-1e4c-4cbe-9c63-32c30eed6596
+		summarizeBy: none
+		sourceColumn: AssetStatusCode
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column 'Asset Status'
+		dataType: string
+		lineageTag: bd4c877e-9b69-4926-b077-458a8bfb9bd8
+		summarizeBy: none
+		sourceColumn: Asset Status
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Asset Status' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("ww-powerbi-demo.database.windows.net", "powerbi"),
+				    mart_AssetStatus = Source{[Schema="mart",Item="AssetStatus"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(mart_AssetStatus,{"_created", "_edited"}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"AssetStatus", "Asset Status"}})
+				in
+				    #"Renamed Columns"
+
+	annotation PBI_ResultType = Table
+

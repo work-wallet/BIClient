@@ -1,0 +1,73 @@
+table 'Option Select Fact'
+	lineageTag: 73dc840d-58e9-41bf-bfb2-f6d8b50bccae
+
+	column ReportedIssue_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 80d36808-4c04-4f53-a351-45f0348d2b3b
+		summarizeBy: none
+		sourceColumn: ReportedIssue_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column ReportedIssueOptionSelect_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 0b6d1ae2-4675-4823-9094-73e3700ee23b
+		summarizeBy: none
+		sourceColumn: ReportedIssueOptionSelect_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column Wallet_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 050a536e-ca4a-4a55-8f2b-19656b0db5db
+		summarizeBy: none
+		sourceColumn: Wallet_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column 'Option Select Count' = 1
+		formatString: 0
+		lineageTag: 80e2e232-24ba-4a42-a85c-b0f7ad068cd5
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column Investigation
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: fd2f42d4-985b-4b87-a63e-cf32566feb33
+		summarizeBy: none
+		sourceColumn: Investigation
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Workflow Stage (Option Select)' = IF('Option Select Fact'[Investigation], "Investigation Stage", "Reporting Stage")
+		lineageTag: c4ff49ce-8bb4-4757-8773-9a73251a094f
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Option Select Fact-14ef56d5-1bcd-4242-b19f-b723f15e9488' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("ww-powerbi-demo.database.windows.net", "powerbi"),
+				    mart_ReportedIssueOptionSelectFact = Source{[Schema="mart",Item="ReportedIssueOptionSelectFact"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(mart_ReportedIssueOptionSelectFact,{"_created", "_edited"})
+				in
+				    #"Removed Columns"
+
+	annotation PBI_ResultType = Table
+

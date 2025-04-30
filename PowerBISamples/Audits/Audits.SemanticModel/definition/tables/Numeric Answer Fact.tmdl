@@ -1,0 +1,71 @@
+table 'Numeric Answer Fact'
+	lineageTag: 4e576a4d-ecd4-4ea1-b7c5-59afe34583af
+
+	column Audit_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 3e13580e-d6fa-4811-bbf4-3ce7d575a6a0
+		summarizeBy: none
+		sourceColumn: Audit_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column AuditNumericQuestion_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: fb39784a-ebf9-42ed-951d-50bb6888eb0b
+		summarizeBy: none
+		sourceColumn: AuditNumericQuestion_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column 'Numeric Answer'
+		dataType: double
+		lineageTag: 2fdc51f2-8095-45bc-a8d1-db3112c6e0b0
+		summarizeBy: sum
+		sourceColumn: Numeric Answer
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Wallet_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 752ca8c7-32cb-405d-ae74-8832aae52764
+		summarizeBy: none
+		sourceColumn: Wallet_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column 'Numeric Answer Count' = 1
+		formatString: 0
+		lineageTag: 2640d7dc-f186-437a-88a4-ec91b726386b
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Numeric Answer Fact' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("ww-powerbi-demo.database.windows.net", "powerbi"),
+				    mart_AuditNumericAnswerFact = Source{[Schema="mart",Item="AuditNumericAnswerFact"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(mart_AuditNumericAnswerFact,{"_created", "_edited"}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"Answer", "Numeric Answer"}})
+				in
+				    #"Renamed Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

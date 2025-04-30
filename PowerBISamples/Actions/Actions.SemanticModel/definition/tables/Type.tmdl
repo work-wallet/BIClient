@@ -1,0 +1,51 @@
+table Type
+	lineageTag: 664c3cc6-f42d-4475-a024-89af882e2232
+
+	column ActionType_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 766d2181-01d9-4b5a-a36c-57e797b40945
+		summarizeBy: none
+		sourceColumn: ActionType_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column ActionTypeCode
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: ca6e6a60-cdc6-4558-969e-34fe47fb94eb
+		summarizeBy: none
+		sourceColumn: ActionTypeCode
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column Type
+		dataType: string
+		lineageTag: 5d5dbbe9-bbdf-4c13-b2f8-b4a1e76b0383
+		summarizeBy: none
+		sourceColumn: Type
+		sortByColumn: ActionTypeCode
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Type = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("ww-powerbi-demo.database.windows.net", "powerbi"),
+				    mart_ActionType = Source{[Schema="mart",Item="ActionType"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(mart_ActionType,{"_created", "_edited"}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"ActionType", "Type"}})
+				in
+				    #"Renamed Columns"
+
+	annotation PBI_ResultType = Table
+

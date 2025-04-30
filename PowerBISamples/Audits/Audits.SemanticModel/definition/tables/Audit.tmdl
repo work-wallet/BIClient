@@ -1,0 +1,256 @@
+table Audit
+	lineageTag: e2381d2a-b787-4eaa-ac59-fbb97f1243ce
+
+	column Audit_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: cf9336ce-ccf3-4849-a14f-ce65d9a6c4e5
+		summarizeBy: none
+		sourceColumn: Audit_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column AuditId
+		dataType: string
+		isHidden
+		lineageTag: 0c404305-8a7f-4ba5-999f-97b6a918e04c
+		summarizeBy: none
+		sourceColumn: AuditId
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Reference
+		dataType: int64
+		formatString: 0
+		lineageTag: 31e29e11-d8d4-4353-a73a-06b426920202
+		summarizeBy: none
+		sourceColumn: Reference
+
+		annotation SummarizationSetBy = User
+
+	column 'Audit Reference'
+		dataType: string
+		lineageTag: 518739d9-cd2b-4826-9dbe-adb1b6563704
+		summarizeBy: none
+		sourceColumn: Audit Reference
+
+		annotation SummarizationSetBy = Automatic
+
+	column AuditGroup_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 04d50ebc-2df1-4e0a-8b6c-74e23bf68b0b
+		summarizeBy: none
+		sourceColumn: AuditGroup_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column AuditStatus_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 3829ff9b-8ab4-4cab-8499-1200568d82ed
+		summarizeBy: none
+		sourceColumn: AuditStatus_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column AuditType_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: f7fa8e54-f675-45e6-952f-914de8a036b5
+		summarizeBy: none
+		sourceColumn: AuditType_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Location_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 77a2e7ce-5ab4-4dbc-88d7-7bbeae2617bf
+		summarizeBy: none
+		sourceColumn: Location_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Inspected On'
+		dataType: dateTime
+		formatString: dd/mm/yyyy hh:nn
+		lineageTag: 01d48a76-705f-46d4-8194-31e303bc5476
+		summarizeBy: none
+		sourceColumn: Inspected On
+
+		variation Variation
+			isDefault
+			relationship: 6000319d-c5ad-4e73-895e-0138952a0ef3
+			defaultHierarchy: LocalDateTable_7ce7b00e-94c4-470d-90cb-c5a5a678fcc4.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column Score
+		dataType: int64
+		formatString: 0
+		lineageTag: a2345b64-6b23-4b5d-bf80-ded5326be2b6
+		summarizeBy: sum
+		sourceColumn: Score
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Potential Score'
+		dataType: int64
+		formatString: 0
+		lineageTag: fbcbd56a-48f6-4620-98dc-4a73c2046337
+		summarizeBy: sum
+		sourceColumn: Potential Score
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Average Score'
+		dataType: double
+		lineageTag: 64f008ca-0211-42ba-919c-1b87ffeae2da
+		summarizeBy: none
+		sourceColumn: Average Score
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Average Potential Score'
+		dataType: double
+		lineageTag: 40f3e7b4-b3ed-43b2-bff6-b78c6b0e182a
+		summarizeBy: none
+		sourceColumn: Average Potential Score
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Percentage Score'
+		dataType: double
+		formatString: 0%;-0%;0%
+		lineageTag: aaf52adc-5ea5-4ec3-b857-71b29480f375
+		summarizeBy: none
+		sourceColumn: Percentage Score
+
+		annotation SummarizationSetBy = User
+
+	column Flags
+		dataType: int64
+		formatString: 0
+		lineageTag: f9110153-b1c0-4f2a-90c7-31f54a7a14ed
+		summarizeBy: sum
+		sourceColumn: Flags
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'External Identifier'
+		dataType: string
+		lineageTag: b20227cc-da92-4ae4-986f-eb81233d0aaa
+		summarizeBy: none
+		sourceColumn: External Identifier
+
+		annotation SummarizationSetBy = Automatic
+
+	column Wallet_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 7870b9da-06e6-4d2b-b6d7-49670caaeaaf
+		summarizeBy: none
+		sourceColumn: Wallet_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column 'Conducted By' = CONCATENATEX (RELATEDTABLE(Contact), Contact[Contact Name], ", ", Contact[Contact Name], ASC)
+		lineageTag: b85c6b45-e32d-426a-a017-c65b1b19a2df
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Score Display' =
+			
+			VAR DisplayScore =
+			    AND(RELATED('Audit Type'[Display Total Score]), Audit[Score] <> -1)
+			VAR DisplayPercentage =
+			    AND(RELATED('Audit Type'[Display Percentage]), Audit[Percentage Score] <> -1)
+			VAR ScoreText =
+			    IF(DisplayScore, Audit[Score] & "/" & Audit[Potential Score], "")
+			VAR PercentageText =
+			    IF(DisplayPercentage, FORMAT(Audit[Percentage Score], "#%"), "")
+			RETURN
+			    IF(
+			        RELATED('Audit Type'[Scoring Enabled]),
+			        IF(
+			            AND(DisplayScore, DisplayPercentage),
+			            ScoreText & " (" & PercentageText & ")",
+			            IF(
+			                DisplayScore,
+			                ScoreText,
+			                IF(
+			                    DisplayPercentage,
+			                    PercentageText,
+			                    ""
+			                )
+			            )
+			        ),
+			        "scoring not enabled"
+			    )
+		lineageTag: c017309e-4cfd-4aab-b272-0d1aadfb1405
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column GradingSetOption_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 4e6d9d7d-6fbe-454f-bf19-664809cfc276
+		summarizeBy: none
+		sourceColumn: GradingSetOption_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column 'Audit Count' = 1
+		formatString: 0
+		lineageTag: 9a1ab7fa-3b3b-4ca3-91f3-71e789ce74a1
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Audit = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("ww-powerbi-demo.database.windows.net", "powerbi"),
+				    mart_Audit = Source{[Schema="mart",Item="Audit"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(mart_Audit,{"_created", "_edited"}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"AuditReference", "Audit Reference"}, {"InspectedOn", "Inspected On"}, {"TotalScore", "Score"}, {"TotalPotentialScore", "Potential Score"}, {"AverageScore", "Average Score"}, {"AveragePotentialScore", "Average Potential Score"}, {"PercentageScore", "Percentage Score"}, {"ExternalIdentifier", "External Identifier"}})
+				in
+				    #"Renamed Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

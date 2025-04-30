@@ -1,0 +1,73 @@
+table 'Score Tag'
+	lineageTag: b49bfca3-57a7-4002-80a8-3eccd5880182
+
+	column AuditScoreTag_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 5397f19e-8f98-4e73-894f-b5052b3e9e20
+		summarizeBy: none
+		sourceColumn: AuditScoreTag_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column TagId
+		dataType: string
+		isHidden
+		lineageTag: e6015cd8-f7c5-4042-8e08-106411af3e1f
+		summarizeBy: none
+		sourceColumn: TagId
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Tag Version'
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 7c8452c6-e397-4b09-ab4f-b6453f65bdc9
+		summarizeBy: none
+		sourceColumn: Tag Version
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column Tag
+		dataType: string
+		lineageTag: b47ce330-65bb-4709-a143-2bd7e1801efa
+		summarizeBy: none
+		sourceColumn: Tag
+
+		annotation SummarizationSetBy = Automatic
+
+	column Wallet_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 0dfe5094-e685-40b7-91f9-b7aab12507de
+		summarizeBy: none
+		sourceColumn: Wallet_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Score Tag' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("ww-powerbi-demo.database.windows.net", "powerbi"),
+				    mart_AuditScoreTag = Source{[Schema="mart",Item="AuditScoreTag"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(mart_AuditScoreTag,{"_created", "_edited"}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"TagVersion", "Tag Version"}})
+				in
+				    #"Renamed Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

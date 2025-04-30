@@ -1,0 +1,60 @@
+relationship a4980354-2196-4687-9064-54244619dac3
+	isActive: false
+	fromColumn: Location.Wallet_key
+	toColumn: Wallet.Wallet_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship 3678d027-4425-4620-a291-11c0628037e0
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'Safety Card'.'Reported Time'
+	toColumn: LocalDateTable_f9be0dac-6de7-4412-ae73-25cfa4796258.Date
+
+relationship dc22753d-51c4-452d-95ae-d560f8383099
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'Safety Card'.'Signature Date'
+	toColumn: LocalDateTable_eb98d27e-b207-4a82-9273-91957b9f2442.Date
+
+relationship 19112c5f-05ab-4b86-9f4c-192cf2d102d0
+	fromColumn: 'Safety Card'.Location_key
+	toColumn: Location.Location_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship be2fcc67-dd99-425f-992c-c21053785b88
+	fromColumn: 'Safety Card'.SafetyCardCategory_key
+	toColumn: Category.SafetyCardCategory_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship d626c09f-4634-49f7-be61-beefc262ca3a
+	fromColumn: 'Safety Card'.SafetyCardOccupationRole_key
+	toColumn: 'Occupation Role'.SafetyCardOccupationRole_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship 3a487988-afb7-41c5-8efe-2ec47ba1f9cb
+	fromColumn: 'Safety Card'.SafetyCardStatus_key
+	toColumn: Status.SafetyCardStatus_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship 270b2fe3-2625-4c43-8135-b832d80c1d3c
+	fromColumn: 'Safety Card'.SafetyCardType_key
+	toColumn: Type.SafetyCardType_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship 57a363a2-0100-4a89-bdaa-5724c663f7a3
+	fromColumn: 'Safety Card'.Wallet_key
+	toColumn: Wallet.Wallet_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship f4399b33-cacc-4a0c-ad48-b8b31bc1c082
+	isActive: false
+	fromColumn: Category.Wallet_key
+	toColumn: Wallet.Wallet_key
+
+	annotation PBI_IsFromSource = FS
+

@@ -1,0 +1,158 @@
+table 'Grading Set Option'
+	isHidden
+	lineageTag: 1dffefc0-f5a4-4c89-b6a1-05e007931b8f
+
+	column GradingSetOptionId
+		dataType: string
+		isHidden
+		lineageTag: 7e647810-e79a-40ef-9e64-6f55ff96b11c
+		summarizeBy: none
+		sourceColumn: GradingSetOptionId
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Grading Set'
+		dataType: string
+		isHidden
+		lineageTag: 93be79bc-62c4-48d1-97ab-1fca3f078649
+		summarizeBy: none
+		sourceColumn: Grading Set
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Grading
+		dataType: string
+		isHidden
+		lineageTag: 7318d021-dcc6-4496-a2bb-c5d3dc38b414
+		summarizeBy: none
+		sourceColumn: Grading
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Wallet_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 3c030539-2820-4a68-809b-1d52bf2e2603
+		summarizeBy: none
+		sourceColumn: Wallet_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column 'Grading Count' = 1
+		isHidden
+		formatString: 0
+		lineageTag: 69ccd164-989e-4208-8018-24116c56539c
+		summarizeBy: sum
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column GradingSetOption_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 119823ae-931e-4822-a2d4-89c1f74769e6
+		summarizeBy: none
+		sourceColumn: GradingSetOption_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column GradingSetId
+		dataType: string
+		isHidden
+		lineageTag: 7bd9d402-8d6f-4689-a179-9a2264809e8f
+		summarizeBy: none
+		sourceColumn: GradingSetId
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column GradingSetVersion
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: a196d8d8-5ca6-49d8-8385-d6031fab9bd9
+		summarizeBy: none
+		sourceColumn: GradingSetVersion
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column 'Grading Value'
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: d17f431d-451a-433c-bfe1-ba88b7f4f137
+		summarizeBy: none
+		sourceColumn: Grading Value
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column 'Grading Colour'
+		dataType: string
+		isHidden
+		lineageTag: 50ca7039-53a9-442c-a22e-2bd5515e9b8d
+		summarizeBy: none
+		sourceColumn: Grading Colour
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Grading Set Is Percentage'
+		dataType: boolean
+		isHidden
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 96717b11-49dc-4ed7-b7e9-dc96c14c94d9
+		summarizeBy: none
+		sourceColumn: Grading Set Is Percentage
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Grading Set Is Score'
+		dataType: boolean
+		isHidden
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: e2b9a419-1109-4db3-bf79-90054e3b6374
+		summarizeBy: none
+		sourceColumn: Grading Set Is Score
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Grading Set Option' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("ww-powerbi-demo.database.windows.net", "powerbi"),
+				    mart_GradingSetOption = Source{[Schema="mart",Item="GradingSetOption"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(mart_GradingSetOption,{"_created", "_edited"}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"GradingSet", "Grading Set"}, {"GradingSetOption", "Grading"}, {"ColourHex", "Grading Colour"}, {"GradingSetIsPercentage", "Grading Set Is Percentage"}, {"GradingSetIsScore", "Grading Set Is Score"}, {"Value", "Grading Value"}})
+				in
+				    #"Renamed Columns"
+
+	changedProperty = IsHidden
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Exception
+

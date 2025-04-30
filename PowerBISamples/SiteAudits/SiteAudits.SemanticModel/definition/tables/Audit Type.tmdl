@@ -1,0 +1,137 @@
+table 'Audit Type'
+	lineageTag: 28f3f0ed-57ec-4bc1-997f-1588373b5768
+
+	column SiteAuditType_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 3b76a4fe-a260-4c80-9fde-61a0c6fbd7e8
+		summarizeBy: none
+		sourceColumn: SiteAuditType_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column SiteAuditTypeId
+		dataType: string
+		isHidden
+		lineageTag: 435e835b-87a6-4a8b-bac7-8f63dc32bec1
+		summarizeBy: none
+		sourceColumn: SiteAuditTypeId
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Audit Type'
+		dataType: string
+		lineageTag: 34222a23-bfa0-4dde-b324-90ff6a23919b
+		summarizeBy: none
+		sourceColumn: Audit Type
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Display Scoring'
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 05991b5e-d01b-4777-8360-9bf871e5830f
+		summarizeBy: none
+		sourceColumn: Display Scoring
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Scoring Method'
+		dataType: int64
+		formatString: 0
+		lineageTag: 9cf926fe-9427-47f5-a4f4-f249ce49c05c
+		summarizeBy: none
+		sourceColumn: Scoring Method
+
+		annotation SummarizationSetBy = User
+
+	column DisplayOptions
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 1c010e3f-f701-4453-bdae-027223e2641e
+		summarizeBy: none
+		sourceColumn: DisplayOptions
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column ShowPercentage
+		dataType: boolean
+		isHidden
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: f540e346-be64-4495-abfd-49297f7b91f1
+		summarizeBy: none
+		sourceColumn: ShowPercentage
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column ShowScore
+		dataType: boolean
+		isHidden
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: c69bb1cc-04a3-4386-9201-28ed76d82c9c
+		summarizeBy: none
+		sourceColumn: ShowScore
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column ShowPassFail
+		dataType: boolean
+		isHidden
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 3e7625e1-fcf0-452b-857a-99fc3ae34245
+		summarizeBy: none
+		sourceColumn: ShowPassFail
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column ShowGrading
+		dataType: boolean
+		isHidden
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: b1e20645-9acd-4b6d-ad5d-696df55484bc
+		summarizeBy: none
+		sourceColumn: ShowGrading
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Wallet_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: f35d3b16-26b5-475f-bd83-c63fa6945ea1
+		summarizeBy: none
+		sourceColumn: Wallet_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	partition 'Audit Type-d0b5b5f2-f438-48cb-964e-b273b731248e' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("ww-powerbi-demo.database.windows.net", "powerbi"),
+				    mart_SiteAuditType = Source{[Schema="mart",Item="SiteAuditType"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(mart_SiteAuditType,{"_created", "_edited"}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"SiteAuditType", "Audit Type"}, {"DisplayScoring", "Display Scoring"}, {"ScoringMethod", "Scoring Method"}})
+				in
+				    #"Renamed Columns"
+
+	annotation PBI_ResultType = Table
+

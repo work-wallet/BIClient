@@ -1,0 +1,48 @@
+table 'Root Cause Analysis Type'
+	lineageTag: 217062d4-7493-4de2-bef7-de59de98cdce
+
+	column ReportedIssueRootCauseAnalysisType_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: fdaf6ec7-dbb9-4f26-9cef-a8b33c03cac2
+		summarizeBy: none
+		sourceColumn: ReportedIssueRootCauseAnalysisType_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column ReportedIssueRootCauseAnalysisTypeCode
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 994428d2-646f-4f63-b624-1b00065412bc
+		summarizeBy: none
+		sourceColumn: ReportedIssueRootCauseAnalysisTypeCode
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column 'Root Cause Analysis Type'
+		dataType: string
+		lineageTag: c4db6644-db1a-4ed0-ab8b-de5a522ba603
+		summarizeBy: none
+		sourceColumn: Root Cause Analysis Type
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Root Cause Analysis Type-3807d13a-733e-418f-b84d-f8f14d79f91c' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("ww-powerbi-demo.database.windows.net", "powerbi"),
+				    mart_ReportedIssueRootCauseAnalysisType = Source{[Schema="mart",Item="ReportedIssueRootCauseAnalysisType"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(mart_ReportedIssueRootCauseAnalysisType,{"_created", "_edited"}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"ReportedIssueRootCauseAnalysisType", "Root Cause Analysis Type"}})
+				in
+				    #"Renamed Columns"
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,109 @@
+table 'Checklist Option'
+	lineageTag: 20005e8e-a778-48c2-a619-80c2f851334c
+
+	column AuditChecklistOption_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: cfd5fa4a-d2e5-4905-9779-05af6f8a953d
+		summarizeBy: none
+		sourceColumn: AuditChecklistOption_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column ChecklistId
+		dataType: string
+		isHidden
+		lineageTag: 2c0bed8e-e180-4629-8a85-8c91b3a66e8c
+		summarizeBy: none
+		sourceColumn: ChecklistId
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column OptionId
+		dataType: string
+		isHidden
+		lineageTag: 91a65637-b32b-4742-ab1c-13318710106c
+		summarizeBy: none
+		sourceColumn: OptionId
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Checklist Question'
+		dataType: string
+		lineageTag: 333b2da4-4223-4a31-8535-bfdb1a3418d4
+		summarizeBy: none
+		sourceColumn: Checklist Question
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Checklist Answer'
+		dataType: string
+		lineageTag: 780b3ab6-f8f8-40eb-9c0f-260b8e9076de
+		summarizeBy: none
+		sourceColumn: Checklist Answer
+
+		annotation SummarizationSetBy = Automatic
+
+	column Mandatory
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 67ac5a6f-6c6e-474f-9c6c-0818137333a9
+		summarizeBy: none
+		sourceColumn: Mandatory
+
+		annotation SummarizationSetBy = Automatic
+
+	column Order
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: b01611ae-a600-4869-84a9-d699fe31dee8
+		summarizeBy: none
+		sourceColumn: Order
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column Wallet_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: bef380a4-1ef6-4fa1-8d05-cba142c9d006
+		summarizeBy: none
+		sourceColumn: Wallet_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column Answer = ```
+			'Checklist Option'[Order] & " - " & 'Checklist Option'[Checklist Answer] 
+			```
+		lineageTag: 01fb0a3c-0028-4579-9980-eac569e5ac3d
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Checklist Option' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("ww-powerbi-demo.database.windows.net", "powerbi"),
+				    mart_AuditChecklistOption = Source{[Schema="mart",Item="AuditChecklistOption"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(mart_AuditChecklistOption,{"_created", "_edited"}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"Value", "Checklist Answer"}, {"Question", "Checklist Question"}})
+				in
+				    #"Renamed Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

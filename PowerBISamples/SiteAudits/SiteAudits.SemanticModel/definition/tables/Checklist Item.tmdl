@@ -1,0 +1,103 @@
+table 'Checklist Item'
+	lineageTag: 66bf89f7-99d2-4468-889e-c7fffb242e87
+
+	column SiteAuditChecklistItem_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 46d814bd-70a7-4b9a-92fa-58d3c390fb1a
+		summarizeBy: none
+		sourceColumn: SiteAuditChecklistItem_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column SiteAuditChecklistItemId
+		dataType: string
+		isHidden
+		lineageTag: bdc95d7b-3399-4566-adac-5ee2025c7f35
+		summarizeBy: none
+		sourceColumn: SiteAuditChecklistItemId
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column SiteAuditChecklist_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: a969ef2c-9e27-4c63-b685-ca74e0a8f951
+		summarizeBy: none
+		sourceColumn: SiteAuditChecklist_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Checklist Item'
+		dataType: string
+		lineageTag: 6726dace-e303-48ad-9c9c-b7a820dac7b5
+		summarizeBy: none
+		sourceColumn: Checklist Item
+
+		annotation SummarizationSetBy = Automatic
+
+	column ChecklistItemDescription
+		dataType: string
+		isHidden
+		lineageTag: 3dac208c-eac7-4538-83d9-8ce450740a30
+		summarizeBy: none
+		sourceColumn: ChecklistItemDescription
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column DisplayOrder
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 4971c80c-2fd0-4911-9901-6f8ebd3c3a9b
+		summarizeBy: none
+		sourceColumn: DisplayOrder
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column Wallet_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 930a4a0a-7cb6-47fe-b7da-6fc2bdbf2ff4
+		summarizeBy: none
+		sourceColumn: Wallet_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column Item = 'Checklist Item'[DisplayOrder] & " - " & 'Checklist Item'[Checklist Item]
+		lineageTag: 3a0a959f-2fae-48c4-8d16-b77d44ffd058
+		summarizeBy: none
+		sortByColumn: DisplayOrder
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Checklist Item-d4c7b309-671e-4a16-978a-39abb735b61f' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("ww-powerbi-demo.database.windows.net", "powerbi"),
+				    mart_SiteAuditChecklistItem = Source{[Schema="mart",Item="SiteAuditChecklistItem"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(mart_SiteAuditChecklistItem,{"_created", "_edited"}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"ChecklistItemTitle", "Checklist Item"}})
+				in
+				    #"Renamed Columns"
+
+	annotation PBI_ResultType = Table
+

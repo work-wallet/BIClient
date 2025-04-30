@@ -1,0 +1,29 @@
+model Model
+	culture: en-GB
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-GB
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation PBI_QueryOrder = ["Induction","Custom Question","Custom Question Fact","Induction Status","Taken By","Taken Status","Wallet"]
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBIDesktopVersion = 2.142.928.0 (25.04)+de52df9f0bb74ad93a80d89c52d63fe6d07e0e1b
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table Induction
+ref table DateTableTemplate_107499ea-2eac-40c2-b775-9a473148087d
+ref table LocalDateTable_6cd50e72-c259-4411-9694-0da3a01f05bd
+ref table 'Custom Question'
+ref table 'Custom Question Fact'
+ref table 'Induction Status'
+ref table 'Taken By'
+ref table LocalDateTable_705796de-106f-48c0-811d-f11b3483f209
+ref table 'Taken Status'
+ref table Wallet
+
+ref cultureInfo en-GB
+

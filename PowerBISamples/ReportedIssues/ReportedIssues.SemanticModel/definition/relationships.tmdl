@@ -1,0 +1,194 @@
+relationship 72dc5da0-4042-40a7-8342-51f03af1e646
+	fromColumn: Location.Wallet_key
+	toColumn: Wallet.Wallet_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship 73d05e09-ab27-49a5-bd9c-161d56304324
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Issue.'Occurred On'
+	toColumn: LocalDateTable_dd6b34cd-63e1-4379-86f1-b704b3815539.Date
+
+relationship 8b95d563-308b-4625-9e6b-b7ab8f8d82eb
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Issue.'Reported On'
+	toColumn: LocalDateTable_4d0d0353-a3b2-4593-b15b-b12b1a357e5a.Date
+
+relationship 63b8be96-d8c3-430c-aaf5-6c86aae32d05
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Issue.'Close Date'
+	toColumn: LocalDateTable_d42af790-e611-47ac-becb-b8ec788208a5.Date
+
+relationship cdc13d88-3481-44bb-b0a9-38f67ac55944
+	crossFilteringBehavior: bothDirections
+	fromColumn: Issue.Location_key
+	toColumn: Location.Location_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship c830bc28-5ee0-4aae-8d70-efa150f7c4b7
+	fromColumn: Issue.ReportedIssueCategory_key
+	toColumn: Category.ReportedIssueCategory_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship 391a4cf6-f76f-45cf-9f79-a51b7f77064b
+	fromColumn: Issue.ReportedIssueSeverity_key
+	toColumn: Severity.ReportedIssueSeverity_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship e5db0e2a-6729-4af5-b3f4-6e18acd88535
+	fromColumn: Issue.ReportedIssueStatus_key
+	toColumn: Status.ReportedIssueStatus_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship bf117299-61ca-4a2b-a6e4-057f43938986
+	isActive: false
+	fromColumn: Issue.Wallet_key
+	toColumn: Wallet.Wallet_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship 52fe329f-44d4-4a92-a0a9-2af2d467a396
+	fromColumn: 'Body Part'.ReportedIssueBodyPartEnum_key
+	toColumn: 'Body Part Enum'.ReportedIssueBodyPartEnum_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship 7b2558d1-f2db-4c56-9484-56bd9b748c56
+	isActive: false
+	fromColumn: 'Body Part'.Wallet_key
+	toColumn: Wallet.Wallet_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship 218c408a-afdf-4642-9602-331c52ec6ef2
+	crossFilteringBehavior: bothDirections
+	fromColumn: 'Body Part Fact'.ReportedIssue_key
+	toColumn: Issue.ReportedIssue_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship b2db1085-437d-4688-bad5-27e8a158816f
+	fromColumn: 'Body Part Fact'.ReportedIssueBodyPart_key
+	toColumn: 'Body Part'.ReportedIssueBodyPart_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship 7cb1a835-63b5-4fcd-9a03-389492fadaff
+	isActive: false
+	fromColumn: 'Body Part Fact'.Wallet_key
+	toColumn: Wallet.Wallet_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship bfbb0e2f-fcd4-4a34-a39a-b419f9cb8f36
+	isActive: false
+	fromColumn: 'Branch Option'.Wallet_key
+	toColumn: Wallet.Wallet_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship 4baff140-c512-4e17-b7c7-a70419465d0c
+	fromColumn: 'Branch Option Fact'.ReportedIssueBranchOption_key
+	toColumn: 'Branch Option'.ReportedIssueBranchOption_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship 7bcf7144-24c7-4a01-842b-5ed10ed213bc
+	isActive: false
+	fromColumn: 'Branch Option Fact'.Wallet_key
+	toColumn: Wallet.Wallet_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship d171fede-7caa-4fcd-8cf3-9e643bf1e9fb
+	isActive: false
+	fromColumn: Category.Wallet_key
+	toColumn: Wallet.Wallet_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship 2d992319-6cd0-4fd3-8a13-dfa647d0e385
+	isActive: false
+	fromColumn: 'Option Select'.Wallet_key
+	toColumn: Wallet.Wallet_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship c230037a-0a61-40af-8bb5-e76cddef13dc
+	crossFilteringBehavior: bothDirections
+	fromColumn: 'Option Select Fact'.ReportedIssue_key
+	toColumn: Issue.ReportedIssue_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship 6ee1e18f-c084-43a2-bad6-189c6bf094f9
+	fromColumn: 'Option Select Fact'.ReportedIssueOptionSelect_key
+	toColumn: 'Option Select'.ReportedIssueOptionSelect_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship 8d5aa9af-015e-4c95-832d-e2040fb6739f
+	isActive: false
+	fromColumn: 'Option Select Fact'.Wallet_key
+	toColumn: Wallet.Wallet_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship 6117154e-b9ff-4a09-82bb-da67d98a041a
+	isActive: false
+	fromColumn: Person.Wallet_key
+	toColumn: Wallet.Wallet_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship 8c5bba35-8bb5-4075-a796-89716d4721ab
+	crossFilteringBehavior: bothDirections
+	fromColumn: 'Person Fact'.ReportedIssue_key
+	toColumn: Issue.ReportedIssue_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship b699e2b3-2804-4c3e-9bb6-bede9742847d
+	fromColumn: 'Person Fact'.ReportedIssuePerson_key
+	toColumn: Person.ReportedIssuePerson_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship c187622c-3ed3-44ca-bbd0-925ce3703b98
+	isActive: false
+	fromColumn: 'Person Fact'.Wallet_key
+	toColumn: Wallet.Wallet_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship 740ae2ef-85da-4d22-8cae-faeb1e56f7aa
+	crossFilteringBehavior: bothDirections
+	fromColumn: 'Root Cause Analysis Fact'.ReportedIssue_key
+	toColumn: Issue.ReportedIssue_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship d5545f89-dbe3-4cc8-b463-65ea8dc3d51a
+	fromColumn: 'Root Cause Analysis Fact'.ReportedIssueRootCauseAnalysisType_key
+	toColumn: 'Root Cause Analysis Type'.ReportedIssueRootCauseAnalysisType_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship c8e2576d-316c-4ec7-a16a-710c985cb987
+	isActive: false
+	fromColumn: 'Root Cause Analysis Fact'.Wallet_key
+	toColumn: Wallet.Wallet_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship f5297d36-af4b-4308-b7f4-f4f7328c99f6
+	crossFilteringBehavior: bothDirections
+	fromColumn: 'Branch Option Fact'.ReportedIssue_key
+	toColumn: Issue.ReportedIssue_key
+
+	annotation PBI_IsFromSource = FS
+

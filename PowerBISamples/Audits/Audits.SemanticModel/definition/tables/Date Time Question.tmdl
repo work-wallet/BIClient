@@ -1,0 +1,88 @@
+table 'Date Time Question'
+	lineageTag: a10b74ae-c26b-416c-ab3c-838d2c6b3add
+
+	column AuditDateTimeQuestion_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 7a03ec5a-d5d0-4ea3-9d9f-d032dfbc80f8
+		summarizeBy: none
+		sourceColumn: AuditDateTimeQuestion_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column QuestionId
+		dataType: string
+		isHidden
+		lineageTag: 16e48e66-25a5-4f2c-a67f-ba199895b399
+		summarizeBy: none
+		sourceColumn: QuestionId
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Date Time Question'
+		dataType: string
+		lineageTag: ea1a24d7-803e-4b5c-9e65-c1ce9a2a8805
+		summarizeBy: none
+		sourceColumn: Date Time Question
+
+		annotation SummarizationSetBy = Automatic
+
+	column Mandatory
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 684a5ce1-57c2-4d92-a9f2-d189c7ee405c
+		summarizeBy: none
+		sourceColumn: Mandatory
+
+		annotation SummarizationSetBy = Automatic
+
+	column Date
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: f1334f72-f4af-41fc-92df-3eb9af4c08ca
+		summarizeBy: none
+		sourceColumn: Date
+
+		annotation SummarizationSetBy = Automatic
+
+	column Time
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 35f7add7-1c7f-4481-adcb-8dd4460a6fd0
+		summarizeBy: none
+		sourceColumn: Time
+
+		annotation SummarizationSetBy = Automatic
+
+	column Wallet_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: fc35e972-e012-434e-9978-929f823a03b4
+		summarizeBy: none
+		sourceColumn: Wallet_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	partition 'Date Time Question' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("ww-powerbi-demo.database.windows.net", "powerbi"),
+				    mart_AuditDateTimeQuestion = Source{[Schema="mart",Item="AuditDateTimeQuestion"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(mart_AuditDateTimeQuestion,{"_created", "_edited"}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"Question", "Date Time Question"}})
+				in
+				    #"Renamed Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,76 @@
+table 'Branch Option Fact'
+	lineageTag: d4bc562e-ee29-4148-8441-f4e7b059e98f
+
+	column ReportedIssue_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 2c313284-28a3-4722-b968-bc5673d48bdf
+		summarizeBy: none
+		sourceColumn: ReportedIssue_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column ReportedIssueBranchOption_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 85e0b275-5f75-4fb3-8c46-ac57e8f9a5df
+		summarizeBy: none
+		sourceColumn: ReportedIssueBranchOption_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column Wallet_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: cbdbf45a-b218-4a26-a685-dd73bb99ac9d
+		summarizeBy: none
+		sourceColumn: Wallet_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column 'Branch Option Count' = 1
+		formatString: 0
+		lineageTag: 15641a9d-b8cb-44d4-9232-91d63599bb0b
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column Investigation
+		dataType: boolean
+		isHidden
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 582b751d-98fd-460a-9dd7-565e6212b681
+		summarizeBy: none
+		sourceColumn: Investigation
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Workflow Stage (Branch Option)' = IF('Branch Option Fact'[Investigation], "Investigation Stage", "Reporting Stage")
+		lineageTag: bb891d88-10d9-4ef7-a50a-b755777dbb05
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Branch Option Fact-845f5fa3-ac5c-41ab-98ca-5f6e356bf71b' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("ww-powerbi-demo.database.windows.net", "powerbi"),
+				    mart_ReportedIssueBranchOptionFact = Source{[Schema="mart",Item="ReportedIssueBranchOptionFact"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(mart_ReportedIssueBranchOptionFact,{"_created", "_edited"})
+				in
+				    #"Removed Columns"
+
+	annotation PBI_ResultType = Table
+

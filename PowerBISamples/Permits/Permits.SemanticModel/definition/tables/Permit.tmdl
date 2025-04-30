@@ -1,0 +1,198 @@
+table Permit
+	lineageTag: 7d107b65-6f34-4409-a98a-c8bfe9c4b7fb
+
+	column Permit_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: f8dad0aa-2a1e-4e0a-98c3-16cc64ef9d1c
+		summarizeBy: none
+		sourceColumn: Permit_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column PermitId
+		dataType: string
+		isHidden
+		lineageTag: f3a1c888-31b2-4f95-92ba-782e220e8312
+		summarizeBy: none
+		sourceColumn: PermitId
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Reference
+		dataType: string
+		lineageTag: f4c7059d-4998-4509-af20-6f102238298f
+		summarizeBy: none
+		sourceColumn: Reference
+
+		annotation SummarizationSetBy = Automatic
+
+	column PermitCategory_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: f929390c-fb6e-4aed-ba9c-7937efbe14b5
+		summarizeBy: none
+		sourceColumn: PermitCategory_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Location_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 739977a2-77a2-44e5-9925-c548f75888c0
+		summarizeBy: none
+		sourceColumn: Location_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Permit
+		dataType: string
+		lineageTag: 6d70bc97-3b1a-4fb5-b3d4-cad49500ff79
+		summarizeBy: none
+		sourceColumn: Permit
+
+		annotation SummarizationSetBy = Automatic
+
+	column IssuedToCompanyId
+		dataType: string
+		isHidden
+		lineageTag: d650551e-1355-46ab-bbb3-e0ba2567e1e6
+		summarizeBy: none
+		sourceColumn: IssuedToCompanyId
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Issued To Company'
+		dataType: string
+		lineageTag: 400ba302-db14-4c71-8ee5-159494758a4f
+		summarizeBy: none
+		sourceColumn: Issued To Company
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Issued On'
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: 68d5d435-06e4-45f8-94e5-a5b5ca2dab61
+		summarizeBy: none
+		sourceColumn: Issued On
+
+		variation Variation
+			isDefault
+			relationship: bd56e3e7-ec1c-464a-9841-7ecbad91de66
+			defaultHierarchy: LocalDateTable_55b7fdf5-ca9f-42af-a60a-4aef862a76d8.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Issued For Minutes'
+		dataType: int64
+		formatString: 0
+		lineageTag: 0162d0b1-19fd-4364-b072-89c0e22f1343
+		summarizeBy: none
+		sourceColumn: Issued For Minutes
+
+		annotation SummarizationSetBy = User
+
+	column 'Issued Expiry'
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: cc43ca9f-485e-4a7c-9c09-544cd511f483
+		summarizeBy: none
+		sourceColumn: Issued Expiry
+
+		variation Variation
+			isDefault
+			relationship: bb25036b-40de-403b-b6ac-ae94041b30ed
+			defaultHierarchy: LocalDateTable_1849e61a-88cf-4015-aad3-d07751c2d5c7.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Closed On'
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: b063977a-a34f-489c-92e2-3bbf57a8a8a2
+		summarizeBy: none
+		sourceColumn: Closed On
+
+		variation Variation
+			isDefault
+			relationship: 0174ce8a-5a10-45bf-9c1e-8a88dc018596
+			defaultHierarchy: LocalDateTable_5994158e-734d-437f-b126-414813922861.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column PermitStatus_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 4d13da6c-2fd8-4f8d-ba8d-ce97149089d5
+		summarizeBy: none
+		sourceColumn: PermitStatus_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Has Been Expired'
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: ee8ca9f7-9624-4d22-b546-e1a8ca90eb0d
+		summarizeBy: none
+		sourceColumn: Has Been Expired
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Has Been Closed'
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 1bbfb7e3-413c-4e94-9dc5-dd4fe623dded
+		summarizeBy: none
+		sourceColumn: Has Been Closed
+
+		annotation SummarizationSetBy = Automatic
+
+	column Wallet_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: c770e308-0042-4dca-b606-7c8eeb54b360
+		summarizeBy: none
+		sourceColumn: Wallet_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Permit Count' = 1
+		formatString: 0
+		lineageTag: f611a9c1-cf8f-407e-8ea3-f9c01db2b2f7
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Permit = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("ww-powerbi-demo.database.windows.net", "powerbi"),
+				    mart_Permit = Source{[Schema="mart",Item="Permit"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(mart_Permit,{"_created", "_edited"}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"PermitReference", "Reference"}, {"PermitDescription", "Permit"}, {"IssuedToCompany", "Issued To Company"}, {"IssuedOn", "Issued On"}, {"IssuedForMinutes", "Issued For Minutes"}, {"IssuedExpiry", "Issued Expiry"}, {"ClosedOn", "Closed On"}, {"HasBeenExpired", "Has Been Expired"}, {"HasBeenClosed", "Has Been Closed"}})
+				in
+				    #"Renamed Columns"
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,155 @@
+table 'Checklist Item Fact'
+	lineageTag: d1561c3b-2c27-4e94-ab6b-1e324ea7bd6b
+
+	measure 'Checklist Item Status' =
+			
+			IF
+			(
+			    HASONEFILTER(Audit[Time Of Inspection]),
+			    IF
+			    (
+			        HASONEFILTER('Checklist Item'[Item]),
+			        SUM([ChecklistItemStatus]),
+			        SUM('Checklist Fact'[Checklist Score])
+			    ),
+			    BLANK()
+			)
+		formatString: 0
+		lineageTag: 06da9363-7ff2-49e7-b68f-2f05ef1d0828
+
+		changedProperty = FormatString
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	column SiteAudit_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 80c576c8-ee8b-408e-ba25-f0e9ceb77758
+		summarizeBy: none
+		sourceColumn: SiteAudit_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column SiteAuditChecklist_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 53dafe50-cca8-45e5-86b2-856ef926a6e9
+		summarizeBy: none
+		sourceColumn: SiteAuditChecklist_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column SiteAuditChecklistItem_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 0949ae0e-ff6e-4598-9fe6-83486158632e
+		summarizeBy: none
+		sourceColumn: SiteAuditChecklistItem_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column SiteAuditType_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: da12384a-5357-45fc-b6fc-20f0e991cadd
+		summarizeBy: none
+		sourceColumn: SiteAuditType_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column Location_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 879c5a9b-6041-4cf1-aad8-25f6b5ab341f
+		summarizeBy: none
+		sourceColumn: Location_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column SiteAuditStatus_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 388f145a-851b-4af8-b2e5-af9098876978
+		summarizeBy: none
+		sourceColumn: SiteAuditStatus_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column Wallet_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 8b042713-94c1-4078-a242-16352604b5f3
+		summarizeBy: none
+		sourceColumn: Wallet_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column ChecklistItemStatusName
+		dataType: string
+		isHidden
+		lineageTag: 130bdfcb-8201-438a-ac07-6ef668eab99b
+		summarizeBy: none
+		sourceColumn: ChecklistItemStatusName
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column ChecklistItemStatus
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: e3991b3d-f606-4cab-96bd-611450eb8635
+		summarizeBy: min
+		sourceColumn: ChecklistItemStatus
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column 'Checklist Item Count' = 1
+		formatString: 0
+		lineageTag: 4e9c3126-0d0d-4b45-9689-53743400f090
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Checklist Item Status Name' = [ChecklistItemStatus] & " - " & [ChecklistItemStatusName]
+		lineageTag: 3f59b1c9-87da-4032-8c4e-3ac372509c8c
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Checklist Item Fact-892e5dc8-a5cf-4aa1-bb64-3c154bce7e54' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("ww-powerbi-demo.database.windows.net", "powerbi"),
+				    mart_SiteAuditChecklistItemFact = Source{[Schema="mart",Item="SiteAuditChecklistItemFact"]}[Data],
+				    #"Renamed Columns" = Table.RenameColumns(mart_SiteAuditChecklistItemFact,{{"ChecklistItemStatus", "ChecklistItemStatus"}, {"ChecklistItemStatusName", "ChecklistItemStatusName"}})
+				in
+				    #"Renamed Columns"
+
+	annotation PBI_ResultType = Table
+

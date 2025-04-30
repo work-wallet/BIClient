@@ -1,0 +1,137 @@
+table Induction
+	lineageTag: 6e1a15d5-e594-42b4-bf1b-14886a90b2b5
+
+	column Induction_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 55f2bdbb-32aa-4af4-9fed-acb365d95a1f
+		summarizeBy: none
+		sourceColumn: Induction_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column InductionId
+		dataType: string
+		isHidden
+		lineageTag: 6ddb5c6b-138a-4c8e-9f32-3e1aa5c401b9
+		summarizeBy: none
+		sourceColumn: InductionId
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Induction Version'
+		dataType: int64
+		formatString: 0
+		lineageTag: ef013509-a1ae-4693-954a-8e5a4174dfca
+		summarizeBy: none
+		sourceColumn: Induction Version
+
+		annotation SummarizationSetBy = User
+
+	column Induction
+		dataType: string
+		lineageTag: 789f070e-1023-437a-9844-85028f2b7e36
+		summarizeBy: none
+		sourceColumn: Induction
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Valid For Days'
+		dataType: int64
+		formatString: 0
+		lineageTag: 27808086-e7d1-49cf-b40b-3b9bae2599f0
+		summarizeBy: none
+		sourceColumn: Valid For Days
+
+		annotation SummarizationSetBy = User
+
+	column 'Created On'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 9885d8b8-8212-460a-85a8-111b013854ac
+		summarizeBy: none
+		sourceColumn: Created On
+
+		variation Variation
+			isDefault
+			relationship: d9d09264-81b9-4632-bf43-4836b55cdccf
+			defaultHierarchy: LocalDateTable_6cd50e72-c259-4411-9694-0da3a01f05bd.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column Active
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 86c7a1d1-00b6-4c13-9ae6-31586a9c266d
+		summarizeBy: none
+		sourceColumn: Active
+
+		annotation SummarizationSetBy = Automatic
+
+	column InductionStatus_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 4532bc4c-0473-4fc1-a0f4-04f974be7d88
+		summarizeBy: none
+		sourceColumn: InductionStatus_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Test Pass Mark'
+		dataType: int64
+		formatString: 0
+		lineageTag: 3c8b52f8-f0b5-4177-a4d2-7d961be096be
+		summarizeBy: sum
+		sourceColumn: Test Pass Mark
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Test Question Count'
+		dataType: int64
+		formatString: 0
+		lineageTag: 70cd8c03-e21b-4ce5-979c-f008b67632cd
+		summarizeBy: sum
+		sourceColumn: Test Question Count
+
+		annotation SummarizationSetBy = Automatic
+
+	column Wallet_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 9af9bc95-e850-4d23-9cf7-133b5588241d
+		summarizeBy: none
+		sourceColumn: Wallet_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column 'Induction Count' = 1
+		formatString: 0
+		lineageTag: 0fa4357d-cd2a-41ec-a774-9304a4f5a059
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Induction = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("ww-powerbi-demo.database.windows.net", "powerbi"),
+				    mart_Induction = Source{[Schema="mart",Item="Induction"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(mart_Induction,{"_created", "_edited"}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"InductionVersion", "Induction Version"}, {"InductionName", "Induction"}, {"ValidForDays", "Valid For Days"}, {"CreatedOn", "Created On"}, {"TestPassMark", "Test Pass Mark"}, {"TestQuestionCount", "Test Question Count"}})
+				in
+				    #"Renamed Columns"
+
+	annotation PBI_ResultType = Table
+

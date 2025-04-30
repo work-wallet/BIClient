@@ -1,0 +1,40 @@
+model Model
+	culture: en-GB
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-GB
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation PBIDesktopVersion = 2.142.928.0 (25.04)+de52df9f0bb74ad93a80d89c52d63fe6d07e0e1b
+
+annotation PBI_QueryOrder = ["Location","Wallet","Issue","Body Part","Body Part Enum","Body Part Fact","Branch Option","Branch Option Fact","Category","Option Select","Option Select Fact","Person","Person Fact","Root Cause Analysis Fact","Root Cause Analysis Type","Severity","Status"]
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table Location
+ref table DateTableTemplate_9530dca3-0f81-4b7a-9949-b5dc79fc3096
+ref table Wallet
+ref table Issue
+ref table LocalDateTable_dd6b34cd-63e1-4379-86f1-b704b3815539
+ref table LocalDateTable_4d0d0353-a3b2-4593-b15b-b12b1a357e5a
+ref table LocalDateTable_d42af790-e611-47ac-becb-b8ec788208a5
+ref table 'Body Part'
+ref table 'Body Part Enum'
+ref table 'Body Part Fact'
+ref table 'Branch Option'
+ref table 'Branch Option Fact'
+ref table Category
+ref table 'Option Select'
+ref table 'Option Select Fact'
+ref table Person
+ref table 'Person Fact'
+ref table 'Root Cause Analysis Fact'
+ref table 'Root Cause Analysis Type'
+ref table Severity
+ref table Status
+
+ref cultureInfo en-GB
+

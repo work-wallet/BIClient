@@ -1,0 +1,51 @@
+table Status
+	lineageTag: 03d2c00e-a7ec-4faf-9670-076f95562c48
+
+	column ActionStatus_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 52ce4c09-79b7-4285-b8eb-a7b22e65d6c5
+		summarizeBy: none
+		sourceColumn: ActionStatus_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column ActionStatusCode
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: d0e70247-f210-431b-8fa4-25e49f240cd7
+		summarizeBy: none
+		sourceColumn: ActionStatusCode
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column Status
+		dataType: string
+		lineageTag: 8acfa365-cb45-4cbd-84e8-07b9931ccc8a
+		summarizeBy: none
+		sourceColumn: Status
+		sortByColumn: ActionStatusCode
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Status = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("ww-powerbi-demo.database.windows.net", "powerbi"),
+				    mart_ActionStatus = Source{[Schema="mart",Item="ActionStatus"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(mart_ActionStatus,{"_created", "_edited"}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"ActionStatus", "Status"}})
+				in
+				    #"Renamed Columns"
+
+	annotation PBI_ResultType = Table
+

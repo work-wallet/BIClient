@@ -1,0 +1,46 @@
+table Wallet
+	lineageTag: f96aea4c-0686-4441-a7a0-bf1078c98249
+
+	column Wallet_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 87e0fbd8-6c94-4cef-becd-7b2561f4560a
+		summarizeBy: none
+		sourceColumn: Wallet_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column WalletId
+		dataType: string
+		isHidden
+		lineageTag: 3434e696-e44d-42be-b860-f4324594dea1
+		summarizeBy: none
+		sourceColumn: WalletId
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Wallet
+		dataType: string
+		lineageTag: ee50e8a3-c7bb-4f55-997e-ec8fee578df3
+		summarizeBy: none
+		sourceColumn: Wallet
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Wallet = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("ww-powerbi-demo.database.windows.net", "powerbi"),
+				    mart_Wallet = Source{[Schema="mart",Item="Wallet"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(mart_Wallet,{"_created", "_edited"})
+				in
+				    #"Removed Columns"
+
+	annotation PBI_ResultType = Table
+

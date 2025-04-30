@@ -1,0 +1,32 @@
+model Model
+	culture: en-GB
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-GB
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation PBI_QueryOrder = ["Asset","Assignment","Assignment Fact","Assignment Type","Property","Property Fact","Property Type","Asset Status","Wallet"]
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBIDesktopVersion = 2.142.928.0 (25.04)+de52df9f0bb74ad93a80d89c52d63fe6d07e0e1b
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table Asset
+ref table DateTableTemplate_0c6d385d-5454-474d-88d8-d563a721fbcf
+ref table LocalDateTable_37a1848f-35ef-46e0-8dbf-84012bdaf89c
+ref table Assignment
+ref table 'Assignment Fact'
+ref table LocalDateTable_7213fd5e-a0e1-4360-ad5a-4e7a26d063b5
+ref table 'Assignment Type'
+ref table Property
+ref table 'Property Fact'
+ref table 'Property Type'
+ref table 'Asset Status'
+ref table Wallet
+ref table LocalDateTable_9ad9a484-b478-496a-8fab-70e22744f21a
+
+ref cultureInfo en-GB
+

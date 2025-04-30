@@ -1,0 +1,69 @@
+table Category
+	lineageTag: 33416e20-5919-4d5b-b859-9f313e8f5f3a
+
+	column SafetyCardCategory_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 663363d4-2ae4-4cd7-bee1-111820d753e5
+		summarizeBy: none
+		sourceColumn: SafetyCardCategory_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column SafetyCardCategoryId
+		dataType: string
+		isHidden
+		lineageTag: a0497151-50f2-4ec8-8665-7ff2c5710305
+		summarizeBy: none
+		sourceColumn: SafetyCardCategoryId
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Category
+		dataType: string
+		lineageTag: 7ad02d72-8f1f-43c1-a412-1bc59f579f25
+		summarizeBy: none
+		sourceColumn: Category
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Category Reference'
+		dataType: string
+		lineageTag: aa232ad8-2dd7-441a-85d4-2ba25bb3af13
+		summarizeBy: none
+		sourceColumn: Category Reference
+
+		annotation SummarizationSetBy = Automatic
+
+	column Wallet_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 50a50eac-61e2-4bc1-9be7-d48cf6d08e11
+		summarizeBy: none
+		sourceColumn: Wallet_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Category = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("ww-powerbi-demo.database.windows.net", "powerbi"),
+				    mart_SafetyCardCategory = Source{[Schema="mart",Item="SafetyCardCategory"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(mart_SafetyCardCategory,{"_edited", "_created"}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"CategoryName", "Category"}, {"CategoryReference", "Category Reference"}})
+				in
+				    #"Renamed Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

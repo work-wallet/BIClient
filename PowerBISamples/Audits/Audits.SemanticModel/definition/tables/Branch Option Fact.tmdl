@@ -1,0 +1,60 @@
+table 'Branch Option Fact'
+	lineageTag: 3f09cab3-2251-454d-980c-6547a0282213
+
+	column Audit_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 7e028203-ad77-4f9d-af6e-0c59dcd19186
+		summarizeBy: none
+		sourceColumn: Audit_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column AuditBranchOption_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: b1228e85-2d93-496b-9598-ac2253995799
+		summarizeBy: none
+		sourceColumn: AuditBranchOption_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Wallet_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: a55f6088-189f-47c4-bf69-772afbb5acc3
+		summarizeBy: none
+		sourceColumn: Wallet_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column 'Branch Option Counnt' = 1
+		formatString: 0
+		lineageTag: c29ff212-2ca3-4bed-884b-85fa05d61cf7
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Branch Option Fact' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("ww-powerbi-demo.database.windows.net", "powerbi"),
+				    mart_AuditBranchOptionFact = Source{[Schema="mart",Item="AuditBranchOptionFact"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(mart_AuditBranchOptionFact,{"_created", "_edited"})
+				in
+				    #"Removed Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

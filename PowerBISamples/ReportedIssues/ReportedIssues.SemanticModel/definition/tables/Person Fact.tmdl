@@ -1,0 +1,73 @@
+table 'Person Fact'
+	lineageTag: 042b4ea7-046e-406d-9ab1-8f9a4c9168a2
+
+	column ReportedIssue_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: b22e929b-eb43-432f-9777-f5487944ce82
+		summarizeBy: none
+		sourceColumn: ReportedIssue_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column ReportedIssuePerson_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: b611b88e-5be1-4a41-acbb-e13909b2c2ec
+		summarizeBy: none
+		sourceColumn: ReportedIssuePerson_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column Wallet_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: f0901b9f-3761-4831-b6ad-6e983515a74a
+		summarizeBy: none
+		sourceColumn: Wallet_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column 'Person Count' = 1
+		formatString: 0
+		lineageTag: c323b8f1-ed54-4c4c-bb3c-e02a271b7946
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column Investigation
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 41818119-6703-4f0d-9887-28f296c1857a
+		summarizeBy: none
+		sourceColumn: Investigation
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Workflow Stage (Person)' = IF('Person Fact'[Investigation], "Investigation Stage", "Reporting Stage")
+		lineageTag: 013d3b96-c584-442f-89ca-fb9a532ed38b
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Person Fact-54090a2b-0786-481d-ad9e-863d39d1d27a' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("ww-powerbi-demo.database.windows.net", "powerbi"),
+				    mart_ReportedIssuePersonFact = Source{[Schema="mart",Item="ReportedIssuePersonFact"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(mart_ReportedIssuePersonFact,{"_created", "_edited"})
+				in
+				    #"Removed Columns"
+
+	annotation PBI_ResultType = Table
+

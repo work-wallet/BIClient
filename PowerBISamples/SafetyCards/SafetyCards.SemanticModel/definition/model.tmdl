@@ -1,0 +1,29 @@
+model Model
+	culture: en-GB
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-GB
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation PBI_QueryOrder = ["Location","Wallet","Safety Card","Category","Occupation Role","Status","Type"]
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBIDesktopVersion = 2.142.928.0 (25.04)+de52df9f0bb74ad93a80d89c52d63fe6d07e0e1b
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table Location
+ref table Wallet
+ref table 'Safety Card'
+ref table DateTableTemplate_67248598-8986-4159-bed0-0197aa8bc32a
+ref table LocalDateTable_f9be0dac-6de7-4412-ae73-25cfa4796258
+ref table LocalDateTable_eb98d27e-b207-4a82-9273-91957b9f2442
+ref table Category
+ref table 'Occupation Role'
+ref table Status
+ref table Type
+
+ref cultureInfo en-GB
+

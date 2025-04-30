@@ -1,0 +1,95 @@
+relationship 10c11389-33ee-4a59-876a-424adf1193ea
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Asset.'Created On'
+	toColumn: LocalDateTable_37a1848f-35ef-46e0-8dbf-84012bdaf89c.Date
+
+relationship 814fb15d-06d8-4ce4-a948-315025ed72be
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'Assignment Fact'.From
+	toColumn: LocalDateTable_7213fd5e-a0e1-4360-ad5a-4e7a26d063b5.Date
+
+relationship 2cc9e861-2519-4afd-a59e-b6a20db322e5
+	fromColumn: Asset.AssetStatus_key
+	toColumn: 'Asset Status'.AssetStatus_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship bea07cc6-c6bf-469a-8af9-4e5afdfe97b5
+	fromColumn: Asset.Wallet_key
+	toColumn: Wallet.Wallet_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship e0f841f4-fb41-4fb0-8a66-8d45f393d279
+	fromColumn: Assignment.AssetAssignmentType_key
+	toColumn: 'Assignment Type'.AssetAssignmentType_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship 1de04bcb-c100-4ce0-bc4e-e8ae02938df6
+	isActive: false
+	fromColumn: Assignment.Wallet_key
+	toColumn: Wallet.Wallet_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship 3f9d6943-13b4-4830-8d8f-8654b299d9d8
+	crossFilteringBehavior: bothDirections
+	fromColumn: 'Assignment Fact'.Asset_key
+	toColumn: Asset.Asset_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship 05dcdd69-9bd8-4450-be46-ab994752fc23
+	crossFilteringBehavior: bothDirections
+	fromColumn: 'Assignment Fact'.AssetAssignment_key
+	toColumn: Assignment.AssetAssignment_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship e6a3f135-28cc-4f9b-9a0c-ee55472b84f0
+	isActive: false
+	fromColumn: 'Assignment Fact'.Wallet_key
+	toColumn: Wallet.Wallet_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship b417940b-f86b-488c-b261-8b46b3560fe8
+	fromColumn: Property.AssetPropertyType_key
+	toColumn: 'Property Type'.AssetPropertyType_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship fbc5324f-d7a8-4f44-b0a1-3ab739d4f8e6
+	isActive: false
+	fromColumn: Property.Wallet_key
+	toColumn: Wallet.Wallet_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship 19fe2796-2078-4a85-a2ae-4fb2212c4812
+	crossFilteringBehavior: bothDirections
+	fromColumn: 'Property Fact'.Asset_key
+	toColumn: Asset.Asset_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship b9a879c3-ae27-4152-a3ef-045c860e1d27
+	crossFilteringBehavior: bothDirections
+	fromColumn: 'Property Fact'.AssetProperty_key
+	toColumn: Property.AssetProperty_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship e6a0796d-83f0-4a70-b568-2113c65f2c24
+	isActive: false
+	fromColumn: 'Property Fact'.Wallet_key
+	toColumn: Wallet.Wallet_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship 5d4ced6d-043b-4bdc-aba4-fb0ff43a7597
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'Assignment Fact'.To
+	toColumn: LocalDateTable_9ad9a484-b478-496a-8fab-70e22744f21a.Date
+

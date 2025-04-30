@@ -1,0 +1,180 @@
+table Issue
+	lineageTag: ab79b25f-fd82-4d1a-a3dc-b16162ac25df
+
+	column ReportedIssue_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 9353d072-1dc0-4dce-bb37-d1c980ce9245
+		summarizeBy: none
+		sourceColumn: ReportedIssue_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column ReportedIssueId
+		dataType: string
+		isHidden
+		lineageTag: a3ab38d5-352a-44e1-815f-0c21231a66c2
+		summarizeBy: none
+		sourceColumn: ReportedIssueId
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Issue Reference'
+		dataType: string
+		lineageTag: b0a3b1c2-4f18-4635-887c-af3653a07396
+		summarizeBy: none
+		sourceColumn: Issue Reference
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Occurred On'
+		dataType: dateTime
+		formatString: dd/mm/yy
+		lineageTag: 961891f9-04d3-43ba-8f6d-fc0682adac60
+		summarizeBy: none
+		sourceColumn: Occurred On
+
+		variation Variation
+			isDefault
+			relationship: 73d05e09-ab27-49a5-bd9c-161d56304324
+			defaultHierarchy: LocalDateTable_dd6b34cd-63e1-4379-86f1-b704b3815539.'Date Hierarchy'
+
+		changedProperty = FormatString
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column 'Reported On'
+		dataType: dateTime
+		formatString: dd/mm/yy
+		lineageTag: e7cd2682-ebca-46d4-bad5-3e5c5b1b47b0
+		summarizeBy: none
+		sourceColumn: Reported On
+
+		variation Variation
+			isDefault
+			relationship: 8b95d563-308b-4625-9e6b-b7ab8f8d82eb
+			defaultHierarchy: LocalDateTable_4d0d0353-a3b2-4593-b15b-b12b1a357e5a.'Date Hierarchy'
+
+		changedProperty = FormatString
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column 'Reported By'
+		dataType: string
+		lineageTag: 8fc803d9-9758-459f-abf4-6b6942293de1
+		summarizeBy: none
+		sourceColumn: Reported By
+
+		annotation SummarizationSetBy = Automatic
+
+	column ReportedIssueStatus_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: b34ed1ee-0548-43c0-9943-0a92447f372e
+		summarizeBy: none
+		sourceColumn: ReportedIssueStatus_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column ReportedIssueCategory_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 1d429b52-bcef-450d-b12a-f6f41c3e43c8
+		summarizeBy: none
+		sourceColumn: ReportedIssueCategory_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Location_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 2b05ffa0-5b11-432e-aa81-8a8415c5b7cc
+		summarizeBy: none
+		sourceColumn: Location_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Issue Overview'
+		dataType: string
+		lineageTag: e728a276-902a-4346-99b9-4271a948345d
+		summarizeBy: none
+		sourceColumn: Issue Overview
+
+		annotation SummarizationSetBy = Automatic
+
+	column ReportedIssueSeverity_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 93ce4f32-677a-48b2-bbd5-45571c672264
+		summarizeBy: none
+		sourceColumn: ReportedIssueSeverity_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Close Date'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 41aab329-7c6c-4c28-89c1-3d978f64da31
+		summarizeBy: none
+		sourceColumn: Close Date
+
+		variation Variation
+			isDefault
+			relationship: 63b8be96-d8c3-430c-aaf5-6c86aae32d05
+			defaultHierarchy: LocalDateTable_d42af790-e611-47ac-becb-b8ec788208a5.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column Wallet_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 4f0bb3a7-9fd3-4b63-8ace-cd3206eec902
+		summarizeBy: none
+		sourceColumn: Wallet_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column 'Issue Count' = 1
+		formatString: 0
+		lineageTag: b05179ff-b1f4-4817-b686-6cbbc2242b27
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Issue-6d9dfa8c-c90c-4cb1-a4bf-ad691525c771 = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("ww-powerbi-demo.database.windows.net", "powerbi"),
+				    mart_ReportedIssue = Source{[Schema="mart",Item="ReportedIssue"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(mart_ReportedIssue,{"_created", "_edited"}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"ReportedIssueReference", "Issue Reference"}, {"OccurredOn", "Occurred On"}, {"ReportedOn", "Reported On"}, {"ReportedBy", "Reported By"}, {"ReportedIssueOverview", "Issue Overview"}, {"CloseDate", "Close Date"}})
+				in
+				    #"Renamed Columns"
+
+	annotation PBI_ResultType = Table
+

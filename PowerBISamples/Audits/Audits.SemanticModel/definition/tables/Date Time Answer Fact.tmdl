@@ -1,0 +1,108 @@
+table 'Date Time Answer Fact'
+	lineageTag: e28bd823-dea3-4313-bfc3-26c47f279ecf
+
+	column Audit_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 6f058aa4-27bf-400f-a426-4d648e6e9e72
+		summarizeBy: none
+		sourceColumn: Audit_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column AuditDateTimeQuestion_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: fcd53ee0-6247-473e-85e5-f16350fd580a
+		summarizeBy: none
+		sourceColumn: AuditDateTimeQuestion_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column 'Date and Time Answer'
+		dataType: dateTime
+		formatString: dd/mm/yy hh:nn
+		lineageTag: a16a5418-f808-43d0-8757-912a04f00507
+		summarizeBy: none
+		sourceColumn: Date and Time Answer
+
+		variation Variation
+			isDefault
+			relationship: 672a080c-7257-49d8-b1fd-96c18a5d54c8
+			defaultHierarchy: LocalDateTable_7ef8035e-357b-4b15-b518-4c8691a6c936.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column 'Date Answer'
+		dataType: dateTime
+		formatString: dd/mm/yy
+		lineageTag: c35734ea-a589-4f4b-aa86-849843565cb9
+		summarizeBy: none
+		sourceColumn: Date Answer
+
+		variation Variation
+			isDefault
+			relationship: 4568f5b7-68e6-49a0-a1c7-b35e17ef3bed
+			defaultHierarchy: LocalDateTable_c4db13f9-0b56-4937-94a5-cbc70a59eb25.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column 'Time Answer'
+		dataType: dateTime
+		formatString: hh:nn
+		lineageTag: a6e5707e-dbd5-4134-b737-aa02e7414b3c
+		summarizeBy: none
+		sourceColumn: Time Answer
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Time
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column Wallet_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 90bb8d90-a49d-47c1-a4ff-b20f7ab175bd
+		summarizeBy: none
+		sourceColumn: Wallet_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column 'Date Time Answer Count' = 1
+		formatString: 0
+		lineageTag: 60eb7713-37a9-43cb-8e28-351365c10593
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Date Time Answer Fact' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("ww-powerbi-demo.database.windows.net", "powerbi"),
+				    mart_AuditDateTimeAnswerFact = Source{[Schema="mart",Item="AuditDateTimeAnswerFact"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(mart_AuditDateTimeAnswerFact,{"_created", "_edited"}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"AnswerDateTime", "Date and Time Answer"}, {"AnswerDate", "Date Answer"}, {"AnswerTime", "Time Answer"}})
+				in
+				    #"Renamed Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

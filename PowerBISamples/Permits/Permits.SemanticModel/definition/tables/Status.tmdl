@@ -1,0 +1,51 @@
+table Status
+	lineageTag: e8eedf73-7f7c-461a-90f1-3a55326d195e
+
+	column PermitStatus_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: b643f2d9-839e-4b37-81e9-4b02d5824f86
+		summarizeBy: none
+		sourceColumn: PermitStatus_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column PermitStatusCode
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: a0a6bc36-d52c-4e48-9807-b9bb1d60beaa
+		summarizeBy: none
+		sourceColumn: PermitStatusCode
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column Status
+		dataType: string
+		lineageTag: f9d25379-e1eb-4ba6-8b88-47beb584a4c2
+		summarizeBy: none
+		sourceColumn: Status
+		sortByColumn: PermitStatusCode
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Status = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("ww-powerbi-demo.database.windows.net", "powerbi"),
+				    mart_PermitStatus = Source{[Schema="mart",Item="PermitStatus"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(mart_PermitStatus,{"_created", "_edited"}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"PermitStatus", "Status"}})
+				in
+				    #"Renamed Columns"
+
+	annotation PBI_ResultType = Table
+

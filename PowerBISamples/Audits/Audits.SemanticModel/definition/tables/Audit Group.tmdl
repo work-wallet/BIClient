@@ -1,0 +1,61 @@
+table 'Audit Group'
+	lineageTag: 2c27faa3-115a-498b-a0dd-e6ead5695887
+
+	column AuditGroup_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: d4fed587-d60a-46c6-9caf-4dda42c90bb2
+		summarizeBy: none
+		sourceColumn: AuditGroup_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column AuditGroupId
+		dataType: string
+		isHidden
+		lineageTag: 1afc3bdb-6fbf-4f93-95fd-be17baf26586
+		summarizeBy: none
+		sourceColumn: AuditGroupId
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Audit Group'
+		dataType: string
+		lineageTag: 764a871f-c157-4cd0-aff6-8ed830966c41
+		summarizeBy: none
+		sourceColumn: Audit Group
+
+		annotation SummarizationSetBy = Automatic
+
+	column Wallet_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: e5f19630-bbf8-4a32-99af-6ca2a1c1d94e
+		summarizeBy: none
+		sourceColumn: Wallet_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Audit Group' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("ww-powerbi-demo.database.windows.net", "powerbi"),
+				    mart_AuditGroup = Source{[Schema="mart",Item="AuditGroup"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(mart_AuditGroup,{"_created", "_edited"}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"AuditGroup", "Audit Group"}})
+				in
+				    #"Renamed Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

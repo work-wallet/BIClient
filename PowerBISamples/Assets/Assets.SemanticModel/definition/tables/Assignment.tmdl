@@ -1,0 +1,109 @@
+table Assignment
+	lineageTag: d946195a-3aed-4bc3-871a-c4015c4a28c6
+
+	column AssetAssignment_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: cc754e51-fd90-4581-8b9b-ee63e3901753
+		summarizeBy: none
+		sourceColumn: AssetAssignment_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column AssetAssignmentType_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: c8184734-91d5-4ae0-bc89-6b4efc9c20da
+		summarizeBy: none
+		sourceColumn: AssetAssignmentType_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Assigned To'
+		dataType: string
+		lineageTag: 6e3aa4a4-4273-48cb-8411-d16e04b581ed
+		summarizeBy: none
+		sourceColumn: Assigned To
+
+		annotation SummarizationSetBy = Automatic
+
+	column CompanyId
+		dataType: string
+		isHidden
+		lineageTag: fbb21f1c-c240-403c-a759-eaa3236d913b
+		summarizeBy: none
+		sourceColumn: CompanyId
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Company
+		dataType: string
+		lineageTag: ab2d194a-2722-4f13-a7a6-4911d8ca9fb9
+		summarizeBy: none
+		sourceColumn: Company
+
+		annotation SummarizationSetBy = Automatic
+
+	column SiteId
+		dataType: string
+		isHidden
+		lineageTag: 3b94356c-3305-4e9b-81dd-5729a4175f20
+		summarizeBy: none
+		sourceColumn: SiteId
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Site
+		dataType: string
+		lineageTag: 4a9f6572-f78d-4c60-b1a2-746d9c8fdb6f
+		summarizeBy: none
+		sourceColumn: Site
+
+		annotation SummarizationSetBy = Automatic
+
+	column Wallet_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: bc996707-902d-4672-afbd-bb9bae0d2c25
+		summarizeBy: none
+		sourceColumn: Wallet_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	hierarchy 'Company Hierarchy'
+		lineageTag: ca781ade-8b56-43e6-bf0a-b335c6f21a12
+
+		level Company
+			lineageTag: e657d9ae-0306-4e14-8a50-e626deb12ac0
+			column: Company
+
+		level Site
+			lineageTag: 48f8db64-350d-4a52-bf6b-d4eea9ca6fbd
+			column: Site
+
+	partition Assignment = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("ww-powerbi-demo.database.windows.net", "powerbi"),
+				    mart_AssetAssignment = Source{[Schema="mart",Item="AssetAssignment"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(mart_AssetAssignment,{"_created", "_edited"}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"AssignedTo", "Assigned To"}})
+				in
+				    #"Renamed Columns"
+
+	annotation PBI_ResultType = Table
+

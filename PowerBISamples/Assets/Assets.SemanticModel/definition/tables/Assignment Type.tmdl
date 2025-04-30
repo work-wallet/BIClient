@@ -1,0 +1,35 @@
+table 'Assignment Type'
+	lineageTag: 961c8f59-215c-463f-a8b0-6f40aa3a0a22
+
+	column AssetAssignmentType_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: a944ef2f-c690-4c8b-96d9-ffa221e28b65
+		summarizeBy: none
+		sourceColumn: AssetAssignmentType_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Assignment Type'
+		dataType: string
+		lineageTag: 5df062dd-4156-4d82-bd00-540e64f2f24e
+		summarizeBy: none
+		sourceColumn: Assignment Type
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Assignment Type' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("ww-powerbi-demo.database.windows.net", "powerbi"),
+				    mart_AssetAssignmentType = Source{[Schema="mart",Item="AssetAssignmentType"]}[Data],
+				    #"Renamed Columns" = Table.RenameColumns(mart_AssetAssignmentType,{{"AssetAssignmentType", "Assignment Type"}})
+				in
+				    #"Renamed Columns"
+
+	annotation PBI_ResultType = Table
+

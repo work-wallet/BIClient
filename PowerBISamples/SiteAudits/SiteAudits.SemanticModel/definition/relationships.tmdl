@@ -1,0 +1,151 @@
+relationship 31671500-5aaa-45e8-9a9e-739955e64e76
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Audit.'Time Of Inspection'
+	toColumn: LocalDateTable_f1ae6c49-4345-493c-802e-05f9d7b29058.Date
+
+relationship 946b1937-7f51-4acb-8dc9-248532a3572d
+	fromColumn: Audit.Location_key
+	toColumn: Location.Location_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship fde04e44-69a9-40b1-94c7-4272e9aaba06
+	isActive: false
+	fromColumn: 'Checklist Fact'.Location_key
+	toColumn: Location.Location_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship 72dc5da0-4042-40a7-8342-51f03af1e646
+	fromColumn: Location.Wallet_key
+	toColumn: Wallet.Wallet_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship c976b951-027e-4f41-8261-c6eb8c4b38e8
+	crossFilteringBehavior: bothDirections
+	fromColumn: 'Checklist Fact'.SiteAudit_key
+	toColumn: Audit.SiteAudit_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship 4a6c549d-931e-40ca-b487-acae56c8d13e
+	fromColumn: Audit.SiteAuditStatus_key
+	toColumn: 'Audit Status'.SiteAuditStatus_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship c317a19f-f7d6-4283-a5db-cfc3b51a2ae6
+	fromColumn: Audit.SiteAuditType_key
+	toColumn: 'Audit Type'.SiteAuditType_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship 1ca3c8f0-8920-4b6e-b51a-8b8995b61013
+	isActive: false
+	fromColumn: Audit.Wallet_key
+	toColumn: Wallet.Wallet_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship 419c25ed-0b3f-44fb-8318-e99abf32d8b6
+	fromColumn: 'Checklist Fact'.SiteAuditChecklist_key
+	toColumn: Checklist.SiteAuditChecklist_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship a2b87c74-bd24-497b-9f7b-11a5eff0612b
+	fromColumn: 'Checklist Item'.SiteAuditChecklist_key
+	toColumn: Checklist.SiteAuditChecklist_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship ca52735f-6ab8-4b4e-ad19-459cbe01071b
+	isActive: false
+	fromColumn: Checklist.Wallet_key
+	toColumn: Wallet.Wallet_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship 3141d9a0-5d85-4848-8d58-5cbb40265afa
+	isActive: false
+	fromColumn: 'Checklist Fact'.SiteAuditStatus_key
+	toColumn: 'Audit Status'.SiteAuditStatus_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship 9c480e0f-9f11-4075-9798-0fddd791c63f
+	isActive: false
+	fromColumn: 'Checklist Fact'.SiteAuditType_key
+	toColumn: 'Audit Type'.SiteAuditType_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship c377f4a0-109f-4c42-bce6-91a44d7896bd
+	isActive: false
+	fromColumn: 'Checklist Fact'.Wallet_key
+	toColumn: Wallet.Wallet_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship 52b620ef-3499-4941-8b7e-71a89501cb34
+	isActive: false
+	fromColumn: 'Checklist Item'.Wallet_key
+	toColumn: Wallet.Wallet_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship 0f9a8f93-a63c-4a4f-8da9-d8e742eb773e
+	isActive: false
+	fromColumn: 'Audit Type'.Wallet_key
+	toColumn: Wallet.Wallet_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship 99a155aa-f751-4e96-b881-db31500eb64c
+	isActive: false
+	fromColumn: 'Checklist Item Fact'.Location_key
+	toColumn: Location.Location_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship 9fbd4231-4d2f-46df-a00e-85d1e4ad13a2
+	fromColumn: 'Checklist Item Fact'.SiteAudit_key
+	toColumn: Audit.SiteAudit_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship 16d16489-d1ce-450f-8c42-e22f8309517c
+	isActive: false
+	fromColumn: 'Checklist Item Fact'.SiteAuditChecklist_key
+	toColumn: Checklist.SiteAuditChecklist_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship f18f2d8b-2d5c-4807-a9d9-60e1acd8b60c
+	fromColumn: 'Checklist Item Fact'.SiteAuditChecklistItem_key
+	toColumn: 'Checklist Item'.SiteAuditChecklistItem_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship ad3454f9-1c02-44fa-acf0-0f03255eaa69
+	isActive: false
+	fromColumn: 'Checklist Item Fact'.SiteAuditStatus_key
+	toColumn: 'Audit Status'.SiteAuditStatus_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship c055b6c1-b359-44c7-98ad-6acd70c68660
+	isActive: false
+	fromColumn: 'Checklist Item Fact'.SiteAuditType_key
+	toColumn: 'Audit Type'.SiteAuditType_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship e420415c-e306-4f1b-ae30-330557c4f7ab
+	isActive: false
+	fromColumn: 'Checklist Item Fact'.Wallet_key
+	toColumn: Wallet.Wallet_key
+
+	annotation PBI_IsFromSource = FS
+

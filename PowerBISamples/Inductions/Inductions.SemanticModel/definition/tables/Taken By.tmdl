@@ -1,0 +1,132 @@
+table 'Taken By'
+	lineageTag: d1c39eb9-26d7-4578-8a92-f5277ee0bc30
+
+	column InductionTaken_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 62e311e6-ea22-40b5-b792-4a3d6d90341f
+		summarizeBy: none
+		sourceColumn: InductionTaken_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column InductionTakenId
+		dataType: string
+		isHidden
+		lineageTag: ce2ab0a6-953f-4f31-bb2d-e3f7bc53aa07
+		summarizeBy: none
+		sourceColumn: InductionTakenId
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Induction_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: cf9214c9-96c4-402a-8e71-e3e22f3d7652
+		summarizeBy: none
+		sourceColumn: Induction_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column ContactId
+		dataType: string
+		isHidden
+		lineageTag: f5785f70-29d2-47d9-8cab-6cecd479f436
+		summarizeBy: none
+		sourceColumn: ContactId
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Person
+		dataType: string
+		lineageTag: ae8ae6e3-2949-4657-836c-7387058de3ce
+		summarizeBy: none
+		sourceColumn: Person
+
+		annotation SummarizationSetBy = Automatic
+
+	column Company
+		dataType: string
+		lineageTag: d6df6b81-341e-4cee-946b-5e8d2206b03f
+		summarizeBy: none
+		sourceColumn: Company
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Taken On'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 8ba6e657-d8cb-4831-b2ec-ac972b819fd5
+		summarizeBy: none
+		sourceColumn: Taken On
+
+		variation Variation
+			isDefault
+			relationship: e7fe03a5-5028-43ed-a1e3-2e1f33504bd2
+			defaultHierarchy: LocalDateTable_705796de-106f-48c0-811d-f11b3483f209.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Correct Test Question Count'
+		dataType: int64
+		formatString: 0
+		lineageTag: c7da737c-fc35-425e-8f0c-ec023946b209
+		summarizeBy: sum
+		sourceColumn: Correct Test Question Count
+
+		annotation SummarizationSetBy = Automatic
+
+	column InductionTakenStatus_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 702c6e8a-2714-4bba-b495-3f212b9dab5a
+		summarizeBy: none
+		sourceColumn: InductionTakenStatus_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Wallet_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 28c28133-6a2b-4db1-91e9-de12acc99736
+		summarizeBy: none
+		sourceColumn: Wallet_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column 'Taken By Count' = 1
+		formatString: 0
+		lineageTag: 391cf8aa-c679-486c-8be1-1d5c4b1123ac
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Taken By' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("ww-powerbi-demo.database.windows.net", "powerbi"),
+				    mart_InductionTaken = Source{[Schema="mart",Item="InductionTaken"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(mart_InductionTaken,{"_created", "_edited"}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"CompanyName", "Company"}, {"TakenOn", "Taken On"}, {"CorrectTestQuestionCount", "Correct Test Question Count"}, {"Name", "Person"}})
+				in
+				    #"Renamed Columns"
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,60 @@
+table 'Body Part'
+	lineageTag: 0fb312cf-4b87-4e79-9a2f-899dfee8f8d5
+
+	column ReportedIssueBodyPart_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 15783306-4a2c-492c-8313-a1d340d3a4c9
+		summarizeBy: none
+		sourceColumn: ReportedIssueBodyPart_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column ReportedIssueBodyPartEnum_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: b14a3641-7580-4ef4-8e22-31297e401c04
+		summarizeBy: none
+		sourceColumn: ReportedIssueBodyPartEnum_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Body Part Question'
+		dataType: string
+		lineageTag: 28f98b09-a79b-4ac3-8f1a-7114aa9b95e3
+		summarizeBy: none
+		sourceColumn: Body Part Question
+
+		annotation SummarizationSetBy = Automatic
+
+	column Wallet_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 5fc29ab2-2818-4d5a-928e-fffeff61a5a6
+		summarizeBy: none
+		sourceColumn: Wallet_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	partition 'Body Part-175d5b2d-3780-48ab-a229-9e014669f5ca' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("ww-powerbi-demo.database.windows.net", "powerbi"),
+				    mart_ReportedIssueBodyPart = Source{[Schema="mart",Item="ReportedIssueBodyPart"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(mart_ReportedIssueBodyPart,{"_created", "_edited"}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"Question", "Body Part Question"}})
+				in
+				    #"Renamed Columns"
+
+	annotation PBI_ResultType = Table
+

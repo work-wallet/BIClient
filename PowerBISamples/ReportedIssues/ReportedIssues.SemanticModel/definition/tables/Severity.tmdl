@@ -1,0 +1,52 @@
+table Severity
+	lineageTag: ca3fcaeb-056c-46c9-aefd-dcdb65a7c8ab
+
+	column ReportedIssueSeverity_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 11043333-dc45-4c30-a350-2476148035e1
+		summarizeBy: none
+		sourceColumn: ReportedIssueSeverity_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column ReportedIssueSeverityCode
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: d305f5c3-cafe-4857-b680-202735692a3f
+		summarizeBy: none
+		sourceColumn: ReportedIssueSeverityCode
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column Severity
+		dataType: string
+		lineageTag: ab31c865-e070-42bd-be8c-d54b22d5f0a2
+		summarizeBy: none
+		sourceColumn: Severity
+		sortByColumn: ReportedIssueSeverityCode
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Severity-d0b3b0f5-b4a2-4c08-be9d-573c7f12c45f = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("ww-powerbi-demo.database.windows.net", "powerbi"),
+				    mart_ReportedIssueSeverity = Source{[Schema="mart",Item="ReportedIssueSeverity"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(mart_ReportedIssueSeverity,{"_created", "_edited"}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"ReportedIssueSeverity", "Severity"}}),
+				    #"Replaced Value" = Table.ReplaceValue(#"Renamed Columns","","(not set)",Replacer.ReplaceValue,{"Severity"})
+				in
+				    #"Replaced Value"
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,67 @@
+table 'Branch Option'
+	lineageTag: 0a090bc6-be7b-43cb-a8a1-b672a96bde1b
+
+	column ReportedIssueBranchOption_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 197b5909-d26b-468e-b12a-87da28b0ff38
+		summarizeBy: none
+		sourceColumn: ReportedIssueBranchOption_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column Branch
+		dataType: string
+		lineageTag: 33850cb3-6d1e-4a3f-9a2c-accefbe12bfd
+		summarizeBy: none
+		sourceColumn: Branch
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Branch Option'
+		dataType: string
+		lineageTag: b460481e-f793-472f-9e57-08140d3d4d19
+		summarizeBy: none
+		sourceColumn: Branch Option
+
+		annotation SummarizationSetBy = Automatic
+
+	column Wallet_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 96ef9273-c560-4a00-b92f-0835f9f1197a
+		summarizeBy: none
+		sourceColumn: Wallet_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	hierarchy 'Branch Option Hierarchy'
+		lineageTag: c6207bf2-9660-45c9-ba0d-a10325821df7
+
+		level Branch
+			lineageTag: 105afea8-eeda-4ef6-8a85-c8cb19e398e8
+			column: Branch
+
+		level 'Branch Option'
+			lineageTag: 182c04f1-1571-49ea-92ef-2be29c7c03a5
+			column: 'Branch Option'
+
+	partition 'Branch Option-48718959-eaac-447e-a604-4d06def1b1f3' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("ww-powerbi-demo.database.windows.net", "powerbi"),
+				    mart_ReportedIssueBranchOption = Source{[Schema="mart",Item="ReportedIssueBranchOption"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(mart_ReportedIssueBranchOption,{"_created", "_edited"}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"Option", "Branch Option"}})
+				in
+				    #"Renamed Columns"
+
+	annotation PBI_ResultType = Table
+

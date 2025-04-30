@@ -1,0 +1,134 @@
+table 'Assignment Fact'
+	lineageTag: 548151e7-60a0-4a50-93fc-62cb8c8e3c33
+
+	column AssetAssignmentFact_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 496570e4-7403-4032-97bf-aa045be7ab24
+		summarizeBy: none
+		sourceColumn: AssetAssignmentFact_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column Asset_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: c94b6058-236e-48aa-85c9-c52a87a0715d
+		summarizeBy: none
+		sourceColumn: Asset_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column AssetAssignment_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: d0871200-9dca-4db1-9022-9ccc187f2749
+		summarizeBy: none
+		sourceColumn: AssetAssignment_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column From
+		dataType: dateTime
+		formatString: dd/mm/yy
+		lineageTag: de86299b-2eca-4d58-9b28-1b0bc4896794
+		summarizeBy: none
+		sourceColumn: From
+
+		variation Variation
+			isDefault
+			relationship: 814fb15d-06d8-4ce4-a948-315025ed72be
+			defaultHierarchy: LocalDateTable_7213fd5e-a0e1-4360-ad5a-4e7a26d063b5.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column 'Is Latest'
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 0d969e46-fa48-4ff3-8857-62c54449ee4c
+		summarizeBy: none
+		sourceColumn: Is Latest
+
+		annotation SummarizationSetBy = Automatic
+
+	column Wallet_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: d26a3305-ece5-4ee7-9e14-202ef049a4bb
+		summarizeBy: none
+		sourceColumn: Wallet_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column To
+		dataType: dateTime
+		formatString: dd/mm/yyyy
+		lineageTag: d55d33dc-9d1f-40c9-9399-2f96401d8874
+		summarizeBy: none
+		sourceColumn: To
+
+		variation Variation
+			isDefault
+			relationship: 5d4ced6d-043b-4bdc-aba4-fb0ff43a7597
+			defaultHierarchy: LocalDateTable_9ad9a484-b478-496a-8fab-70e22744f21a.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column 'Is Latest (int)' = IF('Assignment Fact'[Is Latest] = TRUE(), 1, IF('Assignment Fact'[Is Latest] = FALSE(), 0))
+		isHidden
+		formatString: 0
+		lineageTag: 1773e635-d921-4daa-9825-a8e9ce78663a
+		summarizeBy: sum
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Days = IF('Assignment Fact'[Is Latest] = FALSE(),'Assignment Fact'[To] - 'Assignment Fact'[From], BLANK())
+		dataType: double
+		formatString: 0.0
+		lineageTag: ea5a2574-8f86-4a04-b573-e1b12fd14c8e
+		summarizeBy: sum
+
+		changedProperty = DataType
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Assignment Number'
+		dataType: int64
+		formatString: 0
+		lineageTag: 1c68c98f-9c1d-48f4-9938-7934e9ffb728
+		summarizeBy: none
+		sourceColumn: Assignment Number
+
+		annotation SummarizationSetBy = User
+
+	partition 'Assignment Fact' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("ww-powerbi-demo.database.windows.net", "powerbi"),
+				    mart_AssetAssignmentFact = Source{[Schema="mart",Item="AssetAssignmentFact"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(mart_AssetAssignmentFact,{"_created"}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"AssignedOn", "From"}, {"IsLatest", "Is Latest"}, {"AssignedEnd", "To"}, {"AssignmentNumber", "Assignment Number"}})
+				in
+				    #"Renamed Columns"
+
+	annotation PBI_ResultType = Table
+

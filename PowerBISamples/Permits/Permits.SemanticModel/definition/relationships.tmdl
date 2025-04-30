@@ -1,0 +1,80 @@
+relationship bd56e3e7-ec1c-464a-9841-7ecbad91de66
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Permit.'Issued On'
+	toColumn: LocalDateTable_55b7fdf5-ca9f-42af-a60a-4aef862a76d8.Date
+
+relationship bb25036b-40de-403b-b6ac-ae94041b30ed
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Permit.'Issued Expiry'
+	toColumn: LocalDateTable_1849e61a-88cf-4015-aad3-d07751c2d5c7.Date
+
+relationship 0174ce8a-5a10-45bf-9c1e-8a88dc018596
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Permit.'Closed On'
+	toColumn: LocalDateTable_5994158e-734d-437f-b126-414813922861.Date
+
+relationship a4980354-2196-4687-9064-54244619dac3
+	isActive: false
+	fromColumn: Location.Wallet_key
+	toColumn: Wallet.Wallet_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship 3370b80e-aa67-4a66-8735-5d81bde2f160
+	fromColumn: Permit.Location_key
+	toColumn: Location.Location_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship 7e2dba7b-4024-4689-87a3-551c4fa8437b
+	fromColumn: Permit.PermitCategory_key
+	toColumn: Category.PermitCategory_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship 749db814-43b2-46b7-ba2e-a5483b03f961
+	fromColumn: Permit.PermitStatus_key
+	toColumn: Status.PermitStatus_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship 94e7062d-dea2-4e0d-b449-fa1ebc6df8b6
+	fromColumn: Permit.Wallet_key
+	toColumn: Wallet.Wallet_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship c0432ef2-bc8a-42b7-8422-039f975fe918
+	isActive: false
+	fromColumn: Category.Wallet_key
+	toColumn: Wallet.Wallet_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship 6d2ebced-f405-4118-a9b4-5603a2e5e6f8
+	isActive: false
+	fromColumn: 'Checklist Answer'.Wallet_key
+	toColumn: Wallet.Wallet_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship 269efab6-11ae-431e-9471-6eb544bdd2f2
+	crossFilteringBehavior: bothDirections
+	fromColumn: 'Checklist Answer Fact'.Permit_key
+	toColumn: Permit.Permit_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship a751d58b-4dfb-4ddd-a5a8-86f46ac16ec7
+	fromColumn: 'Checklist Answer Fact'.PermitChecklistAnswer_key
+	toColumn: 'Checklist Answer'.PermitChecklistAnswer_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship 718eecc1-5ef2-46ee-83ee-4c4178ffde7d
+	isActive: false
+	fromColumn: 'Checklist Answer Fact'.Wallet_key
+	toColumn: Wallet.Wallet_key
+
+	annotation PBI_IsFromSource = FS
+

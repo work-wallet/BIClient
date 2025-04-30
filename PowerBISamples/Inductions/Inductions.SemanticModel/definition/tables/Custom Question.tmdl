@@ -1,0 +1,56 @@
+table 'Custom Question'
+	lineageTag: 2cde93b0-9f3a-47bd-ae2b-296e2fa527be
+
+	column InductionCustomQuestion_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: a730dc79-508b-4f58-95b1-34287d1ef542
+		summarizeBy: none
+		sourceColumn: InductionCustomQuestion_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Question
+		dataType: string
+		lineageTag: 7c942ff4-0a4c-4b8d-82aa-f479e7dae920
+		summarizeBy: none
+		sourceColumn: Question
+
+		annotation SummarizationSetBy = Automatic
+
+	column Answer
+		dataType: string
+		lineageTag: 88a4c5b4-35d2-4d4a-96fb-47edaf401850
+		summarizeBy: none
+		sourceColumn: Answer
+
+		annotation SummarizationSetBy = Automatic
+
+	column Wallet_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 7df8c6fe-418f-46da-a7ce-33da63375915
+		summarizeBy: none
+		sourceColumn: Wallet_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Custom Question' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("ww-powerbi-demo.database.windows.net", "powerbi"),
+				    mart_InductionCustomQuestion = Source{[Schema="mart",Item="InductionCustomQuestion"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(mart_InductionCustomQuestion,{"_created", "_edited"}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"Title", "Question"}, {"Value", "Answer"}})
+				in
+				    #"Renamed Columns"
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,50 @@
+table Status
+	lineageTag: 84425ed7-13f5-4c96-83b9-b4fd8e59bc9d
+
+	column SafetyCardStatus_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 0db41f5b-789c-4d8b-ab78-24f18b6398b3
+		summarizeBy: none
+		sourceColumn: SafetyCardStatus_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column SafetyCardStatusCode
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 72eed1a4-f144-424f-96ee-ff5855bb3e67
+		summarizeBy: none
+		sourceColumn: SafetyCardStatusCode
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Status
+		dataType: string
+		lineageTag: 824d9b40-08fd-4da2-8e78-7e85b1380eb7
+		summarizeBy: none
+		sourceColumn: Status
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Status = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("ww-powerbi-demo.database.windows.net", "powerbi"),
+				    mart_SafetyCardStatus = Source{[Schema="mart",Item="SafetyCardStatus"]}[Data],
+				    #"Renamed Columns" = Table.RenameColumns(mart_SafetyCardStatus,{{"SafetyCardStatus", "Status"}}),
+				    #"Removed Columns" = Table.RemoveColumns(#"Renamed Columns",{"_created", "_edited"})
+				in
+				    #"Removed Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

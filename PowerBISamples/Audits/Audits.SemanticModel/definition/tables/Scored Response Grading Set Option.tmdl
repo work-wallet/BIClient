@@ -1,0 +1,125 @@
+table 'Scored Response Grading Set Option'
+	lineageTag: 4559a4d4-f2dc-4b57-9d73-9ca09cb536b7
+
+	column GradingSetOption_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: e6d9d641-7d97-4521-84e9-78c60ede0f59
+		summarizeBy: none
+		sourceColumn: GradingSetOption_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column GradingSetId
+		dataType: string
+		isHidden
+		lineageTag: 31014e67-dd2c-455f-ac18-18d1f95c8e38
+		summarizeBy: none
+		sourceColumn: GradingSetId
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column GradingSetVersion
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: c3ebf650-ff9c-4c90-97b1-1f0dd814accc
+		summarizeBy: none
+		sourceColumn: GradingSetVersion
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column GradingSetOptionId
+		dataType: string
+		isHidden
+		lineageTag: 21824b32-223b-4608-94cf-4cdb10440938
+		summarizeBy: none
+		sourceColumn: GradingSetOptionId
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Scored Response Grading Set'
+		dataType: string
+		lineageTag: afda0d0c-92f9-4881-b604-425193069c65
+		summarizeBy: none
+		sourceColumn: Scored Response Grading Set
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Scored Response Grading'
+		dataType: string
+		lineageTag: 7670e490-b598-42a2-a884-e136466f8199
+		summarizeBy: none
+		sourceColumn: Scored Response Grading
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Scored Response Grading Value'
+		dataType: int64
+		formatString: 0
+		lineageTag: 31eba3f0-69a3-449c-acb4-299fbd2fffc7
+		summarizeBy: none
+		sourceColumn: Scored Response Grading Value
+
+		annotation SummarizationSetBy = User
+
+	column 'Scored Response Grading Colour'
+		dataType: string
+		lineageTag: fb1f9472-ef30-4da0-9903-b81270fcbead
+		summarizeBy: none
+		sourceColumn: Scored Response Grading Colour
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Scored Response Grading Set Is Percentage'
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: a5a80eb1-9da9-4d9c-a055-a6a74dcc2739
+		summarizeBy: none
+		sourceColumn: Scored Response Grading Set Is Percentage
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Scored Response Grading Set Is Score'
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 1f7e16b5-e29d-4a47-a6e2-cf207401c04b
+		summarizeBy: none
+		sourceColumn: Scored Response Grading Set Is Score
+
+		annotation SummarizationSetBy = Automatic
+
+	column Wallet_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 495f90bd-4886-46ac-a277-e5c0fa837484
+		summarizeBy: none
+		sourceColumn: Wallet_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	partition 'Scored Response Grading Set Option' = m
+		mode: import
+		source =
+				let
+				    Source = #"Grading Set Option",
+				    #"Renamed Columns" = Table.RenameColumns(Source,{{"Grading Set", "Scored Response Grading Set"}, {"Grading", "Scored Response Grading"}, {"Grading Value", "Scored Response Grading Value"}, {"Grading Colour", "Scored Response Grading Colour"}, {"Grading Set Is Percentage", "Scored Response Grading Set Is Percentage"}, {"Grading Set Is Score", "Scored Response Grading Set Is Score"}})
+				in
+				    #"Renamed Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

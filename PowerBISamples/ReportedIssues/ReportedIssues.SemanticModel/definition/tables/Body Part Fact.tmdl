@@ -1,0 +1,76 @@
+table 'Body Part Fact'
+	lineageTag: d11a4010-c2aa-4126-86fc-2d8d2be870aa
+
+	column ReportedIssue_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: c2d47265-a2a8-4a0f-ba12-8116f9eec9b9
+		summarizeBy: none
+		sourceColumn: ReportedIssue_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column ReportedIssueBodyPart_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: d16ac01b-2197-45e4-9057-abf7616484cd
+		summarizeBy: none
+		sourceColumn: ReportedIssueBodyPart_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column Wallet_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 4924b4b5-77a6-4aad-a91d-d12dfc202953
+		summarizeBy: none
+		sourceColumn: Wallet_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column 'Body Part Count' = 1
+		formatString: 0
+		lineageTag: a10fa091-4ec9-4aa0-9302-ee9dd00a4a2f
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column Investigation
+		dataType: boolean
+		isHidden
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 545a36c6-29ec-475b-a471-1366dd6af152
+		summarizeBy: none
+		sourceColumn: Investigation
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Workflow Stage (Body Part)' = IF('Body Part Fact'[Investigation], "Investigation Stage", "Reporting Stage")
+		lineageTag: 042bff4e-f585-4996-9041-7719bf316283
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Body Part Fact-dbc3d6f9-c5f7-4bbc-83ab-a9fac52e293c' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("ww-powerbi-demo.database.windows.net", "powerbi"),
+				    mart_ReportedIssueBodyPartFact = Source{[Schema="mart",Item="ReportedIssueBodyPartFact"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(mart_ReportedIssueBodyPartFact,{"_created", "_edited"})
+				in
+				    #"Removed Columns"
+
+	annotation PBI_ResultType = Table
+

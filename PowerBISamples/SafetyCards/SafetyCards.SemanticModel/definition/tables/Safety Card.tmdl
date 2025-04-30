@@ -1,0 +1,216 @@
+table 'Safety Card'
+	lineageTag: 53255aa4-be37-4d64-b53e-1b27126e4ad1
+
+	column SafetyCard_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: c98f3b7a-ddbb-4400-9c16-f83613948331
+		summarizeBy: none
+		sourceColumn: SafetyCard_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column SafetyCardId
+		dataType: string
+		isHidden
+		lineageTag: f06ee97d-4545-427a-b2bc-8b187a8a7776
+		summarizeBy: none
+		sourceColumn: SafetyCardId
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Reference
+		dataType: string
+		lineageTag: 8dc15ece-fa57-488d-ae47-7952eb205d02
+		summarizeBy: none
+		sourceColumn: Reference
+
+		annotation SummarizationSetBy = Automatic
+
+	column SafetyCardType_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 4cba716b-e4d7-4a72-b87f-ac602c5e17ee
+		summarizeBy: none
+		sourceColumn: SafetyCardType_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Reported By User'
+		dataType: string
+		lineageTag: e4bd018a-7fbd-4e3f-889c-3eb1a472ba8e
+		summarizeBy: none
+		sourceColumn: Reported By User
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Reported Time'
+		dataType: dateTime
+		formatString: dd/mm/yyyy hh:nn
+		lineageTag: 8bfb9944-c954-4317-bfc6-b750d16399bd
+		summarizeBy: none
+		sourceColumn: Reported Time
+
+		variation Variation
+			isDefault
+			relationship: 3678d027-4425-4620-a291-11c0628037e0
+			defaultHierarchy: LocalDateTable_f9be0dac-6de7-4412-ae73-25cfa4796258.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column SafetyCardCategory_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 44e18127-36cb-44fa-a139-3e82bf7a3fea
+		summarizeBy: none
+		sourceColumn: SafetyCardCategory_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Employer
+		dataType: string
+		lineageTag: 27ac2fe9-c331-4302-a54f-b149cbbcd89b
+		summarizeBy: none
+		sourceColumn: Employer
+
+		annotation SummarizationSetBy = Automatic
+
+	column Employee
+		dataType: string
+		lineageTag: 075027aa-1920-45f8-92ed-d387e283e7c1
+		summarizeBy: none
+		sourceColumn: Employee
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Induction Number'
+		dataType: string
+		lineageTag: 895bd607-6dfa-4f49-ba3b-934810a2558b
+		summarizeBy: none
+		sourceColumn: Induction Number
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Report Details'
+		dataType: string
+		lineageTag: b1efbc06-c8eb-4467-a409-89c1b2282c2c
+		summarizeBy: none
+		sourceColumn: Report Details
+
+		annotation SummarizationSetBy = Automatic
+
+	column SafetyCardStatus_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 114b7a6c-7af1-458e-916d-f2c0a1ccbf47
+		summarizeBy: none
+		sourceColumn: SafetyCardStatus_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Has Signature'
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 09afe956-5d7f-4875-9eb0-666fa9cb7931
+		summarizeBy: none
+		sourceColumn: Has Signature
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Signature Date'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 5f0131bc-d03e-46dd-ba19-4dec3dc786bb
+		summarizeBy: none
+		sourceColumn: Signature Date
+
+		variation Variation
+			isDefault
+			relationship: dc22753d-51c4-452d-95ae-d560f8383099
+			defaultHierarchy: LocalDateTable_eb98d27e-b207-4a82-9273-91957b9f2442.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column Occupation
+		dataType: string
+		lineageTag: ab08b407-7019-46e8-b933-d3a8228c430f
+		summarizeBy: none
+		sourceColumn: Occupation
+
+		annotation SummarizationSetBy = Automatic
+
+	column SafetyCardOccupationRole_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: ff6ff0db-d3e1-44a7-bf53-3b2ab8c621b1
+		summarizeBy: none
+		sourceColumn: SafetyCardOccupationRole_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Location_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: ca24861c-99ff-4f53-8306-ae0315626a8c
+		summarizeBy: none
+		sourceColumn: Location_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'External Identifier'
+		dataType: string
+		lineageTag: e087f0ed-a350-4f63-bfc9-defc9934e1ff
+		summarizeBy: none
+		sourceColumn: External Identifier
+
+		annotation SummarizationSetBy = Automatic
+
+	column Wallet_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 06bf9f7f-056a-4d2f-a1e2-abb28e2af921
+		summarizeBy: none
+		sourceColumn: Wallet_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Safety Card' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("ww-powerbi-demo.database.windows.net", "powerbi"),
+				    mart_SafetyCard = Source{[Schema="mart",Item="SafetyCard"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(mart_SafetyCard,{"_created", "_edited"}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"ExternalIdentifier", "External Identifier"}, {"SafetyCardReference", "Reference"}, {"ReportedByUser", "Reported By User"}, {"ReportedDateTime", "Reported Time"}, {"InductionNumber", "Induction Number"}, {"ReportDetails", "Report Details"}, {"HasSignature", "Has Signature"}, {"SignatureDate", "Signature Date"}})
+				in
+				    #"Renamed Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

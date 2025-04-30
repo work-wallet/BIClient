@@ -1,0 +1,67 @@
+table Person
+	lineageTag: 44afeb98-ad25-4a5f-a84e-2954545f3ee4
+
+	column ReportedIssuePerson_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: cd930810-db13-458e-9663-19681585245d
+		summarizeBy: none
+		sourceColumn: ReportedIssuePerson_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column 'Person Question'
+		dataType: string
+		lineageTag: 42b17881-e0bd-46b7-9149-9c58d8ce013d
+		summarizeBy: none
+		sourceColumn: Person Question
+
+		annotation SummarizationSetBy = Automatic
+
+	column Person
+		dataType: string
+		lineageTag: 3071d834-e0b6-4c33-9e3d-1f111aa45b1c
+		summarizeBy: none
+		sourceColumn: Person
+
+		annotation SummarizationSetBy = Automatic
+
+	column Wallet_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 4642ffff-d0c5-4201-a0e4-658f3567817e
+		summarizeBy: none
+		sourceColumn: Wallet_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	hierarchy 'Person Hierarchy'
+		lineageTag: b7c0e768-a7b1-435f-812b-59c80f82ad1a
+
+		level 'Person Question'
+			lineageTag: 4cbafa21-87a7-49c5-bbc7-c3447aa66c2b
+			column: 'Person Question'
+
+		level Person
+			lineageTag: 3fef4141-e322-4d34-9c4d-b71d4269d4e4
+			column: Person
+
+	partition Person-659e322e-bc45-445a-abda-974582a59b61 = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("ww-powerbi-demo.database.windows.net", "powerbi"),
+				    mart_ReportedIssuePerson = Source{[Schema="mart",Item="ReportedIssuePerson"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(mart_ReportedIssuePerson,{"_created", "_edited"}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"Question", "Person Question"}, {"Option", "Person"}})
+				in
+				    #"Renamed Columns"
+
+	annotation PBI_ResultType = Table
+

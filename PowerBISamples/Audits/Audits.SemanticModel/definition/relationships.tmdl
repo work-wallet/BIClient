@@ -1,0 +1,320 @@
+relationship 72dc5da0-4042-40a7-8342-51f03af1e646
+	isActive: false
+	fromColumn: Location.Wallet_key
+	toColumn: Wallet.Wallet_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship 6000319d-c5ad-4e73-895e-0138952a0ef3
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Audit.'Inspected On'
+	toColumn: LocalDateTable_7ce7b00e-94c4-470d-90cb-c5a5a678fcc4.Date
+
+relationship 672a080c-7257-49d8-b1fd-96c18a5d54c8
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'Date Time Answer Fact'.'Date and Time Answer'
+	toColumn: LocalDateTable_7ef8035e-357b-4b15-b518-4c8691a6c936.Date
+
+relationship 4568f5b7-68e6-49a0-a1c7-b35e17ef3bed
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'Date Time Answer Fact'.'Date Answer'
+	toColumn: LocalDateTable_c4db13f9-0b56-4937-94a5-cbc70a59eb25.Date
+
+relationship a9b48b72-be9b-46ab-b187-571c22c9f812
+	fromColumn: Audit.AuditGroup_key
+	toColumn: 'Audit Group'.AuditGroup_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship 64877d3a-939b-4022-a26c-6bab9c0306dc
+	fromColumn: Audit.AuditStatus_key
+	toColumn: 'Audit Status'.AuditStatus_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship a323ce12-bbaa-4e68-aa2c-dee7d656accf
+	fromColumn: Audit.AuditType_key
+	toColumn: 'Audit Type'.AuditType_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship 108d6779-7b8a-4a4f-975f-64efb54f6741
+	fromColumn: Audit.Location_key
+	toColumn: Location.Location_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship 15b5359a-037e-4013-93fd-cd2e4fc973f8
+	fromColumn: Audit.Wallet_key
+	toColumn: Wallet.Wallet_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship 845de126-9f66-49aa-97e7-ce9bdd11a419
+	isActive: false
+	fromColumn: 'Branch Option'.Wallet_key
+	toColumn: Wallet.Wallet_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship 659dcd2f-bd84-41c7-9749-ecdf991680c3
+	isActive: false
+	fromColumn: 'Branch Option Fact'.Wallet_key
+	toColumn: Wallet.Wallet_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship dabb785a-4d00-4602-838a-9d9ef26e9ee3
+	isActive: false
+	fromColumn: 'Checklist Answer Fact'.Wallet_key
+	toColumn: Wallet.Wallet_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship 0d91f0b0-5596-4990-b9b3-100d10b8bf22
+	isActive: false
+	fromColumn: 'Checklist Option'.Wallet_key
+	toColumn: Wallet.Wallet_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship 68b779a1-e223-40c6-8df9-8c98b7b3eceb
+	isActive: false
+	fromColumn: 'Date Time Answer Fact'.Wallet_key
+	toColumn: Wallet.Wallet_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship d6aab14a-daad-4c33-8a50-52328837d524
+	isActive: false
+	fromColumn: 'Date Time Question'.Wallet_key
+	toColumn: Wallet.Wallet_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship 7389490d-9f6d-40b8-b629-c4b68dd9c4dc
+	isActive: false
+	fromColumn: 'Grading Set Option'.Wallet_key
+	toColumn: Wallet.Wallet_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship 233a5dae-91ec-4aaa-8f5b-53a696aa04bd
+	isActive: false
+	fromColumn: 'Audit Group'.Wallet_key
+	toColumn: Wallet.Wallet_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship 220904b7-d5a6-4ce3-b6c1-31ea996f0485
+	crossFilteringBehavior: bothDirections
+	fromColumn: 'Inspected By Fact'.Audit_key
+	toColumn: Audit.Audit_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship 94c96788-ee86-4e48-b323-f8a9260b200b
+	crossFilteringBehavior: bothDirections
+	fromColumn: 'Inspected By Fact'.Contact_key
+	toColumn: Contact.Contact_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship b3a56e32-8958-4c01-aad3-6a9796984fba
+	isActive: false
+	fromColumn: 'Inspected By Fact'.Wallet_key
+	toColumn: Wallet.Wallet_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship e136e814-d15f-4512-be4a-fe124977d7af
+	isActive: false
+	fromColumn: 'Numeric Answer Fact'.Wallet_key
+	toColumn: Wallet.Wallet_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship 02894f4a-a240-4f09-8f13-9f7e9033e5e5
+	isActive: false
+	fromColumn: 'Numeric Question'.Wallet_key
+	toColumn: Wallet.Wallet_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship b41eb2b6-ff01-4e0b-970d-67a9c2b09c5a
+	isActive: false
+	fromColumn: 'Scored Response'.Wallet_key
+	toColumn: Wallet.Wallet_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship a4c8462b-e639-4191-b8ca-4629932d97ff
+	isActive: false
+	fromColumn: 'Scored Response Fact'.Wallet_key
+	toColumn: Wallet.Wallet_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship 4ab456d1-c25d-4321-956b-6bf9d9fbd298
+	isActive: false
+	fromColumn: 'Score Section'.Wallet_key
+	toColumn: Wallet.Wallet_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship 1c48fab8-9771-44f1-b000-3ad05e59d343
+	isActive: false
+	fromColumn: 'Score Section Fact'.Wallet_key
+	toColumn: Wallet.Wallet_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship bb7b56bd-6f46-4290-b9d6-41d8a1045647
+	isActive: false
+	fromColumn: 'Score Tag'.Wallet_key
+	toColumn: Wallet.Wallet_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship c0accf50-368b-4ca0-9e8f-d02cd2939994
+	fromColumn: 'Score Tag Fact'.AuditScoreTag_key
+	toColumn: 'Score Tag'.AuditScoreTag_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship d1fe16f1-68d6-498f-afe5-4bba19d8abe6
+	isActive: false
+	fromColumn: 'Score Tag Fact'.Wallet_key
+	toColumn: Wallet.Wallet_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship a236247c-9451-4316-9b60-fa5a7006417e
+	isActive: false
+	fromColumn: 'Audit Type'.Wallet_key
+	toColumn: Wallet.Wallet_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship 4f896999-f827-4054-bb7d-2db918350b28
+	isActive: false
+	fromColumn: Contact.Wallet_key
+	toColumn: Wallet.Wallet_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship 03e5eb1b-a4e1-4b21-9f6c-9cfab65d3220
+	fromColumn: 'Numeric Question'.Unit_key
+	toColumn: Unit.Unit_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship df6e90e5-f710-62dd-0514-18e3f21f52c1
+	crossFilteringBehavior: bothDirections
+	fromColumn: 'Score Tag Fact'.Audit_key
+	toColumn: Audit.Audit_key
+
+relationship c2cd0ec8-1d1e-9469-8667-899a3f100b92
+	crossFilteringBehavior: bothDirections
+	fromColumn: 'Branch Option Fact'.Audit_key
+	toColumn: Audit.Audit_key
+
+relationship e85d3da2-8b54-74fd-da4b-b49aeb21b743
+	crossFilteringBehavior: bothDirections
+	fromColumn: 'Checklist Answer Fact'.Audit_key
+	toColumn: Audit.Audit_key
+
+relationship 4c6fbb7b-5829-d3f3-e7fa-c3b1495c1a06
+	crossFilteringBehavior: bothDirections
+	fromColumn: 'Score Section Fact'.Audit_key
+	toColumn: Audit.Audit_key
+
+relationship d9fddc21-1c9c-7e6c-d782-6a74fe3fb0bc
+	crossFilteringBehavior: bothDirections
+	fromColumn: 'Scored Response Fact'.Audit_key
+	toColumn: Audit.Audit_key
+
+relationship f21e4aab-0a91-50fb-2755-501a0b7f357c
+	isActive: false
+	fromColumn: 'Audit Grading Set Option'.Wallet_key
+	toColumn: Wallet.Wallet_key
+
+relationship c46872b3-c577-7a80-32b1-c70bc7d536c8
+	isActive: false
+	fromColumn: 'Scored Response Grading Set Option'.Wallet_key
+	toColumn: Wallet.Wallet_key
+
+relationship 9e70bb03-cb61-86a2-3f59-ffcb26731855
+	isActive: false
+	fromColumn: 'Score Tag Grading Set Option'.Wallet_key
+	toColumn: Wallet.Wallet_key
+
+relationship a99f0c93-2df3-8406-301d-720aa8118cee
+	isActive: false
+	fromColumn: 'Score Section Grading Set Option'.Wallet_key
+	toColumn: Wallet.Wallet_key
+
+relationship 4d0246b6-4fb2-f2cd-317c-d4f5729f0d42
+	fromColumn: Audit.GradingSetOption_key
+	toColumn: 'Audit Grading Set Option'.GradingSetOption_key
+
+relationship 670196e5-3992-3203-0c37-0e78eb1ad79f
+	fromColumn: 'Score Section Fact'.GradingSetOption_key
+	toColumn: 'Score Section Grading Set Option'.GradingSetOption_key
+
+relationship 0615012d-560d-5dea-a837-71a07127fe43
+	fromColumn: 'Score Tag Fact'.GradingSetOption_key
+	toColumn: 'Score Tag Grading Set Option'.GradingSetOption_key
+
+relationship fce35993-0844-6a56-db41-fb4c11dfc09f
+	crossFilteringBehavior: bothDirections
+	fromColumn: 'Scored Response Fact'.GradingSetOption_key
+	toColumn: 'Scored Response Grading Set Option'.GradingSetOption_key
+
+relationship a50078dd-1baa-9b58-be3d-6bc9ee110628
+	crossFilteringBehavior: bothDirections
+	fromColumn: 'Numeric Answer Fact'.Audit_key
+	toColumn: Audit.Audit_key
+
+relationship f0d992a7-2267-b329-e2e0-caebec19c0e4
+	fromColumn: 'Numeric Answer Fact'.AuditNumericQuestion_key
+	toColumn: 'Numeric Question'.AuditNumericQuestion_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship 0c6d3582-59ea-1290-7ad0-9c52f506dc92
+	fromColumn: 'Date Time Answer Fact'.AuditDateTimeQuestion_key
+	toColumn: 'Date Time Question'.AuditDateTimeQuestion_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship 575ec07f-052b-08af-57f5-f2a4c4e4417c
+	crossFilteringBehavior: bothDirections
+	fromColumn: 'Date Time Answer Fact'.Audit_key
+	toColumn: Audit.Audit_key
+
+relationship 3d964c21-5fda-7328-8164-c3edbab94c71
+	fromColumn: 'Checklist Answer Fact'.AuditChecklistOption_key
+	toColumn: 'Checklist Option'.AuditChecklistOption_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship 06b00818-1a3c-2013-fcf1-b4b10bfe6fdf
+	fromColumn: 'Branch Option Fact'.AuditBranchOption_key
+	toColumn: 'Branch Option'.AuditBranchOption_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship 91a0df41-17bd-d4a8-a0bd-4e6edebdfb68
+	crossFilteringBehavior: bothDirections
+	fromColumn: 'Scored Response Fact'.AuditScoredResponse_key
+	toColumn: 'Scored Response'.AuditScoredResponse_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship 615de0d7-63a4-8c52-0da2-2f5f1ff0b851
+	fromColumn: 'Score Section Fact'.AuditScoreSection_key
+	toColumn: 'Score Section'.AuditScoreSection_key
+
+	annotation PBI_IsFromSource = FS
+

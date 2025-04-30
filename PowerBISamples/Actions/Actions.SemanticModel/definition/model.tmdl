@@ -1,0 +1,29 @@
+model Model
+	culture: en-GB
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-GB
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation PBI_QueryOrder = ["Action","Priority","Status","Type","Action Update","Wallet"]
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBIDesktopVersion = 2.142.928.0 (25.04)+de52df9f0bb74ad93a80d89c52d63fe6d07e0e1b
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table Action
+ref table DateTableTemplate_360e3de1-4a23-47e0-90cc-95670ce2d258
+ref table LocalDateTable_1a68d81b-af39-45d7-9ca1-d622f61db5ef
+ref table LocalDateTable_63dc6543-5454-4316-966c-21e8d90c28e3
+ref table Priority
+ref table Status
+ref table Type
+ref table 'Action Update'
+ref table LocalDateTable_b400b2e2-7e47-4c0d-b8da-bd1adbaec555
+ref table Wallet
+
+ref cultureInfo en-GB
+

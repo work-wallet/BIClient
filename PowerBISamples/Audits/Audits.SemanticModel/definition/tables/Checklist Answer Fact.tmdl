@@ -1,0 +1,60 @@
+table 'Checklist Answer Fact'
+	lineageTag: 9f49e6c7-f8c6-4fe5-b117-c9ba55203fc6
+
+	column Audit_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: d2675b6f-12d4-4406-a4ea-f4d93a9da2c8
+		summarizeBy: none
+		sourceColumn: Audit_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column AuditChecklistOption_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: cc6403d2-5037-4d78-bfba-c09d8b687bb1
+		summarizeBy: none
+		sourceColumn: AuditChecklistOption_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Wallet_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 4e317a24-5632-49b7-be7e-ae76bfaf048f
+		summarizeBy: none
+		sourceColumn: Wallet_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column 'Checklist Answer Count' = 1
+		formatString: 0
+		lineageTag: 0fd9db06-ab26-483f-8ddc-bd7e04dbf050
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Checklist Answer Fact' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("ww-powerbi-demo.database.windows.net", "powerbi"),
+				    mart_AuditChecklistAnswerFact = Source{[Schema="mart",Item="AuditChecklistAnswerFact"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(mart_AuditChecklistAnswerFact,{"_created", "_edited"})
+				in
+				    #"Removed Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

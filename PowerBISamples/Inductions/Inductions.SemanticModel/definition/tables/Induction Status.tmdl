@@ -1,0 +1,48 @@
+table 'Induction Status'
+	lineageTag: 6f45f30e-0240-4cef-b7f1-b3acbfac9612
+
+	column InductionStatus_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 9c3c4c0d-d7aa-4030-b1f5-98861af90489
+		summarizeBy: none
+		sourceColumn: InductionStatus_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column InductionStatusCode
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: f1bb5208-eabb-4750-abd2-1e1f9b169407
+		summarizeBy: none
+		sourceColumn: InductionStatusCode
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column 'Induction Status'
+		dataType: string
+		lineageTag: de9972f3-8d36-442a-8498-10b848401109
+		summarizeBy: none
+		sourceColumn: Induction Status
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Induction Status' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("ww-powerbi-demo.database.windows.net", "powerbi"),
+				    mart_InductionStatus = Source{[Schema="mart",Item="InductionStatus"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(mart_InductionStatus,{"_created", "_edited"}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"InductionStatus", "Induction Status"}})
+				in
+				    #"Renamed Columns"
+
+	annotation PBI_ResultType = Table
+

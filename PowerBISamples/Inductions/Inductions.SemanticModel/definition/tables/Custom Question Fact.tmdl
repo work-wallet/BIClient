@@ -1,0 +1,58 @@
+table 'Custom Question Fact'
+	lineageTag: 6c16818b-37c8-4bb1-a2d1-ac0aa04be04c
+
+	column InductionTaken_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 9234850d-367b-4534-ad5e-7b5529063532
+		summarizeBy: none
+		sourceColumn: InductionTaken_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column InductionCustomQuestion_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 707c6d55-08ca-4893-a8e8-9ace7362c21b
+		summarizeBy: none
+		sourceColumn: InductionCustomQuestion_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Wallet_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: d6790233-3a51-4618-ac27-760403650e0b
+		summarizeBy: none
+		sourceColumn: Wallet_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column 'Custom Question Count' = 1
+		formatString: 0
+		lineageTag: f9482763-9c8b-44c6-ad25-dcae56f4622e
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Custom Question Fact' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("ww-powerbi-demo.database.windows.net", "powerbi"),
+				    mart_InductionCustomQuestionFact = Source{[Schema="mart",Item="InductionCustomQuestionFact"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(mart_InductionCustomQuestionFact,{"_created", "_edited"})
+				in
+				    #"Removed Columns"
+
+	annotation PBI_ResultType = Table
+

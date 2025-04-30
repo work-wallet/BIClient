@@ -1,0 +1,35 @@
+table 'Property Type'
+	lineageTag: c2b7a152-612c-4020-98f8-28f0366e5cba
+
+	column AssetPropertyType_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 7592d2e7-36dc-4606-b680-131104d879e6
+		summarizeBy: none
+		sourceColumn: AssetPropertyType_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Property Type'
+		dataType: string
+		lineageTag: c8f5f2c6-97db-4437-a4d6-d005c995bd8d
+		summarizeBy: none
+		sourceColumn: Property Type
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Property Type' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("ww-powerbi-demo.database.windows.net", "powerbi"),
+				    mart_AssetPropertyType = Source{[Schema="mart",Item="AssetPropertyType"]}[Data],
+				    #"Renamed Columns" = Table.RenameColumns(mart_AssetPropertyType,{{"AssetPropertyType", "Property Type"}})
+				in
+				    #"Renamed Columns"
+
+	annotation PBI_ResultType = Table
+

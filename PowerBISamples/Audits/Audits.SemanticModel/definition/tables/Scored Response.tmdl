@@ -1,0 +1,98 @@
+table 'Scored Response'
+	lineageTag: 0530d395-4153-4658-af7b-13b1611db825
+
+	column AuditScoredResponse_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: fbc47cbc-8e22-4090-b613-4158982bbb59
+		summarizeBy: none
+		sourceColumn: AuditScoredResponse_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column BranchId
+		dataType: string
+		isHidden
+		lineageTag: 136b1d01-6475-4d4d-82ba-60e74d13e2b4
+		summarizeBy: none
+		sourceColumn: BranchId
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column OptionId
+		dataType: string
+		isHidden
+		lineageTag: d2d85ac4-de60-4384-83de-b5edc4a9172f
+		summarizeBy: none
+		sourceColumn: OptionId
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Scored Response Question'
+		dataType: string
+		lineageTag: 0a0a7f9e-d83d-4663-95d2-40e42c361de0
+		summarizeBy: none
+		sourceColumn: Scored Response Question
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Scored Response Answer'
+		dataType: string
+		lineageTag: 4fb175f2-1507-48a4-99b7-67acf9ec1e66
+		summarizeBy: none
+		sourceColumn: Scored Response Answer
+
+		annotation SummarizationSetBy = Automatic
+
+	column Order
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 3249116c-6fde-40e3-9fe7-9c73b1f9481c
+		summarizeBy: none
+		sourceColumn: Order
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column Wallet_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 0e44677c-4456-49d3-af78-e845ddfca62a
+		summarizeBy: none
+		sourceColumn: Wallet_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column Response = 'Scored Response'[Order] & " - " & 'Scored Response'[Scored Response Answer]
+		lineageTag: 14234657-6a12-435d-a555-ed164514381a
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Scored Response' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("ww-powerbi-demo.database.windows.net", "powerbi"),
+				    mart_AuditScoredResponse = Source{[Schema="mart",Item="AuditScoredResponse"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(mart_AuditScoredResponse,{"_created", "_edited"}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"Branch", "Scored Response Question"}, {"Value", "Scored Response Answer"}})
+				in
+				    #"Renamed Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,67 @@
+table 'Option Select'
+	lineageTag: 2042ba1c-1418-4e10-ad33-487de047d368
+
+	column ReportedIssueOptionSelect_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: b745ea47-95ee-4639-a1cc-ebf7ccfb6a69
+		summarizeBy: none
+		sourceColumn: ReportedIssueOptionSelect_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column 'Option Question'
+		dataType: string
+		lineageTag: d934f00c-b435-41f0-b370-6e7253863dbb
+		summarizeBy: none
+		sourceColumn: Option Question
+
+		annotation SummarizationSetBy = Automatic
+
+	column Option
+		dataType: string
+		lineageTag: 7233608d-dc29-4953-a767-a9c0e851993c
+		summarizeBy: none
+		sourceColumn: Option
+
+		annotation SummarizationSetBy = Automatic
+
+	column Wallet_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: cd357720-1160-41a0-b607-b2de12fb0bf6
+		summarizeBy: none
+		sourceColumn: Wallet_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	hierarchy 'Option Hierarchy'
+		lineageTag: 48493585-c3e6-43aa-a982-b0cd8a8b59ff
+
+		level 'Option Question'
+			lineageTag: 21d66ca3-9864-43f6-982e-10f6ce29e903
+			column: 'Option Question'
+
+		level Option
+			lineageTag: 218ef1c1-75b9-4cf9-a0ab-fef4bf742afa
+			column: Option
+
+	partition 'Option Select-0c4602cb-8031-4f11-91b6-c44dfde36460' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("ww-powerbi-demo.database.windows.net", "powerbi"),
+				    mart_ReportedIssueOptionSelect = Source{[Schema="mart",Item="ReportedIssueOptionSelect"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(mart_ReportedIssueOptionSelect,{"_created", "_edited"}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"Question", "Option Question"}, {"Option", "Option"}})
+				in
+				    #"Renamed Columns"
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,50 @@
+table 'Occupation Role'
+	lineageTag: 872828d3-e36a-4f6e-9c46-e18a28b223b9
+
+	column SafetyCardOccupationRole_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 80639c00-753b-4f9d-a192-da296c8f6651
+		summarizeBy: none
+		sourceColumn: SafetyCardOccupationRole_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column OccupationRoleCode
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 4b7c06db-232e-4e2f-a00c-8d7afd6d0706
+		summarizeBy: none
+		sourceColumn: OccupationRoleCode
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Occupation Role'
+		dataType: string
+		lineageTag: 787ae285-0948-4870-bf9f-6479ecd56eb3
+		summarizeBy: none
+		sourceColumn: Occupation Role
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Occupation Role' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("ww-powerbi-demo.database.windows.net", "powerbi"),
+				    mart_SafetyCardOccupationRole = Source{[Schema="mart",Item="SafetyCardOccupationRole"]}[Data],
+				    #"Renamed Columns" = Table.RenameColumns(mart_SafetyCardOccupationRole,{{"OccupationRole", "Occupation Role"}}),
+				    #"Removed Columns" = Table.RemoveColumns(#"Renamed Columns",{"_created", "_edited"})
+				in
+				    #"Removed Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,96 @@
+table 'Score Section'
+	lineageTag: 135cd0d2-ed00-402b-9e31-a4882185f272
+
+	column AuditScoreSection_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: cfb6bea2-b0e1-4cb7-a6ad-0b5624b4d219
+		summarizeBy: none
+		sourceColumn: AuditScoreSection_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column AuditType_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: a166d164-42e7-48c5-9034-038e6f41c920
+		summarizeBy: none
+		sourceColumn: AuditType_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column SectionId
+		dataType: string
+		isHidden
+		lineageTag: 28749192-be22-42b9-b68f-28260a6dc55c
+		summarizeBy: none
+		sourceColumn: SectionId
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Section
+		dataType: string
+		lineageTag: eb754df7-f5fd-4792-94d4-725a89250c38
+		summarizeBy: none
+		sourceColumn: Section
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Display Score'
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 0058f921-2c2a-4480-b8ff-2bfe8c0497ff
+		summarizeBy: none
+		sourceColumn: Display Score
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Order
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 5977654e-f8ba-4341-a326-f3e566bb6d4e
+		summarizeBy: none
+		sourceColumn: Order
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column Wallet_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 6ce3054a-118c-4063-aa28-00c4fbb419d8
+		summarizeBy: none
+		sourceColumn: Wallet_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	partition 'Score Section' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("ww-powerbi-demo.database.windows.net", "powerbi"),
+				    mart_AuditScoreSection = Source{[Schema="mart",Item="AuditScoreSection"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(mart_AuditScoreSection,{"_created", "_edited"}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"DisplayScore", "Display Score"}})
+				in
+				    #"Renamed Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

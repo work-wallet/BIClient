@@ -1,0 +1,177 @@
+table 'Audit Type'
+	lineageTag: 992fc2cf-62f8-44e3-911d-adad4abb7281
+
+	column AuditType_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 34d2ce5f-d8c7-4656-9d2c-e8f85d867d12
+		summarizeBy: none
+		sourceColumn: AuditType_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column AuditTypeId
+		dataType: string
+		isHidden
+		lineageTag: 18bfe189-79d8-4be1-b586-a87f62c9acbe
+		summarizeBy: none
+		sourceColumn: AuditTypeId
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Audit Type Version'
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: f912804b-855a-4bd1-99b8-c0bb61c21ac0
+		summarizeBy: none
+		sourceColumn: Audit Type Version
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Audit Type'
+		dataType: string
+		lineageTag: 5ce1ff80-8da3-4bee-97fd-b72a2c6279ff
+		summarizeBy: none
+		sourceColumn: Audit Type
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Audit Type Description'
+		dataType: string
+		lineageTag: 5b73b14d-93ac-44af-bfe8-67c57408a7e4
+		summarizeBy: none
+		sourceColumn: Audit Type Description
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Scoring Enabled'
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 5b4499a9-c595-474b-aed6-e102b154de07
+		summarizeBy: none
+		sourceColumn: Scoring Enabled
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Display Percentage'
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: f0c183de-0e51-4b4f-8248-c3470b26c2e2
+		summarizeBy: none
+		sourceColumn: Display Percentage
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Display Total Score'
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 9aebdf77-7aad-4539-8574-69c9807b8fe6
+		summarizeBy: none
+		sourceColumn: Display Total Score
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Display Average Score'
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 60e58b47-3d47-48da-ace4-d2acf24dc0b3
+		summarizeBy: none
+		sourceColumn: Display Average Score
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Grading Set'
+		dataType: string
+		lineageTag: c71759e4-f027-4bf2-9bc2-d9ffef2d14f4
+		summarizeBy: none
+		sourceColumn: Grading Set
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Grading Set Is Percentage'
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: e44ca7a3-d7cd-4420-95b5-99ae08fd43a6
+		summarizeBy: none
+		sourceColumn: Grading Set Is Percentage
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Grading Set Is Score'
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 1110c9e0-a4d3-45ac-a5f1-5ede0e51f074
+		summarizeBy: none
+		sourceColumn: Grading Set Is Score
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Reporting Enabled'
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 31e30940-f47b-4bd0-802b-37ee66c7d07a
+		summarizeBy: none
+		sourceColumn: Reporting Enabled
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Reporting Abbreviation'
+		dataType: string
+		lineageTag: b96ae844-a2dd-4009-ba03-5cee2e8d3432
+		summarizeBy: none
+		sourceColumn: Reporting Abbreviation
+
+		annotation SummarizationSetBy = Automatic
+
+	column Wallet_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 62254e9c-5e14-4103-b20d-af309b0d7a27
+		summarizeBy: none
+		sourceColumn: Wallet_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column GradingSetId
+		dataType: string
+		lineageTag: 1edf726a-b9e6-407a-abe2-093369f1fa95
+		summarizeBy: none
+		sourceColumn: GradingSetId
+
+		annotation SummarizationSetBy = Automatic
+
+	column GradingSetVersion
+		dataType: int64
+		formatString: 0
+		lineageTag: c9ae0619-a9a0-45de-8fe9-e0eda740cb47
+		summarizeBy: none
+		sourceColumn: GradingSetVersion
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Audit Type' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("ww-powerbi-demo.database.windows.net", "powerbi"),
+				    mart_AuditType = Source{[Schema="mart",Item="AuditType"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(mart_AuditType,{"_created", "_edited"}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"AuditTypeVersion", "Audit Type Version"}, {"AuditType", "Audit Type"}, {"ScoringEnabled", "Scoring Enabled"}, {"DisplayPercentage", "Display Percentage"}, {"DisplayTotalScore", "Display Total Score"}, {"DisplayAverageScore", "Display Average Score"}, {"GradingSet", "Grading Set"}, {"Description", "Audit Type Description"}, {"GradingSetIsPercentage", "Grading Set Is Percentage"}, {"GradingSetIsScore", "Grading Set Is Score"}, {"ReportingEnabled", "Reporting Enabled"}, {"ReportingAbbreviation", "Reporting Abbreviation"}})
+				in
+				    #"Renamed Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

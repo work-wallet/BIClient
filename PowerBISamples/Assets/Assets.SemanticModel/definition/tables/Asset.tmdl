@@ -1,0 +1,118 @@
+table Asset
+	lineageTag: 1fbdd36a-5356-45f3-8c79-63344009ee01
+
+	column Asset_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 2135c0d1-7bcb-41a1-bae1-6628bea7573a
+		summarizeBy: none
+		sourceColumn: Asset_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column AssetId
+		dataType: string
+		isHidden
+		lineageTag: e1016ea4-192f-4e21-b570-974785bb14ab
+		summarizeBy: none
+		sourceColumn: AssetId
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Asset Type'
+		dataType: string
+		lineageTag: da46f7ca-2971-4ea1-9208-82e7d3c4dacf
+		summarizeBy: none
+		sourceColumn: Asset Type
+
+		annotation SummarizationSetBy = Automatic
+
+	column AssetStatus_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 2629575c-5876-424f-aab6-7490d4b041f6
+		summarizeBy: none
+		sourceColumn: AssetStatus_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Reference
+		dataType: string
+		lineageTag: e4ba0696-0b1a-4d0f-a203-8cba4433274b
+		summarizeBy: none
+		sourceColumn: Reference
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Asset Name'
+		dataType: string
+		lineageTag: d445a91f-a16a-4cd0-821d-492c931a4d0c
+		summarizeBy: none
+		sourceColumn: Asset Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Asset Notes'
+		dataType: string
+		lineageTag: 42071586-7246-443b-a024-3a27bc4e6828
+		summarizeBy: none
+		sourceColumn: Asset Notes
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Created On'
+		dataType: dateTime
+		formatString: dd/mm/yy
+		lineageTag: 353e3857-f920-4767-b857-81a04ffac03d
+		summarizeBy: none
+		sourceColumn: Created On
+
+		variation Variation
+			isDefault
+			relationship: 10c11389-33ee-4a59-876a-424adf1193ea
+			defaultHierarchy: LocalDateTable_37a1848f-35ef-46e0-8dbf-84012bdaf89c.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column Wallet_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 4d312161-a638-4c02-8f22-2ac5f3dfe1de
+		summarizeBy: none
+		sourceColumn: Wallet_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Asset Count' = 1
+		formatString: 0
+		lineageTag: 26b70d5a-fc07-4f3a-801b-f18269f49f16
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Asset = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("ww-powerbi-demo.database.windows.net", "powerbi"),
+				    mart_Asset = Source{[Schema="mart",Item="Asset"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(mart_Asset,{"_created", "_edited"}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"Name", "Asset Name"}, {"Description", "Asset Notes"}, {"CreatedOn", "Created On"}, {"AssetType", "Asset Type"}})
+				in
+				    #"Renamed Columns"
+
+	annotation PBI_ResultType = Table
+

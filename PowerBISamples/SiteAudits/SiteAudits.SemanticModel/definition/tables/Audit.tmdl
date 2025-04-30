@@ -1,0 +1,179 @@
+table Audit
+	lineageTag: a08d52fc-2c34-4bbe-b3a2-a9c74189eb0c
+
+	column SiteAudit_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 40bdffa8-5dce-4d22-b197-fb6aef7f4732
+		summarizeBy: none
+		sourceColumn: SiteAudit_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column SiteAuditId
+		dataType: string
+		isHidden
+		lineageTag: db4f2c82-8d8c-43cb-9715-a10f30509c72
+		summarizeBy: none
+		sourceColumn: SiteAuditId
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Audit Reference'
+		dataType: string
+		lineageTag: 7c0369e3-f476-44eb-910d-b2af2e19ba75
+		summarizeBy: none
+		sourceColumn: Audit Reference
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Time Of Inspection'
+		dataType: dateTime
+		formatString: dd/mm/yyyy hh:nn
+		lineageTag: 85a26d2f-b08a-45b3-a66d-b0faa0c27c73
+		summarizeBy: none
+		sourceColumn: Time Of Inspection
+
+		variation Variation
+			isDefault
+			relationship: 31671500-5aaa-45e8-9a9e-739955e64e76
+			defaultHierarchy: LocalDateTable_f1ae6c49-4345-493c-802e-05f9d7b29058.'Date Hierarchy'
+
+		changedProperty = FormatString
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column SiteAuditStatus_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: b76dbf71-81f7-49c4-982d-b67ccc2ab3f8
+		summarizeBy: none
+		sourceColumn: SiteAuditStatus_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column SiteAuditType_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 57aa9bf2-4f61-422d-9f9e-2b3ed4dff1e1
+		summarizeBy: none
+		sourceColumn: SiteAuditType_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Location_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 418e390b-9597-4227-9bfe-0c50c49fd61d
+		summarizeBy: none
+		sourceColumn: Location_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Audit Summary'
+		dataType: string
+		lineageTag: 1251c2c2-5836-4caf-9c7e-a11012f07b45
+		summarizeBy: none
+		sourceColumn: Audit Summary
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Audit Has Score'
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: dc234a18-629c-423b-827b-006d620fd9b9
+		summarizeBy: none
+		sourceColumn: Audit Has Score
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Audit Passed'
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 8b7a599a-0cb9-4bdc-84bb-05954dbc0db8
+		summarizeBy: none
+		sourceColumn: Audit Passed
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Audit Actual Score'
+		dataType: double
+		lineageTag: b771ccfe-b1ce-45e9-9bb0-953100a2ea99
+		summarizeBy: sum
+		sourceColumn: Audit Actual Score
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Audit Potential Score'
+		dataType: double
+		lineageTag: f38a1dbc-bd84-4727-a7f5-433fb3e0afe0
+		summarizeBy: sum
+		sourceColumn: Audit Potential Score
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Audit %'
+		dataType: int64
+		formatString: #,0
+		lineageTag: d3c133ed-8611-4de6-bed1-33a6c97ae2dc
+		summarizeBy: average
+		sourceColumn: Audit %
+
+		changedProperty = FormatString
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	column Wallet_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 4dfe45e0-a8bd-4314-8e84-bd2942d60fe7
+		summarizeBy: none
+		sourceColumn: Wallet_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column 'Audit Count' = 1
+		formatString: 0
+		lineageTag: e477422a-11f7-413c-b2d1-9cc807ddf641
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Audit-6b11ca81-b82a-4bf4-93ed-e189c7ad4b95 = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("ww-powerbi-demo.database.windows.net", "powerbi"),
+				    mart_SiteAudit = Source{[Schema="mart",Item="SiteAudit"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(mart_SiteAudit,{"_created", "_edited"}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"HasScore", "Audit Has Score"}, {"DateAndTimeOfInspection", "Time Of Inspection"}, {"AuditReference", "Audit Reference"}, {"AuditSummary", "Audit Summary"}, {"ActualScore", "Audit Actual Score"}, {"PotentialScore", "Audit Potential Score"}, {"Percent", "Audit %"}, {"Passed", "Audit Passed"}})
+				in
+				    #"Renamed Columns"
+
+	annotation PBI_ResultType = Table
+

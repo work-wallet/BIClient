@@ -1,0 +1,60 @@
+relationship a664852e-57b3-4471-8280-e32f09bd7a85
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Action.'Due On'
+	toColumn: LocalDateTable_1a68d81b-af39-45d7-9ca1-d622f61db5ef.Date
+
+relationship 6b9ef040-d7fd-44f5-82e3-c4c32931516a
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Action.'Created On'
+	toColumn: LocalDateTable_63dc6543-5454-4316-966c-21e8d90c28e3.Date
+
+relationship f32b18bd-d9b9-4998-86d0-459de9df78f1
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'Action Update'.'Created On'
+	toColumn: LocalDateTable_b400b2e2-7e47-4c0d-b8da-bd1adbaec555.Date
+
+relationship a3701399-3cb7-40c6-9d7b-6c5c327bf4d0
+	fromColumn: Action.ActionPriority_key
+	toColumn: Priority.ActionPriority_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship 51140a83-43b9-4725-8129-7681d7f6fb72
+	fromColumn: Action.ActionStatus_key
+	toColumn: Status.ActionStatus_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship 8aa5bc54-a559-4ae3-8004-a91230fbb0f1
+	fromColumn: Action.ActionType_key
+	toColumn: Type.ActionType_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship befd163d-2344-4f93-8d71-e8032438a45d
+	fromColumn: Action.Wallet_key
+	toColumn: Wallet.Wallet_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship 60f33dcb-ad4d-49fe-ab41-59e24f7e0226
+	crossFilteringBehavior: bothDirections
+	fromColumn: 'Action Update'.Action_key
+	toColumn: Action.Action_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship e3176194-67af-41fb-833c-22acc7a8f7c3
+	isActive: false
+	fromColumn: 'Action Update'.ActionStatus_key
+	toColumn: Status.ActionStatus_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship 331cd442-83c9-4e37-8c8a-24ee18e05df9
+	isActive: false
+	fromColumn: 'Action Update'.Wallet_key
+	toColumn: Wallet.Wallet_key
+
+	annotation PBI_IsFromSource = FS
+

@@ -1,0 +1,160 @@
+table Checklist
+	lineageTag: 28a135da-59ee-4691-a700-3b17e30c8403
+
+	column SiteAuditChecklist_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: a6d3e712-87df-4043-9b1f-ce482fe79b7d
+		summarizeBy: none
+		sourceColumn: SiteAuditChecklist_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column SiteAuditChecklistId
+		dataType: string
+		isHidden
+		lineageTag: 11fe6981-12d1-4a55-bcbe-1b6dad0c7ed2
+		summarizeBy: none
+		sourceColumn: SiteAuditChecklistId
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column SiteAuditChecklistVersion
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 67e954c3-fefa-4e0d-bc60-1ce6c02e6a17
+		summarizeBy: none
+		sourceColumn: SiteAuditChecklistVersion
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column Checklist
+		dataType: string
+		lineageTag: 7c433098-dcad-4dac-8343-a569724d418a
+		summarizeBy: none
+		sourceColumn: Checklist
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Checklist Description'
+		dataType: string
+		lineageTag: 9f4bec82-8562-4214-b8f7-56107481aa85
+		summarizeBy: none
+		sourceColumn: Checklist Description
+
+		annotation SummarizationSetBy = Automatic
+
+	column NumberOfResponseOptions
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 3402395d-d53c-4e52-aff8-d09fb578b5d6
+		summarizeBy: none
+		sourceColumn: NumberOfResponseOptions
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column 'Scoring Enabled'
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 50494f39-b7d6-42c2-b900-499e2368ccf0
+		summarizeBy: none
+		sourceColumn: Scoring Enabled
+
+		annotation SummarizationSetBy = Automatic
+
+	column PassStatus
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 57039b20-c679-4bad-a0fe-c865c5dcba73
+		summarizeBy: none
+		sourceColumn: PassStatus
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column ChecklistWeighting
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 63873597-6dd7-429c-9bda-7ab337a68bc0
+		summarizeBy: none
+		sourceColumn: ChecklistWeighting
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column FailedItemScoring
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 1f424290-7933-4378-962f-dba242366437
+		summarizeBy: none
+		sourceColumn: FailedItemScoring
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column FailedItemsCountTowardsAverageScore
+		dataType: boolean
+		isHidden
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 4eaf18f4-8a46-437a-8e9e-e244a440da1f
+		summarizeBy: none
+		sourceColumn: FailedItemsCountTowardsAverageScore
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column FailedItemsSetTheChecklistScoreToZero
+		dataType: boolean
+		isHidden
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: b53a010f-5638-4f4f-8b82-20da3ff0d3f1
+		summarizeBy: none
+		sourceColumn: FailedItemsSetTheChecklistScoreToZero
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Wallet_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 18417745-13fc-4e2e-a76d-b0c061fc6303
+		summarizeBy: none
+		sourceColumn: Wallet_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	partition Checklist-28df3bf5-e5f7-4836-a5d6-9ae8d4023625 = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("ww-powerbi-demo.database.windows.net", "powerbi"),
+				    mart_SiteAuditChecklist = Source{[Schema="mart",Item="SiteAuditChecklist"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(mart_SiteAuditChecklist,{"_created", "_edited"}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"ChecklistName", "Checklist"}, {"ChecklistDescription", "Checklist Description"}, {"ScoringEnabled", "Scoring Enabled"}})
+				in
+				    #"Renamed Columns"
+
+	annotation PBI_ResultType = Exception
+

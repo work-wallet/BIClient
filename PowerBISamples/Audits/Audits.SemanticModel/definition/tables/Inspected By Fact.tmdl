@@ -1,0 +1,60 @@
+table 'Inspected By Fact'
+	lineageTag: 0e37693c-6e14-4794-bd06-f999ef384760
+
+	column Audit_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: aa12e4d2-76ce-45fd-929f-cad9c2a254a4
+		summarizeBy: none
+		sourceColumn: Audit_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Contact_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 5011ee29-b374-46a6-a30e-de28bc007f2b
+		summarizeBy: none
+		sourceColumn: Contact_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Wallet_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 1395f1cb-22a0-40bc-8e89-c1b54cf54440
+		summarizeBy: none
+		sourceColumn: Wallet_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column 'Inspected By Count' = 1
+		formatString: 0
+		lineageTag: fdc0396a-c89d-40d5-9b89-97a3a59c37e2
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Inspected By Fact' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("ww-powerbi-demo.database.windows.net", "powerbi"),
+				    mart_AuditInspectedByFact = Source{[Schema="mart",Item="AuditInspectedByFact"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(mart_AuditInspectedByFact,{"_created", "_edited"})
+				in
+				    #"Removed Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,78 @@
+table Unit
+	isHidden
+	lineageTag: a27913a2-d5d6-4382-805b-7dc81dac48a6
+
+	column Unit_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 55fab976-79af-43da-a540-7863fb61edc9
+		summarizeBy: none
+		sourceColumn: Unit_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column UnitCode
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 529529cf-38db-40db-9e29-61f99c243235
+		summarizeBy: none
+		sourceColumn: UnitCode
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Unit Group'
+		dataType: string
+		isHidden
+		lineageTag: 7baea313-9386-4377-9645-d34a96ad27b3
+		summarizeBy: none
+		sourceColumn: Unit Group
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Unit
+		dataType: string
+		isHidden
+		lineageTag: b5bcf98b-a12e-4379-97d4-aa2682da61ed
+		summarizeBy: none
+		sourceColumn: Unit
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Unit Acronym'
+		dataType: string
+		isHidden
+		lineageTag: d07142b2-39f4-4b66-b792-eeadd8164ef9
+		summarizeBy: none
+		sourceColumn: Unit Acronym
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Unit = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("ww-powerbi-demo.database.windows.net", "powerbi"),
+				    mart_Unit = Source{[Schema="mart",Item="Unit"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(mart_Unit,{"_created", "_edited"}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"UnitAcronym", "Unit Acronym"}, {"Group", "Unit Group"}})
+				in
+				    #"Renamed Columns"
+
+	changedProperty = IsHidden
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

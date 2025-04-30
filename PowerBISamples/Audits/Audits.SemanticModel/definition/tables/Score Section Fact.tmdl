@@ -1,0 +1,163 @@
+table 'Score Section Fact'
+	lineageTag: 1c7e31f1-f044-4e7f-ad78-da4ae6c622bb
+
+	column Audit_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 13a38646-00cd-4f7f-b473-696176d88aa1
+		summarizeBy: none
+		sourceColumn: Audit_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column AuditScoreSection_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 1bcbdc2e-6dad-4fc2-99df-3437a9cfbc5a
+		summarizeBy: none
+		sourceColumn: AuditScoreSection_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column Score
+		dataType: int64
+		formatString: 0
+		lineageTag: d301c8a7-2a0b-4ac4-9e91-8f040ebd1ab4
+		summarizeBy: sum
+		sourceColumn: Score
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Potential Score'
+		dataType: int64
+		formatString: 0
+		lineageTag: 640f143e-ba5b-40ae-aeac-9568adde7074
+		summarizeBy: sum
+		sourceColumn: Potential Score
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Average Score'
+		dataType: double
+		lineageTag: 442e38c0-4894-4258-b355-12c2c4d56c7f
+		summarizeBy: none
+		sourceColumn: Average Score
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Average Potential Score'
+		dataType: double
+		lineageTag: f12e3856-d5df-4cbe-8426-fc48a46219c1
+		summarizeBy: none
+		sourceColumn: Average Potential Score
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Percentage Score'
+		dataType: double
+		lineageTag: 7ca906b3-90cf-4caf-b5a7-80b8451c7a99
+		summarizeBy: none
+		sourceColumn: Percentage Score
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Flags
+		dataType: int64
+		formatString: 0
+		lineageTag: e7d88637-95eb-4bfd-9b7c-f3b8c8c3e38b
+		summarizeBy: sum
+		sourceColumn: Flags
+
+		annotation SummarizationSetBy = Automatic
+
+	column Wallet_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 76e893e5-1579-4f2d-bb44-27dec5cc80d3
+		summarizeBy: none
+		sourceColumn: Wallet_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column 'Score Section Count' = 1
+		formatString: 0
+		lineageTag: 30b4db9c-577e-4eef-9b95-2f9a7a3f3d77
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column GradingSetOption_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: fd1974f0-57b4-4f26-9f1f-dfeebf94873f
+		summarizeBy: none
+		sourceColumn: GradingSetOption_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column 'Score Display' =
+			
+			VAR DisplayScore =
+			    AND(RELATED('Audit Type'[Display Total Score]), 'Score Section Fact'[Score] <> -1)
+			VAR DisplayPercentage =
+			    AND(RELATED('Audit Type'[Display Percentage]), 'Score Section Fact'[Percentage Score] <> -1)
+			VAR ScoreText =
+			    IF(DisplayScore, 'Score Section Fact'[Score] & "/" & 'Score Section Fact'[Potential Score], "")
+			VAR PercentageText =
+			    IF(DisplayPercentage, FORMAT('Score Section Fact'[Percentage Score], "#%"), "")
+			RETURN
+			    IF(
+			        RELATED('Audit Type'[Scoring Enabled]),
+			        IF(
+			            AND(DisplayScore, DisplayPercentage),
+			            ScoreText & " (" & PercentageText & ")",
+			            IF(
+			                DisplayScore,
+			                ScoreText,
+			                IF(
+			                    DisplayPercentage,
+			                    PercentageText,
+			                    ""
+			                )
+			            )
+			        ),
+			        "scoring not enabled"
+			    )
+		lineageTag: b08cd98e-b67d-46de-bd39-d3b30da77e0c
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Score Section Fact' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("ww-powerbi-demo.database.windows.net", "powerbi"),
+				    mart_AuditScoreSectionFact = Source{[Schema="mart",Item="AuditScoreSectionFact"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(mart_AuditScoreSectionFact,{"_created", "_edited"}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"TotalScore", "Score"}, {"TotalPotentialScore", "Potential Score"}, {"AverageScore", "Average Score"}, {"AveragePotentialScore", "Average Potential Score"}, {"PercentageScore", "Percentage Score"}})
+				in
+				    #"Renamed Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

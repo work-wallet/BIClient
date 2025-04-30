@@ -1,0 +1,98 @@
+table 'Branch Option'
+	lineageTag: dfda8400-a442-49a2-a445-7604c0fb2a16
+
+	column AuditBranchOption_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: f26d5c11-0f7b-4148-92c5-d325c5f1215f
+		summarizeBy: none
+		sourceColumn: AuditBranchOption_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column BranchId
+		dataType: string
+		isHidden
+		lineageTag: e8929eb3-e331-451f-bc76-5683d9b2187b
+		summarizeBy: none
+		sourceColumn: BranchId
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column OptionId
+		dataType: string
+		isHidden
+		lineageTag: f61a549d-7905-4c08-90f5-4a99f395ab21
+		summarizeBy: none
+		sourceColumn: OptionId
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Branch
+		dataType: string
+		lineageTag: eba71ac9-21f3-4a39-a62a-8b43c2eb2fef
+		summarizeBy: none
+		sourceColumn: Branch
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Branch Option'
+		dataType: string
+		lineageTag: a6290d6d-4c3a-4346-b6e7-843a74dd05a6
+		summarizeBy: none
+		sourceColumn: Branch Option
+
+		annotation SummarizationSetBy = Automatic
+
+	column Order
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: ff8bfa3e-056b-415b-8fc7-920fff991eb8
+		summarizeBy: none
+		sourceColumn: Order
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column Wallet_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 7489fa90-e455-4387-9c1f-688575e8e794
+		summarizeBy: none
+		sourceColumn: Wallet_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column Option = 'Branch Option'[Order] & " - " & 'Branch Option'[Branch Option]
+		lineageTag: ed0ab39c-4f91-4f7d-93dc-070298b9108b
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Branch Option' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("ww-powerbi-demo.database.windows.net", "powerbi"),
+				    mart_AuditBranchOption = Source{[Schema="mart",Item="AuditBranchOption"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(mart_AuditBranchOption,{"_created", "_edited"}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"Value", "Branch Option"}})
+				in
+				    #"Renamed Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Exception
+

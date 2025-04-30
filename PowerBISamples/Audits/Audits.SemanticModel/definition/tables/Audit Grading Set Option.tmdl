@@ -1,0 +1,125 @@
+table 'Audit Grading Set Option'
+	lineageTag: c37f0193-3f1f-40ef-81be-4ff784fcaa5b
+
+	column GradingSetOption_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 119852ab-797d-489e-a5e1-746b5a118504
+		summarizeBy: none
+		sourceColumn: GradingSetOption_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column GradingSetId
+		dataType: string
+		isHidden
+		lineageTag: 10435800-181d-4161-bbef-2e602996a7af
+		summarizeBy: none
+		sourceColumn: GradingSetId
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column GradingSetVersion
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 928062bc-5c61-4382-b943-47470d8e9e03
+		summarizeBy: none
+		sourceColumn: GradingSetVersion
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column GradingSetOptionId
+		dataType: string
+		isHidden
+		lineageTag: bb23cc93-cdbd-4ca6-8f50-d7696c83f544
+		summarizeBy: none
+		sourceColumn: GradingSetOptionId
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Audit Grading Set'
+		dataType: string
+		lineageTag: e7c407c1-ab78-451b-81d5-961e85aaa713
+		summarizeBy: none
+		sourceColumn: Audit Grading Set
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Audit Grading'
+		dataType: string
+		lineageTag: 8f429e3b-c01e-4ffa-83b8-e1b1b7c93eb0
+		summarizeBy: none
+		sourceColumn: Audit Grading
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Audit Grading Value'
+		dataType: int64
+		formatString: 0
+		lineageTag: b63efb67-76ad-48d8-8d24-4dfbbd79e02a
+		summarizeBy: none
+		sourceColumn: Audit Grading Value
+
+		annotation SummarizationSetBy = User
+
+	column 'Audit Grading Colour'
+		dataType: string
+		lineageTag: 2f3c1991-7fdd-4641-8b87-4829ec0aecab
+		summarizeBy: none
+		sourceColumn: Audit Grading Colour
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Audit Grading Set Is Percentage'
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: d574a399-e58e-4cb7-a931-8386ce03830a
+		summarizeBy: none
+		sourceColumn: Audit Grading Set Is Percentage
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Audit Grading Set Is Score'
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 3c6f5036-6050-4ee0-9749-f51694afb916
+		summarizeBy: none
+		sourceColumn: Audit Grading Set Is Score
+
+		annotation SummarizationSetBy = Automatic
+
+	column Wallet_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 1d0fe514-2e87-4657-9c06-ae7a32c9eb63
+		summarizeBy: none
+		sourceColumn: Wallet_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	partition 'Audit Grading Set Option' = m
+		mode: import
+		source =
+				let
+				    Source = #"Grading Set Option",
+				    #"Renamed Columns" = Table.RenameColumns(Source,{{"Grading", "Audit Grading"}, {"Grading Set", "Audit Grading Set"}, {"Grading Value", "Audit Grading Value"}, {"Grading Colour", "Audit Grading Colour"}, {"Grading Set Is Percentage", "Audit Grading Set Is Percentage"}, {"Grading Set Is Score", "Audit Grading Set Is Score"}})
+				in
+				    #"Renamed Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,53 @@
+table 'Audit Status'
+	lineageTag: d2a69548-d886-42de-b9da-20fce8d745bd
+
+	column AuditStatus_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: da941538-9eae-4cc9-9c1d-251b2eb5257c
+		summarizeBy: none
+		sourceColumn: AuditStatus_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column AuditStatusCode
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: f1a474df-aa51-4be9-ad6d-200337d407a9
+		summarizeBy: none
+		sourceColumn: AuditStatusCode
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Audit Status'
+		dataType: string
+		lineageTag: 20e706ab-8835-4f10-9716-e3ac5394db42
+		summarizeBy: none
+		sourceColumn: Audit Status
+		sortByColumn: AuditStatusCode
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Audit Status' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("ww-powerbi-demo.database.windows.net", "powerbi"),
+				    mart_AuditStatus = Source{[Schema="mart",Item="AuditStatus"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(mart_AuditStatus,{"_created", "_edited"}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"AuditStatus", "Audit Status"}})
+				in
+				    #"Renamed Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
