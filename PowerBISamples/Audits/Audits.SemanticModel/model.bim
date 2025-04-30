@@ -38607,6 +38607,7 @@
       },
       {
         "name": "fce35993-0844-6a56-db41-fb4c11dfc09f",
+        "crossFilteringBehavior": "bothDirections",
         "fromColumn": "GradingSetOption_key",
         "fromTable": "Scored Response Fact",
         "toColumn": "GradingSetOption_key",
@@ -38688,6 +38689,7 @@
             "value": "FS"
           }
         ],
+        "crossFilteringBehavior": "bothDirections",
         "fromColumn": "AuditScoredResponse_key",
         "fromTable": "Scored Response Fact",
         "toColumn": "AuditScoredResponse_key",
@@ -39530,6 +39532,22 @@
             "lineageTag": "4e6d9d7d-6fbe-454f-bf19-664809cfc276",
             "sourceColumn": "GradingSetOption_key",
             "summarizeBy": "none"
+          },
+          {
+            "name": "Audit Count",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "expression": "1",
+            "formatString": "0",
+            "isDataTypeInferred": true,
+            "lineageTag": "9a1ab7fa-3b3b-4ca3-91f3-71e789ce74a1",
+            "summarizeBy": "sum",
+            "type": "calculated"
           }
         ],
         "lineageTag": "e2381d2a-b787-4eaa-ac59-fbb97f1243ce",
@@ -40094,6 +40112,21 @@
             "lineageTag": "7489fa90-e455-4387-9c1f-688575e8e794",
             "sourceColumn": "Wallet_key",
             "summarizeBy": "none"
+          },
+          {
+            "name": "Option",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "expression": "'Branch Option'[Order] & \" - \" & 'Branch Option'[Branch Option]",
+            "isDataTypeInferred": true,
+            "lineageTag": "ed0ab39c-4f91-4f7d-93dc-070298b9108b",
+            "summarizeBy": "none",
+            "type": "calculated"
           }
         ],
         "lineageTag": "dfda8400-a442-49a2-a445-7604c0fb2a16",
@@ -40484,6 +40517,21 @@
             "lineageTag": "bef380a4-1ef6-4fa1-8d05-cba142c9d006",
             "sourceColumn": "Wallet_key",
             "summarizeBy": "none"
+          },
+          {
+            "name": "Answer",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "expression": "'Checklist Option'[Order] & \" - \" & 'Checklist Option'[Checklist Answer] ",
+            "isDataTypeInferred": true,
+            "lineageTag": "01fb0a3c-0028-4579-9980-eac569e5ac3d",
+            "summarizeBy": "none",
+            "type": "calculated"
           }
         ],
         "lineageTag": "20005e8e-a778-48c2-a619-80c2f851334c",
@@ -42189,6 +42237,21 @@
             "lineageTag": "0e44677c-4456-49d3-af78-e845ddfca62a",
             "sourceColumn": "Wallet_key",
             "summarizeBy": "none"
+          },
+          {
+            "name": "Response",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "expression": "'Scored Response'[Order] & \" - \" & 'Scored Response'[Scored Response Answer]",
+            "isDataTypeInferred": true,
+            "lineageTag": "14234657-6a12-435d-a555-ed164514381a",
+            "summarizeBy": "none",
+            "type": "calculated"
           }
         ],
         "lineageTag": "0530d395-4153-4658-af7b-13b1611db825",
