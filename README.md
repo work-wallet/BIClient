@@ -141,6 +141,29 @@ You can obtain information about successful downloads in the `mart.ETL_ChangeDet
 Change detection is used (so that only changes since last run are downloaded).
 The first run can trigger a substantial download. It is recommended that you monitor the console output to check for errors, especially on the first run.
 
+## Force Data Reset (Advanced)
+
+A data reset is only necessary if you need to pull data afresh from the API.
+
+It is possible to force a reset by deleting records from the `mart.ETL_ChangeDetection` table.
+If change tracking records are removed from this table then the code will first delete all data from the associated tables.
+This can be a slow operation if data volumes are significant (and it may be quicker to drop and recreate the database).
+
+```sql
+-- example resetting Audits dataset
+DELETE FROM mart.ETL_ChangeDetection where LogType = 'AUDIT2_UPDATED';
+```
+
+| Dataset | LogType |
+| --- | --- |
+| ReportedIssues | REPORTED_ISSUE_UPDATED |
+| Inductions | INDUCTION_UPDATED |
+| Permits | PERMIT_UPDATED |
+| Actions | ACTION_UPDATED |
+| Assets | ASSET_UPDATED |
+| SafetyCards | SAFETY_CARD_UPDATED |
+| Audits | AUDIT2_UPDATED |
+
 ## Configuring the Azure Function App
 
 `WorkWallet.BI.ClientFunction` project
@@ -240,7 +263,3 @@ To refresh the data, press the `Refresh` button on the `Home` tab.
 ### Adjust Report Filters
 
 After refreshing the Power BI model with your data, it is necessary to check and adjust the filters on the reports (otherwise no data may be shown).
-
-For instance, in the example below it is necessary to change the filter for `Checklist`.
-
-![Power BI Filters](Docs/Images/PowerBIFilters.png)

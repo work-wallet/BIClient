@@ -11,7 +11,6 @@ To fully explore the models it is recommended that you open the relevant sample 
 
 Jump to the relevant section:
 
-* [Site Audits](#site-audits) (legacy module)
 * [Reported Issues](#reported-issues)
 * [Inductions](#inductions)
 * [Permits](#permits)
@@ -23,14 +22,6 @@ Jump to the relevant section:
 ## Site Audits
 
 Legacy module
-
-### Site Audits - Main
-
-![Main](Images/PowerBIModelDiagrams/SiteAudits_Main.png)
-
-### Site Audits - Checklists
-
-![Checklists](Images/PowerBIModelDiagrams/SiteAudits_Checklists.png)
 
 ## Reported Issues
 

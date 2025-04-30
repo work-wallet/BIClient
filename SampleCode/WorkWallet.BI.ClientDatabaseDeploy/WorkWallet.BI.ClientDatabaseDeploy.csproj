@@ -5,13 +5,12 @@
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <AssemblyVersion>4.0.0.0</AssemblyVersion>
+    <AssemblyVersion>4.0.1.0</AssemblyVersion>
     <UserSecretsId>a745c317-cecd-4df8-877a-5f2fdd497e26</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
     <None Remove="appsettings.json" />
-    <None Remove="Scripts\Clean\DropStoredProcedures.sql" />
     <None Remove="Scripts\Schema\0001 - Common.sql" />
     <None Remove="Scripts\Schema\0002 - CommonPatch.sql" />
     <None Remove="Scripts\Schema\0003 - SiteAudits.sql" />
@@ -29,7 +28,6 @@
     <None Remove="Scripts\StoredProcedures\mart.ETL_DeleteInductionFacts.sql" />
     <None Remove="Scripts\StoredProcedures\mart.ETL_DeletePermitFacts.sql" />
     <None Remove="Scripts\StoredProcedures\mart.ETL_DeleteReportedIssueFacts.sql" />
-    <None Remove="Scripts\StoredProcedures\mart.ETL_DeleteSiteAuditFacts.sql" />
     <None Remove="Scripts\StoredProcedures\mart.ETL_LoadActions.sql" />
     <None Remove="Scripts\StoredProcedures\mart.ETL_LoadActionUpdates.sql" />
     <None Remove="Scripts\StoredProcedures\mart.ETL_LoadAssets.sql" />
@@ -44,9 +42,6 @@
     <None Remove="Scripts\StoredProcedures\mart.ETL_LoadReportedIssueRootCauseAnalysisFact.sql" />
     <None Remove="Scripts\StoredProcedures\mart.ETL_LoadReportedIssues.sql" />
     <None Remove="Scripts\StoredProcedures\mart.ETL_LoadSafetyCards.sql" />
-    <None Remove="Scripts\StoredProcedures\mart.ETL_LoadSiteAuditChecklistFact.sql" />
-    <None Remove="Scripts\StoredProcedures\mart.ETL_LoadSiteAuditChecklistItemFact.sql" />
-    <None Remove="Scripts\StoredProcedures\mart.ETL_LoadSiteAudits.sql" />
     <None Remove="Scripts\StoredProcedures\mart.ETL_MaintainActionDimension.sql" />
     <None Remove="Scripts\StoredProcedures\mart.ETL_MaintainAssetAssignmentDimension.sql" />
     <None Remove="Scripts\StoredProcedures\mart.ETL_MaintainAssetDimension.sql" />
@@ -66,10 +61,6 @@
     <None Remove="Scripts\StoredProcedures\mart.ETL_MaintainReportedIssuePersonDimension.sql" />
     <None Remove="Scripts\StoredProcedures\mart.ETL_MaintainSafetyCardCategoryDimension.sql" />
     <None Remove="Scripts\StoredProcedures\mart.ETL_MaintainSafetyCardDimension.sql" />
-    <None Remove="Scripts\StoredProcedures\mart.ETL_MaintainSiteAuditChecklistDimension.sql" />
-    <None Remove="Scripts\StoredProcedures\mart.ETL_MaintainSiteAuditChecklistItemDimension.sql" />
-    <None Remove="Scripts\StoredProcedures\mart.ETL_MaintainSiteAuditDimension.sql" />
-    <None Remove="Scripts\StoredProcedures\mart.ETL_MaintainSiteAuditTypeDimension.sql" />
     <None Remove="Scripts\StoredProcedures\mart.ETL_MaintainWalletDimension.sql" />
     <None Remove="Scripts\StoredProcedures\mart.ETL_PostProcessActions.sql" />
     <None Remove="Scripts\StoredProcedures\mart.ETL_PostProcessAssets.sql" />
@@ -77,7 +68,6 @@
     <None Remove="Scripts\StoredProcedures\mart.ETL_PostProcessPermits.sql" />
     <None Remove="Scripts\StoredProcedures\mart.ETL_PostProcessReportedIssues.sql" />
     <None Remove="Scripts\StoredProcedures\mart.ETL_PostProcessSafetyCards.sql" />
-    <None Remove="Scripts\StoredProcedures\mart.ETL_PostProcessSiteAudits.sql" />
     <None Remove="Scripts\StoredProcedures\mart.ETL_ResetActions.sql" />
     <None Remove="Scripts\StoredProcedures\mart.ETL_ResetAssets.sql" />
     <None Remove="Scripts\StoredProcedures\mart.ETL_ResetCommon.sql" />
@@ -85,7 +75,6 @@
     <None Remove="Scripts\StoredProcedures\mart.ETL_ResetPermits.sql" />
     <None Remove="Scripts\StoredProcedures\mart.ETL_ResetReportedIssues.sql" />
     <None Remove="Scripts\StoredProcedures\mart.ETL_ResetSafetyCards.sql" />
-    <None Remove="Scripts\StoredProcedures\mart.ETL_ResetSiteAudits.sql" />
     <None Remove="Scripts\StoredProcedures\mart.ETL_UpdateLastSync.sql" />
     <None Remove="Scripts\Types\mart.ETL_ActionTable.sql" />
     <None Remove="Scripts\Types\mart.ETL_ActionUpdateTable.sql" />
@@ -108,12 +97,6 @@
     <None Remove="Scripts\Types\mart.ETL_ReportedIssueTable.sql" />
     <None Remove="Scripts\Types\mart.ETL_SafetyCardCategoryTable.sql" />
     <None Remove="Scripts\Types\mart.ETL_SafetyCardTable.sql" />
-    <None Remove="Scripts\Types\mart.ETL_SiteAuditChecklistFactTable.sql" />
-    <None Remove="Scripts\Types\mart.ETL_SiteAuditChecklistItemFactTable.sql" />
-    <None Remove="Scripts\Types\mart.ETL_SiteAuditChecklistItemTable.sql" />
-    <None Remove="Scripts\Types\mart.ETL_SiteAuditChecklistTable.sql" />
-    <None Remove="Scripts\Types\mart.ETL_SiteAuditTable.sql" />
-    <None Remove="Scripts\Types\mart.ETL_SiteAuditTypeTable.sql" />
     <None Remove="Scripts\Types\mart.ETL_WalletTable.sql" />
   </ItemGroup>
 
@@ -124,7 +107,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="Scripts\Clean\DropStoredProcedures.sql" />
+    <EmbeddedResource Include="Scripts\Clean\2 - DropObsoleteTypes.sql" />
+    <EmbeddedResource Include="Scripts\Clean\1 - DropStoredProcedures.sql" />
     <EmbeddedResource Include="Scripts\Schema\0001 - Common.sql" />
     <EmbeddedResource Include="Scripts\Schema\0011 - Rename FK constraints.sql" />
     <EmbeddedResource Include="Scripts\Schema\0014 - Contacts.sql" />
@@ -165,7 +149,6 @@
     <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_PostProcessAudits.sql" />
     <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_LoadAudits.sql" />
     <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_ResetAudits.sql" />
-    <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_PostProcessSiteAudits.sql" />
     <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_PostProcessActions.sql" />
     <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_PostProcessAssets.sql" />
     <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_PostProcessInductions.sql" />
@@ -188,7 +171,6 @@
     <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_DeleteInductionFacts.sql" />
     <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_DeletePermitFacts.sql" />
     <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_DeleteReportedIssueFacts.sql" />
-    <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_DeleteSiteAuditFacts.sql" />
     <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_LoadActions.sql" />
     <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_LoadActionUpdates.sql" />
     <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_LoadInductionCustomQuestionFact.sql" />
@@ -201,9 +183,6 @@
     <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_LoadReportedIssuePersonFact.sql" />
     <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_LoadReportedIssueRootCauseAnalysisFact.sql" />
     <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_LoadReportedIssues.sql" />
-    <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_LoadSiteAuditChecklistFact.sql" />
-    <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_LoadSiteAuditChecklistItemFact.sql" />
-    <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_LoadSiteAudits.sql" />
     <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_MaintainActionDimension.sql" />
     <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_MaintainInductionCustomQuestionDimension.sql" />
     <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_MaintainInductionDimension.sql" />
@@ -218,17 +197,12 @@
     <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_MaintainReportedIssueDimension.sql" />
     <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_MaintainReportedIssueOptionSelectDimension.sql" />
     <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_MaintainReportedIssuePersonDimension.sql" />
-    <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_MaintainSiteAuditChecklistDimension.sql" />
-    <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_MaintainSiteAuditChecklistItemDimension.sql" />
-    <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_MaintainSiteAuditDimension.sql" />
-    <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_MaintainSiteAuditTypeDimension.sql" />
     <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_MaintainWalletDimension.sql" />
     <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_ResetActions.sql" />
     <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_ResetCommon.sql" />
     <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_ResetInductions.sql" />
     <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_ResetPermits.sql" />
     <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_ResetReportedIssues.sql" />
-    <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_ResetSiteAudits.sql" />
     <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_UpdateLastSync.sql" />
     <EmbeddedResource Include="Scripts\Types\mart.ETL_AuditScoreTagTable.sql" />
     <EmbeddedResource Include="Scripts\Types\mart.ETL_AuditScoreSectionTable.sql" />
@@ -263,12 +237,6 @@
     <EmbeddedResource Include="Scripts\Types\mart.ETL_ReportedIssuePersonTable.sql" />
     <EmbeddedResource Include="Scripts\Types\mart.ETL_ReportedIssueRootCauseAnalysisTable.sql" />
     <EmbeddedResource Include="Scripts\Types\mart.ETL_ReportedIssueTable.sql" />
-    <EmbeddedResource Include="Scripts\Types\mart.ETL_SiteAuditChecklistFactTable.sql" />
-    <EmbeddedResource Include="Scripts\Types\mart.ETL_SiteAuditChecklistItemFactTable.sql" />
-    <EmbeddedResource Include="Scripts\Types\mart.ETL_SiteAuditChecklistItemTable.sql" />
-    <EmbeddedResource Include="Scripts\Types\mart.ETL_SiteAuditChecklistTable.sql" />
-    <EmbeddedResource Include="Scripts\Types\mart.ETL_SiteAuditTable.sql" />
-    <EmbeddedResource Include="Scripts\Types\mart.ETL_SiteAuditTypeTable.sql" />
     <EmbeddedResource Include="Scripts\Types\mart.ETL_WalletTable.sql" />
   </ItemGroup>
 
