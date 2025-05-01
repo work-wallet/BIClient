@@ -141,6 +141,10 @@ You can obtain information about successful downloads in the `mart.ETL_ChangeDet
 Change detection is used (so that only changes since last run are downloaded).
 The first run can trigger a substantial download. It is recommended that you monitor the console output to check for errors, especially on the first run.
 
+It is important that data is pulled regularly (recommend at least daily).
+If data is not pulled regularly then you will get an error: `Invalid lastSynchronizationVerion`.
+The fix is to reset your local database (see below).
+
 ## Force Data Reset (Advanced)
 
 A data reset is only necessary if you need to pull data afresh from the API.
