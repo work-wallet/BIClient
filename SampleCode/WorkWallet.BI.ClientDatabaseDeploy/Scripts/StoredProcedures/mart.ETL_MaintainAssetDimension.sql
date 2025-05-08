@@ -25,6 +25,7 @@ BEGIN
     ON target.AssetId = source.AssetId
     WHEN MATCHED AND (
         target.AssetType <> source.AssetType
+        OR target.AssetStatus_key <> source.AssetStatus_key
         OR target.Reference <> source.Reference
         OR target.[Name] <> source.[Name]
         OR target.[Description] <> source.[Description]
@@ -34,6 +35,7 @@ BEGIN
     THEN
         UPDATE SET
             AssetType = source.AssetType
+            ,AssetStatus_key = source.AssetStatus_key
             ,Reference = source.Reference
             ,[Name] = source.[Name]
             ,[Description] = source.[Description]
