@@ -10,6 +10,9 @@ CREATE TYPE mart.ETL_AuditNumericAnswerTable AS TABLE
     ,Scale int NOT NULL
     ,UnitCode int NOT NULL
     ,Answer decimal(35,6) NOT NULL
+    ,SectionId uniqueidentifier NOT NULL
+    ,Section nvarchar(250) NOT NULL
+    ,OrderInSection int NOT NULL
     ,WalletId uniqueidentifier NOT NULL
     ,PRIMARY KEY (AuditId, QuestionId)
 );

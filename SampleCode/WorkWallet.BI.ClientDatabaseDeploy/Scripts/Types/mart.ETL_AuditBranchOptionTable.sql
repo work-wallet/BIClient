@@ -9,6 +9,9 @@ CREATE TYPE mart.ETL_AuditBranchOptionTable AS TABLE
     ,Branch nvarchar(100) NOT NULL
     ,[Value] nvarchar(250) NOT NULL
     ,[Order] int NOT NULL
+    ,SectionId uniqueidentifier NOT NULL
+    ,Section nvarchar(250) NOT NULL
+    ,OrderInSection int NOT NULL
     ,WalletId uniqueidentifier NOT NULL
     ,PRIMARY KEY (AuditId, BranchId, OptionId)
 );

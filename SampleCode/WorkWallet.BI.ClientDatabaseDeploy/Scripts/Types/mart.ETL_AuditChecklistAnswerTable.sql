@@ -10,6 +10,9 @@ CREATE TYPE mart.ETL_AuditChecklistAnswerTable AS TABLE
     ,[Value] nvarchar(250) NOT NULL
     ,Mandatory bit NOT NULL
     ,[Order] int NOT NULL
+    ,SectionId uniqueidentifier NOT NULL
+    ,Section nvarchar(250) NOT NULL
+    ,OrderInSection int NOT NULL
     ,WalletId uniqueidentifier NOT NULL
     ,PRIMARY KEY (AuditId, ChecklistId, OptionId)
 );
