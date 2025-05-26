@@ -258,6 +258,9 @@ BEGIN
             ,Scale
             ,UnitCode
             ,Answer
+            ,SectionId
+            ,Section
+            ,OrderInSection
             ,WalletId
         )
         SELECT * FROM OPENJSON(@json, '$.AuditNumericAnswers')
@@ -270,6 +273,9 @@ BEGIN
             ,Scale int
             ,UnitCode int
             ,Answer decimal(35,6)
+            ,SectionId uniqueidentifier
+            ,Section nvarchar(250)
+            ,OrderInSection int
             ,WalletId uniqueidentifier
         );
 
@@ -289,6 +295,9 @@ BEGIN
             ,[Date]
             ,[Time]
             ,Answer
+            ,SectionId
+            ,Section
+            ,OrderInSection
             ,WalletId
         )
         SELECT * FROM OPENJSON(@json, '$.AuditDateTimeAnswers')
@@ -301,6 +310,9 @@ BEGIN
             ,[Date] bit
             ,[Time] bit
             ,Answer datetime
+            ,SectionId uniqueidentifier
+            ,Section nvarchar(250)
+            ,OrderInSection int
             ,WalletId uniqueidentifier
         );
 
@@ -320,6 +332,9 @@ BEGIN
             ,[Value]
             ,Mandatory
             ,[Order]
+            ,SectionId
+            ,Section
+            ,OrderInSection
             ,WalletId
         )
         SELECT * FROM OPENJSON(@json, '$.AuditChecklistAnswers')
@@ -332,6 +347,9 @@ BEGIN
             ,[Value] nvarchar(250)
             ,Mandatory bit
             ,[Order] int
+            ,SectionId uniqueidentifier
+            ,Section nvarchar(250)
+            ,OrderInSection int
             ,WalletId uniqueidentifier
         );
 
@@ -350,6 +368,9 @@ BEGIN
             ,Branch
             ,[Value]
             ,[Order]
+            ,SectionId
+            ,Section
+            ,OrderInSection
             ,WalletId
         )
         SELECT * FROM OPENJSON(@json, '$.AuditBranchOptions')
@@ -361,6 +382,9 @@ BEGIN
             ,Branch nvarchar(100)
             ,[Value] nvarchar(250)
             ,[Order] int
+            ,SectionId uniqueidentifier
+            ,Section nvarchar(250)
+            ,OrderInSection int
             ,WalletId uniqueidentifier
         );
 
@@ -384,6 +408,9 @@ BEGIN
             ,PercentageScore
             ,Flag
             ,GradingSetOptionId
+            ,SectionId
+            ,Section
+            ,OrderInSection
             ,WalletId
         )
         SELECT * FROM OPENJSON(@json, '$.AuditScoredResponses')
@@ -400,6 +427,9 @@ BEGIN
             ,PercentageScore decimal(7,6)
             ,Flag bit
             ,GradingSetOptionId uniqueidentifier
+            ,SectionId uniqueidentifier
+            ,Section nvarchar(250)
+            ,OrderInSection int
             ,WalletId uniqueidentifier
         );
 

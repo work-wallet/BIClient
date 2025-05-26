@@ -71,6 +71,32 @@ table 'Date Time Question'
 
 		annotation SummarizationSetBy = User
 
+	column Section
+		dataType: string
+		lineageTag: efb0be38-4c5d-4af5-a2c8-3792f1b8a0f3
+		summarizeBy: none
+		sourceColumn: Section
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Order In Section'
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 81967694-e544-448c-a201-1bb347ded059
+		summarizeBy: none
+		sourceColumn: Order In Section
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Question = Format('Date Time Question'[Order In Section], "00") & " - " & 'Date Time Question'[Date Time Question]
+		lineageTag: 10fe5176-56ec-4d00-887c-28060e38755c
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
 	partition 'Date Time Question' = m
 		mode: import
 		source =
@@ -78,7 +104,7 @@ table 'Date Time Question'
 				    Source = Sql.Database("ww-powerbi-demo.database.windows.net", "powerbi"),
 				    mart_AuditDateTimeQuestion = Source{[Schema="mart",Item="AuditDateTimeQuestion"]}[Data],
 				    #"Removed Columns" = Table.RemoveColumns(mart_AuditDateTimeQuestion,{"_created", "_edited"}),
-				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"Question", "Date Time Question"}})
+				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"Question", "Date Time Question"}, {"OrderInSection", "Order In Section"}})
 				in
 				    #"Renamed Columns"
 

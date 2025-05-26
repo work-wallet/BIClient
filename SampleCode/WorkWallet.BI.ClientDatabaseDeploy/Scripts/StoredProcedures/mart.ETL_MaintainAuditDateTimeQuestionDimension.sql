@@ -14,6 +14,8 @@ BEGIN
             a.Mandatory,
             a.[Date],
             a.[Time],
+            a.Section,
+            a.OrderInSection,
             w.Wallet_key
         FROM
             @auditDateTimeAnswerTable AS a
@@ -25,6 +27,8 @@ BEGIN
         OR target.Mandatory <> source.Mandatory
         OR target.[Date] <> source.[Date]
         OR target.[Time] <> source.[Time]
+        OR target.Section <> source.Section
+        OR target.OrderInSection <> source.OrderInSection
         OR target.Wallet_key <> source.Wallet_key
     )
     THEN
@@ -33,6 +37,8 @@ BEGIN
             Mandatory = source.Mandatory,
             [Date] = source.[Date],
             [Time] = source.[Time],
+            Section = source.Section,
+            OrderInSection = source.OrderInSection,
             Wallet_key = source.Wallet_key,
             _edited = SYSUTCDATETIME()
     WHEN NOT MATCHED BY TARGET THEN
@@ -42,6 +48,8 @@ BEGIN
             Mandatory,
             [Date],
             [Time],
+            Section,
+            OrderInSection,
             Wallet_key
         ) VALUES (
             source.QuestionId,
@@ -49,6 +57,8 @@ BEGIN
             source.Mandatory,
             source.[Date],
             source.[Time],
+            source.Section,
+            source.OrderInSection,
             source.Wallet_key
         );
 

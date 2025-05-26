@@ -92,6 +92,32 @@ table 'Checklist Option'
 
 		annotation SummarizationSetBy = Automatic
 
+	column Section
+		dataType: string
+		lineageTag: f8142142-62da-465c-bc5b-0cf630e396aa
+		summarizeBy: none
+		sourceColumn: Section
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Order In Section'
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 9d4c163f-eefb-4e91-831a-53a57a1e065f
+		summarizeBy: none
+		sourceColumn: Order In Section
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Question = Format('Checklist Option'[Order In Section], "00") & " - " & 'Checklist Option'[Checklist Question]
+		lineageTag: 5e93999c-bb01-4dd5-946c-b248db215407
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
 	partition 'Checklist Option' = m
 		mode: import
 		source =
@@ -99,7 +125,7 @@ table 'Checklist Option'
 				    Source = Sql.Database("ww-powerbi-demo.database.windows.net", "powerbi"),
 				    mart_AuditChecklistOption = Source{[Schema="mart",Item="AuditChecklistOption"]}[Data],
 				    #"Removed Columns" = Table.RemoveColumns(mart_AuditChecklistOption,{"_created", "_edited"}),
-				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"Value", "Checklist Answer"}, {"Question", "Checklist Question"}})
+				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"Value", "Checklist Answer"}, {"Question", "Checklist Question"}, {"OrderInSection", "Order In Section"}})
 				in
 				    #"Renamed Columns"
 

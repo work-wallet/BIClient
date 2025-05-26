@@ -177,6 +177,7 @@ relationship bb7b56bd-6f46-4290-b9d6-41d8a1045647
 	annotation PBI_IsFromSource = FS
 
 relationship c0accf50-368b-4ca0-9e8f-d02cd2939994
+	crossFilteringBehavior: bothDirections
 	fromColumn: 'Score Tag Fact'.AuditScoreTag_key
 	toColumn: 'Score Tag'.AuditScoreTag_key
 
@@ -259,10 +260,12 @@ relationship 4d0246b6-4fb2-f2cd-317c-d4f5729f0d42
 	toColumn: 'Audit Grading Set Option'.GradingSetOption_key
 
 relationship 670196e5-3992-3203-0c37-0e78eb1ad79f
+	crossFilteringBehavior: bothDirections
 	fromColumn: 'Score Section Fact'.GradingSetOption_key
 	toColumn: 'Score Section Grading Set Option'.GradingSetOption_key
 
 relationship 0615012d-560d-5dea-a837-71a07127fe43
+	crossFilteringBehavior: bothDirections
 	fromColumn: 'Score Tag Fact'.GradingSetOption_key
 	toColumn: 'Score Tag Grading Set Option'.GradingSetOption_key
 
@@ -277,12 +280,14 @@ relationship a50078dd-1baa-9b58-be3d-6bc9ee110628
 	toColumn: Audit.Audit_key
 
 relationship f0d992a7-2267-b329-e2e0-caebec19c0e4
+	crossFilteringBehavior: bothDirections
 	fromColumn: 'Numeric Answer Fact'.AuditNumericQuestion_key
 	toColumn: 'Numeric Question'.AuditNumericQuestion_key
 
 	annotation PBI_IsFromSource = FS
 
 relationship 0c6d3582-59ea-1290-7ad0-9c52f506dc92
+	crossFilteringBehavior: bothDirections
 	fromColumn: 'Date Time Answer Fact'.AuditDateTimeQuestion_key
 	toColumn: 'Date Time Question'.AuditDateTimeQuestion_key
 
@@ -294,12 +299,14 @@ relationship 575ec07f-052b-08af-57f5-f2a4c4e4417c
 	toColumn: Audit.Audit_key
 
 relationship 3d964c21-5fda-7328-8164-c3edbab94c71
+	crossFilteringBehavior: bothDirections
 	fromColumn: 'Checklist Answer Fact'.AuditChecklistOption_key
 	toColumn: 'Checklist Option'.AuditChecklistOption_key
 
 	annotation PBI_IsFromSource = FS
 
 relationship 06b00818-1a3c-2013-fcf1-b4b10bfe6fdf
+	crossFilteringBehavior: bothDirections
 	fromColumn: 'Branch Option Fact'.AuditBranchOption_key
 	toColumn: 'Branch Option'.AuditBranchOption_key
 
@@ -313,6 +320,7 @@ relationship 91a0df41-17bd-d4a8-a0bd-4e6edebdfb68
 	annotation PBI_IsFromSource = FS
 
 relationship 615de0d7-63a4-8c52-0da2-2f5f1ff0b851
+	crossFilteringBehavior: bothDirections
 	fromColumn: 'Score Section Fact'.AuditScoreSection_key
 	toColumn: 'Score Section'.AuditScoreSection_key
 

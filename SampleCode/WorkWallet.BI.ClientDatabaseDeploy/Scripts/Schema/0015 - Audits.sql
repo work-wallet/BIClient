@@ -178,6 +178,8 @@ CREATE TABLE mart.AuditNumericQuestion
     ,Mandatory bit NOT NULL
     ,Scale int NOT NULL
     ,Unit_key int NOT NULL
+    ,Section nvarchar(250) NOT NULL
+    ,OrderInSection int NOT NULL
     ,Wallet_key int NOT NULL
     ,_created datetime2(7) NOT NULL CONSTRAINT [DF_mart.AuditNumericQuestion__created] DEFAULT SYSUTCDATETIME()
     ,_edited datetime2(7) NULL
@@ -208,6 +210,8 @@ CREATE TABLE mart.AuditDateTimeQuestion
     ,Mandatory bit NOT NULL
     ,[Date] bit NOT NULL
     ,[Time] bit NOT NULL
+    ,Section nvarchar(250) NOT NULL
+    ,OrderInSection int NOT NULL
     ,Wallet_key int NOT NULL
     ,_created datetime2(7) NOT NULL CONSTRAINT [DF_mart.AuditDateTimeQuestion__created] DEFAULT SYSUTCDATETIME()
     ,_edited datetime2(7) NULL
@@ -240,6 +244,8 @@ CREATE TABLE mart.AuditChecklistOption
     ,[Value] nvarchar(250) NOT NULL
     ,Mandatory bit NOT NULL
     ,[Order] int NOT NULL
+    ,Section nvarchar(250) NOT NULL
+    ,OrderInSection int NOT NULL
     ,Wallet_key int NOT NULL
     ,_created datetime2(7) NOT NULL CONSTRAINT [DF_mart.AuditChecklistOption__created] DEFAULT SYSUTCDATETIME()
     ,_edited datetime2(7) NULL
@@ -268,6 +274,8 @@ CREATE TABLE mart.AuditBranchOption
     ,Branch nvarchar(100) NOT NULL
     ,[Value] nvarchar(250) NOT NULL
     ,[Order] int NOT NULL
+    ,Section nvarchar(250) NOT NULL
+    ,OrderInSection int NOT NULL
     ,Wallet_key int NOT NULL
     ,_created datetime2(7) NOT NULL CONSTRAINT [DF_mart.AuditBranchOption__created] DEFAULT SYSUTCDATETIME()
     ,_edited datetime2(7) NULL
@@ -296,6 +304,8 @@ CREATE TABLE mart.AuditScoredResponse
     ,Branch nvarchar(500) NOT NULL
     ,[Value] nvarchar(100) NOT NULL
     ,[Order] int NOT NULL
+    ,Section nvarchar(250) NOT NULL
+    ,OrderInSection int NOT NULL
     ,Wallet_key int NOT NULL
     ,_created datetime2(7) NOT NULL CONSTRAINT [DF_mart.AuditScoredResponse__created] DEFAULT SYSUTCDATETIME()
     ,_edited datetime2(7) NULL

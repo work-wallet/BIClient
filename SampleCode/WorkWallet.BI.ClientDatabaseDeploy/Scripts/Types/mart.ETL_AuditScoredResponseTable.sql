@@ -14,6 +14,9 @@ CREATE TYPE mart.ETL_AuditScoredResponseTable AS TABLE
     ,PercentageScore decimal(7,6) NOT NULL
     ,Flag bit NOT NULL
     ,GradingSetOptionId uniqueidentifier NOT NULL
+    ,SectionId uniqueidentifier NOT NULL
+    ,Section nvarchar(250) NOT NULL
+    ,OrderInSection int NOT NULL
     ,WalletId uniqueidentifier NOT NULL
     ,PRIMARY KEY (AuditId, BranchId, OptionId)
 );

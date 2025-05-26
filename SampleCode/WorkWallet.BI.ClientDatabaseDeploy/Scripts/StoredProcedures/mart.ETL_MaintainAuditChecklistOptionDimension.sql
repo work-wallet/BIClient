@@ -15,6 +15,8 @@ BEGIN
             a.[Value],
             a.Mandatory,
             a.[Order],
+            a.Section,
+            a.OrderInSection,
             w.Wallet_key
         FROM
             @auditChecklistAnswerTable AS a
@@ -26,6 +28,8 @@ BEGIN
         OR target.[Value] <> source.[Value]
         OR target.Mandatory <> source.Mandatory
         OR target.[Order] <> source.[Order]
+        OR target.Section <> source.Section
+        OR target.OrderInSection <> source.OrderInSection
         OR target.Wallet_key <> source.Wallet_key
     )
     THEN
@@ -34,6 +38,8 @@ BEGIN
             [Value] = source.[Value],
             Mandatory = source.Mandatory,
             [Order] = source.[Order],
+            Section = source.Section,
+            OrderInSection = source.OrderInSection,
             Wallet_key = source.Wallet_key,
             _edited = SYSUTCDATETIME()
     WHEN NOT MATCHED BY TARGET THEN
@@ -44,6 +50,8 @@ BEGIN
             [Value],
             Mandatory,
             [Order],
+            Section,
+            OrderInSection,
             Wallet_key
         ) VALUES (
             source.ChecklistId,
@@ -52,6 +60,8 @@ BEGIN
             source.[Value],
             source.Mandatory,
             source.[Order],
+            source.Section,
+            source.OrderInSection,
             source.Wallet_key
         );
 

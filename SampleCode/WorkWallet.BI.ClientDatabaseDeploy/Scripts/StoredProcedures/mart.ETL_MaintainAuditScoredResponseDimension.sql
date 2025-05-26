@@ -14,6 +14,8 @@ BEGIN
             a.Branch,
             a.[Value],
             a.[Order],
+            a.Section,
+            a.OrderInSection,
             w.Wallet_key
         FROM
             @auditScoredResponseTable AS a
@@ -24,6 +26,8 @@ BEGIN
         target.Branch <> source.Branch
         OR target.[Value] <> source.[Value]
         OR target.[Order] <> source.[Order]
+        OR target.Section <> source.Section
+        OR target.OrderInSection <> source.OrderInSection
         OR target.Wallet_key <> source.Wallet_key
     )
     THEN
@@ -31,6 +35,8 @@ BEGIN
             Branch = source.Branch,
             [Value] = source.[Value],
             [Order] = source.[Order],
+            Section = source.Section,
+            OrderInSection = source.OrderInSection,
             Wallet_key = source.Wallet_key,
             _edited = SYSUTCDATETIME()
     WHEN NOT MATCHED BY TARGET THEN
@@ -40,6 +46,8 @@ BEGIN
             Branch,
             [Value],
             [Order],
+            Section,
+            OrderInSection,
             Wallet_key
         ) VALUES (
             source.BranchId,
@@ -47,6 +55,8 @@ BEGIN
             source.Branch,
             source.[Value],
             source.[Order],
+            source.Section,
+            source.OrderInSection,
             source.Wallet_key
         );
 

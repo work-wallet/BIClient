@@ -14,6 +14,8 @@ BEGIN
             a.Mandatory,
             a.Scale,
             u.Unit_key,
+            a.Section,
+            a.OrderInSection,
             w.Wallet_key
         FROM
             @auditNumericAnswerTable AS a
@@ -26,6 +28,8 @@ BEGIN
         OR target.Mandatory <> source.Mandatory
         OR target.Scale <> source.Scale
         OR target.Unit_key <> source.Unit_key
+        OR target.Section <> source.Section
+        OR target.OrderInSection <> source.OrderInSection
         OR target.Wallet_key <> source.Wallet_key
     )
     THEN
@@ -34,6 +38,8 @@ BEGIN
             Mandatory = source.Mandatory,
             Scale = source.Scale,
             Unit_key = source.Unit_key,
+            Section = source.Section,
+            OrderInSection = source.OrderInSection,
             Wallet_key = source.Wallet_key,
             _edited = SYSUTCDATETIME()
     WHEN NOT MATCHED BY TARGET THEN
@@ -43,6 +49,8 @@ BEGIN
             Mandatory,
             Scale,
             Unit_key,
+            Section,
+            OrderInSection,
             Wallet_key
         ) VALUES (
             source.QuestionId,
@@ -50,6 +58,8 @@ BEGIN
             source.Mandatory,
             source.Scale,
             source.Unit_key,
+            source.Section,
+            source.OrderInSection,
             source.Wallet_key
         );
 

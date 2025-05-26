@@ -382,7 +382,7 @@
       "ordinal": 1,
       "scrollPosition": {
         "x": 0,
-        "y": 73
+        "y": 53.983283715360585
       },
       "nodes": [
         {
@@ -393,10 +393,10 @@
           "nodeIndex": "Audit",
           "nodeLineageTag": "e2381d2a-b787-4eaa-ac59-fbb97f1243ce",
           "size": {
-            "height": 615,
+            "height": 632,
             "width": 234
           },
-          "zIndex": 12
+          "zIndex": 5
         },
         {
           "location": {
@@ -409,7 +409,7 @@
             "height": 527,
             "width": 234
           },
-          "zIndex": 2
+          "zIndex": 1
         },
         {
           "location": {
@@ -422,7 +422,7 @@
             "height": 221,
             "width": 234
           },
-          "zIndex": 4
+          "zIndex": 2
         },
         {
           "location": {
@@ -435,7 +435,7 @@
             "height": 152,
             "width": 234
           },
-          "zIndex": 5
+          "zIndex": 3
         },
         {
           "location": {
@@ -448,7 +448,7 @@
             "height": 632,
             "width": 234
           },
-          "zIndex": 9
+          "zIndex": 4
         },
         {
           "location": {
@@ -459,9 +459,9 @@
           "nodeLineageTag": "c37f0193-3f1f-40ef-81be-4ff784fcaa5b",
           "size": {
             "height": 366,
-            "width": 234
+            "width": 290
           },
-          "zIndex": 1
+          "zIndex": 6
         }
       ],
       "name": "Main",
@@ -486,7 +486,7 @@
           "nodeIndex": "Audit",
           "nodeLineageTag": "e2381d2a-b787-4eaa-ac59-fbb97f1243ce",
           "size": {
-            "height": 616,
+            "height": 629,
             "width": 234
           },
           "zIndex": 0
@@ -529,7 +529,7 @@
       "ordinal": 3,
       "scrollPosition": {
         "x": 0,
-        "y": 100
+        "y": 0
       },
       "nodes": [
         {
@@ -540,23 +540,23 @@
           "nodeIndex": "Audit",
           "nodeLineageTag": "e2381d2a-b787-4eaa-ac59-fbb97f1243ce",
           "size": {
-            "height": 619,
+            "height": 632,
             "width": 234
           },
-          "zIndex": 0
+          "zIndex": 1
         },
         {
           "location": {
-            "x": 789,
-            "y": 115
+            "x": 787,
+            "y": 44
           },
           "nodeIndex": "Scored Response",
           "nodeLineageTag": "0530d395-4153-4658-af7b-13b1611db825",
           "size": {
-            "height": 269,
+            "height": 366,
             "width": 234
           },
-          "zIndex": 0
+          "zIndex": 4
         },
         {
           "location": {
@@ -569,7 +569,7 @@
             "height": 402,
             "width": 234
           },
-          "zIndex": 0
+          "zIndex": 2
         },
         {
           "location": {
@@ -582,7 +582,7 @@
             "height": 369,
             "width": 293
           },
-          "zIndex": 0
+          "zIndex": 3
         }
       ],
       "name": "Scored Response",
@@ -607,7 +607,7 @@
           "nodeIndex": "Audit",
           "nodeLineageTag": "e2381d2a-b787-4eaa-ac59-fbb97f1243ce",
           "size": {
-            "height": 615,
+            "height": 624,
             "width": 234
           },
           "zIndex": 0
@@ -674,7 +674,7 @@
           "nodeIndex": "Audit",
           "nodeLineageTag": "e2381d2a-b787-4eaa-ac59-fbb97f1243ce",
           "size": {
-            "height": 615,
+            "height": 626,
             "width": 234
           },
           "zIndex": 0
@@ -730,7 +730,7 @@
       "ordinal": 6,
       "scrollPosition": {
         "x": 0,
-        "y": 3
+        "y": 1
       },
       "nodes": [
         {
@@ -741,10 +741,10 @@
           "nodeIndex": "Audit",
           "nodeLineageTag": "e2381d2a-b787-4eaa-ac59-fbb97f1243ce",
           "size": {
-            "height": 599,
+            "height": 626,
             "width": 269
           },
-          "zIndex": 0
+          "zIndex": 1
         },
         {
           "location": {
@@ -757,25 +757,25 @@
             "height": 214,
             "width": 250
           },
-          "zIndex": 0
+          "zIndex": 2
         },
         {
           "location": {
-            "x": 782,
-            "y": 235
+            "x": 688,
+            "y": 110
           },
           "nodeIndex": "Numeric Question",
           "nodeLineageTag": "1046a9a6-0c1a-4aba-97d3-908952785237",
           "size": {
-            "height": 343,
+            "height": 399,
             "width": 269
           },
-          "zIndex": 0
+          "zIndex": 4
         },
         {
           "location": {
-            "x": 708,
-            "y": 701
+            "x": 595,
+            "y": 681
           },
           "nodeIndex": "Unit",
           "nodeLineageTag": "a27913a2-d5d6-4382-805b-7dc81dac48a6",
@@ -783,7 +783,7 @@
             "height": 222,
             "width": 234
           },
-          "zIndex": 0
+          "zIndex": 3
         }
       ],
       "name": "Numeric Answer",
@@ -811,7 +811,7 @@
             "height": 629,
             "width": 234
           },
-          "zIndex": 0
+          "zIndex": 1
         },
         {
           "location": {
@@ -824,20 +824,20 @@
             "height": 272,
             "width": 269
           },
-          "zIndex": 0
+          "zIndex": 2
         },
         {
           "location": {
             "x": 812,
-            "y": 197
+            "y": 163
           },
           "nodeIndex": "Date Time Question",
           "nodeLineageTag": "a10b74ae-c26b-416c-ab3c-838d2c6b3add",
           "size": {
-            "height": 278,
+            "height": 349,
             "width": 260
           },
-          "zIndex": 0
+          "zIndex": 3
         }
       ],
       "name": "Date Time Answer",
@@ -862,7 +862,7 @@
           "nodeIndex": "Audit",
           "nodeLineageTag": "e2381d2a-b787-4eaa-ac59-fbb97f1243ce",
           "size": {
-            "height": 594,
+            "height": 620,
             "width": 234
           },
           "zIndex": 1
@@ -882,13 +882,13 @@
         },
         {
           "location": {
-            "x": 718,
-            "y": 102
+            "x": 715,
+            "y": 73
           },
           "nodeIndex": "Checklist Option",
           "nodeLineageTag": "20005e8e-a778-48c2-a619-80c2f851334c",
           "size": {
-            "height": 319,
+            "height": 396,
             "width": 234
           },
           "zIndex": 0
@@ -905,7 +905,7 @@
       "ordinal": 9,
       "scrollPosition": {
         "x": 0,
-        "y": 0
+        "y": 9
       },
       "nodes": [
         {
@@ -916,7 +916,7 @@
           "nodeIndex": "Audit",
           "nodeLineageTag": "e2381d2a-b787-4eaa-ac59-fbb97f1243ce",
           "size": {
-            "height": 597,
+            "height": 623,
             "width": 234
           },
           "zIndex": 0
@@ -937,12 +937,12 @@
         {
           "location": {
             "x": 664,
-            "y": 103
+            "y": 54
           },
           "nodeIndex": "Branch Option",
           "nodeLineageTag": "dfda8400-a442-49a2-a445-7604c0fb2a16",
           "size": {
-            "height": 270,
+            "height": 363,
             "width": 234
           },
           "zIndex": 0
