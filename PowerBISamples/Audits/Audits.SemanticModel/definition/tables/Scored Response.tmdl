@@ -81,6 +81,32 @@ table 'Scored Response'
 
 		annotation SummarizationSetBy = Automatic
 
+	column Section
+		dataType: string
+		lineageTag: 42847b83-3952-4f1c-8dde-d27bc37c3dbc
+		summarizeBy: none
+		sourceColumn: Section
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Order In Section'
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: fcfab099-eabd-4712-984a-e2142783b89b
+		summarizeBy: none
+		sourceColumn: Order In Section
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Question = Format('Scored Response'[Order In Section], "00") & " - " & 'Scored Response'[Scored Response Question]
+		lineageTag: 2638070f-0be7-4eb3-adfc-ba16e8c72cda
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
 	partition 'Scored Response' = m
 		mode: import
 		source =
@@ -88,7 +114,7 @@ table 'Scored Response'
 				    Source = Sql.Database("ww-powerbi-demo.database.windows.net", "powerbi"),
 				    mart_AuditScoredResponse = Source{[Schema="mart",Item="AuditScoredResponse"]}[Data],
 				    #"Removed Columns" = Table.RemoveColumns(mart_AuditScoredResponse,{"_created", "_edited"}),
-				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"Branch", "Scored Response Question"}, {"Value", "Scored Response Answer"}})
+				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"Branch", "Scored Response Question"}, {"Value", "Scored Response Answer"}, {"OrderInSection", "Order In Section"}})
 				in
 				    #"Renamed Columns"
 

@@ -81,6 +81,32 @@ table 'Branch Option'
 
 		annotation SummarizationSetBy = Automatic
 
+	column Section
+		dataType: string
+		lineageTag: b50bdd7c-1add-468e-8534-e2c7a7d7f23f
+		summarizeBy: none
+		sourceColumn: Section
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Order In Section'
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: cf41e44d-6b54-47fb-8b00-9439d27eac08
+		summarizeBy: none
+		sourceColumn: Order In Section
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Question = Format('Branch Option'[Order In Section], "00") & " - " & 'Branch Option'[Branch]
+		lineageTag: c907919a-be45-4c60-b065-e47fe1bcfe29
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
 	partition 'Branch Option' = m
 		mode: import
 		source =
@@ -88,7 +114,7 @@ table 'Branch Option'
 				    Source = Sql.Database("ww-powerbi-demo.database.windows.net", "powerbi"),
 				    mart_AuditBranchOption = Source{[Schema="mart",Item="AuditBranchOption"]}[Data],
 				    #"Removed Columns" = Table.RemoveColumns(mart_AuditBranchOption,{"_created", "_edited"}),
-				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"Value", "Branch Option"}})
+				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"Value", "Branch Option"}, {"OrderInSection", "Order In Section"}})
 				in
 				    #"Renamed Columns"
 

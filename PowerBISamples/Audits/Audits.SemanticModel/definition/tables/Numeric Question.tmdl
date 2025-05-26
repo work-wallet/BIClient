@@ -86,6 +86,32 @@ table 'Numeric Question'
 
 		annotation SummarizationSetBy = Automatic
 
+	column Section
+		dataType: string
+		lineageTag: 67e62c74-6c7b-412d-bca1-cedc63939bb8
+		summarizeBy: none
+		sourceColumn: Section
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Order In Section'
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: b44da2f8-3637-4d6a-9600-13b2d1031f06
+		summarizeBy: none
+		sourceColumn: Order In Section
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column Question = Format('Numeric Question'[Order In Section], "00") & " - " & 'Numeric Question'[Numeric Question]
+		lineageTag: 788f15d1-99d2-4a0a-9664-0e6174750f7c
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
 	partition 'Numeric Question' = m
 		mode: import
 		source =
@@ -93,7 +119,7 @@ table 'Numeric Question'
 				    Source = Sql.Database("ww-powerbi-demo.database.windows.net", "powerbi"),
 				    mart_AuditNumericQuestion = Source{[Schema="mart",Item="AuditNumericQuestion"]}[Data],
 				    #"Removed Columns" = Table.RemoveColumns(mart_AuditNumericQuestion,{"_created", "_edited"}),
-				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"Question", "Numeric Question"}})
+				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"Question", "Numeric Question"}, {"OrderInSection", "Order In Section"}})
 				in
 				    #"Renamed Columns"
 
