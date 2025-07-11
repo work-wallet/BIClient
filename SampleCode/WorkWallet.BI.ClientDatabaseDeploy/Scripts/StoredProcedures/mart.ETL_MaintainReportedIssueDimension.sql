@@ -14,6 +14,7 @@ BEGIN
             a.OccurredOn,
             a.ReportedOn,
             a.ReportedBy,
+            a.ReportedByCompany,
             ris.ReportedIssueStatus_key,
             ric.ReportedIssueCategory_key,
             ol.Location_key,
@@ -35,6 +36,7 @@ BEGIN
             OR target.OccurredOn <> source.OccurredOn
             OR target.ReportedOn <> source.ReportedOn
             OR target.ReportedBy <> source.ReportedBy
+            OR target.ReportedByCompany <> source.ReportedByCompany
             OR target.ReportedIssueStatus_key <> source.ReportedIssueStatus_key
             OR target.ReportedIssueCategory_key <> source.ReportedIssueCategory_key
             OR target.Location_key <> source.Location_key
@@ -48,6 +50,7 @@ BEGIN
             target.OccurredOn = source.OccurredOn,
             target.ReportedOn = source.ReportedOn,
             target.ReportedBy = source.ReportedBy,
+            target.ReportedByCompany = source.ReportedByCompany,
             target.ReportedIssueStatus_key = source.ReportedIssueStatus_key,
             target.ReportedIssueCategory_key = source.ReportedIssueCategory_key,
             target.Location_key = source.Location_key,
@@ -63,6 +66,7 @@ BEGIN
             OccurredOn,
             ReportedOn,
             ReportedBy,
+            ReportedByCompany,
             ReportedIssueStatus_key,
             ReportedIssueCategory_key,
             Location_key,
@@ -77,6 +81,7 @@ BEGIN
             source.OccurredOn,
             source.ReportedOn,
             source.ReportedBy,
+            source.ReportedByCompany,
             source.ReportedIssueStatus_key,
             source.ReportedIssueCategory_key,
             source.Location_key,

@@ -115,6 +115,7 @@ BEGIN
             ,OccurredOn
             ,ReportedOn
             ,ReportedBy
+            ,ReportedByCompany
             ,ReportedIssueStatusCode
             ,SubcategoryId
             ,CategoryVersion
@@ -132,6 +133,7 @@ BEGIN
             ,OccurredOn datetime2(7)
             ,ReportedOn datetime2(7)
             ,ReportedBy nvarchar(max)
+            ,ReportedByCompany nvarchar(max)
             ,ReportedIssueStatusCode int
             ,SubcategoryId uniqueidentifier
             ,CategoryVersion int
