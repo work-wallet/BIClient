@@ -68,11 +68,14 @@ table Issue
 
 		annotation PBI_FormatHint = {"isDateTimeCustom":true}
 
-	column 'Reported By'
+	column 'Reported By Person'
 		dataType: string
+		isHidden
 		lineageTag: 8fc803d9-9758-459f-abf4-6b6942293de1
 		summarizeBy: none
-		sourceColumn: Reported By
+		sourceColumn: Reported By Person
+
+		changedProperty = IsHidden
 
 		annotation SummarizationSetBy = Automatic
 
@@ -165,6 +168,23 @@ table Issue
 
 		annotation SummarizationSetBy = Automatic
 
+	column 'Reported By Company'
+		dataType: string
+		isHidden
+		lineageTag: fe86d0f2-ff2b-4939-ba14-677d85c890ed
+		summarizeBy: none
+		sourceColumn: Reported By Company
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Reported By' = IF(Issue[Reported By Company] = "[not captured when downloaded]", Issue[Reported By Person], Issue[Reported By Person] & " (" & Issue[Reported By Company] & ")")
+		lineageTag: d804bf4e-49c5-444c-8077-b1c0bd918e8b
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
 	partition Issue-6d9dfa8c-c90c-4cb1-a4bf-ad691525c771 = m
 		mode: import
 		source =
@@ -172,9 +192,11 @@ table Issue
 				    Source = Sql.Database("ww-powerbi-demo.database.windows.net", "powerbi"),
 				    mart_ReportedIssue = Source{[Schema="mart",Item="ReportedIssue"]}[Data],
 				    #"Removed Columns" = Table.RemoveColumns(mart_ReportedIssue,{"_created", "_edited"}),
-				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"ReportedIssueReference", "Issue Reference"}, {"OccurredOn", "Occurred On"}, {"ReportedOn", "Reported On"}, {"ReportedBy", "Reported By"}, {"ReportedIssueOverview", "Issue Overview"}, {"CloseDate", "Close Date"}})
+				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"ReportedIssueReference", "Issue Reference"}, {"OccurredOn", "Occurred On"}, {"ReportedOn", "Reported On"}, {"ReportedBy", "Reported By Person"}, {"ReportedIssueOverview", "Issue Overview"}, {"CloseDate", "Close Date"}, {"ReportedByCompany", "Reported By Company"}})
 				in
 				    #"Renamed Columns"
 
 	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
 
