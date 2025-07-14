@@ -123,6 +123,7 @@ CREATE TABLE mart.ReportedIssue
     ,OccurredOn datetime2(7) NOT NULL
     ,ReportedOn datetime2(7) NOT NULL
     ,ReportedBy nvarchar(max) NOT NULL
+    ,ReportedByCompany nvarchar(max) NOT NULL
     ,ReportedIssueStatus_key int NOT NULL
     ,ReportedIssueCategory_key int NOT NULL
     ,Location_key int NOT NULL

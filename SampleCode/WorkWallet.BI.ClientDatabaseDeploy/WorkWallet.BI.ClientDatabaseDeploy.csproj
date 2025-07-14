@@ -5,7 +5,7 @@
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <AssemblyVersion>4.0.3.0</AssemblyVersion>
+    <AssemblyVersion>4.0.4.0</AssemblyVersion>
     <UserSecretsId>a745c317-cecd-4df8-877a-5f2fdd497e26</UserSecretsId>
   </PropertyGroup>
 
@@ -112,6 +112,7 @@
     <EmbeddedResource Include="Scripts\Schema\0001 - Common.sql" />
     <EmbeddedResource Include="Scripts\Schema\0011 - Rename FK constraints.sql" />
     <EmbeddedResource Include="Scripts\Schema\0014 - Contacts.sql" />
+    <EmbeddedResource Include="Scripts\Schema\0019 - ReportedIssuesReportedByCompany.sql" />
     <EmbeddedResource Include="Scripts\Schema\0017 - AuditsSectionContext.sql" />
     <EmbeddedResource Include="Scripts\Schema\0016 - AuditsPatch.sql" />
     <EmbeddedResource Include="Scripts\Schema\0015 - Audits.sql" />
@@ -244,10 +245,10 @@
   <ItemGroup>
     <PackageReference Include="dbup-sqlserver" Version="6.0.0" />
     <PackageReference Include="Microsoft.Data.SqlClient" Version="6.0.2" />
-    <PackageReference Include="Microsoft.Extensions.Configuration" Version="9.0.5" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="9.0.5" />
-    <PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.5" />
-    <PackageReference Include="Microsoft.Extensions.Logging" Version="9.0.5" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="9.0.7" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="9.0.7" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.7" />
+    <PackageReference Include="Microsoft.Extensions.Logging" Version="9.0.7" />
   </ItemGroup>
 
 </Project>
