@@ -160,20 +160,44 @@ BEGIN
         WITH
         (
             PPEAssignmentId uniqueidentifier
-            ,AssignedTo nvarchar(100)
+            ,AssignedTo nvarchar(max)
             ,PPETypeId uniqueidentifier
             ,PPETypeVariantId uniqueidentifier
-            ,AssignedOn datetime
-            ,ExpiredOn datetime
+            ,AssignedOn date
+            ,ExpiredOn date
             ,PPEStatusCode int
             ,AssignedFromStockId uniqueidentifier
             ,ReturnedToStockId uniqueidentifier
             ,ReplacementRequestedFromStockId uniqueidentifier
-            ,ReplacementRequestedOn datetime
+            ,ReplacementRequestedOn datetimeoffset(7)
             ,WalletId uniqueidentifier
         );
 
         EXEC mart.ETL_MaintainPPEAssignmentDimension @ppeAssignmentTable = @ppeAssignmentTable;
+
+        -- maintain PPEAssignmentHistory dimension
+        DECLARE @ppeAssignmentHistoryTable mart.ETL_PPEAssignmentHistoryTable;
+
+        INSERT INTO @ppeAssignmentHistoryTable
+        (
+            PPEAssignmentHistoryId
+            ,PPEAssignmentId
+            ,PPEActionCode
+            ,ActionedBy
+            ,ActionedOn
+            ,WalletId
+        ) SELECT * FROM OPENJSON(@json, '$.PPEAssignmentHistories')
+        WITH
+        (
+            PPEAssignmentHistoryId uniqueidentifier
+            ,PPEAssignmentId uniqueidentifier
+            ,PPEActionCode int
+            ,ActionedBy nvarchar(max)
+            ,ActionedOn datetimeoffset(7)
+            ,WalletId uniqueidentifier
+        );
+
+        EXEC mart.ETL_MaintainPPEAssignmentHistoryDimension @ppeAssignmentHistoryTable = @ppeAssignmentHistoryTable;
 
         COMMIT TRANSACTION;
     END TRY
