@@ -128,6 +128,7 @@
     <EmbeddedResource Include="Scripts\Schema\0007 - Actions.sql" />
     <EmbeddedResource Include="Scripts\Schema\0008 - PermitsFix.sql" />
     <EmbeddedResource Include="Scripts\Schema\0009 - Assets.sql" />
+    <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_MaintainPPEAssignmentDimension.sql" />
     <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_MaintainPPEStockHistoryDimension.sql" />
     <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_PostProcessPPEAssignments.sql" />
     <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_PostProcessPPEStockHistories.sql" />

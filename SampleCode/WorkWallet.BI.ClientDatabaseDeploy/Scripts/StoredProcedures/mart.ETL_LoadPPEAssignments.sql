@@ -137,6 +137,44 @@ BEGIN
 
         EXEC mart.ETL_MaintainPPEStockDimension @ppeStockTable = @ppeStockTable;
 
+        -- maintain PPEAssignment dimension
+
+        DECLARE @ppeAssignmentTable mart.ETL_PPEAssignmentTable;
+
+        INSERT INTO @ppeAssignmentTable
+        (
+            PPEAssignmentId
+            ,AssignedTo
+            ,PPETypeId
+            ,PPETypeVariantId
+            ,AssignedOn
+            ,ExpiredOn
+            ,PPEStatusCode
+            ,AssignedFromStockId
+            ,ReturnedToStockId
+            ,ReplacementRequestedFromStockId
+            ,ReplacementRequestedOn
+            ,WalletId
+        )
+        SELECT * FROM OPENJSON(@json, '$.PPEAssignments')
+        WITH
+        (
+            PPEAssignmentId uniqueidentifier
+            ,AssignedTo nvarchar(100)
+            ,PPETypeId uniqueidentifier
+            ,PPETypeVariantId uniqueidentifier
+            ,AssignedOn datetime
+            ,ExpiredOn datetime
+            ,PPEStatusCode int
+            ,AssignedFromStockId uniqueidentifier
+            ,ReturnedToStockId uniqueidentifier
+            ,ReplacementRequestedFromStockId uniqueidentifier
+            ,ReplacementRequestedOn datetime
+            ,WalletId uniqueidentifier
+        );
+
+        EXEC mart.ETL_MaintainPPEAssignmentDimension @ppeAssignmentTable = @ppeAssignmentTable;
+
         COMMIT TRANSACTION;
     END TRY
     BEGIN CATCH

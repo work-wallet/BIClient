@@ -143,7 +143,7 @@ BEGIN
         (
             PPEStockHistoryId
             ,PPEStockId
-            ,ActionCode
+            ,PPEActionCode
             ,TransferredFromStockId
             ,StockQuantity
             ,ActionedBy
@@ -156,7 +156,7 @@ BEGIN
         (
             PPEStockHistoryId uniqueidentifier
             ,PPEStockId uniqueidentifier
-            ,ActionCode int
+            ,PPEActionCode int
             ,TransferredFromStockId uniqueidentifier
             ,StockQuantity int
             ,ActionedBy nvarchar(max)

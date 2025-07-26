@@ -5,7 +5,7 @@ CREATE TYPE mart.ETL_PPEStockHistoryTable AS TABLE
 (
     PPEStockHistoryId uniqueidentifier NOT NULL
     ,PPEStockId uniqueidentifier NOT NULL
-    ,ActionCode int NOT NULL
+    ,PPEActionCode int NOT NULL
     ,TransferredFromStockId uniqueidentifier NULL -- allow NULLs
     ,StockQuantity int NOT NULL
     ,ActionedBy nvarchar(max) NOT NULL
