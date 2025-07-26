@@ -1,7 +1,7 @@
-DROP PROCEDURE IF EXISTS mart.ETL_LoadPPEStockAssignments;
+DROP PROCEDURE IF EXISTS mart.ETL_LoadPPEAssignments;
 GO
 
-CREATE PROCEDURE mart.ETL_LoadPPEStockAssignments
+CREATE PROCEDURE mart.ETL_LoadPPEAssignments
     @json nvarchar(max)
 AS
 BEGIN

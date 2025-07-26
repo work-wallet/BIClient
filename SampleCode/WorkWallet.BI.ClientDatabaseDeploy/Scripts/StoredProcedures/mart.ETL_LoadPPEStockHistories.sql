@@ -135,7 +135,7 @@ BEGIN
 
         EXEC mart.ETL_MaintainPPEStockDimension @ppeStockTable = @ppeStockTable;
 
-        -- maintain PPEStock dimension
+        -- maintain PPEStockHistory dimension
 
         DECLARE @ppeStockHistoryTable mart.ETL_PPEStockHistoryTable;
 
@@ -143,7 +143,7 @@ BEGIN
         (
             PPEStockHistoryId
             ,PPEStockId
-            ,ActionId
+            ,ActionCode
             ,TransferredFromStockId
             ,StockQuantity
             ,ActionedBy
@@ -156,7 +156,7 @@ BEGIN
         (
             PPEStockHistoryId uniqueidentifier
             ,PPEStockId uniqueidentifier
-            ,ActionId int
+            ,ActionCode int
             ,TransferredFromStockId uniqueidentifier
             ,StockQuantity int
             ,ActionedBy nvarchar(max)

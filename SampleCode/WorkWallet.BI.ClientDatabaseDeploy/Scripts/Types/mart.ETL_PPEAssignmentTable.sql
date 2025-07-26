@@ -9,7 +9,7 @@ CREATE TYPE mart.ETL_PPEAssignmentTable AS TABLE
     ,PPETypeVariantId uniqueidentifier NOT NULL
     ,AssignedOn date NOT NULL
     ,ExpiredOn date NULL -- allow NULLs
-    ,StatusId int NOT NULL
+    ,StatusCode int NOT NULL
     ,AssignedFromStockId uniqueidentifier NULL -- allow NULLs
     ,ReturnedToStockId uniqueidentifier NULL -- allow NULLs
     ,ReplacementRequestedFromStockId uniqueidentifier NULL -- allow NULLs

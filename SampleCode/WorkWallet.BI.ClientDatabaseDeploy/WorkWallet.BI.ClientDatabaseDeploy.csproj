@@ -129,13 +129,13 @@
     <EmbeddedResource Include="Scripts\Schema\0008 - PermitsFix.sql" />
     <EmbeddedResource Include="Scripts\Schema\0009 - Assets.sql" />
     <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_MaintainPPEStockHistoryDimension.sql" />
-    <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_PostProcessPPEStockAssignments.sql" />
+    <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_PostProcessPPEAssignments.sql" />
     <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_PostProcessPPEStockHistories.sql" />
     <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_PostProcessPPEStocks.sql" />
-    <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_ResetPPEStockAssignments.sql" />
+    <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_ResetPPEAssignments.sql" />
     <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_ResetPPEStockHistories.sql" />
     <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_ResetPPEStocks.sql" />
-    <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_LoadPPEStockAssignments.sql" />
+    <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_LoadPPEAssignments.sql" />
     <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_LoadPPEStockHistories.sql" />
     <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_MaintainPPEStockDimension.sql" />
     <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_ResetPPECommon.sql" />

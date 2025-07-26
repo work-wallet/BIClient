@@ -21,7 +21,7 @@ BEGIN
         FROM
             @ppeStockHistoryTable AS s
             INNER JOIN mart.PPEStock AS ps ON s.PPEStockId = ps.PPEStockId
-            INNER JOIN mart.PPEAction AS pa ON s.ActionId = pa.PPEActionCode
+            INNER JOIN mart.PPEAction AS pa ON s.ActionCode = pa.PPEActionCode
             LEFT JOIN mart.PPEStock AS tps ON s.TransferredFromStockId = tps.PPEStockId
             INNER JOIN mart.Wallet AS w ON s.WalletId = w.WalletId
     ) AS source

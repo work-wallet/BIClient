@@ -1,7 +1,7 @@
-DROP PROCEDURE IF EXISTS mart.ETL_ResetPPEStockAssignments;
+DROP PROCEDURE IF EXISTS mart.ETL_ResetPPEAssignments;
 GO
 
-CREATE PROCEDURE mart.ETL_ResetPPEStockAssignments @walletId uniqueidentifier
+CREATE PROCEDURE mart.ETL_ResetPPEAssignments @walletId uniqueidentifier
 AS
 BEGIN
     SET NOCOUNT ON;
