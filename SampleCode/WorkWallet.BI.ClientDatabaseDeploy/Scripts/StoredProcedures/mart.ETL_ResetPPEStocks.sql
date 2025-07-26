@@ -6,7 +6,9 @@ AS
 BEGIN
     SET NOCOUNT ON;
 
-    EXEC mart.ETL_ResetPPE @walletId;
+    /* Do nothing - the PPE stock tables are also used for PPEStockHistories and PPEStockAssignments,
+       so not safe to delete them.
+       See also mart.ETL_ResetPPECommon */
 
 END
 GO

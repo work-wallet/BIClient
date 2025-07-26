@@ -1,7 +1,7 @@
-DROP PROCEDURE IF EXISTS mart.ETL_ResetPPE;
+DROP PROCEDURE IF EXISTS mart.ETL_ResetPPECommon;
 GO
 
-CREATE PROCEDURE mart.ETL_ResetPPE @walletId uniqueidentifier
+CREATE PROCEDURE mart.ETL_ResetPPECommon @walletId uniqueidentifier
 AS
 BEGIN
     SET NOCOUNT ON;

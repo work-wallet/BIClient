@@ -48,7 +48,7 @@ CREATE TABLE mart.PPEType
     ,Wallet_key int NOT NULL
     ,_created datetime2(7) NOT NULL CONSTRAINT [DF_mart.PPEType__created] DEFAULT SYSUTCDATETIME()
     ,_edited datetime2(7) NULL
-    ,CONSTRAINT [PK_mart.PPEType] PRIMARY KEY (PPEType_key, PPETypeVariantId)
+    ,CONSTRAINT [PK_mart.PPEType] PRIMARY KEY (PPEType_key)
     ,CONSTRAINT [UQ_mart.PPEType_PPETypeId_PPETypeVariantId] UNIQUE (PPETypeId, PPETypeVariantId)
     ,CONSTRAINT [FK_mart.PPEType_mart.Wallet_Wallet_key] FOREIGN KEY(Wallet_key) REFERENCES mart.Wallet
 );
@@ -57,9 +57,8 @@ CREATE TABLE mart.PPEStock
 (
     PPEStock_key int IDENTITY
     ,PPEStockId uniqueidentifier NOT NULL
-    ,LocationId uniqueidentifier NOT NULL
-    ,PPETypeId uniqueidentifier NOT NULL
-    ,PPETypeVariantId uniqueidentifier NOT NULL
+    ,Location_key int NOT NULL
+    ,PPEType_key int NOT NULL
     ,StockQuantity int NOT NULL
     ,WarningQuantity int NULL -- allow NULLs
     ,Wallet_key int NOT NULL
@@ -67,5 +66,72 @@ CREATE TABLE mart.PPEStock
     ,_edited datetime2(7) NULL
     ,CONSTRAINT [PK_mart.PPEStock] PRIMARY KEY (PPEStock_key)
     ,CONSTRAINT [UQ_mart.PPEStock_PPEStockId] UNIQUE (PPEStockId)
+    ,CONSTRAINT [FK_mart.PPEStock_mart.Location_Location_key] FOREIGN KEY(Location_key) REFERENCES mart.Location
+    ,CONSTRAINT [FK_mart.PPEStock_mart.PPEType_PPEType_key] FOREIGN KEY(PPEType_key) REFERENCES mart.PPEType
     ,CONSTRAINT [FK_mart.PPEStock_mart.Wallet_Wallet_key] FOREIGN KEY(Wallet_key) REFERENCES mart.Wallet
+);
+
+CREATE TABLE mart.PPEStockHistory
+(
+    PPEStockHistory_key int IDENTITY
+    ,PPEStockHistoryId uniqueidentifier NOT NULL
+    ,PPEStock_key int NOT NULL
+    ,PPEAction_key int NOT NULL
+    ,TransferredFromPPEStock_key int NULL -- allow NULLs
+    ,StockQuantity int NOT NULL
+    ,ActionedBy nvarchar(max) NOT NULL
+    ,ActionedOn datetimeoffset(7) NOT NULL
+    ,Notes nvarchar(250) NULL
+    ,Wallet_key int NOT NULL
+    ,_created datetime2(7) NOT NULL CONSTRAINT [DF_mart.PPEStockHistory__created] DEFAULT SYSUTCDATETIME()
+    ,_edited datetime2(7) NULL
+    ,CONSTRAINT [PK_mart.PPEStockHistory] PRIMARY KEY (PPEStockHistory_key)
+    ,CONSTRAINT [UQ_mart.PPEStockHistory_PPEStockHistoryId] UNIQUE (PPEStockHistoryId)
+    ,CONSTRAINT [FK_mart.PPEStockHistory_mart.PPEStock_PPEStock_key] FOREIGN KEY(PPEStock_key) REFERENCES mart.PPEStock
+    ,CONSTRAINT [FK_mart.PPEStockHistory_mart.PPEAction_PPEAction_key] FOREIGN KEY(PPEAction_key) REFERENCES mart.PPEAction
+    ,CONSTRAINT [FK_mart.PPEStockHistory_mart.Wallet_Wallet_key] FOREIGN KEY(Wallet_key) REFERENCES mart.Wallet
+);
+
+CREATE TABLE mart.PPEAssignment
+(
+    PPEAssignment_key int IDENTITY
+    ,PPEAssignmentId uniqueidentifier NOT NULL
+    ,AssignedTo nvarchar(max) NOT NULL
+    ,PPEType_key int NOT NULL
+    ,AssignedOn date NOT NULL
+    ,ExpiredOn date NULL -- allow NULLs
+    ,PPEStatus_key int NOT NULL
+    ,AssignedFromPPEStock_key int NULL -- allow NULLs
+    ,ReturnedToPPEStock_key int NULL -- allow NULLs
+    ,ReplacementRequestedFromPPEStock_key int NULL -- allow NULLs
+    ,ReplacementRequestedOn datetimeoffset(7) NULL -- allow NULLs
+    ,Wallet_key int NOT NULL
+    ,_created datetime2(7) NOT NULL CONSTRAINT [DF_mart.PPEAssignment__created] DEFAULT SYSUTCDATETIME()
+    ,_edited datetime2(7) NULL
+    ,CONSTRAINT [PK_mart.PPEAssignment] PRIMARY KEY (PPEAssignment_key)
+    ,CONSTRAINT [UQ_mart.PPEAssignment_PPEAssignmentId] UNIQUE (PPEAssignmentId)
+    ,CONSTRAINT [FK_mart.PPEAssignment_mart.PPEType_PPEType_key] FOREIGN KEY(PPEType_key) REFERENCES mart.PPEType
+    ,CONSTRAINT [FK_mart.PPEAssignment_mart.PPEStatus_PPEStatus_key] FOREIGN KEY(PPEStatus_key) REFERENCES mart.PPEStatus
+    ,CONSTRAINT [FK_mart.PPEAssignment_mart.PPEStock_AssignedFromPPEStock_key] FOREIGN KEY(AssignedFromPPEStock_key) REFERENCES mart.PPEStock
+    ,CONSTRAINT [FK_mart.PPEAssignment_mart.PPEStock_ReturnedToPPEStock_key] FOREIGN KEY(ReturnedToPPEStock_key) REFERENCES mart.PPEStock
+    ,CONSTRAINT [FK_mart.PPEAssignment_mart.PPEStock_ReplacementRequestedFromPPEStock_key] FOREIGN KEY(ReplacementRequestedFromPPEStock_key) REFERENCES mart.PPEStock
+    ,CONSTRAINT [FK_mart.PPEAssignment_mart.Wallet_Wallet_key] FOREIGN KEY(Wallet_key) REFERENCES mart.Wallet
+);
+
+CREATE TABLE mart.PPEAssignmentHistory
+(
+    PPEAssignmentHistory_key int IDENTITY
+    ,PPEAssignmentHistoryId uniqueidentifier NOT NULL
+    ,PPEAssignment_key int NOT NULL
+    ,PPEAction_key int NOT NULL
+    ,ActionedBy nvarchar(max) NOT NULL
+    ,ActionedOn datetimeoffset(7) NOT NULL
+    ,Wallet_key int NOT NULL
+    ,_created datetime2(7) NOT NULL CONSTRAINT [DF_mart.PPEAssignmentHistory__created] DEFAULT SYSUTCDATETIME()
+    ,_edited datetime2(7) NULL
+    ,CONSTRAINT [PK_mart.PPEAssignmentHistory] PRIMARY KEY (PPEAssignmentHistory_key)
+    ,CONSTRAINT [UQ_mart.PPEAssignmentHistory_PPEAssignmentHistoryId] UNIQUE (PPEAssignmentHistoryId)
+    ,CONSTRAINT [FK_mart.PPEAssignmentHistory_mart.PPEAssignment_PPEAssignment_key] FOREIGN KEY(PPEAssignment_key) REFERENCES mart.PPEAssignment
+    ,CONSTRAINT [FK_mart.PPEAssignmentHistory_mart.PPEAction_PPEAction_key] FOREIGN KEY(PPEAction_key) REFERENCES mart.PPEAction
+    ,CONSTRAINT [FK_mart.PPEAssignmentHistory_mart.Wallet_Wallet_key] FOREIGN KEY(Wallet_key) REFERENCES mart.Wallet
 );

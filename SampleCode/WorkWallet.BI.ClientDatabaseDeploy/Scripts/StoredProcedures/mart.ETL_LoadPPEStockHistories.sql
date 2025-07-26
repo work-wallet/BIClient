@@ -6,8 +6,6 @@ CREATE PROCEDURE mart.ETL_LoadPPEStockHistories
 AS
 BEGIN
 
-    SET NOCOUNT ON;
-
     BEGIN TRY
         BEGIN TRANSACTION
 
@@ -136,6 +134,38 @@ BEGIN
         );
 
         EXEC mart.ETL_MaintainPPEStockDimension @ppeStockTable = @ppeStockTable;
+
+        -- maintain PPEStock dimension
+
+        DECLARE @ppeStockHistoryTable mart.ETL_PPEStockHistoryTable;
+
+        INSERT INTO @ppeStockHistoryTable
+        (
+            PPEStockHistoryId
+            ,PPEStockId
+            ,ActionId
+            ,TransferredFromStockId
+            ,StockQuantity
+            ,ActionedBy
+            ,ActionedOn
+            ,Notes
+            ,WalletId
+        )
+        SELECT * FROM OPENJSON(@json, '$.PPEStockHistories')
+        WITH
+        (
+            PPEStockHistoryId uniqueidentifier
+            ,PPEStockId uniqueidentifier
+            ,ActionId int
+            ,TransferredFromStockId uniqueidentifier
+            ,StockQuantity int
+            ,ActionedBy nvarchar(max)
+            ,ActionedOn datetimeoffset(7)
+            ,Notes nvarchar(250)
+            ,WalletId uniqueidentifier
+        );
+
+        EXEC mart.ETL_MaintainPPEStockHistoryDimension @ppeStockHistoryTable = @ppeStockHistoryTable;
 
         COMMIT TRANSACTION;
     END TRY
