@@ -144,12 +144,12 @@ table Location
 		isHidden
 		formatString: 0
 		lineageTag: 9dc67335-531f-4293-8214-487d30a1b21a
-		summarizeBy: sum
+		summarizeBy: none
 		sourceColumn: Wallet_key
 
 		changedProperty = IsHidden
 
-		annotation SummarizationSetBy = Automatic
+		annotation SummarizationSetBy = User
 
 	column Department
 		dataType: string

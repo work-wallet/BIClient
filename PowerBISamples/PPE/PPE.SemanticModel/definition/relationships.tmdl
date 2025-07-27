@@ -5,13 +5,6 @@ relationship 72dc5da0-4042-40a7-8342-51f03af1e646
 
 	annotation PBI_IsFromSource = FS
 
-relationship 4f896999-f827-4054-bb7d-2db918350b28
-	isActive: false
-	fromColumn: Contact.Wallet_key
-	toColumn: Wallet.Wallet_key
-
-	annotation PBI_IsFromSource = FS
-
 relationship 5f6c5bd0-1f38-483c-8077-d40733f4fd61
 	joinOnDateBehavior: datePartOnly
 	fromColumn: Assignment.'Assigned On'
@@ -44,6 +37,7 @@ relationship a56cbd9b-d689-491e-93fa-a907f12bcaf5
 	annotation PBI_IsFromSource = FS
 
 relationship dbc027d5-d578-48e4-abd0-729aa363a94a
+	isActive: false
 	fromColumn: Assignment.AssignedFromPPEStock_key
 	toColumn: Stock.PPEStock_key
 
@@ -63,12 +57,6 @@ relationship ae4b33dc-3b5e-4992-8544-b67de73753df
 
 	annotation PBI_IsFromSource = FS
 
-relationship 92cf97ef-6585-4316-b555-7f85d4e51582
-	fromColumn: Assignment.PPEType_key
-	toColumn: 'PPE Type'.PPEType_key
-
-	annotation PBI_IsFromSource = FS
-
 relationship 9f32179d-89d4-4e01-ac86-6d793d434508
 	fromColumn: 'Assignment History'.PPEAction_key
 	toColumn: 'PPE Action'.PPEAction_key
@@ -82,7 +70,6 @@ relationship 530a0657-8eea-414f-8a2d-f5cdf6d29c33
 	annotation PBI_IsFromSource = FS
 
 relationship 13e80013-77c4-4fdb-9162-c318ea433d8b
-	isActive: false
 	fromColumn: Stock.PPEType_key
 	toColumn: 'PPE Type'.PPEType_key
 
@@ -99,4 +86,52 @@ relationship d742de10-3975-4f1f-a611-629203216f5b
 	toColumn: Stock.PPEStock_key
 
 	annotation PBI_IsFromSource = FS
+
+relationship e2b84b54-9f43-43ba-8cd5-e821c0cc5c9b
+	fromColumn: Assignment.Wallet_key
+	toColumn: Wallet.Wallet_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship 73bdac87-5336-40cc-be47-96c49a79320c
+	isActive: false
+	fromColumn: 'Assignment History'.Wallet_key
+	toColumn: Wallet.Wallet_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship 9d720469-31c1-4f5b-b4a5-c57c774066fe
+	fromColumn: Stock.Location_key
+	toColumn: Location.Location_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship cf55029f-5ae8-4702-bdc0-9be0493d79da
+	fromColumn: Stock.Wallet_key
+	toColumn: Wallet.Wallet_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship 77bd1988-2bca-4988-b0bd-794542b787e6
+	isActive: false
+	fromColumn: 'Stock History'.Wallet_key
+	toColumn: Wallet.Wallet_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship 641ce44e-457a-43bb-8176-1e1769924779
+	isActive: false
+	fromColumn: 'PPE Type'.Wallet_key
+	toColumn: Wallet.Wallet_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship cde6fe0a-c2ea-eab1-907c-1c407423ac1a
+	fromColumn: Assignment.PPEType_key
+	toColumn: 'PPE Assignment Type'.PPEType_key
+
+relationship 85905324-b0ce-007e-cc16-ff3ec994e049
+	isActive: false
+	fromColumn: 'Stock History'.TransferredFromPPEStock_key
+	toColumn: Stock.PPEStock_key
 

@@ -93,7 +93,7 @@ table Assignment
 		isHidden
 		formatString: 0
 		lineageTag: b637deee-e40c-4c6a-baa8-982c2b58aa7c
-		summarizeBy: none
+		summarizeBy: sum
 		sourceColumn: AssignedFromPPEStock_key
 
 		changedProperty = IsHidden

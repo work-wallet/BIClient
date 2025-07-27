@@ -8,15 +8,16 @@ model Model
 
 annotation PBIDesktopVersion = 2.145.1262.0 (25.07)+10bdeda5ab0db954b2cf824e7a117ad7cee97f88
 
-annotation PBI_QueryOrder = ["Location","Wallet","Contact","PPE Action","Assignment","Assignment History","PPE Status","Stock","Stock History","PPE Type"]
+annotation PBI_QueryOrder = ["Location","Wallet","PPE Action","Assignment","Assignment History","PPE Status","Stock","Stock History","PPE Type","PPE Assignment Type"]
 
 annotation __PBI_TimeIntelligenceEnabled = 1
 
 annotation PBI_ProTooling = ["DevMode"]
 
+annotation PBI_RemovedChildren = [{"remoteItemId":{"foreignKeyRelationship":{"fromTableLocalLineageTag":"4cd4c7b8-78ce-4f8e-927e-e92f949db79b","fromColumnLocalLineageTag":"da35c950-f10a-4282-935a-e9798250fa03","toTableLocalLineageTag":"784865e7-41be-46a5-a713-88e990e53228","toColumnLocalLineageTag":"7b3cbaf3-fa37-42ff-9cbf-dced966db017"}},"objectType":"Relationship"}]
+
 ref table Location
 ref table Wallet
-ref table Contact
 ref table 'PPE Action'
 ref table DateTableTemplate_1ea741d5-b265-4e44-915a-bc3f84030075
 ref table Assignment
@@ -30,6 +31,7 @@ ref table Stock
 ref table 'Stock History'
 ref table LocalDateTable_0b142ea6-4d11-4451-b39c-7a919543f3ec
 ref table 'PPE Type'
+ref table 'PPE Assignment Type'
 
 ref cultureInfo en-GB
 
