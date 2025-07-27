@@ -18,6 +18,7 @@ Jump to the relevant section:
 * [Assets](#assets)
 * [Safety Cards](#safety-cards)
 * [Audits](#audits)
+* [PPE](#ppe)
 
 ## Site Audits
 
@@ -124,3 +125,17 @@ Legacy module
 ### Audits - Branch Option
 
 ![Branch Option](Images/PowerBIModelDiagrams/Audits_BranchOption.png)
+
+## PPE
+
+### PPE - Stock
+
+![Main](Images/PowerBIModelDiagrams/PPE_Stock.png)
+
+### PPE - Stock History
+
+![Main](Images/PowerBIModelDiagrams/PPE_StockHistory.png)
+
+### PPE - Stock Assignments
+
+![Main](Images/PowerBIModelDiagrams/PPE_Assignments.png)

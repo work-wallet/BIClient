@@ -46,7 +46,7 @@ table Assignment
 
 	column 'Assigned On'
 		dataType: dateTime
-		formatString: Long Date
+		formatString: dd/mm/yy
 		lineageTag: 69b80387-2121-4a75-ae3b-ec5dd0303f54
 		summarizeBy: none
 		sourceColumn: Assigned On
@@ -60,9 +60,11 @@ table Assignment
 
 		annotation UnderlyingDateTimeDataType = Date
 
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
 	column 'Expired On'
 		dataType: dateTime
-		formatString: Long Date
+		formatString: dd/mm/yy
 		lineageTag: 8d8cc5e0-21c1-4a1e-b81f-53a9bc40030a
 		summarizeBy: none
 		sourceColumn: Expired On
@@ -75,6 +77,8 @@ table Assignment
 		annotation SummarizationSetBy = Automatic
 
 		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
 
 	column PPEStatus_key
 		dataType: int64
