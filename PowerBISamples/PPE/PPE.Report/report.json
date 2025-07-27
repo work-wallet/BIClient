@@ -1,0 +1,79 @@
+{
+  "config": "{\"version\":\"5.55\",\"themeCollection\":{\"baseTheme\":{\"name\":\"CY24SU06\",\"type\":2,\"version\":\"5.56\"},\"customTheme\":{\"name\":\"NoWalls_Analytics4439775621304771.json\",\"type\":1,\"version\":\"5.56\"}},\"activeSectionIndex\":0,\"defaultDrillFilterOtherVisuals\":true,\"filterSortOrder\":3,\"slowDataSourceSettings\":{\"isCrossHighlightingDisabled\":false,\"isSlicerSelectionsButtonEnabled\":false,\"isFilterSelectionsButtonEnabled\":false,\"isFieldWellButtonEnabled\":false,\"isApplyAllButtonEnabled\":false},\"linguisticSchemaSyncVersion\":2,\"settings\":{\"useNewFilterPaneExperience\":true,\"allowChangeFilterTypes\":true,\"useStylableVisualContainerHeader\":true,\"exportDataMode\":1,\"useEnhancedTooltips\":true},\"objects\":{\"section\":[{\"properties\":{\"verticalAlignment\":{\"expr\":{\"Literal\":{\"Value\":\"'Top'\"}}}}}],\"outspacePane\":[{\"properties\":{\"expanded\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}}}}]}}",
+  "filters": "[]",
+  "layoutOptimization": 0,
+  "publicCustomVisuals": [
+    "advanceCardE03760C5AB684758B56AA29F9E6C257B"
+  ],
+  "resourcePackages": [
+    {
+      "resourcePackage": {
+        "disabled": false,
+        "items": [
+          {
+            "name": "CY24SU06",
+            "path": "BaseThemes/CY24SU06.json",
+            "type": 202
+          }
+        ],
+        "name": "SharedResources",
+        "type": 2
+      }
+    },
+    {
+      "resourcePackage": {
+        "disabled": false,
+        "items": [
+          {
+            "name": "NoWalls_Analytics4439775621304771.json",
+            "path": "NoWalls_Analytics4439775621304771.json",
+            "type": 201
+          }
+        ],
+        "name": "RegisteredResources",
+        "type": 1
+      }
+    }
+  ],
+  "sections": [
+    {
+      "config": "{\"objects\":{\"outspacePane\":[{\"properties\":{\"width\":{\"expr\":{\"Literal\":{\"Value\":\"248L\"}}}}}]}}",
+      "displayName": "PPE Stock",
+      "displayOption": 1,
+      "filters": "[]",
+      "height": 720.00,
+      "name": "0e5e0693c4483648cc08",
+      "visualContainers": [
+        {
+          "config": "{\"name\":\"a3f2efeee8c9c842d505\",\"layouts\":[{\"id\":0,\"position\":{\"x\":0,\"y\":0,\"z\":2000,\"width\":419,\"height\":102,\"tabOrder\":2000}}],\"singleVisual\":{\"visualType\":\"slicer\",\"projections\":{\"Values\":[{\"queryRef\":\"PPE Type.PPE Type\",\"active\":true}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"p\",\"Entity\":\"PPE Type\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"p\"}},\"Property\":\"PPE Type\"},\"Name\":\"PPE Type.PPE Type\",\"NativeReferenceName\":\"PPE Type\"}]},\"syncGroup\":{\"groupName\":\"Inspected On\",\"fieldChanges\":true,\"filterChanges\":true},\"drillFilterOtherVisuals\":true,\"hasDefaultSort\":true,\"objects\":{\"data\":[{\"properties\":{\"mode\":{\"expr\":{\"Literal\":{\"Value\":\"'Dropdown'\"}}},\"relativeRange\":{\"expr\":{\"Literal\":{\"Value\":\"'Last'\"}}},\"relativeDuration\":{\"expr\":{\"Literal\":{\"Value\":\"3D\"}}},\"relativePeriod\":{\"expr\":{\"Literal\":{\"Value\":\"'Months'\"}}}}}],\"dateRange\":[{\"properties\":{\"includeToday\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}}}}],\"general\":[{\"properties\":{\"filter\":{\"filter\":{\"Version\":2,\"From\":[{\"Name\":\"p\",\"Entity\":\"PPE Type\",\"Type\":0}],\"Where\":[{\"Condition\":{\"In\":{\"Expressions\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"p\"}},\"Property\":\"PPE Type\"}}],\"Values\":[[{\"Literal\":{\"Value\":\"'Tree Climbing Harness'\"}}]]}}}]}}}}]},\"vcObjects\":{\"title\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}}}}]}}}",
+          "filters": "[]",
+          "height": 102.00,
+          "width": 419.00,
+          "x": 0.00,
+          "y": 0.00,
+          "z": 2000.00
+        },
+        {
+          "config": "{\"name\":\"a9d0a663a162b7d0f458\",\"layouts\":[{\"id\":0,\"position\":{\"x\":0,\"y\":101.77897574123989,\"z\":0,\"width\":1280,\"height\":617.5741239892183,\"tabOrder\":0}}],\"singleVisual\":{\"visualType\":\"tableEx\",\"projections\":{\"Values\":[{\"queryRef\":\"Location.Location\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"l\",\"Entity\":\"Location\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"l\"}},\"Property\":\"Location\"},\"Name\":\"Location.Location\",\"NativeReferenceName\":\"Location\"}]},\"drillFilterOtherVisuals\":true,\"objects\":{\"columnWidth\":[{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"330.32651272223603D\"}}}},\"selector\":{\"metadata\":\"Location.Location\"}},{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"40D\"}}}},\"selector\":{\"metadata\":\"Audit.Inspected On.Variation.Date Hierarchy.Year\"}},{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"48D\"}}}},\"selector\":{\"metadata\":\"Audit.Inspected On.Variation.Date Hierarchy.Quarter\"}},{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"70D\"}}}},\"selector\":{\"metadata\":\"Audit.Inspected On.Variation.Date Hierarchy.Month\"}},{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"29D\"}}}},\"selector\":{\"metadata\":\"Audit.Inspected On.Variation.Date Hierarchy.Day\"}}]},\"vcObjects\":{\"visualTooltip\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}}}}]}}}",
+          "filters": "[]",
+          "height": 617.57,
+          "width": 1280.00,
+          "x": 0.00,
+          "y": 101.78,
+          "z": 0.00
+        },
+        {
+          "config": "{\"name\":\"b506e34e8f7180074b6b\",\"layouts\":[{\"id\":0,\"position\":{\"x\":418.74285714285713,\"y\":0,\"z\":1000,\"width\":861.2571428571429,\"height\":102.4,\"tabOrder\":1000}}],\"singleVisual\":{\"visualType\":\"slicer\",\"projections\":{\"Values\":[{\"queryRef\":\"PPE Type.PPE Variant\",\"active\":true}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"p\",\"Entity\":\"PPE Type\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"p\"}},\"Property\":\"PPE Variant\"},\"Name\":\"PPE Type.PPE Variant\",\"NativeReferenceName\":\"PPE Variant\"}]},\"drillFilterOtherVisuals\":true,\"objects\":{\"data\":[{\"properties\":{\"mode\":{\"expr\":{\"Literal\":{\"Value\":\"'Dropdown'\"}}}}}],\"general\":[{\"properties\":{\"orientation\":{\"expr\":{\"Literal\":{\"Value\":\"1D\"}}}}}],\"selection\":[{\"properties\":{\"selectAllCheckboxEnabled\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}}}}]}}}",
+          "filters": "[]",
+          "height": 102.40,
+          "width": 861.26,
+          "x": 418.74,
+          "y": 0.00,
+          "z": 1000.00
+        }
+      ],
+      "width": 1280.00
+    }
+  ],
+  "theme": "NoWalls_Analytics4439775621304771.json"
+}
