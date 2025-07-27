@@ -5,7 +5,7 @@
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <AssemblyVersion>4.0.4.0</AssemblyVersion>
+    <AssemblyVersion>4.1.0.0</AssemblyVersion>
     <UserSecretsId>a745c317-cecd-4df8-877a-5f2fdd497e26</UserSecretsId>
   </PropertyGroup>
 
@@ -112,6 +112,7 @@
     <EmbeddedResource Include="Scripts\Schema\0001 - Common.sql" />
     <EmbeddedResource Include="Scripts\Schema\0011 - Rename FK constraints.sql" />
     <EmbeddedResource Include="Scripts\Schema\0014 - Contacts.sql" />
+    <EmbeddedResource Include="Scripts\Schema\0020 - PPE.sql" />
     <EmbeddedResource Include="Scripts\Schema\0019 - ReportedIssuesReportedByCompany.sql" />
     <EmbeddedResource Include="Scripts\Schema\0017 - AuditsSectionContext.sql" />
     <EmbeddedResource Include="Scripts\Schema\0016 - AuditsPatch.sql" />
@@ -127,6 +128,21 @@
     <EmbeddedResource Include="Scripts\Schema\0007 - Actions.sql" />
     <EmbeddedResource Include="Scripts\Schema\0008 - PermitsFix.sql" />
     <EmbeddedResource Include="Scripts\Schema\0009 - Assets.sql" />
+    <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_MaintainPPEAssignmentHistoryDimension.sql" />
+    <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_MaintainPPEAssignmentDimension.sql" />
+    <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_MaintainPPEStockHistoryDimension.sql" />
+    <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_PostProcessPPEAssignments.sql" />
+    <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_PostProcessPPEStockHistories.sql" />
+    <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_PostProcessPPEStocks.sql" />
+    <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_ResetPPEAssignments.sql" />
+    <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_ResetPPEStockHistories.sql" />
+    <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_ResetPPEStocks.sql" />
+    <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_LoadPPEAssignments.sql" />
+    <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_LoadPPEStockHistories.sql" />
+    <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_MaintainPPEStockDimension.sql" />
+    <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_ResetPPECommon.sql" />
+    <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_MaintainPPETypeDimension.sql" />
+    <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_LoadPPEStocks.sql" />
     <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_LoadAuditScoreTagFact.sql" />
     <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_MaintainAuditScoreTagDimension.sql" />
     <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_LoadAuditScoreSectionFact.sql" />
@@ -206,6 +222,11 @@
     <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_ResetPermits.sql" />
     <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_ResetReportedIssues.sql" />
     <EmbeddedResource Include="Scripts\StoredProcedures\mart.ETL_UpdateLastSync.sql" />
+    <EmbeddedResource Include="Scripts\Types\mart.ETL_PPEAssignmentHistory.sql" />
+    <EmbeddedResource Include="Scripts\Types\mart.ETL_PPEAssignmentTable.sql" />
+    <EmbeddedResource Include="Scripts\Types\mart.ETL_PPEStockHistoryTable.sql" />
+    <EmbeddedResource Include="Scripts\Types\mart.ETL_PPEStockTable.sql" />
+    <EmbeddedResource Include="Scripts\Types\mart.ETL_PPETypeTable.sql" />
     <EmbeddedResource Include="Scripts\Types\mart.ETL_AuditScoreTagTable.sql" />
     <EmbeddedResource Include="Scripts\Types\mart.ETL_AuditScoreSectionTable.sql" />
     <EmbeddedResource Include="Scripts\Types\mart.ETL_GradingSetOptionTable.sql" />

@@ -13,6 +13,10 @@ The datasets currently enabled for download are:
 * Assets
 * Safety Cards
 * Audits
+* PPE - comprises three modules:
+  * PPEStocks
+  * PPEStockHistories
+  * PPEAssignments
 
 The API uses a combination of paging and change tracking to efficiently transfer data from the Work Wallet cloud to your local environment.
 
@@ -167,6 +171,9 @@ DELETE FROM mart.ETL_ChangeDetection where LogType = 'AUDIT2_UPDATED';
 | Assets | ASSET_UPDATED |
 | SafetyCards | SAFETY_CARD_UPDATED |
 | Audits | AUDIT2_UPDATED |
+| PPEStocks | PPE_STOCK_UPDATED |
+| PPEStockHistories | PPE_STOCK_HISTORY_UPDATED |
+| PPEAssignments | PPE_ASSIGNMENT_UPDATED |
 
 ## Configuring the Azure Function App
 

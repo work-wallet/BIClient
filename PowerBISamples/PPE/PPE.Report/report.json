@@ -1,0 +1,82 @@
+{
+  "config": "{\"version\":\"5.55\",\"themeCollection\":{\"baseTheme\":{\"name\":\"CY24SU06\",\"type\":2,\"version\":\"5.56\"},\"customTheme\":{\"name\":\"NoWalls_Analytics4439775621304771.json\",\"type\":1,\"version\":\"5.56\"}},\"activeSectionIndex\":0,\"defaultDrillFilterOtherVisuals\":true,\"filterSortOrder\":3,\"slowDataSourceSettings\":{\"isCrossHighlightingDisabled\":false,\"isSlicerSelectionsButtonEnabled\":false,\"isFilterSelectionsButtonEnabled\":false,\"isFieldWellButtonEnabled\":false,\"isApplyAllButtonEnabled\":false},\"linguisticSchemaSyncVersion\":2,\"settings\":{\"useNewFilterPaneExperience\":true,\"allowChangeFilterTypes\":true,\"useStylableVisualContainerHeader\":true,\"exportDataMode\":1,\"useEnhancedTooltips\":true},\"objects\":{\"section\":[{\"properties\":{\"verticalAlignment\":{\"expr\":{\"Literal\":{\"Value\":\"'Top'\"}}}}}],\"outspacePane\":[{\"properties\":{\"expanded\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}}}}]}}",
+  "filters": "[]",
+  "layoutOptimization": 0,
+  "publicCustomVisuals": [
+    "advanceCardE03760C5AB684758B56AA29F9E6C257B"
+  ],
+  "resourcePackages": [
+    {
+      "resourcePackage": {
+        "disabled": false,
+        "items": [
+          {
+            "name": "CY24SU06",
+            "path": "BaseThemes/CY24SU06.json",
+            "type": 202
+          }
+        ],
+        "name": "SharedResources",
+        "type": 2
+      }
+    },
+    {
+      "resourcePackage": {
+        "disabled": false,
+        "items": [
+          {
+            "name": "NoWalls_Analytics4439775621304771.json",
+            "path": "NoWalls_Analytics4439775621304771.json",
+            "type": 201
+          }
+        ],
+        "name": "RegisteredResources",
+        "type": 1
+      }
+    }
+  ],
+  "sections": [
+    {
+      "config": "{\"objects\":{\"outspacePane\":[{\"properties\":{\"width\":{\"expr\":{\"Literal\":{\"Value\":\"248L\"}}}}}]}}",
+      "displayName": "PPE Stock",
+      "displayOption": 1,
+      "filters": "[]",
+      "height": 720.00,
+      "name": "0e5e0693c4483648cc08",
+      "visualContainers": [
+        {
+          "config": "{\"name\":\"a9d0a663a162b7d0f458\",\"layouts\":[{\"id\":0,\"position\":{\"x\":0,\"y\":0,\"z\":0,\"width\":1280,\"height\":719.3530997304582,\"tabOrder\":0}}],\"singleVisual\":{\"visualType\":\"pivotTable\",\"projections\":{\"Rows\":[{\"queryRef\":\"Location.Location\",\"active\":true},{\"queryRef\":\"PPE Type.PPE Type\",\"active\":true},{\"queryRef\":\"PPE Type.PPE Variant\",\"active\":true}],\"Values\":[{\"queryRef\":\"Sum(Stock.Stock Quantity)\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"l\",\"Entity\":\"Location\",\"Type\":0},{\"Name\":\"s\",\"Entity\":\"Stock\",\"Type\":0},{\"Name\":\"p\",\"Entity\":\"PPE Type\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"l\"}},\"Property\":\"Location\"},\"Name\":\"Location.Location\",\"NativeReferenceName\":\"Location\"},{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"s\"}},\"Property\":\"Stock Quantity\"}},\"Function\":0},\"Name\":\"Sum(Stock.Stock Quantity)\",\"NativeReferenceName\":\"Stock Quantity\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"p\"}},\"Property\":\"PPE Type\"},\"Name\":\"PPE Type.PPE Type\",\"NativeReferenceName\":\"PPE Type\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"p\"}},\"Property\":\"PPE Variant\"},\"Name\":\"PPE Type.PPE Variant\",\"NativeReferenceName\":\"PPE Variant\"}]},\"expansionStates\":[{\"roles\":[\"Rows\"],\"levels\":[{\"queryRefs\":[\"Location.Location\"],\"identityKeys\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"Location\"}},\"Property\":\"Location\"}}],\"isPinned\":true},{\"queryRefs\":[\"PPE Type.PPE Type\"],\"isPinned\":true},{\"queryRefs\":[\"PPE Type.PPE Variant\"],\"isCollapsed\":true,\"isPinned\":true}],\"root\":{\"identityValues\":null}}],\"drillFilterOtherVisuals\":true,\"objects\":{\"columnWidth\":[{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"330.32651272223603D\"}}}},\"selector\":{\"metadata\":\"Location.Location\"}},{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"40D\"}}}},\"selector\":{\"metadata\":\"Audit.Inspected On.Variation.Date Hierarchy.Year\"}},{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"48D\"}}}},\"selector\":{\"metadata\":\"Audit.Inspected On.Variation.Date Hierarchy.Quarter\"}},{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"70D\"}}}},\"selector\":{\"metadata\":\"Audit.Inspected On.Variation.Date Hierarchy.Month\"}},{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"29D\"}}}},\"selector\":{\"metadata\":\"Audit.Inspected On.Variation.Date Hierarchy.Day\"}},{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"80D\"}}}},\"selector\":{\"metadata\":\"Sum(Stock.Stock Quantity)\"}}]},\"vcObjects\":{\"visualTooltip\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}}}}]}}}",
+          "filters": "[]",
+          "height": 719.35,
+          "width": 1280.00,
+          "x": 0.00,
+          "y": 0.00,
+          "z": 0.00
+        }
+      ],
+      "width": 1280.00
+    },
+    {
+      "config": "{}",
+      "displayName": "PPE Assignments",
+      "displayOption": 1,
+      "filters": "[]",
+      "height": 720.00,
+      "name": "77542c83a3ba1a74dc53",
+      "ordinal": 1,
+      "visualContainers": [
+        {
+          "config": "{\"name\":\"671169cf0d46a07717e6\",\"layouts\":[{\"id\":0,\"position\":{\"x\":10.350404312668463,\"y\":0,\"z\":0,\"width\":1269.6495956873314,\"height\":720.2156334231805,\"tabOrder\":0}}],\"singleVisual\":{\"visualType\":\"tableEx\",\"projections\":{\"Values\":[{\"queryRef\":\"Assignment.Assigned To\"},{\"queryRef\":\"PPE Assignment Type.PPE Type\"},{\"queryRef\":\"PPE Assignment Type.PPE Variant\"},{\"queryRef\":\"Assignment.Assigned On\"},{\"queryRef\":\"Assignment.Expired On\"},{\"queryRef\":\"Assignment.Replacement Requested On\"},{\"queryRef\":\"PPE Assignment Type.Value\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"a\",\"Entity\":\"Assignment\",\"Type\":0},{\"Name\":\"p\",\"Entity\":\"PPE Assignment Type\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"a\"}},\"Property\":\"Assigned To\"},\"Name\":\"Assignment.Assigned To\",\"NativeReferenceName\":\"Assigned To\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"p\"}},\"Property\":\"PPE Type\"},\"Name\":\"PPE Assignment Type.PPE Type\",\"NativeReferenceName\":\"PPE Type\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"a\"}},\"Property\":\"Assigned On\"},\"Name\":\"Assignment.Assigned On\",\"NativeReferenceName\":\"Assigned On\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"p\"}},\"Property\":\"Value\"},\"Name\":\"PPE Assignment Type.Value\",\"NativeReferenceName\":\"Value\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"p\"}},\"Property\":\"PPE Variant\"},\"Name\":\"PPE Assignment Type.PPE Variant\",\"NativeReferenceName\":\"PPE Variant\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"a\"}},\"Property\":\"Expired On\"},\"Name\":\"Assignment.Expired On\",\"NativeReferenceName\":\"Expired On\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"a\"}},\"Property\":\"Replacement Requested On\"},\"Name\":\"Assignment.Replacement Requested On\",\"NativeReferenceName\":\"Replacement Requested On\"}]},\"drillFilterOtherVisuals\":true,\"objects\":{\"columnWidth\":[{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"142D\"}}}},\"selector\":{\"data\":[{\"scopeId\":{\"Comparison\":{\"ComparisonKind\":0,\"Left\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"PPE Assignment Type\"}},\"Property\":\"PPE Type\"}},\"Right\":{\"Literal\":{\"Value\":\"'Tree Climbing Harness'\"}}}}}]}},{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"146.96496154181813D\"}}}},\"selector\":{\"metadata\":\"Assignment.Assigned To\"}},{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"117D\"}}}},\"selector\":{\"data\":[{\"total\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"PPE Assignment Type\"}},\"Property\":\"PPE Type\"}}]}]}},{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"156.5633423180593D\"}}}},\"selector\":{\"metadata\":\"PPE Assignment Type.PPE Type\"}},{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"39D\"}}}},\"selector\":{\"metadata\":\"Assignment.Assigned On.Variation.Date Hierarchy.Year\"}},{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"48D\"}}}},\"selector\":{\"metadata\":\"Assignment.Assigned On.Variation.Date Hierarchy.Quarter\"}},{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"70D\"}}}},\"selector\":{\"metadata\":\"Assignment.Assigned On.Variation.Date Hierarchy.Month\"}},{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"29D\"}}}},\"selector\":{\"metadata\":\"Assignment.Assigned On.Variation.Date Hierarchy.Day\"}},{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"145.4636105791004D\"}}}},\"selector\":{\"metadata\":\"Assignment.Assigned On\"}},{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"85.9515074541907D\"}}}},\"selector\":{\"metadata\":\"PPE Assignment Type.Value\"}},{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"64D\"}}}},\"selector\":{\"metadata\":\"PPE Assignment Type.PPE Variant\"}},{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"39D\"}}}},\"selector\":{\"metadata\":\"Assignment.Expired On.Variation.Date Hierarchy.Year\"}},{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"48D\"}}}},\"selector\":{\"metadata\":\"Assignment.Expired On.Variation.Date Hierarchy.Quarter\"}},{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"55D\"}}}},\"selector\":{\"metadata\":\"Assignment.Expired On.Variation.Date Hierarchy.Month\"}},{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"29D\"}}}},\"selector\":{\"metadata\":\"Assignment.Expired On.Variation.Date Hierarchy.Day\"}},{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"102D\"}}}},\"selector\":{\"metadata\":\"Assignment.Expired On\"}},{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"32D\"}}}},\"selector\":{\"metadata\":\"Assignment.Replacement Requested On.Variation.Date Hierarchy.Year\"}},{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"48D\"}}}},\"selector\":{\"metadata\":\"Assignment.Replacement Requested On.Variation.Date Hierarchy.Quarter\"}},{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"44D\"}}}},\"selector\":{\"metadata\":\"Assignment.Replacement Requested On.Variation.Date Hierarchy.Month\"}},{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"29D\"}}}},\"selector\":{\"metadata\":\"Assignment.Replacement Requested On.Variation.Date Hierarchy.Day\"}},{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"155.66307387122464D\"}}}},\"selector\":{\"metadata\":\"Assignment.Replacement Requested On\"}}]}}}",
+          "filters": "[]",
+          "height": 720.22,
+          "width": 1269.65,
+          "x": 10.35,
+          "y": 0.00,
+          "z": 0.00
+        }
+      ],
+      "width": 1280.00
+    }
+  ],
+  "theme": "NoWalls_Analytics4439775621304771.json"
+}

@@ -12,6 +12,9 @@ internal static class DataSets
         { "Assets", "ASSET_UPDATED" },
         { "SafetyCards", "SAFETY_CARD_UPDATED" },
         { "Audits", "AUDIT2_UPDATED" },
+        { "PPEStocks", "PPE_STOCK_UPDATED" },
+        { "PPEStockHistories", "PPE_STOCK_HISTORY_UPDATED" },
+        { "PPEAssignments", "PPE_ASSIGNMENT_UPDATED" }
     };
 
     internal static IReadOnlyDictionary<string, string> Entries => _entries.AsReadOnly();
