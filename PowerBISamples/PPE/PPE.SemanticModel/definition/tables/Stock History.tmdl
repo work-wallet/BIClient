@@ -62,7 +62,7 @@ table 'Stock History'
 
 	column 'Stock Quantity'
 		dataType: int64
-		formatString: 0
+		formatString: #,0
 		lineageTag: d48dbe20-d762-4a70-bb85-9b13b4ed8fac
 		summarizeBy: sum
 		sourceColumn: Stock Quantity
@@ -79,7 +79,7 @@ table 'Stock History'
 
 	column 'Actioned On'
 		dataType: dateTime
-		formatString: General Date
+		formatString: dd/mm/yyyy hh:nn
 		lineageTag: c0abd62c-bf0f-4cff-9c44-7596768726b7
 		summarizeBy: none
 		sourceColumn: Actioned On
@@ -90,6 +90,8 @@ table 'Stock History'
 			defaultHierarchy: LocalDateTable_0b142ea6-4d11-4451-b39c-7a919543f3ec.'Date Hierarchy'
 
 		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
 
 	column Notes
 		dataType: string
@@ -111,11 +113,49 @@ table 'Stock History'
 
 		annotation SummarizationSetBy = User
 
+	column 'Stock Location' = RELATED(Location[Location])
+		lineageTag: c5df8748-c6a2-44f6-9687-de9f55cbc3d3
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Transferred From Stock Location' =
+			
+			VAR FromStockKey = 'Stock History'[TransferredFromPPEStock_key]
+			VAR LocationKey = LOOKUPVALUE(
+			    Stock[Location_key],
+			    Stock[PPEStock_key], FromStockKey
+			)
+			RETURN
+			LOOKUPVALUE(
+			    Location[Location],
+			    Location[Location_key], LocationKey
+			)
+		lineageTag: 6fc98843-3986-4182-8262-ff03f5a34ea2
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Stock Site' = RELATED(Location[Site])
+		lineageTag: 784babd8-a319-486b-935a-c84361626048
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column Value = RELATED('PPE Type'[Value]) * 'Stock History'[Stock Quantity]
+		formatString: "£"#,0.00;-"£"#,0.00;"£"#,0.00
+		lineageTag: 2c2a43e4-3934-4d32-ba30-c8ec49c2fbd0
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-GB"}
+
 	partition 'Stock History' = m
 		mode: import
 		source =
 				let
-				    Source = Sql.Database("CAKESOFBREAD", "WorkWalletBIClient_Local"),
+				    Source = Sql.Database("CAKESOFBREAD", "WorkWalletBIClient_Demo"),
 				    mart_PPEStockHistory = Source{[Schema="mart",Item="PPEStockHistory"]}[Data],
 				    #"Removed Columns" = Table.RemoveColumns(mart_PPEStockHistory,{"_created", "_edited"}),
 				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"StockQuantity", "Stock Quantity"}, {"ActionedBy", "Actioned By"}, {"ActionedOn", "Actioned On"}})

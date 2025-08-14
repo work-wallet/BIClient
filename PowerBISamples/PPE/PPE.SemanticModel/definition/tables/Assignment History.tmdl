@@ -86,7 +86,7 @@ table 'Assignment History'
 		mode: import
 		source =
 				let
-				    Source = Sql.Database("CAKESOFBREAD", "WorkWalletBIClient_Local"),
+				    Source = Sql.Database("CAKESOFBREAD", "WorkWalletBIClient_Demo"),
 				    mart_PPEAssignmentHistory = Source{[Schema="mart",Item="PPEAssignmentHistory"]}[Data],
 				    #"Removed Columns" = Table.RemoveColumns(mart_PPEAssignmentHistory,{"_created", "_edited"}),
 				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"ActionedBy", "Actioned By"}, {"ActionedOn", "Actioned On"}})

@@ -1,8 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using System.Net;
+using System.Text.Json;
 using System.Web;
 using WorkWallet.BI.ClientCore.Exceptions;
 using WorkWallet.BI.ClientCore.Interfaces.Services;
@@ -18,6 +17,12 @@ public class ProcessorService(
     IProgressService progressService) : IProcessorService
 {
     private readonly ProcessorServiceOptions _serviceOptions = serviceOptions.Value;
+    
+    // the wallet endpoint uses camel case (the dataextract endpoints use pascal case)
+    private static readonly JsonSerializerOptions _jsonCamelCaseOptions = new()
+    {
+        PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+    };
 
     private record WalletContext
     {
@@ -38,7 +43,7 @@ public class ProcessorService(
             progressService.WriteWallet(walletContext.Name.Trim(), walletContext.DataRegion);
 
             // if no dataTypes are provided, then use all the ones that we know about
-            string[] dataSets = _serviceOptions.DataSets.Length > 0 ? _serviceOptions.DataSets : DataSets.Entries.Keys.ToArray();
+            string[] dataSets = _serviceOptions.DataSets.Length > 0 ? _serviceOptions.DataSets : [.. DataSets.Entries.Keys];
 
             // repeat for all the dataSets selected
             foreach (string dataSet in dataSets)
@@ -101,8 +106,9 @@ public class ProcessorService(
             try
             {
                 // extract the context information (this is included at the top of the JSON)
-                var res = JObject.Parse(json);
-                context = res["Context"]!.ToObject<Context>()!;
+                using var document = JsonDocument.Parse(json);
+                var contextElement = document.RootElement.GetProperty("Context");
+                context = JsonSerializer.Deserialize<Context>(contextElement.GetRawText())!;
             }
             catch (Exception ex)
             {
@@ -181,7 +187,7 @@ public class ProcessorService(
         string content = await response.Content.ReadAsStringAsync(cancellationToken);
 
         // parse the JSON response
-        return JsonConvert.DeserializeObject<WalletContext>(content) ?? throw new DeserializeResponseException(typeof(WalletContext), walletId);
+        return JsonSerializer.Deserialize<WalletContext>(content, _jsonCamelCaseOptions) ?? throw new DeserializeResponseException(typeof(WalletContext), walletId);
     }
 
     private async Task<string> CallApiAsync(

@@ -76,6 +76,7 @@ relationship 13e80013-77c4-4fdb-9162-c318ea433d8b
 	annotation PBI_IsFromSource = FS
 
 relationship f28da94d-2c2a-4eb5-bde2-ff6b72ce8c4e
+	crossFilteringBehavior: bothDirections
 	fromColumn: 'Stock History'.PPEAction_key
 	toColumn: 'PPE Action'.PPEAction_key
 

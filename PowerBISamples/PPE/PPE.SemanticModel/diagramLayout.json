@@ -186,7 +186,7 @@
           "nodeIndex": "PPE Type",
           "nodeLineageTag": "784865e7-41be-46a5-a713-88e990e53228",
           "size": {
-            "height": 384,
+            "height": 420,
             "width": 234
           },
           "zIndex": 0
@@ -227,7 +227,7 @@
           "nodeIndex": "Stock History",
           "nodeLineageTag": "5f547d8f-0fbd-45e3-b10a-b114ab53ed5c",
           "size": {
-            "height": 354,
+            "height": 431,
             "width": 269
           },
           "zIndex": 2
@@ -240,7 +240,7 @@
           "nodeIndex": "PPE Type",
           "nodeLineageTag": "784865e7-41be-46a5-a713-88e990e53228",
           "size": {
-            "height": 372,
+            "height": 422,
             "width": 234
           },
           "zIndex": 0
@@ -294,7 +294,7 @@
           "nodeIndex": "Assignment",
           "nodeLineageTag": "4cd4c7b8-78ce-4f8e-927e-e92f949db79b",
           "size": {
-            "height": 404,
+            "height": 518,
             "width": 327
           },
           "zIndex": 0
@@ -320,7 +320,7 @@
           "nodeIndex": "PPE Assignment Type",
           "nodeLineageTag": "3028bc43-9111-4896-8e0a-213ce3ca20ad",
           "size": {
-            "height": 381,
+            "height": 417,
             "width": 261
           },
           "zIndex": 0
@@ -360,6 +360,6 @@
       "tablesLocked": false
     }
   ],
-  "selectedDiagram": "Stock",
+  "selectedDiagram": "Stock History",
   "defaultDiagram": "All tables"
 }

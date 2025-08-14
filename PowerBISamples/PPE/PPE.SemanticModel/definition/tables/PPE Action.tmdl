@@ -37,7 +37,7 @@ table 'PPE Action'
 		mode: import
 		source =
 				let
-				    Source = Sql.Database("CAKESOFBREAD", "WorkWalletBIClient_Local"),
+				    Source = Sql.Database("CAKESOFBREAD", "WorkWalletBIClient_Demo"),
 				    mart_PPEAction = Source{[Schema="mart",Item="PPEAction"]}[Data],
 				    #"Removed Columns" = Table.RemoveColumns(mart_PPEAction,{"_created", "_edited"}),
 				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"PPEAction", "PPE Action"}})

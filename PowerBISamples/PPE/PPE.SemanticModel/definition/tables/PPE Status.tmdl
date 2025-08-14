@@ -37,7 +37,7 @@ table 'PPE Status'
 		mode: import
 		source =
 				let
-				    Source = Sql.Database("CAKESOFBREAD", "WorkWalletBIClient_Local"),
+				    Source = Sql.Database("CAKESOFBREAD", "WorkWalletBIClient_Demo"),
 				    mart_PPEStatus = Source{[Schema="mart",Item="PPEStatus"]}[Data],
 				    #"Removed Columns" = Table.RemoveColumns(mart_PPEStatus,{"_created", "_edited"}),
 				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"PPEStatus", "PPE Status"}})
