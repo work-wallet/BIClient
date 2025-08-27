@@ -48,14 +48,6 @@ table 'Assignment History'
 
 		annotation SummarizationSetBy = Automatic
 
-	column 'Actioned By'
-		dataType: string
-		lineageTag: d026556f-23fb-426b-b495-edad568164f6
-		summarizeBy: none
-		sourceColumn: Actioned By
-
-		annotation SummarizationSetBy = Automatic
-
 	column 'Actioned On'
 		dataType: dateTime
 		formatString: General Date
@@ -82,6 +74,18 @@ table 'Assignment History'
 
 		annotation SummarizationSetBy = User
 
+	column ActionedByContact_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 12a0a57b-8c1e-4a63-967e-e3448359b274
+		summarizeBy: none
+		sourceColumn: ActionedByContact_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
 	partition 'Assignment History' = m
 		mode: import
 		source =
@@ -89,7 +93,7 @@ table 'Assignment History'
 				    Source = Sql.Database("CAKESOFBREAD", "WorkWalletBIClient_Demo"),
 				    mart_PPEAssignmentHistory = Source{[Schema="mart",Item="PPEAssignmentHistory"]}[Data],
 				    #"Removed Columns" = Table.RemoveColumns(mart_PPEAssignmentHistory,{"_created", "_edited"}),
-				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"ActionedBy", "Actioned By"}, {"ActionedOn", "Actioned On"}})
+				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"ActionedOn", "Actioned On"}})
 				in
 				    #"Renamed Columns"
 

@@ -6,15 +6,13 @@ model Model
 		legacyRedirects
 		returnErrorValuesAsNull
 
-annotation PBIDesktopVersion = 2.146.705.0 (25.08)+b71502aff0a01340c88f384884ef42771068f115
+annotation PBIDesktopVersion = 2.146.1133.0 (25.08)+c8010d55d1db76eda03c968b03481610e96a1ef7
 
-annotation PBI_QueryOrder = ["Location","Wallet","PPE Action","Assignment","Assignment History","PPE Status","Stock","Stock History","PPE Type","PPE Assignment Type"]
+annotation PBI_QueryOrder = ["Location","Wallet","PPE Action","Assignment","Assignment History","PPE Status","Stock","Stock History","PPE Type","PPE Assignment Type","Actioned By Contact","Assigned To Contact"]
 
 annotation __PBI_TimeIntelligenceEnabled = 1
 
 annotation PBI_ProTooling = ["DevMode"]
-
-annotation PBI_RemovedChildren = [{"remoteItemId":{"foreignKeyRelationship":{"fromTableLocalLineageTag":"4cd4c7b8-78ce-4f8e-927e-e92f949db79b","fromColumnLocalLineageTag":"da35c950-f10a-4282-935a-e9798250fa03","toTableLocalLineageTag":"784865e7-41be-46a5-a713-88e990e53228","toColumnLocalLineageTag":"7b3cbaf3-fa37-42ff-9cbf-dced966db017"}},"objectType":"Relationship"}]
 
 ref table Location
 ref table Wallet
@@ -32,6 +30,8 @@ ref table 'Stock History'
 ref table LocalDateTable_0b142ea6-4d11-4451-b39c-7a919543f3ec
 ref table 'PPE Type'
 ref table 'PPE Assignment Type'
+ref table 'Actioned By Contact'
+ref table 'Assigned To Contact'
 
 ref cultureInfo en-GB
 

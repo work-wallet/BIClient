@@ -24,14 +24,6 @@ table Assignment
 
 		annotation SummarizationSetBy = Automatic
 
-	column 'Assigned To'
-		dataType: string
-		lineageTag: f2c61bd5-d27a-4ae3-8fcf-9ecbc9c53d29
-		summarizeBy: none
-		sourceColumn: Assigned To
-
-		annotation SummarizationSetBy = Automatic
-
 	column PPEType_key
 		dataType: int64
 		isHidden
@@ -208,6 +200,18 @@ table Assignment
 
 		annotation SummarizationSetBy = Automatic
 
+	column AssignedToContact_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: c3ce2fe4-1624-4593-9735-4b5614df42d3
+		summarizeBy: none
+		sourceColumn: AssignedToContact_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
 	partition Assignment = m
 		mode: import
 		source =
@@ -215,7 +219,7 @@ table Assignment
 				    Source = Sql.Database("CAKESOFBREAD", "WorkWalletBIClient_Demo"),
 				    mart_PPEAssignment = Source{[Schema="mart",Item="PPEAssignment"]}[Data],
 				    #"Removed Columns" = Table.RemoveColumns(mart_PPEAssignment,{"_created", "_edited"}),
-				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"AssignedTo", "Assigned To"}, {"AssignedOn", "Assigned On"}, {"ExpiredOn", "Expired On"}, {"ReplacementRequestedOn", "Replacement Requested On"}})
+				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"AssignedOn", "Assigned On"}, {"ExpiredOn", "Expired On"}, {"ReplacementRequestedOn", "Replacement Requested On"}})
 				in
 				    #"Renamed Columns"
 

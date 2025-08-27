@@ -69,14 +69,6 @@ table 'Stock History'
 
 		annotation SummarizationSetBy = Automatic
 
-	column 'Actioned By'
-		dataType: string
-		lineageTag: f3193e6c-9dc9-432a-99f9-d181df92cadc
-		summarizeBy: none
-		sourceColumn: Actioned By
-
-		annotation SummarizationSetBy = Automatic
-
 	column 'Actioned On'
 		dataType: dateTime
 		formatString: dd/mm/yyyy hh:nn
@@ -151,6 +143,18 @@ table 'Stock History'
 
 		annotation PBI_FormatHint = {"currencyCulture":"en-GB"}
 
+	column ActionedByContact_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 1c5d7acc-5edb-42a1-a387-3f977b653d43
+		summarizeBy: none
+		sourceColumn: ActionedByContact_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
 	partition 'Stock History' = m
 		mode: import
 		source =
@@ -158,7 +162,7 @@ table 'Stock History'
 				    Source = Sql.Database("CAKESOFBREAD", "WorkWalletBIClient_Demo"),
 				    mart_PPEStockHistory = Source{[Schema="mart",Item="PPEStockHistory"]}[Data],
 				    #"Removed Columns" = Table.RemoveColumns(mart_PPEStockHistory,{"_created", "_edited"}),
-				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"StockQuantity", "Stock Quantity"}, {"ActionedBy", "Actioned By"}, {"ActionedOn", "Actioned On"}})
+				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"StockQuantity", "Stock Quantity"}, {"ActionedOn", "Actioned On"}})
 				in
 				    #"Renamed Columns"
 

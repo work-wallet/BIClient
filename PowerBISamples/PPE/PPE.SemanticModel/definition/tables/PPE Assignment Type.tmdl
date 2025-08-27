@@ -64,7 +64,7 @@ table 'PPE Assignment Type'
 		dataType: int64
 		formatString: 0
 		lineageTag: 3b1086b3-e2b2-442c-aa93-a080f1be8aca
-		summarizeBy: none
+		summarizeBy: sum
 		sourceColumn: Lifespan Days
 
 		annotation SummarizationSetBy = Automatic
@@ -72,7 +72,7 @@ table 'PPE Assignment Type'
 	column Value
 		dataType: double
 		lineageTag: 79f92f14-a398-408c-a63f-bffa23b37053
-		summarizeBy: none
+		summarizeBy: sum
 		sourceColumn: Value
 
 		annotation SummarizationSetBy = Automatic
