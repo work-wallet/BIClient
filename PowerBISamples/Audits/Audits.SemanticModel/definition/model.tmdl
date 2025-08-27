@@ -6,7 +6,7 @@ model Model
 		legacyRedirects
 		returnErrorValuesAsNull
 
-annotation PBIDesktopVersion = 2.143.878.0 (25.05)+b20aa3b866ec1b70879135a4e60e4b1301c75b21
+annotation PBIDesktopVersion = 2.146.1133.0 (25.08)+c8010d55d1db76eda03c968b03481610e96a1ef7
 
 annotation PBI_QueryOrder = ["Location","Wallet","Audit","Branch Option","Branch Option Fact","Checklist Answer Fact","Checklist Option","Date Time Answer Fact","Date Time Question","Grading Set Option","Audit Group","Inspected By Fact","Numeric Answer Fact","Numeric Question","Scored Response","Scored Response Fact","Score Section","Score Section Fact","Score Tag","Score Tag Fact","Audit Status","Audit Type","Contact","Unit","Audit Grading Set Option","Score Tag Grading Set Option","Score Section Grading Set Option","Scored Response Grading Set Option"]
 
