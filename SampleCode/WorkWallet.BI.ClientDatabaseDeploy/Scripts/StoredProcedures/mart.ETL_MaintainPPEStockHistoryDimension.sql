@@ -14,7 +14,7 @@ BEGIN
             pa.PPEAction_key,
             tps.PPEStock_key AS TransferredFromPPEStock_key,
             s.StockQuantity,
-            s.ActionedBy,
+            c.Contact_key AS ActionedByContact_key,
             s.ActionedOn,
             s.Notes,
             w.Wallet_key
@@ -23,6 +23,7 @@ BEGIN
             INNER JOIN mart.PPEStock AS ps ON s.PPEStockId = ps.PPEStockId
             INNER JOIN mart.PPEAction AS pa ON s.PPEActionCode = pa.PPEActionCode
             LEFT JOIN mart.PPEStock AS tps ON s.TransferredFromStockId = tps.PPEStockId
+            LEFT JOIN mart.Contact AS c ON s.ActionedByContactId = c.ContactId
             INNER JOIN mart.Wallet AS w ON s.WalletId = w.WalletId
     ) AS source
     ON target.PPEStockHistoryId = source.PPEStockHistoryId
@@ -31,7 +32,7 @@ BEGIN
         OR target.PPEAction_key <> source.PPEAction_key
         OR target.TransferredFromPPEStock_key IS DISTINCT FROM source.TransferredFromPPEStock_key
         OR target.StockQuantity <> source.StockQuantity
-        OR target.ActionedBy <> source.ActionedBy
+        OR target.ActionedByContact_key IS DISTINCT FROM source.ActionedByContact_key
         OR target.ActionedOn <> source.ActionedOn
         OR target.Notes IS DISTINCT FROM source.Notes
         OR target.Wallet_key <> source.Wallet_key
@@ -42,7 +43,7 @@ BEGIN
             PPEAction_key = source.PPEAction_key,
             TransferredFromPPEStock_key = source.TransferredFromPPEStock_key,
             StockQuantity = source.StockQuantity,
-            ActionedBy = source.ActionedBy,
+            ActionedByContact_key = source.ActionedByContact_key,
             ActionedOn = source.ActionedOn,
             Notes = source.Notes,
             Wallet_key = source.Wallet_key,
@@ -54,7 +55,7 @@ BEGIN
             PPEAction_key,
             TransferredFromPPEStock_key,
             StockQuantity,
-            ActionedBy,
+            ActionedByContact_key,
             ActionedOn,
             Notes,
             Wallet_key
@@ -64,7 +65,7 @@ BEGIN
             source.PPEAction_key,
             source.TransferredFromPPEStock_key,
             source.StockQuantity,
-            source.ActionedBy,
+            source.ActionedByContact_key,
             source.ActionedOn,
             source.Notes,
             source.Wallet_key

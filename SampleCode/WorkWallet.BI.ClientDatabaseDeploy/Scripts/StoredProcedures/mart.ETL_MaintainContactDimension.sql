@@ -11,6 +11,8 @@ BEGIN
         SELECT
             a.ContactId,
             a.[Name],
+            a.EmailAddress,
+            a.CompanyName,
             w.Wallet_key
         FROM
             @contactTable AS a
@@ -19,21 +21,29 @@ BEGIN
     ON target.ContactId = source.ContactId
     WHEN MATCHED AND (
         target.[Name] <> source.[Name]
+        OR target.EmailAddress <> source.EmailAddress
+        OR target.CompanyName <> source.CompanyName
         OR target.Wallet_key <> source.Wallet_key
     )
     THEN
         UPDATE SET
             [Name] = source.[Name],
+            EmailAddress = source.EmailAddress,
+            CompanyName = source.CompanyName,
             Wallet_key = source.Wallet_key,
             _edited = SYSUTCDATETIME()
     WHEN NOT MATCHED BY TARGET THEN
         INSERT (
             ContactId,
             [Name],
+            EmailAddress,
+            CompanyName,
             Wallet_key
         ) VALUES (
             source.ContactId,
             source.[Name],
+            source.EmailAddress,
+            source.CompanyName,
             source.Wallet_key
         );
 

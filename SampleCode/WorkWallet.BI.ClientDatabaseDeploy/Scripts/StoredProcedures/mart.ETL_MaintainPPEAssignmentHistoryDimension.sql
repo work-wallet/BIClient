@@ -12,20 +12,21 @@ BEGIN
             h.PPEAssignmentHistoryId,
             a.PPEAssignment_key,
             pa.PPEAction_key,
-            h.ActionedBy,
+            c.Contact_key AS ActionedByContact_key,
             h.ActionedOn,
             w.Wallet_key
         FROM
             @ppeAssignmentHistoryTable AS h
             INNER JOIN mart.PPEAssignment AS a ON h.PPEAssignmentId = a.PPEAssignmentId
             INNER JOIN mart.PPEAction AS pa ON h.PPEActionCode = pa.PPEActionCode
+            LEFT JOIN mart.Contact AS c ON h.ActionedByContactId = c.ContactId
             INNER JOIN mart.Wallet AS w ON h.WalletId = w.WalletId
     ) AS source
     ON target.PPEAssignmentHistoryId = source.PPEAssignmentHistoryId
     WHEN MATCHED AND (
         target.PPEAssignment_key <> source.PPEAssignment_key
         OR target.PPEAction_key <> source.PPEAction_key
-        OR target.ActionedBy <> source.ActionedBy
+        OR target.ActionedByContact_key IS DISTINCT FROM source.ActionedByContact_key
         OR target.ActionedOn <> source.ActionedOn
         OR target.Wallet_key <> source.Wallet_key
     )
@@ -33,7 +34,7 @@ BEGIN
         UPDATE SET
             PPEAssignment_key = source.PPEAssignment_key,
             PPEAction_key = source.PPEAction_key,
-            ActionedBy = source.ActionedBy,
+            ActionedByContact_key = source.ActionedByContact_key,
             ActionedOn = source.ActionedOn,
             Wallet_key = source.Wallet_key,
             _edited = SYSUTCDATETIME()
@@ -42,14 +43,14 @@ BEGIN
             PPEAssignmentHistoryId,
             PPEAssignment_key,
             PPEAction_key,
-            ActionedBy,
+            ActionedByContact_key,
             ActionedOn,
             Wallet_key
         ) VALUES (
             source.PPEAssignmentHistoryId,
             source.PPEAssignment_key,
             source.PPEAction_key,
-            source.ActionedBy,
+            source.ActionedByContact_key,
             source.ActionedOn,
             source.Wallet_key
         );
