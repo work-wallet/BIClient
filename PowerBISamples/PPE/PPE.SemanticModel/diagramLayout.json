@@ -10,8 +10,8 @@
       "nodes": [
         {
           "location": {
-            "x": 339.85180629963179,
-            "y": 216.90121992486752
+            "x": 53.103433583703747,
+            "y": 1288.4504176131977
           },
           "nodeIndex": "Location",
           "size": {
@@ -22,8 +22,8 @@
         },
         {
           "location": {
-            "x": 252.02368003437573,
-            "y": 845.13860349071956
+            "x": 226.32706225565903,
+            "y": 1081.7834524149152
           },
           "nodeIndex": "Wallet",
           "nodeLineageTag": "c5071c3c-bb18-4bf8-af75-410c48a300ed",
@@ -35,8 +35,8 @@
         },
         {
           "location": {
-            "x": 863.96574598047368,
-            "y": 301.59448983945413
+            "x": 339.95773631278695,
+            "y": 226.12064939614493
           },
           "nodeIndex": "Assignment",
           "nodeLineageTag": "4cd4c7b8-78ce-4f8e-927e-e92f949db79b",
@@ -48,8 +48,8 @@
         },
         {
           "location": {
-            "x": 545.42887117599889,
-            "y": 959.08905221477039
+            "x": 672.67348135913835,
+            "y": 305.27928180278195
           },
           "nodeIndex": "Assignment History",
           "nodeLineageTag": "f13c365b-f484-4874-9dad-268ce4e01777",
@@ -61,8 +61,8 @@
         },
         {
           "location": {
-            "x": 388.17188438687646,
-            "y": 1405.0577374604154
+            "x": 1069.3330857484807,
+            "y": 402.17163635316228
           },
           "nodeIndex": "PPE Action",
           "nodeLineageTag": "7a623cea-ad5b-4c08-b3b0-717eb86e0a12",
@@ -74,8 +74,8 @@
         },
         {
           "location": {
-            "x": 833.41099173766611,
-            "y": 1128.8985910948704
+            "x": 50.000000000000014,
+            "y": 112.20190891415496
           },
           "nodeIndex": "PPE Status",
           "nodeLineageTag": "7dc20fc1-263a-445d-b9d4-643b3da800a5",
@@ -87,8 +87,8 @@
         },
         {
           "location": {
-            "x": 50.000000000000014,
-            "y": 489.66436539711015
+            "x": 815.403990492999,
+            "y": 1206.5665579402894
           },
           "nodeIndex": "PPE Type",
           "nodeLineageTag": "784865e7-41be-46a5-a713-88e990e53228",
@@ -100,21 +100,21 @@
         },
         {
           "location": {
-            "x": 623.43650576351251,
-            "y": 656.09635773552691
+            "x": 514.15708283857884,
+            "y": 756.972431553487
           },
           "nodeIndex": "Stock",
           "nodeLineageTag": "bbf0fdac-d372-411b-8f0a-b5b754d6ea2d",
           "size": {
-            "height": 248,
+            "height": 300,
             "width": 234
           },
           "zIndex": 6
         },
         {
           "location": {
-            "x": 256.25042854510997,
-            "y": 1050.7219141613441
+            "x": 802.87693546146886,
+            "y": 609.90906094790682
           },
           "nodeIndex": "Stock History",
           "nodeLineageTag": "5f547d8f-0fbd-45e3-b10a-b114ab53ed5c",
@@ -126,7 +126,7 @@
         },
         {
           "location": {
-            "x": 973.26334225686969,
+            "x": 629.74303878426576,
             "y": -50
           },
           "nodeIndex": "PPE Assignment Type",
@@ -138,7 +138,10 @@
           "zIndex": 1
         },
         {
-          "location": {},
+          "location": {
+            "x": 134.0198802005211,
+            "y": 582.56469466537681
+          },
           "nodeIndex": "Assigned To Contact",
           "nodeLineageTag": "eff9a1d0-5fd9-43fb-a398-29f9e7684c26",
           "size": {
@@ -149,8 +152,8 @@
         },
         {
           "location": {
-            "x": 1207.2633422568697,
-            "y": 691.52886873020771
+            "x": 1088.767798001184,
+            "y": 926.0399799283523
           },
           "nodeIndex": "Actioned By Contact",
           "size": {
@@ -161,7 +164,7 @@
         }
       ],
       "name": "All tables",
-      "zoomValue": 53.952480914334444,
+      "zoomValue": 52.978215005089723,
       "pinKeyFieldsToTop": false,
       "showExtraHeaderInfo": false,
       "hideKeyFieldsWhenCollapsed": false,
@@ -195,7 +198,7 @@
           "nodeIndex": "Stock",
           "nodeLineageTag": "bbf0fdac-d372-411b-8f0a-b5b754d6ea2d",
           "size": {
-            "height": 281,
+            "height": 341,
             "width": 234
           },
           "zIndex": 1
@@ -420,6 +423,6 @@
       "tablesLocked": false
     }
   ],
-  "selectedDiagram": "Assignments",
+  "selectedDiagram": "Stock",
   "defaultDiagram": "All tables"
 }
