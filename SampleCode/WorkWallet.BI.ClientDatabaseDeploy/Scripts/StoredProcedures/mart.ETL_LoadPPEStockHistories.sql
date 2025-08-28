@@ -6,6 +6,8 @@ CREATE PROCEDURE mart.ETL_LoadPPEStockHistories
 AS
 BEGIN
 
+    SET NOCOUNT ON;
+
     BEGIN TRY
         BEGIN TRANSACTION
 
