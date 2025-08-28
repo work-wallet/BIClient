@@ -4,7 +4,7 @@ GO
 CREATE TYPE mart.ETL_PPEAssignmentTable AS TABLE
 (
     PPEAssignmentId uniqueidentifier NOT NULL
-    ,AssignedTo nvarchar(max) NOT NULL
+    ,AssignedToContactId uniqueidentifier NOT NULL
     ,PPETypeId uniqueidentifier NOT NULL
     ,PPETypeVariantId uniqueidentifier NOT NULL
     ,AssignedOn date NOT NULL

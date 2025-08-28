@@ -1,22 +1,22 @@
-table Contact
-	lineageTag: cc210300-f349-4b7d-94c4-5f5f87c1bbe6
+table 'Actioned By Contact'
+	lineageTag: 95740707-1076-48f7-b6d7-b7ccaf696a49
 
 	column Contact_key
 		dataType: int64
 		isHidden
 		formatString: 0
-		lineageTag: 6419429b-b873-484e-890c-d41eb6eaaa33
+		lineageTag: 5406e2bb-d6be-4dc9-892b-367f76a304cb
 		summarizeBy: none
 		sourceColumn: Contact_key
 
 		changedProperty = IsHidden
 
-		annotation SummarizationSetBy = Automatic
+		annotation SummarizationSetBy = User
 
 	column ContactId
 		dataType: string
 		isHidden
-		lineageTag: 9ce95a9b-3255-472e-96ec-fecb685dfd40
+		lineageTag: 3fddcaa3-a0e6-44cf-9aff-afb56e5c391a
 		summarizeBy: none
 		sourceColumn: ContactId
 
@@ -26,27 +26,15 @@ table Contact
 
 	column 'Contact Name'
 		dataType: string
-		lineageTag: 944bbf04-4bcb-4157-985e-dd4a7ba80771
+		lineageTag: faa54c5d-09d9-4b47-9ae5-afb4e3fe8bba
 		summarizeBy: none
 		sourceColumn: Contact Name
 
 		annotation SummarizationSetBy = Automatic
 
-	column Wallet_key
-		dataType: int64
-		isHidden
-		formatString: 0
-		lineageTag: 284166f0-d04a-4a42-bac2-abef1a869fdd
-		summarizeBy: none
-		sourceColumn: Wallet_key
-
-		changedProperty = IsHidden
-
-		annotation SummarizationSetBy = User
-
 	column Email
 		dataType: string
-		lineageTag: a345e00e-6c58-4e9f-b0c6-4639ca6425f6
+		lineageTag: a459b8e0-2bd4-48d4-a69e-79158b9c5a76
 		summarizeBy: none
 		sourceColumn: Email
 
@@ -54,23 +42,34 @@ table Contact
 
 	column Company
 		dataType: string
-		lineageTag: 87574ed9-a961-45e5-82df-12c577fe4ec2
+		lineageTag: b9cfbc68-2d06-4ce0-b142-4c3137f7a769
 		summarizeBy: none
 		sourceColumn: Company
 
 		annotation SummarizationSetBy = Automatic
 
-	partition Contact = m
+	column Wallet_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: b975eedb-47ff-4f5d-b529-761a161e5fb8
+		summarizeBy: none
+		sourceColumn: Wallet_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	partition 'Actioned By Contact' = m
 		mode: import
 		source =
 				let
 				    Source = Sql.Database("ww-powerbi-demo.database.windows.net", "powerbi"),
 				    mart_Contact = Source{[Schema="mart",Item="Contact"]}[Data],
-				    #"Renamed Columns" = Table.RenameColumns(mart_Contact,{{"Name", "Contact Name"}}),
-				    #"Removed Columns" = Table.RemoveColumns(#"Renamed Columns",{"_created", "_edited"}),
-				    #"Renamed Columns1" = Table.RenameColumns(#"Removed Columns",{{"EmailAddress", "Email"}, {"CompanyName", "Company"}})
+				    #"Renamed Columns" = Table.RenameColumns(mart_Contact,{{"EmailAddress", "Email"}, {"CompanyName", "Company"}, {"Name", "Contact Name"}}),
+				    #"Removed Columns" = Table.RemoveColumns(#"Renamed Columns",{"_created", "_edited"})
 				in
-				    #"Renamed Columns1"
+				    #"Removed Columns"
 
 	annotation PBI_NavigationStepName = Navigation
 

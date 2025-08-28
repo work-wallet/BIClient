@@ -112,11 +112,23 @@ table 'PPE Type'
 
 		annotation SummarizationSetBy = User
 
+	column Variant = IF(ISBLANK('PPE Type'[PPE Variant]), "", 'PPE Type'[VariantOrder] & " - " & 'PPE Type'[PPE Variant])
+		lineageTag: 85031691-c359-4f24-85cd-b77ecff433a7
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column PPE = IF(ISBLANK('PPE Type'[PPE Variant]), 'PPE Type'[PPE Type], 'PPE Type'[PPE Type] & " (" & 'PPE Type'[PPE Variant] & ")")
+		lineageTag: 025c16d2-4f18-4e2e-8657-7f257c3f5349
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
 	partition 'PPE Type' = m
 		mode: import
 		source =
 				let
-				    Source = Sql.Database("CAKESOFBREAD", "WorkWalletBIClient_Local"),
+				    Source = Sql.Database("ww-powerbi-demo.database.windows.net", "powerbi"),
 				    mart_PPEType = Source{[Schema="mart",Item="PPEType"]}[Data],
 				    #"Removed Columns" = Table.RemoveColumns(mart_PPEType,{"_created", "_edited"}),
 				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"Type", "PPE Type"}, {"Variant", "PPE Variant"}, {"LifespanDays", "Lifespan Days"}, {"TypeDeleted", "Type Deleted"}, {"VariantDeleted", "Variant Deleted"}})

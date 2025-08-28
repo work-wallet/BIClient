@@ -209,16 +209,37 @@ BEGIN
 
         EXEC mart.ETL_DeleteAuditFacts @auditTable = @auditTable;
 
+        -- load the Contact dimension
+
+        DECLARE @contactTable mart.ETL_ContactTable;
+        INSERT INTO @contactTable
+        (
+            ContactId
+            ,[Name]
+            ,EmailAddress
+            ,CompanyName
+            ,WalletId
+        )
+        SELECT * FROM OPENJSON(@json, '$.Contacts')
+        WITH
+        (
+            ContactId uniqueidentifier
+            ,[Name] nvarchar(max)
+            ,EmailAddress nvarchar(max)
+            ,CompanyName nvarchar(max)
+            ,WalletId uniqueidentifier
+        );
+
+        EXEC mart.ETL_MaintainContactDimension @contactTable = @contactTable;
+
         -- load the AuditInspectedBy data
 
         DECLARE @auditInspectedByTable mart.ETL_AuditInspectedByTable;
-        DECLARE @contactTable mart.ETL_ContactTable;
 
         INSERT INTO @auditInspectedByTable
         (
             AuditId
             ,ContactId
-            ,[Name]
             ,WalletId
         )
         SELECT * FROM OPENJSON(@json, '$.AuditInspectors')
@@ -226,23 +247,9 @@ BEGIN
         (
             AuditId uniqueidentifier
             ,ContactId uniqueidentifier
-            ,[Name] nvarchar(max)
             ,WalletId uniqueidentifier
         );
 
-        INSERT INTO @contactTable
-        (
-            ContactId
-            ,[Name]
-            ,WalletId
-        )
-        SELECT DISTINCT
-            ContactId
-            ,[Name]
-            ,WalletId
-        FROM @auditInspectedByTable;
-
-        EXEC mart.ETL_MaintainContactDimension @contactTable = @contactTable;
         EXEC mart.ETL_LoadAuditInspectedByFact @auditInspectedByTable = @auditInspectedByTable;
 
         -- load the AuditNumericAnswer data

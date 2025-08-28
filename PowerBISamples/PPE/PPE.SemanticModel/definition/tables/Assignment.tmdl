@@ -24,14 +24,6 @@ table Assignment
 
 		annotation SummarizationSetBy = Automatic
 
-	column 'Assigned To'
-		dataType: string
-		lineageTag: f2c61bd5-d27a-4ae3-8fcf-9ecbc9c53d29
-		summarizeBy: none
-		sourceColumn: Assigned To
-
-		annotation SummarizationSetBy = Automatic
-
 	column PPEType_key
 		dataType: int64
 		isHidden
@@ -97,12 +89,12 @@ table Assignment
 		isHidden
 		formatString: 0
 		lineageTag: b637deee-e40c-4c6a-baa8-982c2b58aa7c
-		summarizeBy: sum
+		summarizeBy: none
 		sourceColumn: AssignedFromPPEStock_key
 
 		changedProperty = IsHidden
 
-		annotation SummarizationSetBy = Automatic
+		annotation SummarizationSetBy = User
 
 	column ReturnedToPPEStock_key
 		dataType: int64
@@ -154,14 +146,80 @@ table Assignment
 
 		annotation SummarizationSetBy = User
 
+	column 'Assigned Count' = 1
+		formatString: #,0
+		lineageTag: 316ed20d-2bd1-45c7-a14f-0d17265333e5
+		summarizeBy: sum
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Require Replacement' =
+			
+			IF
+			(
+			    ISBLANK(Assignment[Replacement Requested On]),
+			    IF
+			    (
+			        NOT(ISBLANK(Assignment[Expired On])) && Assignment[Expired On] <= TODAY(),
+			        TRUE,
+			        FALSE
+			    ),
+			    TRUE
+			)
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 81ff963b-d591-4dc5-934c-646beb4573b7
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column Value = RELATED('PPE Assignment Type'[Value])
+		formatString: "£"#,0.00;-"£"#,0.00;"£"#,0.00
+		lineageTag: be70e25d-57d3-436c-97b9-81285e7a0a48
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-GB"}
+
+	column 'Assigned From Stock Site' =
+			
+			VAR FromStockKey = 'Assignment'[AssignedFromPPEStock_key]
+			VAR LocationKey = LOOKUPVALUE(
+			    Stock[Location_key],
+			    Stock[PPEStock_key], FromStockKey
+			)
+			RETURN
+			LOOKUPVALUE(
+			    Location[Site],
+			    Location[Location_key], LocationKey
+			)
+		lineageTag: 28ca9e98-979d-4270-98a0-667da02d6649
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column AssignedToContact_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: c3ce2fe4-1624-4593-9735-4b5614df42d3
+		summarizeBy: none
+		sourceColumn: AssignedToContact_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
 	partition Assignment = m
 		mode: import
 		source =
 				let
-				    Source = Sql.Database("CAKESOFBREAD", "WorkWalletBIClient_Local"),
+				    Source = Sql.Database("ww-powerbi-demo.database.windows.net", "powerbi"),
 				    mart_PPEAssignment = Source{[Schema="mart",Item="PPEAssignment"]}[Data],
 				    #"Removed Columns" = Table.RemoveColumns(mart_PPEAssignment,{"_created", "_edited"}),
-				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"AssignedTo", "Assigned To"}, {"AssignedOn", "Assigned On"}, {"ExpiredOn", "Expired On"}, {"ReplacementRequestedOn", "Replacement Requested On"}})
+				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"AssignedOn", "Assigned On"}, {"ExpiredOn", "Expired On"}, {"ReplacementRequestedOn", "Replacement Requested On"}})
 				in
 				    #"Renamed Columns"
 

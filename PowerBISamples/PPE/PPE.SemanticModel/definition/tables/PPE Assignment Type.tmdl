@@ -64,7 +64,7 @@ table 'PPE Assignment Type'
 		dataType: int64
 		formatString: 0
 		lineageTag: 3b1086b3-e2b2-442c-aa93-a080f1be8aca
-		summarizeBy: none
+		summarizeBy: sum
 		sourceColumn: Lifespan Days
 
 		annotation SummarizationSetBy = Automatic
@@ -72,7 +72,7 @@ table 'PPE Assignment Type'
 	column Value
 		dataType: double
 		lineageTag: 79f92f14-a398-408c-a63f-bffa23b37053
-		summarizeBy: none
+		summarizeBy: sum
 		sourceColumn: Value
 
 		annotation SummarizationSetBy = Automatic
@@ -109,11 +109,23 @@ table 'PPE Assignment Type'
 
 		annotation SummarizationSetBy = User
 
+	column Variant = IF(ISBLANK('PPE Assignment Type'[PPE Variant]), "", 'PPE Assignment Type'[VariantOrder] & " - " & 'PPE Assignment Type'[PPE Variant])
+		lineageTag: 1d2f2652-35b5-4e27-b5a1-bf017055ea0d
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column PPE = IF(ISBLANK('PPE Assignment Type'[PPE Variant]), 'PPE Assignment Type'[PPE Type], 'PPE Assignment Type'[PPE Type] & " (" & 'PPE Assignment Type'[PPE Variant] & ")")
+		lineageTag: 6360e7a0-9c39-4ca8-a831-3c402ebadc43
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
 	partition 'PPE Assignment Type' = m
 		mode: import
 		source =
 				let
-				    Source = Sql.Database("CAKESOFBREAD", "WorkWalletBIClient_Local"),
+				    Source = Sql.Database("ww-powerbi-demo.database.windows.net", "powerbi"),
 				    mart_PPEType = Source{[Schema="mart",Item="PPEType"]}[Data],
 				    #"Removed Columns" = Table.RemoveColumns(mart_PPEType,{"_created", "_edited"}),
 				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"Type", "PPE Type"}, {"Variant", "PPE Variant"}, {"LifespanDays", "Lifespan Days"}, {"TypeDeleted", "Type Deleted"}, {"VariantDeleted", "Variant Deleted"}})

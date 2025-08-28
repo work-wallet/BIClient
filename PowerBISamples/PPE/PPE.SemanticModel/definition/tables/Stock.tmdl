@@ -50,7 +50,7 @@ table Stock
 
 	column 'Stock Quantity'
 		dataType: int64
-		formatString: 0
+		formatString: #,0
 		lineageTag: 288f4829-a998-4459-9496-92eff9261fe4
 		summarizeBy: sum
 		sourceColumn: Stock Quantity
@@ -80,11 +80,32 @@ table Stock
 
 		annotation SummarizationSetBy = User
 
+	column Value = RELATED('PPE Type'[Value]) * Stock[Stock Quantity]
+		formatString: "£"#,0.00;-"£"#,0.00;"£"#,0.00
+		lineageTag: 00a1d89f-271c-44e9-9c2b-5de7cc475adb
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-GB"}
+
+	column 'Stock Site' = RELATED(Location[Site])
+		lineageTag: b6f45301-fc92-41d1-939a-b8782c284cef
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Stock Location' = RELATED(Location[Location])
+		lineageTag: fab6d3fd-741a-41e6-a0a7-bd5c00173fd7
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
 	partition Stock = m
 		mode: import
 		source =
 				let
-				    Source = Sql.Database("CAKESOFBREAD", "WorkWalletBIClient_Local"),
+				    Source = Sql.Database("ww-powerbi-demo.database.windows.net", "powerbi"),
 				    mart_PPEStock = Source{[Schema="mart",Item="PPEStock"]}[Data],
 				    #"Removed Columns" = Table.RemoveColumns(mart_PPEStock,{"_created", "_edited"}),
 				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"WarningQuantity", "Warning Quantity"}, {"StockQuantity", "Stock Quantity"}})

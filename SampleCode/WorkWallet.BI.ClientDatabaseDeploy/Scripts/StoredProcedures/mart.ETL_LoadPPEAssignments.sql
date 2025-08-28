@@ -137,6 +137,29 @@ BEGIN
 
         EXEC mart.ETL_MaintainPPEStockDimension @ppeStockTable = @ppeStockTable;
 
+        -- load the Contact dimension
+
+        DECLARE @contactTable mart.ETL_ContactTable;
+        INSERT INTO @contactTable
+        (
+            ContactId
+            ,[Name]
+            ,EmailAddress
+            ,CompanyName
+            ,WalletId
+        )
+        SELECT * FROM OPENJSON(@json, '$.Contacts')
+        WITH
+        (
+            ContactId uniqueidentifier
+            ,[Name] nvarchar(max)
+            ,EmailAddress nvarchar(max)
+            ,CompanyName nvarchar(max)
+            ,WalletId uniqueidentifier
+        );
+
+        EXEC mart.ETL_MaintainContactDimension @contactTable = @contactTable;
+
         -- maintain PPEAssignment dimension
 
         DECLARE @ppeAssignmentTable mart.ETL_PPEAssignmentTable;
@@ -144,7 +167,7 @@ BEGIN
         INSERT INTO @ppeAssignmentTable
         (
             PPEAssignmentId
-            ,AssignedTo
+            ,AssignedToContactId
             ,PPETypeId
             ,PPETypeVariantId
             ,AssignedOn
@@ -160,7 +183,7 @@ BEGIN
         WITH
         (
             PPEAssignmentId uniqueidentifier
-            ,AssignedTo nvarchar(max)
+            ,AssignedToContactId uniqueidentifier
             ,PPETypeId uniqueidentifier
             ,PPETypeVariantId uniqueidentifier
             ,AssignedOn date
@@ -183,7 +206,7 @@ BEGIN
             PPEAssignmentHistoryId
             ,PPEAssignmentId
             ,PPEActionCode
-            ,ActionedBy
+            ,ActionedByContactId
             ,ActionedOn
             ,WalletId
         ) SELECT * FROM OPENJSON(@json, '$.PPEAssignmentHistories')
@@ -192,7 +215,7 @@ BEGIN
             PPEAssignmentHistoryId uniqueidentifier
             ,PPEAssignmentId uniqueidentifier
             ,PPEActionCode int
-            ,ActionedBy nvarchar(max)
+            ,ActionedByContactId uniqueidentifier
             ,ActionedOn datetimeoffset(7)
             ,WalletId uniqueidentifier
         );

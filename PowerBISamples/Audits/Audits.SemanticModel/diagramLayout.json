@@ -506,13 +506,13 @@
         },
         {
           "location": {
-            "x": 708,
-            "y": 177
+            "x": 709,
+            "y": 151
           },
           "nodeIndex": "Contact",
           "nodeLineageTag": "cc210300-f349-4b7d-94c4-5f5f87c1bbe6",
           "size": {
-            "height": 189,
+            "height": 240,
             "width": 234
           },
           "zIndex": 0

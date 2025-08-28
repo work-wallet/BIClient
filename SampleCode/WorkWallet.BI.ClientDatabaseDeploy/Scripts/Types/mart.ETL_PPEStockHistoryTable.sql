@@ -8,7 +8,7 @@ CREATE TYPE mart.ETL_PPEStockHistoryTable AS TABLE
     ,PPEActionCode int NOT NULL
     ,TransferredFromStockId uniqueidentifier NULL -- allow NULLs
     ,StockQuantity int NOT NULL
-    ,ActionedBy nvarchar(max) NOT NULL
+    ,ActionedByContactId uniqueidentifier NULL -- allow NULLs
     ,ActionedOn datetimeoffset(7) NOT NULL
     ,Notes nvarchar(250) NULL
     ,WalletId uniqueidentifier NOT NULL

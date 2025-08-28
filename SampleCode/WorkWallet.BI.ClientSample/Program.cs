@@ -24,18 +24,21 @@ try
 
     IServiceProvider serviceProvider = host.Services;
 
-    Console.WriteLine("Press ESC to cancel . . .");
     var tokenSource = new CancellationTokenSource();
 
-    // create a task to listen to keyboard key presses
-    var keyBoardTask = Task.Run(() =>
+    if (!Console.IsOutputRedirected)
     {
-        var key = Console.ReadKey(true);
-        if (key.Key == ConsoleKey.Escape)
+        Console.WriteLine("Press ESC to cancel . . .");
+        // create a task to listen to keyboard key presses
+        var keyBoardTask = Task.Run(() =>
         {
-            tokenSource.Cancel();
-        }
-    });
+            var key = Console.ReadKey(true);
+            if (key.Key == ConsoleKey.Escape)
+            {
+                tokenSource.Cancel();
+            }
+        });
+    }
 
     await serviceProvider.GetRequiredService<IProcessorService>().RunAsync(tokenSource.Token);
 

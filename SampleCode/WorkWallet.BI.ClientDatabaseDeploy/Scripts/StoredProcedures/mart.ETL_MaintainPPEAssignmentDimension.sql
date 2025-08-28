@@ -10,7 +10,7 @@ BEGIN
     USING (
         SELECT
             a.PPEAssignmentId,
-            a.AssignedTo,
+            c.Contact_key AS AssignedToContact_key,
             pt.PPEType_key,
             a.AssignedOn,
             a.ExpiredOn,
@@ -22,6 +22,7 @@ BEGIN
             w.Wallet_key
         FROM
             @ppeAssignmentTable AS a
+            INNER JOIN mart.Contact AS c ON a.AssignedToContactId = c.ContactId
             INNER JOIN mart.PPEType AS pt ON a.PPETypeId = pt.PPETypeId AND a.PPETypeVariantId = pt.PPETypeVariantId
             INNER JOIN mart.PPEStatus AS ps ON a.PPEStatusCode = ps.PPEStatusCode
             LEFT JOIN mart.PPEStock AS afs ON a.AssignedFromStockId = afs.PPEStockId
@@ -31,7 +32,7 @@ BEGIN
     ) AS source
     ON target.PPEAssignmentId = source.PPEAssignmentId
     WHEN MATCHED AND (
-        target.AssignedTo <> source.AssignedTo
+        target.AssignedToContact_key <> source.AssignedToContact_key
         OR target.PPEType_key <> source.PPEType_key
         OR target.AssignedOn <> source.AssignedOn
         OR target.ExpiredOn IS DISTINCT FROM source.ExpiredOn
@@ -44,7 +45,7 @@ BEGIN
     )
     THEN
         UPDATE SET
-            AssignedTo = source.AssignedTo,
+            AssignedToContact_key = source.AssignedToContact_key,
             PPEType_key = source.PPEType_key,
             AssignedOn = source.AssignedOn,
             ExpiredOn = source.ExpiredOn,
@@ -58,7 +59,7 @@ BEGIN
     WHEN NOT MATCHED BY TARGET THEN
         INSERT (
             PPEAssignmentId,
-            AssignedTo,
+            AssignedToContact_key,
             PPEType_key,
             AssignedOn,
             ExpiredOn,
@@ -70,7 +71,7 @@ BEGIN
             Wallet_key
         ) VALUES (
             source.PPEAssignmentId,
-            source.AssignedTo,
+            source.AssignedToContact_key,
             source.PPEType_key,
             source.AssignedOn,
             source.ExpiredOn,
