@@ -1,0 +1,103 @@
+table 'Assignment History'
+	lineageTag: f13c365b-f484-4874-9dad-268ce4e01777
+
+	column PPEAssignmentHistory_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: b87d6cfd-08d5-4855-840e-8035e3427b8d
+		summarizeBy: none
+		sourceColumn: PPEAssignmentHistory_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column PPEAssignmentHistoryId
+		dataType: string
+		isHidden
+		lineageTag: 52ab068b-4dea-4c8d-a92d-bdb592cf9fb6
+		summarizeBy: none
+		sourceColumn: PPEAssignmentHistoryId
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column PPEAssignment_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: de63e7cc-0f3b-4b2b-ad22-fcfc0691a8c4
+		summarizeBy: none
+		sourceColumn: PPEAssignment_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column PPEAction_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 67cae203-1f4c-4c88-8a85-5226c58c17d5
+		summarizeBy: none
+		sourceColumn: PPEAction_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Actioned On'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 29b12a50-5d6e-41f8-8a50-1a8183b35596
+		summarizeBy: none
+		sourceColumn: Actioned On
+
+		variation Variation
+			isDefault
+			relationship: 21822d9d-70fb-449c-a391-c72892303c7e
+			defaultHierarchy: LocalDateTable_e606528f-20e0-40a8-9fec-9f1f7011e6bc.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column Wallet_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 2748240f-48d2-4371-b674-bdf090238621
+		summarizeBy: none
+		sourceColumn: Wallet_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column ActionedByContact_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 12a0a57b-8c1e-4a63-967e-e3448359b274
+		summarizeBy: none
+		sourceColumn: ActionedByContact_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	partition 'Assignment History' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("ww-powerbi-demo.database.windows.net", "powerbi"),
+				    mart_PPEAssignmentHistory = Source{[Schema="mart",Item="PPEAssignmentHistory"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(mart_PPEAssignmentHistory,{"_created", "_edited"}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"ActionedOn", "Actioned On"}})
+				in
+				    #"Renamed Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

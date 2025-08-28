@@ -1,0 +1,50 @@
+table 'PPE Status'
+	lineageTag: 7dc20fc1-263a-445d-b9d4-643b3da800a5
+
+	column PPEStatus_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: c9c05b33-0e8f-4e83-8583-bcf4ed30d764
+		summarizeBy: none
+		sourceColumn: PPEStatus_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column PPEStatusCode
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: e13de87c-ea94-4577-b87e-c4ab562464c2
+		summarizeBy: none
+		sourceColumn: PPEStatusCode
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column 'PPE Status'
+		dataType: string
+		lineageTag: d487c165-6f64-4d20-96dc-30208bc44588
+		summarizeBy: none
+		sourceColumn: PPE Status
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'PPE Status' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("ww-powerbi-demo.database.windows.net", "powerbi"),
+				    mart_PPEStatus = Source{[Schema="mart",Item="PPEStatus"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(mart_PPEStatus,{"_created", "_edited"}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"PPEStatus", "PPE Status"}})
+				in
+				    #"Renamed Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

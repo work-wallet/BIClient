@@ -1,0 +1,199 @@
+table Location
+	lineageTag: 0c282e94-763a-47f5-94ca-832dc2919c25
+
+	column Location_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: f706c3f9-7ec9-4f8d-ba62-4524068a7f92
+		summarizeBy: none
+		sourceColumn: Location_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column LocationId
+		dataType: string
+		isHidden
+		lineageTag: 3f3f4c1c-57c7-43aa-a3da-db3f14169285
+		summarizeBy: none
+		sourceColumn: LocationId
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column LocationTypeCode
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 81ea1a37-02cd-40b6-b78b-87ecad9df1b8
+		summarizeBy: none
+		sourceColumn: LocationTypeCode
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column 'Location Type'
+		dataType: string
+		lineageTag: 1a082cff-5440-449f-908a-4fa19bed1381
+		summarizeBy: none
+		sourceColumn: Location Type
+
+		annotation SummarizationSetBy = Automatic
+
+	column Location
+		dataType: string
+		lineageTag: 8a022518-644a-4149-8ad1-628c1b6dd11c
+		summarizeBy: none
+		sourceColumn: Location
+
+		annotation SummarizationSetBy = Automatic
+
+	column CompanyId
+		dataType: string
+		isHidden
+		lineageTag: dfc897fa-57d4-41f0-a31b-ed0cccc54e06
+		summarizeBy: none
+		sourceColumn: CompanyId
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Company
+		dataType: string
+		lineageTag: 6987131e-7d8b-4176-815a-65e8fefef1de
+		summarizeBy: none
+		sourceColumn: Company
+
+		annotation SummarizationSetBy = Automatic
+
+	column SiteId
+		dataType: string
+		isHidden
+		lineageTag: 16ab020f-d530-4091-9d90-80be009958b3
+		summarizeBy: none
+		sourceColumn: SiteId
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Site
+		dataType: string
+		lineageTag: 44b186cf-dbe6-4470-ae04-6d5d2ff25896
+		summarizeBy: none
+		sourceColumn: Site
+
+		annotation SummarizationSetBy = Automatic
+
+	column AreaId
+		dataType: string
+		isHidden
+		lineageTag: 83dbd36f-1bfe-4cc3-8f4b-d7ef4308dc0b
+		summarizeBy: none
+		sourceColumn: AreaId
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Area
+		dataType: string
+		lineageTag: aef34c53-4976-4ca9-8250-cfd88eb32bb2
+		summarizeBy: none
+		sourceColumn: Area
+
+		annotation SummarizationSetBy = Automatic
+
+	column JobId
+		dataType: string
+		isHidden
+		lineageTag: c5223c24-5d98-4125-9e31-08f52dfd7444
+		summarizeBy: none
+		sourceColumn: JobId
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Job
+		dataType: string
+		lineageTag: 2fc38039-1e4d-4761-8f8e-e53b0926e219
+		summarizeBy: none
+		sourceColumn: Job
+
+		annotation SummarizationSetBy = Automatic
+
+	column SiteLocationId
+		dataType: string
+		isHidden
+		lineageTag: 8629c730-41d6-4812-96a6-f766de1dbe37
+		summarizeBy: none
+		sourceColumn: SiteLocationId
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Wallet_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 9dc67335-531f-4293-8214-487d30a1b21a
+		summarizeBy: none
+		sourceColumn: Wallet_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column Department
+		dataType: string
+		lineageTag: 56531169-a186-4073-9702-9a17d504f014
+		summarizeBy: none
+		sourceColumn: Department
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Location External Identifier'
+		dataType: string
+		lineageTag: ff023746-d58f-492a-8ae4-5359246d651a
+		summarizeBy: none
+		sourceColumn: Location External Identifier
+
+		annotation SummarizationSetBy = Automatic
+
+	hierarchy 'Company Hierarchy'
+		lineageTag: 75777fbc-dcf3-4852-9ca7-1935ee7ce74d
+
+		level Company
+			lineageTag: dcdc6acc-b019-42e3-95a7-2288ee690267
+			column: Company
+
+		level Site
+			lineageTag: 5706759d-9472-4310-af27-6d8b36e7bf4b
+			column: Site
+
+		level Area
+			lineageTag: 79667294-8d48-443a-8dc7-bd6d3911ea94
+			column: Area
+
+	partition Location-ee290f9c-000d-4d1a-a829-4a7a5badab5e = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("ww-powerbi-demo.database.windows.net", "powerbi"),
+				    mart_Location = Source{[Schema="mart",Item="Location"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(mart_Location,{"_created", "_edited"}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"LocationType", "Location Type"}, {"ExternalIdentifier", "Location External Identifier"}})
+				in
+				    #"Renamed Columns"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

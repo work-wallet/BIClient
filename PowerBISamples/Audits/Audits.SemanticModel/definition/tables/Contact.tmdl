@@ -44,6 +44,22 @@ table Contact
 
 		annotation SummarizationSetBy = User
 
+	column Email
+		dataType: string
+		lineageTag: a345e00e-6c58-4e9f-b0c6-4639ca6425f6
+		summarizeBy: none
+		sourceColumn: Email
+
+		annotation SummarizationSetBy = Automatic
+
+	column Company
+		dataType: string
+		lineageTag: 87574ed9-a961-45e5-82df-12c577fe4ec2
+		summarizeBy: none
+		sourceColumn: Company
+
+		annotation SummarizationSetBy = Automatic
+
 	partition Contact = m
 		mode: import
 		source =
@@ -51,9 +67,10 @@ table Contact
 				    Source = Sql.Database("ww-powerbi-demo.database.windows.net", "powerbi"),
 				    mart_Contact = Source{[Schema="mart",Item="Contact"]}[Data],
 				    #"Renamed Columns" = Table.RenameColumns(mart_Contact,{{"Name", "Contact Name"}}),
-				    #"Removed Columns" = Table.RemoveColumns(#"Renamed Columns",{"_created", "_edited"})
+				    #"Removed Columns" = Table.RemoveColumns(#"Renamed Columns",{"_created", "_edited"}),
+				    #"Renamed Columns1" = Table.RenameColumns(#"Removed Columns",{{"EmailAddress", "Email"}, {"CompanyName", "Company"}})
 				in
-				    #"Removed Columns"
+				    #"Renamed Columns1"
 
 	annotation PBI_NavigationStepName = Navigation
 

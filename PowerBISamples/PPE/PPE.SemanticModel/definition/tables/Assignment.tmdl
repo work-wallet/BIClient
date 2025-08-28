@@ -1,0 +1,229 @@
+table Assignment
+	lineageTag: 4cd4c7b8-78ce-4f8e-927e-e92f949db79b
+
+	column PPEAssignment_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 5dbf2682-a46f-483c-b317-98e4217ba0ff
+		summarizeBy: none
+		sourceColumn: PPEAssignment_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column PPEAssignmentId
+		dataType: string
+		isHidden
+		lineageTag: 5736a494-7f63-4588-9372-ec06d0fa90b4
+		summarizeBy: none
+		sourceColumn: PPEAssignmentId
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column PPEType_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: da35c950-f10a-4282-935a-e9798250fa03
+		summarizeBy: none
+		sourceColumn: PPEType_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Assigned On'
+		dataType: dateTime
+		formatString: dd/mm/yy
+		lineageTag: 69b80387-2121-4a75-ae3b-ec5dd0303f54
+		summarizeBy: none
+		sourceColumn: Assigned On
+
+		variation Variation
+			isDefault
+			relationship: 5f6c5bd0-1f38-483c-8077-d40733f4fd61
+			defaultHierarchy: LocalDateTable_d4a131a7-d277-4787-9568-f7f8f8301f2f.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column 'Expired On'
+		dataType: dateTime
+		formatString: dd/mm/yy
+		lineageTag: 8d8cc5e0-21c1-4a1e-b81f-53a9bc40030a
+		summarizeBy: none
+		sourceColumn: Expired On
+
+		variation Variation
+			isDefault
+			relationship: 075671d3-4f96-405e-bf83-f5f85749938f
+			defaultHierarchy: LocalDateTable_6ec53d14-0639-4b98-b617-ee016ff3a454.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column PPEStatus_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 9f6c99aa-bb56-4144-89ba-48851add703d
+		summarizeBy: none
+		sourceColumn: PPEStatus_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column AssignedFromPPEStock_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: b637deee-e40c-4c6a-baa8-982c2b58aa7c
+		summarizeBy: none
+		sourceColumn: AssignedFromPPEStock_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column ReturnedToPPEStock_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: e7c23bd9-768e-4a97-9306-808267548072
+		summarizeBy: none
+		sourceColumn: ReturnedToPPEStock_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column ReplacementRequestedFromPPEStock_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 93145118-62d5-4e28-8e33-cf0f02de630f
+		summarizeBy: none
+		sourceColumn: ReplacementRequestedFromPPEStock_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column 'Replacement Requested On'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 195c30fc-3d43-415d-a2bc-e1b0b48c7329
+		summarizeBy: none
+		sourceColumn: Replacement Requested On
+
+		variation Variation
+			isDefault
+			relationship: 1b04408e-9ab2-4993-bcad-ea3b1780c1ca
+			defaultHierarchy: LocalDateTable_1d9f4524-968f-4891-b5b8-221b52b154f2.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column Wallet_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: f341a937-83e2-4f6b-ac52-19042fb41516
+		summarizeBy: none
+		sourceColumn: Wallet_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column 'Assigned Count' = 1
+		formatString: #,0
+		lineageTag: 316ed20d-2bd1-45c7-a14f-0d17265333e5
+		summarizeBy: sum
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Require Replacement' =
+			
+			IF
+			(
+			    ISBLANK(Assignment[Replacement Requested On]),
+			    IF
+			    (
+			        NOT(ISBLANK(Assignment[Expired On])) && Assignment[Expired On] <= TODAY(),
+			        TRUE,
+			        FALSE
+			    ),
+			    TRUE
+			)
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 81ff963b-d591-4dc5-934c-646beb4573b7
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column Value = RELATED('PPE Assignment Type'[Value])
+		formatString: "£"#,0.00;-"£"#,0.00;"£"#,0.00
+		lineageTag: be70e25d-57d3-436c-97b9-81285e7a0a48
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-GB"}
+
+	column 'Assigned From Stock Site' =
+			
+			VAR FromStockKey = 'Assignment'[AssignedFromPPEStock_key]
+			VAR LocationKey = LOOKUPVALUE(
+			    Stock[Location_key],
+			    Stock[PPEStock_key], FromStockKey
+			)
+			RETURN
+			LOOKUPVALUE(
+			    Location[Site],
+			    Location[Location_key], LocationKey
+			)
+		lineageTag: 28ca9e98-979d-4270-98a0-667da02d6649
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column AssignedToContact_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: c3ce2fe4-1624-4593-9735-4b5614df42d3
+		summarizeBy: none
+		sourceColumn: AssignedToContact_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	partition Assignment = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("ww-powerbi-demo.database.windows.net", "powerbi"),
+				    mart_PPEAssignment = Source{[Schema="mart",Item="PPEAssignment"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(mart_PPEAssignment,{"_created", "_edited"}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"AssignedOn", "Assigned On"}, {"ExpiredOn", "Expired On"}, {"ReplacementRequestedOn", "Replacement Requested On"}})
+				in
+				    #"Renamed Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,173 @@
+relationship 72dc5da0-4042-40a7-8342-51f03af1e646
+	isActive: false
+	fromColumn: Location.Wallet_key
+	toColumn: Wallet.Wallet_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship 5f6c5bd0-1f38-483c-8077-d40733f4fd61
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Assignment.'Assigned On'
+	toColumn: LocalDateTable_d4a131a7-d277-4787-9568-f7f8f8301f2f.Date
+
+relationship 075671d3-4f96-405e-bf83-f5f85749938f
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Assignment.'Expired On'
+	toColumn: LocalDateTable_6ec53d14-0639-4b98-b617-ee016ff3a454.Date
+
+relationship 1b04408e-9ab2-4993-bcad-ea3b1780c1ca
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Assignment.'Replacement Requested On'
+	toColumn: LocalDateTable_1d9f4524-968f-4891-b5b8-221b52b154f2.Date
+
+relationship 21822d9d-70fb-449c-a391-c72892303c7e
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'Assignment History'.'Actioned On'
+	toColumn: LocalDateTable_e606528f-20e0-40a8-9fec-9f1f7011e6bc.Date
+
+relationship 6eb8075b-0068-4578-8056-af1b1516d356
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'Stock History'.'Actioned On'
+	toColumn: LocalDateTable_0b142ea6-4d11-4451-b39c-7a919543f3ec.Date
+
+relationship a56cbd9b-d689-491e-93fa-a907f12bcaf5
+	fromColumn: Assignment.PPEStatus_key
+	toColumn: 'PPE Status'.PPEStatus_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship dbc027d5-d578-48e4-abd0-729aa363a94a
+	isActive: false
+	fromColumn: Assignment.AssignedFromPPEStock_key
+	toColumn: Stock.PPEStock_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship 034eacd3-640f-48a6-824c-83a593271b14
+	isActive: false
+	fromColumn: Assignment.ReplacementRequestedFromPPEStock_key
+	toColumn: Stock.PPEStock_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship ae4b33dc-3b5e-4992-8544-b67de73753df
+	isActive: false
+	fromColumn: Assignment.ReturnedToPPEStock_key
+	toColumn: Stock.PPEStock_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship 9f32179d-89d4-4e01-ac86-6d793d434508
+	fromColumn: 'Assignment History'.PPEAction_key
+	toColumn: 'PPE Action'.PPEAction_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship 530a0657-8eea-414f-8a2d-f5cdf6d29c33
+	fromColumn: 'Assignment History'.PPEAssignment_key
+	toColumn: Assignment.PPEAssignment_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship 13e80013-77c4-4fdb-9162-c318ea433d8b
+	fromColumn: Stock.PPEType_key
+	toColumn: 'PPE Type'.PPEType_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship f28da94d-2c2a-4eb5-bde2-ff6b72ce8c4e
+	crossFilteringBehavior: bothDirections
+	fromColumn: 'Stock History'.PPEAction_key
+	toColumn: 'PPE Action'.PPEAction_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship d742de10-3975-4f1f-a611-629203216f5b
+	fromColumn: 'Stock History'.PPEStock_key
+	toColumn: Stock.PPEStock_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship e2b84b54-9f43-43ba-8cd5-e821c0cc5c9b
+	fromColumn: Assignment.Wallet_key
+	toColumn: Wallet.Wallet_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship 73bdac87-5336-40cc-be47-96c49a79320c
+	isActive: false
+	fromColumn: 'Assignment History'.Wallet_key
+	toColumn: Wallet.Wallet_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship 9d720469-31c1-4f5b-b4a5-c57c774066fe
+	fromColumn: Stock.Location_key
+	toColumn: Location.Location_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship cf55029f-5ae8-4702-bdc0-9be0493d79da
+	fromColumn: Stock.Wallet_key
+	toColumn: Wallet.Wallet_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship 77bd1988-2bca-4988-b0bd-794542b787e6
+	isActive: false
+	fromColumn: 'Stock History'.Wallet_key
+	toColumn: Wallet.Wallet_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship 641ce44e-457a-43bb-8176-1e1769924779
+	isActive: false
+	fromColumn: 'PPE Type'.Wallet_key
+	toColumn: Wallet.Wallet_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship cde6fe0a-c2ea-eab1-907c-1c407423ac1a
+	fromColumn: Assignment.PPEType_key
+	toColumn: 'PPE Assignment Type'.PPEType_key
+
+relationship 85905324-b0ce-007e-cc16-ff3ec994e049
+	isActive: false
+	fromColumn: 'Stock History'.TransferredFromPPEStock_key
+	toColumn: Stock.PPEStock_key
+
+relationship 5459a596-e3e0-2043-dc65-056b1d82d6cc
+	fromColumn: 'Stock History'.ActionedByContact_key
+	toColumn: 'Actioned By Contact'.Contact_key
+
+relationship 32483c7d-2b2d-3190-6981-1567985ba1e6
+	isActive: false
+	fromColumn: 'Actioned By Contact'.Wallet_key
+	toColumn: Wallet.Wallet_key
+
+relationship 15172995-69b5-4d73-93f3-1d2f14b5ac90
+	fromColumn: Stock.PPEType_key
+	toColumn: 'PPE Assignment Type'.PPEType_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship b1e4f15b-8305-43ce-bb0d-2fb7f54a1320
+	isActive: false
+	fromColumn: 'PPE Assignment Type'.Wallet_key
+	toColumn: Wallet.Wallet_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship 4dd71630-6fab-2457-3517-a32ee5640afb
+	fromColumn: 'Assignment History'.ActionedByContact_key
+	toColumn: 'Actioned By Contact'.Contact_key
+
+relationship 5a086ce4-066a-3313-c651-dad834ee1f19
+	isActive: false
+	fromColumn: 'Assigned To Contact'.Wallet_key
+	toColumn: Wallet.Wallet_key
+
+relationship 27e11d97-fd2a-3f6a-ce86-8516e1f87eb5
+	fromColumn: Assignment.AssignedToContact_key
+	toColumn: 'Assigned To Contact'.Contact_key
+

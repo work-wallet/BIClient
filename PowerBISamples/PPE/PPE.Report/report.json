@@ -1,0 +1,256 @@
+{
+  "config": "{\"version\":\"5.66\",\"themeCollection\":{\"baseTheme\":{\"name\":\"CY24SU06\",\"type\":2,\"version\":{\"visual\":\"1.8.92\",\"report\":\"2.0.92\",\"page\":\"1.3.92\"}},\"customTheme\":{\"name\":\"NoWalls_Analytics4439775621304771.json\",\"type\":1,\"version\":{\"visual\":\"1.8.92\",\"report\":\"2.0.92\",\"page\":\"1.3.92\"}}},\"activeSectionIndex\":0,\"defaultDrillFilterOtherVisuals\":true,\"filterSortOrder\":3,\"slowDataSourceSettings\":{\"isCrossHighlightingDisabled\":false,\"isSlicerSelectionsButtonEnabled\":false,\"isFilterSelectionsButtonEnabled\":false,\"isFieldWellButtonEnabled\":false,\"isApplyAllButtonEnabled\":false},\"linguisticSchemaSyncVersion\":2,\"settings\":{\"useNewFilterPaneExperience\":true,\"allowChangeFilterTypes\":true,\"useStylableVisualContainerHeader\":true,\"exportDataMode\":1,\"useEnhancedTooltips\":true},\"objects\":{\"section\":[{\"properties\":{\"verticalAlignment\":{\"expr\":{\"Literal\":{\"Value\":\"'Top'\"}}}}}],\"outspacePane\":[{\"properties\":{\"expanded\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}}}}]}}",
+  "filters": "[]",
+  "layoutOptimization": 0,
+  "publicCustomVisuals": [
+    "advanceCardE03760C5AB684758B56AA29F9E6C257B"
+  ],
+  "resourcePackages": [
+    {
+      "resourcePackage": {
+        "disabled": false,
+        "items": [
+          {
+            "name": "CY24SU06",
+            "path": "BaseThemes/CY24SU06.json",
+            "type": 202
+          }
+        ],
+        "name": "SharedResources",
+        "type": 2
+      }
+    },
+    {
+      "resourcePackage": {
+        "disabled": false,
+        "items": [
+          {
+            "name": "NoWalls_Analytics4439775621304771.json",
+            "path": "NoWalls_Analytics4439775621304771.json",
+            "type": 201
+          }
+        ],
+        "name": "RegisteredResources",
+        "type": 1
+      }
+    }
+  ],
+  "sections": [
+    {
+      "config": "{\"objects\":{\"outspacePane\":[{\"properties\":{\"width\":{\"expr\":{\"Literal\":{\"Value\":\"248L\"}}}}}]}}",
+      "displayName": "PPE Stock",
+      "displayOption": 1,
+      "filters": "[]",
+      "height": 720.00,
+      "name": "0e5e0693c4483648cc08",
+      "ordinal": 2,
+      "visualContainers": [
+        {
+          "config": "{\"name\":\"a9d0a663a162b7d0f458\",\"layouts\":[{\"id\":0,\"position\":{\"x\":0,\"y\":0,\"z\":0,\"width\":1280,\"height\":719.3530997304582,\"tabOrder\":0}}],\"singleVisual\":{\"visualType\":\"pivotTable\",\"projections\":{\"Rows\":[{\"queryRef\":\"Location.Location\",\"active\":true},{\"queryRef\":\"PPE Type.PPE Type\"},{\"queryRef\":\"PPE Type.Variant\"}],\"Values\":[{\"queryRef\":\"Sum(Stock.Stock Quantity)\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"l\",\"Entity\":\"Location\",\"Type\":0},{\"Name\":\"s\",\"Entity\":\"Stock\",\"Type\":0},{\"Name\":\"p\",\"Entity\":\"PPE Type\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"l\"}},\"Property\":\"Location\"},\"Name\":\"Location.Location\",\"NativeReferenceName\":\"Location\"},{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"s\"}},\"Property\":\"Stock Quantity\"}},\"Function\":0},\"Name\":\"Sum(Stock.Stock Quantity)\",\"NativeReferenceName\":\"Stock Quantity\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"p\"}},\"Property\":\"PPE Type\"},\"Name\":\"PPE Type.PPE Type\",\"NativeReferenceName\":\"PPE Type\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"p\"}},\"Property\":\"Variant\"},\"Name\":\"PPE Type.Variant\",\"NativeReferenceName\":\"Variant\"}],\"OrderBy\":[{\"Direction\":1,\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"l\"}},\"Property\":\"Location\"}}},{\"Direction\":1,\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"p\"}},\"Property\":\"PPE Type\"}}}]},\"expansionStates\":[{\"roles\":[\"Rows\"],\"levels\":[{\"queryRefs\":[\"Location.Location\"],\"isCollapsed\":true,\"identityKeys\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"Location\"}},\"Property\":\"Location\"}}],\"isPinned\":true},{\"queryRefs\":[\"PPE Type.PPE Type\"],\"isCollapsed\":true,\"identityKeys\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"PPE Type\"}},\"Property\":\"PPE Type\"}}],\"isPinned\":true},{\"queryRefs\":[\"PPE Type.Variant\"],\"isCollapsed\":true,\"isPinned\":true}],\"root\":{\"identityValues\":null}}],\"drillFilterOtherVisuals\":true,\"objects\":{\"columnWidth\":[{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"330.32651272223603D\"}}}},\"selector\":{\"metadata\":\"Location.Location\"}},{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"40D\"}}}},\"selector\":{\"metadata\":\"Audit.Inspected On.Variation.Date Hierarchy.Year\"}},{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"48D\"}}}},\"selector\":{\"metadata\":\"Audit.Inspected On.Variation.Date Hierarchy.Quarter\"}},{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"70D\"}}}},\"selector\":{\"metadata\":\"Audit.Inspected On.Variation.Date Hierarchy.Month\"}},{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"29D\"}}}},\"selector\":{\"metadata\":\"Audit.Inspected On.Variation.Date Hierarchy.Day\"}},{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"80D\"}}}},\"selector\":{\"metadata\":\"Sum(Stock.Stock Quantity)\"}}]},\"vcObjects\":{\"visualTooltip\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}}}}]}}}",
+          "filters": "[]",
+          "height": 719.35,
+          "width": 1280.00,
+          "x": 0.00,
+          "y": 0.00,
+          "z": 0.00
+        }
+      ],
+      "width": 1280.00
+    },
+    {
+      "config": "{}",
+      "displayName": "Assignment History",
+      "displayOption": 1,
+      "filters": "[]",
+      "height": 720.00,
+      "name": "1abfd10c7df82b457c45",
+      "ordinal": 3,
+      "visualContainers": [
+        {
+          "config": "{\"name\":\"4196a58d7f5ce5807f0d\",\"layouts\":[{\"id\":0,\"position\":{\"x\":10.314262691377921,\"y\":0,\"z\":0,\"width\":1269.685737308622,\"height\":719.9355358581789,\"tabOrder\":0}}],\"singleVisual\":{\"visualType\":\"tableEx\",\"projections\":{\"Values\":[{\"queryRef\":\"PPE Type.PPE\"},{\"queryRef\":\"PPE Action.PPE Action\"},{\"queryRef\":\"Actioned By Contact.Contact Name\"},{\"queryRef\":\"Sum(Stock History.Stock Quantity)\"},{\"queryRef\":\"Stock History.Transferred From Stock Location\"},{\"queryRef\":\"Stock History.Stock Location\"},{\"queryRef\":\"Stock History.Actioned On\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"p\",\"Entity\":\"PPE Action\",\"Type\":0},{\"Name\":\"s\",\"Entity\":\"Stock History\",\"Type\":0},{\"Name\":\"p1\",\"Entity\":\"PPE Type\",\"Type\":0},{\"Name\":\"a\",\"Entity\":\"Actioned By Contact\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"p\"}},\"Property\":\"PPE Action\"},\"Name\":\"PPE Action.PPE Action\",\"NativeReferenceName\":\"Action\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"s\"}},\"Property\":\"Actioned On\"},\"Name\":\"Stock History.Actioned On\",\"NativeReferenceName\":\"Date\"},{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"s\"}},\"Property\":\"Stock Quantity\"}},\"Function\":0},\"Name\":\"Sum(Stock History.Stock Quantity)\",\"NativeReferenceName\":\"Quantity\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"p1\"}},\"Property\":\"PPE\"},\"Name\":\"PPE Type.PPE\",\"NativeReferenceName\":\"PPE Type\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"s\"}},\"Property\":\"Stock Location\"},\"Name\":\"Stock History.Stock Location\",\"NativeReferenceName\":\"Location\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"s\"}},\"Property\":\"Transferred From Stock Location\"},\"Name\":\"Stock History.Transferred From Stock Location\",\"NativeReferenceName\":\"From\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"a\"}},\"Property\":\"Contact Name\"},\"Name\":\"Actioned By Contact.Contact Name\",\"NativeReferenceName\":\"By\"}],\"OrderBy\":[{\"Direction\":2,\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"s\"}},\"Property\":\"Actioned On\"}}}]},\"columnProperties\":{\"PPE Type.PPE\":{\"displayName\":\"PPE Type\"},\"PPE Action.PPE Action\":{\"displayName\":\"Action\"},\"Sum(Stock History.Stock Quantity)\":{\"displayName\":\"Quantity\"},\"Stock History.Actioned On\":{\"displayName\":\"Date\"},\"Stock History.Transferred From Stock Location\":{\"displayName\":\"From\"},\"Stock History.Stock Location\":{\"displayName\":\"Location\"},\"Actioned By Contact.Contact Name\":{\"displayName\":\"By\"}},\"drillFilterOtherVisuals\":true,\"objects\":{\"columnWidth\":[{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"126.63572040488116D\"}}}},\"selector\":{\"metadata\":\"PPE Action.PPE Action\"}},{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"39D\"}}}},\"selector\":{\"metadata\":\"Stock History.Actioned On.Variation.Date Hierarchy.Year\"}},{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"48D\"}}}},\"selector\":{\"metadata\":\"Stock History.Actioned On.Variation.Date Hierarchy.Quarter\"}},{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"73D\"}}}},\"selector\":{\"metadata\":\"Stock History.Actioned On.Variation.Date Hierarchy.Month\"}},{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"29D\"}}}},\"selector\":{\"metadata\":\"Stock History.Actioned On.Variation.Date Hierarchy.Day\"}},{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"126D\"}}}},\"selector\":{\"metadata\":\"Stock History.Actioned On\"}},{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"60.40290088638195D\"}}}},\"selector\":{\"metadata\":\"Sum(Stock History.Stock Quantity)\"}},{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"360.9342146769623D\"}}}},\"selector\":{\"metadata\":\"PPE Type.PPE\"}},{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"251D\"}}}},\"selector\":{\"metadata\":\"Stock History.Stock Location\"}},{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"206D\"}}}},\"selector\":{\"metadata\":\"Stock History.Transferred From Stock Location\"}},{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"104D\"}}}},\"selector\":{\"metadata\":\"Actioned By Contact.Contact Name\"}}]}}}",
+          "filters": "[]",
+          "height": 719.94,
+          "width": 1269.69,
+          "x": 10.31,
+          "y": 0.00,
+          "z": 0.00
+        }
+      ],
+      "width": 1280.00
+    },
+    {
+      "config": "{}",
+      "displayName": "Assigned PPE Value",
+      "displayOption": 1,
+      "filters": "[{\"name\":\"c055d30a504272ac2de9\",\"expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"PPE Status\"}},\"Property\":\"PPE Status\"}},\"filter\":{\"Version\":2,\"From\":[{\"Name\":\"p\",\"Entity\":\"PPE Status\",\"Type\":0}],\"Where\":[{\"Condition\":{\"In\":{\"Expressions\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"p\"}},\"Property\":\"PPE Status\"}}],\"Values\":[[{\"Literal\":{\"Value\":\"'Assigned'\"}}]]}}}]},\"type\":\"Categorical\",\"howCreated\":1,\"objects\":{}}]",
+      "height": 720.00,
+      "name": "1e3fdb9574c44e2684aa",
+      "ordinal": 4,
+      "visualContainers": [
+        {
+          "config": "{\"name\":\"10f48d227463fc782436\",\"layouts\":[{\"id\":0,\"position\":{\"x\":10.350404312668463,\"y\":0,\"z\":0,\"width\":1269.6495956873314,\"height\":720.2156334231805,\"tabOrder\":0}}],\"singleVisual\":{\"visualType\":\"tableEx\",\"projections\":{\"Values\":[{\"queryRef\":\"PPE Assignment Type.PPE\"},{\"queryRef\":\"Assigned To Contact.Company\"},{\"queryRef\":\"Assignment.Assigned From Stock Location\"},{\"queryRef\":\"Sum(Assignment._Count)\"},{\"queryRef\":\"Sum(Assignment.Value)\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"p\",\"Entity\":\"PPE Assignment Type\",\"Type\":0},{\"Name\":\"a\",\"Entity\":\"Assignment\",\"Type\":0},{\"Name\":\"a1\",\"Entity\":\"Assigned To Contact\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"p\"}},\"Property\":\"PPE\"},\"Name\":\"PPE Assignment Type.PPE\",\"NativeReferenceName\":\"PPE\"},{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"a\"}},\"Property\":\"Assigned Count\"}},\"Function\":0},\"Name\":\"Sum(Assignment._Count)\",\"NativeReferenceName\":\"Quantity Assigned\"},{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"a\"}},\"Property\":\"Value\"}},\"Function\":0},\"Name\":\"Sum(Assignment.Value)\",\"NativeReferenceName\":\"Total Value\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"a\"}},\"Property\":\"Assigned From Stock Site\"},\"Name\":\"Assignment.Assigned From Stock Location\",\"NativeReferenceName\":\"Assigned From Stock Site\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"a1\"}},\"Property\":\"Company\"},\"Name\":\"Assigned To Contact.Company\",\"NativeReferenceName\":\"Company\"}],\"OrderBy\":[{\"Direction\":1,\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"p\"}},\"Property\":\"PPE\"}}}]},\"columnProperties\":{\"Sum(Assignment._Count)\":{\"displayName\":\"Quantity Assigned\"},\"Sum(Assignment.Value)\":{\"displayName\":\"Total Value\"}},\"drillFilterOtherVisuals\":true,\"objects\":{\"columnWidth\":[{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"454.1809617016802D\"}}}},\"selector\":{\"metadata\":\"PPE Assignment Type.PPE\"}},{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"105.5384265174128D\"}}}},\"selector\":{\"metadata\":\"Sum(Assignment._Count)\"}},{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"68D\"}}}},\"selector\":{\"metadata\":\"Sum(Assignment.Value)\"}},{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"292D\"}}}},\"selector\":{\"metadata\":\"Assignment.Assigned From Stock Location\"}},{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"178D\"}}}},\"selector\":{\"metadata\":\"Assigned To Contact.Company\"}}]}}}",
+          "filters": "[]",
+          "height": 720.22,
+          "width": 1269.65,
+          "x": 10.35,
+          "y": 0.00,
+          "z": 0.00
+        }
+      ],
+      "width": 1280.00
+    },
+    {
+      "config": "{}",
+      "displayName": "Current PPE Assignments",
+      "displayOption": 1,
+      "filters": "[{\"name\":\"df3e13e3b7f53c2a0ea5\",\"expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"PPE Status\"}},\"Property\":\"PPE Status\"}},\"filter\":{\"Version\":2,\"From\":[{\"Name\":\"p\",\"Entity\":\"PPE Status\",\"Type\":0}],\"Where\":[{\"Condition\":{\"In\":{\"Expressions\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"p\"}},\"Property\":\"PPE Status\"}}],\"Values\":[[{\"Literal\":{\"Value\":\"'Assigned'\"}}]]}}}]},\"type\":\"Categorical\",\"howCreated\":1,\"objects\":{\"general\":[{\"properties\":{}}]}}]",
+      "height": 720.00,
+      "name": "77542c83a3ba1a74dc53",
+      "ordinal": 1,
+      "visualContainers": [
+        {
+          "config": "{\"name\":\"671169cf0d46a07717e6\",\"layouts\":[{\"id\":0,\"position\":{\"x\":0,\"y\":84.57695406929895,\"z\":0,\"width\":1280,\"height\":635.35858178888,\"tabOrder\":0}}],\"singleVisual\":{\"visualType\":\"tableEx\",\"projections\":{\"Values\":[{\"queryRef\":\"PPE Assignment Type.PPE Type\"},{\"queryRef\":\"PPE Assignment Type.PPE Variant\"},{\"queryRef\":\"Assigned To Contact.Contact Name\"},{\"queryRef\":\"Assigned To Contact.Email\"},{\"queryRef\":\"Assigned To Contact.Company\"},{\"queryRef\":\"Sum(Assignment.Assigned Count)\"},{\"queryRef\":\"Assignment.Assigned On\"},{\"queryRef\":\"Assignment.Expired On\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"a\",\"Entity\":\"Assignment\",\"Type\":0},{\"Name\":\"p\",\"Entity\":\"PPE Assignment Type\",\"Type\":0},{\"Name\":\"a1\",\"Entity\":\"Assigned To Contact\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"p\"}},\"Property\":\"PPE Type\"},\"Name\":\"PPE Assignment Type.PPE Type\",\"NativeReferenceName\":\"Type\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"a\"}},\"Property\":\"Assigned On\"},\"Name\":\"Assignment.Assigned On\",\"NativeReferenceName\":\"Date Issued\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"a\"}},\"Property\":\"Expired On\"},\"Name\":\"Assignment.Expired On\",\"NativeReferenceName\":\"Expiry Date\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"p\"}},\"Property\":\"PPE Variant\"},\"Name\":\"PPE Assignment Type.PPE Variant\",\"NativeReferenceName\":\"Variant\"},{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"a\"}},\"Property\":\"Assigned Count\"}},\"Function\":0},\"Name\":\"Sum(Assignment.Assigned Count)\",\"NativeReferenceName\":\"Quantity\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"a1\"}},\"Property\":\"Contact Name\"},\"Name\":\"Assigned To Contact.Contact Name\",\"NativeReferenceName\":\"Name\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"a1\"}},\"Property\":\"Company\"},\"Name\":\"Assigned To Contact.Company\",\"NativeReferenceName\":\"Company\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"a1\"}},\"Property\":\"Email\"},\"Name\":\"Assigned To Contact.Email\",\"NativeReferenceName\":\"Email\"}],\"OrderBy\":[{\"Direction\":2,\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"a\"}},\"Property\":\"Assigned On\"}}},{\"Direction\":1,\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"a1\"}},\"Property\":\"Contact Name\"}}}]},\"columnProperties\":{\"Assignment.Assigned On\":{\"displayName\":\"Date Issued\"},\"Assignment.Expired On\":{\"displayName\":\"Expiry Date\"},\"PPE Assignment Type.PPE Variant\":{\"displayName\":\"Variant\"},\"PPE Assignment Type.PPE Type\":{\"displayName\":\"Type\"},\"Sum(Assignment.Assigned Count)\":{\"displayName\":\"Quantity\"},\"Assigned To Contact.Contact Name\":{\"displayName\":\"Name\"}},\"drillFilterOtherVisuals\":true,\"objects\":{\"columnWidth\":[{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"142D\"}}}},\"selector\":{\"data\":[{\"scopeId\":{\"Comparison\":{\"ComparisonKind\":0,\"Left\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"PPE Assignment Type\"}},\"Property\":\"PPE Type\"}},\"Right\":{\"Literal\":{\"Value\":\"'Tree Climbing Harness'\"}}}}}]}},{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"117D\"}}}},\"selector\":{\"data\":[{\"total\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"PPE Assignment Type\"}},\"Property\":\"PPE Type\"}}]}]}},{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"308.4610637529272D\"}}}},\"selector\":{\"metadata\":\"PPE Assignment Type.PPE Type\"}},{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"39D\"}}}},\"selector\":{\"metadata\":\"Assignment.Assigned On.Variation.Date Hierarchy.Year\"}},{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"48D\"}}}},\"selector\":{\"metadata\":\"Assignment.Assigned On.Variation.Date Hierarchy.Quarter\"}},{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"70D\"}}}},\"selector\":{\"metadata\":\"Assignment.Assigned On.Variation.Date Hierarchy.Month\"}},{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"29D\"}}}},\"selector\":{\"metadata\":\"Assignment.Assigned On.Variation.Date Hierarchy.Day\"}},{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"145.4636105791004D\"}}}},\"selector\":{\"metadata\":\"Assignment.Assigned On\"}},{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"39D\"}}}},\"selector\":{\"metadata\":\"Assignment.Expired On.Variation.Date Hierarchy.Year\"}},{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"48D\"}}}},\"selector\":{\"metadata\":\"Assignment.Expired On.Variation.Date Hierarchy.Quarter\"}},{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"55D\"}}}},\"selector\":{\"metadata\":\"Assignment.Expired On.Variation.Date Hierarchy.Month\"}},{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"29D\"}}}},\"selector\":{\"metadata\":\"Assignment.Expired On.Variation.Date Hierarchy.Day\"}},{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"102D\"}}}},\"selector\":{\"metadata\":\"Assignment.Expired On\"}},{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"77D\"}}}},\"selector\":{\"metadata\":\"PPE Assignment Type.PPE Variant\"}},{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"85D\"}}}},\"selector\":{\"metadata\":\"Sum(Assignment.Assigned Count)\"}},{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"161.64356216094586D\"}}}},\"selector\":{\"metadata\":\"Assigned To Contact.Contact Name\"}},{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"110D\"}}}},\"selector\":{\"metadata\":\"Assigned To Contact.Company\"}},{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"233.6388140161725D\"}}}},\"selector\":{\"metadata\":\"Assigned To Contact.Email\"}}]}}}",
+          "filters": "[]",
+          "height": 635.36,
+          "width": 1280.00,
+          "x": 0.00,
+          "y": 84.58,
+          "z": 0.00
+        },
+        {
+          "config": "{\"name\":\"9fcb4ee0f7bb08ab5a87\",\"layouts\":[{\"id\":0,\"position\":{\"x\":0,\"y\":0,\"z\":1000,\"width\":577.5987107171636,\"height\":84.57695406929895,\"tabOrder\":1000}}],\"singleVisual\":{\"visualType\":\"slicer\",\"projections\":{\"Values\":[{\"queryRef\":\"Assignment.Require Replacement\",\"active\":true}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"a\",\"Entity\":\"Assignment\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"a\"}},\"Property\":\"Require Replacement\"},\"Name\":\"Assignment.Require Replacement\",\"NativeReferenceName\":\"Require Replacement\"}]},\"drillFilterOtherVisuals\":true,\"objects\":{\"data\":[{\"properties\":{\"mode\":{\"expr\":{\"Literal\":{\"Value\":\"'Basic'\"}}}}}],\"general\":[{\"properties\":{\"orientation\":{\"expr\":{\"Literal\":{\"Value\":\"1D\"}}}}}],\"selection\":[{\"properties\":{\"selectAllCheckboxEnabled\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}}}}]}}}",
+          "filters": "[]",
+          "height": 84.58,
+          "width": 577.60,
+          "x": 0.00,
+          "y": 0.00,
+          "z": 1000.00
+        }
+      ],
+      "width": 1280.00
+    },
+    {
+      "config": "{}",
+      "displayName": "Stock Transferred",
+      "displayOption": 1,
+      "filters": "[{\"name\":\"28a3d368e21bfa5d7754\",\"expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"PPE Action\"}},\"Property\":\"PPE Action\"}},\"filter\":{\"Version\":2,\"From\":[{\"Name\":\"p\",\"Entity\":\"PPE Action\",\"Type\":0}],\"Where\":[{\"Condition\":{\"In\":{\"Expressions\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"p\"}},\"Property\":\"PPE Action\"}}],\"Values\":[[{\"Literal\":{\"Value\":\"'Stock Transferred'\"}}]]}}}]},\"type\":\"Categorical\",\"howCreated\":1,\"objects\":{}}]",
+      "height": 720.00,
+      "name": "944b0a9ad1acfacab434",
+      "ordinal": 8,
+      "visualContainers": [
+        {
+          "config": "{\"name\":\"b84e400cbf2a1a0645fb\",\"layouts\":[{\"id\":0,\"position\":{\"x\":0,\"y\":0,\"z\":0,\"width\":1280,\"height\":720,\"tabOrder\":0}}],\"singleVisual\":{\"visualType\":\"tableEx\",\"projections\":{\"Values\":[{\"queryRef\":\"Stock History.Actioned On\"},{\"queryRef\":\"Stock History.Transferred From Stock Location\"},{\"queryRef\":\"Stock History.Stock Location\"},{\"queryRef\":\"Sum(Stock History.Stock Quantity)\"},{\"queryRef\":\"PPE Type.PPE\"},{\"queryRef\":\"Sum(Stock History.Value)\"},{\"queryRef\":\"Stock History.Notes\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"s\",\"Entity\":\"Stock History\",\"Type\":0},{\"Name\":\"p1\",\"Entity\":\"PPE Type\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"s\"}},\"Property\":\"Actioned On\"},\"Name\":\"Stock History.Actioned On\",\"NativeReferenceName\":\"Date\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"s\"}},\"Property\":\"Transferred From Stock Location\"},\"Name\":\"Stock History.Transferred From Stock Location\",\"NativeReferenceName\":\"From\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"s\"}},\"Property\":\"Stock Location\"},\"Name\":\"Stock History.Stock Location\",\"NativeReferenceName\":\"To\"},{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"s\"}},\"Property\":\"Stock Quantity\"}},\"Function\":0},\"Name\":\"Sum(Stock History.Stock Quantity)\",\"NativeReferenceName\":\"Quantity\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"p1\"}},\"Property\":\"PPE\"},\"Name\":\"PPE Type.PPE\",\"NativeReferenceName\":\"PPE Type\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"s\"}},\"Property\":\"Notes\"},\"Name\":\"Stock History.Notes\",\"NativeReferenceName\":\"Notes\"},{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"s\"}},\"Property\":\"Value\"}},\"Function\":0},\"Name\":\"Sum(Stock History.Value)\",\"NativeReferenceName\":\"Value\"}],\"OrderBy\":[{\"Direction\":2,\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"s\"}},\"Property\":\"Actioned On\"}}}]},\"columnProperties\":{\"Stock History.Actioned On\":{\"displayName\":\"Date\"},\"Stock History.Transferred From Stock Location\":{\"displayName\":\"From\"},\"Stock History.Stock Location\":{\"displayName\":\"To\"},\"Sum(Stock History.Stock Quantity)\":{\"displayName\":\"Quantity\"},\"PPE Type.PPE\":{\"displayName\":\"PPE Type\"}},\"drillFilterOtherVisuals\":true,\"objects\":{\"columnWidth\":[{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"39D\"}}}},\"selector\":{\"metadata\":\"Stock History.Actioned On.Variation.Date Hierarchy.Year\"}},{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"48D\"}}}},\"selector\":{\"metadata\":\"Stock History.Actioned On.Variation.Date Hierarchy.Quarter\"}},{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"62D\"}}}},\"selector\":{\"metadata\":\"Stock History.Actioned On.Variation.Date Hierarchy.Month\"}},{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"29D\"}}}},\"selector\":{\"metadata\":\"Stock History.Actioned On.Variation.Date Hierarchy.Day\"}},{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"120.25640952680472D\"}}}},\"selector\":{\"metadata\":\"Stock History.Actioned On\"}},{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"231.76749954937222D\"}}}},\"selector\":{\"metadata\":\"Stock History.Transferred From Stock Location\"}},{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"261.2910665278762D\"}}}},\"selector\":{\"metadata\":\"Stock History.Stock Location\"}},{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"80D\"}}}},\"selector\":{\"metadata\":\"Sum(Stock History.Stock Quantity)\"}},{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"311.1541369586384D\"}}}},\"selector\":{\"metadata\":\"PPE Type.PPE\"}},{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"162.02566607363946D\"}}}},\"selector\":{\"metadata\":\"Stock History.Notes\"}},{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"83.28203951109326D\"}}}},\"selector\":{\"metadata\":\"Sum(Stock History.Value)\"}}]}}}",
+          "filters": "[]",
+          "height": 720.00,
+          "width": 1280.00,
+          "x": 0.00,
+          "y": 0.00,
+          "z": 0.00
+        }
+      ],
+      "width": 1280.00
+    },
+    {
+      "config": "{}",
+      "displayName": "Assigned PPE Removed",
+      "displayOption": 1,
+      "filters": "[{\"name\":\"90ab2f2f82ebfff0bf70\",\"expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"PPE Status\"}},\"Property\":\"PPE Status\"}},\"filter\":{\"Version\":2,\"From\":[{\"Name\":\"p\",\"Entity\":\"PPE Status\",\"Type\":0}],\"Where\":[{\"Condition\":{\"In\":{\"Expressions\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"p\"}},\"Property\":\"PPE Status\"}}],\"Values\":[[{\"Literal\":{\"Value\":\"'Removed'\"}}]]}}}]},\"type\":\"Categorical\",\"howCreated\":1,\"objects\":{}}]",
+      "height": 720.00,
+      "name": "98c00bf00c4856f59272",
+      "ordinal": 5,
+      "visualContainers": [
+        {
+          "config": "{\"name\":\"83a9cbad77c397cdc6b2\",\"layouts\":[{\"id\":0,\"position\":{\"x\":10.256410256410257,\"y\":0,\"z\":0,\"width\":1269.7435897435898,\"height\":720,\"tabOrder\":0}}],\"singleVisual\":{\"visualType\":\"tableEx\",\"projections\":{\"Values\":[{\"queryRef\":\"PPE Assignment Type.PPE Type\"},{\"queryRef\":\"Assigned To Contact.Company\"},{\"queryRef\":\"Assignment.Assigned From Stock Site\"},{\"queryRef\":\"Sum(Assignment.Assigned Count)\"},{\"queryRef\":\"Sum(Assignment.Value)\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"p\",\"Entity\":\"PPE Assignment Type\",\"Type\":0},{\"Name\":\"a\",\"Entity\":\"Assignment\",\"Type\":0},{\"Name\":\"a1\",\"Entity\":\"Assigned To Contact\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"p\"}},\"Property\":\"PPE Type\"},\"Name\":\"PPE Assignment Type.PPE Type\",\"NativeReferenceName\":\"PPE Type\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"a\"}},\"Property\":\"Assigned From Stock Site\"},\"Name\":\"Assignment.Assigned From Stock Site\",\"NativeReferenceName\":\"Original Stock Location\"},{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"a\"}},\"Property\":\"Assigned Count\"}},\"Function\":0},\"Name\":\"Sum(Assignment.Assigned Count)\",\"NativeReferenceName\":\"Quantity Removed\"},{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"a\"}},\"Property\":\"Value\"}},\"Function\":0},\"Name\":\"Sum(Assignment.Value)\",\"NativeReferenceName\":\"Total Value\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"a1\"}},\"Property\":\"Company\"},\"Name\":\"Assigned To Contact.Company\",\"NativeReferenceName\":\"Company\"}]},\"columnProperties\":{\"Assignment.Assigned From Stock Site\":{\"displayName\":\"Original Stock Location\"},\"Sum(Assignment.Assigned Count)\":{\"displayName\":\"Quantity Removed\"},\"Sum(Assignment.Value)\":{\"displayName\":\"Total Value\"}},\"drillFilterOtherVisuals\":true,\"objects\":{\"columnWidth\":[{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"430.94725752556144D\"}}}},\"selector\":{\"metadata\":\"PPE Assignment Type.PPE Type\"}},{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"225.25641025641025D\"}}}},\"selector\":{\"metadata\":\"Assignment.Assigned From Stock Site\"}},{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"121.92307692307693D\"}}}},\"selector\":{\"metadata\":\"Sum(Assignment.Assigned Count)\"}},{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"68D\"}}}},\"selector\":{\"metadata\":\"Sum(Assignment.Value)\"}},{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"133D\"}}}},\"selector\":{\"metadata\":\"Assigned To Contact.Company\"}}]}}}",
+          "filters": "[]",
+          "height": 720.00,
+          "width": 1269.74,
+          "x": 10.26,
+          "y": 0.00,
+          "z": 0.00
+        }
+      ],
+      "width": 1280.00
+    },
+    {
+      "config": "{}",
+      "displayName": "Total Stock Value",
+      "displayOption": 1,
+      "filters": "[]",
+      "height": 720.00,
+      "name": "b7249f35a03508676e6d",
+      "ordinal": 6,
+      "visualContainers": [
+        {
+          "config": "{\"name\":\"937c22bbb3667fb92c59\",\"layouts\":[{\"id\":0,\"position\":{\"x\":10.256410256410257,\"y\":0,\"z\":0,\"width\":1269.7435897435898,\"height\":720,\"tabOrder\":0}}],\"singleVisual\":{\"visualType\":\"tableEx\",\"projections\":{\"Values\":[{\"queryRef\":\"PPE Type.PPE\"},{\"queryRef\":\"Stock.Stock Site\"},{\"queryRef\":\"Sum(Stock.Stock Quantity)\"},{\"queryRef\":\"Sum(Stock.Value)\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"p\",\"Entity\":\"PPE Type\",\"Type\":0},{\"Name\":\"s1\",\"Entity\":\"Stock\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"p\"}},\"Property\":\"PPE\"},\"Name\":\"PPE Type.PPE\",\"NativeReferenceName\":\"PPE Type\"},{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"s1\"}},\"Property\":\"Value\"}},\"Function\":0},\"Name\":\"Sum(Stock.Value)\",\"NativeReferenceName\":\"Total Value\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"s1\"}},\"Property\":\"Stock Site\"},\"Name\":\"Stock.Stock Site\",\"NativeReferenceName\":\"Stock Location\"},{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"s1\"}},\"Property\":\"Stock Quantity\"}},\"Function\":0},\"Name\":\"Sum(Stock.Stock Quantity)\",\"NativeReferenceName\":\"Quantity\"}]},\"columnProperties\":{\"Sum(Stock.Value)\":{\"displayName\":\"Total Value\"},\"Sum(Stock.Stock Quantity)\":{\"displayName\":\"Quantity\"},\"Stock.Stock Site\":{\"displayName\":\"Stock Location\"},\"PPE Type.PPE\":{\"displayName\":\"PPE Type\"}},\"drillFilterOtherVisuals\":true,\"objects\":{\"columnWidth\":[{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"423.66315363680235D\"}}}},\"selector\":{\"metadata\":\"PPE Type.PPE\"}},{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"172.94337921986232D\"}}}},\"selector\":{\"metadata\":\"Sum(Stock.Value)\"}},{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"269.8205038235935D\"}}}},\"selector\":{\"metadata\":\"Stock.Stock Site\"}},{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"80D\"}}}},\"selector\":{\"metadata\":\"Sum(Stock.Stock Quantity)\"}}]}}}",
+          "filters": "[{\"expression\":{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"Stock\"}},\"Property\":\"Stock Quantity\"}},\"Function\":0}},\"filter\":{\"Version\":2,\"From\":[{\"Name\":\"s1\",\"Entity\":\"Stock\",\"Type\":0}],\"Where\":[{\"Condition\":{\"Comparison\":{\"ComparisonKind\":1,\"Left\":{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"s1\"}},\"Property\":\"Stock Quantity\"}},\"Function\":0}},\"Right\":{\"Literal\":{\"Value\":\"0L\"}}}}}]},\"type\":\"Advanced\",\"howCreated\":0,\"isHiddenInViewMode\":false}]",
+          "height": 720.00,
+          "width": 1269.74,
+          "x": 10.26,
+          "y": 0.00,
+          "z": 0.00
+        }
+      ],
+      "width": 1280.00
+    },
+    {
+      "config": "{}",
+      "displayName": "Dashboard",
+      "displayOption": 1,
+      "filters": "[]",
+      "height": 720.00,
+      "name": "d59103a631fd0ac36821",
+      "visualContainers": [
+        {
+          "config": "{\"name\":\"1104701b9627b9a55408\",\"layouts\":[{\"id\":0,\"position\":{\"x\":280.1215805471125,\"y\":0,\"z\":1000,\"width\":279.1489361702128,\"height\":280.1215805471125,\"tabOrder\":1000}}],\"singleVisual\":{\"visualType\":\"card\",\"projections\":{\"Values\":[{\"queryRef\":\"Sum(Assignment.Assigned Count)\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"a\",\"Entity\":\"Assignment\",\"Type\":0}],\"Select\":[{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"a\"}},\"Property\":\"Assigned Count\"}},\"Function\":0},\"Name\":\"Sum(Assignment.Assigned Count)\",\"NativeReferenceName\":\"Assigned PPE\"}],\"OrderBy\":[{\"Direction\":2,\"Expression\":{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"a\"}},\"Property\":\"Assigned Count\"}},\"Function\":0}}}]},\"columnProperties\":{\"Sum(Assignment.Assigned Count)\":{\"displayName\":\"Assigned PPE\"}},\"drillFilterOtherVisuals\":true,\"hasDefaultSort\":true,\"objects\":{\"categoryLabels\":[{\"properties\":{\"fontSize\":{\"expr\":{\"Literal\":{\"Value\":\"14D\"}}},\"color\":{\"solid\":{\"color\":{\"expr\":{\"ThemeDataColor\":{\"ColorId\":7,\"Percent\":0}}}}}}}],\"labels\":[{\"properties\":{\"fontSize\":{\"expr\":{\"Literal\":{\"Value\":\"20D\"}}}}}]}}}",
+          "filters": "[{\"name\":\"388f6ed5c553328cae5a\",\"expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"PPE Status\"}},\"Property\":\"PPE Status\"}},\"filter\":{\"Version\":2,\"From\":[{\"Name\":\"p\",\"Entity\":\"PPE Status\",\"Type\":0}],\"Where\":[{\"Condition\":{\"In\":{\"Expressions\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"p\"}},\"Property\":\"PPE Status\"}}],\"Values\":[[{\"Literal\":{\"Value\":\"'Assigned'\"}}]]}}}]},\"type\":\"Categorical\",\"howCreated\":1,\"objects\":{}}]",
+          "height": 280.12,
+          "width": 279.15,
+          "x": 280.12,
+          "y": 0.00,
+          "z": 1000.00
+        },
+        {
+          "config": "{\"name\":\"77f9d58be8c6bce1b56b\",\"layouts\":[{\"id\":0,\"position\":{\"x\":0,\"y\":0,\"z\":0,\"width\":280.1215805471125,\"height\":280.1215805471125,\"tabOrder\":0}}],\"singleVisual\":{\"visualType\":\"card\",\"projections\":{\"Values\":[{\"queryRef\":\"Sum(Stock.Stock Quantity)\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"s\",\"Entity\":\"Stock\",\"Type\":0}],\"Select\":[{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"s\"}},\"Property\":\"Stock Quantity\"}},\"Function\":0},\"Name\":\"Sum(Stock.Stock Quantity)\",\"NativeReferenceName\":\"Available Stock\"}],\"OrderBy\":[{\"Direction\":2,\"Expression\":{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"s\"}},\"Property\":\"Stock Quantity\"}},\"Function\":0}}}]},\"columnProperties\":{\"Sum(Stock.Stock Quantity)\":{\"displayName\":\"Available Stock\"}},\"drillFilterOtherVisuals\":true,\"hasDefaultSort\":true,\"objects\":{\"categoryLabels\":[{\"properties\":{\"fontSize\":{\"expr\":{\"Literal\":{\"Value\":\"14D\"}}},\"color\":{\"solid\":{\"color\":{\"expr\":{\"ThemeDataColor\":{\"ColorId\":7,\"Percent\":0}}}}}}}],\"labels\":[{\"properties\":{\"fontSize\":{\"expr\":{\"Literal\":{\"Value\":\"20D\"}}},\"labelDisplayUnits\":{\"expr\":{\"Literal\":{\"Value\":\"1D\"}}}}}]}}}",
+          "filters": "[]",
+          "height": 280.12,
+          "width": 280.12,
+          "x": 0.00,
+          "y": 0.00,
+          "z": 0.00
+        },
+        {
+          "config": "{\"name\":\"a9900f792ad60d0e09f6\",\"layouts\":[{\"id\":0,\"position\":{\"x\":559.2705167173252,\"y\":0,\"z\":2000,\"width\":279.1489361702128,\"height\":280.1215805471125,\"tabOrder\":2000}}],\"singleVisual\":{\"visualType\":\"card\",\"projections\":{\"Values\":[{\"queryRef\":\"Sum(Assignment.Assigned Count)\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"a\",\"Entity\":\"Assignment\",\"Type\":0}],\"Select\":[{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"a\"}},\"Property\":\"Assigned Count\"}},\"Function\":0},\"Name\":\"Sum(Assignment.Assigned Count)\",\"NativeReferenceName\":\"Require Replacement\"}],\"OrderBy\":[{\"Direction\":2,\"Expression\":{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"a\"}},\"Property\":\"Assigned Count\"}},\"Function\":0}}}]},\"columnProperties\":{\"Sum(Assignment.Assigned Count)\":{\"displayName\":\"Require Replacement\"}},\"drillFilterOtherVisuals\":true,\"hasDefaultSort\":true,\"objects\":{\"categoryLabels\":[{\"properties\":{\"fontSize\":{\"expr\":{\"Literal\":{\"Value\":\"14D\"}}},\"color\":{\"solid\":{\"color\":{\"expr\":{\"ThemeDataColor\":{\"ColorId\":7,\"Percent\":0}}}}}}}],\"labels\":[{\"properties\":{\"fontSize\":{\"expr\":{\"Literal\":{\"Value\":\"20D\"}}},\"labelDisplayUnits\":{\"expr\":{\"Literal\":{\"Value\":\"0D\"}}}}}]},\"vcObjects\":{\"title\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}},\"text\":{\"expr\":{\"Literal\":{\"Value\":\"''\"}}}}}]}}}",
+          "filters": "[{\"name\":\"158f2524719a7e4c7bb9\",\"expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"Assignment\"}},\"Property\":\"Require Replacement\"}},\"filter\":{\"Version\":2,\"From\":[{\"Name\":\"a\",\"Entity\":\"Assignment\",\"Type\":0}],\"Where\":[{\"Condition\":{\"Not\":{\"Expression\":{\"In\":{\"Expressions\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"a\"}},\"Property\":\"Require Replacement\"}}],\"Values\":[[{\"Literal\":{\"Value\":\"false\"}}]]}}}}}]},\"type\":\"Categorical\",\"howCreated\":1,\"objects\":{\"general\":[{\"properties\":{\"isInvertedSelectionMode\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}}}}]}},{\"name\":\"14849f64022f3f86bbb7\",\"expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"PPE Status\"}},\"Property\":\"PPE Status\"}},\"filter\":{\"Version\":2,\"From\":[{\"Name\":\"p\",\"Entity\":\"PPE Status\",\"Type\":0}],\"Where\":[{\"Condition\":{\"In\":{\"Expressions\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"p\"}},\"Property\":\"PPE Status\"}}],\"Values\":[[{\"Literal\":{\"Value\":\"'Assigned'\"}}]]}}}]},\"type\":\"Categorical\",\"howCreated\":1,\"objects\":{}}]",
+          "height": 280.12,
+          "width": 279.15,
+          "x": 559.27,
+          "y": 0.00,
+          "z": 2000.00
+        }
+      ],
+      "width": 1280.00
+    },
+    {
+      "config": "{}",
+      "displayName": "Stock Removed",
+      "displayOption": 1,
+      "filters": "[{\"name\":\"87313fea537e4eef1ee4\",\"expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"PPE Action\"}},\"Property\":\"PPE Action\"}},\"filter\":{\"Version\":2,\"From\":[{\"Name\":\"p\",\"Entity\":\"PPE Action\",\"Type\":0}],\"Where\":[{\"Condition\":{\"In\":{\"Expressions\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"p\"}},\"Property\":\"PPE Action\"}}],\"Values\":[[{\"Literal\":{\"Value\":\"'Stock Removed'\"}}]]}}}]},\"type\":\"Categorical\",\"howCreated\":1,\"objects\":{\"general\":[{\"properties\":{}}]}}]",
+      "height": 720.00,
+      "name": "e76c0e59ba6d84ab7376",
+      "ordinal": 7,
+      "visualContainers": [
+        {
+          "config": "{\"name\":\"45d6f1f82062ba30e905\",\"layouts\":[{\"id\":0,\"position\":{\"x\":10.256410256410257,\"y\":0,\"z\":0,\"width\":1269.7435897435898,\"height\":720,\"tabOrder\":0}}],\"singleVisual\":{\"visualType\":\"tableEx\",\"projections\":{\"Values\":[{\"queryRef\":\"PPE Type.PPE\"},{\"queryRef\":\"Stock History.Stock Site\"},{\"queryRef\":\"Sum(Stock History.Stock Quantity)\"},{\"queryRef\":\"Sum(Stock History.Value)\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"p\",\"Entity\":\"PPE Type\",\"Type\":0},{\"Name\":\"s\",\"Entity\":\"Stock History\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"p\"}},\"Property\":\"PPE\"},\"Name\":\"PPE Type.PPE\",\"NativeReferenceName\":\"PPE Type\"},{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"s\"}},\"Property\":\"Stock Quantity\"}},\"Function\":0},\"Name\":\"Sum(Stock History.Stock Quantity)\",\"NativeReferenceName\":\"Quantity\"},{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"s\"}},\"Property\":\"Value\"}},\"Function\":0},\"Name\":\"Sum(Stock History.Value)\",\"NativeReferenceName\":\"Value\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"s\"}},\"Property\":\"Stock Site\"},\"Name\":\"Stock History.Stock Site\",\"NativeReferenceName\":\"Stock Location\"}]},\"columnProperties\":{\"PPE Type.PPE\":{\"displayName\":\"PPE Type\"},\"Sum(Stock History.Stock Quantity)\":{\"displayName\":\"Quantity\"},\"Stock History.Stock Site\":{\"displayName\":\"Stock Location\"}},\"drillFilterOtherVisuals\":true,\"objects\":{\"columnWidth\":[{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"573.4532490761385D\"}}}},\"selector\":{\"metadata\":\"PPE Type.PPE\"}},{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"80D\"}}}},\"selector\":{\"metadata\":\"Sum(Stock History.Stock Quantity)\"}},{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"98.84615384615384D\"}}}},\"selector\":{\"metadata\":\"Sum(Stock History.Value)\"}},{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"157D\"}}}},\"selector\":{\"metadata\":\"Stock History.Stock Site\"}}]}}}",
+          "filters": "[]",
+          "height": 720.00,
+          "width": 1269.74,
+          "x": 10.26,
+          "y": 0.00,
+          "z": 0.00
+        }
+      ],
+      "width": 1280.00
+    }
+  ],
+  "theme": "NoWalls_Analytics4439775621304771.json"
+}

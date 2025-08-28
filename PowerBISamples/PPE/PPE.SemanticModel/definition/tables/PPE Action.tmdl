@@ -1,0 +1,50 @@
+table 'PPE Action'
+	lineageTag: 7a623cea-ad5b-4c08-b3b0-717eb86e0a12
+
+	column PPEAction_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 250a9ad4-7550-44b3-9abb-169e69b4f49e
+		summarizeBy: none
+		sourceColumn: PPEAction_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column PPEActionCode
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 999123bb-21f2-46b8-b592-b6fea5711966
+		summarizeBy: none
+		sourceColumn: PPEActionCode
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column 'PPE Action'
+		dataType: string
+		lineageTag: 7e30ec5b-6f78-424f-ade2-2a0ae6a3f5ae
+		summarizeBy: none
+		sourceColumn: PPE Action
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'PPE Action' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("ww-powerbi-demo.database.windows.net", "powerbi"),
+				    mart_PPEAction = Source{[Schema="mart",Item="PPEAction"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(mart_PPEAction,{"_created", "_edited"}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"PPEAction", "PPE Action"}})
+				in
+				    #"Renamed Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

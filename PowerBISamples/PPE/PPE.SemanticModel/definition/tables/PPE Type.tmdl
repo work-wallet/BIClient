@@ -1,0 +1,141 @@
+table 'PPE Type'
+	lineageTag: 784865e7-41be-46a5-a713-88e990e53228
+
+	column PPEType_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 7b3cbaf3-fa37-42ff-9cbf-dced966db017
+		summarizeBy: none
+		sourceColumn: PPEType_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column PPETypeId
+		dataType: string
+		isHidden
+		lineageTag: a1f902af-9729-4c70-8866-010de5e55c30
+		summarizeBy: none
+		sourceColumn: PPETypeId
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column PPETypeVariantId
+		dataType: string
+		isHidden
+		lineageTag: d6edafae-39b0-4d9f-bb77-a55e20ffe700
+		summarizeBy: none
+		sourceColumn: PPETypeVariantId
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'PPE Type'
+		dataType: string
+		lineageTag: 3cdc1cc0-33f0-4290-be4b-45cb9fe2bc95
+		summarizeBy: none
+		sourceColumn: PPE Type
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'PPE Variant'
+		dataType: string
+		lineageTag: 536f59dd-3bc6-4519-aee4-fdd293e564e3
+		summarizeBy: none
+		sourceColumn: PPE Variant
+
+		annotation SummarizationSetBy = Automatic
+
+	column VariantOrder
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 22540235-c5af-449a-91cb-0ca162de9f44
+		summarizeBy: none
+		sourceColumn: VariantOrder
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column 'Lifespan Days'
+		dataType: int64
+		formatString: 0
+		lineageTag: 402de710-6b56-4f67-a53f-9723caaef09f
+		summarizeBy: none
+		sourceColumn: Lifespan Days
+
+		annotation SummarizationSetBy = Automatic
+
+	column Value
+		dataType: double
+		lineageTag: f729f68d-1c1e-4a99-868d-1e2286c22371
+		summarizeBy: none
+		sourceColumn: Value
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Type Deleted'
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 7e7ad893-d633-4241-87b3-c76f26bacf0d
+		summarizeBy: none
+		sourceColumn: Type Deleted
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Variant Deleted'
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: a0e595f6-2861-4284-824a-c65f71638f01
+		summarizeBy: none
+		sourceColumn: Variant Deleted
+
+		annotation SummarizationSetBy = Automatic
+
+	column Wallet_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 18f719f9-67a3-40ed-bc55-81cbee02c01d
+		summarizeBy: none
+		sourceColumn: Wallet_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column Variant = IF(ISBLANK('PPE Type'[PPE Variant]), "", 'PPE Type'[VariantOrder] & " - " & 'PPE Type'[PPE Variant])
+		lineageTag: 85031691-c359-4f24-85cd-b77ecff433a7
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column PPE = IF(ISBLANK('PPE Type'[PPE Variant]), 'PPE Type'[PPE Type], 'PPE Type'[PPE Type] & " (" & 'PPE Type'[PPE Variant] & ")")
+		lineageTag: 025c16d2-4f18-4e2e-8657-7f257c3f5349
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'PPE Type' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("ww-powerbi-demo.database.windows.net", "powerbi"),
+				    mart_PPEType = Source{[Schema="mart",Item="PPEType"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(mart_PPEType,{"_created", "_edited"}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"Type", "PPE Type"}, {"Variant", "PPE Variant"}, {"LifespanDays", "Lifespan Days"}, {"TypeDeleted", "Type Deleted"}, {"VariantDeleted", "Variant Deleted"}})
+				in
+				    #"Renamed Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

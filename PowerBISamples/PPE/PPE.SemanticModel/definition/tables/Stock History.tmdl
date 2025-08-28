@@ -1,0 +1,172 @@
+table 'Stock History'
+	lineageTag: 5f547d8f-0fbd-45e3-b10a-b114ab53ed5c
+
+	column PPEStockHistory_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 68bed9f7-cc61-4051-ab45-adadbb7a14cb
+		summarizeBy: none
+		sourceColumn: PPEStockHistory_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column PPEStockHistoryId
+		dataType: string
+		isHidden
+		lineageTag: da67afbc-eea0-4fa8-a134-963e2afe568f
+		summarizeBy: none
+		sourceColumn: PPEStockHistoryId
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column PPEStock_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 69531e97-5d7a-4f8e-8128-b82090d362f6
+		summarizeBy: none
+		sourceColumn: PPEStock_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column PPEAction_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 2696910c-9e08-4400-a4f5-416104924976
+		summarizeBy: none
+		sourceColumn: PPEAction_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column TransferredFromPPEStock_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 63859d4b-73f5-4e4b-a957-ff8eb2c49bb4
+		summarizeBy: none
+		sourceColumn: TransferredFromPPEStock_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column 'Stock Quantity'
+		dataType: int64
+		formatString: #,0
+		lineageTag: d48dbe20-d762-4a70-bb85-9b13b4ed8fac
+		summarizeBy: sum
+		sourceColumn: Stock Quantity
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Actioned On'
+		dataType: dateTime
+		formatString: dd/mm/yyyy hh:nn
+		lineageTag: c0abd62c-bf0f-4cff-9c44-7596768726b7
+		summarizeBy: none
+		sourceColumn: Actioned On
+
+		variation Variation
+			isDefault
+			relationship: 6eb8075b-0068-4578-8056-af1b1516d356
+			defaultHierarchy: LocalDateTable_0b142ea6-4d11-4451-b39c-7a919543f3ec.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column Notes
+		dataType: string
+		lineageTag: 31181155-1af6-4c8e-a81e-2f024aa98985
+		summarizeBy: none
+		sourceColumn: Notes
+
+		annotation SummarizationSetBy = Automatic
+
+	column Wallet_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 3f839b6d-4190-457c-9694-99e572d43b4c
+		summarizeBy: none
+		sourceColumn: Wallet_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column 'Stock Location' = RELATED(Location[Location])
+		lineageTag: c5df8748-c6a2-44f6-9687-de9f55cbc3d3
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Transferred From Stock Location' =
+			
+			VAR FromStockKey = 'Stock History'[TransferredFromPPEStock_key]
+			VAR LocationKey = LOOKUPVALUE(
+			    Stock[Location_key],
+			    Stock[PPEStock_key], FromStockKey
+			)
+			RETURN
+			LOOKUPVALUE(
+			    Location[Location],
+			    Location[Location_key], LocationKey
+			)
+		lineageTag: 6fc98843-3986-4182-8262-ff03f5a34ea2
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Stock Site' = RELATED(Location[Site])
+		lineageTag: 784babd8-a319-486b-935a-c84361626048
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column Value = RELATED('PPE Type'[Value]) * 'Stock History'[Stock Quantity]
+		formatString: "£"#,0.00;-"£"#,0.00;"£"#,0.00
+		lineageTag: 2c2a43e4-3934-4d32-ba30-c8ec49c2fbd0
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-GB"}
+
+	column ActionedByContact_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 1c5d7acc-5edb-42a1-a387-3f977b653d43
+		summarizeBy: none
+		sourceColumn: ActionedByContact_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	partition 'Stock History' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("ww-powerbi-demo.database.windows.net", "powerbi"),
+				    mart_PPEStockHistory = Source{[Schema="mart",Item="PPEStockHistory"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(mart_PPEStockHistory,{"_created", "_edited"}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"StockQuantity", "Stock Quantity"}, {"ActionedOn", "Actioned On"}})
+				in
+				    #"Renamed Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

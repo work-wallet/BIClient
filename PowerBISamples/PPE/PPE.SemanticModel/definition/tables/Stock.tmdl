@@ -1,0 +1,118 @@
+table Stock
+	lineageTag: bbf0fdac-d372-411b-8f0a-b5b754d6ea2d
+
+	column PPEStock_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: c32c76b6-f364-463a-99eb-542e08031c34
+		summarizeBy: none
+		sourceColumn: PPEStock_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column PPEStockId
+		dataType: string
+		isHidden
+		lineageTag: 72149d68-6c8b-452d-b354-0f75951beaeb
+		summarizeBy: none
+		sourceColumn: PPEStockId
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Location_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 4524410b-26c0-4221-b91e-e1952a6393d7
+		summarizeBy: none
+		sourceColumn: Location_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column PPEType_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 9193f88b-7128-4429-8733-9600dc01e30d
+		summarizeBy: none
+		sourceColumn: PPEType_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column 'Stock Quantity'
+		dataType: int64
+		formatString: #,0
+		lineageTag: 288f4829-a998-4459-9496-92eff9261fe4
+		summarizeBy: sum
+		sourceColumn: Stock Quantity
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Warning Quantity'
+		dataType: int64
+		formatString: 0
+		lineageTag: 0c439181-ca61-499a-a272-d9ffe43f4acb
+		summarizeBy: none
+		sourceColumn: Warning Quantity
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column Wallet_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: bcf71ea7-4591-4e0b-bde2-7b23f2417179
+		summarizeBy: none
+		sourceColumn: Wallet_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column Value = RELATED('PPE Type'[Value]) * Stock[Stock Quantity]
+		formatString: "£"#,0.00;-"£"#,0.00;"£"#,0.00
+		lineageTag: 00a1d89f-271c-44e9-9c2b-5de7cc475adb
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-GB"}
+
+	column 'Stock Site' = RELATED(Location[Site])
+		lineageTag: b6f45301-fc92-41d1-939a-b8782c284cef
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Stock Location' = RELATED(Location[Location])
+		lineageTag: fab6d3fd-741a-41e6-a0a7-bd5c00173fd7
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Stock = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("ww-powerbi-demo.database.windows.net", "powerbi"),
+				    mart_PPEStock = Source{[Schema="mart",Item="PPEStock"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(mart_PPEStock,{"_created", "_edited"}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"WarningQuantity", "Warning Quantity"}, {"StockQuantity", "Stock Quantity"}})
+				in
+				    #"Renamed Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
