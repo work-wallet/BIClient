@@ -10,7 +10,7 @@ annotation PBI_QueryOrder = ["Asset","Assignment","Assignment Fact","Assignment 
 
 annotation __PBI_TimeIntelligenceEnabled = 1
 
-annotation PBIDesktopVersion = 2.142.928.0 (25.04)+de52df9f0bb74ad93a80d89c52d63fe6d07e0e1b
+annotation PBIDesktopVersion = 2.146.1133.0 (25.08)+c8010d55d1db76eda03c968b03481610e96a1ef7
 
 annotation PBI_ProTooling = ["DevMode"]
 
