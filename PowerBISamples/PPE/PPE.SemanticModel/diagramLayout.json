@@ -242,7 +242,7 @@
             "height": 348.75,
             "width": 234
           },
-          "zIndex": 3
+          "zIndex": 5
         },
         {
           "location": {
@@ -255,7 +255,7 @@
             "height": 444,
             "width": 234
           },
-          "zIndex": 4
+          "zIndex": 3
         },
         {
           "location": {
@@ -268,7 +268,7 @@
             "height": 426.91917162773473,
             "width": 234
           },
-          "zIndex": 1
+          "zIndex": 2
         },
         {
           "location": {
@@ -281,7 +281,7 @@
             "height": 152,
             "width": 234
           },
-          "zIndex": 5
+          "zIndex": 4
         },
         {
           "location": {
@@ -293,7 +293,7 @@
             "height": 246,
             "width": 234
           },
-          "zIndex": 0
+          "zIndex": 1
         }
       ],
       "name": "Stock History",
@@ -416,7 +416,7 @@
         }
       ],
       "name": "Assignments",
-      "zoomValue": 80,
+      "zoomValue": 100,
       "pinKeyFieldsToTop": false,
       "showExtraHeaderInfo": false,
       "hideKeyFieldsWhenCollapsed": false,
