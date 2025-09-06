@@ -38,6 +38,9 @@ Currently supported data types:
 * Assets
 * SafetyCards
 * Audits
+* PPEStocks
+* PPEStockHistories
+* PPEAssignments
 
 When you call the API an Authorization header with value: `Bearer [token]` is required.
 
