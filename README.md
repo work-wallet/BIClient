@@ -84,7 +84,7 @@ These settings are required to call the API.
 
 The API endpoint is at <https://bi.work-wallet.com> and the [OAuth 2.0](https://oauth.net/2/) authorisation server is at <https://identity.work-wallet.com>.
 
-To integrate with the API directly (not recommended) see the documentation [here](./Docs/API.md).
+To integrate with the API directly see the documentation in [Docs/API.md](./Docs/API.md).
 
 ## Binaries
 
@@ -251,7 +251,7 @@ The sample Power BI Desktop project files can be found in the `PowerBISamples` f
 
 To use these files with your own data you need to connect to your local database and refresh the data.
 
-For convenience, the Power BI semantic models are available to peruse [here](Docs/PowerBISamplesModels.md).
+For convenience, the Power BI semantic models are available to peruse [Docs/PowerBISamplesModels.md](Docs/PowerBISamplesModels.md).
 
 ### Connecting to the Database
 
