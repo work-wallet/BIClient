@@ -1,165 +1,210 @@
 # Work Wallet Business Intelligence (BI) Client
 
+A streamlined, production-ready reference implementation for extracting Health & Safety data from the Work Wallet BI Extract API into a local/star-schema SQL Server data mart, with optional scheduling (console or Azure Function) and sample Power BI semantic models.
+
+---
+
+## Contents
+
+1. [Overview](#overview)
+2. [Supported Datasets](#supported-datasets)
+3. [Quick Start](#quick-start)
+4. [Prerequisites](#prerequisites)
+5. [Architecture](#architecture)
+6. [Repository Structure](#repository-structure)
+7. [API Access](#api-access)
+8. [Binaries / Downloads](#binaries--downloads)
+9. [Database Deployment](#database-deployment)
+10. [Data Extraction (Console)](#data-extraction-console)
+11. [Azure Function Deployment](#azure-function-deployment)
+12. [Force Data Reset](#force-data-reset)
+13. [Power BI Samples](#power-bi-samples)
+14. [Configuration Reference](#configuration-reference)
+15. [Troubleshooting](#troubleshooting)
+16. [Security Notes](#security-notes)
+17. [Contributing / Issues](#contributing--issues)
+18. [License](#license)
+
+---
+
 ## Overview
 
-The [Work Wallet](https://www.work-wallet.com/) Health and Safety solution provides an API to allow organisations to automate the download of their Wallet data. The API is optimised for organisations requiring a regular feed of data for Business Intelligence (BI) purposes.
+The [Work Wallet](https://www.work-wallet.com/) Health & Safety platform exposes a secure BI Extract API optimised for regular, incremental data feeds into analytics platforms. This repository provides:
 
-The datasets currently enabled for download are:
+- A ready-made SQL Server data mart (star schema) and deployment tool
+- A robust, paged, change-tracking extraction client (console + Azure Function)
+- Sample Power BI project (.pbip) files with semantic models & reports
+- Extensible, strongly-typed .NET 8 code you can adopt or adapt
 
-* Reported Issues
-* Inductions
-* Permits
-* Actions
-* Assets
-* Safety Cards
-* Audits
-* PPE - comprises three modules:
-  * PPEStocks
-  * PPEStockHistories
-  * PPEAssignments
+You can use the binaries directly (no code changes required), customise the solution, or treat it as a reference implementation for your own stack.
 
-The API uses a combination of paging and change tracking to efficiently transfer data from the Work Wallet cloud to your local environment.
+## Supported Datasets
 
-This repository provides a quick start solution to enable an organisation to get up and running with the API without needing to write a line of code. The solution may be used as is, or may be modified to suit your specific requirements. *(Or you may use the solution as a reference and develop an API consumer using your preferred technology stack.)*
+The API currently enables download of:
+
+- Reported Issues
+- Inductions
+- Permits
+- Actions
+- Assets
+- Safety Cards
+- Audits
+- PPE (three modules):
+  - PPEStocks
+  - PPEStockHistories
+  - PPEAssignments
+
+Each dataset is queried using paging + `lastSynchronizationVersion` change tracking to minimise transfer volume.
+
+## Quick Start
+
+1. Request API access (see [API Access](#api-access)).
+2. Download latest release binaries (database deploy + client) from [Releases](https://github.com/work-wallet/BIClient/releases).
+3. Deploy / upgrade the database (edit `WorkWallet.BI.ClientDatabaseDeploy/appsettings.json` then run `WorkWallet.BI.ClientDatabaseDeploy.exe`).
+4. Configure data extraction (edit `WorkWallet.BI.ClientSample/appsettings.json` then run the executable — first run is a full load).
+5. (Optional) Open a Power BI sample `.pbip` project from `PowerBISamples`, point to your database, refresh.
+6. (Optional) Deploy `WorkWallet.BI.ClientFunction` for scheduled automation.
 
 ## Prerequisites
 
-These instructions assume that the reader is an experienced IT professional familiar with the Microsoft technology stack. (The .NET Core applications may be run on a Windows, Linux, or suitable cloud platform.)
+You should be comfortable with basic SQL Server administration and .NET runtime deployment.
 
-* A SQL Server database server (any recent edition, including Azure SQL, Express, Developer, Standard, etc.)
-* A connection string for the database (suitable for use with the package `Microsoft.Data.SqlClient`)
-* Internet connectivity (with firewall access permitted to the Work Wallet API and authorisation endpoints)
-* An environment suitable for running a .NET 8.0 application (or alternatively a Microsoft Azure subscription for running the code as an Azure Function App)
-* If wishing to use the sample Power BI Desktop files - a local install of Microsoft Power BI Desktop
-* If wishing to build the code, an installation of Microsoft Visual Studio (2022) is recommended.
+Required:
 
-## Work Wallet BI Client Architecture
+- SQL Server (Azure SQL, LocalDB, Express, Developer, Standard, etc.)
+- A SQL connection string compatible with `Microsoft.Data.SqlClient`
+- Internet access (firewall allow: `bi.work-wallet.com`, `identity.work-wallet.com`)
+- .NET 8 runtime (for running) or SDK (if building from source)
 
-The sample solution comprises:
+Optional:
 
-* Scripts to create a SQL Server database that receives the data from the API. The database has a [star schema](https://en.wikipedia.org/wiki/Star_schema) optimised as a data mart.
-* A console application that calls the API and stores the returned data in the database. The application can be scheduled (using your preferred scheduler) to run on a periodic basis (e.g. daily) in order to fully automate the feed. *(The code is also available as an [Azure Function](https://azure.microsoft.com/en-gb/products/functions/).)*
-* [Sample Power BI Desktop project files](#sample-power-bi-desktop-project-files) that import the data from the database and provide rich analytical capabilities. The reports are viewed using the free [Power BI Desktop](https://powerbi.microsoft.com/en-us/desktop/) application from Microsoft. These reports can be customised, data can be combined with other (non-Work Wallet) datasets etc.. Organisations with Power BI Pro licences can publish auto-updating reports to their intranet, and benefit from a full suite of collaborative features.
+- Visual Studio 2022 (or `dotnet` CLI) to modify/build
+- Power BI Desktop (for provided sample models)
+- Azure Subscription (if using Azure Functions)
 
-Power BI is not a prerequisite to use this solution - any BI tool may be used to read and process the data held within the data mart (database).
+## Architecture
 
-## Technology Stack
+Core concepts:
 
-The sample solution provided here is based on the following technology:
+- OAuth2 Client Credentials → bearer tokens from `https://identity.work-wallet.com`
+- Paged API requests to `https://bi.work-wallet.com/dataextract/{dataset}` (page size configurable; max 500)
+- Incremental sync keyed by `lastSynchronizationVersion` persisted in `mart.ETL_ChangeDetection`
+- Star-schema data mart (facts + dimensions) populated via JSON shredding stored procedures
+- Multiple wallet support via `AgentWallets[]` configuration array
 
-* Database - Microsoft SQL Server *(Azure SQL, local instance, Express, etc.)*. Hardware resource requirements are minimal.
-* Application Code - .NET 8.0 / C#
-* BI Platform - Microsoft Power BI
+## Repository Structure
 
-The API itself is a standard RESTful API that runs over a secure HTTPS/TLS channel.
-
-## Contained within this Repository
-
-In the `SampleCode` folder is a [Visual Studio](https://visualstudio.microsoft.com/) solution file `WorkWallet.BI.Client.sln` - this may be used to open and build all the components.
-
-Pre-built binaries are available for download. See [Binaries](#binaries) below.
-
-The following projects are provided:
-
-| Project | |
+| Project | Purpose |
 | --- | --- |
-| `WorkWallet.BI.ClientDatabaseDeploy` | A console application that creates (and upgrades) the database. Creates the database schema plus the required types and stored procedures. |
-| `WorkWallet.BI.ClientSample` | A console application that calls the API and populates the database with data. |
-| `WorkWallet.BI.ClientFunction` | Same as for `WorkWallet.BI.ClientSample`, but packged as an Azure Function |
+| `WorkWallet.BI.ClientDatabaseDeploy` | Deploys / upgrades schema, types & stored procedures (drops + recreates procs on upgrade). |
+| `WorkWallet.BI.ClientSample` | Console data extraction client (manual / scheduled). |
+| `WorkWallet.BI.ClientFunction` | Azure Function timer-trigger wrapper for automated extraction. |
+| `WorkWallet.BI.ClientCore` | Shared abstractions & options. |
+| `WorkWallet.BI.ClientServices` | HTTP + data store implementations, processor logic. |
+| `PowerBISamples` | `.pbip` models & reports (one per dataset family + theme). |
+| `Docs` | API, schema notes, legacy migration, semantic model diagrams. |
 
-## Calling the API
+## API Access
 
-API access is activated and secured on a per-Wallet basis.
+Access is enabled per Wallet. Contact Work Wallet Support to request activation. You will receive:
 
-Contact Work Wallet to request API access for your Wallet.
+- `ApiAccessClientId`
+- `ApiAccessClientSecret`
+- `WalletId`
+- `WalletSecret`
 
-Once activated, you will be provided with the following settings:
+Base endpoints:
 
-* `ApiAccessClientId`
-* `ApiAccessClientSecret`
-* `WalletId`
-* `WalletSecret`
+- API: `https://bi.work-wallet.com`
+- Auth: `https://identity.work-wallet.com`
 
-These settings are required to call the API.
+Direct integration details: see [`Docs/API.md`](./Docs/API.md).
 
-The API endpoint is at <https://bi.work-wallet.com> and the [OAuth 2.0](https://oauth.net/2/) authorisation server is at <https://identity.work-wallet.com>.
+## Binaries / Downloads
 
-To integrate with the API directly see the documentation in [Docs/API.md](./Docs/API.md).
+All binaries target .NET 8. Install the [.NET 8 runtime](https://dotnet.microsoft.com/en-us/download/dotnet/8.0) if not already present.
 
-## Binaries
+Download from GitHub [Releases](https://github.com/work-wallet/BIClient/releases):
 
-All binaries target .NET 8.0
-
-Install the [.NET 8.0](https://dotnet.microsoft.com/en-us/download/dotnet/8.0) runtime (if not already present).
-
-Pre-built binaries can be downloaded from the [releases](https://github.com/work-wallet/BIClient/releases) section on GitHub.
-
-| Tool | Executable | Config. File |
+| Tool | Executable | Config File |
 | --- | --- | --- |
-| Database deployment | `WorkWallet.BI.ClientDatabaseDeploy.exe` | `appsettings.json` |
-| Client sample | `WorkWallet.BI.ClientSample.exe` | `appsettings.json` |
+| Database Deployment | `WorkWallet.BI.ClientDatabaseDeploy.exe` | `appsettings.json` |
+| Data Extraction (Console) | `WorkWallet.BI.ClientSample.exe` | `appsettings.json` |
 
-## Creating or Upgrading the Database
+## Database Deployment
 
-`WorkWallet.BI.ClientDatabaseDeploy` project / executable
+Executable: `WorkWallet.BI.ClientDatabaseDeploy`.
 
-**If you have an existing installation that predates August 2023 then please read the document [Legacy Schema](./Docs/LegacySchema.md) before proceeding.**
+1. (Legacy) If upgrading from an installation prior to Aug 2023 read [`Docs/LegacySchema.md`](./Docs/LegacySchema.md) first.
+2. Edit `appsettings.json` → set: `AppSettings:DatabaseConnectionString`.
+3. Run `WorkWallet.BI.ClientDatabaseDeploy.exe` – creates the database if absent and applies migrations (drops & recreates stored procedures in `mart` schema intentionally).
 
-Edit `appsettings.json` and enter the required settings:
+## Data Extraction (Console)
 
-| Setting | | Description |
+Executable: `WorkWallet.BI.ClientSample`.
+
+Edit `appsettings.json` (key fields shown):
+
+| Path | Description |
+| --- | --- |
+| `ClientOptions:ApiAccessClientId` | OAuth2 client id |
+| `ClientOptions:ApiAccessClientSecret` | OAuth2 client secret |
+| `ClientOptions:AgentWallets:[n]:WalletId` | Wallet identifier (repeatable) |
+| `ClientOptions:AgentWallets:[n]:WalletSecret` | Wallet secret (repeatable) |
+| `ClientOptions:DataSets[]` | Array of datasets to pull (see list above) |
+| `ConnectionStrings:ClientDb` | SQL connection string |
+
+Run the executable manually or schedule (Task Scheduler / cron / etc.).
+
+Notes:
+
+- First run performs full historical load (may be large).
+- Incremental loads fetch only changed pages per dataset.
+- Progress & change tracking stored in `mart.ETL_ChangeDetection`.
+- Configure multiple wallets by adding more objects to `AgentWallets[]`.
+
+Error `Invalid lastSynchronizationVersion`: usually means extraction gap exceeded retention. Resolve by [Force Data Reset](#force-data-reset).
+
+## Azure Function Deployment
+
+Project: `WorkWallet.BI.ClientFunction` (timer trigger).
+
+Recommended host creation settings:
+
+- Runtime stack: .NET 8 (Isolated)
+- OS: Windows
+- Application Insights: Enabled
+
+Key app settings:
+
+| Setting | Example | Notes |
 | --- | --- | --- |
-| AppSettings | DatabaseConnectionString | database connection string |
+| `BITimerTriggerSchedule` | `0 30 21 * * *` | NCRONTAB expression (UTC) |
+| `FuncOptions:AgentApiUrl` | `https://bi.work-wallet.com` | Base API URL |
+| `FuncOptions:AgentPageSize` | `500` | Max recommended 500 |
+| `FuncOptions:AgentWallets:[0]:WalletId` | | Repeat per wallet |
+| `FuncOptions:AgentWallets:[0]:WalletSecret` | |  |
+| `FuncOptions:ApiAccessAuthority` | `https://identity.work-wallet.com` | Auth endpoint |
+| `FuncOptions:ApiAccessClientId` | |  |
+| `FuncOptions:ApiAccessClientSecret` | |  |
+| `FuncOptions:ApiAccessScope` | `ww_bi_extract` | Scope constant |
+| `sqldb_connection` | | SQL connection string |
 
-You will need to set a suitable SQL Server database connection string for your database server.
+Local development requires `local.settings.json` (sample retained and updated in repo). Include `APPLICATIONINSIGHTS_CONNECTION_STRING` if you want to see structured logs (some info-level events bypass console output).
 
-Run `WorkWallet.BI.ClientDatabaseDeploy.exe` from a command prompt.
+## Force Data Reset
 
-This will create the database if it does not exist.
-If you have an previous version, this will update the database.
+Only perform if you need a full re-pull (e.g. lost change tracking continuity).
 
-(Warning: *all* stored procedures are dropped from the mart schema as a first step in the upgrade.)
+Mechanism: Delete relevant rows from `mart.ETL_ChangeDetection`. On next run the client will:
 
-## Calling the API to Download Data to the Database
+1. Truncate (delete) data rows for affected dataset tables
+2. Re-ingest from page 1
 
-`WorkWallet.BI.ClientSample` project / executable
-
-Edit `appsettings.json` and enter the required settings:
-
-| Setting | | | Description |
-| --- | --- | --- | --- |
-| ClientOptions | | ApiAccessClientId | |
-| ClientOptions | | ApiAccessClientSecret | |
-| ClientOptions | AgentWallets[] | WalletId | |
-| ClientOptions | AgentWallets[] | WalletSecret | |
-| ClientOptions | DataSets[] | | the data sets to process |
-| ConnectionStrings | ClientDb | | database connection string |
-
-*The application supports the processing multiple wallets by setting multiple entries in the `AgentWallets[]` array.*
-
-Run `WorkWallet.BI.ClientSample.exe` from a command prompt.
-
-You can use your preferred task scheduler to automate the running of the executable.
-
-You can obtain information about successful downloads in the `mart.ETL_ChangeDetection` table.
-Change detection is used (so that only changes since last run are downloaded).
-The first run can trigger a substantial download. It is recommended that you monitor the console output to check for errors, especially on the first run.
-
-It is important that data is pulled regularly (recommend at least daily).
-If data is not pulled regularly then you will get an error: `Invalid lastSynchronizationVerion`.
-The fix is to reset your local database (see below).
-
-## Force Data Reset (Advanced)
-
-A data reset is only necessary if you need to pull data afresh from the API.
-
-It is possible to force a reset by deleting records from the `mart.ETL_ChangeDetection` table.
-If change tracking records are removed from this table then the code will first delete all data from the associated tables.
-This can be a slow operation if data volumes are significant (and it may be quicker to drop and recreate the database).
+Example (reset Audits dataset):
 
 ```sql
--- example resetting Audits dataset
-DELETE FROM mart.ETL_ChangeDetection where LogType = 'AUDIT2_UPDATED';
+DELETE FROM mart.ETL_ChangeDetection WHERE LogType = 'AUDIT2_UPDATED';
 ```
 
 | Dataset | LogType |
@@ -175,102 +220,84 @@ DELETE FROM mart.ETL_ChangeDetection where LogType = 'AUDIT2_UPDATED';
 | PPEStockHistories | PPE_STOCK_HISTORY_UPDATED |
 | PPEAssignments | PPE_ASSIGNMENT_UPDATED |
 
-## Configuring the Azure Function App
+If large volumes make deletion slow, recreating the database + redeploying may be faster.
 
-`WorkWallet.BI.ClientFunction` project
+## Power BI Samples
 
-Ignore this section if not deploying as an Azure Function.
+Sample Power BI Project files (`.pbip`) are located in `PowerBISamples/` (one folder per domain). These include both the semantic model and report definitions.
 
-When creating the Azure function:
+You may:
 
-* Runtime stack: .NET 8 Isolated
-* Operating System: Windows
-* Enable public access: On
-* Enable Application Insights: Yes
+- Point them at your database (change data source)
+- Refresh to populate visuals
+- Customise measures, relationships, visuals
 
-You can use Visual Studio to publish the function to Azure.
+They are a reference only—any BI tool can consume the database.
 
-The following configuration settings are required:
+For model diagrams see [`Docs/PowerBISamplesModels.md`](Docs/PowerBISamplesModels.md).
 
-| Setting | Example | Description |
-| --- | --- | --- |
-| BITimerTriggerSchedule | `0 30 21 * * *` | [NCRONTAB](https://learn.microsoft.com/en-us/azure/azure-functions/functions-bindings-timer?tabs=python-v2%2Cin-process%2Cnodejs-v4&pivots=programming-language-csharp#ncrontab-expressions) expression |
-| FuncOptions:AgentApiUrl | `https://bi.work-wallet.com` | |
-| FuncOptions:AgentPageSize | `500` | |
-| FuncOptions:AgentWallets:[0]:WalletId | | |
-| FuncOptions:AgentWallets:[0]:WalletSecret | | |
-| FuncOptions:ApiAccessAuthority | `https://identity.work-wallet.com` | |
-| FuncOptions:ApiAccessClientId | | |
-| FuncOptions:ApiAccessClientSecret | | |
-| FuncOptions:ApiAccessScope | `ww_bi_extract` | |
-| sqldb_connection | | database connection string |
+### Connect to Your Database
 
-When developing locally within Visual Studio you will need a `local.settings.json` file to supply the settings.
-
-Example `local.settings.json`:
-
-```json
-{
-  "IsEncrypted": false,
-  "Values": {
-    "FUNCTIONS_WORKER_RUNTIME": "dotnet-isolated",
-    "APPLICATIONINSIGHTS_CONNECTION_STRING": "[required]",
-    "AzureWebJobsStorage": "UseDevelopmentStorage=true",
-    "BITimerTriggerSchedule": "0 30 21 * * *",
-    "FuncOptions:ApiAccessAuthority": "https://identity.work-wallet.com",
-    "FuncOptions:ApiAccessClientId": "[required]",
-    "FuncOptions:ApiAccessClientSecret": "[required]",
-    "FuncOptions:ApiAccessScope": "ww_bi_extract",
-    "FuncOptions:AgentApiUrl": "https://bi.work-wallet.com",
-    "FuncOptions:AgentWallets:[0]:WalletId": "[required]",
-    "FuncOptions:AgentWallets:[0]:WalletSecret": "[required]",
-    "FuncOptions:AgentPageSize": "500",
-    "sqldb_connection": "Server=(localdb)\\MSSQLLocalDB;Database=WorkWalletBIClient;Integrated Security=true"
-  }
-}
-```
-
-When developing locally it is recommended to connect to an Application Insights instance (`APPLICATIONINSIGHTS_CONNECTION_STRING` above),
-as informational log events are sent here (and don't show in the console).
-
-## Sample Power BI Desktop Project Files
-
-Work Wallet provides sample Power BI Desktop project (`.pbib`) files.
-These files may be used with your own Wallet data, and modified as required.
-The files may alternatively be used simply to help inform your own BI model and reporting designs.
-
-Power BI Desktop is available as a free [download](https://powerbi.microsoft.com/en-us/desktop/) from Microsoft.
-
-[Power BI Desktop projects](https://learn.microsoft.com/en-us/power-bi/developer/projects/projects-overview) can be refreshed with data and then saved and shared as standalone (`.pbix`) files.
-
-If you have a [Power BI Pro licence](https://powerbi.microsoft.com/en-gb/power-bi-pro/) then you can benefit from auto-updating reports plus full distribution and collaboration features.
-
-*Note that any BI or reporting solution may be used - it is not necessary to use Power BI with the Work Wallet BI interface. If using an alternative, you may use the Power BI model as a reference design.*
-
-The sample Power BI Desktop project files can be found in the `PowerBISamples` folder.
-
-To use these files with your own data you need to connect to your local database and refresh the data.
-
-For convenience, the Power BI semantic models are available to peruse [Docs/PowerBISamplesModels.md](Docs/PowerBISamplesModels.md).
-
-### Connecting to the Database
-
-Select `File` and then `Options and settings`:
+Power BI Desktop → File → Options and settings → Data source settings → Change Source...
 
 ![Power BI Options and Settings](Docs/Images/PowerBIOptionsAndSettings.png)
 
-Select `Data source settings` and `Change Source...`:
-
 ![Power BI Data Source Settings](Docs/Images/PowerBIDataSourceSettings.png)
 
-### Refresh the Data
+### Refresh Data
 
-The data within the .pbix file is only refreshed on demand. *(Use Power BI Pro for automatic refreshing of data, distribtution, and collaboration features.)*
-
-To refresh the data, press the `Refresh` button on the `Home` tab.
+Click Refresh (Home ribbon). Data is on-demand unless you publish to a service (Power BI Pro / Fabric) with scheduled refresh.
 
 ![Power BI Refresh Data](Docs/Images/PowerBIRefresh.png)
 
-### Adjust Report Filters
+### Adjust Filters
 
-After refreshing the Power BI model with your data, it is necessary to check and adjust the filters on the reports (otherwise no data may be shown).
+Ensure any default filters (e.g. date, site, status) reflect values present in your Wallet or visuals may appear blank.
+
+## Configuration Reference
+
+Common console `appsettings.json` keys:
+
+| Key | Purpose |
+| --- | --- |
+| `ClientOptions:ApiAccessClientId` | OAuth2 client credential id |
+| `ClientOptions:ApiAccessClientSecret` | OAuth2 client credential secret |
+| `ClientOptions:ApiAccessAuthority` | (`identity.work-wallet.com`) override if needed |
+| `ClientOptions:ApiAccessScope` | Should be `ww_bi_extract` |
+| `ClientOptions:AgentApiUrl` | API base (default `https://bi.work-wallet.com`) |
+| `ClientOptions:AgentPageSize` | Page size (<= 500) |
+| `ClientOptions:AgentWallets` | Array of wallet credential objects |
+| `ClientOptions:DataSets` | Array of dataset names to process |
+| `ConnectionStrings:ClientDb` | Target SQL database |
+
+## Troubleshooting
+
+| Symptom | Cause | Resolution |
+| --- | --- | --- |
+| `Invalid lastSynchronizationVersion` | Gap too long / table reset mismatch | Perform [Force Data Reset](#force-data-reset). |
+| Slow first run | Full historical ingestion | Allow to complete; subsequent runs incremental. |
+| Empty Power BI visuals | Filters exclude data / wrong DB | Adjust filters; verify data tables populated. |
+| Auth failure (401) | Invalid client credentials | Re-check `ApiAccessClientId` / secret; wallet enabled? |
+| Network errors | Firewall / proxy blocking | Allow outbound HTTPS to API + identity endpoints. |
+| High DB log growth | Large initial ingest | Ensure regular log backups (full recovery) or switch to simple during first load. |
+
+## Security Notes
+
+- Keep client secrets + wallet secrets out of source control (use environment variables / secret managers for production).
+- Principle of least privilege: SQL login should have rights only to target database.
+- All traffic is HTTPS; no extra encryption required in transit.
+- Consider enabling Transparent Data Encryption (TDE) / at rest encryption in SQL if mandated.
+
+## Contributing / Issues
+
+Issues / enhancement requests: open a GitHub Issue. Pull Requests welcome (ensure any schema changes include deployment scripts & docs update).
+
+## License
+
+See [LICENSE.md](./LICENSE.md).
+
+---
+
+### Revision History (README)
+
+- Updated for clarity, structure & consistency (spelling corrections, added quick start, troubleshooting, security) – Sept 2025.

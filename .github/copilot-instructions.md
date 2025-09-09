@@ -106,3 +106,23 @@ Power BI connects directly to SQL Server database - no intermediate files or API
 - **Microsoft.Data.SqlClient**: Database connectivity
 - **DbUp**: Database deployment and versioning
 - **System.Text.Json**: API response processing
+
+## Markdown Style (markdownlint Preference)
+
+When generating or editing Markdown in this repository, follow common markdownlint best practices:
+
+- Use a single H1 (`# Title`) per document; increment heading levels sequentially (no level skipping).
+- Always add a blank line after headings, before/after lists, and before code fences (except where compact lists are intentional).
+- Limit line length to ~120 characters where practical (soft wrap for readability) – do not hard-break sentences unnaturally.
+- Prefer fenced code blocks with an explicit language (e.g. ```csharp, ```json, ```sql, ```powershell).
+- Use backticks for inline code, symbols, filenames, and configuration keys.
+- Avoid trailing spaces, tabs, and multiple consecutive blank lines.
+- Lists: use `-` for unordered; for ordered lists you may use `1.` for all items (markdownlint autocorrect) or ascending numbers consistently.
+- Tables: keep a header row and separator row; avoid alignment padding beyond necessity.
+- No inline HTML unless required for something Markdown cannot express; if used, keep it minimal.
+- Avoid bare URLs—wrap them in angle brackets `<https://example>` or use descriptive links `[Text](url)`.
+- Prefer descriptive link text over "here"/"click".
+- Emphasize sparingly (`*italics*`, `**bold**`); avoid all-caps emphasis.
+- Keep front-matter (if ever added) separated by `---` delimiters at top only.
+
+These guidelines should be applied to future README / docs updates automatically.
