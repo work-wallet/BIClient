@@ -466,6 +466,7 @@ Key context fields:
 | `MinValidSynchronizationVersion` | Earliest acceptable version for incremental calls |
 | `Count` | Rows in this page |
 | `FullCount` | Total rows (first page) |
+| `lastSynchronizationVersion` | Echo of request (only if > 0) |
 | `PageNumber` / `PageSize` | Echo of request |
 
 ### Example (Truncated JSON)
@@ -507,6 +508,7 @@ Discover region:
 
 ```http
 GET https://bi.work-wallet.com/wallet?walletId={WalletId}&walletSecret={WalletSecret}
+Authorization: Bearer {access_token}
 ```
 
 Response contains `dataRegion`.
@@ -545,6 +547,7 @@ Example truncated error-bearing payload:
     "FullCount": 0,
     "PageNumber": 1,
     "PageSize": 500,
+    "LastSynchronizationVersion": 11000,
     "SynchronizationVersion": 12000,
     "MinValidSynchronizationVersion": 11850,
     "Error": "Invalid LastSynchronizationVersion",
