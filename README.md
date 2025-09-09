@@ -135,7 +135,7 @@ Base endpoints:
 - API: `https://bi.work-wallet.com`
 - Auth: `https://identity.work-wallet.com`
 
-These values are required for both the Quick Start (stored in configuration) and Direct API usage (token + query parameters). For raw HTTP guidance see [`Docs/API.md`](./Docs/API.md).
+These values are required for both the Quick Start (stored in configuration) and Direct API usage (token + query parameters). Raw HTTP guidance is fully contained in this README (see [Direct API Usage](#direct-api-usage-no-database)).
 
 ## Binaries / Downloads
 
@@ -412,6 +412,54 @@ GET https://bi.work-wallet.com/wallet?walletId={WalletId}&walletSecret={WalletSe
 ```
 
 Response contains `dataRegion`.
+
+Notes:
+
+- Only send the `DataRegion` header when you are calling from a different geographic region than the wallet’s hosting region (cross-region optimisation).
+- If you supply a `DataRegion` value that does not match the wallet’s actual region the API returns **HTTP 400** with a plain text body: `Incorrect data region` (no JSON payload). Remove or correct the header (use the wallet lookup call above to confirm the right value) and retry.
+
+### Error Handling
+
+Error surfaces come from two places:
+
+1. HTTP status codes (e.g. 4xx/5xx)
+2. The `Context.Error` field in a successful (HTTP 200) JSON body
+
+Always check both. A normal page response has `"Error": ""` (empty string).
+
+Common scenarios:
+
+| Signal | Meaning | Action |
+| --- | --- | --- |
+| HTTP 401 / 403 | Auth failure / bad credentials / scope | Re‑request token, verify client & wallet secrets. |
+| HTTP 400 with body `Incorrect data region` | `DataRegion` header value does not match wallet region | Query wallet endpoint to confirm `dataRegion`; correct or omit header then retry. |
+| HTTP 5xx | Transient platform issue | Retry with jitter; escalate if persistent. |
+| `Context.Error = "Invalid LastSynchronizationVersion"` | Supplied `lastSynchronizationVersion` below `MinValidSynchronizationVersion` | Perform dataset re‑ingest: remove tracking entry and reload. |
+| Other non-empty `Context.Error` | Dataset-specific or validation issue | Log, alert, and decide whether to skip or halt the run. |
+
+Example truncated error-bearing payload:
+
+```json
+{
+  "Context": {
+    "Version": 1,
+    "Count": 0,
+    "FullCount": 0,
+    "PageNumber": 1,
+    "PageSize": 500,
+    "SynchronizationVersion": 12000,
+    "MinValidSynchronizationVersion": 11850,
+    "Error": "Invalid LastSynchronizationVersion",
+    "UTC": "2025-09-09T09:15:12.345"
+  }
+}
+```
+
+Handling guidance:
+
+- Treat `Invalid LastSynchronizationVersion` as a controlled recovery path—do not loop retries with same value.
+- For unknown `Context.Error` values: log, then continue with other datasets if safe.
+- Ensure logging distinguishes transport errors (no JSON) vs logical errors (JSON with `Context.Error`).
 
 ### When to Use the Quick Start Instead
 
