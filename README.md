@@ -119,7 +119,8 @@ Core concepts:
 | `WorkWallet.BI.ClientCore` | Shared abstractions & options. |
 | `WorkWallet.BI.ClientServices` | HTTP + data store implementations, processor logic. |
 | `PowerBISamples` | `.pbip` models & reports (one per dataset family + theme). |
-| `Docs` | Power BI semantic model diagrams, screenshots, legacy migration script. |
+| `Images` | Screenshots (used in documentation). |
+| `Scripts` | Legacy migration script. |
 
 ## API Credentials
 
@@ -164,7 +165,7 @@ If you originally stood up the database manually before August 2023 your schema 
 To remediate:
 
 1. Take a backup of the existing database (recommended).
-2. Open the script `Docs/InitialiseSchemaVersions.sql` and review its contents.
+2. Open the script `Scripts/InitialiseSchemaVersions.sql` and review its contents.
 3. Execute it against the target database (e.g. in SQL Server Management Studio or `sqlcmd`). It inserts baseline rows representing the current state.
 4. Run `WorkWallet.BI.ClientDatabaseDeploy.exe` normally.
 
@@ -267,21 +268,21 @@ You may:
 
 They are a reference only—any BI tool can consume the database.
 
-For model diagrams see [`Docs/PowerBISamplesModels.md`](Docs/PowerBISamplesModels.md).
+For model diagrams see [`PowerBISamplesModels.md`](PowerBISamplesModels.md).
 
 ### Connect to Your Database
 
 Power BI Desktop → File → Options and settings → Data source settings → Change Source...
 
-![Power BI Options and Settings](Docs/Images/PowerBIOptionsAndSettings.png)
+![Power BI Options and Settings](Images/PowerBIOptionsAndSettings.png)
 
-![Power BI Data Source Settings](Docs/Images/PowerBIDataSourceSettings.png)
+![Power BI Data Source Settings](Images/PowerBIDataSourceSettings.png)
 
 ### Refresh Data
 
 Click Refresh (Home ribbon). Data is on-demand unless you publish to a service (Power BI Pro / Fabric) with scheduled refresh.
 
-![Power BI Refresh Data](Docs/Images/PowerBIRefresh.png)
+![Power BI Refresh Data](Images/PowerBIRefresh.png)
 
 ### Adjust Filters
 
