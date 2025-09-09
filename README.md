@@ -168,6 +168,22 @@ Executable: `WorkWallet.BI.ClientDatabaseDeploy`.
 1. Edit `appsettings.json` → set: `AppSettings:DatabaseConnectionString`.
 2. Run `WorkWallet.BI.ClientDatabaseDeploy.exe` – creates the database if absent and applies migrations (drops & recreates stored procedures in `mart` schema intentionally).
 
+Example `appsettings.json` placed alongside the executable:
+
+```json
+{
+  "AppSettings": {
+    "DatabaseConnectionString": "Server=(localdb)\\MSSQLLocalDB;Database=WorkWalletBIClient;Integrated Security=true"
+  },
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft": "Warning"
+    }
+  }
+}
+```
+
 ### Legacy Installations (Pre-Aug 2023)
 
 Most users can skip this section.
@@ -199,6 +215,50 @@ Edit `appsettings.json` (key fields shown):
 | `ClientOptions:AgentWallets:[n]:WalletSecret` | Wallet secret (repeatable) |
 | `ClientOptions:DataSets[]` | Array of datasets to pull (see list above) |
 | `ConnectionStrings:ClientDb` | SQL connection string |
+
+Example `appsettings.json` placed alongside `WorkWallet.BI.ClientSample.exe`:
+
+```json
+{
+  "ClientOptions": {
+    "ApiAccessAuthority": "https://identity.work-wallet.com",
+    "ApiAccessClientId": "[required]",
+    "ApiAccessClientSecret": "[required]",
+    "ApiAccessScope": "ww_bi_extract",
+    "AgentApiUrl": "https://bi.work-wallet.com",
+    "AgentWallets": [
+      {
+        "WalletId": "[required]",
+        "WalletSecret": "[required]"
+      }
+    ],
+    "AgentPageSize": "500",
+    "DataSets": [
+      "ReportedIssues",
+      "Inductions",
+      "Permits",
+      "Actions",
+      "Assets",
+      "SafetyCards",
+      "Audits",
+      "PPEStocks",
+      "PPEStockHistories",
+      "PPEAssignments"
+    ]
+  },
+  "ConnectionStrings": {
+    "ClientDb": "Server=(localdb)\\MSSQLLocalDB;Database=WorkWalletBIClient;Integrated Security=true"
+  },
+  "Logging": {
+    "LogLevel": {
+      "Default": "Warning",
+      "Microsoft": "Warning",
+      "WorkWallet.BI.ClientServices.Processor.ProcessorService": "Information",
+      "WorkWallet.BI.ClientServices.DataStore.SQLService": "Information"
+    }
+  }
+}
+```
 
 Run the executable manually or schedule (Task Scheduler / cron / etc.).
 
@@ -236,7 +296,31 @@ Key app settings:
 | `FuncOptions:ApiAccessScope` | `ww_bi_extract` | Scope constant |
 | `sqldb_connection` | | SQL connection string |
 
-Local development requires `local.settings.json` (sample retained and updated in repo). Include `APPLICATIONINSIGHTS_CONNECTION_STRING` if you want to see structured logs (some info-level events bypass console output).
+Local development requires `local.settings.json`.
+Include `APPLICATIONINSIGHTS_CONNECTION_STRING` if you want to see structured logs (some info-level events bypass console output).
+
+Example `local.settings.json` for local Azure Function development:
+
+```json
+{
+  "IsEncrypted": false,
+  "Values": {
+    "FUNCTIONS_WORKER_RUNTIME": "dotnet-isolated",
+    "APPLICATIONINSIGHTS_CONNECTION_STRING": "[required]",
+    "AzureWebJobsStorage": "UseDevelopmentStorage=true",
+    "BITimerTriggerSchedule": "0 30 21 * * *",
+    "FuncOptions:ApiAccessAuthority": "https://identity.work-wallet.com",
+    "FuncOptions:ApiAccessClientId": "[required]",
+    "FuncOptions:ApiAccessClientSecret": "[required]",
+    "FuncOptions:ApiAccessScope": "ww_bi_extract",
+    "FuncOptions:AgentApiUrl": "https://bi.work-wallet.com",
+    "FuncOptions:AgentWallets:[0]:WalletId": "[required]",
+    "FuncOptions:AgentWallets:[0]:WalletSecret": "[required]",
+    "FuncOptions:AgentPageSize": "500",
+    "sqldb_connection": "Server=(localdb)\\MSSQLLocalDB;Database=WorkWalletBIClient;Integrated Security=true"
+  }
+}
+```
 
 ## Force Data Reset
 
