@@ -18,12 +18,12 @@ A streamlined, production-ready reference implementation for extracting Health &
 10. [Database Deployment](#database-deployment)
 11. [Data Extraction (Console)](#data-extraction-console)
 12. [Azure Function Deployment](#azure-function-deployment)
-13. [Direct API Usage (No Database)](#direct-api-usage-no-database)
-14. [Force Data Reset](#force-data-reset)
-15. [Power BI Samples](#power-bi-samples)
-16. [Configuration Reference](#configuration-reference)
-17. [Troubleshooting](#troubleshooting)
-18. [Security Notes](#security-notes)
+13. [Force Data Reset](#force-data-reset)
+14. [Power BI Samples](#power-bi-samples)
+15. [Configuration Reference](#configuration-reference)
+16. [Troubleshooting](#troubleshooting)
+17. [Security Notes](#security-notes)
+18. [Direct API Usage (No Database)](#direct-api-usage-no-database)
 19. [Contributing / Issues](#contributing--issues)
 20. [License](#license)
 
@@ -69,7 +69,9 @@ Choose the approach that best fits your analytics platform maturity:
 
 If unsure, start with the Quick Start; you can later migrate to a bespoke ingestion using the same credentials.
 
-Proceed to [Quick Start (Database + Power BI Path)](#quick-start-database--power-bi-path) or jump to [Direct API Usage (No Database)](#direct-api-usage-no-database).
+Advanced raw integration details are documented near the end: see [Direct API Usage (No Database)](#direct-api-usage-no-database).
+
+Proceed to [Quick Start (Database + Power BI Path)](#quick-start-database--power-bi-path).
 
 ## Quick Start (Database + Power BI Path)
 
@@ -207,10 +209,116 @@ Key app settings:
 
 Local development requires `local.settings.json` (sample retained and updated in repo). Include `APPLICATIONINSIGHTS_CONNECTION_STRING` if you want to see structured logs (some info-level events bypass console output).
 
+
+## Force Data Reset
+
+Only relevant to the Quick Start (database) path when incremental tracking continuity is lost.
+
+Mechanism: Delete relevant rows from `mart.ETL_ChangeDetection`. Next execution will:
+
+1. Delete existing rows for that dataset’s tables.
+2. Re-ingest from page 1.
+
+Example (reset Audits dataset):
+
+```sql
+DELETE FROM mart.ETL_ChangeDetection WHERE LogType = 'AUDIT2_UPDATED';
+```
+
+| Dataset | LogType |
+| --- | --- |
+| ReportedIssues | REPORTED_ISSUE_UPDATED |
+| Inductions | INDUCTION_UPDATED |
+| Permits | PERMIT_UPDATED |
+| Actions | ACTION_UPDATED |
+| Assets | ASSET_UPDATED |
+| SafetyCards | SAFETY_CARD_UPDATED |
+| Audits | AUDIT2_UPDATED |
+| PPEStocks | PPE_STOCK_UPDATED |
+| PPEStockHistories | PPE_STOCK_HISTORY_UPDATED |
+| PPEAssignments | PPE_ASSIGNMENT_UPDATED |
+
+If large volumes make deletion slow, recreating the database + redeploying may be faster.
+
+## Power BI Samples
+
+Sample Power BI Project files (`.pbip`) are located in `PowerBISamples/` (one folder per domain). These include both the semantic model and report definitions.
+
+You may:
+
+- Point them at your database (change data source)
+- Refresh to populate visuals
+- Customise measures, relationships, visuals
+
+They are a reference only—any BI tool can consume the database.
+
+For model diagrams see [`Docs/PowerBISamplesModels.md`](Docs/PowerBISamplesModels.md).
+
+### Connect to Your Database
+
+Power BI Desktop → File → Options and settings → Data source settings → Change Source...
+
+![Power BI Options and Settings](Docs/Images/PowerBIOptionsAndSettings.png)
+
+![Power BI Data Source Settings](Docs/Images/PowerBIDataSourceSettings.png)
+
+### Refresh Data
+
+Click Refresh (Home ribbon). Data is on-demand unless you publish to a service (Power BI Pro / Fabric) with scheduled refresh.
+
+![Power BI Refresh Data](Docs/Images/PowerBIRefresh.png)
+
+### Adjust Filters
+
+Ensure any default filters (e.g. date, site, status) reflect values present in your Wallet or visuals may appear blank.
+
+## Configuration Reference
+
+Common console `appsettings.json` keys:
+
+| Key | Purpose |
+| --- | --- |
+| `ClientOptions:ApiAccessClientId` | OAuth2 client credential id |
+| `ClientOptions:ApiAccessClientSecret` | OAuth2 client credential secret |
+| `ClientOptions:ApiAccessAuthority` | (`identity.work-wallet.com`) override if needed |
+| `ClientOptions:ApiAccessScope` | Should be `ww_bi_extract` |
+| `ClientOptions:AgentApiUrl` | API base (default `https://bi.work-wallet.com`) |
+| `ClientOptions:AgentPageSize` | Page size (<= 500) |
+| `ClientOptions:AgentWallets` | Array of wallet credential objects |
+| `ClientOptions:DataSets` | Array of dataset names to process |
+| `ConnectionStrings:ClientDb` | Target SQL database |
+
+## Troubleshooting
+
+| Symptom | Cause | Resolution |
+| --- | --- | --- |
+| `Invalid lastSynchronizationVersion` | Gap too long / table reset mismatch | Perform [Force Data Reset](#force-data-reset). |
+| Slow first run | Full historical ingestion | Allow to complete; subsequent runs incremental. |
+| Empty Power BI visuals | Filters exclude data / wrong DB | Adjust filters; verify data tables populated. |
+| Auth failure (401) | Invalid client credentials | Re-check `ApiAccessClientId` / secret; wallet enabled? |
+| Network errors | Firewall / proxy blocking | Allow outbound HTTPS to API + identity endpoints. |
+| High DB log growth | Large initial ingest | Ensure regular log backups (full recovery) or switch to simple during first load. |
+
+## Security Notes
+
+- Keep client secrets + wallet secrets out of source control (use environment variables / secret managers for production).
+- Principle of least privilege: SQL login should have rights only to target database.
+- All traffic is HTTPS; no extra encryption required in transit.
+- Consider enabling Transparent Data Encryption (TDE) / at rest encryption in SQL if mandated.
+
+## Contributing / Issues
+
+Issues / enhancement requests: open a GitHub Issue. Pull Requests welcome (ensure any schema changes include deployment scripts & docs update).
+
+## License
+
+See [LICENSE.md](./LICENSE.md).
+
+---
+
 ## Direct API Usage (No Database)
 
-If you prefer to integrate directly (without deploying the sample database or console app), implement the following. Running the Quick Start
-once first is still helpful for understanding structure.
+If you prefer to integrate directly (without deploying the sample database or console app), implement the following. Running the Quick Start once first is still helpful for understanding structure.
 
 ### Obtain an OAuth 2.0 Access Token
 
@@ -323,110 +431,6 @@ Use the provided pipeline if you want:
 - Lower engineering overhead for change tracking.
 
 The choices are interoperable: you can switch paths later using the same credentials.
-
-## Force Data Reset
-
-Only relevant to the Quick Start (database) path when incremental tracking continuity is lost.
-
-Mechanism: Delete relevant rows from `mart.ETL_ChangeDetection`. Next execution will:
-
-1. Delete existing rows for that dataset’s tables.
-2. Re-ingest from page 1.
-
-Example (reset Audits dataset):
-
-```sql
-DELETE FROM mart.ETL_ChangeDetection WHERE LogType = 'AUDIT2_UPDATED';
-```
-
-| Dataset | LogType |
-| --- | --- |
-| ReportedIssues | REPORTED_ISSUE_UPDATED |
-| Inductions | INDUCTION_UPDATED |
-| Permits | PERMIT_UPDATED |
-| Actions | ACTION_UPDATED |
-| Assets | ASSET_UPDATED |
-| SafetyCards | SAFETY_CARD_UPDATED |
-| Audits | AUDIT2_UPDATED |
-| PPEStocks | PPE_STOCK_UPDATED |
-| PPEStockHistories | PPE_STOCK_HISTORY_UPDATED |
-| PPEAssignments | PPE_ASSIGNMENT_UPDATED |
-
-If large volumes make deletion slow, recreating the database + redeploying may be faster.
-
-## Power BI Samples
-
-Sample Power BI Project files (`.pbip`) are located in `PowerBISamples/` (one folder per domain). These include both the semantic model and report definitions.
-
-You may:
-
-- Point them at your database (change data source)
-- Refresh to populate visuals
-- Customise measures, relationships, visuals
-
-They are a reference only—any BI tool can consume the database.
-
-For model diagrams see [`Docs/PowerBISamplesModels.md`](Docs/PowerBISamplesModels.md).
-
-### Connect to Your Database
-
-Power BI Desktop → File → Options and settings → Data source settings → Change Source...
-
-![Power BI Options and Settings](Docs/Images/PowerBIOptionsAndSettings.png)
-
-![Power BI Data Source Settings](Docs/Images/PowerBIDataSourceSettings.png)
-
-### Refresh Data
-
-Click Refresh (Home ribbon). Data is on-demand unless you publish to a service (Power BI Pro / Fabric) with scheduled refresh.
-
-![Power BI Refresh Data](Docs/Images/PowerBIRefresh.png)
-
-### Adjust Filters
-
-Ensure any default filters (e.g. date, site, status) reflect values present in your Wallet or visuals may appear blank.
-
-## Configuration Reference
-
-Common console `appsettings.json` keys:
-
-| Key | Purpose |
-| --- | --- |
-| `ClientOptions:ApiAccessClientId` | OAuth2 client credential id |
-| `ClientOptions:ApiAccessClientSecret` | OAuth2 client credential secret |
-| `ClientOptions:ApiAccessAuthority` | (`identity.work-wallet.com`) override if needed |
-| `ClientOptions:ApiAccessScope` | Should be `ww_bi_extract` |
-| `ClientOptions:AgentApiUrl` | API base (default `https://bi.work-wallet.com`) |
-| `ClientOptions:AgentPageSize` | Page size (<= 500) |
-| `ClientOptions:AgentWallets` | Array of wallet credential objects |
-| `ClientOptions:DataSets` | Array of dataset names to process |
-| `ConnectionStrings:ClientDb` | Target SQL database |
-
-## Troubleshooting
-
-| Symptom | Cause | Resolution |
-| --- | --- | --- |
-| `Invalid lastSynchronizationVersion` | Gap too long / table reset mismatch | Perform [Force Data Reset](#force-data-reset). |
-| Slow first run | Full historical ingestion | Allow to complete; subsequent runs incremental. |
-| Empty Power BI visuals | Filters exclude data / wrong DB | Adjust filters; verify data tables populated. |
-| Auth failure (401) | Invalid client credentials | Re-check `ApiAccessClientId` / secret; wallet enabled? |
-| Network errors | Firewall / proxy blocking | Allow outbound HTTPS to API + identity endpoints. |
-| High DB log growth | Large initial ingest | Ensure regular log backups (full recovery) or switch to simple during first load. |
-
-## Security Notes
-
-- Keep client secrets + wallet secrets out of source control (use environment variables / secret managers for production).
-- Principle of least privilege: SQL login should have rights only to target database.
-- All traffic is HTTPS; no extra encryption required in transit.
-- Consider enabling Transparent Data Encryption (TDE) / at rest encryption in SQL if mandated.
-
-## Contributing / Issues
-
-Issues / enhancement requests: open a GitHub Issue. Pull Requests welcome (ensure any schema changes include deployment scripts & docs update).
-
-## License
-
-See [LICENSE.md](./LICENSE.md).
 
 ---
 
