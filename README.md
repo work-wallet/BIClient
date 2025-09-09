@@ -26,6 +26,7 @@ A streamlined, production-ready reference implementation for extracting Health &
 18. [Direct API Usage (No Database)](#direct-api-usage-no-database)
 19. [Contributing / Issues](#contributing--issues)
 20. [License](#license)
+21. [Changelog](#changelog)
 
 ---
 
@@ -39,6 +40,17 @@ The [Work Wallet](https://www.work-wallet.com/) Health & Safety platform exposes
 - Extensible, strongly-typed .NET 8 code you can adopt or adapt
 
 You can use the binaries directly (no code changes required), customise the solution, or treat it as a reference implementation for your own stack.
+
+### Why This Exists
+
+Many organisations need timely Health & Safety operational insight (issues raised, audits, permits, actions) but lack a ready-made ingestion pattern. Building robust paging, incremental change tracking and schema management from scratch is repetitive and error-prone. This project provides:
+
+- A proven extraction + persistence pattern (paged, resilient, incremental)
+- A normalised → star-schema transformation with dimensional consistency
+- Sample semantic models to accelerate analytics consumption
+- Clear extension points so you can swap storage, add datasets or integrate into existing orchestration
+
+Use it to accelerate your first production deployment, then iterate where you differentiate (governance, advanced modelling, ML, etc.).
 
 ## Supported Datasets
 
@@ -487,3 +499,7 @@ Use the provided pipeline if you want:
 - Lower engineering overhead for change tracking.
 
 The choices are interoperable: you can switch paths later using the same credentials.
+
+## Changelog
+
+See [CHANGELOG.md](CHANGELOG.md) for release history and recent documentation updates.
