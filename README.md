@@ -34,6 +34,8 @@ A streamlined, production-ready reference implementation for extracting Health &
 
 The [Work Wallet](https://www.work-wallet.com/) Health & Safety platform exposes a secure BI Extract API optimised for regular, incremental data feeds into analytics platforms. This repository provides:
 
+Repository (source & releases): [work-wallet/BIClient](https://github.com/work-wallet/BIClient)
+
 - A ready-made SQL Server data mart (star schema) and deployment tool
 - A robust, paged, change-tracking extraction client (console + Azure Function)
 - Sample Power BI project (.pbip) files with semantic models & reports
@@ -130,7 +132,7 @@ Core concepts:
 | `WorkWallet.BI.ClientFunction` | Azure Function timer-trigger wrapper for automated extraction. |
 | `WorkWallet.BI.ClientCore` | Shared abstractions & options. |
 | `WorkWallet.BI.ClientServices` | HTTP + data store implementations, processor logic. |
-| `PowerBISamples` | `.pbip` models & reports (one per dataset family + theme). |
+| `PowerBISamples` | `.pbip` models & reports (one per dataset). |
 | `Images` | Screenshots (used in documentation). |
 | `Scripts` | Legacy migration script. |
 
@@ -329,7 +331,7 @@ Only relevant to the Quick Start (database) path when incremental tracking conti
 Mechanism: Delete relevant rows from `mart.ETL_ChangeDetection`. Next execution will:
 
 1. Delete existing rows for that dataset’s tables.
-2. Re-ingest from page 1.
+2. Re-ingest all data.
 
 Example (reset Audits dataset):
 
@@ -364,7 +366,7 @@ You may:
 
 They are a reference only—any BI tool can consume the database.
 
-For model diagrams see [`PowerBISamplesModels.md`](Docs/PowerBISamplesModels.md).
+For model diagrams see [`PowerBISamplesModels.md`](PowerBISamplesModels.md).
 
 ### Connect to Your Database
 
