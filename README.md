@@ -209,25 +209,120 @@ Local development requires `local.settings.json` (sample retained and updated in
 
 ## Direct API Usage (No Database)
 
-Use this path if you prefer to land raw JSON into an existing data platform and manage transformation yourself.
+If you prefer to integrate directly (without deploying the sample database or console app), implement the following. Running the Quick Start
+once first is still helpful for understanding structure.
 
-High-level flow:
+### Obtain an OAuth 2.0 Access Token
 
-1. Obtain OAuth2 token (Client Credentials) from `https://identity.work-wallet.com` (scope `ww_bi_extract`).
-2. Call dataset endpoint: `GET https://bi.work-wallet.com/dataextract/{DataSet}?walletId={WalletId}&walletSecret={WalletSecret}&pageNumber=1&pageSize=500` with `Authorization: Bearer {token}`.
-3. Iterate `pageNumber` until returned `Count < PageSize`.
-4. Persist `SynchronizationVersion` per dataset and use `lastSynchronizationVersion=` on subsequent runs.
-5. If you receive an invalid synchronization error, perform a dataset-level re-pull (logic mirrored in the provided client) or rebuild state.
-6. For cross-region access add header `DataRegion: <code>` (discover via `GET /wallet`).
+Flow: Client Credentials.
 
-Recommended implementation practices:
+- Authority: `https://identity.work-wallet.com`
+- Discovery: `https://identity.work-wallet.com/.well-known/openid-configuration`
+- Token endpoint: `https://identity.work-wallet.com/connect/token`
+- Scope: `ww_bi_extract`
 
-- Enforce max `pageSize` 500.
-- Exponential backoff (HTTP 429/5xx).
-- Capture request/response metadata (dataset, page, version) for observability.
-- Treat new JSON properties as additive; design schema evolution strategy if projecting into typed tables.
+Form-style body (conceptual):
 
-Reference material & examples: [`Docs/API.md`](./Docs/API.md).
+```text
+client_id={ApiAccessClientId}&client_secret={ApiAccessClientSecret}&grant_type=client_credentials&scope=ww_bi_extract
+```
+
+### Call the BI Extract Endpoint (Paging)
+
+Template:
+
+```http
+GET https://bi.work-wallet.com/dataextract/{DataSet}?walletId={WalletId}&walletSecret={WalletSecret}&pageNumber=1&pageSize=500
+Authorization: Bearer {access_token}
+```
+
+Supported dataset names: see [Supported Datasets](#supported-datasets).
+
+Rules:
+
+- Keep `pageSize` ≤ 500.
+- Increment `pageNumber` until returned page `Count < PageSize`.
+
+### Change Tracking
+
+Store the `SynchronizationVersion` returned in the `Context` block per dataset. Next run add:
+
+```text
+&lastSynchronizationVersion={storedVersion}
+```
+
+First ever call: omit the parameter (or set `0`). If you later pass a version lower than `MinValidSynchronizationVersion` the API will reject it—perform a full reload for that dataset (see Force Data Reset logic used by the Quick Start path).
+
+Key context fields:
+
+| Field | Description |
+| --- | --- |
+| `SynchronizationVersion` | High-water mark to persist |
+| `MinValidSynchronizationVersion` | Earliest acceptable version for incremental calls |
+| `Count` | Rows in this page |
+| `FullCount` | Total rows (first page) |
+| `PageNumber` / `PageSize` | Echo of request |
+
+### Example (Truncated JSON)
+
+```json
+{
+  "Context": {
+    "Version": 1,
+    "Count": 13,
+    "FullCount": 13,
+    "PageNumber": 1,
+    "PageSize": 500,
+    "SynchronizationVersion": 10101,
+    "MinValidSynchronizationVersion": 9000,
+    "Error": "",
+    "UTC": "2025-03-26T14:54:59.127"
+  },
+  "Wallets": [ { "WalletId": "...", "Wallet": "Example Wallet" } ],
+  "Locations": [ { "LocationId": "...", "LocationTypeCode": 2, "LocationType": "Operations Site" } ]
+}
+```
+
+### Unpacking the JSON
+
+Options:
+
+- Project directly into relational structures (ETL) much like the stored procedures in `SampleCode/WorkWallet.BI.ClientDatabaseDeploy/Scripts/StoredProcedures`.
+- Land raw page payloads first (ELT) then transform later; star-schema scripts in `Scripts/Schema` can guide modelling.
+
+### Multi-Region Access
+
+If your execution region differs from the Wallet’s hosting region add a header:
+
+```http
+DataRegion: GB
+```
+
+Discover region:
+
+```http
+GET https://bi.work-wallet.com/wallet?walletId={WalletId}&walletSecret={WalletSecret}
+```
+
+Response contains `dataRegion`.
+
+### Recommended Practices
+
+- Exponential backoff (429 / transient 5xx).
+- Log (dataset, page, synchronizationVersion) for replay.
+- Validate `MinValidSynchronizationVersion` before starting page loop.
+- Keep an audit trail of last successful version per dataset.
+- Treat new JSON fields as additive for forward compatibility.
+
+### When to Use the Quick Start Instead
+
+Use the provided pipeline if you want:
+
+- Rapid deployment with validated transformation logic.
+- Pre-built Power BI semantic models.
+- Lower engineering overhead for change tracking.
+
+The choices are interoperable: you can switch paths later using the same credentials.
 
 ## Force Data Reset
 
