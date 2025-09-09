@@ -20,13 +20,12 @@ A streamlined, production-ready reference implementation for extracting Health &
 12. [Azure Function Deployment](#azure-function-deployment)
 13. [Force Data Reset](#force-data-reset)
 14. [Power BI Samples](#power-bi-samples)
-15. [Configuration Reference](#configuration-reference)
-16. [Troubleshooting](#troubleshooting)
-17. [Security Notes](#security-notes)
-18. [Direct API Usage (No Database)](#direct-api-usage-no-database)
-19. [Contributing / Issues](#contributing--issues)
-20. [License](#license)
-21. [Changelog](#changelog)
+15. [Troubleshooting](#troubleshooting)
+16. [Security Notes](#security-notes)
+17. [Direct API Usage (No Database)](#direct-api-usage-no-database)
+18. [Contributing / Issues](#contributing--issues)
+19. [License](#license)
+20. [Changelog](#changelog)
 
 ---
 
@@ -385,22 +384,6 @@ Click Refresh (Home ribbon). Data is on-demand unless you publish to a service (
 ### Adjust Filters
 
 Ensure any default filters (e.g. date, site, status) reflect values present in your Wallet or visuals may appear blank.
-
-## Configuration Reference
-
-Common console `appsettings.json` keys:
-
-| Key | Purpose |
-| --- | --- |
-| `ClientOptions:ApiAccessClientId` | OAuth2 client credential id |
-| `ClientOptions:ApiAccessClientSecret` | OAuth2 client credential secret |
-| `ClientOptions:ApiAccessAuthority` | (`identity.work-wallet.com`) override if needed |
-| `ClientOptions:ApiAccessScope` | Should be `ww_bi_extract` |
-| `ClientOptions:AgentApiUrl` | API base (default `https://bi.work-wallet.com`) |
-| `ClientOptions:AgentPageSize` | Page size (<= 500) |
-| `ClientOptions:AgentWallets` | Array of wallet credential objects |
-| `ClientOptions:DataSets` | Array of dataset names to process |
-| `ConnectionStrings:ClientDb` | Target SQL database |
 
 ## Troubleshooting
 
