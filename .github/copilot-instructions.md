@@ -1,108 +1,72 @@
-# Work Wallet BI Client - AI Coding Guide
+# Work Wallet BI Client - Concise AI Guide
 
-## Architecture Overview
+## 1. Core Architecture
+Data extraction & load into SQL Server star schema. Two runtimes share the same processor:
+- Console (`ClientSample`)
+- Azure Function timer (`ClientFunction`)
+Supporting projects: `ClientCore` (interfaces/options), `ClientServices` (HTTP + SQL store + auth), `ClientDatabaseDeploy` (DbUp deployer).
 
-This is a **data extraction and warehousing solution** that pulls health & safety data from the Work Wallet API into a local SQL Server database with a star schema design. The solution supports multiple deployment models: console app and Azure Function.
+## 2. Data Flow Essentials
+1. OAuth2 client credentials via `BearerTokenHandler` (identity endpoint).
+2. Page API: `.../dataextract/{dataset}` (<=500 page size).
+3. Incremental sync using `lastSynchronizationVersion` (persist newest `SynchronizationVersion`).
+4. Stored procs in `mart` schema parse JSON into tables.
 
-### Core Components
+Supported datasets (see `DataSets.cs` for mapping): ReportedIssues, Inductions, Permits, Actions, Assets, SafetyCards, Audits (AUDIT2), PPEStocks, PPEStockHistories, PPEAssignments.
 
-- **ClientCore**: Shared interfaces and options (`IProcessorService`, `IDataStoreService`, `ProcessorServiceOptions`)
-- **ClientServices**: HTTP client services with OAuth2 bearer token handling and SQL data store implementation
-- **ClientSample**: Console application entry point with cancellation support (ESC key)
-- **ClientFunction**: Azure Function timer trigger wrapper around the same processor
-- **ClientDatabaseDeploy**: DbUp-based database schema deployment tool
+## 3. Config & Deployment
+- Multiple wallets: `AgentWallets[]` in config.
+- Console: `appsettings.json` (user secrets in DEBUG for secrets).
+- Function: `local.settings.json` locally; app settings in Azure (flattened keys like `FuncOptions:AgentWallets:0:WalletId`).
+- Database deploy: run deployer (DbUp groups: Clean, Schema, Types, StoredProcedures).
 
-## Data Flow Architecture
+Local run (summary): deploy DB → run console (ESC cancels). Function uses NCRONTAB schedule string.
 
-1. **OAuth2 Token Acquisition**: `BearerTokenHandler` manages tokens from `https://identity.work-wallet.com`
-2. **API Pagination**: `ProcessorService` handles paged requests to `https://bi.work-wallet.com/dataextract/[dataset]`
-3. **Change Tracking**: Uses `lastSynchronizationVersion` to pull only changed data since last sync
-4. **Database Storage**: JSON payloads processed by SQL stored procedures in `mart` schema
+## 4. Error Handling (Keep Table In README In Sync)
+Evaluate HTTP status + `Context.Error`:
+- 401/403: auth/scope → refresh/validate credentials.
+- 400 "Incorrect data region": remove/fix `DataRegion` header after determining wallet region.
+- 5xx: retry with capped exponential backoff + jitter.
+- `Invalid LastSynchronizationVersion`: delete tracking entry → full reload dataset.
+- Other non-empty `Context.Error`: log and decide skip vs halt (no infinite retry).
+Rules: empty `Context.Error` = success; never exceed page size 500.
 
-### Supported Datasets
-```csharp
-// From DataSets.cs - maps API endpoints to change tracking log types
-{ "ReportedIssues", "REPORTED_ISSUE_UPDATED" }
-{ "Inductions", "INDUCTION_UPDATED" }
-{ "Permits", "PERMIT_UPDATED" }
-{ "Actions", "ACTION_UPDATED" }
-{ "Assets", "ASSET_UPDATED" }
-{ "SafetyCards", "SAFETY_CARD_UPDATED" }
-{ "Audits", "AUDIT2_UPDATED" }  // Note: AUDIT2 not AUDIT, as AUDIT was used for the original SiteAudits implementation
-{ "PPEStocks", "PPE_STOCK_UPDATED" }  // PPE has 3 separate modules
-{ "PPEStockHistories", "PPE_STOCK_HISTORY_UPDATED" }
-{ "PPEAssignments", "PPE_ASSIGNMENT_UPDATED" }
-```
+## 5. Extension Points
+- Progress output: implement `IProgressService`.
+- Alternative storage: implement `IDataStoreService`.
+- New dataset: add to `DataSets.cs`, create SQL processing proc(s), update docs & changelog.
 
-## Configuration Patterns
+## 6. Minimal Documentation Rules
+- Single canonical guide: `README.md`.
+- Embed sample config JSON inline in relevant sections (not a separate section).
+- Keep README TOC explicitly numbered; leave other markdown to standard lint auto-numbering.
+- Add rationale or clarifications under existing headings instead of creating new top-level ones unless substantial.
 
-### Multi-Wallet Support
-All services support processing multiple wallets via `AgentWallets[]` array in configuration.
+## 7. Changelog Updates
+- Use `CHANGELOG.md` with Unreleased → versioned sections on release.
+- Categories: Added / Changed / Fixed / Removed / Notes (only those needed).
+- Note dataset additions with required DB deploy + optional full reload.
+- Documentation-only changes go under Changed (Documentation) or Changed.
 
-### Environment-Specific Config
-- **Console**: `appsettings.json` with user secrets in DEBUG
-- **Azure Function**: `local.settings.json` for development, Azure App Settings for production (nested config like `FuncOptions:AgentWallets:[0]:WalletId`)
-- **Database Deploy**: Simple `AppSettings` section for connection string only
+## 8. Release Checklist (Short Form)
+1. DbUp scripts grouped correctly (RunOnce vs RunAlways validated).
+2. Version bump applied if required.
+3. README datasets & reset mapping updated.
+4. Changelog: Unreleased moved to dated version.
+5. Power BI samples updated if schema impact.
+6. Error handling section reflects any new conditions.
 
-## Database Schema Approach
+## 9. Quick Reference: Do / Do Not
+Do: keep error matrix current; embed config snippets; maintain dataset order; use structured tables for mappings.
+Do Not: exceed page size 500; infinite-retry logical errors; introduce standalone sample config section; resurrect deleted docs.
 
-### DbUp Deployment Strategy
-Scripts run in specific order via `RunGroupOrder`:
-1. **Clean**: Drop stored procedures (ScriptType.RunAlways)
-2. **Schema**: Create tables/views (ScriptType.RunOnce)
-3. **Types**: User-defined types (ScriptType.RunAlways)
-4. **StoredProcedures**: Data processing logic (ScriptType.RunAlways)
+## 10. Style Snapshot
+Follow markdownlint defaults. Single H1 per file. Use fenced code blocks with language. README TOC explicitly numbered. Concise, present tense. Prefer inline code backticks. Keep tables lean.
 
-## Development Workflows
+## 11. Common Tasks
+| Task | Action |
+| --- | --- |
+| Add dataset | Update `DataSets.cs`, SQL procs, README tables, changelog. |
+| Schema change | Add/adjust DbUp script + procs; update Power BI model if needed. |
 
-### Local Development
-```powershell
-# Database setup
-cd SampleCode/WorkWallet.BI.ClientDatabaseDeploy
-dotnet run
-
-# Run data sync
-cd ../WorkWallet.BI.ClientSample  
-dotnet run  # Press ESC to cancel gracefully
-```
-
-### Azure Function Development
-- Uses `local.settings.json` for local config
-- Timer trigger schedule: NCRONTAB format (`"0 30 21 * * *"`)
-- Application Insights recommended for logging visibility
-
-## Error Handling Patterns
-
-### API Error Recovery
-- `Invalid lastSynchronizationVersion`: Reset via change detection table
-- Multi-region support: Add `DataRegion` header for cross-region calls
-- Page size limit: Max 500 (performance/payload size balance)
-
-### Logging Strategy
-- `ILogger` throughout with structured logging
-- `IProgressService` for console output in ClientSample
-- Application Insights for Azure Function monitoring
-
-## Power BI Integration
-
-### File Structure
-- `.pbip` projects (not `.pbix`) for source control
-- `SemanticModel/` contains data model definitions
-- `Report/` contains report layouts and visualizations
-- Database connection configured via Power BI Options & Settings
-
-### Data Refresh Pattern
-Power BI connects directly to SQL Server database - no intermediate files or APIs required.
-
-## Extension Points
-
-- **Custom Progress Reporting**: Implement `IProgressService` 
-- **Alternative Data Stores**: Implement `IDataStoreService`
-- **Additional Datasets**: Add entries to `DataSets.cs` and corresponding stored procedures
-
-## Critical Dependencies
-
-- **.NET 8.0**: All projects target this runtime
-- **Microsoft.Data.SqlClient**: Database connectivity
-- **DbUp**: Database deployment and versioning
-- **System.Text.Json**: API response processing
+---
