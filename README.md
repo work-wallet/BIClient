@@ -268,7 +268,7 @@ You may:
 
 They are a reference only—any BI tool can consume the database.
 
-For model diagrams see [`PowerBISamplesModels.md`](PowerBISamplesModels.md).
+For model diagrams see [`PowerBISamplesModels.md`](Docs/PowerBISamplesModels.md).
 
 ### Connect to Your Database
 
@@ -412,7 +412,7 @@ Key context fields:
 Options:
 
 - Process directly into relational structures (ETL) much like the stored procedures in `SampleCode/WorkWallet.BI.ClientDatabaseDeploy/Scripts/StoredProcedures`.
-- Land raw page payloads first (ELT) then transform later; star-schema scripts in `Scripts/Schema` can guide modelling.
+- Land raw page payloads first (ELT) then transform later; star-schema scripts in `SampleCode/WorkWallet.BI.ClientDatabaseDeploy/Scripts/Schema` can guide modelling.
 
 ### Multi-Region Access
 
