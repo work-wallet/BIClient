@@ -209,7 +209,6 @@ Key app settings:
 
 Local development requires `local.settings.json` (sample retained and updated in repo). Include `APPLICATIONINSIGHTS_CONNECTION_STRING` if you want to see structured logs (some info-level events bypass console output).
 
-
 ## Force Data Reset
 
 Only relevant to the Quick Start (database) path when incremental tracking continuity is lost.
@@ -359,7 +358,7 @@ Store the `SynchronizationVersion` returned in the `Context` block per dataset. 
 &lastSynchronizationVersion={storedVersion}
 ```
 
-First ever call: omit the parameter (or set `0`). If you later pass a version lower than `MinValidSynchronizationVersion` the API will reject it—perform a full reload for that dataset (see Force Data Reset logic used by the Quick Start path).
+First ever call: omit the parameter (or set `0`). If you later pass a version lower than `MinValidSynchronizationVersion` the API will reject it—perform a full reload for that dataset.
 
 Key context fields:
 
@@ -395,7 +394,7 @@ Key context fields:
 
 Options:
 
-- Project directly into relational structures (ETL) much like the stored procedures in `SampleCode/WorkWallet.BI.ClientDatabaseDeploy/Scripts/StoredProcedures`.
+- Process directly into relational structures (ETL) much like the stored procedures in `SampleCode/WorkWallet.BI.ClientDatabaseDeploy/Scripts/StoredProcedures`.
 - Land raw page payloads first (ELT) then transform later; star-schema scripts in `Scripts/Schema` can guide modelling.
 
 ### Multi-Region Access
@@ -414,14 +413,6 @@ GET https://bi.work-wallet.com/wallet?walletId={WalletId}&walletSecret={WalletSe
 
 Response contains `dataRegion`.
 
-### Recommended Practices
-
-- Exponential backoff (429 / transient 5xx).
-- Log (dataset, page, synchronizationVersion) for replay.
-- Validate `MinValidSynchronizationVersion` before starting page loop.
-- Keep an audit trail of last successful version per dataset.
-- Treat new JSON fields as additive for forward compatibility.
-
 ### When to Use the Quick Start Instead
 
 Use the provided pipeline if you want:
@@ -431,9 +422,3 @@ Use the provided pipeline if you want:
 - Lower engineering overhead for change tracking.
 
 The choices are interoperable: you can switch paths later using the same credentials.
-
----
-
-### Revision History (README)
-
-- Updated for clarity, structure & consistency (spelling corrections, added quick start, troubleshooting, security) – Sept 2025.

@@ -120,7 +120,7 @@ When generating or editing Markdown in this repository, follow common markdownli
 - Lists: use `-` for unordered; for ordered lists you may use `1.` for all items (markdownlint autocorrect) or ascending numbers consistently.
 - Tables: keep a header row and separator row; avoid alignment padding beyond necessity.
 - No inline HTML unless required for something Markdown cannot express; if used, keep it minimal.
-- Avoid bare URLs—wrap them in angle brackets `<https://example>` or use descriptive links `[Text](url)`.
+- Avoid bare URLs—wrap them in angle brackets like `<https://example.com>` or use descriptive links such as `[Work Wallet](https://work-wallet.com)`.
 - Prefer descriptive link text over "here"/"click".
 - Emphasize sparingly (`*italics*`, `**bold**`); avoid all-caps emphasis.
 - Keep front-matter (if ever added) separated by `---` delimiters at top only.
