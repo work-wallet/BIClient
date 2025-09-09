@@ -92,8 +92,6 @@ The format loosely follows Keep a Changelog principles (dates in YYYY-MM-DD). Ve
 
 - `LastSynchronizationVersion` handling: ensures `ETL_ChangeDetection` updates even when zero rows returned, reducing risk of stale version errors.
 
----
-
 ## [3.1.3] - 2024-08-01
 
 ### Changed (3.1.3)
