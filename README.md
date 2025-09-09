@@ -119,7 +119,7 @@ Core concepts:
 | `WorkWallet.BI.ClientCore` | Shared abstractions & options. |
 | `WorkWallet.BI.ClientServices` | HTTP + data store implementations, processor logic. |
 | `PowerBISamples` | `.pbip` models & reports (one per dataset family + theme). |
-| `Docs` | API, schema notes, legacy migration, semantic model diagrams. |
+| `Docs` | Power BI semantic model diagrams, screenshots, legacy migration script. |
 
 ## API Credentials
 
@@ -152,9 +152,25 @@ Download from GitHub [Releases](https://github.com/work-wallet/BIClient/releases
 
 Executable: `WorkWallet.BI.ClientDatabaseDeploy`.
 
-1. (Legacy) If upgrading from an installation prior to Aug 2023 read [`Docs/LegacySchema.md`](./Docs/LegacySchema.md) first.
-2. Edit `appsettings.json` → set: `AppSettings:DatabaseConnectionString`.
-3. Run `WorkWallet.BI.ClientDatabaseDeploy.exe` – creates the database if absent and applies migrations (drops & recreates stored procedures in `mart` schema intentionally).
+1. Edit `appsettings.json` → set: `AppSettings:DatabaseConnectionString`.
+2. Run `WorkWallet.BI.ClientDatabaseDeploy.exe` – creates the database if absent and applies migrations (drops & recreates stored procedures in `mart` schema intentionally).
+
+### Legacy Installations (Pre-Aug 2023)
+
+Most users can skip this section.
+
+If you originally stood up the database manually before August 2023 your schema will be missing the tracking table `dbo.SchemaVersions` used by the deployment tool to know which one-time scripts have already been applied. Running the deployment tool without seeding this table could cause it to (re)apply scripts incorrectly.
+
+To remediate:
+
+1. Take a backup of the existing database (recommended).
+2. Open the script `Docs/InitialiseSchemaVersions.sql` and review its contents.
+3. Execute it against the target database (e.g. in SQL Server Management Studio or `sqlcmd`). It inserts baseline rows representing the current state.
+4. Run `WorkWallet.BI.ClientDatabaseDeploy.exe` normally.
+
+Why this is needed: the deployment tool records each RunOnce group (schema objects) in `dbo.SchemaVersions`. Older manual installs pre-date that mechanism. Seeding prevents duplicate creation attempts and ensures future upgrades run only delta logic.
+
+Alternative: If a full reload is acceptable you may instead create a fresh empty database, run the deployment tool (which will create `dbo.SchemaVersions` automatically) and then perform a full data extraction.
 
 ## Data Extraction (Console)
 
