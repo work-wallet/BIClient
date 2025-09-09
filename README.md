@@ -8,22 +8,24 @@ A streamlined, production-ready reference implementation for extracting Health &
 
 1. [Overview](#overview)
 2. [Supported Datasets](#supported-datasets)
-3. [Quick Start](#quick-start)
-4. [Prerequisites](#prerequisites)
-5. [Architecture](#architecture)
-6. [Repository Structure](#repository-structure)
-7. [API Access](#api-access)
-8. [Binaries / Downloads](#binaries--downloads)
-9. [Database Deployment](#database-deployment)
-10. [Data Extraction (Console)](#data-extraction-console)
-11. [Azure Function Deployment](#azure-function-deployment)
-12. [Force Data Reset](#force-data-reset)
-13. [Power BI Samples](#power-bi-samples)
-14. [Configuration Reference](#configuration-reference)
-15. [Troubleshooting](#troubleshooting)
-16. [Security Notes](#security-notes)
-17. [Contributing / Issues](#contributing--issues)
-18. [License](#license)
+3. [Usage Paths](#usage-paths)
+4. [Quick Start (Database + Power BI Path)](#quick-start-database--power-bi-path)
+5. [Prerequisites](#prerequisites)
+6. [Architecture](#architecture)
+7. [Repository Structure](#repository-structure)
+8. [API Credentials](#api-credentials)
+9. [Binaries / Downloads](#binaries--downloads)
+10. [Database Deployment](#database-deployment)
+11. [Data Extraction (Console)](#data-extraction-console)
+12. [Azure Function Deployment](#azure-function-deployment)
+13. [Direct API Usage (No Database)](#direct-api-usage-no-database)
+14. [Force Data Reset](#force-data-reset)
+15. [Power BI Samples](#power-bi-samples)
+16. [Configuration Reference](#configuration-reference)
+17. [Troubleshooting](#troubleshooting)
+18. [Security Notes](#security-notes)
+19. [Contributing / Issues](#contributing--issues)
+20. [License](#license)
 
 ---
 
@@ -56,9 +58,22 @@ The API currently enables download of:
 
 Each dataset is queried using paging + `lastSynchronizationVersion` change tracking to minimise transfer volume.
 
-## Quick Start
+## Usage Paths
 
-1. Request API access (see [API Access](#api-access)).
+Choose the approach that best fits your analytics platform maturity:
+
+| Path | When to Use | Outputs | Effort |
+| --- | --- | --- | --- |
+| Quick Start (recommended) | You want an end‑to‑end working pipeline fast | Deployed SQL star schema + optional Power BI models | Minimal configuration |
+| Direct API (no database) | You already have existing data integration or lake tooling | Raw paged JSON responses | Build paging + change tracking logic |
+
+If unsure, start with the Quick Start; you can later migrate to a bespoke ingestion using the same credentials.
+
+Proceed to [Quick Start (Database + Power BI Path)](#quick-start-database--power-bi-path) or jump to [Direct API Usage (No Database)](#direct-api-usage-no-database).
+
+## Quick Start (Database + Power BI Path)
+
+1. Request API credentials (see [API Credentials](#api-credentials)).
 2. Download latest release binaries (database deploy + client) from [Releases](https://github.com/work-wallet/BIClient/releases).
 3. Deploy / upgrade the database (edit `WorkWallet.BI.ClientDatabaseDeploy/appsettings.json` then run `WorkWallet.BI.ClientDatabaseDeploy.exe`).
 4. Configure data extraction (edit `WorkWallet.BI.ClientSample/appsettings.json` then run the executable — first run is a full load).
@@ -104,7 +119,7 @@ Core concepts:
 | `PowerBISamples` | `.pbip` models & reports (one per dataset family + theme). |
 | `Docs` | API, schema notes, legacy migration, semantic model diagrams. |
 
-## API Access
+## API Credentials
 
 Access is enabled per Wallet. Contact Work Wallet Support to request activation. You will receive:
 
@@ -118,7 +133,7 @@ Base endpoints:
 - API: `https://bi.work-wallet.com`
 - Auth: `https://identity.work-wallet.com`
 
-Direct integration details: see [`Docs/API.md`](./Docs/API.md).
+These values are required for both the Quick Start (stored in configuration) and Direct API usage (token + query parameters). For raw HTTP guidance see [`Docs/API.md`](./Docs/API.md).
 
 ## Binaries / Downloads
 
@@ -192,14 +207,36 @@ Key app settings:
 
 Local development requires `local.settings.json` (sample retained and updated in repo). Include `APPLICATIONINSIGHTS_CONNECTION_STRING` if you want to see structured logs (some info-level events bypass console output).
 
+## Direct API Usage (No Database)
+
+Use this path if you prefer to land raw JSON into an existing data platform and manage transformation yourself.
+
+High-level flow:
+
+1. Obtain OAuth2 token (Client Credentials) from `https://identity.work-wallet.com` (scope `ww_bi_extract`).
+2. Call dataset endpoint: `GET https://bi.work-wallet.com/dataextract/{DataSet}?walletId={WalletId}&walletSecret={WalletSecret}&pageNumber=1&pageSize=500` with `Authorization: Bearer {token}`.
+3. Iterate `pageNumber` until returned `Count < PageSize`.
+4. Persist `SynchronizationVersion` per dataset and use `lastSynchronizationVersion=` on subsequent runs.
+5. If you receive an invalid synchronization error, perform a dataset-level re-pull (logic mirrored in the provided client) or rebuild state.
+6. For cross-region access add header `DataRegion: <code>` (discover via `GET /wallet`).
+
+Recommended implementation practices:
+
+- Enforce max `pageSize` 500.
+- Exponential backoff (HTTP 429/5xx).
+- Capture request/response metadata (dataset, page, version) for observability.
+- Treat new JSON properties as additive; design schema evolution strategy if projecting into typed tables.
+
+Reference material & examples: [`Docs/API.md`](./Docs/API.md).
+
 ## Force Data Reset
 
-Only perform if you need a full re-pull (e.g. lost change tracking continuity).
+Only relevant to the Quick Start (database) path when incremental tracking continuity is lost.
 
-Mechanism: Delete relevant rows from `mart.ETL_ChangeDetection`. On next run the client will:
+Mechanism: Delete relevant rows from `mart.ETL_ChangeDetection`. Next execution will:
 
-1. Truncate (delete) data rows for affected dataset tables
-2. Re-ingest from page 1
+1. Delete existing rows for that dataset’s tables.
+2. Re-ingest from page 1.
 
 Example (reset Audits dataset):
 
