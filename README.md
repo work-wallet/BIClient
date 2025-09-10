@@ -417,6 +417,8 @@ See [LICENSE.md](./LICENSE.md).
 
 If you prefer to integrate directly (without deploying the sample database or console app), implement the following. Running the Quick Start once first is still helpful for understanding structure.
 
+For complete JSON response examples for each dataset, see [`SampleJSONFromAPI.md`](SampleJSONFromAPI.md).
+
 ### Obtain an OAuth 2.0 Access Token
 
 Flow: Client Credentials.
