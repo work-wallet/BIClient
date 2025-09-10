@@ -82,7 +82,6 @@ public class ProcessorService(
         }
 
         int pageNumber = 0;
-        int totalPages;
         Context context;
 
         // we support data paging in order to be able to cope with large result sets
@@ -126,16 +125,12 @@ public class ProcessorService(
                 throw new ApiErrorResponseException(context.Error, walletContext.Id, dataType);
             }
 
-            // now we know how many rows there are in total, we can calculate the total number of pages we need to fetch
-            // note that we want to calculate this every iteration (in case server data has been added to)
-            totalPages = (context.FullCount - 1) / context.PageSize + 1;
-
             logger.LogDebug("API for {DataType} returned JSON of length {Length}", dataType, json.Length);
             logger.LogDebug("Count: {Count}", context.Count);
             logger.LogDebug("FullCount: {FullCount}", context.FullCount);
             logger.LogDebug("LastSynchronizationVersion: {LastSynchronizationVersion}", context.LastSynchronizationVersion);
             logger.LogDebug("SynchronizationVersion: {SynchronizationVersion}", context.SynchronizationVersion);
-            logger.LogDebug("PageNumber: {PageNumber} / {totalPages}, PageSize: {PageSize}", context.PageNumber, totalPages, context.PageSize);
+            logger.LogDebug("PageNumber: {PageNumber}, PageSize: {PageSize}", context.PageNumber, context.PageSize);
 
             if (context.Count > 0)
             {
@@ -149,7 +144,7 @@ public class ProcessorService(
                 logger.LogDebug($"No records to load");
             }
 
-        } while (pageNumber < totalPages);
+        } while (context.Count == context.PageSize);
         progressService.EndShowProgress(context.FullCount);
 
         // update our change detection / logging table, so we only fetch new and changed data next time
