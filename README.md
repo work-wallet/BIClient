@@ -57,17 +57,17 @@ Use it to accelerate your first production deployment, then iterate where you di
 
 The API currently enables download of:
 
-- Reported Issues
+- Actions
+- Audits
+- Assets
 - Inductions
 - Permits
-- Actions
-- Assets
-- Safety Cards
-- Audits
 - PPE (three modules):
-  - PPEStocks
-  - PPEStockHistories
   - PPEAssignments
+  - PPEStockHistories
+  - PPEStocks
+- Reported Issues
+- Safety Cards
 
 Each dataset is queried using paging + `lastSynchronizationVersion` change tracking to minimise transfer volume.
 
@@ -235,16 +235,16 @@ Example `appsettings.json` placed alongside `WorkWallet.BI.ClientSample.exe`:
     ],
     "AgentPageSize": "500",
     "DataSets": [
-      "ReportedIssues",
+      "Actions",
+      "Audits",
+      "Assets",
       "Inductions",
       "Permits",
-      "Actions",
-      "Assets",
-      "SafetyCards",
-      "Audits",
-      "PPEStocks",
+      "PPEAssignments",
       "PPEStockHistories",
-      "PPEAssignments"
+      "PPEStocks",
+      "ReportedIssues",
+      "SafetyCards"
     ]
   },
   "ConnectionStrings": {
@@ -340,16 +340,16 @@ DELETE FROM mart.ETL_ChangeDetection WHERE LogType = 'AUDIT2_UPDATED';
 
 | Dataset | LogType |
 | --- | --- |
-| ReportedIssues | REPORTED_ISSUE_UPDATED |
-| Inductions | INDUCTION_UPDATED |
-| Permits | PERMIT_UPDATED |
 | Actions | ACTION_UPDATED |
 | Assets | ASSET_UPDATED |
-| SafetyCards | SAFETY_CARD_UPDATED |
 | Audits | AUDIT2_UPDATED |
-| PPEStocks | PPE_STOCK_UPDATED |
-| PPEStockHistories | PPE_STOCK_HISTORY_UPDATED |
+| Inductions | INDUCTION_UPDATED |
+| Permits | PERMIT_UPDATED |
 | PPEAssignments | PPE_ASSIGNMENT_UPDATED |
+| PPEStockHistories | PPE_STOCK_HISTORY_UPDATED |
+| PPEStocks | PPE_STOCK_UPDATED |
+| ReportedIssues | REPORTED_ISSUE_UPDATED |
+| SafetyCards | SAFETY_CARD_UPDATED |
 
 If large volumes make deletion slow, recreating the database + redeploying may be faster.
 

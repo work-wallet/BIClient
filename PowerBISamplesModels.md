@@ -11,56 +11,14 @@ To fully explore the models it is recommended that you open the relevant sample 
 
 Jump to the relevant section:
 
-* [Reported Issues](#reported-issues)
-* [Inductions](#inductions)
-* [Permits](#permits)
 * [Actions](#actions)
 * [Assets](#assets)
-* [Safety Cards](#safety-cards)
 * [Audits](#audits)
+* [Inductions](#inductions)
+* [Permits](#permits)
 * [PPE](#ppe)
-
-## Site Audits
-
-Legacy module
-
-## Reported Issues
-
-### Reported Issues - Main
-
-![Main](Images/PowerBIModelDiagrams/ReportedIssues_Main.png)
-
-### Reported Issues - Body Part
-
-![Body Part](Images/PowerBIModelDiagrams/ReportedIssues_BodyPart.png)
-
-### Reported Issues - Branch Option
-
-![Branch Option](Images/PowerBIModelDiagrams/ReportedIssues_BranchOption.png)
-
-### Reported Issues - Option Select
-
-![Option Select](Images/PowerBIModelDiagrams/ReportedIssues_OptionSelect.png)
-
-### Reported Issues - Person
-
-![Person](Images/PowerBIModelDiagrams/ReportedIssues_Person.png)
-
-### Reported Issues - Root Cause Analysis
-
-![Root Cause Analysis](Images/PowerBIModelDiagrams/ReportedIssues_RootCauseAnalysis.png)
-
-## Inductions
-
-### Inductions - Main
-
-![Main](Images/PowerBIModelDiagrams/Inductions_Main.png)
-
-## Permits
-
-### Permits - Main
-
-![Main](Images/PowerBIModelDiagrams/Permits_Main.png)
+* [Reported Issues](#reported-issues)
+* [Safety Cards](#safety-cards)
 
 ## Actions
 
@@ -81,12 +39,6 @@ Legacy module
 ### Assets - Property
 
 ![Property](Images/PowerBIModelDiagrams/Assets_Property.png)
-
-## Safety Cards
-
-### Safety Cards - Main
-
-![Main](Images/PowerBIModelDiagrams/SafetyCards_Main.png)
 
 ## Audits
 
@@ -126,6 +78,18 @@ Legacy module
 
 ![Branch Option](Images/PowerBIModelDiagrams/Audits_BranchOption.png)
 
+## Inductions
+
+### Inductions - Main
+
+![Main](Images/PowerBIModelDiagrams/Inductions_Main.png)
+
+## Permits
+
+### Permits - Main
+
+![Main](Images/PowerBIModelDiagrams/Permits_Main.png)
+
 ## PPE
 
 ### PPE - Stock
@@ -139,3 +103,35 @@ Legacy module
 ### PPE - Stock Assignments
 
 ![Main](Images/PowerBIModelDiagrams/PPE_Assignments.png)
+
+## Reported Issues
+
+### Reported Issues - Main
+
+![Main](Images/PowerBIModelDiagrams/ReportedIssues_Main.png)
+
+### Reported Issues - Body Part
+
+![Body Part](Images/PowerBIModelDiagrams/ReportedIssues_BodyPart.png)
+
+### Reported Issues - Branch Option
+
+![Branch Option](Images/PowerBIModelDiagrams/ReportedIssues_BranchOption.png)
+
+### Reported Issues - Option Select
+
+![Option Select](Images/PowerBIModelDiagrams/ReportedIssues_OptionSelect.png)
+
+### Reported Issues - Person
+
+![Person](Images/PowerBIModelDiagrams/ReportedIssues_Person.png)
+
+### Reported Issues - Root Cause Analysis
+
+![Root Cause Analysis](Images/PowerBIModelDiagrams/ReportedIssues_RootCauseAnalysis.png)
+
+## Safety Cards
+
+### Safety Cards - Main
+
+![Main](Images/PowerBIModelDiagrams/SafetyCards_Main.png)

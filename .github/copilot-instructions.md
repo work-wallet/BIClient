@@ -12,7 +12,7 @@ Supporting projects: `ClientCore` (interfaces/options), `ClientServices` (HTTP +
 3. Incremental sync using `lastSynchronizationVersion` (persist newest `SynchronizationVersion`).
 4. Stored procs in `mart` schema parse JSON into tables.
 
-Supported datasets (see `DataSets.cs` for mapping): ReportedIssues, Inductions, Permits, Actions, Assets, SafetyCards, Audits (AUDIT2), PPEStocks, PPEStockHistories, PPEAssignments.
+Supported datasets (see `DataSets.cs` for mapping): Actions, Assets, Audits (AUDIT2), Inductions, Permits, PPEAssignments, PPEStockHistories, PPEStocks, ReportedIssues, SafetyCards.
 
 ## 3. Config & Deployment
 - Multiple wallets: `AgentWallets[]` in config.
