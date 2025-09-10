@@ -447,7 +447,7 @@ Supported dataset names: see [Supported Datasets](#supported-datasets).
 
 Rules:
 
-- Keep `pageSize` ≤ 500.
+- Keep `pageSize` ≤ current API limit (currently 500; may be lower for some datasets in the future).
 - Increment `pageNumber` until returned page `Count < PageSize`.
 
 ### Change Tracking
@@ -535,6 +535,9 @@ Common scenarios:
 | --- | --- | --- |
 | HTTP 401 / 403 | Auth failure / bad credentials / scope | Re‑request token, verify client & wallet secrets. |
 | HTTP 400 with body `Incorrect data region` | `DataRegion` header value does not match wallet region | Query wallet endpoint to confirm `dataRegion`; correct or omit header then retry. |
+| HTTP 400 (PageSize validation) | PageSize exceeds current API limit | Automatically retry with smaller value (use `maxPageSize` from response body). |
+| HTTP 400 (other validation errors) | Invalid request parameters | Check request parameters against API constraints and retry with corrected values. |
+| HTTP 429 | Rate limiting / too many requests | Retry with exponential backoff + jitter; respect `Retry-After` header if present. |
 | HTTP 5xx | Transient platform issue | Retry with jitter; escalate if persistent. |
 | `Context.Error = "Invalid LastSynchronizationVersion"` | Supplied `lastSynchronizationVersion` below `MinValidSynchronizationVersion` | Perform dataset re‑ingest: remove tracking entry and reload. |
 | Other non-empty `Context.Error` | Dataset-specific or validation issue | Log, alert, and decide whether to skip or halt the run. |
@@ -558,9 +561,20 @@ Example truncated error-bearing payload:
 }
 ```
 
+Example HTTP 400 validation error response (PageSize too large):
+
+```json
+{
+  "error": "PageSize exceeds maximum allowed value of 200",
+  "maxPageSize": 200,
+  "requestedPageSize": 750
+}
+```
+
 Handling guidance:
 
 - Treat `Invalid LastSynchronizationVersion` as a controlled recovery path—do not loop retries with same value.
+- For PageSize validation errors, use `maxPageSize` from response body and retry immediately.
 - For unknown `Context.Error` values: log, then continue with other datasets if safe.
 - Ensure logging distinguishes transport errors (no JSON) vs logical errors (JSON with `Context.Error`).
 

@@ -8,7 +8,7 @@ Supporting projects: `ClientCore` (interfaces/options), `ClientServices` (HTTP +
 
 ## 2. Data Flow Essentials
 1. OAuth2 client credentials via `BearerTokenHandler` (identity endpoint).
-2. Page API: `.../dataextract/{dataset}` (<=500 page size).
+2. Page API: `.../dataextract/{dataset}` (≤current API limit, currently 500; may be lower for some datasets).
 3. Incremental sync using `lastSynchronizationVersion` (persist newest `SynchronizationVersion`).
 4. Stored procs in `mart` schema parse JSON into tables.
 
@@ -26,10 +26,12 @@ Local run (summary): deploy DB → run console (ESC cancels). Function uses NCRO
 Evaluate HTTP status + `Context.Error`:
 - 401/403: auth/scope → refresh/validate credentials.
 - 400 "Incorrect data region": remove/fix `DataRegion` header after determining wallet region.
+- 400 PageSize validation: automatically retry with smaller value using `maxPageSize` from response body.
+- 429: rate limiting → retry with exponential backoff + jitter; respect `Retry-After` header.
 - 5xx: retry with capped exponential backoff + jitter.
 - `Invalid LastSynchronizationVersion`: delete tracking entry → full reload dataset.
 - Other non-empty `Context.Error`: log and decide skip vs halt (no infinite retry).
-Rules: empty `Context.Error` = success; never exceed page size 500.
+Rules: empty `Context.Error` = success; respect current API limits (may vary per dataset).
 
 ## 5. Extension Points
 - Progress output: implement `IProgressService`.
@@ -58,7 +60,7 @@ Rules: empty `Context.Error` = success; never exceed page size 500.
 
 ## 9. Quick Reference: Do / Do Not
 Do: keep error matrix current; embed config snippets; maintain dataset order; use structured tables for mappings.
-Do Not: exceed page size 500; infinite-retry logical errors; introduce standalone sample config section; resurrect deleted docs.
+Do Not: exceed current API limits (may vary per dataset); infinite-retry logical errors; introduce standalone sample config section; resurrect deleted docs.
 
 ## 10. Style Snapshot
 Follow markdownlint defaults. Single H1 per file. Use fenced code blocks with language. README TOC explicitly numbered. Concise, present tense. Prefer inline code backticks. Keep tables lean.
