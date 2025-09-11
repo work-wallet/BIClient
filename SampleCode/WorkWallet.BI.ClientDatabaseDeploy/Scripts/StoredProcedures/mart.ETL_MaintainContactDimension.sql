@@ -9,11 +9,11 @@ BEGIN
     MERGE mart.Contact AS target
     USING (
         SELECT
-            a.ContactId,
-            a.[Name],
-            a.EmailAddress,
-            a.CompanyName,
-            w.Wallet_key
+            a.ContactId
+            ,a.[Name]
+            ,a.EmailAddress
+            ,a.CompanyName
+            ,w.Wallet_key
         FROM
             @contactTable AS a
             INNER JOIN mart.Wallet AS w ON a.WalletId = w.WalletId
@@ -27,24 +27,24 @@ BEGIN
     )
     THEN
         UPDATE SET
-            [Name] = source.[Name],
-            EmailAddress = source.EmailAddress,
-            CompanyName = source.CompanyName,
-            Wallet_key = source.Wallet_key,
-            _edited = SYSUTCDATETIME()
+            [Name] = source.[Name]
+            ,EmailAddress = source.EmailAddress
+            ,CompanyName = source.CompanyName
+            ,Wallet_key = source.Wallet_key
+            ,_edited = SYSUTCDATETIME()
     WHEN NOT MATCHED BY TARGET THEN
         INSERT (
-            ContactId,
-            [Name],
-            EmailAddress,
-            CompanyName,
-            Wallet_key
+            ContactId
+            ,[Name]
+            ,EmailAddress
+            ,CompanyName
+            ,Wallet_key
         ) VALUES (
-            source.ContactId,
-            source.[Name],
-            source.EmailAddress,
-            source.CompanyName,
-            source.Wallet_key
+            source.ContactId
+            ,source.[Name]
+            ,source.EmailAddress
+            ,source.CompanyName
+            ,source.Wallet_key
         );
 
     PRINT 'MERGE mart.Contact, number of rows = ' + CAST(@@ROWCOUNT AS varchar);

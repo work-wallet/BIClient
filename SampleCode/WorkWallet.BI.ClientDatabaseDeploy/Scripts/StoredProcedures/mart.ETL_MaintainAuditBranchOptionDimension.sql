@@ -9,14 +9,14 @@ BEGIN
     MERGE mart.AuditBranchOption AS target
     USING (
         SELECT DISTINCT
-            a.BranchId,
-            a.OptionId,
-            a.Branch,
-            a.[Value],
-            a.[Order],
-            a.Section,
-            a.OrderInSection,
-            w.Wallet_key
+            a.BranchId
+            ,a.OptionId
+            ,a.Branch
+            ,a.[Value]
+            ,a.[Order]
+            ,a.Section
+            ,a.OrderInSection
+            ,w.Wallet_key
         FROM
             @auditBranchOptionTable AS a
             INNER JOIN mart.Wallet AS w ON a.WalletId = w.WalletId
@@ -32,32 +32,32 @@ BEGIN
     )
     THEN
         UPDATE SET
-            Branch = source.Branch,
-            [Value] = source.[Value],
-            [Order] = source.[Order],
-            Section = source.Section,
-            OrderInSection = source.OrderInSection,
-            Wallet_key = source.Wallet_key,
-            _edited = SYSUTCDATETIME()
+            Branch = source.Branch
+            ,[Value] = source.[Value]
+            ,[Order] = source.[Order]
+            ,Section = source.Section
+            ,OrderInSection = source.OrderInSection
+            ,Wallet_key = source.Wallet_key
+            ,_edited = SYSUTCDATETIME()
     WHEN NOT MATCHED BY TARGET THEN
         INSERT (
-            BranchId,
-            OptionId,
-            Branch,
-            [Value],
-            [Order],
-            Section,
-            OrderInSection,
-            Wallet_key
+            BranchId
+            ,OptionId
+            ,Branch
+            ,[Value]
+            ,[Order]
+            ,Section
+            ,OrderInSection
+            ,Wallet_key
         ) VALUES (
-            source.BranchId,
-            source.OptionId,
-            source.Branch,
-            source.[Value],
-            source.[Order],
-            source.Section,
-            source.OrderInSection,
-            source.Wallet_key
+            source.BranchId
+            ,source.OptionId
+            ,source.Branch
+            ,source.[Value]
+            ,source.[Order]
+            ,source.Section
+            ,source.OrderInSection
+            ,source.Wallet_key
         );
 
     PRINT 'MERGE mart.AuditBranchOption, number of rows = ' + CAST(@@ROWCOUNT AS varchar);

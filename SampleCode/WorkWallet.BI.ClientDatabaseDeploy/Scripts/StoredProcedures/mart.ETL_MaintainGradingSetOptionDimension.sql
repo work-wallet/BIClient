@@ -9,16 +9,16 @@ BEGIN
     MERGE mart.GradingSetOption AS target
     USING (
         SELECT DISTINCT
-            o.GradingSetId,
-            o.GradingSetVersion,
-            o.GradingSetOptionId,
-            o.GradingSet,
-            o.GradingSetOption,
-            o.[Value],
-            o.ColourHex,
-            o.GradingSetIsPercentage,
-            o.GradingSetIsScore,
-            w.Wallet_key
+            o.GradingSetId
+            ,o.GradingSetVersion
+            ,o.GradingSetOptionId
+            ,o.GradingSet
+            ,o.GradingSetOption
+            ,o.[Value]
+            ,o.ColourHex
+            ,o.GradingSetIsPercentage
+            ,o.GradingSetIsScore
+            ,w.Wallet_key
         FROM
             @gradingSetOptionTable AS o
             INNER JOIN mart.Wallet AS w ON o.WalletId = w.WalletId
@@ -35,37 +35,37 @@ BEGIN
     )
     THEN
         UPDATE SET
-            GradingSet = source.GradingSet,
-            GradingSetOption = source.GradingSetOption,
-            [Value] = source.[Value],
-            ColourHex = source.ColourHex,
-            GradingSetIsPercentage = source.GradingSetIsPercentage,
-            GradingSetIsScore = source.GradingSetIsScore,
-            Wallet_key = source.Wallet_key,
-            _edited = SYSUTCDATETIME()
+            GradingSet = source.GradingSet
+            ,GradingSetOption = source.GradingSetOption
+            ,[Value] = source.[Value]
+            ,ColourHex = source.ColourHex
+            ,GradingSetIsPercentage = source.GradingSetIsPercentage
+            ,GradingSetIsScore = source.GradingSetIsScore
+            ,Wallet_key = source.Wallet_key
+            ,_edited = SYSUTCDATETIME()
     WHEN NOT MATCHED BY TARGET THEN
         INSERT (
-            GradingSetId,
-            GradingSetVersion,
-            GradingSetOptionId,
-            GradingSet,
-            GradingSetOption,
-            [Value],
-            ColourHex,
-            GradingSetIsPercentage,
-            GradingSetIsScore,
-            Wallet_key
+            GradingSetId
+            ,GradingSetVersion
+            ,GradingSetOptionId
+            ,GradingSet
+            ,GradingSetOption
+            ,[Value]
+            ,ColourHex
+            ,GradingSetIsPercentage
+            ,GradingSetIsScore
+            ,Wallet_key
         ) VALUES (
-            source.GradingSetId,
-            source.GradingSetVersion,
-            source.GradingSetOptionId,
-            source.GradingSet,
-            source.GradingSetOption,
-            source.[Value],
-            source.ColourHex,
-            source.GradingSetIsPercentage,
-            source.GradingSetIsScore,
-            source.Wallet_key
+            source.GradingSetId
+            ,source.GradingSetVersion
+            ,source.GradingSetOptionId
+            ,source.GradingSet
+            ,source.GradingSetOption
+            ,source.[Value]
+            ,source.ColourHex
+            ,source.GradingSetIsPercentage
+            ,source.GradingSetIsScore
+            ,source.Wallet_key
         );
 
     PRINT 'MERGE mart.GradingSetOption, number of rows = ' + CAST(@@ROWCOUNT AS varchar);

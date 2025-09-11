@@ -9,15 +9,15 @@ BEGIN
     MERGE mart.AuditChecklistOption AS target
     USING (
         SELECT DISTINCT
-            a.ChecklistId,
-            a.OptionId,
-            a.Question,
-            a.[Value],
-            a.Mandatory,
-            a.[Order],
-            a.Section,
-            a.OrderInSection,
-            w.Wallet_key
+            a.ChecklistId
+            ,a.OptionId
+            ,a.Question
+            ,a.[Value]
+            ,a.Mandatory
+            ,a.[Order]
+            ,a.Section
+            ,a.OrderInSection
+            ,w.Wallet_key
         FROM
             @auditChecklistAnswerTable AS a
             INNER JOIN mart.Wallet AS w ON a.WalletId = w.WalletId
@@ -34,35 +34,35 @@ BEGIN
     )
     THEN
         UPDATE SET
-            Question = source.Question,
-            [Value] = source.[Value],
-            Mandatory = source.Mandatory,
-            [Order] = source.[Order],
-            Section = source.Section,
-            OrderInSection = source.OrderInSection,
-            Wallet_key = source.Wallet_key,
-            _edited = SYSUTCDATETIME()
+            Question = source.Question
+            ,[Value] = source.[Value]
+            ,Mandatory = source.Mandatory
+            ,[Order] = source.[Order]
+            ,Section = source.Section
+            ,OrderInSection = source.OrderInSection
+            ,Wallet_key = source.Wallet_key
+            ,_edited = SYSUTCDATETIME()
     WHEN NOT MATCHED BY TARGET THEN
         INSERT (
-            ChecklistId,
-            OptionId,
-            Question,
-            [Value],
-            Mandatory,
-            [Order],
-            Section,
-            OrderInSection,
-            Wallet_key
+            ChecklistId
+            ,OptionId
+            ,Question
+            ,[Value]
+            ,Mandatory
+            ,[Order]
+            ,Section
+            ,OrderInSection
+            ,Wallet_key
         ) VALUES (
-            source.ChecklistId,
-            source.OptionId,
-            source.Question,
-            source.[Value],
-            source.Mandatory,
-            source.[Order],
-            source.Section,
-            source.OrderInSection,
-            source.Wallet_key
+            source.ChecklistId
+            ,source.OptionId
+            ,source.Question
+            ,source.[Value]
+            ,source.Mandatory
+            ,source.[Order]
+            ,source.Section
+            ,source.OrderInSection
+            ,source.Wallet_key
         );
 
     PRINT 'MERGE mart.AuditChecklistOption, number of rows = ' + CAST(@@ROWCOUNT AS varchar);

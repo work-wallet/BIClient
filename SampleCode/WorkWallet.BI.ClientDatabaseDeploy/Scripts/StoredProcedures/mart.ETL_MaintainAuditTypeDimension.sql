@@ -9,22 +9,22 @@ BEGIN
     MERGE mart.AuditType AS target
     USING (
         SELECT
-            a.AuditTypeId,
-            a.AuditTypeVersion,
-            a.AuditType,
-            a.[Description],
-            a.ScoringEnabled,
-            a.DisplayPercentage,
-            a.DisplayTotalScore,
-            a.DisplayAverageScore,
-            a.GradingSetId,
-            a.GradingSetVersion,
-            a.GradingSet,
-            a.GradingSetIsPercentage,
-            a.GradingSetIsScore,
-            a.ReportingEnabled,
-            a.ReportingAbbreviation,
-            w.Wallet_key
+            a.AuditTypeId
+            ,a.AuditTypeVersion
+            ,a.AuditType
+            ,a.[Description]
+            ,a.ScoringEnabled
+            ,a.DisplayPercentage
+            ,a.DisplayTotalScore
+            ,a.DisplayAverageScore
+            ,a.GradingSetId
+            ,a.GradingSetVersion
+            ,a.GradingSet
+            ,a.GradingSetIsPercentage
+            ,a.GradingSetIsScore
+            ,a.ReportingEnabled
+            ,a.ReportingAbbreviation
+            ,w.Wallet_key
         FROM
             @auditTypeTable AS a
             INNER JOIN mart.Wallet AS w ON a.WalletId = w.WalletId
@@ -48,56 +48,56 @@ BEGIN
     )
     THEN
         UPDATE SET
-            AuditType = source.AuditType,
-            [Description] = source.[Description],
-            ScoringEnabled = source.ScoringEnabled,
-            DisplayPercentage = source.DisplayPercentage,
-            DisplayTotalScore = source.DisplayTotalScore,
-            DisplayAverageScore = source.DisplayAverageScore,
-            GradingSetId = source.GradingSetId,
-            GradingSetVersion = source.GradingSetVersion,
-            GradingSet = source.GradingSet,
-            GradingSetIsPercentage = source.GradingSetIsPercentage,
-            GradingSetIsScore = source.GradingSetIsScore,
-            ReportingEnabled = source.ReportingEnabled,
-            ReportingAbbreviation = source.ReportingAbbreviation,
-            Wallet_key = source.Wallet_key,
-            _edited = SYSUTCDATETIME()
+            AuditType = source.AuditType
+            ,[Description] = source.[Description]
+            ,ScoringEnabled = source.ScoringEnabled
+            ,DisplayPercentage = source.DisplayPercentage
+            ,DisplayTotalScore = source.DisplayTotalScore
+            ,DisplayAverageScore = source.DisplayAverageScore
+            ,GradingSetId = source.GradingSetId
+            ,GradingSetVersion = source.GradingSetVersion
+            ,GradingSet = source.GradingSet
+            ,GradingSetIsPercentage = source.GradingSetIsPercentage
+            ,GradingSetIsScore = source.GradingSetIsScore
+            ,ReportingEnabled = source.ReportingEnabled
+            ,ReportingAbbreviation = source.ReportingAbbreviation
+            ,Wallet_key = source.Wallet_key
+            ,_edited = SYSUTCDATETIME()
     WHEN NOT MATCHED BY TARGET THEN
         INSERT (
-            AuditTypeId,
-            AuditTypeVersion,
-            AuditType,
-            [Description],
-            ScoringEnabled,
-            DisplayPercentage,
-            DisplayTotalScore,
-            DisplayAverageScore,
-            GradingSetId,
-            GradingSetVersion,
-            GradingSet,
-            GradingSetIsPercentage,
-            GradingSetIsScore,
-            ReportingEnabled,
-            ReportingAbbreviation,
-            Wallet_key
+            AuditTypeId
+            ,AuditTypeVersion
+            ,AuditType
+            ,[Description]
+            ,ScoringEnabled
+            ,DisplayPercentage
+            ,DisplayTotalScore
+            ,DisplayAverageScore
+            ,GradingSetId
+            ,GradingSetVersion
+            ,GradingSet
+            ,GradingSetIsPercentage
+            ,GradingSetIsScore
+            ,ReportingEnabled
+            ,ReportingAbbreviation
+            ,Wallet_key
         ) VALUES (
-            source.AuditTypeId,
-            source.AuditTypeVersion,
-            source.AuditType,
-            source.[Description],
-            source.ScoringEnabled,
-            source.DisplayPercentage,
-            source.DisplayTotalScore,
-            source.DisplayAverageScore,
-            source.GradingSetId,
-            source.GradingSetVersion,
-            source.GradingSet,
-            source.GradingSetIsPercentage,
-            source.GradingSetIsScore,
-            source.ReportingEnabled,
-            source.ReportingAbbreviation,
-            source.Wallet_key
+            source.AuditTypeId
+            ,source.AuditTypeVersion
+            ,source.AuditType
+            ,source.[Description]
+            ,source.ScoringEnabled
+            ,source.DisplayPercentage
+            ,source.DisplayTotalScore
+            ,source.DisplayAverageScore
+            ,source.GradingSetId
+            ,source.GradingSetVersion
+            ,source.GradingSet
+            ,source.GradingSetIsPercentage
+            ,source.GradingSetIsScore
+            ,source.ReportingEnabled
+            ,source.ReportingAbbreviation
+            ,source.Wallet_key
         );
 
     PRINT 'MERGE mart.AuditType, number of rows = ' + CAST(@@ROWCOUNT AS varchar);
