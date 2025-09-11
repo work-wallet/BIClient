@@ -9,19 +9,19 @@ BEGIN
     MERGE mart.[Action] AS target
     USING (
         SELECT
-            a.ActionId,
-            atype.ActionType_key,
-            a.TargetId,
-            a.TargetReference,
-            a.Title,
-            a.[Description],
-            a.AssignedTo,
-            ap.ActionPriority_key,
-            a.DueOn,
-            astat.ActionStatus_key,
-            a.Deleted,
-            a.CreatedOn,
-            w.Wallet_key
+            a.ActionId
+            ,atype.ActionType_key
+            ,a.TargetId
+            ,a.TargetReference
+            ,a.Title
+            ,a.[Description]
+            ,a.AssignedTo
+            ,ap.ActionPriority_key
+            ,a.DueOn
+            ,astat.ActionStatus_key
+            ,a.Deleted
+            ,a.CreatedOn
+            ,w.Wallet_key
         FROM
             @ActionTable AS a
             INNER JOIN mart.ActionStatus AS astat ON a.ActionStatusCode = astat.ActionStatusCode
@@ -46,48 +46,48 @@ BEGIN
     )
     THEN
         UPDATE SET
-            ActionType_key = source.ActionType_key,
-            TargetId = source.TargetId,
-            TargetReference = source.TargetReference,
-            Title = source.Title,
-            [Description] = source.[Description],
-            AssignedTo = source.AssignedTo,
-            ActionPriority_key = source.ActionPriority_key,
-            DueOn = source.DueOn,
-            ActionStatus_key = source.ActionStatus_key,
-            Deleted = source.Deleted,
-            CreatedOn = source.CreatedOn,
-            Wallet_key = source.Wallet_key,
-            _edited = SYSUTCDATETIME()
+            ActionType_key = source.ActionType_key
+            ,TargetId = source.TargetId
+            ,TargetReference = source.TargetReference
+            ,Title = source.Title
+            ,[Description] = source.[Description]
+            ,AssignedTo = source.AssignedTo
+            ,ActionPriority_key = source.ActionPriority_key
+            ,DueOn = source.DueOn
+            ,ActionStatus_key = source.ActionStatus_key
+            ,Deleted = source.Deleted
+            ,CreatedOn = source.CreatedOn
+            ,Wallet_key = source.Wallet_key
+            ,_edited = SYSUTCDATETIME()
     WHEN NOT MATCHED BY TARGET THEN
         INSERT (
-            ActionId,
-            ActionType_key,
-            TargetId,
-            TargetReference,
-            Title,
-            [Description],
-            AssignedTo,
-            ActionPriority_key,
-            DueOn,
-            ActionStatus_key,
-            Deleted,
-            CreatedOn,
-            Wallet_key
+            ActionId
+            ,ActionType_key
+            ,TargetId
+            ,TargetReference
+            ,Title
+            ,[Description]
+            ,AssignedTo
+            ,ActionPriority_key
+            ,DueOn
+            ,ActionStatus_key
+            ,Deleted
+            ,CreatedOn
+            ,Wallet_key
         ) VALUES (
-            source.ActionId,
-            source.ActionType_key,
-            source.TargetId,
-            source.TargetReference,
-            source.Title,
-            source.[Description],
-            source.AssignedTo,
-            source.ActionPriority_key,
-            source.DueOn,
-            source.ActionStatus_key,
-            source.Deleted,
-            source.CreatedOn,
-            source.Wallet_key
+            source.ActionId
+            ,source.ActionType_key
+            ,source.TargetId
+            ,source.TargetReference
+            ,source.Title
+            ,source.[Description]
+            ,source.AssignedTo
+            ,source.ActionPriority_key
+            ,source.DueOn
+            ,source.ActionStatus_key
+            ,source.Deleted
+            ,source.CreatedOn
+            ,source.Wallet_key
         );
 
     PRINT 'MERGE mart.Action, number of rows = ' + CAST(@@ROWCOUNT AS varchar);

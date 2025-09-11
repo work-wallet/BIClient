@@ -9,9 +9,9 @@ BEGIN
     MERGE mart.InductionCustomQuestion AS target
     USING (
         SELECT DISTINCT
-            a.Title,
-            a.[Value],
-            w.Wallet_key
+            a.Title
+            ,a.[Value]
+            ,w.Wallet_key
         FROM
             @inductionCustomQuestionTable AS a
             INNER JOIN mart.Wallet AS w ON a.WalletId = w.WalletId
@@ -22,14 +22,14 @@ BEGIN
         AND target.[Value] = source.[Value]
     WHEN NOT MATCHED BY TARGET THEN
         INSERT (
-            Title,
-            [Value],
-            Wallet_key
+            Title
+            ,[Value]
+            ,Wallet_key
         )
         VALUES (
-            source.Title,
-            source.[Value],
-            source.Wallet_key
+            source.Title
+            ,source.[Value]
+            ,source.Wallet_key
         );
 
     PRINT 'MERGE mart.InductionCustomQuestion, number of rows = ' + CAST(@@ROWCOUNT AS varchar);

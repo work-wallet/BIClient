@@ -9,8 +9,8 @@ BEGIN
     MERGE mart.Wallet AS target
     USING (
         SELECT
-            a.WalletId,
-            a.Wallet
+            a.WalletId
+            ,a.Wallet
         FROM
             @walletTable AS a
     ) AS source
@@ -20,15 +20,15 @@ BEGIN
     )
     THEN
         UPDATE SET
-            Wallet = source.Wallet,
-            _edited = SYSUTCDATETIME()
+            Wallet = source.Wallet
+            ,_edited = SYSUTCDATETIME()
     WHEN NOT MATCHED BY TARGET THEN
         INSERT (
-            WalletId,
-            Wallet
+            WalletId
+            ,Wallet
         ) VALUES (
-            source.WalletId,
-            source.Wallet
+            source.WalletId
+            ,source.Wallet
         );
 
     PRINT 'MERGE mart.Wallet, number of rows = ' + CAST(@@ROWCOUNT AS varchar);
