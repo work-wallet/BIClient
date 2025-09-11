@@ -36,15 +36,15 @@ BEGIN
         OR target.Wallet_key <> source.Wallet_key
     ) THEN
         UPDATE SET
-            target.Induction_key = source.Induction_key
-            ,target.ContactId = source.ContactId
-            ,target.[Name] = source.[Name]
-            ,target.CompanyName = source.CompanyName
-            ,target.TakenOn = source.TakenOn
-            ,target.CorrectTestQuestionCount = source.CorrectTestQuestionCount
-            ,target.InductionTakenStatus_key = source.InductionTakenStatus_key
-            ,target.Wallet_key = source.Wallet_key
-            ,target._edited = SYSUTCDATETIME()
+            Induction_key = source.Induction_key
+            ,ContactId = source.ContactId
+            ,[Name] = source.[Name]
+            ,CompanyName = source.CompanyName
+            ,TakenOn = source.TakenOn
+            ,CorrectTestQuestionCount = source.CorrectTestQuestionCount
+            ,InductionTakenStatus_key = source.InductionTakenStatus_key
+            ,Wallet_key = source.Wallet_key
+            ,_edited = SYSUTCDATETIME()
     WHEN NOT MATCHED BY TARGET THEN
         INSERT (
             InductionTakenId

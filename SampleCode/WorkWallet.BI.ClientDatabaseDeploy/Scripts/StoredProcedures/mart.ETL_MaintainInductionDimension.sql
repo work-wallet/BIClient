@@ -38,15 +38,15 @@ BEGIN
         OR target.Wallet_key <> source.Wallet_key
     ) THEN
         UPDATE SET
-            target.InductionName = source.InductionName
-            ,target.ValidForDays = source.ValidForDays
-            ,target.CreatedOn = source.CreatedOn
-            ,target.Active = source.Active
-            ,target.InductionStatus_key = source.InductionStatus_key
-            ,target.TestPassMark = source.TestPassMark
-            ,target.TestQuestionCount = source.TestQuestionCount
-            ,target.Wallet_key = source.Wallet_key
-            ,target._edited = SYSUTCDATETIME()
+            InductionName = source.InductionName
+            ,ValidForDays = source.ValidForDays
+            ,CreatedOn = source.CreatedOn
+            ,Active = source.Active
+            ,InductionStatus_key = source.InductionStatus_key
+            ,TestPassMark = source.TestPassMark
+            ,TestQuestionCount = source.TestQuestionCount
+            ,Wallet_key = source.Wallet_key
+            ,_edited = SYSUTCDATETIME()
     WHEN NOT MATCHED BY TARGET THEN
         INSERT (
             InductionId

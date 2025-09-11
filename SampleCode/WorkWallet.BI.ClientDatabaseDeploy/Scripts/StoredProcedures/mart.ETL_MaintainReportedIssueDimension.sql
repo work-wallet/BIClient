@@ -58,7 +58,7 @@ BEGIN
             ,ReportedIssueSeverity_key = source.ReportedIssueSeverity_key
             ,CloseDate = source.CloseDate
             ,Wallet_key = source.Wallet_key
-            ,target._edited = SYSUTCDATETIME()
+            ,_edited = SYSUTCDATETIME()
     WHEN NOT MATCHED BY TARGET THEN
         INSERT (
             ReportedIssueId
