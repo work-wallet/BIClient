@@ -9,9 +9,9 @@ BEGIN
     MERGE mart.ReportedIssueBodyPart AS target
     USING (
         SELECT DISTINCT
-            e.ReportedIssueBodyPartEnum_key,
-            a.Question,
-            w.Wallet_key
+            e.ReportedIssueBodyPartEnum_key
+            ,a.Question
+            ,w.Wallet_key
         FROM
             @reportedIssueBodyPartTable AS a
             INNER JOIN mart.ReportedIssueBodyPartEnum AS e ON
@@ -25,14 +25,14 @@ BEGIN
         AND target.Wallet_key = source.Wallet_key
     WHEN NOT MATCHED BY TARGET THEN
         INSERT (
-            ReportedIssueBodyPartEnum_key,
-            Question,
-            Wallet_key
+            ReportedIssueBodyPartEnum_key
+            ,Question
+            ,Wallet_key
         )
         VALUES (
-            source.ReportedIssueBodyPartEnum_key,
-            source.Question,
-            source.Wallet_key
+            source.ReportedIssueBodyPartEnum_key
+            ,source.Question
+            ,source.Wallet_key
         );
 
     PRINT 'MERGE mart.ReportedIssueBodyPart, number of rows = ' + CAST(@@ROWCOUNT AS varchar);
