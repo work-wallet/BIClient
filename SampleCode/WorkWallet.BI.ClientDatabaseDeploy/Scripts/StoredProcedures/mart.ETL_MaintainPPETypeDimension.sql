@@ -9,16 +9,16 @@ BEGIN
     MERGE mart.PPEType AS target
     USING (
         SELECT
-            a.PPETypeId,
-            a.PPETypeVariantId,
-            a.[Type],
-            a.Variant,
-            a.VariantOrder,
-            a.LifespanDays,
-            a.[Value],
-            a.TypeDeleted,
-            a.VariantDeleted,
-            w.Wallet_key        
+            a.PPETypeId
+            ,a.PPETypeVariantId
+            ,a.[Type]
+            ,a.Variant
+            ,a.VariantOrder
+            ,a.LifespanDays
+            ,a.[Value]
+            ,a.TypeDeleted
+            ,a.VariantDeleted
+            ,w.Wallet_key        
         FROM
             @ppeTypeTable AS a
             INNER JOIN mart.Wallet AS w ON a.WalletId = w.WalletId
@@ -36,38 +36,38 @@ BEGIN
     )
     THEN
         UPDATE SET
-            [Type] = source.[Type],
-            Variant = source.Variant,
-            VariantOrder = source.VariantOrder,
-            LifespanDays = source.LifespanDays,
-            [Value] = source.[Value],
-            TypeDeleted = source.TypeDeleted,
-            VariantDeleted = source.VariantDeleted,
-            Wallet_key = source.Wallet_key,
-            _edited = SYSUTCDATETIME()
+            [Type] = source.[Type]
+            ,Variant = source.Variant
+            ,VariantOrder = source.VariantOrder
+            ,LifespanDays = source.LifespanDays
+            ,[Value] = source.[Value]
+            ,TypeDeleted = source.TypeDeleted
+            ,VariantDeleted = source.VariantDeleted
+            ,Wallet_key = source.Wallet_key
+            ,_edited = SYSUTCDATETIME()
     WHEN NOT MATCHED BY TARGET THEN
         INSERT (
-            PPETypeId,
-            PPETypeVariantId,
-            [Type],
-            Variant,
-            VariantOrder,
-            LifespanDays,
-            [Value],
-            TypeDeleted,
-            VariantDeleted,            
-            Wallet_key
+            PPETypeId
+            ,PPETypeVariantId
+            ,[Type]
+            ,Variant
+            ,VariantOrder
+            ,LifespanDays
+            ,[Value]
+            ,TypeDeleted
+            ,VariantDeleted
+            ,Wallet_key
         ) VALUES (
-            source.PPETypeId,
-            source.PPETypeVariantId,
-            source.[Type],
-            source.Variant,
-            source.VariantOrder,
-            source.LifespanDays,
-            source.[Value],
-            source.TypeDeleted,
-            source.VariantDeleted,
-            source.Wallet_key
+            source.PPETypeId
+            ,source.PPETypeVariantId
+            ,source.[Type]
+            ,source.Variant
+            ,source.VariantOrder
+            ,source.LifespanDays
+            ,source.[Value]
+            ,source.TypeDeleted
+            ,source.VariantDeleted
+            ,source.Wallet_key
         );
 
     PRINT 'MERGE mart.PPEType, number of rows = ' + CAST(@@ROWCOUNT AS varchar);

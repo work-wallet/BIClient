@@ -9,23 +9,23 @@ BEGIN
     MERGE mart.[Audit] AS target
     USING (
         SELECT
-            a.AuditId,
-            a.Reference,
-            a.AuditReference,
-            g.AuditGroup_key,
-            s.AuditStatus_key,
-            t.AuditType_key,
-            ol.Location_key,
-            a.InspectedOn,
-            a.TotalScore,
-            a.TotalPotentialScore,
-            a.AverageScore,
-            a.AveragePotentialScore,
-            a.PercentageScore,
-            a.Flags,
-            gso.GradingSetOption_key,
-            a.ExternalIdentifier,
-            w.Wallet_key
+            a.AuditId
+            ,a.Reference
+            ,a.AuditReference
+            ,g.AuditGroup_key
+            ,s.AuditStatus_key
+            ,t.AuditType_key
+            ,ol.Location_key
+            ,a.InspectedOn
+            ,a.TotalScore
+            ,a.TotalPotentialScore
+            ,a.AverageScore
+            ,a.AveragePotentialScore
+            ,a.PercentageScore
+            ,a.Flags
+            ,gso.GradingSetOption_key
+            ,a.ExternalIdentifier
+            ,w.Wallet_key
         FROM
             @auditTable AS a
             INNER JOIN mart.AuditGroup AS g ON a.AuditGroupId = g.AuditGroupId
@@ -56,60 +56,60 @@ BEGIN
     )
     THEN
         UPDATE SET
-            Reference = source.Reference,
-            AuditReference = source.AuditReference,
-            AuditGroup_key = source.AuditGroup_key,
-            AuditStatus_key = source.AuditStatus_key,
-            AuditType_key = source.AuditType_key,
-            Location_key = source.Location_key,
-            InspectedOn = source.InspectedOn,
-            TotalScore = source.TotalScore,
-            TotalPotentialScore = source.TotalPotentialScore,
-            AverageScore = source.AverageScore,
-            AveragePotentialScore = source.AveragePotentialScore,
-            PercentageScore = source.PercentageScore,
-            Flags = source.Flags,
-            GradingSetOption_key = source.GradingSetOption_key,
-            ExternalIdentifier = source.ExternalIdentifier,
-            Wallet_key = source.Wallet_key,
-            _edited = SYSUTCDATETIME()
+            Reference = source.Reference
+            ,AuditReference = source.AuditReference
+            ,AuditGroup_key = source.AuditGroup_key
+            ,AuditStatus_key = source.AuditStatus_key
+            ,AuditType_key = source.AuditType_key
+            ,Location_key = source.Location_key
+            ,InspectedOn = source.InspectedOn
+            ,TotalScore = source.TotalScore
+            ,TotalPotentialScore = source.TotalPotentialScore
+            ,AverageScore = source.AverageScore
+            ,AveragePotentialScore = source.AveragePotentialScore
+            ,PercentageScore = source.PercentageScore
+            ,Flags = source.Flags
+            ,GradingSetOption_key = source.GradingSetOption_key
+            ,ExternalIdentifier = source.ExternalIdentifier
+            ,Wallet_key = source.Wallet_key
+            ,_edited = SYSUTCDATETIME()
     WHEN NOT MATCHED BY TARGET THEN
         INSERT (
-            AuditId,
-            Reference,
-            AuditReference,
-            AuditGroup_key,
-            AuditStatus_key,
-            AuditType_key,
-            Location_key,
-            InspectedOn,
-            TotalScore,
-            TotalPotentialScore,
-            AverageScore,
-            AveragePotentialScore,
-            PercentageScore,
-            Flags,
-            GradingSetOption_key,
-            ExternalIdentifier,
-            Wallet_key
+            AuditId
+            ,Reference
+            ,AuditReference
+            ,AuditGroup_key
+            ,AuditStatus_key
+            ,AuditType_key
+            ,Location_key
+            ,InspectedOn
+            ,TotalScore
+            ,TotalPotentialScore
+            ,AverageScore
+            ,AveragePotentialScore
+            ,PercentageScore
+            ,Flags
+            ,GradingSetOption_key
+            ,ExternalIdentifier
+            ,Wallet_key
         ) VALUES (
-            source.AuditId,
-            source.Reference,
-            source.AuditReference,
-            source.AuditGroup_key,
-            source.AuditStatus_key,
-            source.AuditType_key,
-            source.Location_key,
-            source.InspectedOn,
-            source.TotalScore,
-            source.TotalPotentialScore,
-            source.AverageScore,
-            source.AveragePotentialScore,
-            source.PercentageScore,
-            source.Flags,
-            source.GradingSetOption_key,
-            source.ExternalIdentifier,
-            source.Wallet_key
+            source.AuditId
+            ,source.Reference
+            ,source.AuditReference
+            ,source.AuditGroup_key
+            ,source.AuditStatus_key
+            ,source.AuditType_key
+            ,source.Location_key
+            ,source.InspectedOn
+            ,source.TotalScore
+            ,source.TotalPotentialScore
+            ,source.AverageScore
+            ,source.AveragePotentialScore
+            ,source.PercentageScore
+            ,source.Flags
+            ,source.GradingSetOption_key
+            ,source.ExternalIdentifier
+            ,source.Wallet_key
         );
 
     PRINT 'MERGE mart.Audit, number of rows = ' + CAST(@@ROWCOUNT AS varchar);

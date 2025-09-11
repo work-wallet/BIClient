@@ -9,22 +9,22 @@ BEGIN
     MERGE mart.[Location] AS target
     USING (
         SELECT
-            a.LocationId,
-            a.LocationTypeCode,
-            a.LocationType,
-            a.[Location],
-            a.CompanyId,
-            a.Company,
-            a.SiteId,
-            a.[Site],
-            a.AreaId,
-            a.Area,
-            a.JobId,
-            a.Job,
-            a.SiteLocationId,
-            a.Department,
-            a.ExternalIdentifier,
-            w.Wallet_key
+            a.LocationId
+            ,a.LocationTypeCode
+            ,a.LocationType
+            ,a.[Location]
+            ,a.CompanyId
+            ,a.Company
+            ,a.SiteId
+            ,a.[Site]
+            ,a.AreaId
+            ,a.Area
+            ,a.JobId
+            ,a.Job
+            ,a.SiteLocationId
+            ,a.Department
+            ,a.ExternalIdentifier
+            ,w.Wallet_key
         FROM
             @locationTable AS a
             INNER JOIN mart.Wallet AS w ON a.WalletId = w.WalletId
@@ -48,58 +48,58 @@ BEGIN
         OR target.Wallet_key <> source.Wallet_key
     ) THEN
         UPDATE SET
-            LocationTypeCode = source.LocationTypeCode,
-            LocationType = source.LocationType,
-            [Location] = source.[Location],
-            CompanyId = source.CompanyId,
-            Company = source.Company,
-            SiteId = source.SiteId,
-            [Site] = source.[Site],
-            AreaId = source.AreaId,
-            Area = source.Area,
-            JobId = source.JobId,
-            Job = source.Job,
-            SiteLocationId = source.SiteLocationId,
-            Department = source.Department,
-            ExternalIdentifier = source.ExternalIdentifier,
-            Wallet_key = source.Wallet_key,
-            _edited = SYSUTCDATETIME()
+            LocationTypeCode = source.LocationTypeCode
+            ,LocationType = source.LocationType
+            ,[Location] = source.[Location]
+            ,CompanyId = source.CompanyId
+            ,Company = source.Company
+            ,SiteId = source.SiteId
+            ,[Site] = source.[Site]
+            ,AreaId = source.AreaId
+            ,Area = source.Area
+            ,JobId = source.JobId
+            ,Job = source.Job
+            ,SiteLocationId = source.SiteLocationId
+            ,Department = source.Department
+            ,ExternalIdentifier = source.ExternalIdentifier
+            ,Wallet_key = source.Wallet_key
+            ,_edited = SYSUTCDATETIME()
     WHEN NOT MATCHED BY TARGET THEN
         INSERT (
-            LocationId,
-            LocationTypeCode,
-            LocationType,
-            [Location],
-            CompanyId,
-            Company,
-            SiteId,
-            [Site],
-            AreaId,
-            Area,
-            JobId,
-            Job,
-            SiteLocationId,
-            Department,
-            ExternalIdentifier,
-            Wallet_key
+            LocationId
+            ,LocationTypeCode
+            ,LocationType
+            ,[Location]
+            ,CompanyId
+            ,Company
+            ,SiteId
+            ,[Site]
+            ,AreaId
+            ,Area
+            ,JobId
+            ,Job
+            ,SiteLocationId
+            ,Department
+            ,ExternalIdentifier
+            ,Wallet_key
         )
         VALUES (
-            source.LocationId,
-            source.LocationTypeCode,
-            source.LocationType,
-            source.[Location],
-            source.CompanyId,
-            source.Company,
-            source.SiteId,
-            source.[Site],
-            source.AreaId,
-            source.Area,
-            source.JobId,
-            source.Job,
-            source.SiteLocationId,
-            source.Department,
-            source.ExternalIdentifier,
-            source.Wallet_key
+            source.LocationId
+            ,source.LocationTypeCode
+            ,source.LocationType
+            ,source.[Location]
+            ,source.CompanyId
+            ,source.Company
+            ,source.SiteId
+            ,source.[Site]
+            ,source.AreaId
+            ,source.Area
+            ,source.JobId
+            ,source.Job
+            ,source.SiteLocationId
+            ,source.Department
+            ,source.ExternalIdentifier
+            ,source.Wallet_key
         );
 
     PRINT 'MERGE mart.[Location], number of rows = ' + CAST(@@ROWCOUNT AS varchar);
