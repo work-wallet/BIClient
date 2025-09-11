@@ -9,10 +9,10 @@ BEGIN
     MERGE mart.AuditScoreTag AS target
     USING (
         SELECT DISTINCT
-            x.TagId,
-            x.TagVersion,
-            x.Tag,
-            w.Wallet_key
+            x.TagId
+            ,x.TagVersion
+            ,x.Tag
+            ,w.Wallet_key
         FROM
             @auditScoreTagTable AS x
             INNER JOIN mart.Wallet AS w ON x.WalletId = w.WalletId
@@ -24,20 +24,20 @@ BEGIN
     )
     THEN
         UPDATE SET
-            Tag = source.Tag,
-            Wallet_key = source.Wallet_key,
-            _edited = SYSUTCDATETIME()
+            Tag = source.Tag
+            ,Wallet_key = source.Wallet_key
+            ,_edited = SYSUTCDATETIME()
     WHEN NOT MATCHED BY TARGET THEN
         INSERT (
-            TagId,
-            TagVersion,
-            Tag,
-            Wallet_key
+            TagId
+            ,TagVersion
+            ,Tag
+            ,Wallet_key
         ) VALUES (
-            source.TagId,
-            source.TagVersion,
-            source.Tag,
-            source.Wallet_key
+            source.TagId
+            ,source.TagVersion
+            ,source.Tag
+            ,source.Wallet_key
         );
 
     PRINT 'MERGE mart.AuditScoreTag, number of rows = ' + CAST(@@ROWCOUNT AS varchar);
