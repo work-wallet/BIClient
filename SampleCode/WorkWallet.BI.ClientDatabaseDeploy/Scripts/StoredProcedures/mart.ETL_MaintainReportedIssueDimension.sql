@@ -46,18 +46,18 @@ BEGIN
             OR target.Wallet_key <> source.Wallet_key
         ) THEN
         UPDATE SET
-            target.ReportedIssueReference = source.ReportedIssueReference,
-            target.OccurredOn = source.OccurredOn,
-            target.ReportedOn = source.ReportedOn,
-            target.ReportedBy = source.ReportedBy,
-            target.ReportedByCompany = source.ReportedByCompany,
-            target.ReportedIssueStatus_key = source.ReportedIssueStatus_key,
-            target.ReportedIssueCategory_key = source.ReportedIssueCategory_key,
-            target.Location_key = source.Location_key,
-            target.ReportedIssueOverview = source.ReportedIssueOverview,
-            target.ReportedIssueSeverity_key = source.ReportedIssueSeverity_key,
-            target.CloseDate = source.CloseDate,
-            target.Wallet_key = source.Wallet_key,
+            ReportedIssueReference = source.ReportedIssueReference,
+            OccurredOn = source.OccurredOn,
+            ReportedOn = source.ReportedOn,
+            ReportedBy = source.ReportedBy,
+            ReportedByCompany = source.ReportedByCompany,
+            ReportedIssueStatus_key = source.ReportedIssueStatus_key,
+            ReportedIssueCategory_key = source.ReportedIssueCategory_key,
+            Location_key = source.Location_key,
+            ReportedIssueOverview = source.ReportedIssueOverview,
+            ReportedIssueSeverity_key = source.ReportedIssueSeverity_key,
+            CloseDate = source.CloseDate,
+            Wallet_key = source.Wallet_key,
             target._edited = SYSUTCDATETIME()
     WHEN NOT MATCHED BY TARGET THEN
         INSERT (

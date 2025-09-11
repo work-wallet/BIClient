@@ -26,10 +26,10 @@ BEGIN
     ON target.PPETypeId = source.PPETypeId AND target.PPETypeVariantId = source.PPETypeVariantId
     WHEN MATCHED AND (
         target.[Type] <> source.[Type]
-        OR target.Variant <> source.Variant
-        OR target.VariantOrder <> source.VariantOrder
-        OR target.LifespanDays <> source.LifespanDays
-        OR target.[Value] <> source.[Value]
+        OR target.Variant IS DISTINCT FROM source.Variant
+        OR target.VariantOrder IS DISTINCT FROM source.VariantOrder
+        OR target.LifespanDays IS DISTINCT FROM source.LifespanDays
+        OR target.[Value] IS DISTINCT FROM source.[Value]
         OR target.TypeDeleted <> source.TypeDeleted
         OR target.VariantDeleted <> source.VariantDeleted
         OR target.Wallet_key <> source.Wallet_key

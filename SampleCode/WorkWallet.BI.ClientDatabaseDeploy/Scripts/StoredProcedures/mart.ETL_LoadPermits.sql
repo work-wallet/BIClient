@@ -188,7 +188,7 @@ BEGIN
 
         EXEC mart.ETL_MaintainPermitChecklistAnswerDimension @permitToWorkChecklistAnswerTable = @permitToWorkChecklistAnswerTable;
 
-        EXEC mart.ETL_LoadPermitChecklistAnswerFact @permitToWorkChecklistAnswerTable = @permitToWorkChecklistAnswerTable
+        EXEC mart.ETL_LoadPermitChecklistAnswerFact @permitToWorkChecklistAnswerTable = @permitToWorkChecklistAnswerTable;
 
         COMMIT TRANSACTION;
     END TRY

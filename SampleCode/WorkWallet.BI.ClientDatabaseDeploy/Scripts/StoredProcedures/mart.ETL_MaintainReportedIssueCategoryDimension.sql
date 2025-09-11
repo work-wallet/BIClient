@@ -33,13 +33,13 @@ BEGIN
             OR target.Wallet_key <> source.Wallet_key
         ) THEN
         UPDATE SET
-            target.CategoryName = source.CategoryName,
-            target.CategoryDescription = source.CategoryDescription,
-            target.SubcategoryName = source.SubcategoryName,
-            target.SubcategoryDescription = source.SubcategoryDescription,
-            target.SubcategoryOrder = source.SubcategoryOrder,
-            target.Wallet_key = source.Wallet_key,
-            target._edited = SYSUTCDATETIME()
+            CategoryName = source.CategoryName,
+            CategoryDescription = source.CategoryDescription,
+            SubcategoryName = source.SubcategoryName,
+            SubcategoryDescription = source.SubcategoryDescription,
+            SubcategoryOrder = source.SubcategoryOrder,
+            Wallet_key = source.Wallet_key,
+            _edited = SYSUTCDATETIME()
     WHEN NOT MATCHED BY TARGET THEN
         INSERT (
             SubcategoryId,
