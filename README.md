@@ -6,7 +6,36 @@ A streamlined, production-ready reference implementation for extracting Health &
 
 ## Contents
 
-<!-- todo -->
+1. [Overview](#1-overview)
+   - 1.1 [Why This Exists](#11-why-this-exists)
+2. [Supported Datasets](#2-supported-datasets)
+3. [Usage Paths](#3-usage-paths)
+4. [API Credentials](#4-api-credentials)
+5. [Quick Start (Database + Power BI Path)](#5-quick-start-database--power-bi-path)
+   - 5.1 [Binaries / Downloads](#51-binaries--downloads)
+   - 5.2 [Prerequisites](#52-prerequisites)
+   - 5.3 [Architecture](#53-architecture)
+   - 5.4 [Repository Structure](#54-repository-structure)
+   - 5.5 [Database Deployment](#55-database-deployment)
+   - 5.6 [Data Extraction (Console)](#56-data-extraction-console)
+   - 5.7 [Azure Function Deployment](#57-azure-function-deployment)
+   - 5.8 [Force Data Reset](#58-force-data-reset)
+   - 5.9 [Power BI Samples](#59-power-bi-samples)
+   - 5.10 [Troubleshooting](#510-troubleshooting)
+   - 5.11 [Security Notes](#511-security-notes)
+6. [Direct API Usage (No Database)](#6-direct-api-usage-no-database)
+   - 6.1 [Obtain an OAuth 2.0 Access Token](#61-obtain-an-oauth-20-access-token)
+   - 6.2 [Call the BI Extract Endpoint (Paging)](#62-call-the-bi-extract-endpoint-paging)
+   - 6.3 [Change Tracking](#63-change-tracking)
+   - 6.4 [Idempotency Considerations](#64-idempotency-considerations)
+   - 6.5 [Example (Truncated JSON)](#65-example-truncated-json)
+   - 6.6 [Unpacking the JSON](#66-unpacking-the-json)
+   - 6.7 [Multi-Region Access](#67-multi-region-access)
+   - 6.8 [Error Handling](#68-error-handling)
+   - 6.9 [When to Use the Quick Start Instead](#69-when-to-use-the-quick-start-instead)
+7. [Contributing / Issues](#7-contributing--issues)
+8. [License](#8-license)
+9. [Changelog](#9-changelog)
 
 ---
 
