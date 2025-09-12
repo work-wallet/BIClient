@@ -428,16 +428,6 @@ Ensure any default filters (e.g. date, site, status) reflect values present in y
 - All traffic is HTTPS; no extra encryption required in transit.
 - Consider enabling Transparent Data Encryption (TDE) / at rest encryption in SQL if mandated.
 
-## Contributing / Issues
-
-Issues / enhancement requests: open a GitHub Issue. Pull Requests welcome (ensure any schema changes include deployment scripts & docs update).
-
-## License
-
-See [LICENSE.md](./LICENSE.md).
-
----
-
 ## Direct API Usage (No Database)
 
 If you prefer to integrate directly (without deploying the sample database or console app), implement the following. Running the Quick Start once first is still helpful for understanding structure.
@@ -625,6 +615,14 @@ Use the provided pipeline if you want:
 - Lower engineering overhead for change tracking.
 
 The choices are interoperable: you can switch paths later using the same credentials.
+
+## Contributing / Issues
+
+Issues / enhancement requests: open a GitHub Issue. Pull Requests welcome (ensure any schema changes include deployment scripts & docs update).
+
+## License
+
+See [LICENSE.md](./LICENSE.md).
 
 ## Changelog
 
