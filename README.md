@@ -6,30 +6,11 @@ A streamlined, production-ready reference implementation for extracting Health &
 
 ## Contents
 
-1. [Overview](#overview)
-2. [Supported Datasets](#supported-datasets)
-3. [Usage Paths](#usage-paths)
-4. [Quick Start (Database + Power BI Path)](#quick-start-database--power-bi-path)
-5. [Prerequisites](#prerequisites)
-6. [Architecture](#architecture)
-7. [Repository Structure](#repository-structure)
-8. [API Credentials](#api-credentials)
-9. [Binaries / Downloads](#binaries--downloads)
-10. [Database Deployment](#database-deployment)
-11. [Data Extraction (Console)](#data-extraction-console)
-12. [Azure Function Deployment](#azure-function-deployment)
-13. [Force Data Reset](#force-data-reset)
-14. [Power BI Samples](#power-bi-samples)
-15. [Troubleshooting](#troubleshooting)
-16. [Security Notes](#security-notes)
-17. [Direct API Usage (No Database)](#direct-api-usage-no-database)
-18. [Contributing / Issues](#contributing--issues)
-19. [License](#license)
-20. [Changelog](#changelog)
+<!-- todo -->
 
 ---
 
-## Overview
+## 1. Overview
 
 The [Work Wallet](https://www.work-wallet.com/) Health & Safety platform exposes a secure BI Extract API optimised for regular, incremental data feeds into analytics platforms. This repository provides:
 
@@ -42,7 +23,7 @@ Repository (source & releases): [work-wallet/BIClient](https://github.com/work-w
 
 You can use the binaries directly (no code changes required), customise the solution, or treat it as a reference implementation for your own stack.
 
-### Why This Exists
+### 1.1 Why This Exists
 
 Many organisations need timely Health & Safety operational insight (issues raised, audits, permits, actions) but lack a ready-made ingestion pattern. Building robust paging, incremental change tracking and schema management from scratch is repetitive and error-prone. This project provides:
 
@@ -53,7 +34,7 @@ Many organisations need timely Health & Safety operational insight (issues raise
 
 Use it to accelerate your first production deployment, then iterate where you differentiate (governance, advanced modelling, ML, etc.).
 
-## Supported Datasets
+## 2. Supported Datasets
 
 The API currently enables download of:
 
@@ -71,71 +52,18 @@ The API currently enables download of:
 
 Each dataset is queried using paging + `lastSynchronizationVersion` change tracking to minimise transfer volume.
 
-## Usage Paths
+## 3. Usage Paths
 
 Choose the approach that best fits your analytics platform maturity:
 
 | Path | When to Use | Outputs | Effort |
 | --- | --- | --- | --- |
-| Quick Start (recommended) | You want an end‑to‑end working pipeline fast | Deployed SQL star schema + optional Power BI models | Minimal configuration |
-| Direct API (no database) | You already have existing data integration or lake tooling | Raw paged JSON responses | Build paging + change tracking logic |
+| [Quick Start (recommended)](#5-quick-start-database--power-bi-path) | You want an end‑to‑end working pipeline fast | Deployed SQL star schema + optional Power BI models | Minimal configuration |
+| [Direct API (no database)](#6-direct-api-usage-no-database) | You already have existing data integration or lake tooling | Raw paged JSON responses | Build paging + change tracking logic |
 
 If unsure, start with the Quick Start; you can later migrate to a bespoke ingestion using the same credentials.
 
-Advanced raw integration details are documented near the end: see [Direct API Usage (No Database)](#direct-api-usage-no-database).
-
-Proceed to [Quick Start (Database + Power BI Path)](#quick-start-database--power-bi-path).
-
-## Quick Start (Database + Power BI Path)
-
-1. Request API credentials (see [API Credentials](#api-credentials)).
-2. Download latest release binaries (database deploy + client) from [Releases](https://github.com/work-wallet/BIClient/releases).
-3. Deploy / upgrade the database (edit `WorkWallet.BI.ClientDatabaseDeploy/appsettings.json` then run `WorkWallet.BI.ClientDatabaseDeploy.exe`).
-4. Configure data extraction (edit `WorkWallet.BI.ClientSample/appsettings.json` then run the executable — first run is a full load).
-5. (Optional) Open a Power BI sample `.pbip` project from `PowerBISamples`, point to your database, refresh.
-6. (Optional) Deploy `WorkWallet.BI.ClientFunction` for scheduled automation.
-
-## Prerequisites
-
-You should be comfortable with basic SQL Server administration and .NET runtime deployment.
-
-Required:
-
-- SQL Server (Azure SQL, LocalDB, Express, Developer, Standard, etc.)
-- A SQL connection string compatible with `Microsoft.Data.SqlClient`
-- Internet access (firewall allow: `bi.work-wallet.com`, `identity.work-wallet.com`)
-- .NET 8 runtime (for running) or SDK (if building from source)
-
-Optional:
-
-- Visual Studio 2022 (or `dotnet` CLI) to modify/build
-- Power BI Desktop (for provided sample models)
-- Azure Subscription (if using Azure Functions)
-
-## Architecture
-
-Core concepts:
-
-- OAuth2 Client Credentials → bearer tokens from `https://identity.work-wallet.com`
-- Paged API requests to `https://bi.work-wallet.com/dataextract/{dataset}` (page size configurable; max 500)
-- Incremental sync keyed by `lastSynchronizationVersion` persisted in `mart.ETL_ChangeDetection`
-- Star-schema data mart (facts + dimensions) populated via JSON shredding stored procedures
-- Multiple wallet support via `AgentWallets[]` configuration array
-
-## Repository Structure
-
-| Project | Purpose |
-| --- | --- |
-| `WorkWallet.BI.ClientDatabaseDeploy` | Deploys / upgrades schema, types & stored procedures (drops + recreates procs on upgrade). |
-| `WorkWallet.BI.ClientSample` | Console data extraction client (manual / scheduled). |
-| `WorkWallet.BI.ClientFunction` | Azure Function timer-trigger wrapper for automated extraction. |
-| `WorkWallet.BI.ClientCore` | Shared abstractions & options. |
-| `WorkWallet.BI.ClientServices` | HTTP + data store implementations, processor logic. |
-| `PowerBISamples` | `.pbip` models & reports (one per dataset). |
-| `Images` | Screenshots (used in documentation). |
-| `Scripts` | Legacy migration script. |
-
-## API Credentials
+## 4. API Credentials
 
 Access is enabled per Wallet. Contact Work Wallet Support to request activation. You will receive:
 
@@ -149,20 +77,69 @@ Base endpoints:
 - API: `https://bi.work-wallet.com`
 - Auth: `https://identity.work-wallet.com`
 
-These values are required for both the Quick Start (stored in configuration) and Direct API usage (token + query parameters). Raw HTTP guidance is fully contained in this README (see [Direct API Usage](#direct-api-usage-no-database)).
+These values are required for both the Quick Start and Direct API usage.
 
-## Binaries / Downloads
+## 5. Quick Start (Database + Power BI Path)
+
+1. Request API credentials.
+2. Download latest release binaries (database deploy + client) from [Releases](https://github.com/work-wallet/BIClient/releases).
+3. Deploy / upgrade the database (edit `WorkWallet.BI.ClientDatabaseDeploy/appsettings.json` then run `WorkWallet.BI.ClientDatabaseDeploy.exe`).
+4. Configure data extraction (edit `WorkWallet.BI.ClientSample/appsettings.json` then run the executable — first run is a full load).
+5. (Optional) Open a Power BI sample `.pbip` project from `PowerBISamples`, point to your database, refresh.
+6. (Optional) Deploy `WorkWallet.BI.ClientFunction` for scheduled automation.
+
+### 5.1 Binaries / Downloads
 
 All binaries target .NET 8. Install the [.NET 8 runtime](https://dotnet.microsoft.com/en-us/download/dotnet/8.0) if not already present.
 
-Download from GitHub [Releases](https://github.com/work-wallet/BIClient/releases):
+Download from GitHub [Releases](https://github.com/work-wallet/BIClient/releases) (or build from source):
 
 | Tool | Executable | Config File |
 | --- | --- | --- |
 | Database Deployment | `WorkWallet.BI.ClientDatabaseDeploy.exe` | `appsettings.json` |
 | Data Extraction (Console) | `WorkWallet.BI.ClientSample.exe` | `appsettings.json` |
 
-## Database Deployment
+### 5.2 Prerequisites
+
+You should be comfortable with basic SQL Server administration and .NET runtime deployment.
+
+Required:
+
+- SQL Server (Azure SQL, LocalDB, Express, Developer, Standard, etc.)
+- A SQL connection string compatible with `Microsoft.Data.SqlClient`
+- Internet access (firewall allows: `bi.work-wallet.com`, `identity.work-wallet.com`)
+- .NET 8 runtime (for running) or SDK (if building from source)
+
+Optional:
+
+- Visual Studio 2022 (or `dotnet` CLI) to modify/build
+- Power BI Desktop (for provided sample models)
+- Azure Subscription (if using Azure Functions)
+
+### 5.3 Architecture
+
+Core concepts:
+
+- OAuth2 Client Credentials → bearer tokens from `https://identity.work-wallet.com`
+- Paged API requests to `https://bi.work-wallet.com/dataextract/{dataset}` (page size configurable; max 500)
+- Incremental sync keyed by `lastSynchronizationVersion` persisted in `mart.ETL_ChangeDetection`
+- Star-schema data mart (facts + dimensions) populated via JSON shredding stored procedures
+- Multiple wallet support via `AgentWallets[]` configuration array
+
+### 5.4 Repository Structure
+
+| Project | Purpose |
+| --- | --- |
+| `WorkWallet.BI.ClientDatabaseDeploy` | Deploys / upgrades schema, types & stored procedures (drops + recreates procs on upgrade). |
+| `WorkWallet.BI.ClientSample` | Console data extraction client (manual / scheduled). |
+| `WorkWallet.BI.ClientFunction` | Azure Function timer-trigger wrapper for automated extraction. |
+| `WorkWallet.BI.ClientCore` | Shared abstractions & options. |
+| `WorkWallet.BI.ClientServices` | HTTP + data store implementations, processor logic. |
+| `PowerBISamples` | `.pbip` models & reports (one per dataset). |
+| `Images` | Screenshots (used in documentation). |
+| `Scripts` | Legacy migration script. |
+
+### 5.5 Database Deployment
 
 Executable: `WorkWallet.BI.ClientDatabaseDeploy`.
 
@@ -185,7 +162,7 @@ Example `appsettings.json` placed alongside the executable:
 }
 ```
 
-### Legacy Installations (Pre-Aug 2023)
+#### 5.5.1 Legacy Installations (Pre-Aug 2023)
 
 Most users can skip this section.
 
@@ -202,7 +179,7 @@ Why this is needed: the deployment tool records each RunOnce group (schema objec
 
 Alternative: If a full reload is acceptable you may instead create a fresh empty database, run the deployment tool (which will create `dbo.SchemaVersions` automatically) and then perform a full data extraction.
 
-### Extension Points for Custom Business Logic
+#### 5.5.2 Extension Points for Custom Business Logic
 
 The database deployment includes empty placeholder stored procedures named `mart.ETL_PostProcess*` (one for each dataset: Actions, Assets, Audits, etc.). These are intentional extension points where you can implement custom business logic that runs after each dataset is loaded.
 
@@ -221,7 +198,7 @@ Example scenarios for custom post-processing:
 
 The post-process procedures are called automatically after each dataset load completes successfully.
 
-## Data Extraction (Console)
+### 5.6 Data Extraction (Console)
 
 Executable: `WorkWallet.BI.ClientSample`.
 
@@ -282,22 +259,22 @@ Example `appsettings.json` placed alongside `WorkWallet.BI.ClientSample.exe`:
 
 Run the executable manually or schedule (Task Scheduler / cron / etc.).
 
-### Scheduling Recommendations
+#### 5.6.1 Scheduling Recommendations
 
 For automated runs, schedule the executable to run outside core working hours to avoid conflicts with active data entry. Run regularly (typically daily) to prevent the `Invalid lastSynchronizationVersion` error caused by synchronization gaps exceeding retention periods.
 
 Choose a slightly randomized time within your out-of-hours window (e.g., 2:17 AM instead of 2:00 AM) to distribute API load and avoid request bunching.
 
-### Notes
+#### 5.6.2 Notes
 
 - First run performs full historical load (may be large).
 - Incremental loads fetch only changed pages per dataset.
 - Progress & change tracking stored in `mart.ETL_ChangeDetection`.
 - Configure multiple wallets by adding more objects to `AgentWallets[]`.
 
-Error `Invalid lastSynchronizationVersion`: usually means extraction gap exceeded retention. Resolve by [Force Data Reset](#force-data-reset).
+Error `Invalid lastSynchronizationVersion`: usually means extraction gap exceeded retention. Resolve by [5.8 Force Data Reset](#58-force-data-reset).
 
-## Azure Function Deployment
+### 5.7 Azure Function Deployment
 
 Project: `WorkWallet.BI.ClientFunction` (timer trigger).
 
@@ -348,9 +325,7 @@ Example `local.settings.json` for local Azure Function development:
 }
 ```
 
-## Force Data Reset
-
-Only relevant to the Quick Start (database) path when incremental tracking continuity is lost.
+### 5.8 Force Data Reset
 
 Mechanism: Delete relevant rows from `mart.ETL_ChangeDetection`. Next execution will:
 
@@ -378,7 +353,7 @@ DELETE FROM mart.ETL_ChangeDetection WHERE LogType = 'AUDIT2_UPDATED';
 
 If large volumes make deletion slow, recreating the database + redeploying may be faster.
 
-## Power BI Samples
+### 5.9 Power BI Samples
 
 Sample Power BI Project files (`.pbip`) are located in `PowerBISamples/` (one folder per domain). These include both the semantic model and report definitions.
 
@@ -392,7 +367,7 @@ They are a reference only—any BI tool can consume the database.
 
 For model diagrams see [`PowerBISamplesModels.md`](PowerBISamplesModels.md).
 
-### Connect to Your Database
+#### 5.9.1 Connect to Your Database
 
 Power BI Desktop → File → Options and settings → Data source settings → Change Source...
 
@@ -400,41 +375,41 @@ Power BI Desktop → File → Options and settings → Data source settings → 
 
 ![Power BI Data Source Settings](Images/PowerBIDataSourceSettings.png)
 
-### Refresh Data
+#### 5.9.2 Refresh Data
 
 Click Refresh (Home ribbon). Data is on-demand unless you publish to a service (Power BI Pro / Fabric) with scheduled refresh.
 
 ![Power BI Refresh Data](Images/PowerBIRefresh.png)
 
-### Adjust Filters
+#### 5.9.3 Adjust Filters
 
 Ensure any default filters (e.g. date, site, status) reflect values present in your Wallet or visuals may appear blank.
 
-## Troubleshooting
+### 5.10 Troubleshooting
 
 | Symptom | Cause | Resolution |
 | --- | --- | --- |
-| `Invalid lastSynchronizationVersion` | Gap too long / table reset mismatch | Perform [Force Data Reset](#force-data-reset). |
+| `Invalid lastSynchronizationVersion` | Gap too long / table reset mismatch | Perform [5.8 Force Data Reset](#58-force-data-reset). |
 | Slow first run | Full historical ingestion | Allow to complete; subsequent runs incremental. |
 | Empty Power BI visuals | Filters exclude data / wrong DB | Adjust filters; verify data tables populated. |
 | Auth failure (401) | Invalid client credentials | Re-check `ApiAccessClientId` / secret; wallet enabled? |
 | Network errors | Firewall / proxy blocking | Allow outbound HTTPS to API + identity endpoints. |
 | High DB log growth | Large initial ingest | Ensure regular log backups (full recovery) or switch to simple during first load. |
 
-## Security Notes
+### 5.11 Security Notes
 
 - Keep client secrets + wallet secrets out of source control (use environment variables / secret managers for production).
 - Principle of least privilege: SQL login should have rights only to target database.
 - All traffic is HTTPS; no extra encryption required in transit.
 - Consider enabling Transparent Data Encryption (TDE) / at rest encryption in SQL if mandated.
 
-## Direct API Usage (No Database)
+## 6. Direct API Usage (No Database)
 
 If you prefer to integrate directly (without deploying the sample database or console app), implement the following. Running the Quick Start once first is still helpful for understanding structure.
 
 For complete JSON response examples for each dataset, see [`SampleJSONFromAPI.md`](SampleJSONFromAPI.md).
 
-### Obtain an OAuth 2.0 Access Token
+### 6.1 Obtain an OAuth 2.0 Access Token
 
 Flow: Client Credentials.
 
@@ -449,7 +424,7 @@ Form-style body (conceptual):
 client_id={ApiAccessClientId}&client_secret={ApiAccessClientSecret}&grant_type=client_credentials&scope=ww_bi_extract
 ```
 
-### Call the BI Extract Endpoint (Paging)
+### 6.2 Call the BI Extract Endpoint (Paging)
 
 Template:
 
@@ -458,14 +433,14 @@ GET https://bi.work-wallet.com/dataextract/{DataSet}?walletId={WalletId}&walletS
 Authorization: Bearer {access_token}
 ```
 
-Supported dataset names: see [Supported Datasets](#supported-datasets).
+Supported dataset names: see [2. Supported Datasets](#2-supported-datasets).
 
 Rules:
 
 - Keep `pageSize` ≤ current API limit (currently 500; may be lower for some datasets in the future).
 - Increment `pageNumber` until returned page `Count < PageSize`.
 
-### Change Tracking
+### 6.3 Change Tracking
 
 Store the `SynchronizationVersion` returned in the `Context` block per dataset. Next run add:
 
@@ -488,7 +463,7 @@ Key context fields:
 | `lastSynchronizationVersion` | Echo of request (only if > 0) |
 | `PageNumber` / `PageSize` | Echo of request |
 
-### Idempotency Considerations
+### 6.4 Idempotency Considerations
 
 Ensure your integration handles re-runs gracefully. If a sync process fails partway through (network issues, system restart, etc.), the next run should be able to continue without data corruption or duplication. Key practices:
 
@@ -499,7 +474,7 @@ Ensure your integration handles re-runs gracefully. If a sync process fails part
 
 This prevents scenarios where partial sync state leads to missing data or infinite retry loops.
 
-### Example (Truncated JSON)
+### 6.5 Example (Truncated JSON)
 
 ```json
 {
@@ -519,14 +494,14 @@ This prevents scenarios where partial sync state leads to missing data or infini
 }
 ```
 
-### Unpacking the JSON
+### 6.6 Unpacking the JSON
 
 Options:
 
 - Process directly into relational structures (ETL) much like the stored procedures in `SampleCode/WorkWallet.BI.ClientDatabaseDeploy/Scripts/StoredProcedures`.
 - Land raw page payloads first (ELT) then transform later; star-schema scripts in `SampleCode/WorkWallet.BI.ClientDatabaseDeploy/Scripts/Schema` can guide modelling.
 
-### Multi-Region Access
+### 6.7 Multi-Region Access
 
 If your execution region differs from the Wallet’s hosting region add a header:
 
@@ -548,7 +523,7 @@ Notes:
 - Only send the `DataRegion` header when you are calling from a different geographic region than the wallet’s hosting region (cross-region optimisation).
 - If you supply a `DataRegion` value that does not match the wallet’s actual region the API returns **HTTP 400** with a plain text body: `Incorrect data region` (no JSON payload). Remove or correct the header (use the wallet lookup call above to confirm the right value) and retry.
 
-### Error Handling
+### 6.8 Error Handling
 
 Error surfaces come from two places:
 
@@ -606,7 +581,7 @@ Handling guidance:
 - For unknown `Context.Error` values: log, then continue with other datasets if safe.
 - Ensure logging distinguishes transport errors (no JSON) vs logical errors (JSON with `Context.Error`).
 
-### When to Use the Quick Start Instead
+### 6.9 When to Use the Quick Start Instead
 
 Use the provided pipeline if you want:
 
@@ -616,14 +591,14 @@ Use the provided pipeline if you want:
 
 The choices are interoperable: you can switch paths later using the same credentials.
 
-## Contributing / Issues
+## 7 Contributing / Issues
 
 Issues / enhancement requests: open a GitHub Issue. Pull Requests welcome (ensure any schema changes include deployment scripts & docs update).
 
-## License
+## 8 License
 
 See [LICENSE.md](./LICENSE.md).
 
-## Changelog
+## 9 Changelog
 
 See [CHANGELOG.md](CHANGELOG.md) for release history and recent documentation updates.
