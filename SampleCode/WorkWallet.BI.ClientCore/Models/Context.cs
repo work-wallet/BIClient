@@ -1,4 +1,4 @@
-﻿namespace WorkWallet.BI.ClientServices.Processor;
+namespace WorkWallet.BI.ClientCore.Models;
 
 public class Context
 {
