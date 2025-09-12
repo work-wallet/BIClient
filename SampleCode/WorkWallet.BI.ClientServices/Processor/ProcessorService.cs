@@ -30,25 +30,40 @@ public class ProcessorService(
             logger.LogInformation("Start process for wallet {wallet}", agentWallet.WalletId);
             progressService.WriteWallet(walletContext.Name.Trim(), walletContext.DataRegion);
 
-            // if no dataTypes are provided, then use all the ones that we know about
-            string[] dataSets = _serviceOptions.DataSets.Length > 0 ? _serviceOptions.DataSets : [.. DataSets.Entries.Keys];
+            await ProcessWalletDataSetsAsync(walletContext, cancellationToken);
+        }
+    }
 
-            // repeat for all the dataSets selected
-            foreach (string dataSet in dataSets)
+    private async Task ProcessWalletDataSetsAsync(WalletContext walletContext, CancellationToken cancellationToken)
+    {
+        var dataSetEntries = GetDataSetEntriesToProcess();
+
+        foreach (var (dataType, logType) in dataSetEntries)
+        {
+            cancellationToken.ThrowIfCancellationRequested();
+            await ProcessAsync(walletContext, dataType, logType, cancellationToken);
+        }
+    }
+
+    private IEnumerable<(string DataType, string LogType)> GetDataSetEntriesToProcess()
+    {
+        // if no DataSets are provided, then use all the ones that we know about
+        var requestedDataSets = _serviceOptions.DataSets.Length > 0 
+            ? _serviceOptions.DataSets 
+            : DataSets.Entries.Keys;
+
+        foreach (string dataSet in requestedDataSets)
+        {
+            var entry = DataSets.Entries.FirstOrDefault(dt => 
+                dt.Key.Equals(dataSet, StringComparison.OrdinalIgnoreCase));
+
+            // the requested dataType is not in our lookup of expected types
+            if (entry.Equals(default(KeyValuePair<string, string>)))
             {
-                cancellationToken.ThrowIfCancellationRequested();
-
-                var entry = DataSets.Entries.FirstOrDefault(dt => dt.Key.Equals(dataSet, StringComparison.OrdinalIgnoreCase));
-
-                // the requested dataType is not in our lookup of expected types
-                if (entry.Equals(default(KeyValuePair<string, string>)))
-                {
-                    throw new UnsupportedDataTypeException(dataSet);
-                }
-
-                // process for this dataType
-                await ProcessAsync(walletContext, entry.Key, entry.Value, cancellationToken);
+                throw new UnsupportedDataTypeException(dataSet);
             }
+
+            yield return (entry.Key, entry.Value);
         }
     }
 
@@ -138,8 +153,7 @@ public class ProcessorService(
 
             LogPageDetails(dataType, json, context);
 
-            bool hasMorePages = PaginationLogic.ShouldContinuePaging(context);
-            return new PageResult(context, json, hasMorePages);
+            return new PageResult(context, json);
         }
         catch (JsonParseException ex)
         {
