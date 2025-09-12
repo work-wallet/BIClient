@@ -114,8 +114,11 @@ These values are required for both the Quick Start and Direct API usage.
 2. Download latest release binaries (database deploy + client) from [Releases](https://github.com/work-wallet/BIClient/releases).
 3. Deploy / upgrade the database (edit `WorkWallet.BI.ClientDatabaseDeploy/appsettings.json` then run `WorkWallet.BI.ClientDatabaseDeploy.exe`).
 4. Configure data extraction (edit `WorkWallet.BI.ClientSample/appsettings.json` then run the executable — first run is a full load).
-5. (Optional) Open a Power BI sample `.pbip` project from `PowerBISamples`, point to your database, refresh.
-6. (Optional) Deploy `WorkWallet.BI.ClientFunction` for scheduled automation.
+5. Set up automated extraction:
+   - **Either**: Schedule `WorkWallet.BI.ClientSample.exe` to run regularly (daily recommended)
+   - **Or**: Deploy `WorkWallet.BI.ClientFunction` for Azure-hosted automation
+6. (Optional) Open a Power BI sample `.pbip` project from `PowerBISamples`, point to your database, refresh.
+7. (Optional) Publish Power BI reports to Power BI Pro / Fabric for sharing and scheduled refresh.
 
 ### 5.1 Binaries / Downloads
 
