@@ -282,7 +282,13 @@ Example `appsettings.json` placed alongside `WorkWallet.BI.ClientSample.exe`:
 
 Run the executable manually or schedule (Task Scheduler / cron / etc.).
 
-Notes:
+### Scheduling Recommendations
+
+For automated runs, schedule the executable to run outside core working hours to avoid conflicts with active data entry. Run regularly (typically daily) to prevent the `Invalid lastSynchronizationVersion` error caused by synchronization gaps exceeding retention periods.
+
+Choose a slightly randomized time within your out-of-hours window (e.g., 2:17 AM instead of 2:00 AM) to distribute API load and avoid request bunching.
+
+### Notes
 
 - First run performs full historical load (may be large).
 - Incremental loads fetch only changed pages per dataset.
@@ -491,6 +497,17 @@ Key context fields:
 | `FullCount` | Total rows (first page) |
 | `lastSynchronizationVersion` | Echo of request (only if > 0) |
 | `PageNumber` / `PageSize` | Echo of request |
+
+### Idempotency Considerations
+
+Ensure your integration handles re-runs gracefully. If a sync process fails partway through (network issues, system restart, etc.), the next run should be able to continue without data corruption or duplication. Key practices:
+
+- Only update the stored `lastSynchronizationVersion` **after** successfully processing all pages for a dataset
+- Use transactional processing where possible (e.g., stage data first, then commit atomically)
+- Consider using MERGE/UPSERT patterns rather than INSERT to handle potential duplicate processing
+- Implement proper cleanup for any temporary/staging data if the process fails mid-run
+
+This prevents scenarios where partial sync state leads to missing data or infinite retry loops.
 
 ### Example (Truncated JSON)
 
