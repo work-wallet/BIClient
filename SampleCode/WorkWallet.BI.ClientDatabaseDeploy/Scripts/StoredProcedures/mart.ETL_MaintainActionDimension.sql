@@ -18,6 +18,7 @@ BEGIN
             ,a.AssignedTo
             ,ap.ActionPriority_key
             ,a.DueOn
+            ,a.OriginalDueOn
             ,astat.ActionStatus_key
             ,a.Deleted
             ,a.CreatedOn
@@ -39,6 +40,7 @@ BEGIN
         OR target.AssignedTo <> source.AssignedTo
         OR target.ActionPriority_key <> source.ActionPriority_key
         OR target.DueOn <> source.DueOn
+        OR target.OriginalDueOn <> source.OriginalDueOn
         OR target.ActionStatus_key <> source.ActionStatus_key
         OR target.Deleted <> source.Deleted
         OR target.CreatedOn <> source.CreatedOn
@@ -54,6 +56,7 @@ BEGIN
             ,AssignedTo = source.AssignedTo
             ,ActionPriority_key = source.ActionPriority_key
             ,DueOn = source.DueOn
+            ,OriginalDueOn = source.OriginalDueOn
             ,ActionStatus_key = source.ActionStatus_key
             ,Deleted = source.Deleted
             ,CreatedOn = source.CreatedOn
@@ -70,6 +73,7 @@ BEGIN
             ,AssignedTo
             ,ActionPriority_key
             ,DueOn
+            ,OriginalDueOn
             ,ActionStatus_key
             ,Deleted
             ,CreatedOn
@@ -84,6 +88,7 @@ BEGIN
             ,source.AssignedTo
             ,source.ActionPriority_key
             ,source.DueOn
+            ,source.OriginalDueOn
             ,source.ActionStatus_key
             ,source.Deleted
             ,source.CreatedOn

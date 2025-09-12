@@ -12,6 +12,7 @@ CREATE TYPE mart.ETL_ActionTable AS TABLE
     ,AssignedTo nvarchar(100) NOT NULL
     ,PriorityCode int NOT NULL
     ,DueOn date NOT NULL
+    ,OriginalDueOn date NOT NULL
     ,ActionStatusCode int NOT NULL
     ,Deleted bit NOT NULL
     ,CreatedOn datetimeoffset(7) NOT NULL

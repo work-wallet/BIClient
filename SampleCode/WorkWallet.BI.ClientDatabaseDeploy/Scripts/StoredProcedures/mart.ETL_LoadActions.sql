@@ -43,6 +43,7 @@ BEGIN
             ,AssignedTo
             ,PriorityCode
             ,DueOn
+            ,OriginalDueOn
             ,ActionStatusCode
             ,Deleted
             ,CreatedOn
@@ -60,6 +61,7 @@ BEGIN
             ,AssignedTo nvarchar(100)
             ,PriorityCode int
             ,DueOn date
+            ,OriginalDueOn date
             ,ActionStatusCode int
             ,Deleted bit
             ,CreatedOn datetimeoffset(7)

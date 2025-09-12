@@ -58,6 +58,7 @@ CREATE TABLE mart.[Action]
     ,AssignedTo nvarchar(100) NOT NULL
     ,ActionPriority_key int NOT NULL
     ,DueOn date NOT NULL
+    ,OriginalDueOn date NOT NULL
     ,ActionStatus_key int NOT NULL
     ,Deleted bit NOT NULL
     ,CreatedOn datetimeoffset(7) NOT NULL
