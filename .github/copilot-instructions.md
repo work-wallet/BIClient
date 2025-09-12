@@ -1,16 +1,22 @@
 # Work Wallet BI Client - Concise AI Guide
 
-## 1. Core Architecture
-Data extraction & load into SQL Server star schema. Two runtimes share the same processor:
-- Console (`ClientSample`)
-- Azure Function timer (`ClientFunction`)
-Supporting projects: `ClientCore` (interfaces/options), `ClientServices` (HTTP + SQL store + auth), `ClientDatabaseDeploy` (DbUp deployer).
+## 1. Core Architecture & Usage Paths
+Two distinct usage paths serve different user scenarios:
+
+**Quick Start Path** (recommended): End-to-end SQL Server star schema solution with:
+- Console (`ClientSample`) + Azure Function timer (`ClientFunction`) runtimes
+- Database deployment (`ClientDatabaseDeploy`) using DbUp
+- Sample Power BI semantic models
+- Supporting projects: `ClientCore` (interfaces/options), `ClientServices` (HTTP + SQL store + auth)
+
+**Direct API Path**: Raw JSON extraction for existing data platforms/lakes - users implement own paging, change tracking, and storage.
 
 ## 2. Data Flow Essentials
 1. OAuth2 client credentials via `BearerTokenHandler` (identity endpoint).
-2. Page API: `.../dataextract/{dataset}` (≤current API limit, currently 500; may be lower for some datasets).
-3. Incremental sync using `lastSynchronizationVersion` (persist newest `SynchronizationVersion`).
-4. Stored procs in `mart` schema parse JSON into tables.
+2. Paged API requests: `.../dataextract/{dataset}` (≤current API limit, currently 500; may be lower for some datasets).
+3. Incremental sync using `lastSynchronizationVersion` (persist `SynchronizationVersion` from **first page** to avoid missing changes during paging).
+4. Quick Start: Stored procs in `mart` schema parse JSON into star schema tables.
+5. Direct API: Users handle JSON processing and storage themselves.
 
 Supported datasets (see `DataSets.cs` for mapping): Actions, Assets, Audits (AUDIT2), Inductions, Permits, PPEAssignments, PPEStockHistories, PPEStocks, ReportedIssues, SafetyCards.
 
@@ -44,11 +50,13 @@ Rules: empty `Context.Error` = success; respect current API limits (may vary per
 - Leading comma convention used throughout SQL code (comma at start of line, not end).
 - MERGE statements use simple `<>` comparisons for NOT NULL columns, `IS DISTINCT FROM` for nullable columns.
 
-## 7. Minimal Documentation Rules
-- Single canonical guide: `README.md`.
+## 7. Documentation Structure & Rules
+- Single canonical guide: `README.md` with numbered section hierarchy (1-9).
+- Two main usage paths clearly separated: Quick Start (section 5) and Direct API (section 6).
 - Embed sample config JSON inline in relevant sections (not a separate section).
 - Keep README TOC explicitly numbered; leave other markdown to standard lint auto-numbering.
 - Add rationale or clarifications under existing headings instead of creating new top-level ones unless substantial.
+- Architecture section (5.3) explains data flow, design principles, and benefits for Quick Start users.
 
 ## 8. Changelog Updates
 - Use `CHANGELOG.md` with Unreleased → versioned sections on release.

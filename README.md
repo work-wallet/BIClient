@@ -147,13 +147,29 @@ Optional:
 
 ### 5.3 Architecture
 
-Core concepts:
+Understanding how the components work together helps when configuring and troubleshooting the solution:
 
-- OAuth2 Client Credentials → bearer tokens from `https://identity.work-wallet.com`
-- Paged API requests to `https://bi.work-wallet.com/dataextract/{dataset}` (page size configurable; max 500)
-- Incremental sync keyed by `lastSynchronizationVersion` persisted in `mart.ETL_ChangeDetection`
-- Star-schema data mart (facts + dimensions) populated via JSON shredding stored procedures
-- Multiple wallet support via `AgentWallets[]` configuration array
+**Data Flow Overview:**
+
+1. **Authentication**: The client obtains OAuth2 bearer tokens using your API credentials from `https://identity.work-wallet.com`
+2. **API Extraction**: Makes paged requests to `https://bi.work-wallet.com/dataextract/{dataset}` (configurable page size, max 500)
+3. **Change Tracking**: Uses `lastSynchronizationVersion` to fetch only new/changed data since the last run
+4. **Database Loading**: JSON responses are parsed and loaded into SQL Server via stored procedures
+5. **Star Schema**: Data is transformed into fact and dimension tables optimized for analytics
+
+**Key Design Principles:**
+
+- **Incremental**: Only fetches changes since last successful sync (stored in `mart.ETL_ChangeDetection`)
+- **Resilient**: Handles network issues, API limits, and partial failures gracefully
+- **Scalable**: Supports multiple wallets via `AgentWallets[]` configuration array
+- **Extensible**: Clear extension points for custom business logic and alternative storage
+
+**Why This Approach:**
+
+- Minimizes API load and transfer time with paging + change tracking
+- Provides analytics-ready star schema out of the box
+- Handles the complexity of robust incremental sync patterns
+- Separates extraction logic from transformation logic for maintainability
 
 ### 5.4 Repository Structure
 
