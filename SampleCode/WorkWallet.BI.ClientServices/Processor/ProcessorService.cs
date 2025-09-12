@@ -83,6 +83,7 @@ public class ProcessorService(
 
         int pageNumber = 0;
         Context context;
+        long? firstPageSynchronizationVersion = null;
 
         // we support data paging in order to be able to cope with large result sets
         progressService.StartShowProgress(dataType, !lastSynchronizationVersion.HasValue);
@@ -132,6 +133,12 @@ public class ProcessorService(
             logger.LogDebug("SynchronizationVersion: {SynchronizationVersion}", context.SynchronizationVersion);
             logger.LogDebug("PageNumber: {PageNumber}, PageSize: {PageSize}", context.PageNumber, context.PageSize);
 
+            // capture the SynchronizationVersion from the first page to use as the high watermark
+            if (pageNumber == 1)
+            {
+                firstPageSynchronizationVersion = context.SynchronizationVersion;
+            }
+
             if (context.Count > 0)
             {
                 cancellationToken.ThrowIfCancellationRequested();
@@ -149,7 +156,9 @@ public class ProcessorService(
 
         // update our change detection / logging table, so we only fetch new and changed data next time
         // (must do this, even if no rows are obtained as lastSynchronizationVersion can otherwise become invalid)
-        await dataStore.UpdateLastSyncAsync(walletContext.Id, logType, context.SynchronizationVersion, context.FullCount);
+        // use the SynchronizationVersion from the first page to avoid missing changes that occur during paging
+        long synchronizationVersionToRecord = firstPageSynchronizationVersion ?? context.SynchronizationVersion;
+        await dataStore.UpdateLastSyncAsync(walletContext.Id, logType, synchronizationVersionToRecord, context.FullCount);
 
         if (context.FullCount > 0)
         {

@@ -202,6 +202,25 @@ Why this is needed: the deployment tool records each RunOnce group (schema objec
 
 Alternative: If a full reload is acceptable you may instead create a fresh empty database, run the deployment tool (which will create `dbo.SchemaVersions` automatically) and then perform a full data extraction.
 
+### Extension Points for Custom Business Logic
+
+The database deployment includes empty placeholder stored procedures named `mart.ETL_PostProcess*` (one for each dataset: Actions, Assets, Audits, etc.). These are intentional extension points where you can implement custom business logic that runs after each dataset is loaded.
+
+**Important:** All `mart.*` stored procedures are dropped and recreated when `WorkWallet.BI.ClientDatabaseDeploy` runs. Any changes you make directly to these procedures will be lost on the next database update.
+
+**Recommended Approach:** If you need to implement custom post-processing logic:
+
+1. **Clone this repository** to your own source control
+2. **Modify the `ETL_PostProcess*` procedures** in your cloned version with your custom business logic
+3. **Keep your fork current** by regularly pulling updates from the upstream repository
+4. **Deploy using your modified version** of `WorkWallet.BI.ClientDatabaseDeploy`
+
+Example scenarios for custom post-processing:
+
+- Additional transformations or calculations
+
+The post-process procedures are called automatically after each dataset load completes successfully.
+
 ## Data Extraction (Console)
 
 Executable: `WorkWallet.BI.ClientSample`.
@@ -459,6 +478,8 @@ Store the `SynchronizationVersion` returned in the `Context` block per dataset. 
 ```
 
 First ever call: omit the parameter (or set `0`). If you later pass a version lower than `MinValidSynchronizationVersion` the API will reject it—perform a full reload for that dataset.
+
+**Important**: When implementing paging, use the `SynchronizationVersion` from the **first page** as your high-water mark, not the last page. This prevents missing changes that occur during the paging process. Changes made between the first and last page requests will be captured in the next sync cycle.
 
 Key context fields:
 
