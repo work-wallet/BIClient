@@ -37,20 +37,26 @@ Rules: empty `Context.Error` = success; respect current API limits (may vary per
 - Progress output: implement `IProgressService`.
 - Alternative storage: implement `IDataStoreService`.
 - New dataset: add to `DataSets.cs`, create SQL processing proc(s), update docs & changelog.
+- Post-processing: `ETL_PostProcess*` procedures are intentionally empty placeholders for users to add custom business logic after data loading.
 
-## 6. Minimal Documentation Rules
+## 6. Database Design Notes
+- Empty `ETL_PostProcess*` stored procedures are deliberate extension points for repository users to implement custom post-processing logic.
+- Leading comma convention used throughout SQL code (comma at start of line, not end).
+- MERGE statements use simple `<>` comparisons for NOT NULL columns, `IS DISTINCT FROM` for nullable columns.
+
+## 7. Minimal Documentation Rules
 - Single canonical guide: `README.md`.
 - Embed sample config JSON inline in relevant sections (not a separate section).
 - Keep README TOC explicitly numbered; leave other markdown to standard lint auto-numbering.
 - Add rationale or clarifications under existing headings instead of creating new top-level ones unless substantial.
 
-## 7. Changelog Updates
+## 8. Changelog Updates
 - Use `CHANGELOG.md` with Unreleased → versioned sections on release.
 - Categories: Added / Changed / Fixed / Removed / Notes (only those needed).
 - Note dataset additions with required DB deploy + optional full reload.
 - Documentation-only changes go under Changed (Documentation) or Changed.
 
-## 8. Release Checklist (Short Form)
+## 9. Release Checklist (Short Form)
 1. DbUp scripts grouped correctly (RunOnce vs RunAlways validated).
 2. Version bump applied if required.
 3. README datasets & reset mapping updated.
@@ -58,14 +64,14 @@ Rules: empty `Context.Error` = success; respect current API limits (may vary per
 5. Power BI samples updated if schema impact.
 6. Error handling section reflects any new conditions.
 
-## 9. Quick Reference: Do / Do Not
+## 10. Quick Reference: Do / Do Not
 Do: keep error matrix current; embed config snippets; maintain dataset order; use structured tables for mappings.
 Do Not: exceed current API limits (may vary per dataset); infinite-retry logical errors; introduce standalone sample config section; resurrect deleted docs.
 
-## 10. Style Snapshot
+## 11. Style Snapshot
 Follow markdownlint defaults. Single H1 per file. Use fenced code blocks with language. README TOC explicitly numbered. Concise, present tense. Prefer inline code backticks. Keep tables lean.
 
-## 11. Common Tasks
+## 12. Common Tasks
 | Task | Action |
 | --- | --- |
 | Add dataset | Update `DataSets.cs`, SQL procs, README tables, changelog. |
