@@ -144,7 +144,7 @@ Required:
 
 Optional:
 
-- Visual Studio 2022 (or `dotnet` CLI) to modify/build
+- Visual Studio Code or Visual Studio 2022 (or just the `dotnet` CLI) to modify/build
 - Power BI Desktop (for provided sample models)
 - Azure Subscription (if using Azure Functions)
 
