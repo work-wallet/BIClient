@@ -9,5 +9,6 @@ public interface IApiClient
         string dataType,
         long? lastSynchronizationVersion,
         int pageNumber,
+        int? pageSize = null,
         CancellationToken cancellationToken = default);
 }

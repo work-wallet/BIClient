@@ -123,13 +123,20 @@ public class ProcessorService(
         int pageNumber = 0;
         long? firstPageSyncVersion = null;
         Context context;
+        int currentPageSize = _serviceOptions.AgentPageSize; // Start with default, reset per dataset
         
         do
         {
             cancellationToken.ThrowIfCancellationRequested();
             
-            var pageResult = await ProcessSinglePageAsync(walletContext, dataType, state.LastSynchronizationVersion, ++pageNumber, cancellationToken);
+            var pageResult = await ProcessSinglePageWithRetryAsync(
+                walletContext, dataType, state.LastSynchronizationVersion, ++pageNumber, 
+                currentPageSize, cancellationToken);
+            
             context = pageResult.Context;
+            
+            // Update page size if it was adjusted during retry
+            currentPageSize = pageResult.UsedPageSize;
             
             if (pageNumber == 1)
                 firstPageSyncVersion = context.SynchronizationVersion;
@@ -152,6 +159,40 @@ public class ProcessorService(
     }
 
     /// <summary>
+    /// Processes a single page with automatic retry for PageSize validation errors
+    /// </summary>
+    private async Task<PageResultWithSize> ProcessSinglePageWithRetryAsync(
+        WalletContext walletContext,
+        string dataType,
+        long? lastSynchronizationVersion,
+        int pageNumber,
+        int initialPageSize,
+        CancellationToken cancellationToken)
+    {
+        int currentPageSize = initialPageSize;
+        
+        while (true)
+        {
+            try
+            {
+                var pageResult = await ProcessSinglePageAsync(
+                    walletContext, dataType, lastSynchronizationVersion, 
+                    pageNumber, currentPageSize, cancellationToken);
+                
+                return new PageResultWithSize(pageResult.Context, pageResult.Json, currentPageSize);
+            }
+            catch (PageSizeExceededException ex)
+            {
+                logger.LogWarning("PageSize {RequestedPageSize} exceeded for dataset {DataType}, retrying with maxPageSize {MaxPageSize}", 
+                    ex.RequestedPageSize, dataType, ex.MaxPageSize);
+                
+                currentPageSize = ex.MaxPageSize;
+                // Continue the loop to retry with the smaller page size
+            }
+        }
+    }
+
+    /// <summary>
     /// Processes a single page of data: fetch, parse, validate, return
     /// </summary>
     private async Task<PageResult> ProcessSinglePageAsync(
@@ -159,10 +200,11 @@ public class ProcessorService(
         string dataType,
         long? lastSynchronizationVersion,
         int pageNumber,
+        int pageSize,
         CancellationToken cancellationToken)
     {
         // call the Work Wallet API end point and obtain the results as JSON
-        string json = await apiClient.FetchDataPageAsync(walletContext, dataType, lastSynchronizationVersion, pageNumber, cancellationToken);
+        string json = await apiClient.FetchDataPageAsync(walletContext, dataType, lastSynchronizationVersion, pageNumber, pageSize, cancellationToken);
 
         progressService.ShowProgress();
 
@@ -225,3 +267,8 @@ public class ProcessorService(
 
     #endregion
 }
+
+/// <summary>
+/// Extended page result that includes the page size used for the request
+/// </summary>
+internal record PageResultWithSize(Context Context, string Json, int UsedPageSize);
