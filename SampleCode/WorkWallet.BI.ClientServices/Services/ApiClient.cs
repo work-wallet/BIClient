@@ -46,8 +46,9 @@ public class ApiClient(
             if (response.StatusCode == HttpStatusCode.BadRequest)
             {
                 string responseContent = await response.Content.ReadAsStringAsync(cancellationToken);
-                
+
                 // Check for the specific "Incorrect data region" error message
+                // (Should never happen, as we obtained DataRegion from the API)
                 if (string.Equals(responseContent, "Incorrect data region", StringComparison.OrdinalIgnoreCase))
                 {
                     throw new IncorrectDataRegionException(walletContext.DataRegion, walletContext.Id, dataType);

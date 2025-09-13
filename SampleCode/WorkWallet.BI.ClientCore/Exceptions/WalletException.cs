@@ -1,5 +1,9 @@
 ﻿namespace WorkWallet.BI.ClientCore.Exceptions;
 
+/// <summary>
+/// Base exception class for all wallet-related errors in the BI Client.
+/// Provides consistent context information including wallet ID and dataset type for error tracking and debugging.
+/// </summary>
 public class WalletException : Exception
 {
     public WalletException(Guid walletId) :
