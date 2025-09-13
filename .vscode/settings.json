@@ -1,0 +1,12 @@
+{
+    "dotnet.defaultSolution": "SampleCode/WorkWallet.BI.Client.sln",
+    "omnisharp.defaultLaunchSolution": "SampleCode/WorkWallet.BI.Client.sln",
+    "files.exclude": {
+        "**/bin": true,
+        "**/obj": true
+    },
+    "omnisharp.enableRoslynAnalyzers": true,
+    "omnisharp.enableEditorConfigSupport": true,
+    "omnisharp.enableImportCompletion": true,
+    "dotnet.completion.showCompletionItemsFromUnimportedNamespaces": true
+}

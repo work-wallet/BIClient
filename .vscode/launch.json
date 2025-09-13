@@ -1,0 +1,57 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Debug ClientSample",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build-clientsample",
+            "program": "${workspaceFolder}/SampleCode/WorkWallet.BI.ClientSample/bin/Debug/net8.0/WorkWallet.BI.ClientSample.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/SampleCode/WorkWallet.BI.ClientSample",
+            "console": "integratedTerminal",
+            "stopAtEntry": false,
+            "justMyCode": true,
+            "requireExactSource": false
+        },
+        {
+            "name": "Debug ClientDatabaseDeploy",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build-clientdatabasedeploy",
+            "program": "${workspaceFolder}/SampleCode/WorkWallet.BI.ClientDatabaseDeploy/bin/Debug/net8.0/WorkWallet.BI.ClientDatabaseDeploy.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/SampleCode/WorkWallet.BI.ClientDatabaseDeploy",
+            "console": "integratedTerminal",
+            "stopAtEntry": false,
+            "justMyCode": true,
+            "requireExactSource": false
+        },
+        {
+            "name": "Run ClientSample (no debug)",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build-clientsample",
+            "program": "${workspaceFolder}/SampleCode/WorkWallet.BI.ClientSample/bin/Debug/net8.0/WorkWallet.BI.ClientSample.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/SampleCode/WorkWallet.BI.ClientSample",
+            "console": "integratedTerminal",
+            "stopAtEntry": false,
+            "justMyCode": false,
+            "enableStepFiltering": false
+        },
+        {
+            "name": "Run ClientDatabaseDeploy (no debug)",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build-clientdatabasedeploy",
+            "program": "${workspaceFolder}/SampleCode/WorkWallet.BI.ClientDatabaseDeploy/bin/Debug/net8.0/WorkWallet.BI.ClientDatabaseDeploy.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/SampleCode/WorkWallet.BI.ClientDatabaseDeploy",
+            "console": "integratedTerminal",
+            "stopAtEntry": false,
+            "justMyCode": false,
+            "enableStepFiltering": false
+        }
+    ]
+}
