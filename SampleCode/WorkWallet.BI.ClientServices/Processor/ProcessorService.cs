@@ -204,7 +204,8 @@ public class ProcessorService(
         CancellationToken cancellationToken)
     {
         // call the Work Wallet API end point and obtain the results as JSON
-        string json = await apiClient.FetchDataPageAsync(walletContext, dataType, lastSynchronizationVersion, pageNumber, pageSize, cancellationToken);
+        string walletSecret = GetSecretForWallet(walletContext.Id);
+        string json = await apiClient.FetchDataPageAsync(walletContext, walletSecret, dataType, lastSynchronizationVersion, pageNumber, pageSize, cancellationToken);
 
         progressService.ShowProgress();
 
@@ -263,6 +264,14 @@ public class ProcessorService(
         logger.LogDebug("LastSynchronizationVersion: {LastSynchronizationVersion}", context.LastSynchronizationVersion);
         logger.LogDebug("SynchronizationVersion: {SynchronizationVersion}", context.SynchronizationVersion);
         logger.LogDebug("PageNumber: {PageNumber}, PageSize: {PageSize}", context.PageNumber, context.PageSize);
+    }
+
+    /// <summary>
+    /// Gets the wallet secret for the specified wallet ID from configuration
+    /// </summary>
+    private string GetSecretForWallet(Guid walletId)
+    {
+        return _serviceOptions.AgentWallets.Single(w => w.WalletId == walletId).WalletSecret;
     }
 
     #endregion

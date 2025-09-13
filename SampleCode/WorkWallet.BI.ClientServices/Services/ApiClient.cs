@@ -1,34 +1,29 @@
-using Microsoft.Extensions.Options;
 using System.Net;
 using System.Text.Json;
 using System.Web;
 using WorkWallet.BI.ClientCore.Exceptions;
 using WorkWallet.BI.ClientCore.Interfaces.Services;
 using WorkWallet.BI.ClientCore.Models;
-using WorkWallet.BI.ClientCore.Options;
 
 namespace WorkWallet.BI.ClientServices.Services;
 
-public class ApiClient(
-    HttpClient httpClient,
-    IOptions<ProcessorServiceOptions> serviceOptions) : IApiClient
+public class ApiClient(HttpClient httpClient) : IApiClient
 {
-    private readonly ProcessorServiceOptions _serviceOptions = serviceOptions.Value;
-
     public async Task<string> FetchDataPageAsync(
         WalletContext walletContext,
+        string walletSecret,
         string dataType,
         long? lastSynchronizationVersion,
         int pageNumber,
-        int? pageSize = null,
+        int pageSize,
         CancellationToken cancellationToken = default)
     {
         var query = HttpUtility.ParseQueryString(string.Empty);
 
         query["walletId"] = walletContext.Id.ToString();
-        query["walletSecret"] = GetSecretForWallet(walletContext.Id);
+        query["walletSecret"] = walletSecret;
         query["pageNumber"] = pageNumber.ToString();
-        query["pageSize"] = (pageSize ?? _serviceOptions.AgentPageSize).ToString();
+        query["pageSize"] = pageSize.ToString();
 
         if (lastSynchronizationVersion.HasValue)
         {
@@ -69,11 +64,6 @@ public class ApiClient(
         }
 
         return await response.Content.ReadAsStringAsync(cancellationToken);
-    }
-
-    private string GetSecretForWallet(Guid walletId)
-    {
-        return _serviceOptions.AgentWallets.Single(w => w.WalletId == walletId).WalletSecret;
     }
 
     /// <summary>

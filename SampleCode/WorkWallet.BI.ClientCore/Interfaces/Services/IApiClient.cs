@@ -6,9 +6,10 @@ public interface IApiClient
 {
     Task<string> FetchDataPageAsync(
         WalletContext walletContext,
+        string walletSecret,
         string dataType,
         long? lastSynchronizationVersion,
         int pageNumber,
-        int? pageSize = null,
+        int pageSize,
         CancellationToken cancellationToken = default);
 }
