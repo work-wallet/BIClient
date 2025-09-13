@@ -43,7 +43,8 @@ public class ProcessorService(
         {
             cancellationToken.ThrowIfCancellationRequested();
 
-            WalletContext walletContext = await walletContextService.GetWalletContextAsync(agentWallet.WalletId, cancellationToken);
+            string walletSecret = GetSecretForWallet(agentWallet.WalletId);
+            WalletContext walletContext = await walletContextService.GetWalletContextAsync(agentWallet.WalletId, walletSecret, cancellationToken);
             logger.LogInformation("Start process for wallet {wallet}", agentWallet.WalletId);
             progressService.WriteWallet(walletContext.Name.Trim(), walletContext.DataRegion);
 

@@ -4,5 +4,5 @@ namespace WorkWallet.BI.ClientCore.Interfaces.Services;
 
 public interface IWalletContextService
 {
-    Task<WalletContext> GetWalletContextAsync(Guid walletId, CancellationToken cancellationToken = default);
+    Task<WalletContext> GetWalletContextAsync(Guid walletId, string walletSecret, CancellationToken cancellationToken = default);
 }

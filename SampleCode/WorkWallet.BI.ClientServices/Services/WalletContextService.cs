@@ -1,29 +1,23 @@
-using Microsoft.Extensions.Options;
 using System.Text.Json;
 using System.Web;
 using WorkWallet.BI.ClientCore.Exceptions;
 using WorkWallet.BI.ClientCore.Interfaces.Services;
 using WorkWallet.BI.ClientCore.Models;
-using WorkWallet.BI.ClientCore.Options;
 
 namespace WorkWallet.BI.ClientServices.Services;
 
-public class WalletContextService(
-    HttpClient httpClient,
-    IOptions<ProcessorServiceOptions> serviceOptions) : IWalletContextService
+public class WalletContextService(HttpClient httpClient) : IWalletContextService
 {
-    private readonly ProcessorServiceOptions _serviceOptions = serviceOptions.Value;
-
     /// <summary>
     /// Retrieves wallet context information including data region and configuration metadata.
     /// This information is required before making data extraction API calls.
     /// </summary>
-    public async Task<WalletContext> GetWalletContextAsync(Guid walletId, CancellationToken cancellationToken = default)
+    public async Task<WalletContext> GetWalletContextAsync(Guid walletId, string walletSecret, CancellationToken cancellationToken = default)
     {
         var query = HttpUtility.ParseQueryString(string.Empty);
 
         query["walletId"] = walletId.ToString();
-        query["walletSecret"] = GetSecretForWallet(walletId);
+        query["walletSecret"] = walletSecret;
 
         string url = $"wallet?{query}";
 
@@ -50,15 +44,6 @@ public class WalletContextService(
             // Enrich with wallet context for better error reporting
             throw new DeserializeResponseException(ex.TargetType, walletId);
         }
-    }
-
-    /// <summary>
-    /// Retrieves the wallet secret for the specified wallet ID from configuration.
-    /// The wallet secret is required for API authentication.
-    /// </summary>
-    private string GetSecretForWallet(Guid walletId)
-    {
-        return _serviceOptions.AgentWallets.Single(w => w.WalletId == walletId).WalletSecret;
     }
     
     /// <summary>
