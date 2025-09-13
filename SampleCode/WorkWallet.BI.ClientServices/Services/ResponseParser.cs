@@ -7,6 +7,10 @@ namespace WorkWallet.BI.ClientServices.Services;
 
 public class ResponseParser : IResponseParser
 {
+    /// <summary>
+    /// Extracts and parses the Context object from a data extraction API JSON response.
+    /// The Context contains pagination information, synchronization version, and error details.
+    /// </summary>
     public Context ParseContext(string json)
     {
         try
@@ -21,6 +25,10 @@ public class ResponseParser : IResponseParser
         }
     }
 
+    /// <summary>
+    /// Validates the parsed API response context and throws appropriate exceptions for error conditions.
+    /// Handles specific error scenarios like invalid synchronization versions and general API errors.
+    /// </summary>
     public void ValidateResponse(Context context, long? lastSynchronizationVersion, Guid walletId, string dataType)
     {
         if (context.Error == "Invalid LastSynchronizationVersion")

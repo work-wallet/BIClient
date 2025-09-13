@@ -14,6 +14,10 @@ public class WalletContextService(
 {
     private readonly ProcessorServiceOptions _serviceOptions = serviceOptions.Value;
 
+    /// <summary>
+    /// Retrieves wallet context information including data region and configuration metadata.
+    /// This information is required before making data extraction API calls.
+    /// </summary>
     public async Task<WalletContext> GetWalletContextAsync(Guid walletId, CancellationToken cancellationToken = default)
     {
         var query = HttpUtility.ParseQueryString(string.Empty);
@@ -48,12 +52,19 @@ public class WalletContextService(
         }
     }
 
+    /// <summary>
+    /// Retrieves the wallet secret for the specified wallet ID from configuration.
+    /// The wallet secret is required for API authentication.
+    /// </summary>
     private string GetSecretForWallet(Guid walletId)
     {
         return _serviceOptions.AgentWallets.Single(w => w.WalletId == walletId).WalletSecret;
     }
     
-    // the wallet endpoint uses camel case (the dataextract endpoints use pascal case)
+    /// <summary>
+    /// JSON serialization options configured for camel case property naming.
+    /// The wallet endpoint uses camel case naming convention (differs from data extract endpoints which use pascal case).
+    /// </summary>
     private static readonly JsonSerializerOptions _jsonCamelCaseOptions = new()
     {
         PropertyNamingPolicy = JsonNamingPolicy.CamelCase
