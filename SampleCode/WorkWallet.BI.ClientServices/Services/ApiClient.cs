@@ -9,6 +9,9 @@ namespace WorkWallet.BI.ClientServices.Services;
 
 public class ApiClient(HttpClient httpClient) : IApiClient
 {
+    /// <summary>
+    /// Fetches a page of data from the API for the specified wallet context and data type
+    /// </summary>
     public async Task<string> FetchDataPageAsync(
         WalletContext walletContext,
         string walletSecret,
@@ -48,17 +51,17 @@ public class ApiClient(HttpClient httpClient) : IApiClient
                 {
                     throw new IncorrectDataRegionException(walletContext.DataRegion, walletContext.Id, dataType);
                 }
-                
+
                 // Try to parse as PageSize validation error
                 if (TryParsePageSizeError(responseContent, out var pageSizeError) && pageSizeError != null)
                 {
                     throw new PageSizeExceededException(
-                        pageSizeError.RequestedPageSize, 
-                        pageSizeError.MaxPageSize, 
+                        pageSizeError.RequestedPageSize,
+                        pageSizeError.MaxPageSize,
                         pageSizeError.Error);
                 }
             }
-            
+
             // Default API exception for other error cases
             throw new ApiException(response.StatusCode, walletContext.Id, dataType);
         }
@@ -75,12 +78,12 @@ public class ApiClient(HttpClient httpClient) : IApiClient
         
         try
         {
-            var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
-            var parsed = JsonSerializer.Deserialize<PageSizeErrorResponse>(responseContent, options);
-            
+            var parsed = JsonSerializer.Deserialize<PageSizeErrorResponse>(responseContent, _jsonCaseInsensitiveOptions);
+
             // Validate that this is actually a PageSize error
             if (parsed != null && 
                 !string.IsNullOrEmpty(parsed.Error) &&
+                parsed.Error.StartsWith("PageSize exceeds maximum", StringComparison.OrdinalIgnoreCase) &&
                 parsed.MaxPageSize > 0 &&
                 parsed.RequestedPageSize > 0)
             {
@@ -103,4 +106,13 @@ public class ApiClient(HttpClient httpClient) : IApiClient
         string Error,
         int MaxPageSize,
         int RequestedPageSize);
+
+
+    /// <summary>
+    /// Case-insensitive JSON deserialization options
+    /// </summary>
+    private static readonly JsonSerializerOptions _jsonCaseInsensitiveOptions = new()
+    {
+        PropertyNameCaseInsensitive = true
+    };
 }

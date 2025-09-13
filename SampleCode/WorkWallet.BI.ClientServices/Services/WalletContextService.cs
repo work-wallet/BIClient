@@ -13,12 +13,6 @@ public class WalletContextService(
     IOptions<ProcessorServiceOptions> serviceOptions) : IWalletContextService
 {
     private readonly ProcessorServiceOptions _serviceOptions = serviceOptions.Value;
-    
-    // the wallet endpoint uses camel case (the dataextract endpoints use pascal case)
-    private static readonly JsonSerializerOptions _jsonCamelCaseOptions = new()
-    {
-        PropertyNamingPolicy = JsonNamingPolicy.CamelCase
-    };
 
     public async Task<WalletContext> GetWalletContextAsync(Guid walletId, CancellationToken cancellationToken = default)
     {
@@ -58,4 +52,10 @@ public class WalletContextService(
     {
         return _serviceOptions.AgentWallets.Single(w => w.WalletId == walletId).WalletSecret;
     }
+    
+    // the wallet endpoint uses camel case (the dataextract endpoints use pascal case)
+    private static readonly JsonSerializerOptions _jsonCamelCaseOptions = new()
+    {
+        PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+    };
 }

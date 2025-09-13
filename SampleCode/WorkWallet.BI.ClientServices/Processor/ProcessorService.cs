@@ -36,7 +36,6 @@ public class ProcessorService(
     /// <summary>
     /// Main entry point: processes all configured wallets and datasets
     /// </summary>
-
     public async Task RunAsync(CancellationToken cancellationToken = default)
     {
         // loop (supporting multiple wallets)
