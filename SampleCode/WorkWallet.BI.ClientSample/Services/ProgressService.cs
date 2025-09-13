@@ -29,4 +29,10 @@ public class ProgressService : IProgressService
         Console.Write($" [{records}]");
         Console.WriteLine();
     }
+
+    public void ReportPageSizeReduced(int oldPageSize, int newPageSize)
+    {
+        Console.WriteLine();
+        Console.WriteLine($"Warning: Page size reduced from {oldPageSize} to {newPageSize} due to server constraints.");
+    }
 }

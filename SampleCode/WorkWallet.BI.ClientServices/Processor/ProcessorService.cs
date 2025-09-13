@@ -184,6 +184,8 @@ public class ProcessorService(
             {
                 logger.LogWarning("PageSize {RequestedPageSize} exceeded for dataset {DataType}, retrying with maxPageSize {MaxPageSize}", 
                     ex.RequestedPageSize, dataType, ex.MaxPageSize);
+
+                    progressService.ReportPageSizeReduced(currentPageSize, ex.MaxPageSize);
                 
                 currentPageSize = ex.MaxPageSize;
                 // Continue the loop to retry with the smaller page size
