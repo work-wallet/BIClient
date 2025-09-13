@@ -8,6 +8,17 @@ using WorkWallet.BI.ClientCore.Utils;
 
 namespace WorkWallet.BI.ClientServices.Processor;
 
+/// <summary>
+/// Orchestrates the synchronization of data from Work Wallet APIs to local storage.
+/// 
+/// Flow:
+/// 1. For each configured wallet
+/// 2. For each configured dataset (or all if none specified)
+/// 3. Initialize synchronization state (incremental vs full sync)
+/// 4. Process data in pages to handle large datasets
+/// 5. Store data and update synchronization tracking
+/// 6. Perform post-processing
+/// </summary>
 public class ProcessorService(
     ILogger<ProcessorService> logger,
     IOptions<ProcessorServiceOptions> serviceOptions,
@@ -15,9 +26,16 @@ public class ProcessorService(
     IProgressService progressService,
     IWalletContextService walletContextService,
     IApiClient apiClient,
-    IResponseParser responseParser) : IProcessorService
+    IResponseParser responseParser,
+    IDataSetResolver dataSetResolver) : IProcessorService
 {
     private readonly ProcessorServiceOptions _serviceOptions = serviceOptions.Value;
+
+    #region Public Interface
+    
+    /// <summary>
+    /// Main entry point: processes all configured wallets and datasets
+    /// </summary>
 
     public async Task RunAsync(CancellationToken cancellationToken = default)
     {
@@ -34,9 +52,16 @@ public class ProcessorService(
         }
     }
 
+    #endregion
+
+    #region Wallet and Dataset Orchestration
+
+    /// <summary>
+    /// Processes all datasets for a single wallet
+    /// </summary>
     private async Task ProcessWalletDataSetsAsync(WalletContext walletContext, CancellationToken cancellationToken)
     {
-        var dataSetEntries = GetDataSetEntriesToProcess();
+        var dataSetEntries = dataSetResolver.GetDataSetEntriesToProcess();
 
         foreach (var (dataType, logType) in dataSetEntries)
         {
@@ -45,28 +70,14 @@ public class ProcessorService(
         }
     }
 
-    private IEnumerable<(string DataType, string LogType)> GetDataSetEntriesToProcess()
-    {
-        // if no DataSets are provided, then use all the ones that we know about
-        var requestedDataSets = _serviceOptions.DataSets.Length > 0 
-            ? _serviceOptions.DataSets 
-            : DataSets.Entries.Keys;
+    #endregion
 
-        foreach (string dataSet in requestedDataSets)
-        {
-            var entry = DataSets.Entries.FirstOrDefault(dt => 
-                dt.Key.Equals(dataSet, StringComparison.OrdinalIgnoreCase));
+    #region Dataset Processing Pipeline
 
-            // the requested dataType is not in our lookup of expected types
-            if (entry.Equals(default(KeyValuePair<string, string>)))
-            {
-                throw new UnsupportedDataTypeException(dataSet);
-            }
-
-            yield return (entry.Key, entry.Value);
-        }
-    }
-
+    /// <summary>
+    /// Main processing pipeline for a single dataset:
+    /// Initialize → Process Pages → Finalize
+    /// </summary>
     private async Task ProcessAsync(
         WalletContext walletContext,
         string dataType,
@@ -79,6 +90,10 @@ public class ProcessorService(
         var result = await ProcessPagesAsync(walletContext, dataType, processingState, cancellationToken);
         await FinalizeProcessingAsync(walletContext, logType, dataType, result);
     }
+
+    /// <summary>
+    /// Initializes processing state and handles full vs incremental sync
+    /// </summary>
 
     private async Task<ProcessingState> InitializeProcessingAsync(WalletContext walletContext, string logType, string dataType)
     {
@@ -94,6 +109,9 @@ public class ProcessorService(
         return new ProcessingState(lastSynchronizationVersion);
     }
 
+    /// <summary>
+    /// Processes all pages of data for a dataset, handling pagination automatically
+    /// </summary>
     private async Task<ProcessingResult> ProcessPagesAsync(
         WalletContext walletContext, 
         string dataType, 
@@ -133,6 +151,9 @@ public class ProcessorService(
         return new ProcessingResult(firstPageSyncVersion!.Value, context.FullCount);
     }
 
+    /// <summary>
+    /// Processes a single page of data: fetch, parse, validate, return
+    /// </summary>
     private async Task<PageResult> ProcessSinglePageAsync(
         WalletContext walletContext,
         string dataType,
@@ -162,16 +183,9 @@ public class ProcessorService(
         }
     }
 
-    private void LogPageDetails(string dataType, string json, Context context)
-    {
-        logger.LogDebug("API for {DataType} returned JSON of length {Length}", dataType, json.Length);
-        logger.LogDebug("Count: {Count}", context.Count);
-        logger.LogDebug("FullCount: {FullCount}", context.FullCount);
-        logger.LogDebug("LastSynchronizationVersion: {LastSynchronizationVersion}", context.LastSynchronizationVersion);
-        logger.LogDebug("SynchronizationVersion: {SynchronizationVersion}", context.SynchronizationVersion);
-        logger.LogDebug("PageNumber: {PageNumber}, PageSize: {PageSize}", context.PageNumber, context.PageSize);
-    }
-
+    /// <summary>
+    /// Updates synchronization tracking and performs post-processing
+    /// </summary>
     private async Task FinalizeProcessingAsync(WalletContext walletContext, string logType, string dataType, ProcessingResult result)
     {
         // update our change detection / logging table, so we only fetch new and changed data next time
@@ -191,4 +205,23 @@ public class ProcessorService(
             logger.LogDebug("No {DataType} records received.", dataType);
         }
     }
+
+    #endregion
+
+    #region Helper Methods
+
+    /// <summary>
+    /// Logs detailed information about the API response for debugging
+    /// </summary>
+    private void LogPageDetails(string dataType, string json, Context context)
+    {
+        logger.LogDebug("API for {DataType} returned JSON of length {Length}", dataType, json.Length);
+        logger.LogDebug("Count: {Count}", context.Count);
+        logger.LogDebug("FullCount: {FullCount}", context.FullCount);
+        logger.LogDebug("LastSynchronizationVersion: {LastSynchronizationVersion}", context.LastSynchronizationVersion);
+        logger.LogDebug("SynchronizationVersion: {SynchronizationVersion}", context.SynchronizationVersion);
+        logger.LogDebug("PageNumber: {PageNumber}, PageSize: {PageSize}", context.PageNumber, context.PageSize);
+    }
+
+    #endregion
 }

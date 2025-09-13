@@ -16,6 +16,7 @@ public static class ServiceExtension
         // register our processor dependencies that don't need HttpClient
         services.AddScoped<IProcessorService, ProcessorService>();
         services.AddScoped<IResponseParser, ResponseParser>();
+        services.AddScoped<IDataSetResolver, DataSetResolver>();
 
         // register our bearer token handler
         services.AddHttpClient<BearerTokenHandler>((serviceProvider, client) =>
