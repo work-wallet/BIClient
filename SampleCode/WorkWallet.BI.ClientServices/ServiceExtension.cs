@@ -68,7 +68,6 @@ public static class ServiceExtension
         .AddResilienceHandler("HttpRetryWithProgress", (builder, context) =>
         {
             // Get services from the context for use in callbacks
-            var logger = context.ServiceProvider.GetService<ILogger<TImplementation>>();
             var progressService = context.ServiceProvider.GetService<IProgressService>();
             
             builder.AddRetry(new HttpRetryStrategyOptions
@@ -93,11 +92,6 @@ public static class ServiceExtension
                     if (response?.StatusCode == HttpStatusCode.TooManyRequests)
                     {
                         var retryAfter = response.Headers.RetryAfter?.ToString() ?? "not specified";
-                        logger?.LogWarning(
-                            "Rate limited (HTTP 429). Retry attempt {AttemptNumber} in {Delay}ms. Retry-After: {RetryAfter}",
-                            args.AttemptNumber,
-                            args.RetryDelay.TotalMilliseconds,
-                            retryAfter);
                         
                         progressService?.ReportHttpRetry(
                             args.AttemptNumber, 
@@ -108,11 +102,6 @@ public static class ServiceExtension
                     else
                     {
                         var statusCode = (int?)response?.StatusCode;
-                        logger?.LogWarning(
-                            "HTTP request failed with {StatusCode}. Retry attempt {AttemptNumber} in {Delay}ms",
-                            response?.StatusCode ?? HttpStatusCode.RequestTimeout,
-                            args.AttemptNumber,
-                            args.RetryDelay.TotalMilliseconds);
                         
                         progressService?.ReportHttpRetry(
                             args.AttemptNumber, 
