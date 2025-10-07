@@ -487,6 +487,7 @@ Rules:
 
 - Keep `pageSize` ≤ current API limit (currently 500; may be lower for some datasets in the future).
 - Increment `pageNumber` until returned page `Count < PageSize`.
+- Don't make concurrent requests (this helps avoid throttling).
 
 ### 6.3 Change Tracking
 
@@ -589,7 +590,8 @@ Common scenarios:
 | HTTP 400 (PageSize validation) | PageSize exceeds current API limit | Automatically retry with smaller value (use `maxPageSize` from response body). |
 | HTTP 400 (other validation errors) | Invalid request parameters | Check request parameters against API constraints and retry with corrected values. |
 | HTTP 429 | Rate limiting / too many requests | Retry with exponential backoff + jitter; respect `Retry-After` header if present. |
-| HTTP 5xx | Transient platform issue | Retry with jitter; escalate if persistent. |
+| HTTP 501 | Internal server error | Retry later; escalate if persistent. |
+| HTTP 503 | Service unavailable / too many requests | Retry with exponential backoff + jitter; respect `Retry-After` header if present. |
 | `Context.Error = "Invalid LastSynchronizationVersion"` | Supplied `lastSynchronizationVersion` below `MinValidSynchronizationVersion` | Perform dataset re‑ingest: remove tracking entry and reload. |
 | Other non-empty `Context.Error` | Dataset-specific or validation issue | Log, alert, and decide whether to skip or halt the run. |
 
