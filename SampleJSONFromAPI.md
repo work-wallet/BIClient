@@ -79,8 +79,8 @@ Each sample shows the standard response structure including:
 Notes
 
 - Actions
-  - DueOn: `1900-01-01` indicates no data
-  - OriginalDueOn: `1900-01-01` indicates no data
+  - **DueOn**: `1900-01-01` indicates no data
+  - **OriginalDueOn**: `1900-01-01` indicates no data
 
 ## Assets
 
@@ -144,8 +144,8 @@ Notes
 Notes
 
 - Assignments
-  - CompanyId: `00000000-0000-0000-0000-000000000000` indicates no data
-  - SiteId: `00000000-0000-0000-0000-000000000000` indicates no data
+  - **CompanyId**: `00000000-0000-0000-0000-000000000000` indicates no data
+  - **SiteId**: `00000000-0000-0000-0000-000000000000` indicates no data
 
 ## Audits
 
@@ -380,46 +380,46 @@ Notes
 Notes:
 
 - Locations
-  - CompanyId: `00000000-0000-0000-0000-000000000000` indicates no data
-  - SiteId: `00000000-0000-0000-0000-000000000000` indicates no data
-  - AreaId: `00000000-0000-0000-0000-000000000000` indicates no data
-  - JobId: `00000000-0000-0000-0000-000000000000` indicates no data
-  - SiteLocationId: `00000000-0000-0000-0000-000000000000` indicates no data
+  - **CompanyId**: `00000000-0000-0000-0000-000000000000` indicates no data
+  - **SiteId**: `00000000-0000-0000-0000-000000000000` indicates no data
+  - **AreaId**: `00000000-0000-0000-0000-000000000000` indicates no data
+  - **JobId**: `00000000-0000-0000-0000-000000000000` indicates no data
+  - **SiteLocationId**: `00000000-0000-0000-0000-000000000000` indicates no data
 - GradingSetOptions
-  - GradingSetId & GradingSetOptionId: `00000000-0000-0000-0000-000000000000` indicates 'null' entry (other fields also zeroed/blank)
+  - **GradingSetId** & **GradingSetOptionId**: `00000000-0000-0000-0000-000000000000` indicates 'null' entry (other fields also zeroed/blank)
 - AuditTypes
-  - GradingSetId: `00000000-0000-0000-0000-000000000000` indicates no data
-  - GradingSetVersion: `0` indicates no data
+  - **GradingSetId**: `00000000-0000-0000-0000-000000000000` indicates no data
+  - **GradingSetVersion**: `0` indicates no data
 - Audits
-  - AuditGroupId: `00000000-0000-0000-0000-000000000000` indicates no data
-  - TotalScore: -1 indicates no data
-  - TotalPotentialScore: -1 indicates no data
-  - AverageScore: -1 indicates no data
-  - AveragePotentialScore: -1 indicates no data
-  - PercentageScore: -1 indicates no data
-  - GradingSetOptionId: `00000000-0000-0000-0000-000000000000` indicates no data
+  - **AuditGroupId**: `00000000-0000-0000-0000-000000000000` indicates no data
+  - **TotalScore**: `-1` indicates no data
+  - **TotalPotentialScore**: `-1` indicates no data
+  - **AverageScore**: `-1` indicates no data
+  - **AveragePotentialScore**: `-1` indicates no data
+  - **PercentageScore**: `-1` indicates no data
+  - **GradingSetOptionId**: `00000000-0000-0000-0000-000000000000` indicates no data
 - AuditNumericAnswers
-  - Scale: `0` indicates no data
-  - UnitCode: `0` indicates no data
+  - **Scale**: `0` indicates no data
+  - **UnitCode**: `0` indicates no data
 - AuditScoredResponses
-  - TotalScore: -1 indicates no data
-  - TotalPotentialScore: -1 indicates no data
-  - PercentageScore: -1 indicates no data
-  - GradingSetOptionId: `00000000-0000-0000-0000-000000000000` indicates no data
+  - **TotalScore**: `-1` indicates no data
+  - **TotalPotentialScore**: `-1` indicates no data
+  - **PercentageScore**: `-1` indicates no data
+  - **GradingSetOptionId**: `00000000-0000-0000-0000-000000000000` indicates no data
 - AuditScoreSections
-  - TotalScore: -1 indicates no data
-  - TotalPotentialScore: -1 indicates no data
-  - AverageScore: -1 indicates no data
-  - AveragePotentialScore: -1 indicates no data
-  - PercentageScore: -1 indicates no data
-  - GradingSetOptionId: `00000000-0000-0000-0000-000000000000` indicates no data
+  - **TotalScore**: `-1` indicates no data
+  - **TotalPotentialScore**: `-1` indicates no data
+  - **AverageScore**: `-1` indicates no data
+  - **AveragePotentialScore**: `-1` indicates no data
+  - **PercentageScore**: `-1` indicates no data
+  - **GradingSetOptionId**: `00000000-0000-0000-0000-000000000000` indicates no data
 - AuditScoreTags
-  - TotalScore: -1 indicates no data
-  - TotalPotentialScore: -1 indicates no data
-  - AverageScore: -1 indicates no data
-  - AveragePotentialScore: -1 indicates no data
-  - PercentageScore: -1 indicates no data
-  - GradingSetOptionId: `00000000-0000-0000-0000-000000000000` indicates no data
+  - **TotalScore**: `-1` indicates no data
+  - **TotalPotentialScore**: `-1` indicates no data
+  - **AverageScore**: `-1` indicates no data
+  - **AveragePotentialScore**: `-1` indicates no data
+  - **PercentageScore**: `-1` indicates no data
+  - **GradingSetOptionId**: `00000000-0000-0000-0000-000000000000` indicates no data
 
 ## Inductions
 
@@ -483,6 +483,11 @@ Notes:
   ]
 }
 ```
+
+Notes
+
+- Inductions
+  - **TestPassMark**: `0` indicates no data
 
 ## Permits
 
@@ -576,12 +581,21 @@ Notes:
 }
 ```
 
+Notes
+
 - Locations
-  - CompanyId: `00000000-0000-0000-0000-000000000000` indicates no data
-  - SiteId: `00000000-0000-0000-0000-000000000000` indicates no data
-  - AreaId: `00000000-0000-0000-0000-000000000000` indicates no data
-  - JobId: `00000000-0000-0000-0000-000000000000` indicates no data
-  - SiteLocationId: `00000000-0000-0000-0000-000000000000` indicates no data
+  - **CompanyId**: `00000000-0000-0000-0000-000000000000` indicates no data
+  - **SiteId**: `00000000-0000-0000-0000-000000000000` indicates no data
+  - **AreaId**: `00000000-0000-0000-0000-000000000000` indicates no data
+  - **JobId**: `00000000-0000-0000-0000-000000000000` indicates no data
+  - **SiteLocationId**: `00000000-0000-0000-0000-000000000000` indicates no data
+- Permits
+  - **IssuedOn**: `1900-01-01T00:00:00` indicates no data (should not occur in practice as draft permits are not returned)
+  - **IssuedForMinutes**: `0` indicates no data
+  - **IssuedExpiry**: `1900-01-01T00:00:00` indicates no data
+  - **ClosedOn**: `1900-01-01T00:00:00` indicates no data
+- PermitCategories
+  - **ValidityPeriodMinutes**: `0` indicates no data
 
 ## PPEAssignments
 
@@ -688,8 +702,27 @@ Notes:
 }
 ```
 
+Notes
+
 - Locations
-  - JobId: `00000000-0000-0000-0000-000000000000` indicates no data (not applicable to PPEAssignments)
+  - **JobId**: `00000000-0000-0000-0000-000000000000` indicates no data (not applicable to PPEAssignments)
+- PPETypes
+  - **PPETypeVariantId**: `00000000-0000-0000-0000-000000000000` indicates no variant
+  - **Variant**: if `null` no field will be returned
+  - **VariantOrder**: if `null` no field will be returned
+  - **LifespanDays**: if `null` no field will be returned
+  - **Value**: if `null` no field will be returned
+- PPEStocks
+  - **PPETypeVariantId**: `00000000-0000-0000-0000-000000000000` indicates no variant
+  - **WarningQuantity**: if `null` no field will be returned
+- PPEAssignments
+  - **ExpiredOn**: if `null` no field will be returned
+  - **AssignedFromStockId**: if `null` no field will be returned
+  - **ReturnedToStockId**: if `null` no field will be returned
+  - **ReplacementRequestedFromStockId**: if `null` no field will be returned
+  - **ReplacementRequestedOn**: if `null` no field will be returned
+- PPEAssignmentHistories
+  - **ActionedByContactId**: if `null` no field will be returned
 
 ## PPEStockHistories
 
@@ -783,8 +816,10 @@ Notes:
 }
 ```
 
+Notes
+
 - Locations
-  - JobId: `00000000-0000-0000-0000-000000000000` indicates no data (not applicable to PPEStockHistories)
+  - **JobId**: `00000000-0000-0000-0000-000000000000` indicates no data (not applicable to PPEStockHistories)
 
 ## PPEStocks
 
@@ -856,8 +891,10 @@ Notes:
 }
 ```
 
+Notes
+
 - Locations
-  - JobId: `00000000-0000-0000-0000-000000000000` indicates no data (not applicable to PPEStocks)
+  - **JobId**: `00000000-0000-0000-0000-000000000000` indicates no data (not applicable to PPEStocks)
 
 ## ReportedIssues
 
@@ -1023,12 +1060,14 @@ Notes:
 }
 ```
 
+Notes
+
 - Locations
-  - CompanyId: `00000000-0000-0000-0000-000000000000` indicates no data
-  - SiteId: `00000000-0000-0000-0000-000000000000` indicates no data
-  - AreaId: `00000000-0000-0000-0000-000000000000` indicates no data
-  - JobId: `00000000-0000-0000-0000-000000000000` indicates no data
-  - SiteLocationId: `00000000-0000-0000-0000-000000000000` indicates no data
+  - **CompanyId**: `00000000-0000-0000-0000-000000000000` indicates no data
+  - **SiteId**: `00000000-0000-0000-0000-000000000000` indicates no data
+  - **AreaId**: `00000000-0000-0000-0000-000000000000` indicates no data
+  - **JobId**: `00000000-0000-0000-0000-000000000000` indicates no data
+  - **SiteLocationId**: `00000000-0000-0000-0000-000000000000` indicates no data
 
 ## SafetyCards
 
@@ -1103,11 +1142,13 @@ Notes:
     }
   ]
 }
+```
+
+Notes
 
 - Locations
-  - CompanyId: `00000000-0000-0000-0000-000000000000` indicates no data
-  - SiteId: `00000000-0000-0000-0000-000000000000` indicates no data
-  - AreaId: `00000000-0000-0000-0000-000000000000` indicates no data
-  - JobId: `00000000-0000-0000-0000-000000000000` indicates no data
-  - SiteLocationId: `00000000-0000-0000-0000-000000000000` indicates no data
-```
+  - **CompanyId**: `00000000-0000-0000-0000-000000000000` indicates no data
+  - **SiteId**: `00000000-0000-0000-0000-000000000000` indicates no data
+  - **AreaId**: `00000000-0000-0000-0000-000000000000` indicates no data
+  - **JobId**: `00000000-0000-0000-0000-000000000000` indicates no data
+  - **SiteLocationId**: `00000000-0000-0000-0000-000000000000` indicates no data
