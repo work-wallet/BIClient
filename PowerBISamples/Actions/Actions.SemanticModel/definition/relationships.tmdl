@@ -58,3 +58,8 @@ relationship 331cd442-83c9-4e37-8c8a-24ee18e05df9
 
 	annotation PBI_IsFromSource = FS
 
+relationship 1515ee55-7e06-4f07-9903-a806c805fccb
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Action.OriginalDueOn
+	toColumn: LocalDateTable_66c8308a-662f-4b19-9254-47cf6aee52dd.Date
+

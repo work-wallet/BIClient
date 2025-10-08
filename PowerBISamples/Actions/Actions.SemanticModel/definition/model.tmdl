@@ -10,8 +10,6 @@ annotation PBI_QueryOrder = ["Action","Priority","Status","Type","Action Update"
 
 annotation __PBI_TimeIntelligenceEnabled = 1
 
-annotation PBIDesktopVersion = 2.146.1133.0 (25.08)+c8010d55d1db76eda03c968b03481610e96a1ef7
-
 annotation PBI_ProTooling = ["DevMode"]
 
 ref table Action
@@ -24,6 +22,7 @@ ref table Type
 ref table 'Action Update'
 ref table LocalDateTable_b400b2e2-7e47-4c0d-b8da-bd1adbaec555
 ref table Wallet
+ref table LocalDateTable_66c8308a-662f-4b19-9254-47cf6aee52dd
 
 ref cultureInfo en-GB
 

@@ -161,6 +161,22 @@ table Action
 
 		annotation SummarizationSetBy = Automatic
 
+	column OriginalDueOn
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: fe6f5270-45c5-423e-bbf1-d779d1bdf4ff
+		summarizeBy: none
+		sourceColumn: OriginalDueOn
+
+		variation Variation
+			isDefault
+			relationship: 1515ee55-7e06-4f07-9903-a806c805fccb
+			defaultHierarchy: LocalDateTable_66c8308a-662f-4b19-9254-47cf6aee52dd.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
 	partition Action = m
 		mode: import
 		source =
@@ -173,4 +189,6 @@ table Action
 				    #"Renamed Columns"
 
 	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
 
