@@ -55,6 +55,7 @@ Each sample shows the standard response structure including:
       "AssignedTo": "Avery Example",
       "PriorityCode": 4,
       "DueOn": "2025-09-20",
+      "OriginalDueOn": "2025-09-20",
       "ActionStatusCode": 2,
       "Deleted": false,
       "CreatedOn": "2025-09-01T08:30:15.1234567+00:00",
@@ -74,6 +75,12 @@ Each sample shows the standard response structure including:
   ]
 }
 ```
+
+Notes
+
+- Actions
+  - DueOn: `1900-01-01` indicates no data
+  - OriginalDueOn: `1900-01-01` indicates no data
 
 ## Assets
 
@@ -133,6 +140,12 @@ Each sample shows the standard response structure including:
   ]
 }
 ```
+
+Notes
+
+- Assignments
+  - CompanyId: `00000000-0000-0000-0000-000000000000` indicates no data
+  - SiteId: `00000000-0000-0000-0000-000000000000` indicates no data
 
 ## Audits
 
@@ -364,6 +377,50 @@ Each sample shows the standard response structure including:
 }
 ```
 
+Notes:
+
+- Locations
+  - CompanyId: `00000000-0000-0000-0000-000000000000` indicates no data
+  - SiteId: `00000000-0000-0000-0000-000000000000` indicates no data
+  - AreaId: `00000000-0000-0000-0000-000000000000` indicates no data
+  - JobId: `00000000-0000-0000-0000-000000000000` indicates no data
+  - SiteLocationId: `00000000-0000-0000-0000-000000000000` indicates no data
+- GradingSetOptions
+  - GradingSetId & GradingSetOptionId: `00000000-0000-0000-0000-000000000000` indicates 'null' entry (other fields also zeroed/blank)
+- AuditTypes
+  - GradingSetId: `00000000-0000-0000-0000-000000000000` indicates no data
+  - GradingSetVersion: `0` indicates no data
+- Audits
+  - AuditGroupId: `00000000-0000-0000-0000-000000000000` indicates no data
+  - TotalScore: -1 indicates no data
+  - TotalPotentialScore: -1 indicates no data
+  - AverageScore: -1 indicates no data
+  - AveragePotentialScore: -1 indicates no data
+  - PercentageScore: -1 indicates no data
+  - GradingSetOptionId: `00000000-0000-0000-0000-000000000000` indicates no data
+- AuditNumericAnswers
+  - Scale: `0` indicates no data
+  - UnitCode: `0` indicates no data
+- AuditScoredResponses
+  - TotalScore: -1 indicates no data
+  - TotalPotentialScore: -1 indicates no data
+  - PercentageScore: -1 indicates no data
+  - GradingSetOptionId: `00000000-0000-0000-0000-000000000000` indicates no data
+- AuditScoreSections
+  - TotalScore: -1 indicates no data
+  - TotalPotentialScore: -1 indicates no data
+  - AverageScore: -1 indicates no data
+  - AveragePotentialScore: -1 indicates no data
+  - PercentageScore: -1 indicates no data
+  - GradingSetOptionId: `00000000-0000-0000-0000-000000000000` indicates no data
+- AuditScoreTags
+  - TotalScore: -1 indicates no data
+  - TotalPotentialScore: -1 indicates no data
+  - AverageScore: -1 indicates no data
+  - AveragePotentialScore: -1 indicates no data
+  - PercentageScore: -1 indicates no data
+  - GradingSetOptionId: `00000000-0000-0000-0000-000000000000` indicates no data
+
 ## Inductions
 
 ```json
@@ -519,6 +576,13 @@ Each sample shows the standard response structure including:
 }
 ```
 
+- Locations
+  - CompanyId: `00000000-0000-0000-0000-000000000000` indicates no data
+  - SiteId: `00000000-0000-0000-0000-000000000000` indicates no data
+  - AreaId: `00000000-0000-0000-0000-000000000000` indicates no data
+  - JobId: `00000000-0000-0000-0000-000000000000` indicates no data
+  - SiteLocationId: `00000000-0000-0000-0000-000000000000` indicates no data
+
 ## PPEAssignments
 
 ```json
@@ -624,6 +688,9 @@ Each sample shows the standard response structure including:
 }
 ```
 
+- Locations
+  - JobId: `00000000-0000-0000-0000-000000000000` indicates no data (not applicable to PPEAssignments)
+
 ## PPEStockHistories
 
 ```json
@@ -716,6 +783,9 @@ Each sample shows the standard response structure including:
 }
 ```
 
+- Locations
+  - JobId: `00000000-0000-0000-0000-000000000000` indicates no data (not applicable to PPEStockHistories)
+
 ## PPEStocks
 
 ```json
@@ -785,6 +855,9 @@ Each sample shows the standard response structure including:
   ]
 }
 ```
+
+- Locations
+  - JobId: `00000000-0000-0000-0000-000000000000` indicates no data (not applicable to PPEStocks)
 
 ## ReportedIssues
 
@@ -950,6 +1023,13 @@ Each sample shows the standard response structure including:
 }
 ```
 
+- Locations
+  - CompanyId: `00000000-0000-0000-0000-000000000000` indicates no data
+  - SiteId: `00000000-0000-0000-0000-000000000000` indicates no data
+  - AreaId: `00000000-0000-0000-0000-000000000000` indicates no data
+  - JobId: `00000000-0000-0000-0000-000000000000` indicates no data
+  - SiteLocationId: `00000000-0000-0000-0000-000000000000` indicates no data
+
 ## SafetyCards
 
 ```json
@@ -1023,4 +1103,11 @@ Each sample shows the standard response structure including:
     }
   ]
 }
+
+- Locations
+  - CompanyId: `00000000-0000-0000-0000-000000000000` indicates no data
+  - SiteId: `00000000-0000-0000-0000-000000000000` indicates no data
+  - AreaId: `00000000-0000-0000-0000-000000000000` indicates no data
+  - JobId: `00000000-0000-0000-0000-000000000000` indicates no data
+  - SiteLocationId: `00000000-0000-0000-0000-000000000000` indicates no data
 ```
