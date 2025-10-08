@@ -820,6 +820,18 @@ Notes
 
 - Locations
   - **JobId**: `00000000-0000-0000-0000-000000000000` indicates no data (not applicable to PPEStockHistories)
+- PPETypes
+  - **PPETypeVariantId**: `00000000-0000-0000-0000-000000000000` indicates no variant
+  - **Variant**: if `null` no field will be returned
+  - **VariantOrder**: if `null` no field will be returned
+  - **LifespanDays**: if `null` no field will be returned
+  - **Value**: if `null` no field will be returned
+- PPEStocks
+  - **PPETypeVariantId**: `00000000-0000-0000-0000-000000000000` indicates no variant
+  - **WarningQuantity**: if `null` no field will be returned
+- PPEStockHistories
+  - **TransferredFromStockId**: if `null` no field will be returned
+  - **ActionedByContactId**: if `null` no field will be returned
 
 ## PPEStocks
 
@@ -895,6 +907,15 @@ Notes
 
 - Locations
   - **JobId**: `00000000-0000-0000-0000-000000000000` indicates no data (not applicable to PPEStocks)
+- PPETypes
+  - **PPETypeVariantId**: `00000000-0000-0000-0000-000000000000` indicates no variant
+  - **Variant**: if `null` no field will be returned
+  - **VariantOrder**: if `null` no field will be returned
+  - **LifespanDays**: if `null` no field will be returned
+  - **Value**: if `null` no field will be returned
+- PPEStocks
+  - **PPETypeVariantId**: `00000000-0000-0000-0000-000000000000` indicates no variant
+  - **WarningQuantity**: if `null` no field will be returned
 
 ## ReportedIssues
 
@@ -1068,6 +1089,9 @@ Notes
   - **AreaId**: `00000000-0000-0000-0000-000000000000` indicates no data
   - **JobId**: `00000000-0000-0000-0000-000000000000` indicates no data
   - **SiteLocationId**: `00000000-0000-0000-0000-000000000000` indicates no data
+- ReportedIssues
+  - **ReportedIssueSeverityCode**: `-1` indicates no data
+  - **CloseDate**: `0001-01-01T00:00:00+00:00` indicates no data
 
 ## SafetyCards
 
@@ -1152,3 +1176,5 @@ Notes
   - **AreaId**: `00000000-0000-0000-0000-000000000000` indicates no data
   - **JobId**: `00000000-0000-0000-0000-000000000000` indicates no data
   - **SiteLocationId**: `00000000-0000-0000-0000-000000000000` indicates no data
+- SafetyCards
+  - **OccupationRoleCode**: `-1` indicates no data
