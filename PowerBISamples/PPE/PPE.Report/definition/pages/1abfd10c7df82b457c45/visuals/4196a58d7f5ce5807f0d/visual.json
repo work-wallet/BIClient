@@ -1,0 +1,308 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.2.0/schema.json",
+  "name": "4196a58d7f5ce5807f0d",
+  "position": {
+    "x": 10.314262691377921,
+    "y": 0,
+    "z": 0,
+    "height": 719.93553585817892,
+    "width": 1269.685737308622
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "PPE Type"
+                    }
+                  },
+                  "Property": "PPE"
+                }
+              },
+              "queryRef": "PPE Type.PPE",
+              "nativeQueryRef": "PPE Type",
+              "displayName": "PPE Type"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "PPE Action"
+                    }
+                  },
+                  "Property": "PPE Action"
+                }
+              },
+              "queryRef": "PPE Action.PPE Action",
+              "nativeQueryRef": "Action",
+              "displayName": "Action"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Actioned By Contact"
+                    }
+                  },
+                  "Property": "Contact Name"
+                }
+              },
+              "queryRef": "Actioned By Contact.Contact Name",
+              "nativeQueryRef": "By",
+              "displayName": "By"
+            },
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Stock History"
+                        }
+                      },
+                      "Property": "Stock Quantity"
+                    }
+                  },
+                  "Function": 0
+                }
+              },
+              "queryRef": "Sum(Stock History.Stock Quantity)",
+              "nativeQueryRef": "Quantity",
+              "displayName": "Quantity"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Stock History"
+                    }
+                  },
+                  "Property": "Transferred From Stock Location"
+                }
+              },
+              "queryRef": "Stock History.Transferred From Stock Location",
+              "nativeQueryRef": "From",
+              "displayName": "From"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Stock History"
+                    }
+                  },
+                  "Property": "Stock Location"
+                }
+              },
+              "queryRef": "Stock History.Stock Location",
+              "nativeQueryRef": "Location",
+              "displayName": "Location"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Stock History"
+                    }
+                  },
+                  "Property": "Actioned On"
+                }
+              },
+              "queryRef": "Stock History.Actioned On",
+              "nativeQueryRef": "Date",
+              "displayName": "Date"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "Stock History"
+                  }
+                },
+                "Property": "Actioned On"
+              }
+            },
+            "direction": "Descending"
+          }
+        ]
+      }
+    },
+    "objects": {
+      "columnWidth": [
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "126.63572040488116D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "PPE Action.PPE Action"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "39D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Stock History.Actioned On.Variation.Date Hierarchy.Year"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "48D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Stock History.Actioned On.Variation.Date Hierarchy.Quarter"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "73D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Stock History.Actioned On.Variation.Date Hierarchy.Month"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "29D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Stock History.Actioned On.Variation.Date Hierarchy.Day"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "126D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Stock History.Actioned On"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "60.40290088638195D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Sum(Stock History.Stock Quantity)"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "360.9342146769623D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "PPE Type.PPE"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "251D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Stock History.Stock Location"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "206D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Stock History.Transferred From Stock Location"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "104D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Actioned By Contact.Contact Name"
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

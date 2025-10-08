@@ -1,0 +1,348 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.2.0/schema.json",
+  "name": "a9d0a663a162b7d0f458",
+  "position": {
+    "x": 0,
+    "y": 101.95583596214512,
+    "z": 0,
+    "height": 617.79179810725554,
+    "width": 1280
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Audit"
+                    }
+                  },
+                  "Property": "Audit Reference"
+                }
+              },
+              "queryRef": "Audit.Audit Reference",
+              "nativeQueryRef": "Audit Reference"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Audit Status"
+                    }
+                  },
+                  "Property": "Audit Status"
+                }
+              },
+              "queryRef": "Audit Status.Audit Status",
+              "nativeQueryRef": "Audit Status"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Audit Type"
+                    }
+                  },
+                  "Property": "Audit Type"
+                }
+              },
+              "queryRef": "Audit Type.Audit Type",
+              "nativeQueryRef": "Audit Type"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Audit"
+                    }
+                  },
+                  "Property": "Conducted By"
+                }
+              },
+              "queryRef": "Audit.Conducted By",
+              "nativeQueryRef": "Conducted By"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Audit"
+                    }
+                  },
+                  "Property": "Inspected On"
+                }
+              },
+              "queryRef": "Audit.Inspected On",
+              "nativeQueryRef": "Inspected On"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Audit Grading Set Option"
+                    }
+                  },
+                  "Property": "Audit Grading"
+                }
+              },
+              "queryRef": "Audit Grading Set Option.Audit Grading",
+              "nativeQueryRef": "Audit Grading"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Location"
+                    }
+                  },
+                  "Property": "Location"
+                }
+              },
+              "queryRef": "Location.Location",
+              "nativeQueryRef": "Location"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "Audit"
+                  }
+                },
+                "Property": "Audit Reference"
+              }
+            },
+            "direction": "Descending"
+          }
+        ]
+      }
+    },
+    "objects": {
+      "columnWidth": [
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "110.70777479892762D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Audit.Audit Reference"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "330.32651272223603D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Location.Location"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "40D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Audit.Inspected On.Variation.Date Hierarchy.Year"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "48D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Audit.Inspected On.Variation.Date Hierarchy.Quarter"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "70D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Audit.Inspected On.Variation.Date Hierarchy.Month"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "29D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Audit.Inspected On.Variation.Date Hierarchy.Day"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "123D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Audit.Inspected On"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "146.52504706307758D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Audit Status.Audit Status"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "210.36788780033328D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Audit Type.Audit Type"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "183.84437955836114D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Audit.Conducted By"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "151.64602313763442D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Audit Grading Set Option.Audit Grading"
+          }
+        }
+      ],
+      "values": [
+        {
+          "properties": {
+            "backColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Aggregation": {
+                      "Expression": {
+                        "Column": {
+                          "Expression": {
+                            "SourceRef": {
+                              "Entity": "Audit Grading Set Option"
+                            }
+                          },
+                          "Property": "Audit Grading Colour"
+                        }
+                      },
+                      "Function": 3
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "selector": {
+            "data": [
+              {
+                "dataViewWildcard": {
+                  "matchingOption": 1
+                }
+              }
+            ],
+            "metadata": "Audit Grading Set Option.Audit Grading"
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "visualTooltip": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

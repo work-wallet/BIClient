@@ -1,0 +1,101 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.2.0/schema.json",
+  "name": "e26eea4307de53e60c08",
+  "position": {
+    "x": 0,
+    "y": 556.30285152409044,
+    "z": 14000,
+    "height": 163.61848574237953,
+    "width": 320,
+    "tabOrder": 14000
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Checklist Option"
+                    }
+                  },
+                  "Property": "Checklist Question"
+                }
+              },
+              "queryRef": "Checklist Option.Checklist Question",
+              "nativeQueryRef": "Question",
+              "displayName": "Question"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Checklist Option"
+                    }
+                  },
+                  "Property": "Checklist Answer"
+                }
+              },
+              "queryRef": "Checklist Option.Checklist Answer",
+              "nativeQueryRef": "Answer",
+              "displayName": "Answer"
+            }
+          ]
+        }
+      }
+    },
+    "objects": {
+      "columnWidth": [
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "159.31737325234099D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Checklist Option.Checklist Question"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "127.62656505171475D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Checklist Option.Checklist Answer"
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Checklists'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}
