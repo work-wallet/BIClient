@@ -57,6 +57,7 @@
 
 | ActionStatusCode | ActionStatus |
 | --- | --- |
+| 0 | Draft |
 | 1 | Open |
 | 2 | In Progress |
 | 3 | Closed |
@@ -71,11 +72,11 @@
 
 ## Assets
 
-| AssetPropertyType | Description |
-| --- | --- |
-| Number | Number |
-| Select | Select |
-| Text | Text |
+| AssetPropertyType |
+| --- |
+| Number |
+| Select |
+| Text |
 
 | AssetStatusCode | AssetStatus |
 | --- | --- |
