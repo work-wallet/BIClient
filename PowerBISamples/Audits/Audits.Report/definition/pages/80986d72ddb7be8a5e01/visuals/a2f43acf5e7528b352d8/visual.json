@@ -1,0 +1,228 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.2.0/schema.json",
+  "name": "a2f43acf5e7528b352d8",
+  "position": {
+    "x": 0,
+    "y": 227.1779744346116,
+    "z": 10000,
+    "height": 150.40314650934118,
+    "width": 640,
+    "tabOrder": 10000
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Score Tag"
+                    }
+                  },
+                  "Property": "Tag"
+                }
+              },
+              "queryRef": "Score Tag.Tag",
+              "nativeQueryRef": "Tag"
+            },
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Score Tag Fact"
+                        }
+                      },
+                      "Property": "Flags"
+                    }
+                  },
+                  "Function": 0
+                }
+              },
+              "queryRef": "Sum(Score Tag Fact.Flags)",
+              "nativeQueryRef": "Flags"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Score Tag Grading Set Option"
+                    }
+                  },
+                  "Property": "Score Tag Grading"
+                }
+              },
+              "queryRef": "Score Tag Grading Set Option.Score Tag Grading",
+              "nativeQueryRef": "Score Tag Grading"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Score Tag Fact"
+                    }
+                  },
+                  "Property": "Score Display"
+                }
+              },
+              "queryRef": "Score Tag Fact.Score Display",
+              "nativeQueryRef": "Score",
+              "displayName": "Score"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "Score Tag Grading Set Option"
+                  }
+                },
+                "Property": "Score Tag Grading"
+              }
+            },
+            "direction": "Ascending"
+          }
+        ]
+      }
+    },
+    "objects": {
+      "columnWidth": [
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "275.57632559158304D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Score Tag.Tag"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "35D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Sum(Score Tag Fact.Flags)"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "93D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Score Tag Fact.Score Display"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "171.98510288204358D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Score Tag Grading Set Option.Score Tag Grading"
+          }
+        }
+      ],
+      "total": [
+        {
+          "properties": {
+            "totals": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "values": [
+        {
+          "properties": {
+            "backColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Aggregation": {
+                      "Expression": {
+                        "Column": {
+                          "Expression": {
+                            "SourceRef": {
+                              "Entity": "Score Tag Grading Set Option"
+                            }
+                          },
+                          "Property": "Score Tag Grading Colour"
+                        }
+                      },
+                      "Function": 3
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "selector": {
+            "data": [
+              {
+                "dataViewWildcard": {
+                  "matchingOption": 1
+                }
+              }
+            ],
+            "metadata": "Score Tag Grading Set Option.Score Tag Grading"
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Tags'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

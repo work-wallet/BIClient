@@ -1,0 +1,152 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.2.0/schema.json",
+  "name": "45d6f1f82062ba30e905",
+  "position": {
+    "x": 10.256410256410257,
+    "y": 0,
+    "z": 0,
+    "height": 720,
+    "width": 1269.7435897435898
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "PPE Type"
+                    }
+                  },
+                  "Property": "PPE"
+                }
+              },
+              "queryRef": "PPE Type.PPE",
+              "nativeQueryRef": "PPE Type",
+              "displayName": "PPE Type"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Stock History"
+                    }
+                  },
+                  "Property": "Stock Site"
+                }
+              },
+              "queryRef": "Stock History.Stock Site",
+              "nativeQueryRef": "Stock Location",
+              "displayName": "Stock Location"
+            },
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Stock History"
+                        }
+                      },
+                      "Property": "Stock Quantity"
+                    }
+                  },
+                  "Function": 0
+                }
+              },
+              "queryRef": "Sum(Stock History.Stock Quantity)",
+              "nativeQueryRef": "Quantity",
+              "displayName": "Quantity"
+            },
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Stock History"
+                        }
+                      },
+                      "Property": "Value"
+                    }
+                  },
+                  "Function": 0
+                }
+              },
+              "queryRef": "Sum(Stock History.Value)",
+              "nativeQueryRef": "Value"
+            }
+          ]
+        }
+      }
+    },
+    "objects": {
+      "columnWidth": [
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "573.4532490761385D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "PPE Type.PPE"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "80D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Sum(Stock History.Stock Quantity)"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "98.84615384615384D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Sum(Stock History.Value)"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "157D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Stock History.Stock Site"
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

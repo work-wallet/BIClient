@@ -1,0 +1,17 @@
+{
+    "folders": [
+        {
+            "path": "."
+        }
+    ],
+    "settings": {
+        "dotnet.defaultSolution": "SampleCode/WorkWallet.BI.Client.sln"
+    },
+    "extensions": {
+        "recommendations": [
+            "ms-dotnettools.csharp",
+            "ms-dotnettools.csdevkit",
+            "ms-vscode.powershell"
+        ]
+    }
+}

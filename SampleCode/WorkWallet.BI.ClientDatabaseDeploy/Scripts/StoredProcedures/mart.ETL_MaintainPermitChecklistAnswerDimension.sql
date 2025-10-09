@@ -9,10 +9,10 @@ BEGIN
     MERGE mart.PermitChecklistAnswer AS target
     USING (
         SELECT DISTINCT
-            a.CategorySectionType,
-            a.Question,
-            a.[Option],
-            w.Wallet_key
+            a.CategorySectionType
+            ,a.Question
+            ,a.[Option]
+            ,w.Wallet_key
         FROM
             @permitToWorkChecklistAnswerTable AS a
             INNER JOIN mart.Wallet AS w ON a.WalletId = w.WalletId
@@ -23,15 +23,15 @@ BEGIN
         AND target.[Option] = source.[Option]
     WHEN NOT MATCHED BY TARGET THEN
         INSERT (
-            CategorySectionType,
-            Question,
-            [Option],
-            Wallet_key
+            CategorySectionType
+            ,Question
+            ,[Option]
+            ,Wallet_key
         ) VALUES (
-            source.CategorySectionType,
-            source.Question,
-            source.[Option],
-            source.Wallet_key
+            source.CategorySectionType
+            ,source.Question
+            ,source.[Option]
+            ,source.Wallet_key
         );
 
     PRINT 'MERGE mart.PermitChecklistAnswer, number of rows = ' + CAST(@@ROWCOUNT AS varchar);

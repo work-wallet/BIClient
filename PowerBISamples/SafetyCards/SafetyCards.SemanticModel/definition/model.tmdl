@@ -10,8 +10,6 @@ annotation PBI_QueryOrder = ["Location","Wallet","Safety Card","Category","Occup
 
 annotation __PBI_TimeIntelligenceEnabled = 1
 
-annotation PBIDesktopVersion = 2.146.1133.0 (25.08)+c8010d55d1db76eda03c968b03481610e96a1ef7
-
 annotation PBI_ProTooling = ["DevMode"]
 
 ref table Location

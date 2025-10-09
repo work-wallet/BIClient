@@ -1,36 +1,41 @@
 ﻿using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using System.Net;
-using System.Text.Json;
-using System.Web;
 using WorkWallet.BI.ClientCore.Exceptions;
 using WorkWallet.BI.ClientCore.Interfaces.Services;
+using WorkWallet.BI.ClientCore.Models;
 using WorkWallet.BI.ClientCore.Options;
+using WorkWallet.BI.ClientCore.Utils;
 
 namespace WorkWallet.BI.ClientServices.Processor;
 
+/// <summary>
+/// Orchestrates the synchronization of data from Work Wallet APIs to local storage.
+/// 
+/// Flow:
+/// 1. For each configured wallet
+/// 2. For each configured dataset (or all if none specified)
+/// 3. Initialize synchronization state (incremental vs full sync)
+/// 4. Process data in pages to handle large datasets
+/// 5. Store data and update synchronization tracking
+/// 6. Perform post-processing
+/// </summary>
 public class ProcessorService(
     ILogger<ProcessorService> logger,
     IOptions<ProcessorServiceOptions> serviceOptions,
-    HttpClient httpClient,
     IDataStoreService dataStore,
-    IProgressService progressService) : IProcessorService
+    IProgressService progressService,
+    IWalletContextService walletContextService,
+    IApiClient apiClient,
+    IResponseParser responseParser,
+    IDataSetResolver dataSetResolver) : IProcessorService
 {
     private readonly ProcessorServiceOptions _serviceOptions = serviceOptions.Value;
+
+    #region Public Interface
     
-    // the wallet endpoint uses camel case (the dataextract endpoints use pascal case)
-    private static readonly JsonSerializerOptions _jsonCamelCaseOptions = new()
-    {
-        PropertyNamingPolicy = JsonNamingPolicy.CamelCase
-    };
-
-    private record WalletContext
-    {
-        public Guid Id { get; set; }
-        public required string Name { get; set; }
-        public required string DataRegion { get; set; }
-    }
-
+    /// <summary>
+    /// Main entry point: processes all configured wallets and datasets
+    /// </summary>
     public async Task RunAsync(CancellationToken cancellationToken = default)
     {
         // loop (supporting multiple wallets)
@@ -38,32 +43,41 @@ public class ProcessorService(
         {
             cancellationToken.ThrowIfCancellationRequested();
 
-            WalletContext walletContext = await GetWalletContextAsync(agentWallet.WalletId, cancellationToken);
+            string walletSecret = GetSecretForWallet(agentWallet.WalletId);
+            WalletContext walletContext = await walletContextService.GetWalletContextAsync(agentWallet.WalletId, walletSecret, cancellationToken);
             logger.LogInformation("Start process for wallet {wallet}", agentWallet.WalletId);
             progressService.WriteWallet(walletContext.Name.Trim(), walletContext.DataRegion);
 
-            // if no dataTypes are provided, then use all the ones that we know about
-            string[] dataSets = _serviceOptions.DataSets.Length > 0 ? _serviceOptions.DataSets : [.. DataSets.Entries.Keys];
-
-            // repeat for all the dataSets selected
-            foreach (string dataSet in dataSets)
-            {
-                cancellationToken.ThrowIfCancellationRequested();
-
-                var entry = DataSets.Entries.FirstOrDefault(dt => dt.Key.Equals(dataSet, StringComparison.OrdinalIgnoreCase));
-
-                // the requested dataType is not in our lookup of expected types
-                if (entry.Equals(default(KeyValuePair<string, string>)))
-                {
-                    throw new UnsupportedDataTypeException(dataSet);
-                }
-
-                // process for this dataType
-                await ProcessAsync(walletContext, entry.Key, entry.Value, cancellationToken);
-            }
+            await ProcessWalletDataSetsAsync(walletContext, cancellationToken);
         }
     }
 
+    #endregion
+
+    #region Wallet and Dataset Orchestration
+
+    /// <summary>
+    /// Processes all datasets for a single wallet
+    /// </summary>
+    private async Task ProcessWalletDataSetsAsync(WalletContext walletContext, CancellationToken cancellationToken)
+    {
+        var dataSetEntries = dataSetResolver.GetDataSetEntriesToProcess();
+
+        foreach (var (dataType, logType) in dataSetEntries)
+        {
+            cancellationToken.ThrowIfCancellationRequested();
+            await ProcessAsync(walletContext, dataType, logType, cancellationToken);
+        }
+    }
+
+    #endregion
+
+    #region Dataset Processing Pipeline
+
+    /// <summary>
+    /// Main processing pipeline for a single dataset:
+    /// Initialize → Process Pages → Finalize
+    /// </summary>
     private async Task ProcessAsync(
         WalletContext walletContext,
         string dataType,
@@ -72,6 +86,17 @@ public class ProcessorService(
     {
         logger.LogDebug("Processing {dataType} for wallet {wallet}", dataType, walletContext.Id);
 
+        var processingState = await InitializeProcessingAsync(walletContext, logType, dataType);
+        var result = await ProcessPagesAsync(walletContext, dataType, processingState, cancellationToken);
+        await FinalizeProcessingAsync(walletContext, logType, dataType, result);
+    }
+
+    /// <summary>
+    /// Initializes processing state and handles full vs incremental sync
+    /// </summary>
+
+    private async Task<ProcessingState> InitializeProcessingAsync(WalletContext walletContext, string logType, string dataType)
+    {
         // obtain our last database change tracking synchronization number (or null if this is the first sync)
         long? lastSynchronizationVersion = await dataStore.GetLastSynchronizationVersionAsync(walletContext.Id, logType);
 
@@ -81,84 +106,141 @@ public class ProcessorService(
             await dataStore.ResetAsync(walletContext.Id, dataType);
         }
 
-        int pageNumber = 0;
-        int totalPages;
-        Context context;
+        return new ProcessingState(lastSynchronizationVersion);
+    }
 
-        // we support data paging in order to be able to cope with large result sets
-        progressService.StartShowProgress(dataType, !lastSynchronizationVersion.HasValue);
+    /// <summary>
+    /// Processes all pages of data for a dataset, handling pagination automatically
+    /// </summary>
+    private async Task<ProcessingResult> ProcessPagesAsync(
+        WalletContext walletContext, 
+        string dataType, 
+        ProcessingState state, 
+        CancellationToken cancellationToken)
+    {
+        progressService.StartShowProgress(dataType, !state.LastSynchronizationVersion.HasValue);
+        
+        int pageNumber = 0;
+        long? firstPageSyncVersion = null;
+        Context context;
+        int currentPageSize = _serviceOptions.AgentPageSize; // Start with default, reset per dataset
+        
         do
         {
             cancellationToken.ThrowIfCancellationRequested();
-
-            ++pageNumber;
-
-            // call the Work Wallet API end point and obtain the results as JSON
-            string json = await CallApiAsync(
-                walletContext,
-                dataType,
-                lastSynchronizationVersion,
-                pageNumber,
-                cancellationToken);
-
-            progressService.ShowProgress();
-
-            try
-            {
-                // extract the context information (this is included at the top of the JSON)
-                using var document = JsonDocument.Parse(json);
-                var contextElement = document.RootElement.GetProperty("Context");
-                context = JsonSerializer.Deserialize<Context>(contextElement.GetRawText())!;
-            }
-            catch (Exception ex)
-            {
-                throw new DeserializeResponseException(typeof(Context), ex.Message, walletContext.Id, dataType);
-            }
-
-            // check for errors
-            if (context.Error == "Invalid LastSynchronizationVersion")
-            {
-                throw new InvalidLastSynchronizationVersionException(lastSynchronizationVersion.Value, context.MinValidSynchronizationVersion, walletContext.Id, dataType);
-            }
-
-            if (context.Error.Length != 0)
-            {
-                throw new ApiErrorResponseException(context.Error, walletContext.Id, dataType);
-            }
-
-            // now we know how many rows there are in total, we can calculate the total number of pages we need to fetch
-            // note that we want to calculate this every iteration (in case server data has been added to)
-            totalPages = (context.FullCount - 1) / context.PageSize + 1;
-
-            logger.LogDebug("API for {DataType} returned JSON of length {Length}", dataType, json.Length);
-            logger.LogDebug("Count: {Count}", context.Count);
-            logger.LogDebug("FullCount: {FullCount}", context.FullCount);
-            logger.LogDebug("LastSynchronizationVersion: {LastSynchronizationVersion}", context.LastSynchronizationVersion);
-            logger.LogDebug("SynchronizationVersion: {SynchronizationVersion}", context.SynchronizationVersion);
-            logger.LogDebug("PageNumber: {PageNumber} / {totalPages}, PageSize: {PageSize}", context.PageNumber, totalPages, context.PageSize);
-
+            
+            var pageResult = await ProcessSinglePageWithRetryAsync(
+                walletContext, dataType, state.LastSynchronizationVersion, ++pageNumber, 
+                currentPageSize, cancellationToken);
+            
+            context = pageResult.Context;
+            
+            // Update page size if it was adjusted during retry
+            currentPageSize = pageResult.UsedPageSize;
+            
+            if (pageNumber == 1)
+                firstPageSyncVersion = context.SynchronizationVersion;
+                
             if (context.Count > 0)
             {
                 cancellationToken.ThrowIfCancellationRequested();
-
-                // load into our local database (all the heavy lifting is done in the stored procedure)
-                await dataStore.LoadAsync(dataType, json);
+                await dataStore.LoadAsync(dataType, pageResult.Json);
             }
             else
             {
-                logger.LogDebug($"No records to load");
+                logger.LogDebug("No records to load");
             }
-
-        } while (pageNumber < totalPages);
+            
+        } while (PaginationLogic.ShouldContinuePaging(context));
+        
         progressService.EndShowProgress(context.FullCount);
+        
+        return new ProcessingResult(firstPageSyncVersion!.Value, context.FullCount);
+    }
 
+    /// <summary>
+    /// Processes a single page with automatic retry for PageSize validation errors
+    /// </summary>
+    private async Task<PageResultWithSize> ProcessSinglePageWithRetryAsync(
+        WalletContext walletContext,
+        string dataType,
+        long? lastSynchronizationVersion,
+        int pageNumber,
+        int initialPageSize,
+        CancellationToken cancellationToken)
+    {
+        int currentPageSize = initialPageSize;
+        
+        while (true)
+        {
+            try
+            {
+                var pageResult = await ProcessSinglePageAsync(
+                    walletContext, dataType, lastSynchronizationVersion, 
+                    pageNumber, currentPageSize, cancellationToken);
+                
+                return new PageResultWithSize(pageResult.Context, pageResult.Json, currentPageSize);
+            }
+            catch (PageSizeExceededException ex)
+            {
+                logger.LogWarning("PageSize {RequestedPageSize} exceeded for dataset {DataType}, retrying with maxPageSize {MaxPageSize}", 
+                    ex.RequestedPageSize, dataType, ex.MaxPageSize);
+
+                    progressService.ReportPageSizeReduced(currentPageSize, ex.MaxPageSize);
+                
+                currentPageSize = ex.MaxPageSize;
+                // Continue the loop to retry with the smaller page size
+            }
+        }
+    }
+
+    /// <summary>
+    /// Processes a single page of data: fetch, parse, validate, return
+    /// </summary>
+    private async Task<PageResult> ProcessSinglePageAsync(
+        WalletContext walletContext,
+        string dataType,
+        long? lastSynchronizationVersion,
+        int pageNumber,
+        int pageSize,
+        CancellationToken cancellationToken)
+    {
+        // call the Work Wallet API end point and obtain the results as JSON
+        string walletSecret = GetSecretForWallet(walletContext.Id);
+        string json = await apiClient.FetchDataPageAsync(walletContext, walletSecret, dataType, lastSynchronizationVersion, pageNumber, pageSize, cancellationToken);
+
+        progressService.ShowProgress();
+
+        try
+        {
+            // extract and validate the context information
+            var context = responseParser.ParseContext(json);
+            responseParser.ValidateResponse(context, lastSynchronizationVersion, walletContext.Id, dataType);
+
+            LogPageDetails(dataType, json, context);
+
+            return new PageResult(context, json);
+        }
+        catch (JsonParseException ex)
+        {
+            // Enrich with wallet context for better error reporting
+            throw new DeserializeResponseException(ex.TargetType, ex.Message, walletContext.Id, dataType);
+        }
+    }
+
+    /// <summary>
+    /// Updates synchronization tracking and performs post-processing
+    /// </summary>
+    private async Task FinalizeProcessingAsync(WalletContext walletContext, string logType, string dataType, ProcessingResult result)
+    {
         // update our change detection / logging table, so we only fetch new and changed data next time
         // (must do this, even if no rows are obtained as lastSynchronizationVersion can otherwise become invalid)
-        await dataStore.UpdateLastSyncAsync(walletContext.Id, logType, context.SynchronizationVersion, context.FullCount);
+        // use the SynchronizationVersion from the first page to avoid missing changes that occur during paging
+        await dataStore.UpdateLastSyncAsync(walletContext.Id, logType, result.SynchronizationVersion, result.TotalRecords);
 
-        if (context.FullCount > 0)
+        if (result.TotalRecords > 0)
         {
-            logger.LogDebug("A total of {FullCount} {DataType} records received.", context.FullCount, dataType);
+            logger.LogDebug("A total of {FullCount} {DataType} records received.", result.TotalRecords, dataType);
 
             // perform any post processing
             await dataStore.PostProcessAsync(walletContext.Id, dataType);
@@ -169,70 +251,35 @@ public class ProcessorService(
         }
     }
 
-    private async Task<WalletContext> GetWalletContextAsync(Guid walletId, CancellationToken cancellationToken = default)
+    #endregion
+
+    #region Helper Methods
+
+    /// <summary>
+    /// Logs detailed information about the API response for debugging
+    /// </summary>
+    private void LogPageDetails(string dataType, string json, Context context)
     {
-        var query = HttpUtility.ParseQueryString(string.Empty);
-
-        query["walletId"] = walletId.ToString();
-        query["walletSecret"] = GetSecretForWallet(walletId);
-
-        string url = $"wallet?{query}";
-
-        var response = await httpClient.GetAsync(url, cancellationToken);
-        if (!response.IsSuccessStatusCode)
-        {
-            throw new WalletContextException(response.StatusCode, walletId);
-        }
-
-        string content = await response.Content.ReadAsStringAsync(cancellationToken);
-
-        // parse the JSON response
-        return JsonSerializer.Deserialize<WalletContext>(content, _jsonCamelCaseOptions) ?? throw new DeserializeResponseException(typeof(WalletContext), walletId);
+        logger.LogDebug("API for {DataType} returned JSON of length {Length}", dataType, json.Length);
+        logger.LogDebug("Count: {Count}", context.Count);
+        logger.LogDebug("FullCount: {FullCount}", context.FullCount);
+        logger.LogDebug("LastSynchronizationVersion: {LastSynchronizationVersion}", context.LastSynchronizationVersion);
+        logger.LogDebug("SynchronizationVersion: {SynchronizationVersion}", context.SynchronizationVersion);
+        logger.LogDebug("PageNumber: {PageNumber}, PageSize: {PageSize}", context.PageNumber, context.PageSize);
     }
 
-    private async Task<string> CallApiAsync(
-        WalletContext walletContext,
-        string dataType,
-        long? lastSynchronizationVersion,
-        int pageNumber,
-        CancellationToken cancellationToken = default)
-    {
-        var query = HttpUtility.ParseQueryString(string.Empty);
-
-        query["walletId"] = walletContext.Id.ToString();
-        query["walletSecret"] = GetSecretForWallet(walletContext.Id);
-        query["pageNumber"] = pageNumber.ToString();
-        query["pageSize"] = _serviceOptions.AgentPageSize.ToString();
-
-        if (lastSynchronizationVersion.HasValue)
-        {
-            query["lastSynchronizationVersion"] = (lastSynchronizationVersion.Value).ToString();
-        }
-
-        string url = $"dataextract/{dataType}?{query}";
-
-        var request = new HttpRequestMessage(HttpMethod.Get, url);
-        request.Headers.Add("DataRegion", walletContext.DataRegion);
-
-        var response = await httpClient.SendAsync(request, cancellationToken);
-        if (!response.IsSuccessStatusCode)
-        {
-            if (response.StatusCode == HttpStatusCode.BadRequest &&                
-                string.Equals(await response.Content.ReadAsStringAsync(cancellationToken), "Incorrect data region", StringComparison.OrdinalIgnoreCase))
-            {
-                throw new IncorrectDataRegionException(walletContext.DataRegion, walletContext.Id, dataType);
-            }
-            else
-            {
-                throw new ApiException(response.StatusCode, walletContext.Id, dataType);
-            }
-        }
-
-        return await response.Content.ReadAsStringAsync(cancellationToken);
-    }
-
+    /// <summary>
+    /// Gets the wallet secret for the specified wallet ID from configuration
+    /// </summary>
     private string GetSecretForWallet(Guid walletId)
     {
         return _serviceOptions.AgentWallets.Single(w => w.WalletId == walletId).WalletSecret;
     }
+
+    #endregion
 }
+
+/// <summary>
+/// Extended page result that includes the page size used for the request
+/// </summary>
+internal record PageResultWithSize(Context Context, string Json, int UsedPageSize);

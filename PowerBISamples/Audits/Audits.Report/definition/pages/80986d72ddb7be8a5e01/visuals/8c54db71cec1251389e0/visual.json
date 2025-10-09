@@ -1,0 +1,99 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.2.0/schema.json",
+  "name": "8c54db71cec1251389e0",
+  "position": {
+    "x": 862.62384322264563,
+    "y": 377.65922700054438,
+    "z": 13000,
+    "height": 178.37778987479587,
+    "width": 417.37615677735442,
+    "tabOrder": 13000
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Branch Option"
+                    }
+                  },
+                  "Property": "Branch"
+                }
+              },
+              "queryRef": "Branch Option.Branch",
+              "nativeQueryRef": "Branch"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Branch Option"
+                    }
+                  },
+                  "Property": "Branch Option"
+                }
+              },
+              "queryRef": "Branch Option.Branch Option",
+              "nativeQueryRef": "Branch Option"
+            }
+          ]
+        }
+      }
+    },
+    "objects": {
+      "columnWidth": [
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "200.47272163051883D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Branch Option.Branch"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "196.00724096264761D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Branch Option.Branch Option"
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Branches'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

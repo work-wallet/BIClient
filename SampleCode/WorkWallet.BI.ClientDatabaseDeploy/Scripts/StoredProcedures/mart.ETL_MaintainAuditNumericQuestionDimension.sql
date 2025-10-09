@@ -9,14 +9,14 @@ BEGIN
     MERGE mart.AuditNumericQuestion AS target
     USING (
         SELECT DISTINCT
-            a.QuestionId,
-            a.Question,
-            a.Mandatory,
-            a.Scale,
-            u.Unit_key,
-            a.Section,
-            a.OrderInSection,
-            w.Wallet_key
+            a.QuestionId
+            ,a.Question
+            ,a.Mandatory
+            ,a.Scale
+            ,u.Unit_key
+            ,a.Section
+            ,a.OrderInSection
+            ,w.Wallet_key
         FROM
             @auditNumericAnswerTable AS a
             INNER JOIN mart.Unit AS u ON a.UnitCode = u.UnitCode
@@ -34,33 +34,33 @@ BEGIN
     )
     THEN
         UPDATE SET
-            Question = source.Question,
-            Mandatory = source.Mandatory,
-            Scale = source.Scale,
-            Unit_key = source.Unit_key,
-            Section = source.Section,
-            OrderInSection = source.OrderInSection,
-            Wallet_key = source.Wallet_key,
-            _edited = SYSUTCDATETIME()
+            Question = source.Question
+            ,Mandatory = source.Mandatory
+            ,Scale = source.Scale
+            ,Unit_key = source.Unit_key
+            ,Section = source.Section
+            ,OrderInSection = source.OrderInSection
+            ,Wallet_key = source.Wallet_key
+            ,_edited = SYSUTCDATETIME()
     WHEN NOT MATCHED BY TARGET THEN
         INSERT (
-            QuestionId,
-            Question,
-            Mandatory,
-            Scale,
-            Unit_key,
-            Section,
-            OrderInSection,
-            Wallet_key
+            QuestionId
+            ,Question
+            ,Mandatory
+            ,Scale
+            ,Unit_key
+            ,Section
+            ,OrderInSection
+            ,Wallet_key
         ) VALUES (
-            source.QuestionId,
-            source.Question,
-            source.Mandatory,
-            source.Scale,
-            source.Unit_key,
-            source.Section,
-            source.OrderInSection,
-            source.Wallet_key
+            source.QuestionId
+            ,source.Question
+            ,source.Mandatory
+            ,source.Scale
+            ,source.Unit_key
+            ,source.Section
+            ,source.OrderInSection
+            ,source.Wallet_key
         );
 
     PRINT 'MERGE mart.AuditNumericQuestion, number of rows = ' + CAST(@@ROWCOUNT AS varchar);

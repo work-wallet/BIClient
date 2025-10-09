@@ -161,6 +161,25 @@ table Action
 
 		annotation SummarizationSetBy = Automatic
 
+	column 'Original Due On'
+		dataType: dateTime
+		isHidden
+		formatString: Short Date
+		lineageTag: fe6f5270-45c5-423e-bbf1-d779d1bdf4ff
+		summarizeBy: none
+		sourceColumn: Original Due On
+
+		variation Variation
+			isDefault
+			relationship: 1515ee55-7e06-4f07-9903-a806c805fccb
+			defaultHierarchy: LocalDateTable_66c8308a-662f-4b19-9254-47cf6aee52dd.'Date Hierarchy'
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
 	partition Action = m
 		mode: import
 		source =
@@ -168,9 +187,11 @@ table Action
 				    Source = Sql.Database("ww-powerbi-demo.database.windows.net", "powerbi"),
 				    mart_Action = Source{[Schema="mart",Item="Action"]}[Data],
 				    #"Removed Columns" = Table.RemoveColumns(mart_Action,{"_created", "_edited"}),
-				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"TargetReference", "Target Reference"}, {"AssignedTo", "Assigned To"}, {"DueOn", "Due On"}, {"CreatedOn", "Created On"}})
+				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"TargetReference", "Target Reference"}, {"AssignedTo", "Assigned To"}, {"DueOn", "Due On"}, {"CreatedOn", "Created On"}, {"OriginalDueOn", "Original Due On"}})
 				in
 				    #"Renamed Columns"
 
 	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
 

@@ -1,0 +1,376 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.2.0/schema.json",
+  "name": "944703ba506a1da3c8e5",
+  "position": {
+    "x": 0,
+    "y": 98.918083462132913,
+    "z": 0,
+    "height": 621.2055641421947,
+    "width": 1280
+  },
+  "visual": {
+    "visualType": "pivotTable",
+    "query": {
+      "queryState": {
+        "Columns": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Severity"
+                    }
+                  },
+                  "Property": "Severity"
+                }
+              },
+              "queryRef": "Severity.Severity",
+              "active": true
+            }
+          ]
+        },
+        "Rows": {
+          "projections": [
+            {
+              "field": {
+                "HierarchyLevel": {
+                  "Expression": {
+                    "Hierarchy": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Person"
+                        }
+                      },
+                      "Hierarchy": "Person Hierarchy"
+                    }
+                  },
+                  "Level": "Person Question"
+                }
+              },
+              "queryRef": "Person.Person Hierarchy.Person Question",
+              "active": true
+            },
+            {
+              "field": {
+                "HierarchyLevel": {
+                  "Expression": {
+                    "Hierarchy": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Person"
+                        }
+                      },
+                      "Hierarchy": "Person Hierarchy"
+                    }
+                  },
+                  "Level": "Person"
+                }
+              },
+              "queryRef": "Person.Person Hierarchy.Person",
+              "active": true
+            }
+          ]
+        },
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Issue"
+                        }
+                      },
+                      "Property": "Issue Count"
+                    }
+                  },
+                  "Function": 0
+                }
+              },
+              "queryRef": "Sum(Issue.Issue Count)"
+            }
+          ]
+        }
+      }
+    },
+    "expansionStates": [
+      {
+        "roles": [
+          "Rows"
+        ],
+        "levels": [
+          {
+            "queryRefs": [
+              "Person.Person Hierarchy.Person Question"
+            ],
+            "isPinned": true
+          },
+          {
+            "queryRefs": [
+              "Person.Person Hierarchy.Person"
+            ],
+            "isCollapsed": true,
+            "isPinned": true
+          }
+        ],
+        "root": {}
+      }
+    ],
+    "objects": {
+      "subTotals": [
+        {
+          "properties": {
+            "columnSubtotals": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "rowSubtotalsLabel": {
+              "expr": {
+                "Literal": {
+                  "Value": "'out of a total number of issues'"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "columnWidth": [
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "61D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "data": [
+              {
+                "scopeId": {
+                  "Comparison": {
+                    "ComparisonKind": 0,
+                    "Left": {
+                      "Column": {
+                        "Expression": {
+                          "SourceRef": {
+                            "Entity": "Severity"
+                          }
+                        },
+                        "Property": "Severity"
+                      }
+                    },
+                    "Right": {
+                      "Literal": {
+                        "Value": "'(not set)'"
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "36D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "data": [
+              {
+                "scopeId": {
+                  "Comparison": {
+                    "ComparisonKind": 0,
+                    "Left": {
+                      "Column": {
+                        "Expression": {
+                          "SourceRef": {
+                            "Entity": "Severity"
+                          }
+                        },
+                        "Property": "Severity"
+                      }
+                    },
+                    "Right": {
+                      "Literal": {
+                        "Value": "'Low'"
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "61D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "data": [
+              {
+                "scopeId": {
+                  "Comparison": {
+                    "ComparisonKind": 0,
+                    "Left": {
+                      "Column": {
+                        "Expression": {
+                          "SourceRef": {
+                            "Entity": "Severity"
+                          }
+                        },
+                        "Property": "Severity"
+                      }
+                    },
+                    "Right": {
+                      "Literal": {
+                        "Value": "'Medium'"
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "40D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "data": [
+              {
+                "scopeId": {
+                  "Comparison": {
+                    "ComparisonKind": 0,
+                    "Left": {
+                      "Column": {
+                        "Expression": {
+                          "SourceRef": {
+                            "Entity": "Severity"
+                          }
+                        },
+                        "Property": "Severity"
+                      }
+                    },
+                    "Right": {
+                      "Literal": {
+                        "Value": "'High'"
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "52D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "data": [
+              {
+                "scopeId": {
+                  "Comparison": {
+                    "ComparisonKind": 0,
+                    "Left": {
+                      "Column": {
+                        "Expression": {
+                          "SourceRef": {
+                            "Entity": "Severity"
+                          }
+                        },
+                        "Property": "Severity"
+                      }
+                    },
+                    "Right": {
+                      "Literal": {
+                        "Value": "'Critical'"
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "42D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "data": [
+              {
+                "total": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Severity"
+                        }
+                      },
+                      "Property": "Severity"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "166D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Person.Person Hierarchy.Person Question"
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

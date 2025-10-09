@@ -124,7 +124,7 @@ BEGIN
 
         EXEC mart.ETL_MaintainInductionCustomQuestionDimension @inductionCustomQuestionTable = @inductionCustomQuestionTable;
 
-        EXEC mart.ETL_LoadInductionCustomQuestionFact @inductionCustomQuestionTable = @inductionCustomQuestionTable
+        EXEC mart.ETL_LoadInductionCustomQuestionFact @inductionCustomQuestionTable = @inductionCustomQuestionTable;
 
         COMMIT TRANSACTION;
     END TRY

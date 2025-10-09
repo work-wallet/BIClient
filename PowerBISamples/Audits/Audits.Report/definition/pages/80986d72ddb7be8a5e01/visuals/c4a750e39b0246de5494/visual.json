@@ -1,0 +1,248 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.2.0/schema.json",
+  "name": "c4a750e39b0246de5494",
+  "position": {
+    "x": 0,
+    "y": 377.65922700054438,
+    "z": 12000,
+    "height": 178.37778987479587,
+    "width": 862.62384322264563,
+    "tabOrder": 12000
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Scored Response"
+                    }
+                  },
+                  "Property": "Scored Response Question"
+                }
+              },
+              "queryRef": "Scored Response.Scored Response Question",
+              "nativeQueryRef": "Scored Response Question"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Scored Response"
+                    }
+                  },
+                  "Property": "Scored Response Answer"
+                }
+              },
+              "queryRef": "Scored Response.Scored Response Answer",
+              "nativeQueryRef": "Answer",
+              "displayName": "Answer"
+            },
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Scored Response Fact"
+                        }
+                      },
+                      "Property": "Score"
+                    }
+                  },
+                  "Function": 0
+                }
+              },
+              "queryRef": "Sum(Scored Response Fact.Score)",
+              "nativeQueryRef": "Score1"
+            },
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Scored Response Fact"
+                        }
+                      },
+                      "Property": "Potential Score"
+                    }
+                  },
+                  "Function": 0
+                }
+              },
+              "queryRef": "Sum(Scored Response Fact.Potential Score)",
+              "nativeQueryRef": "Potential Score"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Scored Response Grading Set Option"
+                    }
+                  },
+                  "Property": "Scored Response Grading"
+                }
+              },
+              "queryRef": "Scored Response Grading Set Option.Scored Response Grading",
+              "nativeQueryRef": "Scored Response Grading"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "Scored Response"
+                  }
+                },
+                "Property": "Scored Response Question"
+              }
+            },
+            "direction": "Ascending"
+          }
+        ]
+      }
+    },
+    "objects": {
+      "columnWidth": [
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "181.3829335270827D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Scored Response.Scored Response Answer"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "231.64679770461862D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Scored Response Grading Set Option.Scored Response Grading"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "47.698136202353986D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Sum(Scored Response Fact.Score)"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "81D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Sum(Scored Response Fact.Potential Score)"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "288.0585054180883D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Scored Response.Scored Response Question"
+          }
+        }
+      ],
+      "values": [
+        {
+          "properties": {
+            "backColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Aggregation": {
+                      "Expression": {
+                        "Column": {
+                          "Expression": {
+                            "SourceRef": {
+                              "Entity": "Scored Response Grading Set Option"
+                            }
+                          },
+                          "Property": "Scored Response Grading Colour"
+                        }
+                      },
+                      "Function": 3
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "selector": {
+            "data": [
+              {
+                "dataViewWildcard": {
+                  "matchingOption": 1
+                }
+              }
+            ],
+            "metadata": "Scored Response Grading Set Option.Scored Response Grading"
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Scored Responses'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

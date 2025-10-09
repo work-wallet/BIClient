@@ -9,14 +9,14 @@ BEGIN
     MERGE mart.AuditDateTimeQuestion AS target
     USING (
         SELECT DISTINCT
-            a.QuestionId,
-            a.Question,
-            a.Mandatory,
-            a.[Date],
-            a.[Time],
-            a.Section,
-            a.OrderInSection,
-            w.Wallet_key
+            a.QuestionId
+            ,a.Question
+            ,a.Mandatory
+            ,a.[Date]
+            ,a.[Time]
+            ,a.Section
+            ,a.OrderInSection
+            ,w.Wallet_key
         FROM
             @auditDateTimeAnswerTable AS a
             INNER JOIN mart.Wallet AS w ON a.WalletId = w.WalletId
@@ -33,33 +33,33 @@ BEGIN
     )
     THEN
         UPDATE SET
-            Question = source.Question,
-            Mandatory = source.Mandatory,
-            [Date] = source.[Date],
-            [Time] = source.[Time],
-            Section = source.Section,
-            OrderInSection = source.OrderInSection,
-            Wallet_key = source.Wallet_key,
-            _edited = SYSUTCDATETIME()
+            Question = source.Question
+            ,Mandatory = source.Mandatory
+            ,[Date] = source.[Date]
+            ,[Time] = source.[Time]
+            ,Section = source.Section
+            ,OrderInSection = source.OrderInSection
+            ,Wallet_key = source.Wallet_key
+            ,_edited = SYSUTCDATETIME()
     WHEN NOT MATCHED BY TARGET THEN
         INSERT (
-            QuestionId,
-            Question,
-            Mandatory,
-            [Date],
-            [Time],
-            Section,
-            OrderInSection,
-            Wallet_key
+            QuestionId
+            ,Question
+            ,Mandatory
+            ,[Date]
+            ,[Time]
+            ,Section
+            ,OrderInSection
+            ,Wallet_key
         ) VALUES (
-            source.QuestionId,
-            source.Question,
-            source.Mandatory,
-            source.[Date],
-            source.[Time],
-            source.Section,
-            source.OrderInSection,
-            source.Wallet_key
+            source.QuestionId
+            ,source.Question
+            ,source.Mandatory
+            ,source.[Date]
+            ,source.[Time]
+            ,source.Section
+            ,source.OrderInSection
+            ,source.Wallet_key
         );
 
     PRINT 'MERGE mart.AuditDateTimeQuestion, number of rows = ' + CAST(@@ROWCOUNT AS varchar);

@@ -1,0 +1,173 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.2.0/schema.json",
+  "name": "29e38ab3a0068749b690",
+  "position": {
+    "x": 9.8159509202453989,
+    "y": 0,
+    "z": 0,
+    "height": 720.49079754601235,
+    "width": 1270.1840490797547
+  },
+  "visual": {
+    "visualType": "pivotTable",
+    "query": {
+      "queryState": {
+        "Rows": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Custom Question"
+                    }
+                  },
+                  "Property": "Question"
+                }
+              },
+              "queryRef": "Custom Question.Question",
+              "nativeQueryRef": "Question",
+              "active": true
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Custom Question"
+                    }
+                  },
+                  "Property": "Answer"
+                }
+              },
+              "queryRef": "Custom Question.Answer",
+              "nativeQueryRef": "Answer",
+              "active": true
+            }
+          ]
+        },
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Taken By"
+                        }
+                      },
+                      "Property": "Taken By Count"
+                    }
+                  },
+                  "Function": 0
+                }
+              },
+              "queryRef": "Sum(Taken By.Taken By Count)",
+              "nativeQueryRef": "Sum of Taken By Count"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "Custom Question"
+                  }
+                },
+                "Property": "Question"
+              }
+            },
+            "direction": "Ascending"
+          },
+          {
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "Custom Question"
+                  }
+                },
+                "Property": "Answer"
+              }
+            },
+            "direction": "Ascending"
+          }
+        ]
+      }
+    },
+    "expansionStates": [
+      {
+        "roles": [
+          "Rows"
+        ],
+        "levels": [
+          {
+            "queryRefs": [
+              "Custom Question.Question"
+            ],
+            "identityKeys": [
+              {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Custom Question"
+                    }
+                  },
+                  "Property": "Question"
+                }
+              }
+            ],
+            "isPinned": true
+          },
+          {
+            "queryRefs": [
+              "Custom Question.Answer"
+            ],
+            "isCollapsed": true,
+            "isPinned": true
+          }
+        ],
+        "root": {}
+      }
+    ],
+    "objects": {
+      "columnWidth": [
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "147D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Sum(Taken By.Taken By Count)"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "827D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Custom Question.Question"
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

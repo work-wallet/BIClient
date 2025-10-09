@@ -13,10 +13,14 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WorkWallet.BI.ClientService
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WorkWallet.BI.ClientDatabaseDeploy", "WorkWallet.BI.ClientDatabaseDeploy\WorkWallet.BI.ClientDatabaseDeploy.csproj", "{A1A94279-2282-4223-9F57-B5F658E1FA52}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{9AEF21C9-7366-4660-BC63-E1849E3572C2}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
 	ProjectSection(SolutionItems) = preProject
-		..\Docs\API.md = ..\Docs\API.md
+		..\CHANGELOG.md = ..\CHANGELOG.md
+		..\LICENSE.md = ..\LICENSE.md
+		..\PowerBISamplesModels.md = ..\PowerBISamplesModels.md
 		..\README.md = ..\README.md
+		..\ReferenceData.md = ..\ReferenceData.md
+		..\SampleJSONFromAPI.md = ..\SampleJSONFromAPI.md
 	EndProjectSection
 EndProject
 Global

@@ -1,0 +1,311 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.2.0/schema.json",
+  "name": "3e1a55ff2e1baebbcdb9",
+  "position": {
+    "x": 0,
+    "y": 102.74028629856851,
+    "z": 0,
+    "height": 617.09611451942737,
+    "width": 1280
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Permit"
+                    }
+                  },
+                  "Property": "Reference"
+                }
+              },
+              "queryRef": "Permit.Reference",
+              "nativeQueryRef": "Reference"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Permit"
+                    }
+                  },
+                  "Property": "Issued On"
+                }
+              },
+              "queryRef": "Permit.Issued On",
+              "nativeQueryRef": "Issued On"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Category"
+                    }
+                  },
+                  "Property": "Category"
+                }
+              },
+              "queryRef": "Category.Category",
+              "nativeQueryRef": "Category"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Permit"
+                    }
+                  },
+                  "Property": "Permit"
+                }
+              },
+              "queryRef": "Permit.Permit",
+              "nativeQueryRef": "Permit"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Status"
+                    }
+                  },
+                  "Property": "Status"
+                }
+              },
+              "queryRef": "Status.Status",
+              "nativeQueryRef": "Status"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Permit"
+                    }
+                  },
+                  "Property": "Issued To Company"
+                }
+              },
+              "queryRef": "Permit.Issued To Company",
+              "nativeQueryRef": "Issued To Company"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Location"
+                    }
+                  },
+                  "Property": "Company"
+                }
+              },
+              "queryRef": "Location.Company",
+              "nativeQueryRef": "Company"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Location"
+                    }
+                  },
+                  "Property": "Site"
+                }
+              },
+              "queryRef": "Location.Site",
+              "nativeQueryRef": "Site"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Permit"
+                    }
+                  },
+                  "Property": "Issued Expiry"
+                }
+              },
+              "queryRef": "Permit.Issued Expiry",
+              "nativeQueryRef": "Issued Expiry"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "Permit"
+                  }
+                },
+                "Property": "Reference"
+              }
+            },
+            "direction": "Descending"
+          }
+        ]
+      }
+    },
+    "objects": {
+      "columnWidth": [
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "76D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Permit.Reference"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "77D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Permit.Issued On"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "180.81352659106665D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Category.Category"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "373.80895545268254D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Permit.Permit"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "88.36386735085117D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Status.Status"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "112D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Permit.Issued To Company"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "104D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Location.Company"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "128D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Location.Site"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "76D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Permit.Issued Expiry"
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "background": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

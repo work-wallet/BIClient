@@ -9,14 +9,14 @@ BEGIN
     MERGE mart.ReportedIssueCategory AS target
     USING (
         SELECT
-            a.SubcategoryId,
-            a.CategoryVersion,
-            a.CategoryName,
-            a.CategoryDescription,
-            a.SubcategoryName,
-            a.SubcategoryDescription,
-            a.SubcategoryOrder,
-            w.Wallet_key
+            a.SubcategoryId
+            ,a.CategoryVersion
+            ,a.CategoryName
+            ,a.CategoryDescription
+            ,a.SubcategoryName
+            ,a.SubcategoryDescription
+            ,a.SubcategoryOrder
+            ,w.Wallet_key
         FROM
             @reportedIssueCategoryTable AS a
             INNER JOIN mart.Wallet AS w ON a.WalletId = w.WalletId
@@ -33,33 +33,33 @@ BEGIN
             OR target.Wallet_key <> source.Wallet_key
         ) THEN
         UPDATE SET
-            target.CategoryName = source.CategoryName,
-            target.CategoryDescription = source.CategoryDescription,
-            target.SubcategoryName = source.SubcategoryName,
-            target.SubcategoryDescription = source.SubcategoryDescription,
-            target.SubcategoryOrder = source.SubcategoryOrder,
-            target.Wallet_key = source.Wallet_key,
-            target._edited = SYSUTCDATETIME()
+            CategoryName = source.CategoryName
+            ,CategoryDescription = source.CategoryDescription
+            ,SubcategoryName = source.SubcategoryName
+            ,SubcategoryDescription = source.SubcategoryDescription
+            ,SubcategoryOrder = source.SubcategoryOrder
+            ,Wallet_key = source.Wallet_key
+            ,_edited = SYSUTCDATETIME()
     WHEN NOT MATCHED BY TARGET THEN
         INSERT (
-            SubcategoryId,
-            CategoryVersion,
-            CategoryName,
-            CategoryDescription,
-            SubcategoryName,
-            SubcategoryDescription,
-            SubcategoryOrder,
-            Wallet_key
+            SubcategoryId
+            ,CategoryVersion
+            ,CategoryName
+            ,CategoryDescription
+            ,SubcategoryName
+            ,SubcategoryDescription
+            ,SubcategoryOrder
+            ,Wallet_key
         )
         VALUES (
-            source.SubcategoryId,
-            source.CategoryVersion,
-            source.CategoryName,
-            source.CategoryDescription,
-            source.SubcategoryName,
-            source.SubcategoryDescription,
-            source.SubcategoryOrder,
-            source.Wallet_key
+            source.SubcategoryId
+            ,source.CategoryVersion
+            ,source.CategoryName
+            ,source.CategoryDescription
+            ,source.SubcategoryName
+            ,source.SubcategoryDescription
+            ,source.SubcategoryOrder
+            ,source.Wallet_key
         );
 
     PRINT 'MERGE mart.ReportedIssueCategory, number of rows = ' + CAST(@@ROWCOUNT AS varchar);

@@ -1,0 +1,184 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.2.0/schema.json",
+  "name": "f8a9ae0025425d07a65c",
+  "position": {
+    "x": 0,
+    "y": 74.177897574123989,
+    "z": 0,
+    "height": 646.03773584905662,
+    "width": 1280
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Asset"
+                    }
+                  },
+                  "Property": "Asset Type"
+                }
+              },
+              "queryRef": "Asset.Asset Type",
+              "nativeQueryRef": "Asset Type"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Asset"
+                    }
+                  },
+                  "Property": "Reference"
+                }
+              },
+              "queryRef": "Asset.Reference",
+              "nativeQueryRef": "Reference"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Asset"
+                    }
+                  },
+                  "Property": "Asset Name"
+                }
+              },
+              "queryRef": "Asset.Asset Name",
+              "nativeQueryRef": "Asset Name"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Property"
+                    }
+                  },
+                  "Property": "Property"
+                }
+              },
+              "queryRef": "Property.Property",
+              "nativeQueryRef": "Property"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Property Fact"
+                    }
+                  },
+                  "Property": "Property Value"
+                }
+              },
+              "queryRef": "Property Fact.Property Value",
+              "nativeQueryRef": "Property Value"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "Property"
+                  }
+                },
+                "Property": "Property"
+              }
+            },
+            "direction": "Ascending"
+          }
+        ]
+      }
+    },
+    "objects": {
+      "columnWidth": [
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "257.54396759256275D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Asset.Asset Name"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "163.14629851811162D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Asset.Asset Type"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "100D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Asset.Reference"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "120D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Property.Property"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "80D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Property Fact.Property Value"
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

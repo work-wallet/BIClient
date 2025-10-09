@@ -1,0 +1,62 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.2.0/schema.json",
+  "name": "7c5e01d3dcb71d3bc16a",
+  "position": {
+    "x": 1092.2043795620439,
+    "y": 0,
+    "z": 7000,
+    "height": 66.335766423357668,
+    "width": 187.79562043795622,
+    "tabOrder": 6000
+  },
+  "visual": {
+    "visualType": "card",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Audit"
+                        }
+                      },
+                      "Property": "Audit Reference"
+                    }
+                  },
+                  "Function": 3
+                }
+              },
+              "queryRef": "Min(Audit.Audit Reference)",
+              "nativeQueryRef": "Reference",
+              "displayName": "Reference"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "isDefaultSort": true
+      }
+    },
+    "objects": {
+      "categoryLabels": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

@@ -1,0 +1,62 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.2.0/schema.json",
+  "name": "5e489e73708d853192ce",
+  "position": {
+    "x": 323.2700729927007,
+    "y": 158.83211678832117,
+    "z": 4000,
+    "height": 68.2043795620438,
+    "width": 560.58394160583941,
+    "tabOrder": 3000
+  },
+  "visual": {
+    "visualType": "card",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Location"
+                        }
+                      },
+                      "Property": "Location"
+                    }
+                  },
+                  "Function": 3
+                }
+              },
+              "queryRef": "Min(Location.Location)",
+              "nativeQueryRef": "Location",
+              "displayName": "Location"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "isDefaultSort": true
+      }
+    },
+    "objects": {
+      "categoryLabels": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

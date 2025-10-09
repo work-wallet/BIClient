@@ -9,12 +9,12 @@ BEGIN
     MERGE mart.PPEStock AS target
     USING (
         SELECT
-            s.PPEStockId,
-            l.Location_key,
-            pt.PPEType_key,
-            s.StockQuantity,
-            s.WarningQuantity,
-            w.Wallet_key
+            s.PPEStockId
+            ,l.Location_key
+            ,pt.PPEType_key
+            ,s.StockQuantity
+            ,s.WarningQuantity
+            ,w.Wallet_key
         FROM
             @ppeStockTable AS s
             INNER JOIN mart.Wallet AS w ON s.WalletId = w.WalletId
@@ -31,27 +31,27 @@ BEGIN
     )
     THEN
         UPDATE SET
-            Location_key = source.Location_key,
-            PPEType_key = source.PPEType_key,
-            StockQuantity = source.StockQuantity,
-            WarningQuantity = source.WarningQuantity,
-            Wallet_key = source.Wallet_key,
-            _edited = SYSUTCDATETIME()
+            Location_key = source.Location_key
+            ,PPEType_key = source.PPEType_key
+            ,StockQuantity = source.StockQuantity
+            ,WarningQuantity = source.WarningQuantity
+            ,Wallet_key = source.Wallet_key
+            ,_edited = SYSUTCDATETIME()
     WHEN NOT MATCHED BY TARGET THEN
         INSERT (
-            PPEStockId,
-            Location_key,
-            PPEType_key,
-            StockQuantity,
-            WarningQuantity,
-            Wallet_key
+            PPEStockId
+            ,Location_key
+            ,PPEType_key
+            ,StockQuantity
+            ,WarningQuantity
+            ,Wallet_key
         ) VALUES (
-            source.PPEStockId,
-            source.Location_key,
-            source.PPEType_key,
-            source.StockQuantity,
-            source.WarningQuantity,
-            source.Wallet_key
+            source.PPEStockId
+            ,source.Location_key
+            ,source.PPEType_key
+            ,source.StockQuantity
+            ,source.WarningQuantity
+            ,source.Wallet_key
         );
 
     PRINT 'MERGE mart.PPEStock, number of rows = ' + CAST(@@ROWCOUNT AS varchar);

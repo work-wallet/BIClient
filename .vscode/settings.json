@@ -1,0 +1,7 @@
+{
+    "dotnet.defaultSolution": "SampleCode/WorkWallet.BI.Client.sln",
+    "files.exclude": {
+        "**/bin": true,
+        "**/obj": true
+    }
+}

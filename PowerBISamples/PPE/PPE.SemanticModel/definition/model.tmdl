@@ -6,8 +6,6 @@ model Model
 		legacyRedirects
 		returnErrorValuesAsNull
 
-annotation PBIDesktopVersion = 2.146.1133.0 (25.08)+c8010d55d1db76eda03c968b03481610e96a1ef7
-
 annotation PBI_QueryOrder = ["Location","Wallet","PPE Action","Assignment","Assignment History","PPE Status","Stock","Stock History","PPE Type","PPE Assignment Type","Actioned By Contact","Assigned To Contact"]
 
 annotation __PBI_TimeIntelligenceEnabled = 1

@@ -1,0 +1,338 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.2.0/schema.json",
+  "name": "c65ad40734e7e7c19805",
+  "position": {
+    "x": 0,
+    "y": 74.177897574123989,
+    "z": 1000,
+    "height": 646.03773584905662,
+    "width": 1280,
+    "tabOrder": 1000
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Asset"
+                    }
+                  },
+                  "Property": "Asset Type"
+                }
+              },
+              "queryRef": "Asset.Asset Type",
+              "nativeQueryRef": "Asset Type"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Asset"
+                    }
+                  },
+                  "Property": "Reference"
+                }
+              },
+              "queryRef": "Asset.Reference",
+              "nativeQueryRef": "Reference"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Asset"
+                    }
+                  },
+                  "Property": "Asset Name"
+                }
+              },
+              "queryRef": "Asset.Asset Name",
+              "nativeQueryRef": "Asset Name"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Assignment Type"
+                    }
+                  },
+                  "Property": "Assignment Type"
+                }
+              },
+              "queryRef": "Assignment Type.Assignment Type",
+              "nativeQueryRef": "Assignment Type"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Assignment"
+                    }
+                  },
+                  "Property": "Assigned To"
+                }
+              },
+              "queryRef": "Assignment.Assigned To",
+              "nativeQueryRef": "Assigned To"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Assignment Fact"
+                    }
+                  },
+                  "Property": "Assignment Number"
+                }
+              },
+              "queryRef": "Assignment Fact.Assignment Number",
+              "nativeQueryRef": "Assignment Number"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Assignment Fact"
+                    }
+                  },
+                  "Property": "From"
+                }
+              },
+              "queryRef": "Assignment Fact.From",
+              "nativeQueryRef": "From"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Assignment Fact"
+                    }
+                  },
+                  "Property": "To"
+                }
+              },
+              "queryRef": "Assignment Fact.To",
+              "nativeQueryRef": "To"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Assignment Fact"
+                    }
+                  },
+                  "Property": "Days"
+                }
+              },
+              "queryRef": "Sum(Assignment Fact.Days)",
+              "nativeQueryRef": "Days"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Asset"
+                    }
+                  },
+                  "Property": "Asset Notes"
+                }
+              },
+              "queryRef": "Asset.Asset Notes",
+              "nativeQueryRef": "Asset Notes"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "Asset"
+                  }
+                },
+                "Property": "Reference"
+              }
+            },
+            "direction": "Ascending"
+          },
+          {
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "Assignment Fact"
+                  }
+                },
+                "Property": "Assignment Number"
+              }
+            },
+            "direction": "Ascending"
+          }
+        ]
+      }
+    },
+    "objects": {
+      "columnWidth": [
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "108D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Asset.Asset Type"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "100D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Asset.Reference"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "165.39759674050174D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Asset.Asset Name"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "92D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Assignment Type.Assignment Type"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "266D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Assignment.Assigned To"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "109D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Assignment Fact.Assignment Number"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "64D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Assignment Fact.From"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "77D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Assignment Fact.To"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "42D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Sum(Assignment Fact.Days)"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "220.81407671233245D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Asset.Asset Notes"
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

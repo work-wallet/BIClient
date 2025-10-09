@@ -9,17 +9,17 @@ BEGIN
     MERGE mart.PermitCategory AS target
     USING (
         SELECT
-            a.CategoryId,
-            a.CategoryVersion,
-            a.CategoryName,
-            a.ExpiryTypeId,
-            a.ExpiryType,
-            a.ValidityPeriodId,
-            a.ValidityPeriod,
-            a.ValidityPeriodMinutes,
-            a.IssueTypeId,
-            a.IssueType,
-            w.Wallet_key
+            a.CategoryId
+            ,a.CategoryVersion
+            ,a.CategoryName
+            ,a.ExpiryTypeId
+            ,a.ExpiryType
+            ,a.ValidityPeriodId
+            ,a.ValidityPeriod
+            ,a.ValidityPeriodMinutes
+            ,a.IssueTypeId
+            ,a.IssueType
+            ,w.Wallet_key
         FROM
             @permitToWorkCategoryTable AS a
             INNER JOIN mart.Wallet AS w ON a.WalletId = w.WalletId
@@ -40,41 +40,41 @@ BEGIN
     )
     THEN
         UPDATE SET
-            CategoryName = source.CategoryName,
-            ExpiryTypeId = source.ExpiryTypeId,
-            ExpiryType = source.ExpiryType,
-            ValidityPeriodId = source.ValidityPeriodId,
-            ValidityPeriod = source.ValidityPeriod,
-            ValidityPeriodMinutes = source.ValidityPeriodMinutes,
-            IssueTypeId = source.IssueTypeId,
-            IssueType = source.IssueType,
-            Wallet_key = source.Wallet_key,
-            _edited = SYSUTCDATETIME()
+            CategoryName = source.CategoryName
+            ,ExpiryTypeId = source.ExpiryTypeId
+            ,ExpiryType = source.ExpiryType
+            ,ValidityPeriodId = source.ValidityPeriodId
+            ,ValidityPeriod = source.ValidityPeriod
+            ,ValidityPeriodMinutes = source.ValidityPeriodMinutes
+            ,IssueTypeId = source.IssueTypeId
+            ,IssueType = source.IssueType
+            ,Wallet_key = source.Wallet_key
+            ,_edited = SYSUTCDATETIME()
     WHEN NOT MATCHED BY TARGET THEN
         INSERT (
-            CategoryId,
-            CategoryVersion,
-            CategoryName,
-            ExpiryTypeId,
-            ExpiryType,
-            ValidityPeriodId,
-            ValidityPeriod,
-            ValidityPeriodMinutes,
-            IssueTypeId,
-            IssueType,
-            Wallet_key
+            CategoryId
+            ,CategoryVersion
+            ,CategoryName
+            ,ExpiryTypeId
+            ,ExpiryType
+            ,ValidityPeriodId
+            ,ValidityPeriod
+            ,ValidityPeriodMinutes
+            ,IssueTypeId
+            ,IssueType
+            ,Wallet_key
         ) VALUES (
-            source.CategoryId,
-            source.CategoryVersion,
-            source.CategoryName,
-            source.ExpiryTypeId,
-            source.ExpiryType,
-            source.ValidityPeriodId,
-            source.ValidityPeriod,
-            source.ValidityPeriodMinutes,
-            source.IssueTypeId,
-            source.IssueType,
-            source.Wallet_key
+            source.CategoryId
+            ,source.CategoryVersion
+            ,source.CategoryName
+            ,source.ExpiryTypeId
+            ,source.ExpiryType
+            ,source.ValidityPeriodId
+            ,source.ValidityPeriod
+            ,source.ValidityPeriodMinutes
+            ,source.IssueTypeId
+            ,source.IssueType
+            ,source.Wallet_key
         );
 
     PRINT 'MERGE mart.PermitCategory, number of rows = ' + CAST(@@ROWCOUNT AS varchar);

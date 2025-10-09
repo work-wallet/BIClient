@@ -1,0 +1,58 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.2.0/schema.json",
+  "name": "118442673891a19a2827",
+  "position": {
+    "x": 0,
+    "y": 90.627737226277375,
+    "z": 1000,
+    "height": 68,
+    "width": 512
+  },
+  "visual": {
+    "visualType": "card",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Audit Type"
+                        }
+                      },
+                      "Property": "Audit Type"
+                    }
+                  },
+                  "Function": 3
+                }
+              },
+              "queryRef": "Min(Audit Type.Audit Type)",
+              "nativeQueryRef": "Audit Type",
+              "displayName": "Audit Type"
+            }
+          ]
+        }
+      }
+    },
+    "objects": {
+      "categoryLabels": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

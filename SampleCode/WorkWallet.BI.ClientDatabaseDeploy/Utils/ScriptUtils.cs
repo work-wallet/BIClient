@@ -28,7 +28,7 @@ internal class ScriptUtils
         }
         else
         {
-            throw new ScriptParseException(scriptName);
+            throw new ScriptPathParseException(scriptName);
         }
     }
 }

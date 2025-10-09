@@ -9,15 +9,15 @@ BEGIN
     MERGE mart.PPEStockHistory AS target
     USING (
         SELECT
-            s.PPEStockHistoryId,
-            ps.PPEStock_key,
-            pa.PPEAction_key,
-            tps.PPEStock_key AS TransferredFromPPEStock_key,
-            s.StockQuantity,
-            c.Contact_key AS ActionedByContact_key,
-            s.ActionedOn,
-            s.Notes,
-            w.Wallet_key
+            s.PPEStockHistoryId
+            ,ps.PPEStock_key
+            ,pa.PPEAction_key
+            ,tps.PPEStock_key AS TransferredFromPPEStock_key
+            ,s.StockQuantity
+            ,c.Contact_key AS ActionedByContact_key
+            ,s.ActionedOn
+            ,s.Notes
+            ,w.Wallet_key
         FROM
             @ppeStockHistoryTable AS s
             INNER JOIN mart.PPEStock AS ps ON s.PPEStockId = ps.PPEStockId
@@ -39,36 +39,36 @@ BEGIN
     )
     THEN
         UPDATE SET
-            PPEStock_key = source.PPEStock_key,
-            PPEAction_key = source.PPEAction_key,
-            TransferredFromPPEStock_key = source.TransferredFromPPEStock_key,
-            StockQuantity = source.StockQuantity,
-            ActionedByContact_key = source.ActionedByContact_key,
-            ActionedOn = source.ActionedOn,
-            Notes = source.Notes,
-            Wallet_key = source.Wallet_key,
-            _edited = SYSUTCDATETIME()
+            PPEStock_key = source.PPEStock_key
+            ,PPEAction_key = source.PPEAction_key
+            ,TransferredFromPPEStock_key = source.TransferredFromPPEStock_key
+            ,StockQuantity = source.StockQuantity
+            ,ActionedByContact_key = source.ActionedByContact_key
+            ,ActionedOn = source.ActionedOn
+            ,Notes = source.Notes
+            ,Wallet_key = source.Wallet_key
+            ,_edited = SYSUTCDATETIME()
     WHEN NOT MATCHED BY TARGET THEN
         INSERT (
-            PPEStockHistoryId,
-            PPEStock_key,
-            PPEAction_key,
-            TransferredFromPPEStock_key,
-            StockQuantity,
-            ActionedByContact_key,
-            ActionedOn,
-            Notes,
-            Wallet_key
+            PPEStockHistoryId
+            ,PPEStock_key
+            ,PPEAction_key
+            ,TransferredFromPPEStock_key
+            ,StockQuantity
+            ,ActionedByContact_key
+            ,ActionedOn
+            ,Notes
+            ,Wallet_key
         ) VALUES (
-            source.PPEStockHistoryId,
-            source.PPEStock_key,
-            source.PPEAction_key,
-            source.TransferredFromPPEStock_key,
-            source.StockQuantity,
-            source.ActionedByContact_key,
-            source.ActionedOn,
-            source.Notes,
-            source.Wallet_key
+            source.PPEStockHistoryId
+            ,source.PPEStock_key
+            ,source.PPEAction_key
+            ,source.TransferredFromPPEStock_key
+            ,source.StockQuantity
+            ,source.ActionedByContact_key
+            ,source.ActionedOn
+            ,source.Notes
+            ,source.Wallet_key
         );
 
     PRINT 'MERGE mart.PPEStockHistory, number of rows = ' + CAST(@@ROWCOUNT AS varchar);

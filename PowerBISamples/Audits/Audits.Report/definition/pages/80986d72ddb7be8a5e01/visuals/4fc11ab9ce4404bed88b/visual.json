@@ -1,0 +1,212 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.2.0/schema.json",
+  "name": "4fc11ab9ce4404bed88b",
+  "position": {
+    "x": 640.06884681583472,
+    "y": 228.02065404475042,
+    "z": 11000,
+    "height": 149.94836488812393,
+    "width": 640.06884681583472,
+    "tabOrder": 11000
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Score Section"
+                    }
+                  },
+                  "Property": "Section"
+                }
+              },
+              "queryRef": "Score Section.Section",
+              "nativeQueryRef": "Section"
+            },
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Score Section Fact"
+                        }
+                      },
+                      "Property": "Flags"
+                    }
+                  },
+                  "Function": 0
+                }
+              },
+              "queryRef": "Sum(Score Section Fact.Flags)",
+              "nativeQueryRef": "Flags"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Score Section Grading Set Option"
+                    }
+                  },
+                  "Property": "Score Section Grading"
+                }
+              },
+              "queryRef": "Score Section Grading Set Option.Score Section Grading",
+              "nativeQueryRef": "Section Grading",
+              "displayName": "Section Grading"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Score Section Fact"
+                    }
+                  },
+                  "Property": "Score Display"
+                }
+              },
+              "queryRef": "Score Section Fact.Score Display",
+              "nativeQueryRef": "Score",
+              "displayName": "Score"
+            }
+          ]
+        }
+      }
+    },
+    "objects": {
+      "total": [
+        {
+          "properties": {
+            "totals": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "columnWidth": [
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "240.96741634234894D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Score Section.Section"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "35D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Sum(Score Section Fact.Flags)"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "238.3583040910379D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Score Section Grading Set Option.Score Section Grading"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "74D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Score Section Fact.Score Display"
+          }
+        }
+      ],
+      "values": [
+        {
+          "properties": {
+            "backColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Aggregation": {
+                      "Expression": {
+                        "Column": {
+                          "Expression": {
+                            "SourceRef": {
+                              "Entity": "Score Section Grading Set Option"
+                            }
+                          },
+                          "Property": "Score Section Grading Colour"
+                        }
+                      },
+                      "Function": 3
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "selector": {
+            "data": [
+              {
+                "dataViewWildcard": {
+                  "matchingOption": 1
+                }
+              }
+            ],
+            "metadata": "Score Section Grading Set Option.Score Section Grading"
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Sections'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

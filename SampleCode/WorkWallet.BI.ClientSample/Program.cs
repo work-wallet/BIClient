@@ -22,8 +22,6 @@ try
         })
         .Build();
 
-    IServiceProvider serviceProvider = host.Services;
-
     var tokenSource = new CancellationTokenSource();
 
     if (!Console.IsOutputRedirected)
@@ -40,7 +38,9 @@ try
         });
     }
 
-    await serviceProvider.GetRequiredService<IProcessorService>().RunAsync(tokenSource.Token);
+    // Create explicit scope for scoped services
+    using var scope = host.Services.CreateScope();
+    await scope.ServiceProvider.GetRequiredService<IProcessorService>().RunAsync(tokenSource.Token);
 
     return 0;
 }

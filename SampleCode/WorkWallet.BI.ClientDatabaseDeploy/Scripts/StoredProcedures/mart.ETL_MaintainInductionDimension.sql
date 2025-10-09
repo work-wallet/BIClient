@@ -9,16 +9,16 @@ BEGIN
     MERGE mart.Induction AS target
     USING (
         SELECT
-            a.InductionId,
-            a.InductionVersion,
-            a.InductionName,
-            a.ValidForDays,
-            a.CreatedOn,
-            a.Active,
-            istat.InductionStatus_key,
-            a.TestPassMark,
-            a.TestQuestionCount,
-            w.Wallet_key
+            a.InductionId
+            ,a.InductionVersion
+            ,a.InductionName
+            ,a.ValidForDays
+            ,a.CreatedOn
+            ,a.Active
+            ,istat.InductionStatus_key
+            ,a.TestPassMark
+            ,a.TestQuestionCount
+            ,w.Wallet_key
         FROM
             @InductionTable AS a
             INNER JOIN mart.InductionStatus AS istat ON a.InductionStatusCode = istat.InductionStatusCode
@@ -38,39 +38,39 @@ BEGIN
         OR target.Wallet_key <> source.Wallet_key
     ) THEN
         UPDATE SET
-            target.InductionName = source.InductionName,
-            target.ValidForDays = source.ValidForDays,
-            target.CreatedOn = source.CreatedOn,
-            target.Active = source.Active,
-            target.InductionStatus_key = source.InductionStatus_key,
-            target.TestPassMark = source.TestPassMark,
-            target.TestQuestionCount = source.TestQuestionCount,
-            target.Wallet_key = source.Wallet_key,
-            target._edited = SYSUTCDATETIME()
+            InductionName = source.InductionName
+            ,ValidForDays = source.ValidForDays
+            ,CreatedOn = source.CreatedOn
+            ,Active = source.Active
+            ,InductionStatus_key = source.InductionStatus_key
+            ,TestPassMark = source.TestPassMark
+            ,TestQuestionCount = source.TestQuestionCount
+            ,Wallet_key = source.Wallet_key
+            ,_edited = SYSUTCDATETIME()
     WHEN NOT MATCHED BY TARGET THEN
         INSERT (
-            InductionId,
-            InductionVersion,
-            InductionName,
-            ValidForDays,
-            CreatedOn,
-            Active,
-            InductionStatus_key,
-            TestPassMark,
-            TestQuestionCount,
-            Wallet_key
+            InductionId
+            ,InductionVersion
+            ,InductionName
+            ,ValidForDays
+            ,CreatedOn
+            ,Active
+            ,InductionStatus_key
+            ,TestPassMark
+            ,TestQuestionCount
+            ,Wallet_key
         )
         VALUES (
-            source.InductionId,
-            source.InductionVersion,
-            source.InductionName,
-            source.ValidForDays,
-            source.CreatedOn,
-            source.Active,
-            source.InductionStatus_key,
-            source.TestPassMark,
-            source.TestQuestionCount,
-            source.Wallet_key
+            source.InductionId
+            ,source.InductionVersion
+            ,source.InductionName
+            ,source.ValidForDays
+            ,source.CreatedOn
+            ,source.Active
+            ,source.InductionStatus_key
+            ,source.TestPassMark
+            ,source.TestQuestionCount
+            ,source.Wallet_key
         );
 
     PRINT 'MERGE mart.Induction, number of rows = ' + CAST(@@ROWCOUNT AS varchar);
