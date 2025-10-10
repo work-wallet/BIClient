@@ -206,6 +206,11 @@ The API sends this as a bitmask, allowing efficient storage and transmission of 
 | 6 | Closed (Archived) |
 | 8 | Deleted |
 
+| ReportedIssueRootCauseAnalysisTypeCode | ReportedIssueRootCauseAnalysisType |
+| --- | --- |
+| 1 | Root Cause |
+| 2 | Immediate Cause |
+
 ## SafetyCards
 
 | OccupationRoleCode | OccupationRole |
