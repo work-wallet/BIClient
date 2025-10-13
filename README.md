@@ -552,25 +552,34 @@ Options:
 
 ### 6.7 Multi-Region Access
 
-If your execution region differs from the Wallet’s hosting region add a header:
+Some wallets are hosted in specific geographic regions for data residency compliance and performance.
+
+If you're calling the API from a different region than where your wallet is hosted, you may need to add a header to specify routing:
 
 ```http
 DataRegion: GB
 ```
 
-Discover region:
+Discover your wallet's region:
 
 ```http
 GET https://bi.work-wallet.com/wallet?walletId={WalletId}&walletSecret={WalletSecret}
 Authorization: Bearer {access_token}
 ```
 
-Response contains `dataRegion`.
+Example response:
 
-Notes:
+```json
+{
+  "id": "a3e1c9f2-5d4b-4330-9c2f-1c2b8f0d9a77",
+  "name": "Northwind Construction Ltd",
+  "dataRegion": "GB"
+}
+```
 
-- Only send the `DataRegion` header when you are calling from a different geographic region than the wallet’s hosting region (cross-region optimisation).
-- If you supply a `DataRegion` value that does not match the wallet’s actual region the API returns **HTTP 400** with a plain text body: `Incorrect data region` (no JSON payload). Remove or correct the header (use the wallet lookup call above to confirm the right value) and retry.
+If you supply an incorrect `DataRegion` header, the data extract API returns **HTTP 400** with a plain text body `Incorrect data region` (no JSON payload).
+
+Most users will not need this header as their calling application and wallet are likely in the same region.
 
 ### 6.8 Error Handling
 
