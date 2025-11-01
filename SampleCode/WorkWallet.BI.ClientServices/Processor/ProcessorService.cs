@@ -177,8 +177,9 @@ public class ProcessorService(
             {
                 var pageResult = await ProcessSinglePageAsync(
                     walletContext, dataType, lastSynchronizationVersion, 
-                    pageNumber, currentPageSize, cancellationToken);
-                
+                    pageNumber, currentPageSize, _serviceOptions.SetBetaFlag,
+                    cancellationToken);
+
                 return new PageResultWithSize(pageResult.Context, pageResult.Json, currentPageSize);
             }
             catch (PageSizeExceededException ex)
@@ -203,11 +204,12 @@ public class ProcessorService(
         long? lastSynchronizationVersion,
         int pageNumber,
         int pageSize,
+        bool? setBetaFlag,
         CancellationToken cancellationToken)
     {
         // call the Work Wallet API end point and obtain the results as JSON
         string walletSecret = GetSecretForWallet(walletContext.Id);
-        string json = await apiClient.FetchDataPageAsync(walletContext, walletSecret, dataType, lastSynchronizationVersion, pageNumber, pageSize, cancellationToken);
+        string json = await apiClient.FetchDataPageAsync(walletContext, walletSecret, dataType, lastSynchronizationVersion, pageNumber, pageSize, setBetaFlag, cancellationToken);
 
         progressService.ShowProgress();
 
