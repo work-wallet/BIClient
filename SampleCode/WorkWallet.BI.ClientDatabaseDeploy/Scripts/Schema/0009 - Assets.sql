@@ -88,6 +88,7 @@ CREATE TABLE mart.AssetAssignment
     AssetAssignment_key int IDENTITY
     ,AssetAssignmentType_key int NOT NULL
     ,AssignedTo nvarchar(max) NOT NULL
+    ,Contact_key int NULL -- allow NULLs
     ,CompanyId uniqueidentifier NOT NULL
     ,Company nvarchar(max) NOT NULL
     ,SiteId uniqueidentifier NOT NULL
