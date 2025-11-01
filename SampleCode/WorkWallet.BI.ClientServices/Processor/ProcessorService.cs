@@ -268,6 +268,7 @@ public class ProcessorService(
         logger.LogDebug("LastSynchronizationVersion: {LastSynchronizationVersion}", context.LastSynchronizationVersion);
         logger.LogDebug("SynchronizationVersion: {SynchronizationVersion}", context.SynchronizationVersion);
         logger.LogDebug("PageNumber: {PageNumber}, PageSize: {PageSize}", context.PageNumber, context.PageSize);
+        logger.LogDebug("ExecutionTimeMs: {ExecutionTimeMs}", context.ExecutionTimeMs);
     }
 
     /// <summary>
