@@ -1,5 +1,19 @@
 # Work Wallet BI Reference Data
 
+Jump to the relevant section:
+
+- [General](#general)
+- [Actions](#actions)
+- [Assets](#assets)
+- [Audits](#audits)
+- [Inductions](#inductions)
+- [Permits](#permits)
+- [PPEAssignments](#ppeassignments)
+- [PPEStockHistories](#ppestockhistories)
+- [PPEStocks](#ppestocks)
+- [ReportedIssues](#reportedissues)
+- [SafetyCards](#safetycards)
+
 ## General
 
 | LocationTypeCode | LocationType |
@@ -74,9 +88,12 @@
 
 | AssetPropertyType |
 | --- |
+| Date |
+| DateTime |
 | Number |
 | Select |
 | Text |
+| Time |
 
 | AssetStatusCode | AssetStatus |
 | --- | --- |
@@ -84,6 +101,12 @@
 | 1 | Out of Service |
 | 2 | Decommissioned |
 | 3 | Deleted |
+
+| AssignmentType |
+| --- |
+| Site |
+| Unassigned |
+| User |
 
 ## Audits
 

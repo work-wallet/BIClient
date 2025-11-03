@@ -9,7 +9,7 @@ Each sample shows the standard response structure including:
 - **Wallets**: Wallet information for the returned data
 - **Dataset-specific arrays**: The actual data for each dataset type
 
-## Datasets
+Jump to the relevant section:
 
 - [Actions](#actions)
 - [Assets](#assets)
@@ -119,9 +119,38 @@ Notes
   "Properties": [
     {
       "AssetId": "2a1bdc44-6e3b-4d2c-9ab7-1e5c0b9f3a21",
+      "PropertyId": "1a2b3c4d-5e6f-4a78-9b01-c2d3e4f5a6b7",
       "Property": "Load Capacity (kg)",
       "PropertyType": "Number",
+      "DisplayOrder": 1,
       "Value": "2500",
+      "WalletId": "a3e1c9f2-5d4b-4330-9c2f-1c2b8f0d9a77"
+    },
+    {
+      "AssetId": "2a1bdc44-6e3b-4d2c-9ab7-1e5c0b9f3a21",
+      "PropertyId": "2b3c4d5e-6f7a-4b89-ac12-d3e4f5a6b7c8",
+      "Property": "Last Service Date",
+      "PropertyType": "Date",
+      "DisplayOrder": 2,
+      "Value": "2025-06-15",
+      "WalletId": "a3e1c9f2-5d4b-4330-9c2f-1c2b8f0d9a77"
+    },
+    {
+      "AssetId": "2a1bdc44-6e3b-4d2c-9ab7-1e5c0b9f3a21",
+      "PropertyId": "3c4d5e6f-7a8b-4c90-bd23-e4f5a6b7c8d9",
+      "Property": "Fuel Type",
+      "PropertyType": "Select",
+      "DisplayOrder": 3,
+      "Value": "Diesel",
+      "WalletId": "a3e1c9f2-5d4b-4330-9c2f-1c2b8f0d9a77"
+    }
+  ],
+  "Contacts": [
+    {
+      "ContactId": "5d6e7f8a-9b0c-4d12-ae34-f5a6b7c8d9e0",
+      "Name": "Jordan Example",
+      "EmailAddress": "jordan.example@example.invalid",
+      "CompanyName": "Northwind Construction Ltd",
       "WalletId": "a3e1c9f2-5d4b-4330-9c2f-1c2b8f0d9a77"
     }
   ],
@@ -131,10 +160,23 @@ Notes
       "AssignedOn": "2025-09-01T08:00:00+00:00",
       "AssignmentType": "Site",
       "AssignedTo": "Acme Utilities Ltd - North Yard",
+      "AssignedToContactId": null,
       "CompanyId": "a1b2c3d4-1111-2222-3333-444455556666",
       "Company": "Acme Utilities Ltd",
       "SiteId": "0f1e2d3c-aaaa-bbbb-cccc-ddddeeeeffff",
       "Site": "North Yard",
+      "WalletId": "a3e1c9f2-5d4b-4330-9c2f-1c2b8f0d9a77"
+    },
+    {
+      "AssetId": "2a1bdc44-6e3b-4d2c-9ab7-1e5c0b9f3a21",
+      "AssignedOn": "2025-09-05T14:30:00+00:00",
+      "AssignmentType": "User",
+      "AssignedTo": "Jordan Example",
+      "AssignedToContactId": "5d6e7f8a-9b0c-4d12-ae34-f5a6b7c8d9e0",
+      "CompanyId": "a3e1c9f2-5d4b-4330-9c2f-1c2b8f0d9a77",
+      "Company": "Northwind Construction Ltd",
+      "SiteId": "00000000-0000-0000-0000-000000000000",
+      "Site": "",
       "WalletId": "a3e1c9f2-5d4b-4330-9c2f-1c2b8f0d9a77"
     }
   ]
@@ -143,7 +185,11 @@ Notes
 
 Notes
 
+- Properties
+  - **PropertyType**: Can be "Text", "Number", "Select", "Date", "Time", or "DateTime"
 - Assignments
+  - **AssignmentType**: Can be "User", "Site", or "Unassigned"
+  - **AssignedToContactId**: if `null` no field will be returned
   - **CompanyId**: `00000000-0000-0000-0000-000000000000` indicates no data
   - **SiteId**: `00000000-0000-0000-0000-000000000000` indicates no data
 
