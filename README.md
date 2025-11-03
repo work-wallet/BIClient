@@ -528,6 +528,7 @@ This prevents scenarios where partial sync state leads to missing data or infini
 ```json
 {
   "Context": {
+    "Dataset": "Audits",
     "Version": 1,
     "Count": 13,
     "FullCount": 13,
@@ -536,7 +537,8 @@ This prevents scenarios where partial sync state leads to missing data or infini
     "SynchronizationVersion": 10101,
     "MinValidSynchronizationVersion": 9000,
     "Error": "",
-    "UTC": "2025-03-26T14:54:59.127"
+    "UTC": "2025-03-26T14:54:59.127",
+    "ExecutionTimeMs": 128
   },
   "Wallets": [ { "WalletId": "...", "Wallet": "Example Wallet" } ],
   "Locations": [ { "LocationId": "...", "LocationTypeCode": 2, "LocationType": "Operations Site" } ]

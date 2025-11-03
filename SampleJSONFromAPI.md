@@ -6,7 +6,6 @@ The samples are indicative and may not be realistic or represent the full range 
 Each sample shows the standard response structure including:
 
 - **Context**: Pagination and synchronization metadata
-- **Wallets**: Wallet information for the returned data
 - **Dataset-specific arrays**: The actual data for each dataset type
 
 Jump to the relevant section:
@@ -21,6 +20,20 @@ Jump to the relevant section:
 - [PPEStocks](#ppestocks)
 - [ReportedIssues](#reportedissues)
 - [SafetyCards](#safetycards)
+
+## NULL Handling Convention
+
+**Important**: The API's NULL handling has evolved over time, creating two conventions:
+
+- **Earlier implementations**: Use placeholder values to represent NULL. Fields are always present with special "no data" values:
+  - `-1` for numeric fields
+  - `1900-01-01` or `0001-01-01T00:00:00+00:00` for dates
+  - `00000000-0000-0000-0000-000000000000` for GUIDs
+  - Empty strings `""` for text fields
+
+- **Recent implementations**: Follow standard JSON convention—NULL values are represented by omitting the field from the response.
+
+Some datasets are hybrid, using placeholders in original fields and omitted fields for newer additions. Specific handling is documented in each dataset's "Notes" section. Consumers must handle both conventions appropriately.
 
 ## Actions
 
