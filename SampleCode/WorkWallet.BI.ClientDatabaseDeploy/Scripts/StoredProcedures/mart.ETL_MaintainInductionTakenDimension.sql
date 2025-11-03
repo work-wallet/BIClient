@@ -11,6 +11,7 @@ BEGIN
         SELECT
             a.InductionTakenId
             ,i.Induction_key
+            ,c.Contact_key
             ,a.ContactId
             ,a.[Name]
             ,a.CompanyName
@@ -21,12 +22,14 @@ BEGIN
         FROM
             @InductionTakenTable AS a
             INNER JOIN mart.Induction AS i ON a.InductionId = i.InductionId AND a.InductionVersion = i.InductionVersion
+            LEFT JOIN mart.Contact AS c ON a.ContactId = c.ContactId
             INNER JOIN mart.InductionTakenStatus AS its ON a.InductionTakenStatusId = its.InductionTakenStatusCode
             INNER JOIN mart.Wallet AS w ON a.WalletId = w.WalletId
     ) AS source
     ON target.InductionTakenId = source.InductionTakenId
     WHEN MATCHED AND (
         target.Induction_key <> source.Induction_key
+        OR target.Contact_key IS DISTINCT FROM source.Contact_key
         OR target.ContactId <> source.ContactId
         OR target.[Name] <> source.[Name]
         OR target.CompanyName <> source.CompanyName
@@ -37,6 +40,7 @@ BEGIN
     ) THEN
         UPDATE SET
             Induction_key = source.Induction_key
+            ,Contact_key = source.Contact_key
             ,ContactId = source.ContactId
             ,[Name] = source.[Name]
             ,CompanyName = source.CompanyName
@@ -49,6 +53,7 @@ BEGIN
         INSERT (
             InductionTakenId
             ,Induction_key
+            ,Contact_key
             ,ContactId
             ,[Name]
             ,CompanyName
@@ -60,6 +65,7 @@ BEGIN
         VALUES (
             source.InductionTakenId
             ,source.Induction_key
+            ,source.Contact_key
             ,source.ContactId
             ,source.[Name]
             ,source.CompanyName

@@ -17,6 +17,7 @@ BEGIN
             ,scc.SafetyCardCategory_key
             ,a.Employer
             ,a.Employee
+            ,c.Contact_key AS EmployeeContact_key
             ,a.InductionNumber
             ,a.ReportDetails
             ,scs.SafetyCardStatus_key
@@ -31,6 +32,7 @@ BEGIN
             @safetyCardTable AS a
             INNER JOIN mart.SafetyCardType AS sct ON a.SafetyCardTypeCode = sct.SafetyCardTypeCode
             INNER JOIN mart.SafetyCardCategory AS scc ON a.SafetyCardCategoryId = scc.SafetyCardCategoryId
+            LEFT JOIN mart.Contact AS c ON a.EmployeeContactId = c.ContactId
             INNER JOIN mart.SafetyCardStatus AS scs ON a.SafetyCardStatusCode = scs.SafetyCardStatusCode
             INNER JOIN mart.SafetyCardOccupationRole AS scor ON a.OccupationRoleCode = scor.OccupationRoleCode
             INNER JOIN mart.[Location] AS l ON a.LocationId = l.LocationId
@@ -45,6 +47,7 @@ BEGIN
         OR target.SafetyCardCategory_key <> source.SafetyCardCategory_key
         OR target.Employer <> source.Employer
         OR target.Employee <> source.Employee
+        OR target.EmployeeContact_key IS DISTINCT FROM source.EmployeeContact_key
         OR target.InductionNumber <> source.InductionNumber
         OR target.ReportDetails <> source.ReportDetails
         OR target.SafetyCardStatus_key <> source.SafetyCardStatus_key
@@ -65,6 +68,7 @@ BEGIN
             ,SafetyCardCategory_key = source.SafetyCardCategory_key
             ,Employer = source.Employer
             ,Employee = source.Employee
+            ,EmployeeContact_key = source.EmployeeContact_key
             ,InductionNumber = source.InductionNumber
             ,ReportDetails = source.ReportDetails
             ,SafetyCardStatus_key = source.SafetyCardStatus_key
@@ -85,6 +89,7 @@ BEGIN
             ,SafetyCardCategory_key
             ,Employer
             ,Employee
+            ,EmployeeContact_key
             ,InductionNumber
             ,ReportDetails
             ,SafetyCardStatus_key
@@ -104,6 +109,7 @@ BEGIN
             ,source.SafetyCardCategory_key
             ,source.Employer
             ,source.Employee
+            ,source.EmployeeContact_key
             ,source.InductionNumber
             ,source.ReportDetails
             ,source.SafetyCardStatus_key

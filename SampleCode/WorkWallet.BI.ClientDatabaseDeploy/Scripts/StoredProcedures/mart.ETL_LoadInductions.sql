@@ -28,6 +28,29 @@ BEGIN
 
         EXEC mart.ETL_MaintainWalletDimension @walletTable = @walletTable;
 
+        -- load the Contact dimension
+
+        DECLARE @contactTable mart.ETL_ContactTable;
+        INSERT INTO @contactTable
+        (
+            ContactId
+            ,[Name]
+            ,EmailAddress
+            ,CompanyName
+            ,WalletId
+        )
+        SELECT * FROM OPENJSON(@json, '$.Contacts')
+        WITH
+        (
+            ContactId uniqueidentifier
+            ,[Name] nvarchar(max)
+            ,EmailAddress nvarchar(max)
+            ,CompanyName nvarchar(max)
+            ,WalletId uniqueidentifier
+        );
+
+        EXEC mart.ETL_MaintainContactDimension @contactTable = @contactTable;
+
         -- maintain the Inductions table
 
         DECLARE @inductionTable mart.ETL_InductionTable;

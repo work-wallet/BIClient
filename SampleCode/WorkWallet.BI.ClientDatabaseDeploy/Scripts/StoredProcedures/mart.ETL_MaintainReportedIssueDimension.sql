@@ -14,6 +14,7 @@ BEGIN
             ,a.OccurredOn
             ,a.ReportedOn
             ,a.ReportedBy
+            ,c.Contact_key AS ReportedByContact_key
             ,a.ReportedByCompany
             ,ris.ReportedIssueStatus_key
             ,ric.ReportedIssueCategory_key
@@ -27,6 +28,7 @@ BEGIN
             INNER JOIN mart.ReportedIssueStatus AS ris ON a.ReportedIssueStatusCode = ris.ReportedIssueStatusCode
             INNER JOIN mart.ReportedIssueCategory AS ric ON a.SubcategoryId = ric.SubcategoryId AND a.CategoryVersion = ric.CategoryVersion
             INNER JOIN mart.[Location] AS ol ON a.LocationId = ol.LocationId
+            INNER JOIN mart.Contact AS c ON a.ReportedByContactId = c.ContactId
             INNER JOIN mart.ReportedIssueSeverity AS riv ON a.ReportedIssueSeverityCode = riv.ReportedIssueSeverityCode
             INNER JOIN mart.Wallet AS w ON a.WalletId = w.WalletId
     ) AS source
@@ -36,6 +38,7 @@ BEGIN
             OR target.OccurredOn <> source.OccurredOn
             OR target.ReportedOn <> source.ReportedOn
             OR target.ReportedBy <> source.ReportedBy
+            OR target.ReportedByContact_key IS DISTINCT FROM source.ReportedByContact_key
             OR target.ReportedByCompany <> source.ReportedByCompany
             OR target.ReportedIssueStatus_key <> source.ReportedIssueStatus_key
             OR target.ReportedIssueCategory_key <> source.ReportedIssueCategory_key
@@ -50,6 +53,7 @@ BEGIN
             ,OccurredOn = source.OccurredOn
             ,ReportedOn = source.ReportedOn
             ,ReportedBy = source.ReportedBy
+            ,ReportedByContact_key = source.ReportedByContact_key
             ,ReportedByCompany = source.ReportedByCompany
             ,ReportedIssueStatus_key = source.ReportedIssueStatus_key
             ,ReportedIssueCategory_key = source.ReportedIssueCategory_key
@@ -66,6 +70,7 @@ BEGIN
             ,OccurredOn
             ,ReportedOn
             ,ReportedBy
+            ,ReportedByContact_key
             ,ReportedByCompany
             ,ReportedIssueStatus_key
             ,ReportedIssueCategory_key
@@ -81,6 +86,7 @@ BEGIN
             ,source.OccurredOn
             ,source.ReportedOn
             ,source.ReportedBy
+            ,source.ReportedByContact_key
             ,source.ReportedByCompany
             ,source.ReportedIssueStatus_key
             ,source.ReportedIssueCategory_key

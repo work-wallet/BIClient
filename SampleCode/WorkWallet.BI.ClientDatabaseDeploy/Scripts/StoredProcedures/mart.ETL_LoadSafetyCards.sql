@@ -96,7 +96,30 @@ BEGIN
 
         EXEC mart.ETL_MaintainSafetyCardCategoryDimension @safetyCardCategoryTable = @safetyCardCategoryTable;
 
-        -- maintain the Permits table
+        -- load the Contact dimension
+
+        DECLARE @contactTable mart.ETL_ContactTable;
+        INSERT INTO @contactTable
+        (
+            ContactId
+            ,[Name]
+            ,EmailAddress
+            ,CompanyName
+            ,WalletId
+        )
+        SELECT * FROM OPENJSON(@json, '$.Contacts')
+        WITH
+        (
+            ContactId uniqueidentifier
+            ,[Name] nvarchar(max)
+            ,EmailAddress nvarchar(max)
+            ,CompanyName nvarchar(max)
+            ,WalletId uniqueidentifier
+        );
+
+        EXEC mart.ETL_MaintainContactDimension @contactTable = @contactTable;
+
+        -- maintain the SafetyCard table
 
         DECLARE @safetyCardTable mart.ETL_SafetyCardTable;
 
@@ -110,6 +133,7 @@ BEGIN
             ,SafetyCardCategoryId
             ,Employer
             ,Employee
+            ,EmployeeContactId
             ,InductionNumber
             ,ReportDetails
             ,SafetyCardStatusCode
@@ -132,6 +156,7 @@ BEGIN
             ,SafetyCardCategoryId uniqueidentifier
             ,Employer nvarchar(max)
             ,Employee nvarchar(max)
+            ,EmployeeContactId uniqueidentifier
             ,InductionNumber nvarchar(500)
             ,ReportDetails nvarchar(max)
             ,SafetyCardStatusCode int
