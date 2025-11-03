@@ -489,6 +489,15 @@ Notes:
       "Wallet": "Northwind Construction Ltd"
     }
   ],
+  "Contacts": [
+    {
+      "ContactId": "7f6a2e10-1c59-4db8-9b6e-1b2f3c4d5e6f",
+      "Name": "Casey Example",
+      "EmailAddress": "casey.example@example.invalid",
+      "CompanyName": "Contoso Civil Ltd",
+      "WalletId": "a3e1c9f2-5d4b-4330-9c2f-1c2b8f0d9a77"
+    }
+  ],
   "InductionsTaken": [
     {
       "InductionTakenId": "3d1c5f77-8b5e-4f7f-a1c4-9a0f6e2d3b11",
@@ -1005,6 +1014,15 @@ Notes
       "WalletId": "a3e1c9f2-5d4b-4330-9c2f-1c2b8f0d9a77"
     }
   ],
+  "Contacts": [
+    {
+      "ContactId": "4f5e6d7c-8b9a-40c1-9d2e-3f4a5b6c7d8e",
+      "Name": "Alex Example",
+      "EmailAddress": "alex.example@example.invalid",
+      "CompanyName": "Northwind Construction Ltd",
+      "WalletId": "a3e1c9f2-5d4b-4330-9c2f-1c2b8f0d9a77"
+    }
+  ],
   "ReportedIssues": [
     {
       "ReportedIssueId": "7b2d1c9e-8356-4a9e-b5c1-0e2f4a6b9d31",
@@ -1012,6 +1030,7 @@ Notes
       "OccurredOn": "2025-09-08T07:45:00",
       "ReportedOn": "2025-09-08T08:10:00",
       "ReportedBy": "Alex Example",
+      "ReportedByContactId": "4f5e6d7c-8b9a-40c1-9d2e-3f4a5b6c7d8e",
       "ReportedByCompany": "Northwind Construction Ltd",
       "ReportedIssueStatusCode": 3,
       "SubcategoryId": "0ab4c92f-6a3c-4b21-8a1f-4f2a6e9d0b55",
@@ -1189,6 +1208,15 @@ Notes
       "WalletId": "a3e1c9f2-5d4b-4330-9c2f-1c2b8f0d9a77"
     }
   ],
+  "Contacts": [
+    {
+      "ContactId": "8d9e0f1a-2b3c-4d5e-9f6a-7b8c9d0e1f2a",
+      "Name": "Casey Worker",
+      "EmailAddress": "casey.worker@example.invalid",
+      "CompanyName": "Northwind Construction Ltd",
+      "WalletId": "a3e1c9f2-5d4b-4330-9c2f-1c2b8f0d9a77"
+    }
+  ],
   "SafetyCards": [
     {
       "SafetyCardId": "7e1b2c3d-4e5f-4a67-9abc-12de34f56a78",
@@ -1199,6 +1227,7 @@ Notes
       "SafetyCardCategoryId": "3a4b5c6d-7e8f-49a0-b1c2-d3e4f5a6b7c8",
       "Employer": "Northwind Construction Ltd",
       "Employee": "Casey Worker",
+      "EmployeeContactId": "8d9e0f1a-2b3c-4d5e-9f6a-7b8c9d0e1f2a",
       "InductionNumber": "IND-4821",
       "ReportDetails": "Loose debris found near the loading bay; area cordoned and housekeeping requested.",
       "SafetyCardStatusCode": 0,
@@ -1223,4 +1252,5 @@ Notes
   - **JobId**: `00000000-0000-0000-0000-000000000000` indicates no data
   - **SiteLocationId**: `00000000-0000-0000-0000-000000000000` indicates no data
 - SafetyCards
+  - **EmployeeContactId**: if `null` no field will be returned
   - **OccupationRoleCode**: `-1` indicates no data
