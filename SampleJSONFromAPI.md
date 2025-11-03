@@ -27,6 +27,7 @@ Jump to the relevant section:
 ```json
 {
   "Context": {
+    "Dataset": "Actions",
     "Version": 1,
     "Count": 1,
     "FullCount": 1,
@@ -36,7 +37,8 @@ Jump to the relevant section:
     "SynchronizationVersion": 1200,
     "MinValidSynchronizationVersion": 900,
     "Error": "",
-    "UTC": "2025-09-10T12:00:00Z"
+    "UTC": "2025-09-10T12:00:00Z",
+    "ExecutionTimeMs": 45
   },
   "Wallets": [
     {
@@ -87,6 +89,7 @@ Notes
 ```json
 {
   "Context": {
+    "Dataset": "Assets",
     "Version": 1,
     "Count": 1,
     "FullCount": 1,
@@ -96,7 +99,8 @@ Notes
     "SynchronizationVersion": 1200,
     "MinValidSynchronizationVersion": 900,
     "Error": "",
-    "UTC": "2025-09-10T10:22:00Z"
+    "UTC": "2025-09-10T10:22:00Z",
+    "ExecutionTimeMs": 52
   },
   "Wallets": [
     {
@@ -198,6 +202,7 @@ Notes
 ```json
 {
   "Context": {
+    "Dataset": "Audits",
     "Version": 1,
     "Count": 1,
     "FullCount": 1,
@@ -207,7 +212,8 @@ Notes
     "SynchronizationVersion": 1200,
     "MinValidSynchronizationVersion": 900,
     "Error": "",
-    "UTC": "2025-09-10T10:12:34Z"
+    "UTC": "2025-09-10T10:12:34Z",
+    "ExecutionTimeMs": 128
   },
   "Wallets": [
     {
@@ -472,6 +478,7 @@ Notes:
 ```json
 {
   "Context": {
+    "Dataset": "Inductions",
     "Version": 1,
     "Count": 1,
     "FullCount": 1,
@@ -481,7 +488,8 @@ Notes:
     "SynchronizationVersion": 1205,
     "MinValidSynchronizationVersion": 900,
     "Error": "",
-    "UTC": "2025-09-10T10:22:00Z"
+    "UTC": "2025-09-10T10:22:00Z",
+    "ExecutionTimeMs": 38
   },
   "Wallets": [
     {
@@ -549,6 +557,7 @@ Notes
 ```json
 {
   "Context": {
+    "Dataset": "Permits",
     "Version": 1,
     "Count": 1,
     "FullCount": 1,
@@ -558,7 +567,8 @@ Notes
     "SynchronizationVersion": 987654400,
     "MinValidSynchronizationVersion": 987650000,
     "Error": "",
-    "UTC": "2025-09-10T10:22:00Z"
+    "UTC": "2025-09-10T10:22:00Z",
+    "ExecutionTimeMs": 67
   },
   "Wallets": [
     {
@@ -657,6 +667,7 @@ Notes
 ```json
 {
   "Context": {
+    "Dataset": "PPEAssignments",
     "Version": 1,
     "Count": 1,
     "FullCount": 1,
@@ -666,7 +677,8 @@ Notes
     "SynchronizationVersion": 1200,
     "MinValidSynchronizationVersion": 900,
     "Error": "",
-    "UTC": "2025-09-10T10:15:00Z"
+    "UTC": "2025-09-10T10:15:00Z",
+    "ExecutionTimeMs": 73
   },
   "Wallets": [
     {
@@ -784,6 +796,7 @@ Notes
 ```json
 {
   "Context": {
+    "Dataset": "PPEStockHistories",
     "Version": 1,
     "Count": 1,
     "FullCount": 1,
@@ -793,7 +806,8 @@ Notes
     "SynchronizationVersion": 1200,
     "MinValidSynchronizationVersion": 900,
     "Error": "",
-    "UTC": "2025-09-10T10:32:00Z"
+    "UTC": "2025-09-10T10:32:00Z",
+    "ExecutionTimeMs": 56
   },
   "Wallets": [
     {
@@ -893,6 +907,7 @@ Notes
 ```json
 {
   "Context": {
+    "Dataset": "PPEStocks",
     "Version": 1,
     "Count": 1,
     "FullCount": 1,
@@ -902,7 +917,8 @@ Notes
     "SynchronizationVersion": 110250,
     "MinValidSynchronizationVersion": 108000,
     "Error": "",
-    "UTC": "2025-09-10T12:34:56Z"
+    "UTC": "2025-09-10T12:34:56Z",
+    "ExecutionTimeMs": 41
   },
   "Wallets": [
     {
@@ -977,6 +993,7 @@ Notes
 ```json
 {
   "Context": {
+    "Dataset": "ReportedIssues",
     "Version": 1,
     "Count": 1,
     "FullCount": 1,
@@ -986,7 +1003,8 @@ Notes
     "SynchronizationVersion": 13042,
     "MinValidSynchronizationVersion": 11000,
     "Error": "",
-    "UTC": "2025-09-10T10:22:00Z"
+    "UTC": "2025-09-10T10:22:00Z",
+    "ExecutionTimeMs": 94
   },
   "Wallets": [
     {
@@ -1163,6 +1181,7 @@ Notes
 ```json
 {
   "Context": {
+    "Dataset": "SafetyCards",
     "Version": 1,
     "Count": 1,
     "FullCount": 1,
@@ -1172,7 +1191,8 @@ Notes
     "SynchronizationVersion": 131234,
     "MinValidSynchronizationVersion": 120000,
     "Error": "",
-    "UTC": "2025-09-10T12:34:56Z"
+    "UTC": "2025-09-10T12:34:56Z",
+    "ExecutionTimeMs": 81
   },
   "Wallets": [
     {
