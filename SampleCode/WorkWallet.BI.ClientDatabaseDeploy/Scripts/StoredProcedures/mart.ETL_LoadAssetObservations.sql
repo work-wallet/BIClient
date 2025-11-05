@@ -68,7 +68,7 @@ BEGIN
             ,ObservationId
             ,Details
             ,ActionTaken
-            ,StatusId
+            ,ObservationStatusCode
             ,ObservedOn
             ,ObservedBy
             ,Deleted
@@ -84,7 +84,7 @@ BEGIN
             ,ObservationId uniqueidentifier
             ,Details nvarchar(max)
             ,ActionTaken nvarchar(max)
-            ,StatusId int
+            ,ObservationStatusCode int
             ,ObservedOn datetimeoffset(7)
             ,ObservedBy nvarchar(81)
             ,Deleted bit

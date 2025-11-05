@@ -7,7 +7,7 @@ CREATE TYPE mart.ETL_AssetObservationTable AS TABLE
     ,ObservationId uniqueidentifier NOT NULL
     ,Details nvarchar(max) NOT NULL
     ,ActionTaken nvarchar(max) NOT NULL
-    ,StatusId int NOT NULL -- 0 = observation, 1 = defect (open), 32 - defect (closed)
+    ,ObservationStatusCode int NOT NULL -- 0 = observation, 1 = defect (open), 32 - defect (closed)
     ,ObservedOn datetimeoffset(7) NOT NULL
     ,ObservedBy nvarchar(81) NOT NULL
     ,Deleted bit NOT NULL

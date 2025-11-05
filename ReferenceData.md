@@ -107,7 +107,7 @@ Note: The actual `ResponseText` values are defined per checklist and may vary.
 
 ## AssetObservations
 
-| AssetObservationStatusId | AssetObservationStatus |
+| AssetObservationStatusCode | AssetObservationStatus |
 | --- | --- |
 | 0 | Observation |
 | 1 | Defect (Open) |

@@ -23,7 +23,7 @@ BEGIN
         FROM
             @observationTable AS o
             INNER JOIN mart.Asset AS a ON o.AssetId = a.AssetId
-            INNER JOIN mart.AssetObservationStatus AS aostat ON o.StatusId = aostat.AssetObservationStatusCode
+            INNER JOIN mart.AssetObservationStatus AS aostat ON o.ObservationStatusCode = aostat.AssetObservationStatusCode
             INNER JOIN mart.Wallet AS w ON o.WalletId = w.WalletId
     ) AS source
     ON target.ObservationId = source.ObservationId
