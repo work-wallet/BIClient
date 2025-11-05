@@ -24,8 +24,8 @@ BEGIN
     DELETE FROM mart.AssetProperty WHERE Wallet_key = @wallet_key;
     SET @rows = @rows + @@ROWCOUNT;
 
-    DELETE FROM mart.Asset WHERE Wallet_key = @wallet_key;
-    SET @rows = @rows + @@ROWCOUNT;
+    -- Note: Asset dimension itself is NOT deleted - it's shared with AssetInspections and AssetObservations
+    -- See also mart.ETL_ResetAssetCommon
 
     PRINT 'RESET (deleting old data), total number of rows deleted = ' + CAST(@rows AS varchar);
 

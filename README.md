@@ -68,7 +68,10 @@ Use it to accelerate your first production deployment, then iterate where you di
 The API currently enables download of:
 
 - Actions
-- Assets
+- Assets (three modules):
+  - AssetInspections
+  - AssetObservations
+  - Assets
 - Audits
 - Inductions
 - Permits
