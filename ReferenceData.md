@@ -61,6 +61,14 @@ Jump to the relevant section:
 | 31 | Miscellaneous | Cycles | cycles |
 | 32 | Miscellaneous | Percent | % |
 | 33 | Miscellaneous | Pounds Per Square Inch | psi |
+| 34 | Area | Square Meters | m² |
+| 35 | Area | Square Kilometers | km² |
+| 36 | Area | Square Feet | ft² |
+| 37 | Power | Kilowatt Hour | kWh |
+| 38 | Currency | Pound | £ |
+| 39 | Currency | Dollar | $ |
+| 40 | Currency | Euro | € |
+| 41 | Currency | Yen | ¥ |
 
 ## Actions
 
