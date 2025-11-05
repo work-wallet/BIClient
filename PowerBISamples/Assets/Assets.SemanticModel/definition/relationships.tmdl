@@ -93,3 +93,82 @@ relationship 5d4ced6d-043b-4bdc-aba4-fb0ff43a7597
 	fromColumn: 'Assignment Fact'.To
 	toColumn: LocalDateTable_9ad9a484-b478-496a-8fab-70e22744f21a.Date
 
+relationship a6722656-3a41-4dda-aab2-cc2dd692ded2
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Observation.ObservedOn
+	toColumn: LocalDateTable_0f8b1d9b-09e1-4b61-bd48-b9c9f1d9c3b4.Date
+
+relationship 4101d18a-fdce-4474-a26d-cce01d41d70c
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Observation.ClosedOn
+	toColumn: LocalDateTable_dd78a9fb-3b9f-416c-b429-1578f95c2eb0.Date
+
+relationship 7b466186-1cf7-4f91-96a0-abaccaab0845
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Inspection.'Inspection Date'
+	toColumn: LocalDateTable_2dee3fba-5892-488e-bf9f-c421d29d1206.Date
+
+relationship 43749b8e-6eae-42ee-b6e0-cbad65cc6b72
+	fromColumn: 'Inspection Checklist Item Fact'.AssetInspectionChecklistItem_key
+	toColumn: 'Inspection Checklist Item'.AssetInspectionChecklistItem_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship 92c5bab6-2e5a-4484-99d8-503beaf29995
+	fromColumn: 'Inspection Checklist Item Fact'.AssetInspection_key
+	toColumn: Inspection.AssetInspection_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship 4a66f077-6069-4a8d-8889-fdf3a694b192
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: 'Inspection Observation Fact'.AssetInspectionChecklistItem_key
+	toColumn: 'Inspection Checklist Item'.AssetInspectionChecklistItem_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship 41a44f0f-8a84-44bf-b0a3-e4b337a524f8
+	isActive: false
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: 'Inspection Observation Fact'.AssetInspection_key
+	toColumn: Inspection.AssetInspection_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship acc62d32-a490-45b9-a312-910813cfe584
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: 'Inspection Observation Fact'.AssetObservation_key
+	toColumn: Observation.AssetObservation_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship e3a1948a-57ee-4fcb-b17c-930eff14be30
+	fromColumn: 'Inspection Property Fact'.AssetInspectionProperty_key
+	toColumn: 'Inspection Property'.AssetInspectionProperty_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship 10eb794a-ab87-44ac-8599-fe04f074ef52
+	fromColumn: 'Inspection Property Fact'.AssetInspection_key
+	toColumn: Inspection.AssetInspection_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship 37999017-5285-42b6-8f56-b58b7577183e
+	fromColumn: Observation.AssetObservationStatus_key
+	toColumn: 'Observation Status'.AssetObservationStatus_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship 368d9441-b56f-f63c-7105-a13acd1dbfcc
+	fromColumn: Assignment.Contact_key
+	toColumn: Contact.Contact_key
+
+relationship f6675550-f446-93c2-cabb-d7bf8c2f904e
+	isActive: false
+	fromColumn: Contact.Wallet_key
+	toColumn: Wallet.Wallet_key
+

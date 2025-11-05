@@ -1,0 +1,77 @@
+table Contact
+	lineageTag: f174ac29-7e26-412e-a9c8-802a14cf4b62
+
+	column Contact_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: d832e9c2-f9b2-410e-bb42-17dc381e1f87
+		summarizeBy: none
+		sourceColumn: Contact_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column ContactId
+		dataType: string
+		isHidden
+		lineageTag: f4bf0678-b6bb-439f-90a9-490e4f1ff31a
+		summarizeBy: none
+		sourceColumn: ContactId
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Contact Name'
+		dataType: string
+		lineageTag: 4d2e04c4-8907-4270-bf9c-b4020a1ba07d
+		summarizeBy: none
+		sourceColumn: Contact Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column Email
+		dataType: string
+		lineageTag: 3f1e5776-37ee-48e3-98bc-cae56b9bec86
+		summarizeBy: none
+		sourceColumn: Email
+
+		annotation SummarizationSetBy = Automatic
+
+	column Company
+		dataType: string
+		lineageTag: e9c1d3db-4508-4c04-8c0e-8aa0351c4e2f
+		summarizeBy: none
+		sourceColumn: Company
+
+		annotation SummarizationSetBy = Automatic
+
+	column Wallet_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 4be37817-280c-4c62-aef8-6ad8113bc05c
+		summarizeBy: none
+		sourceColumn: Wallet_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	partition Contact = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("CAKESOFBREAD", "WorkWalletBIClient_LocalStaging"),
+				    mart_Contact = Source{[Schema="mart",Item="Contact"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(mart_Contact,{"_created", "_edited"}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"EmailAddress", "Email"}, {"CompanyName", "Company"}, {"Name", "Contact Name"}})
+				in
+				    #"Renamed Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,86 @@
+table 'Inspection Observation Fact'
+	lineageTag: 92291e38-3eac-433c-9555-da198b332849
+
+	column AssetInspectionObservationFact_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 74617cb5-67c2-4b75-8e6a-9fd4e0bf5e30
+		summarizeBy: none
+		sourceColumn: AssetInspectionObservationFact_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column AssetInspection_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: ab6fcb09-e721-4372-bc67-1261310a471a
+		summarizeBy: none
+		sourceColumn: AssetInspection_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column AssetObservation_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: c67ff364-0065-4ce0-b55e-7f3ba236afaa
+		summarizeBy: none
+		sourceColumn: AssetObservation_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column AssetInspectionChecklistItem_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: c2827adc-31aa-4ad0-87b5-88ea061496f5
+		summarizeBy: none
+		sourceColumn: AssetInspectionChecklistItem_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column New
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: ec3b705d-de75-45b0-80ed-812cc0ea4376
+		summarizeBy: none
+		sourceColumn: New
+
+		annotation SummarizationSetBy = Automatic
+
+	column Wallet_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 015ce9ea-cfcd-4977-82b2-a8605f5052bb
+		summarizeBy: none
+		sourceColumn: Wallet_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	partition 'Inspection Observation Fact' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("CAKESOFBREAD", "WorkWalletBIClient_LocalStaging"),
+				    mart_AssetInspectionObservationFact = Source{[Schema="mart",Item="AssetInspectionObservationFact"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(mart_AssetInspectionObservationFact,{"_created"})
+				in
+				    #"Removed Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

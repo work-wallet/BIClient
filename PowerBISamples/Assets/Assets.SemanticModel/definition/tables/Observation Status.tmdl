@@ -1,0 +1,50 @@
+table 'Observation Status'
+	lineageTag: 36c35329-c768-49d5-bf0b-de52e01a5296
+
+	column AssetObservationStatus_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: bdf48b1c-1695-413f-b241-151b4215c1c6
+		summarizeBy: none
+		sourceColumn: AssetObservationStatus_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column AssetObservationStatusCode
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 1216052c-694e-4da6-bf0b-03e8c44d00ab
+		summarizeBy: none
+		sourceColumn: AssetObservationStatusCode
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Observation Status'
+		dataType: string
+		lineageTag: 1a37c264-bdaf-4594-baa4-899444e00694
+		summarizeBy: none
+		sourceColumn: Observation Status
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Observation Status' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("CAKESOFBREAD", "WorkWalletBIClient_LocalStaging"),
+				    mart_AssetObservationStatus = Source{[Schema="mart",Item="AssetObservationStatus"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(mart_AssetObservationStatus,{"_created", "_edited"}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"AssetObservationStatus", "Observation Status"}})
+				in
+				    #"Renamed Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

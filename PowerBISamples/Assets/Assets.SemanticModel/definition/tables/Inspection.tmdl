@@ -1,0 +1,115 @@
+table Inspection
+	lineageTag: 9cb6e7f8-8551-4efe-946a-8bf11e22d406
+
+	column AssetInspection_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: d9b90760-5b2f-455f-b329-c9e5ff7426d0
+		summarizeBy: none
+		sourceColumn: AssetInspection_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column InspectionId
+		dataType: string
+		isHidden
+		lineageTag: cd1cb9f1-ac2b-4862-9810-07083afc48cc
+		summarizeBy: none
+		sourceColumn: InspectionId
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Asset_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 85221f72-b56b-4e0f-9c1e-f69e3594589a
+		summarizeBy: none
+		sourceColumn: Asset_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column InspectionTypeId
+		dataType: string
+		isHidden
+		lineageTag: c9383661-3a38-4373-a858-a0a7c9e174eb
+		summarizeBy: none
+		sourceColumn: InspectionTypeId
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Inspection Type'
+		dataType: string
+		lineageTag: 29e73c50-a427-4a2e-97d5-ed789259e5f1
+		summarizeBy: none
+		sourceColumn: Inspection Type
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Inspection Date'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 95261f41-77b3-4cba-b3c6-ef386f4ea83d
+		summarizeBy: none
+		sourceColumn: Inspection Date
+
+		variation Variation
+			isDefault
+			relationship: 7b466186-1cf7-4f91-96a0-abaccaab0845
+			defaultHierarchy: LocalDateTable_2dee3fba-5892-488e-bf9f-c421d29d1206.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Inspected By'
+		dataType: string
+		lineageTag: b839d2e3-c9c0-4398-b231-aa2630dc0884
+		summarizeBy: none
+		sourceColumn: Inspected By
+
+		annotation SummarizationSetBy = Automatic
+
+	column Deleted
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 9a87fc1d-61cc-4807-97be-1ec8d679a5df
+		summarizeBy: none
+		sourceColumn: Deleted
+
+		annotation SummarizationSetBy = Automatic
+
+	column Wallet_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 850f3091-7731-4b0e-8210-281b6d261511
+		summarizeBy: none
+		sourceColumn: Wallet_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	partition Inspection = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("CAKESOFBREAD", "WorkWalletBIClient_LocalStaging"),
+				    mart_AssetInspection = Source{[Schema="mart",Item="AssetInspection"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(mart_AssetInspection,{"_created", "_edited"}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"InspectionType", "Inspection Type"}, {"InspectionDate", "Inspection Date"}, {"InspectedBy", "Inspected By"}})
+				in
+				    #"Renamed Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
