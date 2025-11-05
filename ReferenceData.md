@@ -4,6 +4,8 @@ Jump to the relevant section:
 
 - [General](#general)
 - [Actions](#actions)
+- [AssetInspections](#assetinspections)
+- [AssetObservations](#assetobservations)
 - [Assets](#assets)
 - [Audits](#audits)
 - [Inductions](#inductions)
@@ -83,6 +85,33 @@ Jump to the relevant section:
 | 4 | Safety Card |
 | 8 | Asset |
 | 16 | Briefing |
+
+## AssetInspections
+
+| AssetPropertyType |
+| --- |
+| Number |
+| Select |
+| Text |
+
+Checklist item response codes are specific to each checklist configuration. Common examples include:
+
+| Response | ResponseText (Example) |
+| --- | --- |
+| 0 | N/A |
+| 1 | Major Failure |
+| 2 | Minor Failure |
+| 3 | No Issues |
+
+Note: The actual `ResponseText` values are defined per checklist and may vary.
+
+## AssetObservations
+
+| AssetObservationStatusId | AssetObservationStatus |
+| --- | --- |
+| 0 | Observation |
+| 1 | Defect (Open) |
+| 32 | Defect (Closed) |
 
 ## Assets
 

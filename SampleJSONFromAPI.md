@@ -11,6 +11,8 @@ Each sample shows the standard response structure including:
 Jump to the relevant section:
 
 - [Actions](#actions)
+- [AssetInspections](#assetinspections)
+- [AssetObservations](#assetobservations)
 - [Assets](#assets)
 - [Audits](#audits)
 - [Inductions](#inductions)
@@ -96,6 +98,197 @@ Notes
 - Actions
   - **DueOn**: `1900-01-01` indicates no data
   - **OriginalDueOn**: `1900-01-01` indicates no data
+
+## AssetInspections
+
+```json
+{
+  "Context": {
+    "Dataset": "AssetInspections",
+    "Version": 1,
+    "Count": 1,
+    "FullCount": 1,
+    "PageNumber": 1,
+    "PageSize": 500,
+    "LastSynchronizationVersion": 1050,
+    "SynchronizationVersion": 1200,
+    "MinValidSynchronizationVersion": 900,
+    "Error": "",
+    "UTC": "2025-09-10T11:45:00Z",
+    "ExecutionTimeMs": 171,
+  },
+  "Wallets": [
+    {
+      "WalletId": "a3e1c9f2-5d4b-4330-9c2f-1c2b8f0d9a77",
+      "Wallet": "Northwind Construction Ltd"
+    }
+  ],
+  "Assets": [
+    {
+      "AssetId": "5b9c97f1-22ff-41fa-9434-7b4b0f8f5d79",
+      "AssetType": "Forklift Truck",
+      "AssetStatusCode": 0,
+      "Reference": "NWC-00421",
+      "Name": "Warehouse Forklift A",
+      "Description": "3.5T diesel forklift used in North Yard loading bay. Next service due Q4.",
+      "CreatedOn": "2025-08-30T09:15:42.1234567+00:00",
+      "WalletId": "a3e1c9f2-5d4b-4330-9c2f-1c2b8f0d9a77"
+    }
+  ],
+  "Inspections": [
+    {
+      "AssetId": "5b9c97f1-22ff-41fa-9434-7b4b0f8f5d79",
+      "InspectionId": "45bc057d-2bae-4d05-a842-037d054fe60a",
+      "InspectionTypeId": "77e298df-9b87-430b-8a12-c9b15757fd62",
+      "InspectionType": "Daily Check",
+      "InspectionDate": "2025-09-05T11:45:00",
+      "InspectedBy": "Taylor Example",
+      "Deleted": false,
+      "WalletId": "a3e1c9f2-5d4b-4330-9c2f-1c2b8f0d9a77"
+    }
+  ],
+  "ChecklistItemStatuses": [
+    {
+      "AssetId": "5b9c97f1-22ff-41fa-9434-7b4b0f8f5d79",
+      "InspectionId": "45bc057d-2bae-4d05-a842-037d054fe60a",
+      "ChecklistId": "5ba73a16-d3db-40fa-9e35-77818778e8b6",
+      "ChecklistName": "Pre-Operation Checks",
+      "ChecklistDisplayOrder": 1,
+      "ChecklistItemId": "22b18b57-4eda-4df4-b674-66d11a11017f",
+      "ChecklistItemName": "Hydraulic System",
+      "ChecklistItemDisplayOrder": 1,
+      "Response": 3,
+      "ResponseText": "No Issues",
+      "WalletId": "a3e1c9f2-5d4b-4330-9c2f-1c2b8f0d9a77"
+    },
+    {
+      "AssetId": "5b9c97f1-22ff-41fa-9434-7b4b0f8f5d79",
+      "InspectionId": "45bc057d-2bae-4d05-a842-037d054fe60a",
+      "ChecklistId": "5ba73a16-d3db-40fa-9e35-77818778e8b6",
+      "ChecklistName": "Pre-Operation Checks",
+      "ChecklistDisplayOrder": 1,
+      "ChecklistItemId": "6f054a65-2a87-41e5-afde-8cc88e3cff7b",
+      "ChecklistItemName": "Brakes",
+      "ChecklistItemDisplayOrder": 2,
+      "Response": 2,
+      "ResponseText": "Minor Failure",
+      "WalletId": "a3e1c9f2-5d4b-4330-9c2f-1c2b8f0d9a77"
+    }
+  ],
+  "InspectionProperties": [
+    {
+      "AssetId": "5b9c97f1-22ff-41fa-9434-7b4b0f8f5d79",
+      "InspectionId": "45bc057d-2bae-4d05-a842-037d054fe60a",
+      "PropertyId": "2a86b228-c6e6-4c4c-aa7e-d346a21fdb89",
+      "Property": "Fuel Level",
+      "PropertyType": "Number",
+      "DisplayOrder": 1,
+      "Value": "75",
+      "WalletId": "a3e1c9f2-5d4b-4330-9c2f-1c2b8f0d9a77"
+    },
+    {
+      "AssetId": "5b9c97f1-22ff-41fa-9434-7b4b0f8f5d79",
+      "InspectionId": "45bc057d-2bae-4d05-a842-037d054fe60a",
+      "PropertyId": "3b97c339-d7f7-5d5d-bb8f-e457b32gec9a",
+      "Property": "Weather Conditions",
+      "PropertyType": "Text",
+      "DisplayOrder": 2,
+      "Value": "Clear",
+      "WalletId": "a3e1c9f2-5d4b-4330-9c2f-1c2b8f0d9a77"
+    }
+  ],
+  "Observations": [
+    {
+      "AssetId": "5b9c97f1-22ff-41fa-9434-7b4b0f8f5d79",
+      "ObservationId": "a21b224a-df1c-4a89-a4b7-bf9291d18555",
+      "Details": "Brake pads showing wear. Replacement recommended within next 2 weeks.",
+      "ActionTaken": "Tagged for maintenance",
+      "StatusId": 1,
+      "ObservedOn": "2025-09-05T11:46:00+00:00",
+      "ObservedBy": "Taylor Example",
+      "Deleted": false,
+      "ClosedBy": "",
+      "ClosureNotes": "",
+      "WalletId": "a3e1c9f2-5d4b-4330-9c2f-1c2b8f0d9a77"
+    }
+  ],
+  "InspectionObservations": [
+    {
+      "InspectionId": "45bc057d-2bae-4d05-a842-037d054fe60a",
+      "ObservationId": "a21b224a-df1c-4a89-a4b7-bf9291d18555",
+      "ChecklistItemId": "6f054a65-2a87-41e5-afde-8cc88e3cff7b",
+      "New": true,
+      "WalletId": "a3e1c9f2-5d4b-4330-9c2f-1c2b8f0d9a77"
+    }
+  ]
+}
+```
+
+Notes
+
+- Observations
+  - **ClosedOn**: if `null` no field will be returned
+- InspectionObservations
+  - **ChecklistItemId**: if `null` no field will be returned`
+
+## AssetObservations
+
+```json
+{
+  "Context": {
+    "Dataset": "AssetObservations",
+    "Version": 1,
+    "Count": 1,
+    "FullCount": 1,
+    "PageNumber": 1,
+    "PageSize": 500,
+    "LastSynchronizationVersion": 1050,
+    "SynchronizationVersion": 1200,
+    "MinValidSynchronizationVersion": 900,
+    "Error": "",
+    "UTC": "2025-09-10T16:54:00Z",
+    "ExecutionTimeMs": 74,
+  },
+  "Wallets": [
+    {
+      "WalletId": "a3e1c9f2-5d4b-4330-9c2f-1c2b8f0d9a77",
+      "Wallet": "Northwind Construction Ltd"
+    }
+  ],
+  "Assets": [
+    {
+      "AssetId": "67efa50f-ff76-4c95-9800-bb54ac57cdab",
+      "AssetType": "Machine",
+      "AssetStatusCode": 0,
+      "Reference": "MC-572384",
+      "Name": "Main Plant Machine",
+      "Description": "Primary production machine for assembly line A",
+      "CreatedOn": "2025-03-02T13:57:10.4003836+00:00",
+      "WalletId": "a3e1c9f2-5d4b-4330-9c2f-1c2b8f0d9a77"
+    }
+  ],
+  "Observations": [
+    {
+      "AssetId": "67efa50f-ff76-4c95-9800-bb54ac57cdab",
+      "ObservationId": "94041a6a-7295-451f-91b0-18ef8e357d4e",
+      "Details": "Unusual vibration detected during operation. Requires investigation.",
+      "ActionTaken": "Machine taken offline for inspection",
+      "StatusId": 1,
+      "ObservedOn": "2025-09-03T16:54:24.2830000+00:00",
+      "ObservedBy": "Jordan Example",
+      "Deleted": false,
+      "ClosedBy": "",
+      "ClosureNotes": "",
+      "WalletId": "a3e1c9f2-5d4b-4330-9c2f-1c2b8f0d9a77"
+    }
+  ]
+}
+```
+
+Notes
+
+- Observations
+  - **ClosedOn**: if `null` no field will be returned
 
 ## Assets
 
@@ -202,10 +395,7 @@ Notes
 
 Notes
 
-- Properties
-  - **PropertyType**: Can be "Text", "Number", "Select", "Date", "Time", or "DateTime"
 - Assignments
-  - **AssignmentType**: Can be "User", "Site", or "Unassigned"
   - **AssignedToContactId**: if `null` no field will be returned
   - **CompanyId**: `00000000-0000-0000-0000-000000000000` indicates no data
   - **SiteId**: `00000000-0000-0000-0000-000000000000` indicates no data
