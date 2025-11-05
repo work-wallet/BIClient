@@ -25,6 +25,9 @@ CREATE TABLE mart.AssetPropertyType
 INSERT INTO mart.AssetPropertyType (AssetPropertyType) VALUES (N'Text');
 INSERT INTO mart.AssetPropertyType (AssetPropertyType) VALUES (N'Number');
 INSERT INTO mart.AssetPropertyType (AssetPropertyType) VALUES (N'Select');
+INSERT INTO mart.AssetPropertyType (AssetPropertyType) VALUES (N'Date');
+INSERT INTO mart.AssetPropertyType (AssetPropertyType) VALUES (N'Time');
+INSERT INTO mart.AssetPropertyType (AssetPropertyType) VALUES (N'DateTime');
 
 CREATE TABLE mart.AssetAssignmentType
 (

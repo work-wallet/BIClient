@@ -1,3 +1,20 @@
+-- Add support for the new property types used in Assets (not used in AssetInspections directly, but needed to bring the Assets module up to date)
+-- (has been back-fixed in the 0009 script)
+IF NOT EXISTS (SELECT 1 FROM mart.AssetPropertyType WHERE AssetPropertyType = N'Date')
+BEGIN
+    INSERT INTO mart.AssetPropertyType (AssetPropertyType) VALUES (N'Date');
+END
+
+IF NOT EXISTS (SELECT 1 FROM mart.AssetPropertyType WHERE AssetPropertyType = N'Time')
+BEGIN
+    INSERT INTO mart.AssetPropertyType (AssetPropertyType) VALUES (N'Time');
+END
+
+IF NOT EXISTS (SELECT 1 FROM mart.AssetPropertyType WHERE AssetPropertyType = N'DateTime')
+BEGIN
+    INSERT INTO mart.AssetPropertyType (AssetPropertyType) VALUES (N'DateTime');
+END
+
 -- AssetObservation Status lookup table
 CREATE TABLE mart.AssetObservationStatus
 (
