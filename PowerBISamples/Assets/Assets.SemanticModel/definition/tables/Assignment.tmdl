@@ -83,6 +83,15 @@ table Assignment
 
 		annotation SummarizationSetBy = User
 
+	column Contact_key
+		dataType: int64
+		formatString: 0
+		lineageTag: 99206b4e-0ec8-4cba-bb07-a51311207738
+		summarizeBy: sum
+		sourceColumn: Contact_key
+
+		annotation SummarizationSetBy = Automatic
+
 	hierarchy 'Company Hierarchy'
 		lineageTag: ca781ade-8b56-43e6-bf0a-b335c6f21a12
 
@@ -98,7 +107,7 @@ table Assignment
 		mode: import
 		source =
 				let
-				    Source = Sql.Database("ww-powerbi-demo.database.windows.net", "powerbi"),
+				    Source = Sql.Database("CAKESOFBREAD", "WorkWalletBIClient_LocalStaging"),
 				    mart_AssetAssignment = Source{[Schema="mart",Item="AssetAssignment"]}[Data],
 				    #"Removed Columns" = Table.RemoveColumns(mart_AssetAssignment,{"_created", "_edited"}),
 				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"AssignedTo", "Assigned To"}})
