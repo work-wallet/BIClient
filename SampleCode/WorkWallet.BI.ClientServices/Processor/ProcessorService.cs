@@ -100,12 +100,6 @@ public class ProcessorService(
         // obtain our last database change tracking synchronization number (or null if this is the first sync)
         long? lastSynchronizationVersion = await dataStore.GetLastSynchronizationVersionAsync(walletContext.Id, logType);
 
-        if (!lastSynchronizationVersion.HasValue)
-        {
-            // no last synchronization data, treat this as a reset and delete all data
-            await dataStore.ResetAsync(walletContext.Id, dataType);
-        }
-
         return new ProcessingState(lastSynchronizationVersion);
     }
 
