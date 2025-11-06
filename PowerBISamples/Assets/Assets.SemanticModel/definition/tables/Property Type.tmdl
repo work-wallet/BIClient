@@ -25,11 +25,11 @@ table 'Property Type'
 		mode: import
 		source =
 				let
-				    Source = Sql.Database("CAKESOFBREAD", "WorkWalletBIClient_LocalStaging"),
+				    Source = Sql.Database("ww-powerbi-demo.database.windows.net", "powerbi"),
 				    mart_AssetPropertyType = Source{[Schema="mart",Item="AssetPropertyType"]}[Data],
 				    #"Renamed Columns" = Table.RenameColumns(mart_AssetPropertyType,{{"AssetPropertyType", "Property Type"}})
 				in
 				    #"Renamed Columns"
 
-	annotation PBI_ResultType = Table
+	annotation PBI_ResultType = Exception
 

@@ -161,14 +161,14 @@ table Asset
 		mode: import
 		source =
 				let
-				    Source = Sql.Database("CAKESOFBREAD", "WorkWalletBIClient_LocalStaging"),
+				    Source = Sql.Database("ww-powerbi-demo.database.windows.net", "powerbi"),
 				    mart_Asset = Source{[Schema="mart",Item="Asset"]}[Data],
 				    #"Removed Columns" = Table.RemoveColumns(mart_Asset,{"_created", "_edited"}),
 				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"Name", "Asset Name"}, {"Description", "Asset Notes"}, {"CreatedOn", "Created On"}, {"AssetType", "Asset Type"}})
 				in
 				    #"Renamed Columns"
 
-	annotation PBI_ResultType = Table
+	annotation PBI_ResultType = Exception
 
 	annotation PBI_NavigationStepName = Navigation
 
