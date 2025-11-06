@@ -1,11 +1,11 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.2.0/schema.json",
-  "name": "de4c841dd3c67ad57cf3",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.3.0/schema.json",
+  "name": "4567435d815e689d94d3",
   "position": {
     "x": 0,
     "y": 0,
     "z": 0,
-    "height": 74.177897574123989,
+    "height": 79.353099730458212,
     "width": 450.24258760107813
   },
   "visual": {
@@ -60,6 +60,11 @@
           }
         }
       ]
+    },
+    "syncGroup": {
+      "groupName": "Asset Type",
+      "fieldChanges": true,
+      "filterChanges": true
     },
     "drillFilterOtherVisuals": true
   }

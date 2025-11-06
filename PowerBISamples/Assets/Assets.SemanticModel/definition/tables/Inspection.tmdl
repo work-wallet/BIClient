@@ -57,7 +57,7 @@ table Inspection
 
 	column 'Inspection Date'
 		dataType: dateTime
-		formatString: General Date
+		formatString: dd/mm/yyyy hh:nn
 		lineageTag: 95261f41-77b3-4cba-b3c6-ef386f4ea83d
 		summarizeBy: none
 		sourceColumn: Inspection Date
@@ -68,6 +68,8 @@ table Inspection
 			defaultHierarchy: LocalDateTable_2dee3fba-5892-488e-bf9f-c421d29d1206.'Date Hierarchy'
 
 		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
 
 	column 'Inspected By'
 		dataType: string
@@ -97,6 +99,41 @@ table Inspection
 		changedProperty = IsHidden
 
 		annotation SummarizationSetBy = User
+
+	column 'Inspection Count' = 1
+		formatString: 0
+		lineageTag: e42efbe9-d186-4b6a-87f9-c460f957817a
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Defects Raised' =
+			
+			VAR CurrentInspectionKey = Inspection[AssetInspection_key]
+			RETURN
+			COALESCE(
+			    CALCULATE(
+			        SUMX(
+			            FILTER(
+			                'Inspection Observation Fact',
+			                'Inspection Observation Fact'[AssetInspection_key] = CurrentInspectionKey
+			                    && 'Inspection Observation Fact'[New] = TRUE
+			            ),
+			            VAR ObsKey = 'Inspection Observation Fact'[AssetObservation_key]
+			            RETURN
+			            CALCULATE(
+			                SUM(Observation[Defect Count]),
+			                Observation[AssetObservation_key] = ObsKey
+			            )
+			        )
+			    ),
+			    0
+			)
+		formatString: 0
+		lineageTag: f58918ea-08bc-4766-903a-12739c408073
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
 
 	partition Inspection = m
 		mode: import

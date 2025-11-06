@@ -103,6 +103,60 @@ table Asset
 
 		annotation SummarizationSetBy = Automatic
 
+	column Asset = Asset[Asset Type] & " - " & Asset[Asset Name]
+		lineageTag: ae9028e5-4a79-4ec9-b68f-a45fe27358c4
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Open Defects' =
+			
+			COALESCE(
+			    SUMX(
+			        RELATEDTABLE(Observation),
+			        Observation[Open Defect Count]
+			    ),
+			    0
+			)
+		formatString: 0
+		lineageTag: fafaaf74-756a-46cd-86dc-f5ab75aaf303
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Latest Assigned To' =
+			
+			CALCULATE(
+			    SELECTEDVALUE(Assignment[Assigned To]),
+			    'Assignment Fact'[Is Latest] = TRUE
+			)
+		lineageTag: 8c62c53f-00d1-41b1-89c9-0c8c5f5a0543
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Last Inspection Date' =
+			
+			COALESCE(
+			    MAXX(
+			        RELATEDTABLE(Inspection),
+			        Inspection[Inspection Date]
+			    ),
+			    BLANK()
+			)
+		formatString: dd/mm/yyyy hh:nn
+		lineageTag: 8b80a8f4-74dd-4037-a804-269f97bb91c7
+		summarizeBy: none
+
+		variation Variation
+			isDefault
+			relationship: 72f3b611-7593-498f-8568-418cf232178e
+			defaultHierarchy: LocalDateTable_63a987a6-743d-4041-aed1-6b8fe393d68e.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
 	partition Asset = m
 		mode: import
 		source =

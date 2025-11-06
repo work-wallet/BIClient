@@ -214,3 +214,8 @@ relationship bb22bc48-3580-4ba5-2c81-e5e1a220b008
 
 	annotation PBI_IsFromSource = FS
 
+relationship 72f3b611-7593-498f-8568-418cf232178e
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Asset.'Last Inspection Date'
+	toColumn: LocalDateTable_63a987a6-743d-4041-aed1-6b8fe393d68e.Date
+
