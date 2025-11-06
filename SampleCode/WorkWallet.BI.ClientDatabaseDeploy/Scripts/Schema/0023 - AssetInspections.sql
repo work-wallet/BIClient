@@ -77,6 +77,7 @@ CREATE TABLE mart.AssetInspectionProperty
     ,Wallet_key int NOT NULL
     ,_created datetime2(7) NOT NULL CONSTRAINT [DF_mart.AssetInspectionProperty__created] DEFAULT SYSUTCDATETIME()
     ,CONSTRAINT [PK_mart.AssetInspectionProperty] PRIMARY KEY (AssetInspectionProperty_key)
+    ,CONSTRAINT [UQ_mart.AssetInspectionProperty_Business_Key] UNIQUE(AssetPropertyType_key, Property, Wallet_key)
     ,CONSTRAINT [FK_mart.AssetInspectionProperty_mart.AssetPropertyType_AssetPropertyType_key] FOREIGN KEY(AssetPropertyType_key) REFERENCES mart.AssetPropertyType
     ,CONSTRAINT [FK_mart.AssetInspectionProperty_mart.Wallet_Wallet_key] FOREIGN KEY(Wallet_key) REFERENCES mart.Wallet
 );

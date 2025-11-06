@@ -89,6 +89,10 @@ BEGIN
         EXEC mart.ETL_MaintainAssetInspectionDimension @inspectionTable = @inspectionTable;
 
         -- maintain the AssetInspectionChecklistItem dimension table
+        -- Note: ChecklistDisplayOrder is extracted from the API but deliberately not maintained in the dimension table.
+        -- Different inspection types can have the same checklist in different display orders, so the order is 
+        -- context-dependent and not an attribute of the checklist itself. ChecklistItemDisplayOrder is maintained
+        -- as it represents the canonical order within a checklist.
 
         DECLARE @checklistItemTable mart.ETL_AssetInspectionChecklistItemTable;
 
@@ -125,6 +129,8 @@ BEGIN
         EXEC mart.ETL_MaintainAssetInspectionChecklistItemDimension @checklistItemTable = @checklistItemTable;
 
         -- maintain the AssetInspectionProperty dimension table
+        -- Note: PropertyId and DisplayOrder are not extracted from the source API to maintain consistency
+        -- with the existing mart.AssetProperty table design, which uses Property name as the business key.
 
         DECLARE @inspectionPropertyTable mart.ETL_AssetInspectionPropertyTable;
 
