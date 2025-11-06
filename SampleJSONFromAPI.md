@@ -229,7 +229,7 @@ Notes
 - Observations
   - **ClosedOn**: if `null` no field will be returned
 - InspectionObservations
-  - **ChecklistItemId**: if `null` no field will be returned`
+  - **ChecklistItemId**: if `null` no field will be returned
 
 ## AssetObservations
 
