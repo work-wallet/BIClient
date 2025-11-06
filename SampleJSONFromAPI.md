@@ -189,7 +189,7 @@ Notes
     {
       "AssetId": "5b9c97f1-22ff-41fa-9434-7b4b0f8f5d79",
       "InspectionId": "45bc057d-2bae-4d05-a842-037d054fe60a",
-      "PropertyId": "3b97c339-d7f7-5d5d-bb8f-e457b32gec9a",
+      "PropertyId": "3b97c339-d7f7-5d5d-bb8f-e457b32aec9a",
       "Property": "Weather Conditions",
       "PropertyType": "Text",
       "DisplayOrder": 2,
