@@ -61,7 +61,7 @@ table 'Inspection Checklist Item'
 
 		changedProperty = IsHidden
 
-		annotation SummarizationSetBy = Automatic
+		annotation SummarizationSetBy = User
 
 	column Wallet_key
 		dataType: int64
@@ -73,7 +73,7 @@ table 'Inspection Checklist Item'
 
 		changedProperty = IsHidden
 
-		annotation SummarizationSetBy = Automatic
+		annotation SummarizationSetBy = User
 
 	partition 'Inspection Checklist Item' = m
 		mode: import

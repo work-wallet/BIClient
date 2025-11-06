@@ -35,7 +35,7 @@ table 'Inspection Observation Fact'
 
 		changedProperty = IsHidden
 
-		annotation SummarizationSetBy = Automatic
+		annotation SummarizationSetBy = User
 
 	column AssetInspectionChecklistItem_key
 		dataType: int64
@@ -47,7 +47,7 @@ table 'Inspection Observation Fact'
 
 		changedProperty = IsHidden
 
-		annotation SummarizationSetBy = Automatic
+		annotation SummarizationSetBy = User
 
 	column New
 		dataType: boolean

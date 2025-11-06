@@ -94,7 +94,7 @@ table Asset
 
 		changedProperty = IsHidden
 
-		annotation SummarizationSetBy = Automatic
+		annotation SummarizationSetBy = User
 
 	column 'Asset Count' = 1
 		formatString: 0

@@ -11,7 +11,7 @@ table Observation
 
 		changedProperty = IsHidden
 
-		annotation SummarizationSetBy = Automatic
+		annotation SummarizationSetBy = User
 
 	column ObservationId
 		dataType: string

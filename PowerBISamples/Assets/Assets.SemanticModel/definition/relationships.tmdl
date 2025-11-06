@@ -15,6 +15,7 @@ relationship 2cc9e861-2519-4afd-a59e-b6a20db322e5
 	annotation PBI_IsFromSource = FS
 
 relationship bea07cc6-c6bf-469a-8af9-4e5afdfe97b5
+	isActive: false
 	fromColumn: Asset.Wallet_key
 	toColumn: Wallet.Wallet_key
 
@@ -120,31 +121,6 @@ relationship 92c5bab6-2e5a-4484-99d8-503beaf29995
 
 	annotation PBI_IsFromSource = FS
 
-relationship 4a66f077-6069-4a8d-8889-fdf3a694b192
-	crossFilteringBehavior: bothDirections
-	fromCardinality: one
-	fromColumn: 'Inspection Observation Fact'.AssetInspectionChecklistItem_key
-	toColumn: 'Inspection Checklist Item'.AssetInspectionChecklistItem_key
-
-	annotation PBI_IsFromSource = FS
-
-relationship 41a44f0f-8a84-44bf-b0a3-e4b337a524f8
-	isActive: false
-	crossFilteringBehavior: bothDirections
-	fromCardinality: one
-	fromColumn: 'Inspection Observation Fact'.AssetInspection_key
-	toColumn: Inspection.AssetInspection_key
-
-	annotation PBI_IsFromSource = FS
-
-relationship acc62d32-a490-45b9-a312-910813cfe584
-	crossFilteringBehavior: bothDirections
-	fromCardinality: one
-	fromColumn: 'Inspection Observation Fact'.AssetObservation_key
-	toColumn: Observation.AssetObservation_key
-
-	annotation PBI_IsFromSource = FS
-
 relationship e3a1948a-57ee-4fcb-b17c-930eff14be30
 	fromColumn: 'Inspection Property Fact'.AssetInspectionProperty_key
 	toColumn: 'Inspection Property'.AssetInspectionProperty_key
@@ -171,4 +147,70 @@ relationship f6675550-f446-93c2-cabb-d7bf8c2f904e
 	isActive: false
 	fromColumn: Contact.Wallet_key
 	toColumn: Wallet.Wallet_key
+
+relationship 1c149914-4561-545b-c517-6bc51e650c96
+	fromColumn: Observation.Asset_key
+	toColumn: Asset.Asset_key
+
+relationship 2e627b37-5214-c355-7ed0-f27f31cf61f0
+	isActive: false
+	fromColumn: Observation.Wallet_key
+	toColumn: Wallet.Wallet_key
+
+relationship 725a005a-cec6-6c8c-6225-7443b0f28eb6
+	isActive: false
+	fromColumn: Inspection.Wallet_key
+	toColumn: Wallet.Wallet_key
+
+relationship 438ad523-c8e8-9b08-e108-6c9e28befe71
+	isActive: false
+	fromColumn: 'Inspection Observation Fact'.Wallet_key
+	toColumn: Wallet.Wallet_key
+
+relationship 7e986bc2-dec7-e834-8a9e-9333346157bb
+	isActive: false
+	fromColumn: 'Inspection Checklist Item Fact'.Wallet_key
+	toColumn: Wallet.Wallet_key
+
+relationship 21854af7-6f23-96d8-739e-23a1215504d1
+	isActive: false
+	fromColumn: 'Inspection Property Fact'.Wallet_key
+	toColumn: Wallet.Wallet_key
+
+relationship 4a46909d-06f9-9894-9d2a-b58f2baf308d
+	isActive: false
+	fromColumn: 'Inspection Checklist Item'.Wallet_key
+	toColumn: Wallet.Wallet_key
+
+relationship 9cb2f209-ef7e-3064-e8a3-5ed65a7cb404
+	isActive: false
+	fromColumn: 'Inspection Property'.Wallet_key
+	toColumn: Wallet.Wallet_key
+
+relationship cf578a42-0456-40f4-9a12-7f52bdf1aee2
+	fromColumn: Inspection.Asset_key
+	toColumn: Asset.Asset_key
+
+relationship d8db6c19-bbb9-1f85-5a92-d8d5a6fdb71e
+	fromColumn: 'Inspection Property'.AssetPropertyType_key
+	toColumn: 'Property Type'.AssetPropertyType_key
+
+relationship 1d36469d-5f01-6a34-03f8-5b1e8fb9ce7c
+	fromColumn: 'Inspection Observation Fact'.AssetInspection_key
+	toColumn: Inspection.AssetInspection_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship 4cc81700-50c8-ff04-2ce1-38aaf6e59d46
+	isActive: false
+	fromColumn: 'Inspection Observation Fact'.AssetObservation_key
+	toColumn: Observation.AssetObservation_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship bb22bc48-3580-4ba5-2c81-e5e1a220b008
+	fromColumn: 'Inspection Observation Fact'.AssetInspectionChecklistItem_key
+	toColumn: 'Inspection Checklist Item'.AssetInspectionChecklistItem_key
+
+	annotation PBI_IsFromSource = FS
 

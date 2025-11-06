@@ -43,7 +43,7 @@ table 'Inspection Property'
 
 		changedProperty = IsHidden
 
-		annotation SummarizationSetBy = Automatic
+		annotation SummarizationSetBy = User
 
 	partition 'Inspection Property' = m
 		mode: import
