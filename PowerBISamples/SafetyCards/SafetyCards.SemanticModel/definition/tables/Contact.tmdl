@@ -1,0 +1,77 @@
+table Contact
+	lineageTag: 0bcb1684-b7e9-4ba0-a4e3-49e638de96ae
+
+	column Contact_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: cda347ae-2960-41aa-9ee8-3ed8913e8505
+		summarizeBy: none
+		sourceColumn: Contact_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column ContactId
+		dataType: string
+		isHidden
+		lineageTag: 64a955a4-2b8e-4b0b-844f-b03b37a51dac
+		summarizeBy: none
+		sourceColumn: ContactId
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Contact Name'
+		dataType: string
+		lineageTag: f617261e-f403-4c9c-b722-161120c70ba5
+		summarizeBy: none
+		sourceColumn: Contact Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column Wallet_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: c6f4c8e7-68ad-41a9-ac43-3806c1fcdc24
+		summarizeBy: none
+		sourceColumn: Wallet_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column Email
+		dataType: string
+		lineageTag: b3ee4c26-683a-41b3-8b51-817c9ea888f9
+		summarizeBy: none
+		sourceColumn: Email
+
+		annotation SummarizationSetBy = Automatic
+
+	column Company
+		dataType: string
+		lineageTag: 4c44b082-2fc1-4cf7-a266-df562b061cda
+		summarizeBy: none
+		sourceColumn: Company
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Contact = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("ww-powerbi-demo.database.windows.net", "powerbi"),
+				    mart_Contact = Source{[Schema="mart",Item="Contact"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(mart_Contact,{"_created", "_edited"}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"Name", "Contact Name"}, {"EmailAddress", "Email"}, {"CompanyName", "Company"}})
+				in
+				    #"Renamed Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
