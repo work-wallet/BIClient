@@ -7,6 +7,7 @@ CREATE TYPE mart.ETL_AssetAssignmentTable AS TABLE
     ,AssignedOn datetimeoffset(7) NOT NULL
     ,AssignmentType nvarchar(20) NOT NULL
     ,AssignedTo nvarchar(max) NOT NULL
+    ,AssignedToContactId uniqueidentifier NULL -- allow NULLs
     ,CompanyId uniqueidentifier NOT NULL
     ,Company nvarchar(max) NOT NULL
     ,SiteId uniqueidentifier NOT NULL

@@ -6,7 +6,7 @@ model Model
 		legacyRedirects
 		returnErrorValuesAsNull
 
-annotation PBI_QueryOrder = ["Induction","Custom Question","Custom Question Fact","Induction Status","Taken By","Taken Status","Wallet"]
+annotation PBI_QueryOrder = ["Induction","Custom Question","Custom Question Fact","Induction Status","Taken By","Taken Status","Wallet","Contact"]
 
 annotation __PBI_TimeIntelligenceEnabled = 1
 
@@ -22,6 +22,7 @@ ref table 'Taken By'
 ref table LocalDateTable_705796de-106f-48c0-811d-f11b3483f209
 ref table 'Taken Status'
 ref table Wallet
+ref table Contact
 
 ref cultureInfo en-GB
 

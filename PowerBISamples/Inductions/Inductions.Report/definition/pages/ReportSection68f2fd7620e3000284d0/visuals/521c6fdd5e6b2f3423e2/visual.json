@@ -1,0 +1,175 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.3.0/schema.json",
+  "name": "521c6fdd5e6b2f3423e2",
+  "position": {
+    "x": 10.666666666666666,
+    "y": 0,
+    "z": 1,
+    "height": 101.33333333333333,
+    "width": 362.66666666666669,
+    "tabOrder": 1
+  },
+  "visual": {
+    "visualType": "slicer",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Taken By"
+                    }
+                  },
+                  "Property": "Taken On"
+                }
+              },
+              "queryRef": "Taken By.Taken On",
+              "nativeQueryRef": "Taken On",
+              "active": true
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "Taken By"
+                  }
+                },
+                "Property": "Taken On"
+              }
+            },
+            "direction": "Ascending"
+          }
+        ],
+        "isDefaultSort": true
+      }
+    },
+    "objects": {
+      "data": [
+        {
+          "properties": {
+            "mode": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Relative'"
+                }
+              }
+            },
+            "relativeRange": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Last'"
+                }
+              }
+            },
+            "relativeDuration": {
+              "expr": {
+                "Literal": {
+                  "Value": "3D"
+                }
+              }
+            },
+            "relativePeriod": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Months'"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "dateRange": [
+        {
+          "properties": {
+            "includeToday": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "general": [
+        {
+          "properties": {
+            "filter": {
+              "filter": {
+                "Version": 2,
+                "From": [
+                  {
+                    "Name": "t",
+                    "Entity": "Taken By",
+                    "Type": 0
+                  }
+                ],
+                "Where": [
+                  {
+                    "Condition": {
+                      "Between": {
+                        "Expression": {
+                          "Column": {
+                            "Expression": {
+                              "SourceRef": {
+                                "Source": "t"
+                              }
+                            },
+                            "Property": "Taken On"
+                          }
+                        },
+                        "LowerBound": {
+                          "DateSpan": {
+                            "Expression": {
+                              "DateAdd": {
+                                "Expression": {
+                                  "DateAdd": {
+                                    "Expression": {
+                                      "Now": {}
+                                    },
+                                    "Amount": 1,
+                                    "TimeUnit": 0
+                                  }
+                                },
+                                "Amount": -3,
+                                "TimeUnit": 2
+                              }
+                            },
+                            "TimeUnit": 0
+                          }
+                        },
+                        "UpperBound": {
+                          "DateSpan": {
+                            "Expression": {
+                              "Now": {}
+                            },
+                            "TimeUnit": 0
+                          }
+                        }
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        }
+      ]
+    },
+    "syncGroup": {
+      "groupName": "Taken On",
+      "fieldChanges": true,
+      "filterChanges": true
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

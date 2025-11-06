@@ -11,5 +11,6 @@ public interface IApiClient
         long? lastSynchronizationVersion,
         int pageNumber,
         int pageSize,
+        bool? setBetaFlag,
         CancellationToken cancellationToken = default);
 }

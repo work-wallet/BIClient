@@ -11,7 +11,7 @@ table Wallet
 
 		changedProperty = IsHidden
 
-		annotation SummarizationSetBy = Automatic
+		annotation SummarizationSetBy = User
 
 	column WalletId
 		dataType: string

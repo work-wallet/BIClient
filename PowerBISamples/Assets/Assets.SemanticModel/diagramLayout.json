@@ -10,8 +10,8 @@
       "nodes": [
         {
           "location": {
-            "x": 703.71393095393489,
-            "y": 835.4028639838541
+            "x": 1082.0192338253828,
+            "y": 1096.8644454681857
           },
           "nodeIndex": "Asset",
           "nodeLineageTag": "1fbdd36a-5356-45f3-8c79-63344009ee01",
@@ -23,8 +23,8 @@
         },
         {
           "location": {
-            "x": 1078.0181089714374,
-            "y": 170.82329280865451
+            "x": 502.88014841512222,
+            "y": 1545.1748168168924
           },
           "nodeIndex": "Assignment",
           "size": {
@@ -35,8 +35,8 @@
         },
         {
           "location": {
-            "x": 1008.5901609882876,
-            "y": 524.51687439576972
+            "x": 795.67610895991288,
+            "y": 1375.420780010737
           },
           "nodeIndex": "Assignment Fact",
           "nodeLineageTag": "548151e7-60a0-4a50-93fc-62cb8c8e3c33",
@@ -48,8 +48,8 @@
         },
         {
           "location": {
-            "x": 294.92058448281642,
-            "y": 353.95594638852072
+            "x": 329.32502751199377,
+            "y": 861.14243638508333
           },
           "nodeIndex": "Property",
           "size": {
@@ -60,8 +60,8 @@
         },
         {
           "location": {
-            "x": 489.15869467685746,
-            "y": 582.50232887397965
+            "x": 556.21651425006348,
+            "y": 1094.3369484765662
           },
           "nodeIndex": "Property Fact",
           "size": {
@@ -72,8 +72,8 @@
         },
         {
           "location": {
-            "x": 773.22336468944934,
-            "y": 1185.6401821355221
+            "x": 1340.5166659494068,
+            "y": 1455.4877304718682
           },
           "nodeIndex": "Asset Status",
           "size": {
@@ -84,8 +84,8 @@
         },
         {
           "location": {
-            "x": 722.43518966529552,
-            "y": 378.10795752675131
+            "x": 801.797401568552,
+            "y": 886.30325770993318
           },
           "nodeIndex": "Wallet",
           "size": {
@@ -96,8 +96,8 @@
         },
         {
           "location": {
-            "x": 1353.8254117758438,
-            "y": -10
+            "x": 793.6956295967484,
+            "y": 1898.2453133947256
           },
           "nodeIndex": "Assignment Type",
           "size": {
@@ -108,8 +108,8 @@
         },
         {
           "location": {
-            "x": 10,
-            "y": 520.84951503991351
+            "x": 50,
+            "y": 676.8356374506875
           },
           "nodeIndex": "Property Type",
           "size": {
@@ -117,10 +117,127 @@
             "width": 234
           },
           "zIndex": 8
+        },
+        {
+          "location": {
+            "x": 267.01193938632923,
+            "y": 1174.3190055092855
+          },
+          "nodeIndex": "Contact",
+          "nodeLineageTag": "f174ac29-7e26-412e-a9c8-802a14cf4b62",
+          "size": {
+            "height": 224,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1093.2889347088035,
+            "y": 688.79525741781072
+          },
+          "nodeIndex": "Inspection",
+          "nodeLineageTag": "9cb6e7f8-8551-4efe-946a-8bf11e22d406",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1245.5193581010399,
+            "y": -50
+          },
+          "nodeIndex": "Inspection Checklist Item",
+          "nodeLineageTag": "1a36bdc1-949f-403a-af2c-b481806f1fdd",
+          "size": {
+            "height": 248,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 955.33988581553047,
+            "y": 34.90733678533843
+          },
+          "nodeIndex": "Inspection Checklist Item Fact",
+          "nodeLineageTag": "6f0c1bfc-d51f-4967-b0f7-b10bd8ef1da4",
+          "size": {
+            "height": 224,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1289.2458389505875,
+            "y": 406.6230457234542
+          },
+          "nodeIndex": "Inspection Observation Fact",
+          "nodeLineageTag": "92291e38-3eac-433c-9555-da198b332849",
+          "size": {
+            "height": 224,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 370.93717123282568,
+            "y": 282.60753184779333
+          },
+          "nodeIndex": "Inspection Property",
+          "nodeLineageTag": "f96ade23-e42e-439a-8aeb-38c5117099f0",
+          "size": {
+            "height": 176,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 663.20429149199936,
+            "y": 300.03888799446827
+          },
+          "nodeIndex": "Inspection Property Fact",
+          "nodeLineageTag": "0542af76-6f9e-421e-9fe7-83c203bbf6cd",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1564.6787255258948,
+            "y": 690.2468100287756
+          },
+          "nodeIndex": "Observation",
+          "nodeLineageTag": "c44fc457-11f3-4191-870e-f172d6a303f0",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1537.6594672261567,
+            "y": 198.59408968773232
+          },
+          "nodeIndex": "Observation Status",
+          "nodeLineageTag": "36c35329-c768-49d5-bf0b-de52e01a5296",
+          "size": {
+            "height": 152,
+            "width": 234
+          },
+          "zIndex": 0
         }
       ],
       "name": "All tables",
-      "zoomValue": 61.910131970077295,
+      "zoomValue": 42.320596595028704,
       "pinKeyFieldsToTop": false,
       "showExtraHeaderInfo": false,
       "hideKeyFieldsWhenCollapsed": false,
@@ -141,7 +258,7 @@
           "nodeIndex": "Asset",
           "nodeLineageTag": "1fbdd36a-5356-45f3-8c79-63344009ee01",
           "size": {
-            "height": 362,
+            "height": 453,
             "width": 234
           },
           "zIndex": 0
@@ -171,39 +288,39 @@
       "ordinal": 2,
       "scrollPosition": {
         "x": 0,
-        "y": 0
+        "y": 1.0204081632653061
       },
       "nodes": [
         {
           "location": {
             "x": 0,
-            "y": 459
+            "y": 372.33340650819162
           },
           "nodeIndex": "Asset",
           "nodeLineageTag": "1fbdd36a-5356-45f3-8c79-63344009ee01",
           "size": {
-            "height": 353,
+            "height": 470.768807107442,
             "width": 234
           },
-          "zIndex": 1
+          "zIndex": 5
         },
         {
           "location": {
-            "x": 271,
-            "y": 220
+            "x": 333.05246771070551,
+            "y": 120.48353309931383
           },
           "nodeIndex": "Assignment Fact",
           "nodeLineageTag": "548151e7-60a0-4a50-93fc-62cb8c8e3c33",
           "size": {
-            "height": 346,
+            "height": 353.0612244897959,
             "width": 234
           },
-          "zIndex": 4
+          "zIndex": 3
         },
         {
           "location": {
-            "x": 633,
-            "y": 0
+            "x": 786.4722500099889,
+            "y": 162.24489795918367
           },
           "nodeIndex": "Assignment Type",
           "nodeLineageTag": "961c8f59-215c-463f-a8b0-6f40aa3a0a22",
@@ -215,20 +332,33 @@
         },
         {
           "location": {
-            "x": 633,
-            "y": 213
+            "x": 615.88475011374135,
+            "y": 393.87755102040819
           },
           "nodeIndex": "Assignment",
           "nodeLineageTag": "d946195a-3aed-4bc3-871a-c4015c4a28c6",
           "size": {
-            "height": 360,
+            "height": 398.9795918367347,
             "width": 234
           },
-          "zIndex": 3
+          "zIndex": 4
+        },
+        {
+          "location": {
+            "x": 944.49002762814848,
+            "y": 355.75510204081627
+          },
+          "nodeIndex": "Contact",
+          "nodeLineageTag": "f174ac29-7e26-412e-a9c8-802a14cf4b62",
+          "size": {
+            "height": 247.46938775510205,
+            "width": 234
+          },
+          "zIndex": 1
         }
       ],
       "name": "Assignment",
-      "zoomValue": 100,
+      "zoomValue": 98,
       "pinKeyFieldsToTop": false,
       "showExtraHeaderInfo": false,
       "hideKeyFieldsWhenCollapsed": false,
@@ -243,21 +373,21 @@
       "nodes": [
         {
           "location": {
-            "x": 66,
-            "y": 414
+            "x": 1,
+            "y": 360
           },
           "nodeIndex": "Asset",
           "nodeLineageTag": "1fbdd36a-5356-45f3-8c79-63344009ee01",
           "size": {
-            "height": 334,
+            "height": 463,
             "width": 234
           },
           "zIndex": 0
         },
         {
           "location": {
-            "x": 346,
-            "y": 197
+            "x": 296,
+            "y": 328
           },
           "nodeIndex": "Property Fact",
           "nodeLineageTag": "a6e4ff47-c73e-4fac-bf89-f0ff44eb028d",
@@ -269,7 +399,7 @@
         },
         {
           "location": {
-            "x": 670,
+            "x": 591,
             "y": 205
           },
           "nodeIndex": "Property",
@@ -282,8 +412,8 @@
         },
         {
           "location": {
-            "x": 670,
-            "y": 0
+            "x": 372,
+            "y": 40
           },
           "nodeIndex": "Property Type",
           "nodeLineageTag": "c2b7a152-612c-4020-98f8-28f0366e5cba",
@@ -300,8 +430,263 @@
       "showExtraHeaderInfo": false,
       "hideKeyFieldsWhenCollapsed": false,
       "tablesLocked": false
+    },
+    {
+      "ordinal": 4,
+      "scrollPosition": {
+        "x": 0,
+        "y": 0
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 301,
+            "y": 0
+          },
+          "nodeIndex": "Inspection Checklist Item",
+          "nodeLineageTag": "1a36bdc1-949f-403a-af2c-b481806f1fdd",
+          "size": {
+            "height": 277,
+            "width": 289
+          },
+          "zIndex": 2
+        },
+        {
+          "location": {
+            "x": 650.20225510460909,
+            "y": 185.88668757846415
+          },
+          "nodeIndex": "Inspection Checklist Item Fact",
+          "nodeLineageTag": "6f0c1bfc-d51f-4967-b0f7-b10bd8ef1da4",
+          "size": {
+            "height": 243,
+            "width": 305
+          },
+          "zIndex": 3
+        },
+        {
+          "location": {
+            "x": 326.41040181545577,
+            "y": 372.37869776906115
+          },
+          "nodeIndex": "Inspection",
+          "nodeLineageTag": "9cb6e7f8-8551-4efe-946a-8bf11e22d406",
+          "size": {
+            "height": 370,
+            "width": 234
+          },
+          "zIndex": 4
+        },
+        {
+          "location": {
+            "x": 0,
+            "y": 378
+          },
+          "nodeIndex": "Asset",
+          "nodeLineageTag": "1fbdd36a-5356-45f3-8c79-63344009ee01",
+          "size": {
+            "height": 446,
+            "width": 234
+          },
+          "zIndex": 1
+        }
+      ],
+      "name": "Inspection",
+      "zoomValue": 100,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    },
+    {
+      "ordinal": 5,
+      "scrollPosition": {
+        "x": 0,
+        "y": 0
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 0,
+            "y": 329
+          },
+          "nodeIndex": "Asset",
+          "nodeLineageTag": "1fbdd36a-5356-45f3-8c79-63344009ee01",
+          "size": {
+            "height": 456,
+            "width": 234
+          },
+          "zIndex": 3
+        },
+        {
+          "location": {
+            "x": 323.20156119318528,
+            "y": 261
+          },
+          "nodeIndex": "Observation",
+          "nodeLineageTag": "c44fc457-11f3-4191-870e-f172d6a303f0",
+          "size": {
+            "height": 501,
+            "width": 279
+          },
+          "zIndex": 1
+        },
+        {
+          "location": {
+            "x": 635,
+            "y": 162.98511077959995
+          },
+          "nodeIndex": "Observation Status",
+          "nodeLineageTag": "36c35329-c768-49d5-bf0b-de52e01a5296",
+          "size": {
+            "height": 152,
+            "width": 269
+          },
+          "zIndex": 2
+        }
+      ],
+      "name": "Observation",
+      "zoomValue": 100,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    },
+    {
+      "ordinal": 6,
+      "scrollPosition": {
+        "x": 0,
+        "y": 0
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 4,
+            "y": 391.11884566677884
+          },
+          "nodeIndex": "Inspection",
+          "nodeLineageTag": "9cb6e7f8-8551-4efe-946a-8bf11e22d406",
+          "size": {
+            "height": 378,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 656.41040181545577,
+            "y": 216
+          },
+          "nodeIndex": "Inspection Property",
+          "nodeLineageTag": "f96ade23-e42e-439a-8aeb-38c5117099f0",
+          "size": {
+            "height": 188,
+            "width": 259
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 332.20225510460909,
+            "y": 361.8866875785302
+          },
+          "nodeIndex": "Inspection Property Fact",
+          "nodeLineageTag": "0542af76-6f9e-421e-9fe7-83c203bbf6cd",
+          "size": {
+            "height": 263,
+            "width": 269
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 439.62216291713673,
+            "y": 41
+          },
+          "nodeIndex": "Property Type",
+          "nodeLineageTag": "c2b7a152-612c-4020-98f8-28f0366e5cba",
+          "size": {
+            "height": 128,
+            "width": 234
+          },
+          "zIndex": 0
+        }
+      ],
+      "name": "Inspection Property",
+      "zoomValue": 100,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    },
+    {
+      "ordinal": 7,
+      "scrollPosition": {
+        "x": 0,
+        "y": 0
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 515,
+            "y": 407
+          },
+          "nodeIndex": "Inspection Observation Fact",
+          "nodeLineageTag": "92291e38-3eac-433c-9555-da198b332849",
+          "size": {
+            "height": 254,
+            "width": 313
+          },
+          "zIndex": 1
+        },
+        {
+          "location": {
+            "x": 586,
+            "y": 0
+          },
+          "nodeIndex": "Inspection Checklist Item",
+          "nodeLineageTag": "1a36bdc1-949f-403a-af2c-b481806f1fdd",
+          "size": {
+            "height": 290,
+            "width": 303
+          },
+          "zIndex": 2
+        },
+        {
+          "location": {
+            "x": 0,
+            "y": 330
+          },
+          "nodeIndex": "Observation",
+          "nodeLineageTag": "c44fc457-11f3-4191-870e-f172d6a303f0",
+          "size": {
+            "height": 496,
+            "width": 271
+          },
+          "zIndex": 4
+        },
+        {
+          "location": {
+            "x": 294,
+            "y": 0
+          },
+          "nodeIndex": "Inspection",
+          "nodeLineageTag": "9cb6e7f8-8551-4efe-946a-8bf11e22d406",
+          "size": {
+            "height": 367,
+            "width": 234
+          },
+          "zIndex": 3
+        }
+      ],
+      "name": "Inspection Observation",
+      "zoomValue": 100,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
     }
   ],
-  "selectedDiagram": "Property",
+  "selectedDiagram": "Main",
   "defaultDiagram": "All tables"
 }

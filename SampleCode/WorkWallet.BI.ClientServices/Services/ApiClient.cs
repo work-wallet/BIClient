@@ -19,6 +19,7 @@ public class ApiClient(HttpClient httpClient) : IApiClient
         long? lastSynchronizationVersion,
         int pageNumber,
         int pageSize,
+        bool? setBetaFlag,
         CancellationToken cancellationToken = default)
     {
         var query = HttpUtility.ParseQueryString(string.Empty);
@@ -27,6 +28,11 @@ public class ApiClient(HttpClient httpClient) : IApiClient
         query["walletSecret"] = walletSecret;
         query["pageNumber"] = pageNumber.ToString();
         query["pageSize"] = pageSize.ToString();
+
+        if (setBetaFlag is true)
+        {
+            query["beta"] = "true";
+        }
 
         if (lastSynchronizationVersion.HasValue)
         {

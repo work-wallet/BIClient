@@ -80,24 +80,6 @@ public class SQLService(
         await command.ExecuteNonQueryAsync(CancellationToken.None);
     }
 
-    public async Task ResetAsync(Guid walletId, string dataType)
-    {
-        using SqlConnection connection = new(ConnectionString);
-        connection.Open();
-
-        string sp = $"mart.ETL_Reset{dataType}";
-
-        logger.LogDebug("Reset data: exec {sp} @walletId = '{walletId}'", sp, walletId);
-
-        using SqlCommand command = new(sp, connection);
-
-        command.CommandType = CommandType.StoredProcedure;
-
-        command.Parameters.Add("@walletId", SqlDbType.UniqueIdentifier).Value = walletId;
-
-        await command.ExecuteNonQueryAsync(CancellationToken.None);
-    }
-
     public async Task PostProcessAsync(Guid walletId, string dataType)
     {
         using SqlConnection connection = new(ConnectionString);

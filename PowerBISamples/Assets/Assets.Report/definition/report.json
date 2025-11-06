@@ -75,7 +75,14 @@
             }
           ]
         },
-        "howCreated": "User"
+        "howCreated": "User",
+        "objects": {
+          "general": [
+            {
+              "properties": {}
+            }
+          ]
+        }
       },
       {
         "name": "Filterc2f84a9ec8a04353d858",
@@ -131,7 +138,7 @@
           "expanded": {
             "expr": {
               "Literal": {
-                "Value": "false"
+                "Value": "true"
               }
             }
           }

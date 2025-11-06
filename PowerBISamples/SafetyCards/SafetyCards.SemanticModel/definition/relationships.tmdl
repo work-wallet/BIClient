@@ -58,3 +58,12 @@ relationship f4399b33-cacc-4a0c-ad48-b8b31bc1c082
 
 	annotation PBI_IsFromSource = FS
 
+relationship 5e7749a2-1e25-6e50-76fb-7760a0233aa0
+	fromColumn: 'Safety Card'.EmployeeContact_key
+	toColumn: Contact.Contact_key
+
+relationship 73fc1dff-5f96-c7ab-cdf3-d8f58dfeefbb
+	isActive: false
+	fromColumn: Contact.Wallet_key
+	toColumn: Wallet.Wallet_key
+

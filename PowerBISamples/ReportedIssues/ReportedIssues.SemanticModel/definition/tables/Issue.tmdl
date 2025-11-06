@@ -185,6 +185,18 @@ table Issue
 
 		annotation SummarizationSetBy = Automatic
 
+	column ReportedByContact_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 226f2506-61b5-4b5b-8c0b-39c9dccee297
+		summarizeBy: none
+		sourceColumn: ReportedByContact_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
 	partition Issue-6d9dfa8c-c90c-4cb1-a4bf-ad691525c771 = m
 		mode: import
 		source =

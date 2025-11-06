@@ -25,6 +25,9 @@ CREATE TABLE mart.AssetPropertyType
 INSERT INTO mart.AssetPropertyType (AssetPropertyType) VALUES (N'Text');
 INSERT INTO mart.AssetPropertyType (AssetPropertyType) VALUES (N'Number');
 INSERT INTO mart.AssetPropertyType (AssetPropertyType) VALUES (N'Select');
+INSERT INTO mart.AssetPropertyType (AssetPropertyType) VALUES (N'Date');
+INSERT INTO mart.AssetPropertyType (AssetPropertyType) VALUES (N'Time');
+INSERT INTO mart.AssetPropertyType (AssetPropertyType) VALUES (N'DateTime');
 
 CREATE TABLE mart.AssetAssignmentType
 (
@@ -88,6 +91,7 @@ CREATE TABLE mart.AssetAssignment
     AssetAssignment_key int IDENTITY
     ,AssetAssignmentType_key int NOT NULL
     ,AssignedTo nvarchar(max) NOT NULL
+    ,Contact_key int NULL -- allow NULLs
     ,CompanyId uniqueidentifier NOT NULL
     ,Company nvarchar(max) NOT NULL
     ,SiteId uniqueidentifier NOT NULL

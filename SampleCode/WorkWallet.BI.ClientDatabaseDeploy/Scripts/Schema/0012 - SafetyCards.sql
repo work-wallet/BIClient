@@ -74,6 +74,7 @@ CREATE TABLE mart.SafetyCard
     ,SafetyCardCategory_key int NOT NULL
     ,Employer nvarchar(max) NOT NULL
     ,Employee nvarchar(max) NOT NULL
+    ,EmployeeContact_key int NULL -- allow NULLs
     ,InductionNumber nvarchar(500) NOT NULL
     ,ReportDetails nvarchar(max) NOT NULL
     ,SafetyCardStatus_key int NOT NULL

@@ -1,0 +1,401 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.3.0/schema.json",
+  "name": "11e04c0ca9f4ccd8cc60",
+  "position": {
+    "x": 0,
+    "y": 79.483870967741936,
+    "z": 1,
+    "height": 641.0322580645161,
+    "width": 1280,
+    "tabOrder": 1
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Asset"
+                    }
+                  },
+                  "Property": "Asset"
+                }
+              },
+              "queryRef": "Asset.Asset",
+              "nativeQueryRef": "Asset Type",
+              "displayName": "Asset Type"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Asset"
+                    }
+                  },
+                  "Property": "Reference"
+                }
+              },
+              "queryRef": "Asset.Reference",
+              "nativeQueryRef": "Asset ID",
+              "displayName": "Asset ID"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Inspection"
+                    }
+                  },
+                  "Property": "Inspection Type"
+                }
+              },
+              "queryRef": "Inspection.Inspection Type",
+              "nativeQueryRef": "Inspection Type"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Inspection"
+                    }
+                  },
+                  "Property": "Inspection Date"
+                }
+              },
+              "queryRef": "Inspection.Inspection Date",
+              "nativeQueryRef": "Date of Inspection",
+              "displayName": "Date of Inspection"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Inspection"
+                    }
+                  },
+                  "Property": "Inspected By"
+                }
+              },
+              "queryRef": "Inspection.Inspected By",
+              "nativeQueryRef": "Inspected By"
+            },
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Inspection"
+                        }
+                      },
+                      "Property": "Defects Raised"
+                    }
+                  },
+                  "Function": 0
+                }
+              },
+              "queryRef": "Sum(Inspection.Defects Raised)",
+              "nativeQueryRef": "Defects Raised",
+              "displayName": "Defects Raised"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "Inspection"
+                  }
+                },
+                "Property": "Inspection Date"
+              }
+            },
+            "direction": "Descending"
+          }
+        ]
+      }
+    },
+    "objects": {
+      "columnWidth": [
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "118.80053908355795D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Asset.Reference"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "244.42479292980298D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Inspection.Inspection Type"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "40D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Inspection.Inspection Date.Variation.Date Hierarchy.Year"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "48D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Inspection.Inspection Date.Variation.Date Hierarchy.Quarter"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "73D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Inspection.Inspection Date.Variation.Date Hierarchy.Month"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "29D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Inspection.Inspection Date.Variation.Date Hierarchy.Day"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "126D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Inspection.Inspection Date"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "136.0151934521623D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Inspection.Inspected By"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "273.83870967741933D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Asset.Asset"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "116D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Sum(Inspection.Defects Raised)"
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "08925fe422acdbcc4801",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Asset"
+              }
+            },
+            "Property": "Reference"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "fc5e2cb0df118fe26478",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Inspection"
+              }
+            },
+            "Property": "Inspection Type"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "e8bb9e007e2ebc75931a",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Inspection"
+              }
+            },
+            "Property": "Inspection Date"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "9afa75b07485304f1fbf",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Inspection"
+              }
+            },
+            "Property": "Inspected By"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "736ac57321e34619dc6f",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Observation Status"
+              }
+            },
+            "Property": "Observation Status"
+          }
+        },
+        "type": "Categorical",
+        "howCreated": "User",
+        "objects": {
+          "general": [
+            {
+              "properties": {
+                "isInvertedSelectionMode": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "true"
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "name": "cb869167b8e08af5e964",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Asset"
+              }
+            },
+            "Property": "Asset"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "83503328bb24ee61fa75",
+        "field": {
+          "Aggregation": {
+            "Expression": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "Inspection"
+                  }
+                },
+                "Property": "Defects Raised"
+              }
+            },
+            "Function": 0
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
+  }
+}

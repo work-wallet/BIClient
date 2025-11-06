@@ -68,8 +68,11 @@ Use it to accelerate your first production deployment, then iterate where you di
 The API currently enables download of:
 
 - Actions
+- Assets (three modules):
+  - AssetInspections
+  - AssetObservations
+  - Assets
 - Audits
-- Assets
 - Inductions
 - Permits
 - PPE (three modules):
@@ -375,12 +378,19 @@ Example `local.settings.json` for local Azure Function development:
 
 ### 5.8 Force Data Reset
 
-Mechanism: Delete relevant rows from `mart.ETL_ChangeDetection`. Next execution will:
+**Advanced option - not normally required.** Normal incremental syncs handle most scenarios. Force a reset only when:
 
-1. Delete existing rows for that dataset’s tables.
-2. Re-ingest all data.
+- Recovery from `Invalid lastSynchronizationVersion` error
+- Migrating to a new API version with additional fields
+- Data corruption requiring full reload
 
-Example (reset Audits dataset):
+Three reset options (in order of increasing scope):
+
+#### Option 1: Reset Specific Dataset(s)
+
+Delete relevant rows from `mart.ETL_ChangeDetection`. Next execution will re-ingest all data for that dataset and MERGE it into existing data (updates changed records, inserts new records). Existing data for other datasets is preserved.
+
+Example (reset Audits dataset only):
 
 ```sql
 DELETE FROM mart.ETL_ChangeDetection WHERE LogType = 'AUDIT2_UPDATED';
@@ -390,6 +400,8 @@ DELETE FROM mart.ETL_ChangeDetection WHERE LogType = 'AUDIT2_UPDATED';
 | --- | --- |
 | Actions | ACTION_UPDATED |
 | Assets | ASSET_UPDATED |
+| AssetInspections | ASSET_INSPECTION_UPDATED |
+| AssetObservations | ASSET_OBSERVATION_UPDATED |
 | Audits | AUDIT2_UPDATED |
 | Inductions | INDUCTION_UPDATED |
 | Permits | PERMIT_UPDATED |
@@ -399,7 +411,25 @@ DELETE FROM mart.ETL_ChangeDetection WHERE LogType = 'AUDIT2_UPDATED';
 | ReportedIssues | REPORTED_ISSUE_UPDATED |
 | SafetyCards | SAFETY_CARD_UPDATED |
 
-If large volumes make deletion slow, recreating the database + redeploying may be faster.
+**Use when**: You need to reload specific dataset(s) but keep other data intact.
+
+#### Option 2: Delete All Data (All Wallets, All Datasets)
+
+Execute the stored procedure:
+
+```sql
+EXEC mart.DeleteAllData;
+```
+
+Removes all transactional data and change tracking entries while preserving reference data (lookup tables). Next execution performs full reload for all datasets.
+
+**Use when**: You need a complete fresh start across all datasets.
+
+#### Option 3: Drop and Recreate Database
+
+Drop the database, recreate it, and re-run `WorkWallet.BI.ClientDatabaseDeploy.exe`.
+
+**Use when**: Database is very large and Option 2 is too slow. Not possible if database contains other schemas or provisioning is restricted.
 
 ### 5.9 Power BI Samples
 
@@ -528,6 +558,7 @@ This prevents scenarios where partial sync state leads to missing data or infini
 ```json
 {
   "Context": {
+    "Dataset": "Audits",
     "Version": 1,
     "Count": 13,
     "FullCount": 13,
@@ -536,7 +567,8 @@ This prevents scenarios where partial sync state leads to missing data or infini
     "SynchronizationVersion": 10101,
     "MinValidSynchronizationVersion": 9000,
     "Error": "",
-    "UTC": "2025-03-26T14:54:59.127"
+    "UTC": "2025-03-26T14:54:59.127",
+    "ExecutionTimeMs": 128
   },
   "Wallets": [ { "WalletId": "...", "Wallet": "Example Wallet" } ],
   "Locations": [ { "LocationId": "...", "LocationTypeCode": 2, "LocationType": "Operations Site" } ]

@@ -11,6 +11,7 @@ CREATE TYPE mart.ETL_SafetyCardTable AS TABLE
     ,SafetyCardCategoryId uniqueidentifier NOT NULL
     ,Employer nvarchar(max) NOT NULL
     ,Employee nvarchar(max) NOT NULL
+    ,EmployeeContactId uniqueidentifier NULL -- allow NULLs
     ,InductionNumber nvarchar(500) NOT NULL
     ,ReportDetails nvarchar(max) NOT NULL
     ,SafetyCardStatusCode int NOT NULL

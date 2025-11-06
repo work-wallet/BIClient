@@ -1,0 +1,173 @@
+table Observation
+	lineageTag: c44fc457-11f3-4191-870e-f172d6a303f0
+
+	column AssetObservation_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 4de32c06-3bc3-4b17-af8a-6a8eac96322f
+		summarizeBy: none
+		sourceColumn: AssetObservation_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column ObservationId
+		dataType: string
+		isHidden
+		lineageTag: 4107b8c3-8d2d-4f31-be19-66043f21a0b1
+		summarizeBy: none
+		sourceColumn: ObservationId
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Asset_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 707926e4-eeba-4ec0-979d-0a1839c0de96
+		summarizeBy: none
+		sourceColumn: Asset_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column Observation
+		dataType: string
+		lineageTag: a989b7bd-454d-471d-8489-c7dfbd3022bc
+		summarizeBy: none
+		sourceColumn: Observation
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Action Taken'
+		dataType: string
+		lineageTag: c2904051-2c13-4e27-b7cf-f4aacc3fd571
+		summarizeBy: none
+		sourceColumn: Action Taken
+
+		annotation SummarizationSetBy = Automatic
+
+	column AssetObservationStatus_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 9b1b1170-86e5-498a-b2b9-bd18ecfe7b9f
+		summarizeBy: none
+		sourceColumn: AssetObservationStatus_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column ObservedOn
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: a610fdae-038f-47f8-bcbe-590bc6425751
+		summarizeBy: none
+		sourceColumn: ObservedOn
+
+		variation Variation
+			isDefault
+			relationship: a6722656-3a41-4dda-aab2-cc2dd692ded2
+			defaultHierarchy: LocalDateTable_0f8b1d9b-09e1-4b61-bd48-b9c9f1d9c3b4.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column ObservedBy
+		dataType: string
+		lineageTag: 58feb9bb-0344-4ee9-84f3-1f3b43c15bb6
+		summarizeBy: none
+		sourceColumn: ObservedBy
+
+		annotation SummarizationSetBy = Automatic
+
+	column ClosedOn
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 97f8b651-8fd3-4b84-beb4-a41645c721a4
+		summarizeBy: none
+		sourceColumn: ClosedOn
+
+		variation Variation
+			isDefault
+			relationship: 4101d18a-fdce-4474-a26d-cce01d41d70c
+			defaultHierarchy: LocalDateTable_dd78a9fb-3b9f-416c-b429-1578f95c2eb0.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column ClosedBy
+		dataType: string
+		lineageTag: ba15dfe7-0345-4fb9-9e8d-5e3c3393b240
+		summarizeBy: none
+		sourceColumn: ClosedBy
+
+		annotation SummarizationSetBy = Automatic
+
+	column ClosureNotes
+		dataType: string
+		lineageTag: 530be007-3f19-454f-b314-0cc84bc1a9ce
+		summarizeBy: none
+		sourceColumn: ClosureNotes
+
+		annotation SummarizationSetBy = Automatic
+
+	column Wallet_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: e6f8593c-cab0-483b-9733-ee29cd4b51e5
+		summarizeBy: none
+		sourceColumn: Wallet_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column 'Observation Count' = 1
+		formatString: 0
+		lineageTag: 34a68a45-a566-456e-80e3-4b5170083b5e
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Open Defect Count' = IF(RELATED('Observation Status'[AssetObservationStatusCode]) = 1, 1, 0)
+		formatString: 0
+		lineageTag: 0f3d0ea7-3ca2-4d30-97b0-83dd33003c19
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Closed Defect Count' = IF(RELATED('Observation Status'[AssetObservationStatusCode]) = 32, 1, 0)
+		formatString: 0
+		lineageTag: d33ea01d-066c-42c0-ae1a-bfd30a0fc6d4
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Defect Count' = IF(RELATED('Observation Status'[AssetObservationStatusCode]) IN {1, 32}, 1, 0)
+		formatString: 0
+		lineageTag: 217415af-72d6-451b-963a-eca948a879ff
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Observation = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("ww-powerbi-demo.database.windows.net", "powerbi"),
+				    mart_AssetObservation = Source{[Schema="mart",Item="AssetObservation"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(mart_AssetObservation,{"_created", "_edited"}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"Details", "Observation"}, {"ActionTaken", "Action Taken"}})
+				in
+				    #"Renamed Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

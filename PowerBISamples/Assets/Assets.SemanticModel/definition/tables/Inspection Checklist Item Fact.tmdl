@@ -1,0 +1,83 @@
+table 'Inspection Checklist Item Fact'
+	lineageTag: 6f0c1bfc-d51f-4967-b0f7-b10bd8ef1da4
+
+	column AssetInspectionChecklistItemFact_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 0ce8ba84-41b4-46a4-9028-89c54dbe7ff7
+		summarizeBy: none
+		sourceColumn: AssetInspectionChecklistItemFact_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column AssetInspection_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: c666102d-4214-40b7-a404-f7ee76f7a6fe
+		summarizeBy: none
+		sourceColumn: AssetInspection_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column AssetInspectionChecklistItem_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 7691d807-7446-4cf6-9024-e06121b5779b
+		summarizeBy: none
+		sourceColumn: AssetInspectionChecklistItem_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Response Code'
+		dataType: int64
+		formatString: 0
+		lineageTag: a95298c8-3ef1-40b6-bf11-9873af9bf3aa
+		summarizeBy: none
+		sourceColumn: Response Code
+
+		annotation SummarizationSetBy = User
+
+	column Response
+		dataType: string
+		lineageTag: 1e189656-477f-4baf-8276-cd15993c07b1
+		summarizeBy: none
+		sourceColumn: Response
+
+		annotation SummarizationSetBy = Automatic
+
+	column Wallet_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 69bd2f9a-b331-4539-824c-db8c262bddc8
+		summarizeBy: none
+		sourceColumn: Wallet_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	partition 'Inspection Checklist Item Fact' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("ww-powerbi-demo.database.windows.net", "powerbi"),
+				    mart_AssetInspectionChecklistItemFact = Source{[Schema="mart",Item="AssetInspectionChecklistItemFact"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(mart_AssetInspectionChecklistItemFact,{"_created"}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"Response", "Response Code"}, {"ResponseText", "Response"}})
+				in
+				    #"Renamed Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

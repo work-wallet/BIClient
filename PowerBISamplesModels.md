@@ -41,6 +41,22 @@ Jump to the relevant section:
 
 ![Assets Property Model](Images/PowerBIModelDiagrams/Assets_Property.png)
 
+### Assets - Inspection
+
+![Assets Inspection Model](Images/PowerBIModelDiagrams/Assets_Inspection.png)
+
+### Assets - Observation
+
+![Assets Observation Model](Images/PowerBIModelDiagrams/Assets_Observation.png)
+
+### Assets - Inspection Property
+
+![Assets Inspection Property Model](Images/PowerBIModelDiagrams/Assets_InspectionProperty.png)
+
+### Assets - Inspection Observation
+
+![Assets Inspection Observation Model](Images/PowerBIModelDiagrams/Assets_InspectionObservation.png)
+
 ## Audits
 
 ### Audits - Main
