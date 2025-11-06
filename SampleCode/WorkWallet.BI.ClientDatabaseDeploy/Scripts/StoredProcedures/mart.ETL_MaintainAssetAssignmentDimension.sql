@@ -36,7 +36,10 @@ BEGIN
                 AND target.SiteId = source.SiteId
             )
             OR
-            -- User assignment matches on Contact_key if present, otherwise on AssignedTo (for legacy data)
+            -- User assignment matches on Contact_key (preferred) or falls back to AssignedTo for legacy records.
+            -- Transitional logic: if target.Contact_key is NULL (legacy data), match on AssignedTo to allow
+            -- the MERGE to update the record with the new Contact_key. Once Contact_key is populated in target,
+            -- future matches will use Contact_key only, ensuring stable identity even if AssignedTo name changes.
             (
                 source.AssignmentType = N'User'
                 AND
@@ -44,7 +47,7 @@ BEGIN
                     target.Contact_key IS NOT DISTINCT FROM source.Contact_key
                     OR
                     (
-                        source.Contact_key IS NULL
+                        target.Contact_key IS NULL
                         AND target.AssignedTo = source.AssignedTo
                     )
                 )
