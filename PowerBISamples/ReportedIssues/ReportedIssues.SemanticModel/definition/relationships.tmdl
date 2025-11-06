@@ -1,4 +1,5 @@
 relationship 72dc5da0-4042-40a7-8342-51f03af1e646
+	isActive: false
 	fromColumn: Location.Wallet_key
 	toColumn: Wallet.Wallet_key
 
@@ -45,7 +46,6 @@ relationship e5db0e2a-6729-4af5-b3f4-6e18acd88535
 	annotation PBI_IsFromSource = FS
 
 relationship bf117299-61ca-4a2b-a6e4-057f43938986
-	isActive: false
 	fromColumn: Issue.Wallet_key
 	toColumn: Wallet.Wallet_key
 
@@ -191,4 +191,13 @@ relationship f5297d36-af4b-4308-b7f4-f4f7328c99f6
 	toColumn: Issue.ReportedIssue_key
 
 	annotation PBI_IsFromSource = FS
+
+relationship 343c44a1-3294-3307-9baf-bf8e74590b26
+	isActive: false
+	fromColumn: Contact.Wallet_key
+	toColumn: Wallet.Wallet_key
+
+relationship 39dfb936-1475-a8ec-dc91-2804e8f12c9c
+	fromColumn: Issue.ReportedByContact_key
+	toColumn: Contact.Contact_key
 
