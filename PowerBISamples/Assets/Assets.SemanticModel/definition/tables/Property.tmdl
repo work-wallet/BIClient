@@ -49,7 +49,7 @@ table Property
 		mode: import
 		source =
 				let
-				    Source = Sql.Database("ww-powerbi-demo.database.windows.net", "powerbi"),
+				    Source = Sql.Database("CAKESOFBREAD", "WorkWalletBIClient_Staging"),
 				    mart_AssetProperty = Source{[Schema="mart",Item="AssetProperty"]}[Data],
 				    #"Removed Columns" = Table.RemoveColumns(mart_AssetProperty,{"_created"})
 				in

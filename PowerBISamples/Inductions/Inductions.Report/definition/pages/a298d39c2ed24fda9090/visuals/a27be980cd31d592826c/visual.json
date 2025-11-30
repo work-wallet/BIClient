@@ -1,5 +1,5 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.3.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
   "name": "a27be980cd31d592826c",
   "position": {
     "x": 10.666666666666666,
@@ -230,7 +230,7 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "110D"
+                  "Value": "129.83827730621388D"
                 }
               }
             }
@@ -379,7 +379,7 @@
                           },
                           "Value": {
                             "Literal": {
-                              "Value": "'#006217'"
+                              "Value": "'#4C955E'"
                             }
                           }
                         },
@@ -415,7 +415,7 @@
                           },
                           "Value": {
                             "Literal": {
-                              "Value": "'#530101'"
+                              "Value": "'#CD5050'"
                             }
                           }
                         },
@@ -451,7 +451,7 @@
                           },
                           "Value": {
                             "Literal": {
-                              "Value": "'#4d651e'"
+                              "Value": "'#98C83E'"
                             }
                           }
                         }

@@ -2,22 +2,13 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/report/3.0.0/schema.json",
   "themeCollection": {
     "baseTheme": {
-      "name": "CY18SU07",
+      "name": "CY25SU11",
       "reportVersionAtImport": {
-        "visual": "1.8.23",
-        "report": "2.0.23",
-        "page": "1.3.23"
+        "visual": "2.4.0",
+        "report": "3.0.0",
+        "page": "2.3.0"
       },
       "type": "SharedResources"
-    },
-    "customTheme": {
-      "name": "NoWalls_Analytics11028182726658664.json",
-      "reportVersionAtImport": {
-        "visual": "1.8.92",
-        "report": "2.0.92",
-        "page": "1.3.92"
-      },
-      "type": "RegisteredResources"
     }
   },
   "filterConfig": {
@@ -90,20 +81,9 @@
       "type": "SharedResources",
       "items": [
         {
-          "name": "CY18SU07",
-          "path": "BaseThemes/CY18SU07.json",
+          "name": "CY25SU11",
+          "path": "BaseThemes/CY25SU11.json",
           "type": "BaseTheme"
-        }
-      ]
-    },
-    {
-      "name": "RegisteredResources",
-      "type": "RegisteredResources",
-      "items": [
-        {
-          "name": "NoWalls_Analytics11028182726658664.json",
-          "path": "NoWalls_Analytics11028182726658664.json",
-          "type": "CustomTheme"
         }
       ]
     }

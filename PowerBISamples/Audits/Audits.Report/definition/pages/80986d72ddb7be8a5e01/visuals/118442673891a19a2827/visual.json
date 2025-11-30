@@ -1,5 +1,5 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.2.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
   "name": "118442673891a19a2827",
   "position": {
     "x": 0,
@@ -31,8 +31,7 @@
                 }
               },
               "queryRef": "Min(Audit Type.Audit Type)",
-              "nativeQueryRef": "Audit Type",
-              "displayName": "Audit Type"
+              "nativeQueryRef": "First Audit Type"
             }
           ]
         }
@@ -40,6 +39,34 @@
     },
     "objects": {
       "categoryLabels": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "labels": [
+        {
+          "properties": {
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "14D"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "border": [
         {
           "properties": {
             "show": {

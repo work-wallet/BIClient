@@ -1,11 +1,11 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.2.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
   "name": "a9d0a663a162b7d0f458",
   "position": {
     "x": 0,
-    "y": 101.95583596214512,
+    "y": 101.77897574123989,
     "z": 0,
-    "height": 617.79179810725554,
+    "height": 617.57412398921826,
     "width": 1280
   },
   "visual": {
@@ -344,5 +344,107 @@
       ]
     },
     "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "91fc6f1a73b062b21058",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Audit"
+              }
+            },
+            "Property": "Audit Reference"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "9d0fd18a063038d54154",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Audit Status"
+              }
+            },
+            "Property": "Audit Status"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "7a123fd5b049e6cecd3c",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Audit Type"
+              }
+            },
+            "Property": "Audit Type"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "f6a752a0d79e45890732",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Audit"
+              }
+            },
+            "Property": "Conducted By"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "2b057fd4d38123ad680d",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Audit"
+              }
+            },
+            "Property": "Inspected On"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "61f87b2610765a3cdd4c",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Audit Grading Set Option"
+              }
+            },
+            "Property": "Audit Grading"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "f8758926ab080aa179b6",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Location"
+              }
+            },
+            "Property": "Location"
+          }
+        },
+        "type": "Categorical"
+      }
+    ]
   }
 }

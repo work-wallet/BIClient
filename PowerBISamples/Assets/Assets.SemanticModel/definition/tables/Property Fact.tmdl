@@ -61,7 +61,7 @@ table 'Property Fact'
 		mode: import
 		source =
 				let
-				    Source = Sql.Database("ww-powerbi-demo.database.windows.net", "powerbi"),
+				    Source = Sql.Database("CAKESOFBREAD", "WorkWalletBIClient_Staging"),
 				    mart_AssetPropertyFact = Source{[Schema="mart",Item="AssetPropertyFact"]}[Data],
 				    #"Removed Columns" = Table.RemoveColumns(mart_AssetPropertyFact,{"_created"}),
 				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"Value", "Property Value"}})
