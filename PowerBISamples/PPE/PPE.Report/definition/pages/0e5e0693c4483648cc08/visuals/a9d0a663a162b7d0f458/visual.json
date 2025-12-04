@@ -1,11 +1,11 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.2.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
   "name": "a9d0a663a162b7d0f458",
   "position": {
     "x": 0,
-    "y": 0,
+    "y": 0.62561094819159335,
     "z": 0,
-    "height": 719.35309973045821,
+    "height": 719.4525904203324,
     "width": 1280
   },
   "visual": {
@@ -22,11 +22,26 @@
                       "Entity": "Location"
                     }
                   },
-                  "Property": "Location"
+                  "Property": "Site"
                 }
               },
-              "queryRef": "Location.Location",
-              "nativeQueryRef": "Location",
+              "queryRef": "Location.Site",
+              "nativeQueryRef": "Site",
+              "active": true
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Location"
+                    }
+                  },
+                  "Property": "Area"
+                }
+              },
+              "queryRef": "Location.Area",
+              "nativeQueryRef": "Area",
               "active": true
             },
             {
@@ -80,26 +95,14 @@
                 }
               },
               "queryRef": "Sum(Stock.Stock Quantity)",
-              "nativeQueryRef": "Stock Quantity"
+              "nativeQueryRef": "Total Stock",
+              "displayName": "Total Stock"
             }
           ]
         }
       },
       "sortDefinition": {
         "sort": [
-          {
-            "field": {
-              "Column": {
-                "Expression": {
-                  "SourceRef": {
-                    "Entity": "Location"
-                  }
-                },
-                "Property": "Location"
-              }
-            },
-            "direction": "Ascending"
-          },
           {
             "field": {
               "Column": {
@@ -124,7 +127,25 @@
         "levels": [
           {
             "queryRefs": [
-              "Location.Location"
+              "Location.Site"
+            ],
+            "identityKeys": [
+              {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Location"
+                    }
+                  },
+                  "Property": "Site"
+                }
+              }
+            ],
+            "isPinned": true
+          },
+          {
+            "queryRefs": [
+              "Location.Area"
             ],
             "isCollapsed": true,
             "identityKeys": [
@@ -135,7 +156,7 @@
                       "Entity": "Location"
                     }
                   },
-                  "Property": "Location"
+                  "Property": "Area"
                 }
               }
             ],
@@ -173,20 +194,6 @@
     ],
     "objects": {
       "columnWidth": [
-        {
-          "properties": {
-            "value": {
-              "expr": {
-                "Literal": {
-                  "Value": "330.32651272223603D"
-                }
-              }
-            }
-          },
-          "selector": {
-            "metadata": "Location.Location"
-          }
-        },
         {
           "properties": {
             "value": {
@@ -255,6 +262,19 @@
           },
           "selector": {
             "metadata": "Sum(Stock.Stock Quantity)"
+          }
+        }
+      ],
+      "subTotals": [
+        {
+          "properties": {
+            "rowSubtotals": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
           }
         }
       ]

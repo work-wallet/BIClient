@@ -1,6 +1,6 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
-  "name": "4196a58d7f5ce5807f0d",
+  "name": "04c80f42b7abe3e73479",
   "position": {
     "x": 0,
     "y": 0,
@@ -16,18 +16,37 @@
           "projections": [
             {
               "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Assignment History"
+                        }
+                      },
+                      "Property": "Assignment History Count"
+                    }
+                  },
+                  "Function": 0
+                }
+              },
+              "queryRef": "Sum(Assignment History.Assignment History Count)",
+              "nativeQueryRef": "#",
+              "displayName": "#"
+            },
+            {
+              "field": {
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "PPE Type"
+                      "Entity": "PPE Assignment Type"
                     }
                   },
                   "Property": "PPE"
                 }
               },
-              "queryRef": "PPE Type.PPE",
-              "nativeQueryRef": "PPE Type",
-              "displayName": "PPE Type"
+              "queryRef": "PPE Assignment Type.PPE",
+              "nativeQueryRef": "PPE"
             },
             {
               "field": {
@@ -61,66 +80,44 @@
             },
             {
               "field": {
-                "Aggregation": {
+                "Column": {
                   "Expression": {
-                    "Column": {
-                      "Expression": {
-                        "SourceRef": {
-                          "Entity": "Stock History"
-                        }
-                      },
-                      "Property": "Stock Quantity"
+                    "SourceRef": {
+                      "Entity": "Assignment History"
                     }
                   },
-                  "Function": 0
+                  "Property": "From"
                 }
               },
-              "queryRef": "Sum(Stock History.Stock Quantity)",
-              "nativeQueryRef": "Quantity",
-              "displayName": "Quantity"
+              "queryRef": "Assignment History.From",
+              "nativeQueryRef": "From"
             },
             {
               "field": {
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Stock History"
+                      "Entity": "Assignment History"
                     }
                   },
-                  "Property": "Transferred From Stock Location"
+                  "Property": "To"
                 }
               },
-              "queryRef": "Stock History.Transferred From Stock Location",
-              "nativeQueryRef": "From",
-              "displayName": "From"
+              "queryRef": "Assignment History.To",
+              "nativeQueryRef": "To"
             },
             {
               "field": {
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Stock History"
-                    }
-                  },
-                  "Property": "Stock Location"
-                }
-              },
-              "queryRef": "Stock History.Stock Location",
-              "nativeQueryRef": "Location",
-              "displayName": "Location"
-            },
-            {
-              "field": {
-                "Column": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "Stock History"
+                      "Entity": "Assignment History"
                     }
                   },
                   "Property": "Actioned On"
                 }
               },
-              "queryRef": "Stock History.Actioned On",
+              "queryRef": "Assignment History.Actioned On",
               "nativeQueryRef": "Date",
               "displayName": "Date"
             }
@@ -134,7 +131,7 @@
               "Column": {
                 "Expression": {
                   "SourceRef": {
-                    "Entity": "Stock History"
+                    "Entity": "Assignment History"
                   }
                 },
                 "Property": "Actioned On"
@@ -147,20 +144,6 @@
     },
     "objects": {
       "columnWidth": [
-        {
-          "properties": {
-            "value": {
-              "expr": {
-                "Literal": {
-                  "Value": "126.63572040488116D"
-                }
-              }
-            }
-          },
-          "selector": {
-            "metadata": "PPE Action.PPE Action"
-          }
-        },
         {
           "properties": {
             "value": {
@@ -222,87 +205,138 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "126D"
+                  "Value": "395.74586373085594D"
                 }
               }
             }
           },
           "selector": {
-            "metadata": "Stock History.Actioned On"
-          }
-        },
-        {
-          "properties": {
-            "value": {
-              "expr": {
-                "Literal": {
-                  "Value": "70.68635562393612D"
-                }
-              }
-            }
-          },
-          "selector": {
-            "metadata": "Sum(Stock History.Stock Quantity)"
-          }
-        },
-        {
-          "properties": {
-            "value": {
-              "expr": {
-                "Literal": {
-                  "Value": "360.9342146769623D"
-                }
-              }
-            }
-          },
-          "selector": {
-            "metadata": "PPE Type.PPE"
-          }
-        },
-        {
-          "properties": {
-            "value": {
-              "expr": {
-                "Literal": {
-                  "Value": "251D"
-                }
-              }
-            }
-          },
-          "selector": {
-            "metadata": "Stock History.Stock Location"
-          }
-        },
-        {
-          "properties": {
-            "value": {
-              "expr": {
-                "Literal": {
-                  "Value": "206D"
-                }
-              }
-            }
-          },
-          "selector": {
-            "metadata": "Stock History.Transferred From Stock Location"
-          }
-        },
-        {
-          "properties": {
-            "value": {
-              "expr": {
-                "Literal": {
-                  "Value": "104D"
-                }
-              }
-            }
-          },
-          "selector": {
-            "metadata": "Actioned By Contact.Contact Name"
+            "metadata": "PPE Assignment Type.PPE"
           }
         }
       ]
     },
     "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "ec891bb250ce3b26d5ea",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "PPE Assignment Type"
+              }
+            },
+            "Property": "PPE"
+          }
+        },
+        "type": "Categorical",
+        "objects": {
+          "general": [
+            {
+              "properties": {}
+            }
+          ]
+        }
+      },
+      {
+        "name": "40f863ef7d1e90325892",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Actioned By Contact"
+              }
+            },
+            "Property": "Contact Name"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "3257f7f22079b7a2b9a5",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Assignment History"
+              }
+            },
+            "Property": "Actioned On"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "bc67711cc619641d2666",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "PPE Action"
+              }
+            },
+            "Property": "PPE Action"
+          }
+        },
+        "type": "Categorical",
+        "objects": {
+          "general": [
+            {
+              "properties": {}
+            }
+          ]
+        }
+      },
+      {
+        "name": "ed61a12470255c3dcb00",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Assignment History"
+              }
+            },
+            "Property": "From"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "a567d6f2e33188001888",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Assignment History"
+              }
+            },
+            "Property": "To"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "38e9f1834bc0a25085ee",
+        "field": {
+          "Aggregation": {
+            "Expression": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "Assignment History"
+                  }
+                },
+                "Property": "Assignment History Count"
+              }
+            },
+            "Function": 0
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
   }
 }

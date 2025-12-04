@@ -15,7 +15,8 @@ cultureInfo en-GB
 			      "Terms": [
 			        {
 			          "location": {
-			            "State": "Generated"
+			            "State": "Generated",
+			            "Weight": 0.87
 			          }
 			        },
 			        {
@@ -1330,11 +1331,6 @@ cultureInfo en-GB
 			          }
 			        },
 			        {
-			          "location name": {
-			            "State": "Generated"
-			          }
-			        },
-			        {
 			          "locality": {
 			            "Type": "Noun",
 			            "State": "Suggested",
@@ -1424,8 +1420,7 @@ cultureInfo en-GB
 			            "Weight": 0.714
 			          }
 			        }
-			      ],
-			      "NameType": "Name"
+			      ]
 			    },
 			    "location.location_external_identifier": {
 			      "Definition": {
@@ -1822,12 +1817,6 @@ cultureInfo en-GB
 			          }
 			        },
 			        {
-			          "type": {
-			            "State": "Generated",
-			            "Weight": 0.97
-			          }
-			        },
-			        {
 			          "location category": {
 			            "Type": "Noun",
 			            "State": "Suggested",
@@ -1868,46 +1857,6 @@ cultureInfo en-GB
 			          }
 			        },
 			        {
-			          "category": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.736
-			          }
-			        },
-			        {
-			          "genre": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.736
-			          }
-			        },
-			        {
-			          "manner": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.736
-			          }
-			        },
-			        {
-			          "variety": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.736
-			          }
-			        },
-			        {
 			          "location brand": {
 			            "Type": "Noun",
 			            "State": "Suggested",
@@ -1919,6 +1868,46 @@ cultureInfo en-GB
 			        },
 			        {
 			          "location class": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.727
+			          }
+			        },
+			        {
+			          "location kind": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.727
+			          }
+			        },
+			        {
+			          "location style": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.727
+			          }
+			        },
+			        {
+			          "location form": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.727
+			          }
+			        },
+			        {
+			          "location grouping": {
 			            "Type": "Noun",
 			            "State": "Suggested",
 			            "Source": {
@@ -9286,12 +9275,6 @@ cultureInfo en-GB
 			          }
 			        },
 			        {
-			          "type": {
-			            "State": "Generated",
-			            "Weight": 0.97
-			          }
-			        },
-			        {
 			          "ppe category": {
 			            "Type": "Noun",
 			            "State": "Suggested",
@@ -9332,46 +9315,6 @@ cultureInfo en-GB
 			          }
 			        },
 			        {
-			          "category": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.736
-			          }
-			        },
-			        {
-			          "genre": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.736
-			          }
-			        },
-			        {
-			          "manner": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.736
-			          }
-			        },
-			        {
-			          "variety": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.736
-			          }
-			        },
-			        {
 			          "ppe brand": {
 			            "Type": "Noun",
 			            "State": "Suggested",
@@ -9383,6 +9326,46 @@ cultureInfo en-GB
 			        },
 			        {
 			          "ppe class": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.727
+			          }
+			        },
+			        {
+			          "ppe kind": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.727
+			          }
+			        },
+			        {
+			          "ppe style": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.727
+			          }
+			        },
+			        {
+			          "ppe form": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.727
+			          }
+			        },
+			        {
+			          "ppe grouping": {
 			            "Type": "Noun",
 			            "State": "Suggested",
 			            "Source": {
@@ -9556,12 +9539,6 @@ cultureInfo en-GB
 			          }
 			        },
 			        {
-			          "type": {
-			            "State": "Generated",
-			            "Weight": 0.97
-			          }
-			        },
-			        {
 			          "type id": {
 			            "State": "Generated",
 			            "Weight": 0.97
@@ -9638,33 +9615,33 @@ cultureInfo en-GB
 			          }
 			        },
 			        {
-			          "category": {
+			          "type credential": {
 			            "Type": "Noun",
 			            "State": "Suggested",
 			            "Source": {
 			              "Agent": "Thesaurus"
 			            },
-			            "Weight": 0.736
+			            "Weight": 0.727
 			          }
 			        },
 			        {
-			          "genre": {
+			          "ppe category id": {
 			            "Type": "Noun",
 			            "State": "Suggested",
 			            "Source": {
 			              "Agent": "Thesaurus"
 			            },
-			            "Weight": 0.736
+			            "Weight": 0.609
 			          }
 			        },
 			        {
-			          "manner": {
+			          "ppe genre id": {
 			            "Type": "Noun",
 			            "State": "Suggested",
 			            "Source": {
 			              "Agent": "Thesaurus"
 			            },
-			            "Weight": 0.736
+			            "Weight": 0.609
 			          }
 			        }
 			      ]
@@ -9839,12 +9816,6 @@ cultureInfo en-GB
 			          }
 			        },
 			        {
-			          "type": {
-			            "State": "Generated",
-			            "Weight": 0.97
-			          }
-			        },
-			        {
 			          "ppe category": {
 			            "Type": "Noun",
 			            "State": "Suggested",
@@ -9885,46 +9856,6 @@ cultureInfo en-GB
 			          }
 			        },
 			        {
-			          "category": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.736
-			          }
-			        },
-			        {
-			          "genre": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.736
-			          }
-			        },
-			        {
-			          "manner": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.736
-			          }
-			        },
-			        {
-			          "variety": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.736
-			          }
-			        },
-			        {
 			          "ppe brand": {
 			            "Type": "Noun",
 			            "State": "Suggested",
@@ -9936,6 +9867,46 @@ cultureInfo en-GB
 			        },
 			        {
 			          "ppe class": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.727
+			          }
+			        },
+			        {
+			          "ppe kind": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.727
+			          }
+			        },
+			        {
+			          "ppe style": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.727
+			          }
+			        },
+			        {
+			          "ppe form": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.727
+			          }
+			        },
+			        {
+			          "ppe grouping": {
 			            "Type": "Noun",
 			            "State": "Suggested",
 			            "Source": {
@@ -10767,12 +10738,6 @@ cultureInfo en-GB
 			          }
 			        },
 			        {
-			          "type": {
-			            "State": "Generated",
-			            "Weight": 0.97
-			          }
-			        },
-			        {
 			          "assignment type": {
 			            "State": "Generated",
 			            "Weight": 0.97
@@ -11043,12 +11008,6 @@ cultureInfo en-GB
 			          }
 			        },
 			        {
-			          "type": {
-			            "State": "Generated",
-			            "Weight": 0.97
-			          }
-			        },
-			        {
 			          "type id": {
 			            "State": "Generated",
 			            "Weight": 0.97
@@ -11125,33 +11084,33 @@ cultureInfo en-GB
 			          }
 			        },
 			        {
-			          "category": {
+			          "type credential": {
 			            "Type": "Noun",
 			            "State": "Suggested",
 			            "Source": {
 			              "Agent": "Thesaurus"
 			            },
-			            "Weight": 0.736
+			            "Weight": 0.727
 			          }
 			        },
 			        {
-			          "genre": {
+			          "ppe category id": {
 			            "Type": "Noun",
 			            "State": "Suggested",
 			            "Source": {
 			              "Agent": "Thesaurus"
 			            },
-			            "Weight": 0.736
+			            "Weight": 0.609
 			          }
 			        },
 			        {
-			          "manner": {
+			          "ppe genre id": {
 			            "Type": "Noun",
 			            "State": "Suggested",
 			            "Source": {
 			              "Agent": "Thesaurus"
 			            },
-			            "Weight": 0.736
+			            "Weight": 0.609
 			          }
 			        }
 			      ]
@@ -11321,12 +11280,6 @@ cultureInfo en-GB
 			          }
 			        },
 			        {
-			          "type": {
-			            "State": "Generated",
-			            "Weight": 0.97
-			          }
-			        },
-			        {
 			          "ppe category": {
 			            "Type": "Noun",
 			            "State": "Suggested",
@@ -11367,46 +11320,6 @@ cultureInfo en-GB
 			          }
 			        },
 			        {
-			          "category": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.736
-			          }
-			        },
-			        {
-			          "genre": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.736
-			          }
-			        },
-			        {
-			          "manner": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.736
-			          }
-			        },
-			        {
-			          "variety": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.736
-			          }
-			        },
-			        {
 			          "ppe brand": {
 			            "Type": "Noun",
 			            "State": "Suggested",
@@ -11418,6 +11331,46 @@ cultureInfo en-GB
 			        },
 			        {
 			          "ppe class": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.727
+			          }
+			        },
+			        {
+			          "ppe kind": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.727
+			          }
+			        },
+			        {
+			          "ppe style": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.727
+			          }
+			        },
+			        {
+			          "ppe form": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.727
+			          }
+			        },
+			        {
+			          "ppe grouping": {
 			            "Type": "Noun",
 			            "State": "Suggested",
 			            "Source": {
@@ -11510,16 +11463,6 @@ cultureInfo en-GB
 			              "Agent": "Thesaurus"
 			            },
 			            "Weight": 0.461
-			          }
-			        },
-			        {
-			          "Variant": {
-			            "State": "Suggested",
-			            "Source": {
-			              "Type": "External",
-			              "Agent": "PowerBI.VisualColumnRename"
-			            },
-			            "Weight": 0.9
 			          }
 			        }
 			      ]
@@ -12227,6 +12170,16 @@ cultureInfo en-GB
 			        {
 			          "ppe": {
 			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "Type": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
 			          }
 			        }
 			      ]
@@ -14047,12 +14000,6 @@ cultureInfo en-GB
 			          }
 			        },
 			        {
-			          "contact": {
-			            "State": "Generated",
-			            "Weight": 0.97
-			          }
-			        },
-			        {
 			          "contact identification": {
 			            "Type": "Noun",
 			            "State": "Suggested",
@@ -14083,26 +14030,6 @@ cultureInfo en-GB
 			          }
 			        },
 			        {
-			          "connection": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.736
-			          }
-			        },
-			        {
-			          "interaction": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.736
-			          }
-			        },
-			        {
 			          "contact credential": {
 			            "Type": "Noun",
 			            "State": "Suggested",
@@ -14113,43 +14040,63 @@ cultureInfo en-GB
 			          }
 			        },
 			        {
-			          "phone": {
+			          "connection id": {
 			            "Type": "Noun",
 			            "State": "Suggested",
 			            "Source": {
 			              "Agent": "Thesaurus"
 			            },
-			            "Weight": 0.714
+			            "Weight": 0.6
 			          }
 			        },
 			        {
-			          "telephone": {
+			          "interaction id": {
 			            "Type": "Noun",
 			            "State": "Suggested",
 			            "Source": {
 			              "Agent": "Thesaurus"
 			            },
-			            "Weight": 0.714
+			            "Weight": 0.6
 			          }
 			        },
 			        {
-			          "communication": {
+			          "phone id": {
 			            "Type": "Noun",
 			            "State": "Suggested",
 			            "Source": {
 			              "Agent": "Thesaurus"
 			            },
-			            "Weight": 0.714
+			            "Weight": 0.582
 			          }
 			        },
 			        {
-			          "e-mail": {
+			          "telephone id": {
 			            "Type": "Noun",
 			            "State": "Suggested",
 			            "Source": {
 			              "Agent": "Thesaurus"
 			            },
-			            "Weight": 0.714
+			            "Weight": 0.582
+			          }
+			        },
+			        {
+			          "communication id": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.582
+			          }
+			        },
+			        {
+			          "e-mail id": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.582
 			          }
 			        }
 			      ]
@@ -14166,32 +14113,6 @@ cultureInfo en-GB
 			        {
 			          "contact name": {
 			            "State": "Generated"
-			          }
-			        },
-			        {
-			          "contact": {
-			            "State": "Generated",
-			            "Weight": 0.97
-			          }
-			        },
-			        {
-			          "connection": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.736
-			          }
-			        },
-			        {
-			          "interaction": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.736
 			          }
 			        },
 			        {
@@ -14235,43 +14156,63 @@ cultureInfo en-GB
 			          }
 			        },
 			        {
-			          "phone": {
+			          "connection name": {
 			            "Type": "Noun",
 			            "State": "Suggested",
 			            "Source": {
 			              "Agent": "Thesaurus"
 			            },
-			            "Weight": 0.714
+			            "Weight": 0.6
 			          }
 			        },
 			        {
-			          "telephone": {
+			          "interaction name": {
 			            "Type": "Noun",
 			            "State": "Suggested",
 			            "Source": {
 			              "Agent": "Thesaurus"
 			            },
-			            "Weight": 0.714
+			            "Weight": 0.6
 			          }
 			        },
 			        {
-			          "communication": {
+			          "phone name": {
 			            "Type": "Noun",
 			            "State": "Suggested",
 			            "Source": {
 			              "Agent": "Thesaurus"
 			            },
-			            "Weight": 0.714
+			            "Weight": 0.582
 			          }
 			        },
 			        {
-			          "e-mail": {
+			          "telephone name": {
 			            "Type": "Noun",
 			            "State": "Suggested",
 			            "Source": {
 			              "Agent": "Thesaurus"
 			            },
-			            "Weight": 0.714
+			            "Weight": 0.582
+			          }
+			        },
+			        {
+			          "communication name": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.582
+			          }
+			        },
+			        {
+			          "e-mail name": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.582
 			          }
 			        },
 			        {
@@ -14842,12 +14783,6 @@ cultureInfo en-GB
 			          }
 			        },
 			        {
-			          "contact": {
-			            "State": "Generated",
-			            "Weight": 0.97
-			          }
-			        },
-			        {
 			          "contact identification": {
 			            "Type": "Noun",
 			            "State": "Suggested",
@@ -14878,26 +14813,6 @@ cultureInfo en-GB
 			          }
 			        },
 			        {
-			          "connection": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.736
-			          }
-			        },
-			        {
-			          "interaction": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.736
-			          }
-			        },
-			        {
 			          "contact credential": {
 			            "Type": "Noun",
 			            "State": "Suggested",
@@ -14908,43 +14823,63 @@ cultureInfo en-GB
 			          }
 			        },
 			        {
-			          "phone": {
+			          "connection id": {
 			            "Type": "Noun",
 			            "State": "Suggested",
 			            "Source": {
 			              "Agent": "Thesaurus"
 			            },
-			            "Weight": 0.714
+			            "Weight": 0.6
 			          }
 			        },
 			        {
-			          "telephone": {
+			          "interaction id": {
 			            "Type": "Noun",
 			            "State": "Suggested",
 			            "Source": {
 			              "Agent": "Thesaurus"
 			            },
-			            "Weight": 0.714
+			            "Weight": 0.6
 			          }
 			        },
 			        {
-			          "communication": {
+			          "phone id": {
 			            "Type": "Noun",
 			            "State": "Suggested",
 			            "Source": {
 			              "Agent": "Thesaurus"
 			            },
-			            "Weight": 0.714
+			            "Weight": 0.582
 			          }
 			        },
 			        {
-			          "e-mail": {
+			          "telephone id": {
 			            "Type": "Noun",
 			            "State": "Suggested",
 			            "Source": {
 			              "Agent": "Thesaurus"
 			            },
-			            "Weight": 0.714
+			            "Weight": 0.582
+			          }
+			        },
+			        {
+			          "communication id": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.582
+			          }
+			        },
+			        {
+			          "e-mail id": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.582
 			          }
 			        }
 			      ]
@@ -14961,32 +14896,6 @@ cultureInfo en-GB
 			        {
 			          "contact name": {
 			            "State": "Generated"
-			          }
-			        },
-			        {
-			          "contact": {
-			            "State": "Generated",
-			            "Weight": 0.97
-			          }
-			        },
-			        {
-			          "connection": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.736
-			          }
-			        },
-			        {
-			          "interaction": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.736
 			          }
 			        },
 			        {
@@ -15030,53 +14939,63 @@ cultureInfo en-GB
 			          }
 			        },
 			        {
-			          "phone": {
+			          "connection name": {
 			            "Type": "Noun",
 			            "State": "Suggested",
 			            "Source": {
 			              "Agent": "Thesaurus"
 			            },
-			            "Weight": 0.714
+			            "Weight": 0.6
 			          }
 			        },
 			        {
-			          "telephone": {
+			          "interaction name": {
 			            "Type": "Noun",
 			            "State": "Suggested",
 			            "Source": {
 			              "Agent": "Thesaurus"
 			            },
-			            "Weight": 0.714
+			            "Weight": 0.6
 			          }
 			        },
 			        {
-			          "communication": {
+			          "phone name": {
 			            "Type": "Noun",
 			            "State": "Suggested",
 			            "Source": {
 			              "Agent": "Thesaurus"
 			            },
-			            "Weight": 0.714
+			            "Weight": 0.582
 			          }
 			        },
 			        {
-			          "e-mail": {
+			          "telephone name": {
 			            "Type": "Noun",
 			            "State": "Suggested",
 			            "Source": {
 			              "Agent": "Thesaurus"
 			            },
-			            "Weight": 0.714
+			            "Weight": 0.582
 			          }
 			        },
 			        {
-			          "Name": {
+			          "communication name": {
+			            "Type": "Noun",
 			            "State": "Suggested",
 			            "Source": {
-			              "Type": "External",
-			              "Agent": "PowerBI.VisualColumnRename"
+			              "Agent": "Thesaurus"
 			            },
-			            "Weight": 0.9
+			            "Weight": 0.582
+			          }
+			        },
+			        {
+			          "e-mail name": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.582
 			          }
 			        }
 			      ]
@@ -15364,141 +15283,295 @@ cultureInfo en-GB
 			          }
 			        }
 			      ]
+			    },
+			    "assigned_to_contact.contact": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Assigned To Contact",
+			          "ConceptualProperty": "Contact"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "contact": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "connection": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.736
+			          }
+			        },
+			        {
+			          "interaction": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.736
+			          }
+			        },
+			        {
+			          "phone": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.714
+			          }
+			        },
+			        {
+			          "telephone": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.714
+			          }
+			        },
+			        {
+			          "communication": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.714
+			          }
+			        },
+			        {
+			          "e-mail": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.714
+			          }
+			        },
+			        {
+			          "link": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.714
+			          }
+			        },
+			        {
+			          "reach": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.714
+			          }
+			        },
+			        {
+			          "e mail": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.589
+			          }
+			        },
+			        {
+			          "phone number": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.571
+			          }
+			        }
+			      ]
+			    },
+			    "assignment.returned_to_stock_site": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Assignment",
+			          "ConceptualProperty": "Returned To Stock Site"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "returned to stock site": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "returned to stock website": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.771
+			          }
+			        },
+			        {
+			          "returned to stock campus": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.771
+			          }
+			        },
+			        {
+			          "returned to stock homepage": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.771
+			          }
+			        },
+			        {
+			          "returned to stock locale": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.771
+			          }
+			        },
+			        {
+			          "returned to inventory site": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.748
+			          }
+			        },
+			        {
+			          "returned to stock place": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.748
+			          }
+			        },
+			        {
+			          "returned to stock position": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.748
+			          }
+			        },
+			        {
+			          "returned to stock spot": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.748
+			          }
+			        }
+			      ]
+			    },
+			    "assignment_history.from": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Assignment History",
+			          "ConceptualProperty": "From"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "from": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "assignment_history.to": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Assignment History",
+			          "ConceptualProperty": "To"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "to": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "assignment_history.assignment_history_count": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Assignment History",
+			          "ConceptualProperty": "Assignment History Count"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "assignment history count": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "history count": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "assignment history amount": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.739
+			          }
+			        },
+			        {
+			          "history amount": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.727
+			          }
+			        }
+			      ]
 			    }
 			  },
 			  "Relationships": {
-			    "assignment_replacement_requested_on_date_hierarchy_has_assignment_replacement_requested_on_day": {
-			      "Binding": {
-			        "ConceptualEntity": "Assignment"
-			      },
-			      "State": "Generated",
-			      "Roles": {
-			        "assignment.replacement_requested_on.date_hierarchy": {
-			          "Target": {
-			            "Entity": "assignment.replacement_requested_on.date_hierarchy"
-			          }
-			        },
-			        "assignment.replacement_requested_on.day": {
-			          "Target": {
-			            "Entity": "assignment.replacement_requested_on.day"
-			          }
-			        }
-			      },
-			      "Phrasings": [
-			        {
-			          "Attribute": {
-			            "Subject": {
-			              "Role": "assignment.replacement_requested_on.date_hierarchy"
-			            },
-			            "Object": {
-			              "Role": "assignment.replacement_requested_on.day"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99,
-			          "ID": "replacement_requested_on_date_hierarchy_have_replacement_requested_on_day"
-			        }
-			      ]
-			    },
-			    "assignment_replacement_requested_on_date_hierarchy_has_assignment_replacement_requested_on_month": {
-			      "Binding": {
-			        "ConceptualEntity": "Assignment"
-			      },
-			      "State": "Generated",
-			      "Roles": {
-			        "assignment.replacement_requested_on.date_hierarchy": {
-			          "Target": {
-			            "Entity": "assignment.replacement_requested_on.date_hierarchy"
-			          }
-			        },
-			        "assignment.replacement_requested_on.month": {
-			          "Target": {
-			            "Entity": "assignment.replacement_requested_on.month"
-			          }
-			        }
-			      },
-			      "Phrasings": [
-			        {
-			          "Attribute": {
-			            "Subject": {
-			              "Role": "assignment.replacement_requested_on.date_hierarchy"
-			            },
-			            "Object": {
-			              "Role": "assignment.replacement_requested_on.month"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99,
-			          "ID": "replacement_requested_on_date_hierarchy_have_replacement_requested_on_month"
-			        }
-			      ]
-			    },
-			    "assignment_replacement_requested_on_date_hierarchy_has_assignment_replacement_requested_on_quarter": {
-			      "Binding": {
-			        "ConceptualEntity": "Assignment"
-			      },
-			      "State": "Generated",
-			      "Roles": {
-			        "assignment.replacement_requested_on.date_hierarchy": {
-			          "Target": {
-			            "Entity": "assignment.replacement_requested_on.date_hierarchy"
-			          }
-			        },
-			        "assignment.replacement_requested_on.quarter": {
-			          "Target": {
-			            "Entity": "assignment.replacement_requested_on.quarter"
-			          }
-			        }
-			      },
-			      "Phrasings": [
-			        {
-			          "Attribute": {
-			            "Subject": {
-			              "Role": "assignment.replacement_requested_on.date_hierarchy"
-			            },
-			            "Object": {
-			              "Role": "assignment.replacement_requested_on.quarter"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99,
-			          "ID": "replacement_requested_on_date_hierarchy_have_replacement_requested_on_quarter"
-			        }
-			      ]
-			    },
-			    "assignment_replacement_requested_on_date_hierarchy_has_assignment_replacement_requested_on_year": {
-			      "Binding": {
-			        "ConceptualEntity": "Assignment"
-			      },
-			      "State": "Generated",
-			      "Roles": {
-			        "assignment.replacement_requested_on.date_hierarchy": {
-			          "Target": {
-			            "Entity": "assignment.replacement_requested_on.date_hierarchy"
-			          }
-			        },
-			        "assignment.replacement_requested_on.year": {
-			          "Target": {
-			            "Entity": "assignment.replacement_requested_on.year"
-			          }
-			        }
-			      },
-			      "Phrasings": [
-			        {
-			          "Attribute": {
-			            "Subject": {
-			              "Role": "assignment.replacement_requested_on.date_hierarchy"
-			            },
-			            "Object": {
-			              "Role": "assignment.replacement_requested_on.year"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99,
-			          "ID": "replacement_requested_on_date_hierarchy_have_replacement_requested_on_year"
-			        }
-			      ]
-			    },
 			    "assignment_replacement_requested_on_has_date_hierarchy": {
 			      "Binding": {
 			        "ConceptualEntity": "Assignment"
@@ -16825,6 +16898,262 @@ cultureInfo en-GB
 			          "State": "Generated",
 			          "Weight": 0.99,
 			          "ID": "PPE_statuses_have_assignments"
+			        }
+			      ]
+			    },
+			    "assignment_history_has_assignment_history_count": {
+			      "Binding": {
+			        "ConceptualEntity": "Assignment History"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "assignment_history": {
+			          "Target": {
+			            "Entity": "assignment_history"
+			          }
+			        },
+			        "assignment_history.assignment_history_count": {
+			          "Target": {
+			            "Entity": "assignment_history.assignment_history_count"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "assignment_history"
+			            },
+			            "Object": {
+			              "Role": "assignment_history.assignment_history_count"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "assignment_histories_have_assignment_history_counts"
+			        }
+			      ]
+			    },
+			    "assignment_history_has_to": {
+			      "Binding": {
+			        "ConceptualEntity": "Assignment History"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "assignment_history": {
+			          "Target": {
+			            "Entity": "assignment_history"
+			          }
+			        },
+			        "assignment_history.to": {
+			          "Target": {
+			            "Entity": "assignment_history.to"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "assignment_history"
+			            },
+			            "Object": {
+			              "Role": "assignment_history.to"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "assignment_histories_have_to"
+			        },
+			        {
+			          "Preposition": {
+			            "Subject": {
+			              "Role": "assignment_history"
+			            },
+			            "Prepositions": [
+			              {
+			                "to": {
+			                  "State": "Generated"
+			                }
+			              }
+			            ],
+			            "Object": {
+			              "Role": "assignment_history.to"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "assignment_histories_are_to_to"
+			        }
+			      ]
+			    },
+			    "assignment_history_has_from": {
+			      "Binding": {
+			        "ConceptualEntity": "Assignment History"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "assignment_history": {
+			          "Target": {
+			            "Entity": "assignment_history"
+			          }
+			        },
+			        "assignment_history.from": {
+			          "Target": {
+			            "Entity": "assignment_history.from"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "assignment_history"
+			            },
+			            "Object": {
+			              "Role": "assignment_history.from"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "assignment_histories_have_from"
+			        },
+			        {
+			          "Preposition": {
+			            "Subject": {
+			              "Role": "assignment_history"
+			            },
+			            "Prepositions": [
+			              {
+			                "from": {
+			                  "State": "Generated"
+			                }
+			              }
+			            ],
+			            "Object": {
+			              "Role": "assignment_history.from"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "assignment_histories_are_from_from"
+			        }
+			      ]
+			    },
+			    "assignment_has_returned_to_stock_site": {
+			      "Binding": {
+			        "ConceptualEntity": "Assignment"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "assignment": {
+			          "Target": {
+			            "Entity": "assignment"
+			          }
+			        },
+			        "assignment.returned_to_stock_site": {
+			          "Target": {
+			            "Entity": "assignment.returned_to_stock_site"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "assignment"
+			            },
+			            "Object": {
+			              "Role": "assignment.returned_to_stock_site"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "assignments_have_returned_to_stock_site"
+			        },
+			        {
+			          "Verb": {
+			            "Verbs": [
+			              {
+			                "return": {
+			                  "State": "Generated"
+			                }
+			              }
+			            ],
+			            "Object": {
+			              "Role": "assignment"
+			            },
+			            "PrepositionalPhrases": [
+			              {
+			                "Prepositions": [
+			                  {
+			                    "to": {
+			                      "State": "Generated"
+			                    }
+			                  }
+			                ],
+			                "Object": {
+			                  "Role": "assignment.returned_to_stock_site"
+			                }
+			              }
+			            ]
+			          },
+			          "State": "Generated",
+			          "Weight": 0.95,
+			          "ID": "assignments_are_returned_to_returned_to_stock_site"
+			        },
+			        {
+			          "Verb": {
+			            "Verbs": [
+			              {
+			                "return": {
+			                  "State": "Generated"
+			                }
+			              }
+			            ],
+			            "IndirectObject": {
+			              "Role": "assignment.returned_to_stock_site"
+			            },
+			            "Object": {
+			              "Role": "assignment"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.75,
+			          "ID": "returned_to_stock_site_are_returned_assignments"
+			        }
+			      ]
+			    },
+			    "assigned_to_contact_has_contact": {
+			      "Binding": {
+			        "ConceptualEntity": "Assigned To Contact"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "assigned_to_contact": {
+			          "Target": {
+			            "Entity": "assigned_to_contact"
+			          }
+			        },
+			        "assigned_to_contact.contact": {
+			          "Target": {
+			            "Entity": "assigned_to_contact.contact"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "assigned_to_contact"
+			            },
+			            "Object": {
+			              "Role": "assigned_to_contact.contact"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "assigned_to_contact_have_contacts"
 			        }
 			      ]
 			    },
@@ -18730,19 +19059,6 @@ cultureInfo en-GB
 			          "State": "Generated",
 			          "Weight": 0.99,
 			          "ID": "locations_have_locations"
-			        },
-			        {
-			          "Name": {
-			            "Subject": {
-			              "Role": "location"
-			            },
-			            "Name": {
-			              "Role": "location.location"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99,
-			          "ID": "locations_are_names_IDs_of_locations"
 			        }
 			      ]
 			    },
@@ -19316,6 +19632,51 @@ cultureInfo en-GB
 			        }
 			      ]
 			    },
+			    "location_in_location": {
+			      "Binding": {
+			        "ConceptualEntity": "Location"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "location": {
+			          "Target": {
+			            "Entity": "location"
+			          }
+			        },
+			        "location.location": {
+			          "Target": {
+			            "Entity": "location.location"
+			          }
+			        }
+			      },
+			      "SemanticSlots": {
+			        "Where": {
+			          "Role": "location.location"
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Preposition": {
+			            "Subject": {
+			              "Role": "location"
+			            },
+			            "Prepositions": [
+			              {
+			                "in": {
+			                  "State": "Generated"
+			                }
+			              }
+			            ],
+			            "Object": {
+			              "Role": "location.location"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "locations_are_in_locations"
+			        }
+			      ]
+			    },
 			    "location_in_company_hierarchy_area": {
 			      "Binding": {
 			        "ConceptualEntity": "Location"
@@ -19838,6 +20199,138 @@ cultureInfo en-GB
 			          "State": "Generated",
 			          "Weight": 0.99,
 			          "ID": "some_PPE_types_are_type_deleted_PPE_types"
+			        }
+			      ]
+			    },
+			    "assignment_replacement_requested_on_date_hierarchy_has_assignment_replacement_requested_on_year": {
+			      "Binding": {
+			        "ConceptualEntity": "Assignment"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "assignment.replacement_requested_on.date_hierarchy": {
+			          "Target": {
+			            "Entity": "assignment.replacement_requested_on.date_hierarchy"
+			          }
+			        },
+			        "assignment.replacement_requested_on.year": {
+			          "Target": {
+			            "Entity": "assignment.replacement_requested_on.year"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "assignment.replacement_requested_on.date_hierarchy"
+			            },
+			            "Object": {
+			              "Role": "assignment.replacement_requested_on.year"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "replacement_requested_on_date_hierarchy_have_replacement_requested_on_year"
+			        }
+			      ]
+			    },
+			    "assignment_replacement_requested_on_date_hierarchy_has_assignment_replacement_requested_on_quarter": {
+			      "Binding": {
+			        "ConceptualEntity": "Assignment"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "assignment.replacement_requested_on.date_hierarchy": {
+			          "Target": {
+			            "Entity": "assignment.replacement_requested_on.date_hierarchy"
+			          }
+			        },
+			        "assignment.replacement_requested_on.quarter": {
+			          "Target": {
+			            "Entity": "assignment.replacement_requested_on.quarter"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "assignment.replacement_requested_on.date_hierarchy"
+			            },
+			            "Object": {
+			              "Role": "assignment.replacement_requested_on.quarter"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "replacement_requested_on_date_hierarchy_have_replacement_requested_on_quarter"
+			        }
+			      ]
+			    },
+			    "assignment_replacement_requested_on_date_hierarchy_has_assignment_replacement_requested_on_month": {
+			      "Binding": {
+			        "ConceptualEntity": "Assignment"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "assignment.replacement_requested_on.date_hierarchy": {
+			          "Target": {
+			            "Entity": "assignment.replacement_requested_on.date_hierarchy"
+			          }
+			        },
+			        "assignment.replacement_requested_on.month": {
+			          "Target": {
+			            "Entity": "assignment.replacement_requested_on.month"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "assignment.replacement_requested_on.date_hierarchy"
+			            },
+			            "Object": {
+			              "Role": "assignment.replacement_requested_on.month"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "replacement_requested_on_date_hierarchy_have_replacement_requested_on_month"
+			        }
+			      ]
+			    },
+			    "assignment_replacement_requested_on_date_hierarchy_has_assignment_replacement_requested_on_day": {
+			      "Binding": {
+			        "ConceptualEntity": "Assignment"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "assignment.replacement_requested_on.date_hierarchy": {
+			          "Target": {
+			            "Entity": "assignment.replacement_requested_on.date_hierarchy"
+			          }
+			        },
+			        "assignment.replacement_requested_on.day": {
+			          "Target": {
+			            "Entity": "assignment.replacement_requested_on.day"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "assignment.replacement_requested_on.date_hierarchy"
+			            },
+			            "Object": {
+			              "Role": "assignment.replacement_requested_on.day"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "replacement_requested_on_date_hierarchy_have_replacement_requested_on_day"
 			        }
 			      ]
 			    },

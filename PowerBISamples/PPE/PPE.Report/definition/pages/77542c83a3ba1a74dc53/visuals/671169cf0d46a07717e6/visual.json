@@ -1,5 +1,5 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.2.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
   "name": "671169cf0d46a07717e6",
   "position": {
     "x": 0,
@@ -22,10 +22,10 @@
                       "Entity": "PPE Assignment Type"
                     }
                   },
-                  "Property": "PPE Type"
+                  "Property": "PPE"
                 }
               },
-              "queryRef": "PPE Assignment Type.PPE Type",
+              "queryRef": "PPE Assignment Type.PPE",
               "nativeQueryRef": "Type",
               "displayName": "Type"
             },
@@ -34,44 +34,14 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "PPE Assignment Type"
-                    }
-                  },
-                  "Property": "PPE Variant"
-                }
-              },
-              "queryRef": "PPE Assignment Type.PPE Variant",
-              "nativeQueryRef": "Variant",
-              "displayName": "Variant"
-            },
-            {
-              "field": {
-                "Column": {
-                  "Expression": {
-                    "SourceRef": {
                       "Entity": "Assigned To Contact"
                     }
                   },
-                  "Property": "Contact Name"
+                  "Property": "Contact"
                 }
               },
-              "queryRef": "Assigned To Contact.Contact Name",
-              "nativeQueryRef": "Name",
-              "displayName": "Name"
-            },
-            {
-              "field": {
-                "Column": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "Assigned To Contact"
-                    }
-                  },
-                  "Property": "Email"
-                }
-              },
-              "queryRef": "Assigned To Contact.Email",
-              "nativeQueryRef": "Email"
+              "queryRef": "Assigned To Contact.Contact",
+              "nativeQueryRef": "Contact"
             },
             {
               "field": {
@@ -154,19 +124,6 @@
               }
             },
             "direction": "Descending"
-          },
-          {
-            "field": {
-              "Column": {
-                "Expression": {
-                  "SourceRef": {
-                    "Entity": "Assigned To Contact"
-                  }
-                },
-                "Property": "Contact Name"
-              }
-            },
-            "direction": "Ascending"
           }
         ]
       }
@@ -237,20 +194,6 @@
                 ]
               }
             ]
-          }
-        },
-        {
-          "properties": {
-            "value": {
-              "expr": {
-                "Literal": {
-                  "Value": "308.4610637529272D"
-                }
-              }
-            }
-          },
-          "selector": {
-            "metadata": "PPE Assignment Type.PPE Type"
           }
         },
         {
@@ -398,21 +341,7 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "77D"
-                }
-              }
-            }
-          },
-          "selector": {
-            "metadata": "PPE Assignment Type.PPE Variant"
-          }
-        },
-        {
-          "properties": {
-            "value": {
-              "expr": {
-                "Literal": {
-                  "Value": "85D"
+                  "Value": "65.03465806964945D"
                 }
               }
             }
@@ -426,41 +355,13 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "161.64356216094586D"
-                }
-              }
-            }
-          },
-          "selector": {
-            "metadata": "Assigned To Contact.Contact Name"
-          }
-        },
-        {
-          "properties": {
-            "value": {
-              "expr": {
-                "Literal": {
-                  "Value": "110D"
+                  "Value": "126.22183833635096D"
                 }
               }
             }
           },
           "selector": {
             "metadata": "Assigned To Contact.Company"
-          }
-        },
-        {
-          "properties": {
-            "value": {
-              "expr": {
-                "Literal": {
-                  "Value": "233.6388140161725D"
-                }
-              }
-            }
-          },
-          "selector": {
-            "metadata": "Assigned To Contact.Email"
           }
         }
       ]

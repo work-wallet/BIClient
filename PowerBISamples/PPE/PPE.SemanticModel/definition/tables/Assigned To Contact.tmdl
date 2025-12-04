@@ -60,6 +60,18 @@ table 'Assigned To Contact'
 
 		annotation SummarizationSetBy = User
 
+	column Contact = ```
+			
+			    IF('Assigned To Contact'[Email] = "",
+			        'Assigned To Contact'[Contact Name],
+			        'Assigned To Contact'[Contact Name] & " (" & 'Assigned To Contact'[Email] & ")"
+			    )
+			```
+		lineageTag: aa6f7ae0-1039-49e0-9b01-0e3aedad0284
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
 	partition 'Assigned To Contact' = m
 		mode: import
 		source =
