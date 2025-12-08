@@ -237,7 +237,7 @@
         }
       ],
       "name": "All tables",
-      "zoomValue": 42.320596595028704,
+      "zoomValue": 53.348765088847259,
       "pinKeyFieldsToTop": false,
       "showExtraHeaderInfo": false,
       "hideKeyFieldsWhenCollapsed": false,
@@ -258,7 +258,7 @@
           "nodeIndex": "Asset",
           "nodeLineageTag": "1fbdd36a-5356-45f3-8c79-63344009ee01",
           "size": {
-            "height": 453,
+            "height": 526,
             "width": 234
           },
           "zIndex": 0
@@ -299,7 +299,7 @@
           "nodeIndex": "Asset",
           "nodeLineageTag": "1fbdd36a-5356-45f3-8c79-63344009ee01",
           "size": {
-            "height": 470.768807107442,
+            "height": 524.85043976050315,
             "width": 234
           },
           "zIndex": 5
@@ -379,7 +379,7 @@
           "nodeIndex": "Asset",
           "nodeLineageTag": "1fbdd36a-5356-45f3-8c79-63344009ee01",
           "size": {
-            "height": 463,
+            "height": 525,
             "width": 234
           },
           "zIndex": 0
@@ -485,7 +485,7 @@
           "nodeIndex": "Asset",
           "nodeLineageTag": "1fbdd36a-5356-45f3-8c79-63344009ee01",
           "size": {
-            "height": 446,
+            "height": 521,
             "width": 234
           },
           "zIndex": 1
@@ -513,7 +513,7 @@
           "nodeIndex": "Asset",
           "nodeLineageTag": "1fbdd36a-5356-45f3-8c79-63344009ee01",
           "size": {
-            "height": 456,
+            "height": 523,
             "width": 234
           },
           "zIndex": 3
@@ -526,7 +526,7 @@
           "nodeIndex": "Observation",
           "nodeLineageTag": "c44fc457-11f3-4191-870e-f172d6a303f0",
           "size": {
-            "height": 501,
+            "height": 531,
             "width": 279
           },
           "zIndex": 1
@@ -660,7 +660,7 @@
           "nodeIndex": "Observation",
           "nodeLineageTag": "c44fc457-11f3-4191-870e-f172d6a303f0",
           "size": {
-            "height": 496,
+            "height": 543,
             "width": 271
           },
           "zIndex": 4
@@ -687,6 +687,6 @@
       "tablesLocked": false
     }
   ],
-  "selectedDiagram": "Main",
+  "selectedDiagram": "Inspection Observation",
   "defaultDiagram": "All tables"
 }

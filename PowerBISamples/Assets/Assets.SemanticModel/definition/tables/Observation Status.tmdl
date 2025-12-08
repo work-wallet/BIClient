@@ -37,7 +37,7 @@ table 'Observation Status'
 		mode: import
 		source =
 				let
-				    Source = Sql.Database("CAKESOFBREAD", "WorkWalletBIClient_Staging"),
+				    Source = Sql.Database("ww-powerbi-demo.database.windows.net", "powerbi"),
 				    mart_AssetObservationStatus = Source{[Schema="mart",Item="AssetObservationStatus"]}[Data],
 				    #"Removed Columns" = Table.RemoveColumns(mart_AssetObservationStatus,{"_created", "_edited"}),
 				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"AssetObservationStatus", "Observation Status"}})

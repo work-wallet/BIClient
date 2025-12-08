@@ -3,11 +3,11 @@
   "name": "c65ad40734e7e7c19805",
   "position": {
     "x": 0,
-    "y": 74.177897574123989,
-    "z": 1000,
-    "height": 646.03773584905662,
+    "y": 79.389933909506865,
+    "z": 0,
+    "height": 640.32536858159642,
     "width": 1280,
-    "tabOrder": 1000
+    "tabOrder": 0
   },
   "visual": {
     "visualType": "tableEx",
@@ -165,26 +165,13 @@
               "Column": {
                 "Expression": {
                   "SourceRef": {
-                    "Entity": "Asset"
-                  }
-                },
-                "Property": "Reference"
-              }
-            },
-            "direction": "Ascending"
-          },
-          {
-            "field": {
-              "Column": {
-                "Expression": {
-                  "SourceRef": {
                     "Entity": "Assignment Fact"
                   }
                 },
-                "Property": "Assignment Number"
+                "Property": "From"
               }
             },
-            "direction": "Ascending"
+            "direction": "Descending"
           }
         ]
       }

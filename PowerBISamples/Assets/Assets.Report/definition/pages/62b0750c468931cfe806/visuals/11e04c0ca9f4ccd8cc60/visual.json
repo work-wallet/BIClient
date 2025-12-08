@@ -1,13 +1,13 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.3.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
   "name": "11e04c0ca9f4ccd8cc60",
   "position": {
     "x": 0,
     "y": 79.483870967741936,
-    "z": 1,
+    "z": 1000,
     "height": 641.0322580645161,
     "width": 1280,
-    "tabOrder": 1
+    "tabOrder": 0
   },
   "visual": {
     "visualType": "tableEx",
@@ -271,68 +271,25 @@
             "metadata": "Sum(Inspection.Defects Raised)"
           }
         }
+      ],
+      "total": [
+        {
+          "properties": {
+            "totals": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
       ]
     },
     "drillFilterOtherVisuals": true
   },
   "filterConfig": {
     "filters": [
-      {
-        "name": "08925fe422acdbcc4801",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "Asset"
-              }
-            },
-            "Property": "Reference"
-          }
-        },
-        "type": "Categorical"
-      },
-      {
-        "name": "fc5e2cb0df118fe26478",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "Inspection"
-              }
-            },
-            "Property": "Inspection Type"
-          }
-        },
-        "type": "Categorical"
-      },
-      {
-        "name": "e8bb9e007e2ebc75931a",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "Inspection"
-              }
-            },
-            "Property": "Inspection Date"
-          }
-        },
-        "type": "Categorical"
-      },
-      {
-        "name": "9afa75b07485304f1fbf",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "Inspection"
-              }
-            },
-            "Property": "Inspected By"
-          }
-        },
-        "type": "Categorical"
-      },
       {
         "name": "736ac57321e34619dc6f",
         "field": {
@@ -362,39 +319,6 @@
             }
           ]
         }
-      },
-      {
-        "name": "cb869167b8e08af5e964",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "Asset"
-              }
-            },
-            "Property": "Asset"
-          }
-        },
-        "type": "Categorical"
-      },
-      {
-        "name": "83503328bb24ee61fa75",
-        "field": {
-          "Aggregation": {
-            "Expression": {
-              "Column": {
-                "Expression": {
-                  "SourceRef": {
-                    "Entity": "Inspection"
-                  }
-                },
-                "Property": "Defects Raised"
-              }
-            },
-            "Function": 0
-          }
-        },
-        "type": "Advanced"
       }
     ]
   }

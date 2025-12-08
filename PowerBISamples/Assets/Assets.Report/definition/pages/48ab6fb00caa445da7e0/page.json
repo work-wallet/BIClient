@@ -1,0 +1,8 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/page/2.0.0/schema.json",
+  "name": "48ab6fb00caa445da7e0",
+  "displayName": "Dashboard",
+  "displayOption": "FitToPage",
+  "height": 720,
+  "width": 1280
+}

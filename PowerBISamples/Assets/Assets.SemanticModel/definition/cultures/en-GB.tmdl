@@ -12526,6 +12526,16 @@ cultureInfo en-GB
 			            },
 			            "Weight": 0.452
 			          }
+			        },
+			        {
+			          "Details of Defect": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
 			        }
 			      ],
 			      "NameType": "Name"
@@ -12815,6 +12825,16 @@ cultureInfo en-GB
 			          "date": {
 			            "State": "Generated",
 			            "Weight": 0.7
+			          }
+			        },
+			        {
+			          "Defect Date": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
 			          }
 			        }
 			      ],
@@ -14157,6 +14177,16 @@ cultureInfo en-GB
 			              "Agent": "Thesaurus"
 			            },
 			            "Weight": 0.727
+			          }
+			        },
+			        {
+			          "Defect Status": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
 			          }
 			        }
 			      ],
@@ -15786,6 +15816,16 @@ cultureInfo en-GB
 			            },
 			            "Weight": 0.9
 			          }
+			        },
+			        {
+			          "Asset Assignment": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
 			        }
 			      ]
 			    },
@@ -16490,9 +16530,301 @@ cultureInfo en-GB
 			        }
 			      ],
 			      "SemanticType": "Time"
+			    },
+			    "asset.defective_count": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Asset",
+			          "ConceptualProperty": "Defective Count"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "defective count": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "defective amount": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.727
+			          }
+			        }
+			      ]
+			    },
+			    "observation.deleted": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Observation",
+			          "ConceptualProperty": "Deleted"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "deleted": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "asset.assigned_count": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Asset",
+			          "ConceptualProperty": "Assigned Count"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "assigned count": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "assigned amount": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.727
+			          }
+			        }
+			      ]
+			    },
+			    "asset.unassigned_count": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Asset",
+			          "ConceptualProperty": "Unassigned Count"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "unassigned count": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "unassigned amount": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.727
+			          }
+			        }
+			      ]
 			    }
 			  },
 			  "Relationships": {
+			    "observation_observed_on_date_hierarchy_has_observation_observed_on_day": {
+			      "Binding": {
+			        "ConceptualEntity": "Observation"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "observation.observed_on.date_hierarchy": {
+			          "Target": {
+			            "Entity": "observation.observed_on.date_hierarchy"
+			          }
+			        },
+			        "observation.observed_on.day": {
+			          "Target": {
+			            "Entity": "observation.observed_on.day"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "observation.observed_on.date_hierarchy"
+			            },
+			            "Object": {
+			              "Role": "observation.observed_on.day"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "observed_on_date_hierarchy_have_observed_on_day"
+			        }
+			      ]
+			    },
+			    "observation_observed_on_date_hierarchy_has_observation_observed_on_month": {
+			      "Binding": {
+			        "ConceptualEntity": "Observation"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "observation.observed_on.date_hierarchy": {
+			          "Target": {
+			            "Entity": "observation.observed_on.date_hierarchy"
+			          }
+			        },
+			        "observation.observed_on.month": {
+			          "Target": {
+			            "Entity": "observation.observed_on.month"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "observation.observed_on.date_hierarchy"
+			            },
+			            "Object": {
+			              "Role": "observation.observed_on.month"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "observed_on_date_hierarchy_have_observed_on_month"
+			        }
+			      ]
+			    },
+			    "observation_observed_on_date_hierarchy_has_observation_observed_on_quarter": {
+			      "Binding": {
+			        "ConceptualEntity": "Observation"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "observation.observed_on.date_hierarchy": {
+			          "Target": {
+			            "Entity": "observation.observed_on.date_hierarchy"
+			          }
+			        },
+			        "observation.observed_on.quarter": {
+			          "Target": {
+			            "Entity": "observation.observed_on.quarter"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "observation.observed_on.date_hierarchy"
+			            },
+			            "Object": {
+			              "Role": "observation.observed_on.quarter"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "observed_on_date_hierarchy_have_observed_on_quarter"
+			        }
+			      ]
+			    },
+			    "observation_observed_on_date_hierarchy_has_observation_observed_on_year": {
+			      "Binding": {
+			        "ConceptualEntity": "Observation"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "observation.observed_on.date_hierarchy": {
+			          "Target": {
+			            "Entity": "observation.observed_on.date_hierarchy"
+			          }
+			        },
+			        "observation.observed_on.year": {
+			          "Target": {
+			            "Entity": "observation.observed_on.year"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "observation.observed_on.date_hierarchy"
+			            },
+			            "Object": {
+			              "Role": "observation.observed_on.year"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "observed_on_date_hierarchy_have_observed_on_year"
+			        }
+			      ]
+			    },
+			    "observation_observed_on_has_date_hierarchy": {
+			      "Binding": {
+			        "ConceptualEntity": "Observation"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "observation.observed_on": {
+			          "Target": {
+			            "Entity": "observation.observed_on"
+			          }
+			        },
+			        "observation.observed_on.date_hierarchy": {
+			          "Target": {
+			            "Entity": "observation.observed_on.date_hierarchy"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "observation.observed_on"
+			            },
+			            "Object": {
+			              "Role": "observation.observed_on.date_hierarchy"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "observed_on_have_observed_on_date_hierarchy"
+			        }
+			      ]
+			    },
+			    "assignment_fact_to_date_hierarchy_has_assignment_fact_to_day": {
+			      "Binding": {
+			        "ConceptualEntity": "Assignment Fact"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "assignment_fact.to.date_hierarchy": {
+			          "Target": {
+			            "Entity": "assignment_fact.to.date_hierarchy"
+			          }
+			        },
+			        "assignment_fact.to.day": {
+			          "Target": {
+			            "Entity": "assignment_fact.to.day"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "assignment_fact.to.date_hierarchy"
+			            },
+			            "Object": {
+			              "Role": "assignment_fact.to.day"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "to_date_hierarchy_have_to_day"
+			        }
+			      ]
+			    },
 			    "assignment_fact_to_date_hierarchy_has_assignment_fact_to_month": {
 			      "Binding": {
 			        "ConceptualEntity": "Assignment Fact"
@@ -17912,6 +18244,138 @@ cultureInfo en-GB
 			          "State": "Generated",
 			          "Weight": 0.99,
 			          "ID": "asset_statuses_have_assets"
+			        }
+			      ]
+			    },
+			    "asset_has_unassigned_count": {
+			      "Binding": {
+			        "ConceptualEntity": "Asset"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "asset": {
+			          "Target": {
+			            "Entity": "asset"
+			          }
+			        },
+			        "asset.unassigned_count": {
+			          "Target": {
+			            "Entity": "asset.unassigned_count"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "asset"
+			            },
+			            "Object": {
+			              "Role": "asset.unassigned_count"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "assets_have_unassigned_counts"
+			        }
+			      ]
+			    },
+			    "asset_has_assigned_count": {
+			      "Binding": {
+			        "ConceptualEntity": "Asset"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "asset": {
+			          "Target": {
+			            "Entity": "asset"
+			          }
+			        },
+			        "asset.assigned_count": {
+			          "Target": {
+			            "Entity": "asset.assigned_count"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "asset"
+			            },
+			            "Object": {
+			              "Role": "asset.assigned_count"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "assets_have_assigned_counts"
+			        }
+			      ]
+			    },
+			    "observation_has_deleted": {
+			      "Binding": {
+			        "ConceptualEntity": "Observation"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "observation": {
+			          "Target": {
+			            "Entity": "observation"
+			          }
+			        },
+			        "observation.deleted": {
+			          "Target": {
+			            "Entity": "observation.deleted"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "observation"
+			            },
+			            "Object": {
+			              "Role": "observation.deleted"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "observations_have_deleted"
+			        }
+			      ]
+			    },
+			    "asset_has_defective_count": {
+			      "Binding": {
+			        "ConceptualEntity": "Asset"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "asset": {
+			          "Target": {
+			            "Entity": "asset"
+			          }
+			        },
+			        "asset.defective_count": {
+			          "Target": {
+			            "Entity": "asset.defective_count"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "asset"
+			            },
+			            "Object": {
+			              "Role": "asset.defective_count"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "assets_have_defective_counts"
 			        }
 			      ]
 			    },
@@ -19990,6 +20454,11 @@ cultureInfo en-GB
 			                "observe": {
 			                  "State": "Generated"
 			                }
+			              },
+			              {
+			                "Defect": {
+			                  "State": "Generated"
+			                }
 			              }
 			            ],
 			            "Object": {
@@ -20041,6 +20510,56 @@ cultureInfo en-GB
 			          "State": "Generated",
 			          "Weight": 0.9,
 			          "ID": "assets_are_created_on_created_on"
+			        }
+			      ]
+			    },
+			    "observation_is_deleted": {
+			      "Binding": {
+			        "ConceptualEntity": "Observation"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "observation": {
+			          "Target": {
+			            "Entity": "observation"
+			          }
+			        },
+			        "observation.deleted": {
+			          "Target": {
+			            "Entity": "observation.deleted"
+			          }
+			        }
+			      },
+			      "Conditions": [
+			        {
+			          "Target": {
+			            "Role": "observation.deleted"
+			          },
+			          "Operator": "Equals",
+			          "Value": {
+			            "Boolean": [
+			              true
+			            ]
+			          }
+			        }
+			      ],
+			      "Phrasings": [
+			        {
+			          "Adjective": {
+			            "Subject": {
+			              "Role": "observation"
+			            },
+			            "Adjectives": [
+			              {
+			                "deleted": {
+			                  "State": "Generated"
+			                }
+			              }
+			            ]
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "some_observations_are_deleted_observations"
 			        }
 			      ]
 			    },
@@ -20191,204 +20710,6 @@ cultureInfo en-GB
 			          "State": "Generated",
 			          "Weight": 0.99,
 			          "ID": "some_assignment_facts_are_late_assignment_facts"
-			        }
-			      ]
-			    },
-			    "assignment_fact_to_date_hierarchy_has_assignment_fact_to_day": {
-			      "Binding": {
-			        "ConceptualEntity": "Assignment Fact"
-			      },
-			      "State": "Generated",
-			      "Roles": {
-			        "assignment_fact.to.date_hierarchy": {
-			          "Target": {
-			            "Entity": "assignment_fact.to.date_hierarchy"
-			          }
-			        },
-			        "assignment_fact.to.day": {
-			          "Target": {
-			            "Entity": "assignment_fact.to.day"
-			          }
-			        }
-			      },
-			      "Phrasings": [
-			        {
-			          "Attribute": {
-			            "Subject": {
-			              "Role": "assignment_fact.to.date_hierarchy"
-			            },
-			            "Object": {
-			              "Role": "assignment_fact.to.day"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99,
-			          "ID": "to_date_hierarchy_have_to_day"
-			        }
-			      ]
-			    },
-			    "observation_observed_on_has_date_hierarchy": {
-			      "Binding": {
-			        "ConceptualEntity": "Observation"
-			      },
-			      "State": "Generated",
-			      "Roles": {
-			        "observation.observed_on": {
-			          "Target": {
-			            "Entity": "observation.observed_on"
-			          }
-			        },
-			        "observation.observed_on.date_hierarchy": {
-			          "Target": {
-			            "Entity": "observation.observed_on.date_hierarchy"
-			          }
-			        }
-			      },
-			      "Phrasings": [
-			        {
-			          "Attribute": {
-			            "Subject": {
-			              "Role": "observation.observed_on"
-			            },
-			            "Object": {
-			              "Role": "observation.observed_on.date_hierarchy"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99,
-			          "ID": "observed_on_have_observed_on_date_hierarchy"
-			        }
-			      ]
-			    },
-			    "observation_observed_on_date_hierarchy_has_observation_observed_on_year": {
-			      "Binding": {
-			        "ConceptualEntity": "Observation"
-			      },
-			      "State": "Generated",
-			      "Roles": {
-			        "observation.observed_on.date_hierarchy": {
-			          "Target": {
-			            "Entity": "observation.observed_on.date_hierarchy"
-			          }
-			        },
-			        "observation.observed_on.year": {
-			          "Target": {
-			            "Entity": "observation.observed_on.year"
-			          }
-			        }
-			      },
-			      "Phrasings": [
-			        {
-			          "Attribute": {
-			            "Subject": {
-			              "Role": "observation.observed_on.date_hierarchy"
-			            },
-			            "Object": {
-			              "Role": "observation.observed_on.year"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99,
-			          "ID": "observed_on_date_hierarchy_have_observed_on_year"
-			        }
-			      ]
-			    },
-			    "observation_observed_on_date_hierarchy_has_observation_observed_on_quarter": {
-			      "Binding": {
-			        "ConceptualEntity": "Observation"
-			      },
-			      "State": "Generated",
-			      "Roles": {
-			        "observation.observed_on.date_hierarchy": {
-			          "Target": {
-			            "Entity": "observation.observed_on.date_hierarchy"
-			          }
-			        },
-			        "observation.observed_on.quarter": {
-			          "Target": {
-			            "Entity": "observation.observed_on.quarter"
-			          }
-			        }
-			      },
-			      "Phrasings": [
-			        {
-			          "Attribute": {
-			            "Subject": {
-			              "Role": "observation.observed_on.date_hierarchy"
-			            },
-			            "Object": {
-			              "Role": "observation.observed_on.quarter"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99,
-			          "ID": "observed_on_date_hierarchy_have_observed_on_quarter"
-			        }
-			      ]
-			    },
-			    "observation_observed_on_date_hierarchy_has_observation_observed_on_month": {
-			      "Binding": {
-			        "ConceptualEntity": "Observation"
-			      },
-			      "State": "Generated",
-			      "Roles": {
-			        "observation.observed_on.date_hierarchy": {
-			          "Target": {
-			            "Entity": "observation.observed_on.date_hierarchy"
-			          }
-			        },
-			        "observation.observed_on.month": {
-			          "Target": {
-			            "Entity": "observation.observed_on.month"
-			          }
-			        }
-			      },
-			      "Phrasings": [
-			        {
-			          "Attribute": {
-			            "Subject": {
-			              "Role": "observation.observed_on.date_hierarchy"
-			            },
-			            "Object": {
-			              "Role": "observation.observed_on.month"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99,
-			          "ID": "observed_on_date_hierarchy_have_observed_on_month"
-			        }
-			      ]
-			    },
-			    "observation_observed_on_date_hierarchy_has_observation_observed_on_day": {
-			      "Binding": {
-			        "ConceptualEntity": "Observation"
-			      },
-			      "State": "Generated",
-			      "Roles": {
-			        "observation.observed_on.date_hierarchy": {
-			          "Target": {
-			            "Entity": "observation.observed_on.date_hierarchy"
-			          }
-			        },
-			        "observation.observed_on.day": {
-			          "Target": {
-			            "Entity": "observation.observed_on.day"
-			          }
-			        }
-			      },
-			      "Phrasings": [
-			        {
-			          "Attribute": {
-			            "Subject": {
-			              "Role": "observation.observed_on.date_hierarchy"
-			            },
-			            "Object": {
-			              "Role": "observation.observed_on.day"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99,
-			          "ID": "observed_on_date_hierarchy_have_observed_on_day"
 			        }
 			      ]
 			    },

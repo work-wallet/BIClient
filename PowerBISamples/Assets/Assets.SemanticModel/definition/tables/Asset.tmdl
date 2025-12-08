@@ -157,11 +157,45 @@ table Asset
 
 		annotation PBI_FormatHint = {"isDateTimeCustom":true}
 
+	column 'Defective Count' = IF(Asset[Open Defects] > 0, 1, 0)
+		dataType: int64
+		formatString: 0
+		lineageTag: f41da1cc-93ac-4d3d-b9d9-8b88441173dc
+		summarizeBy: sum
+
+		changedProperty = DataType
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Assigned Count' =
+			
+			IF(
+			    CALCULATE(
+			        COUNTROWS('Assignment Fact'),
+			        'Assignment Fact'[Is Latest] = TRUE(),
+			        'Assignment Type'[Assignment Type] <> "Unassigned"
+			    ) > 0,
+			    1,
+			    0
+			)
+		formatString: 0
+		lineageTag: 5ccf45e8-58be-4bec-91ff-ed51903c6035
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Unassigned Count' = 1 - [Assigned Count]
+		formatString: 0
+		lineageTag: f53223c4-64fe-4136-8cc5-731be9425a7d
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
 	partition Asset = m
 		mode: import
 		source =
 				let
-				    Source = Sql.Database("CAKESOFBREAD", "WorkWalletBIClient_Staging"),
+				    Source = Sql.Database("ww-powerbi-demo.database.windows.net", "powerbi"),
 				    mart_Asset = Source{[Schema="mart",Item="Asset"]}[Data],
 				    #"Removed Columns" = Table.RemoveColumns(mart_Asset,{"_created", "_edited"}),
 				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"Name", "Asset Name"}, {"Description", "Asset Notes"}, {"CreatedOn", "Created On"}, {"AssetType", "Asset Type"}})

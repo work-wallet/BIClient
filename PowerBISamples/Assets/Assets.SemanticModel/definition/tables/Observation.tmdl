@@ -66,7 +66,7 @@ table Observation
 
 	column ObservedOn
 		dataType: dateTime
-		formatString: General Date
+		formatString: dd/mm/yyyy hh:nn
 		lineageTag: a610fdae-038f-47f8-bcbe-590bc6425751
 		summarizeBy: none
 		sourceColumn: ObservedOn
@@ -77,6 +77,8 @@ table Observation
 			defaultHierarchy: LocalDateTable_0f8b1d9b-09e1-4b61-bd48-b9c9f1d9c3b4.'Date Hierarchy'
 
 		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
 
 	column ObservedBy
 		dataType: string
@@ -135,24 +137,33 @@ table Observation
 
 		annotation SummarizationSetBy = Automatic
 
-	column 'Open Defect Count' = IF(RELATED('Observation Status'[AssetObservationStatusCode]) = 1, 1, 0)
+	column 'Open Defect Count' = IF(AND(Observation[Deleted] = FALSE(), RELATED('Observation Status'[AssetObservationStatusCode]) = 1), 1, 0)
 		formatString: 0
 		lineageTag: 0f3d0ea7-3ca2-4d30-97b0-83dd33003c19
 		summarizeBy: sum
 
 		annotation SummarizationSetBy = Automatic
 
-	column 'Closed Defect Count' = IF(RELATED('Observation Status'[AssetObservationStatusCode]) = 32, 1, 0)
+	column 'Closed Defect Count' = IF(AND(Observation[Deleted] = FALSE(), RELATED('Observation Status'[AssetObservationStatusCode]) = 32), 1, 0)
 		formatString: 0
 		lineageTag: d33ea01d-066c-42c0-ae1a-bfd30a0fc6d4
 		summarizeBy: sum
 
 		annotation SummarizationSetBy = Automatic
 
-	column 'Defect Count' = IF(RELATED('Observation Status'[AssetObservationStatusCode]) IN {1, 32}, 1, 0)
+	column 'Defect Count' = IF(AND(Observation[Deleted] = FALSE(), RELATED('Observation Status'[AssetObservationStatusCode]) IN {1, 32}), 1, 0)
 		formatString: 0
 		lineageTag: 217415af-72d6-451b-963a-eca948a879ff
 		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column Deleted
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 718d037a-1709-42b0-948a-2b5ea9a83253
+		summarizeBy: none
+		sourceColumn: Deleted
 
 		annotation SummarizationSetBy = Automatic
 
@@ -160,12 +171,13 @@ table Observation
 		mode: import
 		source =
 				let
-				    Source = Sql.Database("CAKESOFBREAD", "WorkWalletBIClient_Staging"),
+				    Source = Sql.Database("ww-powerbi-demo.database.windows.net", "powerbi"),
 				    mart_AssetObservation = Source{[Schema="mart",Item="AssetObservation"]}[Data],
 				    #"Removed Columns" = Table.RemoveColumns(mart_AssetObservation,{"_created", "_edited"}),
-				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"Details", "Observation"}, {"ActionTaken", "Action Taken"}})
+				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"Details", "Observation"}, {"ActionTaken", "Action Taken"}}),
+				    #"Filtered Rows" = Table.SelectRows(#"Renamed Columns", each true)
 				in
-				    #"Renamed Columns"
+				    #"Filtered Rows"
 
 	annotation PBI_NavigationStepName = Navigation
 

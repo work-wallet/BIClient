@@ -1,13 +1,13 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.3.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
   "name": "26c839914555745e96e1",
   "position": {
     "x": 0,
     "y": 79.483870967741936,
-    "z": 1,
+    "z": 1000,
     "height": 641.0322580645161,
     "width": 1280,
-    "tabOrder": 1
+    "tabOrder": 0
   },
   "visual": {
     "visualType": "tableEx",
@@ -107,7 +107,7 @@
                 }
               },
               "queryRef": "Sum(Asset.Open Defects)",
-              "nativeQueryRef": "Open Defects",
+              "nativeQueryRef": "Sum of Open Defects",
               "displayName": "Open Defects"
             }
           ]
@@ -273,101 +273,21 @@
             "metadata": "Asset.Last Inspection Date"
           }
         }
+      ],
+      "total": [
+        {
+          "properties": {
+            "totals": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
       ]
     },
     "drillFilterOtherVisuals": true
-  },
-  "filterConfig": {
-    "filters": [
-      {
-        "name": "109a5d74fe6fe93f697a",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "Asset Status"
-              }
-            },
-            "Property": "Asset Status"
-          }
-        },
-        "type": "Categorical"
-      },
-      {
-        "name": "31b8a18f7d74fbdd592a",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "Asset"
-              }
-            },
-            "Property": "Asset"
-          }
-        },
-        "type": "Categorical"
-      },
-      {
-        "name": "a7b6886dadd66285edf9",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "Asset"
-              }
-            },
-            "Property": "Reference"
-          }
-        },
-        "type": "Categorical"
-      },
-      {
-        "name": "3198406deaf21487b604",
-        "field": {
-          "Aggregation": {
-            "Expression": {
-              "Column": {
-                "Expression": {
-                  "SourceRef": {
-                    "Entity": "Asset"
-                  }
-                },
-                "Property": "Open Defects"
-              }
-            },
-            "Function": 0
-          }
-        },
-        "type": "Advanced"
-      },
-      {
-        "name": "aee857e3d4039321855f",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "Asset"
-              }
-            },
-            "Property": "Latest Assigned To"
-          }
-        },
-        "type": "Categorical"
-      },
-      {
-        "name": "7d49792dce7803201ffb",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "Asset"
-              }
-            },
-            "Property": "Last Inspection Date"
-          }
-        },
-        "type": "Categorical"
-      }
-    ]
   }
 }

@@ -1,5 +1,5 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.3.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
   "name": "0845124c3451be650081",
   "position": {
     "x": 0,
@@ -7,7 +7,7 @@
     "z": 1000,
     "height": 301.88679245283015,
     "width": 631.37466307277623,
-    "tabOrder": 1000
+    "tabOrder": 0
   },
   "visual": {
     "visualType": "pivotTable",
@@ -292,70 +292,5 @@
       ]
     },
     "drillFilterOtherVisuals": true
-  },
-  "filterConfig": {
-    "filters": [
-      {
-        "name": "779b5b6cd0386bb88092",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "Assignment Type"
-              }
-            },
-            "Property": "Assignment Type"
-          }
-        },
-        "type": "Categorical"
-      },
-      {
-        "name": "21823f5986067b8b6cbc",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "Assignment"
-              }
-            },
-            "Property": "Assigned To"
-          }
-        },
-        "type": "Categorical"
-      },
-      {
-        "name": "bd71648200df15cfee60",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "Asset"
-              }
-            },
-            "Property": "Asset Name"
-          }
-        },
-        "type": "Categorical"
-      },
-      {
-        "name": "21a3d3b9f6f2c213d4a1",
-        "field": {
-          "Aggregation": {
-            "Expression": {
-              "Column": {
-                "Expression": {
-                  "SourceRef": {
-                    "Entity": "Asset"
-                  }
-                },
-                "Property": "Asset Count"
-              }
-            },
-            "Function": 0
-          }
-        },
-        "type": "Advanced"
-      }
-    ]
   }
 }

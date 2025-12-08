@@ -1,13 +1,13 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
-  "name": "f8a9ae0025425d07a65c",
+  "name": "d1e0dd9b754aac9a4576",
   "position": {
     "x": 0,
-    "y": 74.177897574123989,
+    "y": 0,
     "z": 0,
-    "height": 646.03773584905662,
+    "height": 719.71530249110322,
     "width": 1280,
-    "tabOrder": 1000
+    "tabOrder": 0
   },
   "visual": {
     "visualType": "tableEx",
@@ -15,6 +15,21 @@
       "queryState": {
         "Values": {
           "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Asset"
+                    }
+                  },
+                  "Property": "Reference"
+                }
+              },
+              "queryRef": "Asset.Reference",
+              "nativeQueryRef": "Asset ID",
+              "displayName": "Asset ID"
+            },
             {
               "field": {
                 "Column": {
@@ -37,20 +52,6 @@
                       "Entity": "Asset"
                     }
                   },
-                  "Property": "Reference"
-                }
-              },
-              "queryRef": "Asset.Reference",
-              "nativeQueryRef": "Reference"
-            },
-            {
-              "field": {
-                "Column": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "Asset"
-                    }
-                  },
                   "Property": "Asset Name"
                 }
               },
@@ -62,28 +63,60 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Property"
+                      "Entity": "Asset"
                     }
                   },
-                  "Property": "Property"
+                  "Property": "Latest Assigned To"
                 }
               },
-              "queryRef": "Property.Property",
-              "nativeQueryRef": "Property"
+              "queryRef": "Asset.Latest Assigned To",
+              "nativeQueryRef": "Asset Assignment",
+              "displayName": "Asset Assignment"
             },
             {
               "field": {
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Property Fact"
+                      "Entity": "Observation Status"
                     }
                   },
-                  "Property": "Property Value"
+                  "Property": "Observation Status"
                 }
               },
-              "queryRef": "Property Fact.Property Value",
-              "nativeQueryRef": "Property Value"
+              "queryRef": "Observation Status.Observation Status",
+              "nativeQueryRef": "Defect Status",
+              "displayName": "Defect Status"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Observation"
+                    }
+                  },
+                  "Property": "ObservedOn"
+                }
+              },
+              "queryRef": "Observation.ObservedOn",
+              "nativeQueryRef": "Defect Date",
+              "displayName": "Defect Date"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Observation"
+                    }
+                  },
+                  "Property": "Observation"
+                }
+              },
+              "queryRef": "Observation.Observation",
+              "nativeQueryRef": "Details of Defect",
+              "displayName": "Details of Defect"
             }
           ]
         }
@@ -95,13 +128,13 @@
               "Column": {
                 "Expression": {
                   "SourceRef": {
-                    "Entity": "Property"
+                    "Entity": "Observation"
                   }
                 },
-                "Property": "Property"
+                "Property": "ObservedOn"
               }
             },
-            "direction": "Ascending"
+            "direction": "Descending"
           }
         ]
       }
@@ -113,35 +146,7 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "257.54396759256275D"
-                }
-              }
-            }
-          },
-          "selector": {
-            "metadata": "Asset.Asset Name"
-          }
-        },
-        {
-          "properties": {
-            "value": {
-              "expr": {
-                "Literal": {
-                  "Value": "163.14629851811162D"
-                }
-              }
-            }
-          },
-          "selector": {
-            "metadata": "Asset.Asset Type"
-          }
-        },
-        {
-          "properties": {
-            "value": {
-              "expr": {
-                "Literal": {
-                  "Value": "100D"
+                  "Value": "119.88660308464745D"
                 }
               }
             }
@@ -155,27 +160,13 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "215.31914893617022D"
+                  "Value": "158.38743500456178D"
                 }
               }
             }
           },
           "selector": {
-            "metadata": "Property.Property"
-          }
-        },
-        {
-          "properties": {
-            "value": {
-              "expr": {
-                "Literal": {
-                  "Value": "165.39083557951483D"
-                }
-              }
-            }
-          },
-          "selector": {
-            "metadata": "Property Fact.Property Value"
+            "metadata": "Asset.Asset Type"
           }
         }
       ]
