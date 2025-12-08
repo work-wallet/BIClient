@@ -93,6 +93,7 @@ CREATE TABLE mart.AssetObservation
     ,AssetObservationStatus_key int NOT NULL
     ,ObservedOn datetimeoffset(7) NOT NULL
     ,ObservedBy nvarchar(81) NOT NULL
+    ,Deleted bit NOT NULL
     ,ClosedOn datetimeoffset(7) NULL -- allow NULLs
     ,ClosedBy nvarchar(81) NOT NULL
     ,ClosureNotes nvarchar(max) NOT NULL

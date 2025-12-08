@@ -16,6 +16,7 @@ BEGIN
             ,aostat.AssetObservationStatus_key
             ,o.ObservedOn
             ,o.ObservedBy
+            ,o.Deleted
             ,o.ClosedOn
             ,o.ClosedBy
             ,o.ClosureNotes
@@ -34,6 +35,7 @@ BEGIN
         OR target.AssetObservationStatus_key <> source.AssetObservationStatus_key
         OR target.ObservedOn <> source.ObservedOn
         OR target.ObservedBy <> source.ObservedBy
+        OR target.Deleted <> source.Deleted
         OR target.ClosedOn IS DISTINCT FROM source.ClosedOn
         OR target.ClosedBy <> source.ClosedBy
         OR target.ClosureNotes <> source.ClosureNotes
@@ -47,6 +49,7 @@ BEGIN
             ,AssetObservationStatus_key = source.AssetObservationStatus_key
             ,ObservedOn = source.ObservedOn
             ,ObservedBy = source.ObservedBy
+            ,Deleted = source.Deleted
             ,ClosedOn = source.ClosedOn
             ,ClosedBy = source.ClosedBy
             ,ClosureNotes = source.ClosureNotes
@@ -61,6 +64,7 @@ BEGIN
             ,AssetObservationStatus_key
             ,ObservedOn
             ,ObservedBy
+            ,Deleted
             ,ClosedOn
             ,ClosedBy
             ,ClosureNotes
@@ -73,6 +77,7 @@ BEGIN
             ,source.AssetObservationStatus_key
             ,source.ObservedOn
             ,source.ObservedBy
+            ,source.Deleted
             ,source.ClosedOn
             ,source.ClosedBy
             ,source.ClosureNotes
