@@ -4,7 +4,7 @@ All notable changes to this project will be documented in this file.
 
 The format loosely follows Keep a Changelog principles (dates in YYYY-MM-DD). Version numbers align with assembly versions unless otherwise noted.
 
-## [Unreleased] (4.3.0)
+## [4.3.0] - 2025-12-09
 
 ### Added (4.3.0)
 
@@ -30,6 +30,7 @@ Associated contact import added across existing datasets:
 - Units (units of measure) reference data expanded with additional values.
 - Documentation improvements: sample JSON + reference data sections clarified and expanded.
 - All reset stored procedures replaced by consolidated `DeleteAllData` stored procedure.
+- All Power BI sample reports now use the default Power BI theme.
 
 ## [4.2.0] - 2025-10-09
 
