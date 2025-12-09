@@ -100,12 +100,6 @@ public class ProcessorService(
         // obtain our last database change tracking synchronization number (or null if this is the first sync)
         long? lastSynchronizationVersion = await dataStore.GetLastSynchronizationVersionAsync(walletContext.Id, logType);
 
-        if (!lastSynchronizationVersion.HasValue)
-        {
-            // no last synchronization data, treat this as a reset and delete all data
-            await dataStore.ResetAsync(walletContext.Id, dataType);
-        }
-
         return new ProcessingState(lastSynchronizationVersion);
     }
 
@@ -177,8 +171,9 @@ public class ProcessorService(
             {
                 var pageResult = await ProcessSinglePageAsync(
                     walletContext, dataType, lastSynchronizationVersion, 
-                    pageNumber, currentPageSize, cancellationToken);
-                
+                    pageNumber, currentPageSize, _serviceOptions.SetBetaFlag,
+                    cancellationToken);
+
                 return new PageResultWithSize(pageResult.Context, pageResult.Json, currentPageSize);
             }
             catch (PageSizeExceededException ex)
@@ -203,11 +198,12 @@ public class ProcessorService(
         long? lastSynchronizationVersion,
         int pageNumber,
         int pageSize,
+        bool? setBetaFlag,
         CancellationToken cancellationToken)
     {
         // call the Work Wallet API end point and obtain the results as JSON
         string walletSecret = GetSecretForWallet(walletContext.Id);
-        string json = await apiClient.FetchDataPageAsync(walletContext, walletSecret, dataType, lastSynchronizationVersion, pageNumber, pageSize, cancellationToken);
+        string json = await apiClient.FetchDataPageAsync(walletContext, walletSecret, dataType, lastSynchronizationVersion, pageNumber, pageSize, setBetaFlag, cancellationToken);
 
         progressService.ShowProgress();
 
@@ -266,6 +262,7 @@ public class ProcessorService(
         logger.LogDebug("LastSynchronizationVersion: {LastSynchronizationVersion}", context.LastSynchronizationVersion);
         logger.LogDebug("SynchronizationVersion: {SynchronizationVersion}", context.SynchronizationVersion);
         logger.LogDebug("PageNumber: {PageNumber}, PageSize: {PageSize}", context.PageNumber, context.PageSize);
+        logger.LogDebug("ExecutionTimeMs: {ExecutionTimeMs}", context.ExecutionTimeMs);
     }
 
     /// <summary>

@@ -6,12 +6,13 @@ The samples are indicative and may not be realistic or represent the full range 
 Each sample shows the standard response structure including:
 
 - **Context**: Pagination and synchronization metadata
-- **Wallets**: Wallet information for the returned data
 - **Dataset-specific arrays**: The actual data for each dataset type
 
-## Datasets
+Jump to the relevant section:
 
 - [Actions](#actions)
+- [AssetInspections](#assetinspections)
+- [AssetObservations](#assetobservations)
 - [Assets](#assets)
 - [Audits](#audits)
 - [Inductions](#inductions)
@@ -22,11 +23,26 @@ Each sample shows the standard response structure including:
 - [ReportedIssues](#reportedissues)
 - [SafetyCards](#safetycards)
 
+## NULL Handling Convention
+
+**Important**: The API's NULL handling has evolved over time, creating two conventions:
+
+- **Earlier implementations**: Use placeholder values to represent NULL. Fields are always present with special "no data" values:
+  - `-1` for numeric fields
+  - `1900-01-01` or `0001-01-01T00:00:00+00:00` for dates
+  - `00000000-0000-0000-0000-000000000000` for GUIDs
+  - Empty strings `""` for text fields
+
+- **Recent implementations**: Follow standard JSON convention—NULL values are represented by omitting the field from the response.
+
+Some datasets are hybrid, using placeholders in original fields and omitted fields for newer additions. Specific handling is documented in each dataset's "Notes" section. Consumers must handle both conventions appropriately.
+
 ## Actions
 
 ```json
 {
   "Context": {
+    "Dataset": "Actions",
     "Version": 1,
     "Count": 1,
     "FullCount": 1,
@@ -36,7 +52,8 @@ Each sample shows the standard response structure including:
     "SynchronizationVersion": 1200,
     "MinValidSynchronizationVersion": 900,
     "Error": "",
-    "UTC": "2025-09-10T12:00:00Z"
+    "UTC": "2025-09-10T12:00:00Z",
+    "ExecutionTimeMs": 45
   },
   "Wallets": [
     {
@@ -82,11 +99,12 @@ Notes
   - **DueOn**: `1900-01-01` indicates no data
   - **OriginalDueOn**: `1900-01-01` indicates no data
 
-## Assets
+## AssetInspections
 
 ```json
 {
   "Context": {
+    "Dataset": "AssetInspections",
     "Version": 1,
     "Count": 1,
     "FullCount": 1,
@@ -96,7 +114,199 @@ Notes
     "SynchronizationVersion": 1200,
     "MinValidSynchronizationVersion": 900,
     "Error": "",
-    "UTC": "2025-09-10T10:22:00Z"
+    "UTC": "2025-09-10T11:45:00Z",
+    "ExecutionTimeMs": 171,
+  },
+  "Wallets": [
+    {
+      "WalletId": "a3e1c9f2-5d4b-4330-9c2f-1c2b8f0d9a77",
+      "Wallet": "Northwind Construction Ltd"
+    }
+  ],
+  "Assets": [
+    {
+      "AssetId": "5b9c97f1-22ff-41fa-9434-7b4b0f8f5d79",
+      "AssetType": "Forklift Truck",
+      "AssetStatusCode": 0,
+      "Reference": "NWC-00421",
+      "Name": "Warehouse Forklift A",
+      "Description": "3.5T diesel forklift used in North Yard loading bay. Next service due Q4.",
+      "CreatedOn": "2025-08-30T09:15:42.1234567+00:00",
+      "WalletId": "a3e1c9f2-5d4b-4330-9c2f-1c2b8f0d9a77"
+    }
+  ],
+  "Inspections": [
+    {
+      "AssetId": "5b9c97f1-22ff-41fa-9434-7b4b0f8f5d79",
+      "InspectionId": "45bc057d-2bae-4d05-a842-037d054fe60a",
+      "InspectionTypeId": "77e298df-9b87-430b-8a12-c9b15757fd62",
+      "InspectionType": "Daily Check",
+      "InspectionDate": "2025-09-05T11:45:00",
+      "InspectedBy": "Taylor Example",
+      "Deleted": false,
+      "WalletId": "a3e1c9f2-5d4b-4330-9c2f-1c2b8f0d9a77"
+    }
+  ],
+  "ChecklistItemStatuses": [
+    {
+      "AssetId": "5b9c97f1-22ff-41fa-9434-7b4b0f8f5d79",
+      "InspectionId": "45bc057d-2bae-4d05-a842-037d054fe60a",
+      "ChecklistId": "5ba73a16-d3db-40fa-9e35-77818778e8b6",
+      "ChecklistName": "Pre-Operation Checks",
+      "ChecklistDisplayOrder": 1,
+      "ChecklistItemId": "22b18b57-4eda-4df4-b674-66d11a11017f",
+      "ChecklistItemName": "Hydraulic System",
+      "ChecklistItemDisplayOrder": 1,
+      "Response": 3,
+      "ResponseText": "No Issues",
+      "WalletId": "a3e1c9f2-5d4b-4330-9c2f-1c2b8f0d9a77"
+    },
+    {
+      "AssetId": "5b9c97f1-22ff-41fa-9434-7b4b0f8f5d79",
+      "InspectionId": "45bc057d-2bae-4d05-a842-037d054fe60a",
+      "ChecklistId": "5ba73a16-d3db-40fa-9e35-77818778e8b6",
+      "ChecklistName": "Pre-Operation Checks",
+      "ChecklistDisplayOrder": 1,
+      "ChecklistItemId": "6f054a65-2a87-41e5-afde-8cc88e3cff7b",
+      "ChecklistItemName": "Brakes",
+      "ChecklistItemDisplayOrder": 2,
+      "Response": 2,
+      "ResponseText": "Minor Failure",
+      "WalletId": "a3e1c9f2-5d4b-4330-9c2f-1c2b8f0d9a77"
+    }
+  ],
+  "InspectionProperties": [
+    {
+      "AssetId": "5b9c97f1-22ff-41fa-9434-7b4b0f8f5d79",
+      "InspectionId": "45bc057d-2bae-4d05-a842-037d054fe60a",
+      "PropertyId": "2a86b228-c6e6-4c4c-aa7e-d346a21fdb89",
+      "Property": "Fuel Level",
+      "PropertyType": "Number",
+      "DisplayOrder": 1,
+      "Value": "75",
+      "WalletId": "a3e1c9f2-5d4b-4330-9c2f-1c2b8f0d9a77"
+    },
+    {
+      "AssetId": "5b9c97f1-22ff-41fa-9434-7b4b0f8f5d79",
+      "InspectionId": "45bc057d-2bae-4d05-a842-037d054fe60a",
+      "PropertyId": "3b97c339-d7f7-5d5d-bb8f-e457b32aec9a",
+      "Property": "Weather Conditions",
+      "PropertyType": "Text",
+      "DisplayOrder": 2,
+      "Value": "Clear",
+      "WalletId": "a3e1c9f2-5d4b-4330-9c2f-1c2b8f0d9a77"
+    }
+  ],
+  "Observations": [
+    {
+      "AssetId": "5b9c97f1-22ff-41fa-9434-7b4b0f8f5d79",
+      "ObservationId": "a21b224a-df1c-4a89-a4b7-bf9291d18555",
+      "Details": "Brake pads showing wear. Replacement recommended within next 2 weeks.",
+      "ActionTaken": "Tagged for maintenance",
+      "ObservationStatusCode": 1,
+      "ObservedOn": "2025-09-05T11:46:00+00:00",
+      "ObservedBy": "Taylor Example",
+      "Deleted": false,
+      "ClosedBy": "",
+      "ClosureNotes": "",
+      "WalletId": "a3e1c9f2-5d4b-4330-9c2f-1c2b8f0d9a77"
+    }
+  ],
+  "InspectionObservations": [
+    {
+      "InspectionId": "45bc057d-2bae-4d05-a842-037d054fe60a",
+      "ObservationId": "a21b224a-df1c-4a89-a4b7-bf9291d18555",
+      "ChecklistItemId": "6f054a65-2a87-41e5-afde-8cc88e3cff7b",
+      "New": true,
+      "WalletId": "a3e1c9f2-5d4b-4330-9c2f-1c2b8f0d9a77"
+    }
+  ]
+}
+```
+
+Notes
+
+- Observations
+  - **ClosedOn**: if `null` no field will be returned
+- InspectionObservations
+  - **ChecklistItemId**: if `null` no field will be returned
+
+## AssetObservations
+
+```json
+{
+  "Context": {
+    "Dataset": "AssetObservations",
+    "Version": 1,
+    "Count": 1,
+    "FullCount": 1,
+    "PageNumber": 1,
+    "PageSize": 500,
+    "LastSynchronizationVersion": 1050,
+    "SynchronizationVersion": 1200,
+    "MinValidSynchronizationVersion": 900,
+    "Error": "",
+    "UTC": "2025-09-10T16:54:00Z",
+    "ExecutionTimeMs": 74,
+  },
+  "Wallets": [
+    {
+      "WalletId": "a3e1c9f2-5d4b-4330-9c2f-1c2b8f0d9a77",
+      "Wallet": "Northwind Construction Ltd"
+    }
+  ],
+  "Assets": [
+    {
+      "AssetId": "67efa50f-ff76-4c95-9800-bb54ac57cdab",
+      "AssetType": "Machine",
+      "AssetStatusCode": 0,
+      "Reference": "MC-572384",
+      "Name": "Main Plant Machine",
+      "Description": "Primary production machine for assembly line A",
+      "CreatedOn": "2025-03-02T13:57:10.4003836+00:00",
+      "WalletId": "a3e1c9f2-5d4b-4330-9c2f-1c2b8f0d9a77"
+    }
+  ],
+  "Observations": [
+    {
+      "AssetId": "67efa50f-ff76-4c95-9800-bb54ac57cdab",
+      "ObservationId": "94041a6a-7295-451f-91b0-18ef8e357d4e",
+      "Details": "Unusual vibration detected during operation. Requires investigation.",
+      "ActionTaken": "Machine taken offline for inspection",
+      "ObservationStatusCode": 1,
+      "ObservedOn": "2025-09-03T16:54:24.2830000+00:00",
+      "ObservedBy": "Jordan Example",
+      "Deleted": false,
+      "ClosedBy": "",
+      "ClosureNotes": "",
+      "WalletId": "a3e1c9f2-5d4b-4330-9c2f-1c2b8f0d9a77"
+    }
+  ]
+}
+```
+
+Notes
+
+- Observations
+  - **ClosedOn**: if `null` no field will be returned
+
+## Assets
+
+```json
+{
+  "Context": {
+    "Dataset": "Assets",
+    "Version": 1,
+    "Count": 1,
+    "FullCount": 1,
+    "PageNumber": 1,
+    "PageSize": 500,
+    "LastSynchronizationVersion": 1050,
+    "SynchronizationVersion": 1200,
+    "MinValidSynchronizationVersion": 900,
+    "Error": "",
+    "UTC": "2025-09-10T10:22:00Z",
+    "ExecutionTimeMs": 52
   },
   "Wallets": [
     {
@@ -119,9 +329,38 @@ Notes
   "Properties": [
     {
       "AssetId": "2a1bdc44-6e3b-4d2c-9ab7-1e5c0b9f3a21",
+      "PropertyId": "1a2b3c4d-5e6f-4a78-9b01-c2d3e4f5a6b7",
       "Property": "Load Capacity (kg)",
       "PropertyType": "Number",
+      "DisplayOrder": 1,
       "Value": "2500",
+      "WalletId": "a3e1c9f2-5d4b-4330-9c2f-1c2b8f0d9a77"
+    },
+    {
+      "AssetId": "2a1bdc44-6e3b-4d2c-9ab7-1e5c0b9f3a21",
+      "PropertyId": "2b3c4d5e-6f7a-4b89-ac12-d3e4f5a6b7c8",
+      "Property": "Last Service Date",
+      "PropertyType": "Date",
+      "DisplayOrder": 2,
+      "Value": "2025-06-15",
+      "WalletId": "a3e1c9f2-5d4b-4330-9c2f-1c2b8f0d9a77"
+    },
+    {
+      "AssetId": "2a1bdc44-6e3b-4d2c-9ab7-1e5c0b9f3a21",
+      "PropertyId": "3c4d5e6f-7a8b-4c90-bd23-e4f5a6b7c8d9",
+      "Property": "Fuel Type",
+      "PropertyType": "Select",
+      "DisplayOrder": 3,
+      "Value": "Diesel",
+      "WalletId": "a3e1c9f2-5d4b-4330-9c2f-1c2b8f0d9a77"
+    }
+  ],
+  "Contacts": [
+    {
+      "ContactId": "5d6e7f8a-9b0c-4d12-ae34-f5a6b7c8d9e0",
+      "Name": "Jordan Example",
+      "EmailAddress": "jordan.example@example.invalid",
+      "CompanyName": "Northwind Construction Ltd",
       "WalletId": "a3e1c9f2-5d4b-4330-9c2f-1c2b8f0d9a77"
     }
   ],
@@ -131,10 +370,23 @@ Notes
       "AssignedOn": "2025-09-01T08:00:00+00:00",
       "AssignmentType": "Site",
       "AssignedTo": "Acme Utilities Ltd - North Yard",
+      "AssignedToContactId": null,
       "CompanyId": "a1b2c3d4-1111-2222-3333-444455556666",
       "Company": "Acme Utilities Ltd",
       "SiteId": "0f1e2d3c-aaaa-bbbb-cccc-ddddeeeeffff",
       "Site": "North Yard",
+      "WalletId": "a3e1c9f2-5d4b-4330-9c2f-1c2b8f0d9a77"
+    },
+    {
+      "AssetId": "2a1bdc44-6e3b-4d2c-9ab7-1e5c0b9f3a21",
+      "AssignedOn": "2025-09-05T14:30:00+00:00",
+      "AssignmentType": "User",
+      "AssignedTo": "Jordan Example",
+      "AssignedToContactId": "5d6e7f8a-9b0c-4d12-ae34-f5a6b7c8d9e0",
+      "CompanyId": "a3e1c9f2-5d4b-4330-9c2f-1c2b8f0d9a77",
+      "Company": "Northwind Construction Ltd",
+      "SiteId": "00000000-0000-0000-0000-000000000000",
+      "Site": "",
       "WalletId": "a3e1c9f2-5d4b-4330-9c2f-1c2b8f0d9a77"
     }
   ]
@@ -144,6 +396,7 @@ Notes
 Notes
 
 - Assignments
+  - **AssignedToContactId**: if `null` no field will be returned
   - **CompanyId**: `00000000-0000-0000-0000-000000000000` indicates no data
   - **SiteId**: `00000000-0000-0000-0000-000000000000` indicates no data
 
@@ -152,6 +405,7 @@ Notes
 ```json
 {
   "Context": {
+    "Dataset": "Audits",
     "Version": 1,
     "Count": 1,
     "FullCount": 1,
@@ -161,7 +415,8 @@ Notes
     "SynchronizationVersion": 1200,
     "MinValidSynchronizationVersion": 900,
     "Error": "",
-    "UTC": "2025-09-10T10:12:34Z"
+    "UTC": "2025-09-10T10:12:34Z",
+    "ExecutionTimeMs": 128
   },
   "Wallets": [
     {
@@ -426,6 +681,7 @@ Notes:
 ```json
 {
   "Context": {
+    "Dataset": "Inductions",
     "Version": 1,
     "Count": 1,
     "FullCount": 1,
@@ -435,12 +691,22 @@ Notes:
     "SynchronizationVersion": 1205,
     "MinValidSynchronizationVersion": 900,
     "Error": "",
-    "UTC": "2025-09-10T10:22:00Z"
+    "UTC": "2025-09-10T10:22:00Z",
+    "ExecutionTimeMs": 38
   },
   "Wallets": [
     {
       "WalletId": "a3e1c9f2-5d4b-4330-9c2f-1c2b8f0d9a77",
       "Wallet": "Northwind Construction Ltd"
+    }
+  ],
+  "Contacts": [
+    {
+      "ContactId": "7f6a2e10-1c59-4db8-9b6e-1b2f3c4d5e6f",
+      "Name": "Casey Example",
+      "EmailAddress": "casey.example@example.invalid",
+      "CompanyName": "Contoso Civil Ltd",
+      "WalletId": "a3e1c9f2-5d4b-4330-9c2f-1c2b8f0d9a77"
     }
   ],
   "InductionsTaken": [
@@ -494,6 +760,7 @@ Notes
 ```json
 {
   "Context": {
+    "Dataset": "Permits",
     "Version": 1,
     "Count": 1,
     "FullCount": 1,
@@ -503,7 +770,8 @@ Notes
     "SynchronizationVersion": 987654400,
     "MinValidSynchronizationVersion": 987650000,
     "Error": "",
-    "UTC": "2025-09-10T10:22:00Z"
+    "UTC": "2025-09-10T10:22:00Z",
+    "ExecutionTimeMs": 67
   },
   "Wallets": [
     {
@@ -602,6 +870,7 @@ Notes
 ```json
 {
   "Context": {
+    "Dataset": "PPEAssignments",
     "Version": 1,
     "Count": 1,
     "FullCount": 1,
@@ -611,7 +880,8 @@ Notes
     "SynchronizationVersion": 1200,
     "MinValidSynchronizationVersion": 900,
     "Error": "",
-    "UTC": "2025-09-10T10:15:00Z"
+    "UTC": "2025-09-10T10:15:00Z",
+    "ExecutionTimeMs": 73
   },
   "Wallets": [
     {
@@ -729,6 +999,7 @@ Notes
 ```json
 {
   "Context": {
+    "Dataset": "PPEStockHistories",
     "Version": 1,
     "Count": 1,
     "FullCount": 1,
@@ -738,7 +1009,8 @@ Notes
     "SynchronizationVersion": 1200,
     "MinValidSynchronizationVersion": 900,
     "Error": "",
-    "UTC": "2025-09-10T10:32:00Z"
+    "UTC": "2025-09-10T10:32:00Z",
+    "ExecutionTimeMs": 56
   },
   "Wallets": [
     {
@@ -838,6 +1110,7 @@ Notes
 ```json
 {
   "Context": {
+    "Dataset": "PPEStocks",
     "Version": 1,
     "Count": 1,
     "FullCount": 1,
@@ -847,7 +1120,8 @@ Notes
     "SynchronizationVersion": 110250,
     "MinValidSynchronizationVersion": 108000,
     "Error": "",
-    "UTC": "2025-09-10T12:34:56Z"
+    "UTC": "2025-09-10T12:34:56Z",
+    "ExecutionTimeMs": 41
   },
   "Wallets": [
     {
@@ -922,6 +1196,7 @@ Notes
 ```json
 {
   "Context": {
+    "Dataset": "ReportedIssues",
     "Version": 1,
     "Count": 1,
     "FullCount": 1,
@@ -931,7 +1206,8 @@ Notes
     "SynchronizationVersion": 13042,
     "MinValidSynchronizationVersion": 11000,
     "Error": "",
-    "UTC": "2025-09-10T10:22:00Z"
+    "UTC": "2025-09-10T10:22:00Z",
+    "ExecutionTimeMs": 94
   },
   "Wallets": [
     {
@@ -959,6 +1235,15 @@ Notes
       "WalletId": "a3e1c9f2-5d4b-4330-9c2f-1c2b8f0d9a77"
     }
   ],
+  "Contacts": [
+    {
+      "ContactId": "4f5e6d7c-8b9a-40c1-9d2e-3f4a5b6c7d8e",
+      "Name": "Alex Example",
+      "EmailAddress": "alex.example@example.invalid",
+      "CompanyName": "Northwind Construction Ltd",
+      "WalletId": "a3e1c9f2-5d4b-4330-9c2f-1c2b8f0d9a77"
+    }
+  ],
   "ReportedIssues": [
     {
       "ReportedIssueId": "7b2d1c9e-8356-4a9e-b5c1-0e2f4a6b9d31",
@@ -966,6 +1251,7 @@ Notes
       "OccurredOn": "2025-09-08T07:45:00",
       "ReportedOn": "2025-09-08T08:10:00",
       "ReportedBy": "Alex Example",
+      "ReportedByContactId": "4f5e6d7c-8b9a-40c1-9d2e-3f4a5b6c7d8e",
       "ReportedByCompany": "Northwind Construction Ltd",
       "ReportedIssueStatusCode": 3,
       "SubcategoryId": "0ab4c92f-6a3c-4b21-8a1f-4f2a6e9d0b55",
@@ -1098,6 +1384,7 @@ Notes
 ```json
 {
   "Context": {
+    "Dataset": "SafetyCards",
     "Version": 1,
     "Count": 1,
     "FullCount": 1,
@@ -1107,7 +1394,8 @@ Notes
     "SynchronizationVersion": 131234,
     "MinValidSynchronizationVersion": 120000,
     "Error": "",
-    "UTC": "2025-09-10T12:34:56Z"
+    "UTC": "2025-09-10T12:34:56Z",
+    "ExecutionTimeMs": 81
   },
   "Wallets": [
     {
@@ -1143,6 +1431,15 @@ Notes
       "WalletId": "a3e1c9f2-5d4b-4330-9c2f-1c2b8f0d9a77"
     }
   ],
+  "Contacts": [
+    {
+      "ContactId": "8d9e0f1a-2b3c-4d5e-9f6a-7b8c9d0e1f2a",
+      "Name": "Casey Worker",
+      "EmailAddress": "casey.worker@example.invalid",
+      "CompanyName": "Northwind Construction Ltd",
+      "WalletId": "a3e1c9f2-5d4b-4330-9c2f-1c2b8f0d9a77"
+    }
+  ],
   "SafetyCards": [
     {
       "SafetyCardId": "7e1b2c3d-4e5f-4a67-9abc-12de34f56a78",
@@ -1153,6 +1450,7 @@ Notes
       "SafetyCardCategoryId": "3a4b5c6d-7e8f-49a0-b1c2-d3e4f5a6b7c8",
       "Employer": "Northwind Construction Ltd",
       "Employee": "Casey Worker",
+      "EmployeeContactId": "8d9e0f1a-2b3c-4d5e-9f6a-7b8c9d0e1f2a",
       "InductionNumber": "IND-4821",
       "ReportDetails": "Loose debris found near the loading bay; area cordoned and housekeeping requested.",
       "SafetyCardStatusCode": 0,
@@ -1177,4 +1475,5 @@ Notes
   - **JobId**: `00000000-0000-0000-0000-000000000000` indicates no data
   - **SiteLocationId**: `00000000-0000-0000-0000-000000000000` indicates no data
 - SafetyCards
+  - **EmployeeContactId**: if `null` no field will be returned
   - **OccupationRoleCode**: `-1` indicates no data

@@ -50,7 +50,7 @@ table 'Assignment History'
 
 	column 'Actioned On'
 		dataType: dateTime
-		formatString: General Date
+		formatString: dd/mm/yyyy hh:nn
 		lineageTag: 29b12a50-5d6e-41f8-8a50-1a8183b35596
 		summarizeBy: none
 		sourceColumn: Actioned On
@@ -61,6 +61,8 @@ table 'Assignment History'
 			defaultHierarchy: LocalDateTable_e606528f-20e0-40a8-9fec-9f1f7011e6bc.'Date Hierarchy'
 
 		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
 
 	column Wallet_key
 		dataType: int64
@@ -85,6 +87,49 @@ table 'Assignment History'
 		changedProperty = IsHidden
 
 		annotation SummarizationSetBy = User
+
+	column From =
+			
+			VAR ActionValue = RELATED('PPE Action'[PPE Action])
+			RETURN
+			SWITCH(
+			    TRUE(),
+			    ActionValue = "Assigned" || ActionValue = "Replaced",
+			        "Stock - " & RELATED(Assignment[Assigned From Stock Site]),
+			    ActionValue = "Returned" || ActionValue = "Removed",
+			        RELATED('Assigned To Contact'[Contact Name]),
+			    BLANK()
+			)
+		lineageTag: 3a11c5eb-edc6-44c3-b183-9f1f268960dc
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column To =
+			
+			VAR ActionValue = RELATED('PPE Action'[PPE Action])
+			RETURN
+			SWITCH(
+			    TRUE(),
+			    ActionValue = "Assigned" || ActionValue = "Replaced",
+			        RELATED('Assigned To Contact'[Contact Name]),
+			    ActionValue = "Returned",
+			        "Stock - " & RELATED(Assignment[Returned To Stock Site]),
+			    ActionValue = "Removed",
+			        "-",
+			    BLANK()
+			)
+		lineageTag: 5a60f4a5-5b8b-4303-82ea-a74efa4ac6e2
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Assignment History Count' = 1
+		formatString: 0
+		lineageTag: cdf5b877-493f-4e86-b53c-e992466c16da
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
 
 	partition 'Assignment History' = m
 		mode: import

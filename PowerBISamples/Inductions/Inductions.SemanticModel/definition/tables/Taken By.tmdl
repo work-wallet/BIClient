@@ -65,7 +65,7 @@ table 'Taken By'
 
 	column 'Taken On'
 		dataType: dateTime
-		formatString: General Date
+		formatString: dd/mm/yyyy hh:nn
 		lineageTag: 8ba6e657-d8cb-4831-b2ec-ac972b819fd5
 		summarizeBy: none
 		sourceColumn: Taken On
@@ -76,6 +76,8 @@ table 'Taken By'
 			defaultHierarchy: LocalDateTable_705796de-106f-48c0-811d-f11b3483f209.'Date Hierarchy'
 
 		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
 
 	column 'Correct Test Question Count'
 		dataType: int64
@@ -116,6 +118,18 @@ table 'Taken By'
 		summarizeBy: sum
 
 		annotation SummarizationSetBy = Automatic
+
+	column Contact_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 3e0702db-4220-4710-a021-4c91ab74cc8a
+		summarizeBy: none
+		sourceColumn: Contact_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
 
 	partition 'Taken By' = m
 		mode: import

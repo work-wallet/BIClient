@@ -1,13 +1,13 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.2.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
   "name": "c65ad40734e7e7c19805",
   "position": {
     "x": 0,
-    "y": 74.177897574123989,
-    "z": 1000,
-    "height": 646.03773584905662,
+    "y": 79.389933909506865,
+    "z": 0,
+    "height": 640.32536858159642,
     "width": 1280,
-    "tabOrder": 1000
+    "tabOrder": 0
   },
   "visual": {
     "visualType": "tableEx",
@@ -165,26 +165,13 @@
               "Column": {
                 "Expression": {
                   "SourceRef": {
-                    "Entity": "Asset"
-                  }
-                },
-                "Property": "Reference"
-              }
-            },
-            "direction": "Ascending"
-          },
-          {
-            "field": {
-              "Column": {
-                "Expression": {
-                  "SourceRef": {
                     "Entity": "Assignment Fact"
                   }
                 },
-                "Property": "Assignment Number"
+                "Property": "From"
               }
             },
-            "direction": "Ascending"
+            "direction": "Descending"
           }
         ]
       }
@@ -252,20 +239,6 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "266D"
-                }
-              }
-            }
-          },
-          "selector": {
-            "metadata": "Assignment.Assigned To"
-          }
-        },
-        {
-          "properties": {
-            "value": {
-              "expr": {
-                "Literal": {
                   "Value": "109D"
                 }
               }
@@ -280,7 +253,7 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "64D"
+                  "Value": "97.06991494962743D"
                 }
               }
             }
@@ -294,7 +267,7 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "77D"
+                  "Value": "107.15196638525886D"
                 }
               }
             }
@@ -329,6 +302,20 @@
           },
           "selector": {
             "metadata": "Asset.Asset Notes"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "215D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Assignment.Assigned To"
           }
         }
       ]

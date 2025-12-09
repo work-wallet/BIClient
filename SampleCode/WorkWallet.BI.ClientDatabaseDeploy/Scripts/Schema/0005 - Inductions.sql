@@ -58,6 +58,7 @@ CREATE TABLE mart.InductionTaken
     InductionTaken_key int IDENTITY
     ,InductionTakenId uniqueidentifier NOT NULL
     ,Induction_key int NOT NULL
+    ,Contact_key int NULL -- allow NULLs (data from older versions of the API did not process contacts, will never be NULL for new data)
     ,ContactId uniqueidentifier NOT NULL
     ,[Name] nvarchar(max) NOT NULL
     ,CompanyName nvarchar(max) NOT NULL

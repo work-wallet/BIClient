@@ -86,6 +86,29 @@ BEGIN
 
         EXEC mart.ETL_LoadAssetPropertyFact @assetPropertyTable = @assetPropertyTable;
 
+        -- load the Contact dimension
+
+        DECLARE @contactTable mart.ETL_ContactTable;
+        INSERT INTO @contactTable
+        (
+            ContactId
+            ,[Name]
+            ,EmailAddress
+            ,CompanyName
+            ,WalletId
+        )
+        SELECT * FROM OPENJSON(@json, '$.Contacts')
+        WITH
+        (
+            ContactId uniqueidentifier
+            ,[Name] nvarchar(max)
+            ,EmailAddress nvarchar(max)
+            ,CompanyName nvarchar(max)
+            ,WalletId uniqueidentifier
+        );
+
+        EXEC mart.ETL_MaintainContactDimension @contactTable = @contactTable;
+
         -- load the AssetAssignment data
 
         DECLARE @assetAssignmentTable mart.ETL_AssetAssignmentTable;
@@ -96,6 +119,7 @@ BEGIN
             ,AssignedOn
             ,AssignmentType
             ,AssignedTo
+            ,AssignedToContactId
             ,CompanyId
             ,Company
             ,SiteId
@@ -109,6 +133,7 @@ BEGIN
             ,AssignedOn datetimeoffset(7)
             ,AssignmentType nvarchar(20)
             ,AssignedTo nvarchar(max)
+            ,AssignedToContactId uniqueidentifier
             ,CompanyId uniqueidentifier
             ,Company nvarchar(max)
             ,SiteId uniqueidentifier

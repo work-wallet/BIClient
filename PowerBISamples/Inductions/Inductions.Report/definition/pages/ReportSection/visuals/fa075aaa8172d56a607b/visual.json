@@ -1,11 +1,11 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.2.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.3.0/schema.json",
   "name": "fa075aaa8172d56a607b",
   "position": {
     "x": 0,
-    "y": 0,
+    "y": 101.33333333333333,
     "z": 1,
-    "height": 719.87145152651317,
+    "height": 618.66666666666663,
     "width": 1280,
     "tabOrder": 1
   },
@@ -394,5 +394,84 @@
       ]
     },
     "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "bb2fe30a3e36444275a9",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Taken Status"
+              }
+            },
+            "Property": "Taken Status"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "787474db1986c3fa4782",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Induction"
+              }
+            },
+            "Property": "Induction"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "fc76073c1e456e60e427",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Taken By"
+              }
+            },
+            "Property": "Company"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "09fe65de1e0908fb5a09",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Taken By"
+              }
+            },
+            "Property": "Person"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "080c59c045d1b0d11a09",
+        "field": {
+          "Aggregation": {
+            "Expression": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "Taken By"
+                  }
+                },
+                "Property": "Taken By Count"
+              }
+            },
+            "Function": 0
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
   }
 }

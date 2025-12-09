@@ -18,4 +18,5 @@ public record ProcessorServiceOptions
     public int AgentPageSize { get; init; }
     public int AgentTimeout { get; init; } = 100;
     public required string[] DataSets { get; init; } = [];
-}
+    public bool? SetBetaFlag { get; init; } = null;
+    }

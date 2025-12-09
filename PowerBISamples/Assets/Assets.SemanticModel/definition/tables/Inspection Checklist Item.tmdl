@@ -1,0 +1,92 @@
+table 'Inspection Checklist Item'
+	lineageTag: 1a36bdc1-949f-403a-af2c-b481806f1fdd
+
+	column AssetInspectionChecklistItem_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 1b96b7f8-1fa0-4449-88d1-f7a0d1d9adf0
+		summarizeBy: none
+		sourceColumn: AssetInspectionChecklistItem_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column ChecklistId
+		dataType: string
+		isHidden
+		lineageTag: 302c3f78-a6e1-4e85-a0e5-95b6f6ff4112
+		summarizeBy: none
+		sourceColumn: ChecklistId
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Checklist Name'
+		dataType: string
+		lineageTag: 62f3c642-81ea-4c96-98ce-e5f9ab8e6947
+		summarizeBy: none
+		sourceColumn: Checklist Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column ChecklistItemId
+		dataType: string
+		isHidden
+		lineageTag: 4ecbaefe-7c75-451d-afbb-150661b3010e
+		summarizeBy: none
+		sourceColumn: ChecklistItemId
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Checklist Item Name'
+		dataType: string
+		lineageTag: fae127fd-3db0-4b12-8feb-3a60df9c7945
+		summarizeBy: none
+		sourceColumn: Checklist Item Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Checklist Item Display Order'
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 8dd2e814-4597-44d0-bff7-4ec91436d292
+		summarizeBy: none
+		sourceColumn: Checklist Item Display Order
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column Wallet_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 42a8edbd-dca8-4b74-b2db-2d2ba5ed3b39
+		summarizeBy: none
+		sourceColumn: Wallet_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	partition 'Inspection Checklist Item' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("ww-powerbi-demo.database.windows.net", "powerbi"),
+				    mart_AssetInspectionChecklistItem = Source{[Schema="mart",Item="AssetInspectionChecklistItem"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(mart_AssetInspectionChecklistItem,{"_created", "_edited"}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"ChecklistName", "Checklist Name"}, {"ChecklistItemName", "Checklist Item Name"}, {"ChecklistItemDisplayOrder", "Checklist Item Display Order"}})
+				in
+				    #"Renamed Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

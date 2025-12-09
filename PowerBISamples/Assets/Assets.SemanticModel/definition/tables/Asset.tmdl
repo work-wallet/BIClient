@@ -94,11 +94,99 @@ table Asset
 
 		changedProperty = IsHidden
 
-		annotation SummarizationSetBy = Automatic
+		annotation SummarizationSetBy = User
 
 	column 'Asset Count' = 1
 		formatString: 0
 		lineageTag: 26b70d5a-fc07-4f3a-801b-f18269f49f16
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column Asset = Asset[Asset Type] & " - " & Asset[Asset Name]
+		lineageTag: ae9028e5-4a79-4ec9-b68f-a45fe27358c4
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Open Defects' =
+			
+			COALESCE(
+			    SUMX(
+			        RELATEDTABLE(Observation),
+			        Observation[Open Defect Count]
+			    ),
+			    0
+			)
+		formatString: 0
+		lineageTag: fafaaf74-756a-46cd-86dc-f5ab75aaf303
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Latest Assigned To' =
+			
+			CALCULATE(
+			    SELECTEDVALUE(Assignment[Assigned To]),
+			    'Assignment Fact'[Is Latest] = TRUE
+			)
+		lineageTag: 8c62c53f-00d1-41b1-89c9-0c8c5f5a0543
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Last Inspection Date' =
+			
+			COALESCE(
+			    MAXX(
+			        RELATEDTABLE(Inspection),
+			        Inspection[Inspection Date]
+			    ),
+			    BLANK()
+			)
+		formatString: dd/mm/yyyy hh:nn
+		lineageTag: 8b80a8f4-74dd-4037-a804-269f97bb91c7
+		summarizeBy: none
+
+		variation Variation
+			isDefault
+			relationship: 72f3b611-7593-498f-8568-418cf232178e
+			defaultHierarchy: LocalDateTable_63a987a6-743d-4041-aed1-6b8fe393d68e.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column 'Defective Count' = IF(Asset[Open Defects] > 0, 1, 0)
+		dataType: int64
+		formatString: 0
+		lineageTag: f41da1cc-93ac-4d3d-b9d9-8b88441173dc
+		summarizeBy: sum
+
+		changedProperty = DataType
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Assigned Count' =
+			
+			IF(
+			    CALCULATE(
+			        COUNTROWS('Assignment Fact'),
+			        'Assignment Fact'[Is Latest] = TRUE(),
+			        'Assignment Type'[Assignment Type] <> "Unassigned"
+			    ) > 0,
+			    1,
+			    0
+			)
+		formatString: 0
+		lineageTag: 5ccf45e8-58be-4bec-91ff-ed51903c6035
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Unassigned Count' = 1 - [Assigned Count]
+		formatString: 0
+		lineageTag: f53223c4-64fe-4136-8cc5-731be9425a7d
 		summarizeBy: sum
 
 		annotation SummarizationSetBy = Automatic
@@ -114,5 +202,7 @@ table Asset
 				in
 				    #"Renamed Columns"
 
-	annotation PBI_ResultType = Table
+	annotation PBI_ResultType = Exception
+
+	annotation PBI_NavigationStepName = Navigation
 

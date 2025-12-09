@@ -48,6 +48,7 @@ relationship f70a8fc3-8fb0-40af-8a63-82459392018b
 	annotation PBI_IsFromSource = FS
 
 relationship 403a341b-0092-4622-9367-5b2320d32cb3
+	crossFilteringBehavior: bothDirections
 	fromColumn: 'Taken By'.Induction_key
 	toColumn: Induction.Induction_key
 
@@ -65,4 +66,13 @@ relationship dda23af0-d9c4-4353-9466-028177a3fb80
 	toColumn: Wallet.Wallet_key
 
 	annotation PBI_IsFromSource = FS
+
+relationship 24f804e3-c3f2-0110-b4f0-49738f3deb4d
+	isActive: false
+	fromColumn: Contact.Wallet_key
+	toColumn: Wallet.Wallet_key
+
+relationship 64c94e2e-3669-2068-525f-5061d07d65fd
+	fromColumn: 'Taken By'.Contact_key
+	toColumn: Contact.Contact_key
 

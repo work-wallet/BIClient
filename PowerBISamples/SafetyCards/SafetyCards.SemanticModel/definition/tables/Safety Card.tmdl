@@ -199,6 +199,18 @@ table 'Safety Card'
 
 		annotation SummarizationSetBy = Automatic
 
+	column EmployeeContact_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: d9bbd39b-b289-4432-a003-3c38d4995897
+		summarizeBy: none
+		sourceColumn: EmployeeContact_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
 	partition 'Safety Card' = m
 		mode: import
 		source =

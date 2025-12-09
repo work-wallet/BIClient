@@ -1,5 +1,5 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.2.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
   "name": "113e1c4a0e5c2b86184d",
   "position": {
     "x": 0,
@@ -7,7 +7,7 @@
     "z": 2000,
     "height": 338.32310838445807,
     "width": 1280,
-    "tabOrder": 2000
+    "tabOrder": 1000
   },
   "visual": {
     "visualType": "tableEx",
@@ -123,10 +123,10 @@
               "Column": {
                 "Expression": {
                   "SourceRef": {
-                    "Entity": "Assignment"
+                    "Entity": "Assignment Fact"
                   }
                 },
-                "Property": "Assigned To"
+                "Property": "From"
               }
             },
             "direction": "Ascending"
@@ -197,7 +197,7 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "66D"
+                  "Value": "121.44076937745332D"
                 }
               }
             }
@@ -211,7 +211,7 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "92D"
+                  "Value": "134.79634153738542D"
                 }
               }
             }
@@ -225,7 +225,7 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "63D"
+                  "Value": "171.93621127341876D"
                 }
               }
             }

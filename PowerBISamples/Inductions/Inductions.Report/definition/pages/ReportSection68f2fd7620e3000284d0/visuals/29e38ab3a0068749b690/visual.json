@@ -1,12 +1,12 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.2.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.3.0/schema.json",
   "name": "29e38ab3a0068749b690",
   "position": {
-    "x": 9.8159509202453989,
-    "y": 0,
+    "x": 9.7777777777777786,
+    "y": 101.33333333333333,
     "z": 0,
-    "height": 720.49079754601235,
-    "width": 1270.1840490797547
+    "height": 619.55555555555554,
+    "width": 1270.2222222222222
   },
   "visual": {
     "visualType": "pivotTable",
@@ -65,7 +65,8 @@
                 }
               },
               "queryRef": "Sum(Taken By.Taken By Count)",
-              "nativeQueryRef": "Sum of Taken By Count"
+              "nativeQueryRef": "Totals",
+              "displayName": "Totals"
             }
           ]
         }
@@ -157,7 +158,7 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "827D"
+                  "Value": "649.2844833576542D"
                 }
               }
             }

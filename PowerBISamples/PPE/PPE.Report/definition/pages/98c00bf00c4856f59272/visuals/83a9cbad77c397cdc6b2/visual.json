@@ -1,5 +1,5 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.2.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
   "name": "83a9cbad77c397cdc6b2",
   "position": {
     "x": 10.256410256410257,
@@ -22,11 +22,11 @@
                       "Entity": "PPE Assignment Type"
                     }
                   },
-                  "Property": "PPE Type"
+                  "Property": "PPE"
                 }
               },
-              "queryRef": "PPE Assignment Type.PPE Type",
-              "nativeQueryRef": "PPE Type"
+              "queryRef": "PPE Assignment Type.PPE",
+              "nativeQueryRef": "PPE"
             },
             {
               "field": {
@@ -99,24 +99,27 @@
             }
           ]
         }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "PPE Assignment Type"
+                  }
+                },
+                "Property": "PPE"
+              }
+            },
+            "direction": "Ascending"
+          }
+        ]
       }
     },
     "objects": {
       "columnWidth": [
-        {
-          "properties": {
-            "value": {
-              "expr": {
-                "Literal": {
-                  "Value": "430.94725752556144D"
-                }
-              }
-            }
-          },
-          "selector": {
-            "metadata": "PPE Assignment Type.PPE Type"
-          }
-        },
         {
           "properties": {
             "value": {
@@ -172,9 +175,107 @@
           "selector": {
             "metadata": "Assigned To Contact.Company"
           }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "464.177897574124D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "PPE Assignment Type.PPE"
+          }
         }
       ]
     },
     "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "75c786f68b2201840092",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "PPE Assignment Type"
+              }
+            },
+            "Property": "PPE"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "c5a7efab4c393223630a",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Assigned To Contact"
+              }
+            },
+            "Property": "Company"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "8c259c9302db6e38ac80",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Assignment"
+              }
+            },
+            "Property": "Assigned From Stock Site"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "17c55a23b3ea15919e44",
+        "field": {
+          "Aggregation": {
+            "Expression": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "Assignment"
+                  }
+                },
+                "Property": "Assigned Count"
+              }
+            },
+            "Function": 0
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "70b7c62464b8324ecdcc",
+        "field": {
+          "Aggregation": {
+            "Expression": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "Assignment"
+                  }
+                },
+                "Property": "Value"
+              }
+            },
+            "Function": 0
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
   }
 }

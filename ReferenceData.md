@@ -1,5 +1,21 @@
 # Work Wallet BI Reference Data
 
+Jump to the relevant section:
+
+- [General](#general)
+- [Actions](#actions)
+- [AssetInspections](#assetinspections)
+- [AssetObservations](#assetobservations)
+- [Assets](#assets)
+- [Audits](#audits)
+- [Inductions](#inductions)
+- [Permits](#permits)
+- [PPEAssignments](#ppeassignments)
+- [PPEStockHistories](#ppestockhistories)
+- [PPEStocks](#ppestocks)
+- [ReportedIssues](#reportedissues)
+- [SafetyCards](#safetycards)
+
 ## General
 
 | LocationTypeCode | LocationType |
@@ -45,6 +61,14 @@
 | 31 | Miscellaneous | Cycles | cycles |
 | 32 | Miscellaneous | Percent | % |
 | 33 | Miscellaneous | Pounds Per Square Inch | psi |
+| 34 | Area | Square Meters | m² |
+| 35 | Area | Square Kilometers | km² |
+| 36 | Area | Square Feet | ft² |
+| 37 | Power | Kilowatt Hour | kWh |
+| 38 | Currency | Pound | £ |
+| 39 | Currency | Dollar | $ |
+| 40 | Currency | Euro | € |
+| 41 | Currency | Yen | ¥ |
 
 ## Actions
 
@@ -70,7 +94,7 @@
 | 8 | Asset |
 | 16 | Briefing |
 
-## Assets
+## AssetInspections
 
 | AssetPropertyType |
 | --- |
@@ -78,12 +102,48 @@
 | Select |
 | Text |
 
+Checklist item response codes are specific to each checklist configuration. Common examples include:
+
+| Response | ResponseText (Example) |
+| --- | --- |
+| 0 | N/A |
+| 1 | Major Failure |
+| 2 | Minor Failure |
+| 3 | No Issues |
+
+Note: The actual `ResponseText` values are defined per checklist and may vary.
+
+## AssetObservations
+
+| AssetObservationStatusCode | AssetObservationStatus |
+| --- | --- |
+| 0 | Observation |
+| 1 | Defect (Open) |
+| 32 | Defect (Closed) |
+
+## Assets
+
+| AssetPropertyType |
+| --- |
+| Date |
+| DateTime |
+| Number |
+| Select |
+| Text |
+| Time |
+
 | AssetStatusCode | AssetStatus |
 | --- | --- |
 | 0 | Active |
 | 1 | Out of Service |
 | 2 | Decommissioned |
 | 3 | Deleted |
+
+| AssignmentType |
+| --- |
+| Site |
+| Unassigned |
+| User |
 
 ## Audits
 

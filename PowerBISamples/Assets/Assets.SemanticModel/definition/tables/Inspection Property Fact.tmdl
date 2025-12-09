@@ -1,0 +1,73 @@
+table 'Inspection Property Fact'
+	lineageTag: 0542af76-6f9e-421e-9fe7-83c203bbf6cd
+
+	column AssetInspectionPropertyFact_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: a560b80e-23c4-4c34-82bf-58d2c356f84c
+		summarizeBy: none
+		sourceColumn: AssetInspectionPropertyFact_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column AssetInspection_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 355bceff-3eed-427e-a426-eb699b3314cb
+		summarizeBy: none
+		sourceColumn: AssetInspection_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column AssetInspectionProperty_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: dad21057-a7f4-4ec9-8915-ace3228b0f65
+		summarizeBy: none
+		sourceColumn: AssetInspectionProperty_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Value
+		dataType: string
+		lineageTag: b249bb3d-618e-4329-b305-088ddb99d705
+		summarizeBy: none
+		sourceColumn: Value
+
+		annotation SummarizationSetBy = Automatic
+
+	column Wallet_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 19552ad8-b971-40bc-bddd-d60098af7d3c
+		summarizeBy: none
+		sourceColumn: Wallet_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	partition 'Inspection Property Fact' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("ww-powerbi-demo.database.windows.net", "powerbi"),
+				    mart_AssetInspectionPropertyFact = Source{[Schema="mart",Item="AssetInspectionPropertyFact"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(mart_AssetInspectionPropertyFact,{"_created"})
+				in
+				    #"Removed Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

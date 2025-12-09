@@ -10,12 +10,12 @@ public class ProgressService : IProgressService
         Console.WriteLine($"{wallet} ({dataRegion})");
     }
 
-    public void StartShowProgress(string dataType, bool reset)
+    public void StartShowProgress(string dataType, bool isFirstLoad)
     {
         Console.Write($"{dataType}: ");
-        if (reset)
+        if (isFirstLoad)
         {
-            Console.Write("(reset) ");
+            Console.Write("(first load) ");
         }
     }
 

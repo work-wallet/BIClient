@@ -74,6 +74,29 @@ BEGIN
 
         EXEC mart.ETL_MaintainLocationDimension @locationTable = @locationTable;
 
+        -- load the Contact dimension
+
+        DECLARE @contactTable mart.ETL_ContactTable;
+        INSERT INTO @contactTable
+        (
+            ContactId
+            ,[Name]
+            ,EmailAddress
+            ,CompanyName
+            ,WalletId
+        )
+        SELECT * FROM OPENJSON(@json, '$.Contacts')
+        WITH
+        (
+            ContactId uniqueidentifier
+            ,[Name] nvarchar(max)
+            ,EmailAddress nvarchar(max)
+            ,CompanyName nvarchar(max)
+            ,WalletId uniqueidentifier
+        );
+
+        EXEC mart.ETL_MaintainContactDimension @contactTable = @contactTable;
+
         -- maintain ReportedIssueCategory dimension
 
         DECLARE @reportedIssueCategoryTable mart.ETL_ReportedIssueCategoryTable;
@@ -115,6 +138,7 @@ BEGIN
             ,OccurredOn
             ,ReportedOn
             ,ReportedBy
+            ,ReportedByContactId
             ,ReportedByCompany
             ,ReportedIssueStatusCode
             ,SubcategoryId
@@ -133,6 +157,7 @@ BEGIN
             ,OccurredOn datetime2(7)
             ,ReportedOn datetime2(7)
             ,ReportedBy nvarchar(max)
+            ,ReportedByContactId uniqueidentifier
             ,ReportedByCompany nvarchar(max)
             ,ReportedIssueStatusCode int
             ,SubcategoryId uniqueidentifier

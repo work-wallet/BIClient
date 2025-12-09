@@ -1,11 +1,11 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.2.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
   "name": "8acfae1bd3a7255029a2",
   "position": {
     "x": 0,
-    "y": 93.530914665304039,
+    "y": 93.153638814016162,
     "z": 0,
-    "height": 626.59172202350544,
+    "height": 627.06199460916434,
     "width": 1280
   },
   "visual": {
@@ -126,7 +126,7 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "77D"
+                  "Value": "130.47709443312826D"
                 }
               }
             }
@@ -140,7 +140,7 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "42D"
+                  "Value": "64.42587319981173D"
                 }
               }
             }
@@ -154,7 +154,7 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "90D"
+                  "Value": "136.5768194070081D"
                 }
               }
             }
@@ -168,7 +168,7 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "58D"
+                  "Value": "120.10243151286419D"
                 }
               }
             }
@@ -182,7 +182,7 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "261D"
+                  "Value": "510.2862230971864D"
                 }
               }
             }
@@ -196,7 +196,7 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "76D"
+                  "Value": "258.99185511200346D"
                 }
               }
             }

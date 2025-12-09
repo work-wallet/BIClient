@@ -83,6 +83,18 @@ table Assignment
 
 		annotation SummarizationSetBy = User
 
+	column Contact_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 99206b4e-0ec8-4cba-bb07-a51311207738
+		summarizeBy: none
+		sourceColumn: Contact_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
 	hierarchy 'Company Hierarchy'
 		lineageTag: ca781ade-8b56-43e6-bf0a-b335c6f21a12
 

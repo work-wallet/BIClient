@@ -1,0 +1,61 @@
+table 'Inspection Property'
+	lineageTag: f96ade23-e42e-439a-8aeb-38c5117099f0
+
+	column AssetInspectionProperty_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 23c20113-1ab0-4c9a-8532-3c170c2a7974
+		summarizeBy: none
+		sourceColumn: AssetInspectionProperty_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column AssetPropertyType_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 5abe5d09-20c9-4816-a1fc-219f2a75a76d
+		summarizeBy: none
+		sourceColumn: AssetPropertyType_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Property
+		dataType: string
+		lineageTag: 882e8069-344d-4714-9120-36a6c782ce21
+		summarizeBy: none
+		sourceColumn: Property
+
+		annotation SummarizationSetBy = Automatic
+
+	column Wallet_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 5774c42e-e9ab-4819-87f0-b44efd3a44dd
+		summarizeBy: none
+		sourceColumn: Wallet_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	partition 'Inspection Property' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("ww-powerbi-demo.database.windows.net", "powerbi"),
+				    mart_AssetInspectionProperty = Source{[Schema="mart",Item="AssetInspectionProperty"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(mart_AssetInspectionProperty,{"_created"})
+				in
+				    #"Removed Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

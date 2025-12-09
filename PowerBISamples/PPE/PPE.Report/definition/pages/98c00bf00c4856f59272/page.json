@@ -52,6 +52,13 @@
                           "Value": "'Removed'"
                         }
                       }
+                    ],
+                    [
+                      {
+                        "Literal": {
+                          "Value": "'Replaced'"
+                        }
+                      }
                     ]
                   ]
                 }

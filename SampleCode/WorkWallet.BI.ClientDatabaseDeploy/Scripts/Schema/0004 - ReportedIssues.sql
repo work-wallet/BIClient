@@ -123,6 +123,7 @@ CREATE TABLE mart.ReportedIssue
     ,OccurredOn datetime2(7) NOT NULL
     ,ReportedOn datetime2(7) NOT NULL
     ,ReportedBy nvarchar(max) NOT NULL
+    ,ReportedByContact_key int NULL -- allow NULLs (data from older versions of the API did not process contacts, will never be NULL for new data)
     ,ReportedByCompany nvarchar(max) NOT NULL
     ,ReportedIssueStatus_key int NOT NULL
     ,ReportedIssueCategory_key int NOT NULL

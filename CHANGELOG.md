@@ -4,6 +4,53 @@ All notable changes to this project will be documented in this file.
 
 The format loosely follows Keep a Changelog principles (dates in YYYY-MM-DD). Version numbers align with assembly versions unless otherwise noted.
 
+## [4.3.0] - 2025-12-09
+
+### Added (4.3.0)
+
+Major:
+
+- New datasets: `AssetInspections`, `AssetObservations` (schema + ingestion + inclusion in Assets Power BI model).
+
+Minor:
+
+Associated contact import added across existing datasets:
+
+- Assets: `AssetAssignment` contact (person asset assigned to).
+- ReportedIssues: `ReportedBy` contact (who reported the issue/incident).
+- SafetyCards: associated `Employee` contact.
+- Inductions: `InductionTaken` contact (who took the induction).
+
+### Changed (4.3.0)
+
+- Assets Power BI sample extended to surface inspections and observations.
+- Assets dataset property types expanded (`AssetPropertyType`): `Date`, `Time`, `DateTime`.
+- Supports optional `beta` flag to enable pre-release API extraction.
+- Enriched `Context` blocks from API are now read and processed.
+- Units (units of measure) reference data expanded with additional values.
+- Documentation improvements: sample JSON + reference data sections clarified and expanded.
+- All reset stored procedures replaced by consolidated `DeleteAllData` stored procedure.
+- All Power BI sample reports now use the default Power BI theme.
+
+## [4.2.0] - 2025-10-09
+
+### Added (4.2.0)
+
+- Actions dataset: new `OriginalDueOn` field (Power BI model column labelled "Original Due On").
+- Sample API response JSON file and associated reference data documentation.
+
+### Changed (4.2.0)
+
+- API resilience: refactored data extraction using Polly / `Microsoft.Extensions.Http.Resilience` with retry/backoff handling for HTTP 429 and dynamic page size adjustment on HTTP 400 (page size too large).
+- Pagination logic updated to capture first page `SynchronizationVersion` ensuring accurate change detection across paged responses.
+- Documentation overhaul: architecture & data flow overview, direct API guidance, scheduling & idempotency recommendations, README section restructuring + table of contents.
+- All NuGet packages upgraded (including `Microsoft.Data.SqlClient` to 6.1.2).
+- Power BI sample projects migrated to latest `.pbip` format; Actions model diagrams updated.
+
+### Fixed (4.2.0)
+
+- Null comparison logic in `mart.ETL_MaintainPPETypeDimension`.
+
 ## [4.1.0] - 2025-08-28
 
 ### Added (4.1.0)

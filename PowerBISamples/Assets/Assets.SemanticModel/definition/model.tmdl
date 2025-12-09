@@ -6,7 +6,7 @@ model Model
 		legacyRedirects
 		returnErrorValuesAsNull
 
-annotation PBI_QueryOrder = ["Asset","Assignment","Assignment Fact","Assignment Type","Property","Property Fact","Property Type","Asset Status","Wallet"]
+annotation PBI_QueryOrder = ["Asset","Assignment","Assignment Fact","Assignment Type","Property","Property Fact","Property Type","Asset Status","Wallet","Contact","Inspection Checklist Item","Inspection Checklist Item Fact","Inspection Observation Fact","Inspection Property","Inspection Property Fact","Observation","Observation Status","Inspection"]
 
 annotation __PBI_TimeIntelligenceEnabled = 1
 
@@ -25,6 +25,19 @@ ref table 'Property Type'
 ref table 'Asset Status'
 ref table Wallet
 ref table LocalDateTable_9ad9a484-b478-496a-8fab-70e22744f21a
+ref table Contact
+ref table 'Inspection Checklist Item'
+ref table 'Inspection Checklist Item Fact'
+ref table 'Inspection Observation Fact'
+ref table 'Inspection Property'
+ref table 'Inspection Property Fact'
+ref table Observation
+ref table LocalDateTable_0f8b1d9b-09e1-4b61-bd48-b9c9f1d9c3b4
+ref table LocalDateTable_dd78a9fb-3b9f-416c-b429-1578f95c2eb0
+ref table 'Observation Status'
+ref table Inspection
+ref table LocalDateTable_2dee3fba-5892-488e-bf9f-c421d29d1206
+ref table LocalDateTable_63a987a6-743d-4041-aed1-6b8fe393d68e
 
 ref cultureInfo en-GB
 

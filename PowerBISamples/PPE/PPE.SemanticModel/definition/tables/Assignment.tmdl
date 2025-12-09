@@ -212,6 +212,23 @@ table Assignment
 
 		annotation SummarizationSetBy = User
 
+	column 'Returned To Stock Site' =
+			
+			VAR ToStockKey = 'Assignment'[ReturnedToPPEStock_key]
+			VAR LocationKey = LOOKUPVALUE(
+			    Stock[Location_key],
+			    Stock[PPEStock_key], ToStockKey
+			)
+			RETURN
+			LOOKUPVALUE(
+			    Location[Site],
+			    Location[Location_key], LocationKey
+			)
+		lineageTag: 19bdd8c5-452f-4ee9-9820-1f52dd050317
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
 	partition Assignment = m
 		mode: import
 		source =
