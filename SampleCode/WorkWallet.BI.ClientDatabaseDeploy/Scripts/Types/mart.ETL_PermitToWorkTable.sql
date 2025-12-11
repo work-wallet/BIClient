@@ -18,6 +18,7 @@ CREATE TYPE mart.ETL_PermitToWorkTable AS TABLE
     ,StatusId int NOT NULL
     ,HasBeenExpired bit NOT NULL
     ,HasBeenClosed bit NOT NULL
+    ,HasBeenExtended bit NOT NULL
     ,WalletId uniqueidentifier NOT NULL
     ,PRIMARY KEY (PermitToWorkReference, PermitToWorkId) -- putting PermitToWorkReference first to order the data load
 );

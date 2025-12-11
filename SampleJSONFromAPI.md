@@ -814,8 +814,10 @@ Notes
       "IssuedExpiry": "2025-09-08T17:15:00",
       "ClosedOn": "1900-01-01T00:00:00",
       "StatusId": 3,
+      "StatusId2": 3,
       "HasBeenExpired": false,
       "HasBeenClosed": false,
+      "HasBeenExtended": false,
       "WalletId": "a3e1c9f2-5d4b-4330-9c2f-1c2b8f0d9a77"
     }
   ],
@@ -862,6 +864,7 @@ Notes
   - **IssuedForMinutes**: `0` indicates no data
   - **IssuedExpiry**: `1900-01-01T00:00:00` indicates no data
   - **ClosedOn**: `1900-01-01T00:00:00` indicates no data
+  - **StatusId**: deprecated, use **StatusId2** instead (supports the `Extended` enum value)
 - PermitCategories
   - **ValidityPeriodMinutes**: `0` indicates no data
 

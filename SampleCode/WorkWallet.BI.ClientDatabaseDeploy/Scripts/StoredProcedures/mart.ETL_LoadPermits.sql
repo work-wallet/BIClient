@@ -131,6 +131,7 @@ BEGIN
             ,StatusId
             ,HasBeenExpired
             ,HasBeenClosed
+            ,HasBeenExtended
             ,WalletId
         )
         SELECT * FROM OPENJSON(@json, '$.Permits')
@@ -148,9 +149,10 @@ BEGIN
             ,IssuedForMinutes int
             ,IssuedExpiry datetime
             ,ClosedOn datetime
-            ,StatusId int
+            ,StatusId2 int -- StatusId is deprecated, replaced by StatusId2
             ,HasBeenExpired bit
             ,HasBeenClosed bit
+            ,HasBeenExtended bit
             ,WalletId uniqueidentifier
         );
 
