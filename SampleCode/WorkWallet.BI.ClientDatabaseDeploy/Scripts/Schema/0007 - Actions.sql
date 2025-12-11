@@ -56,6 +56,7 @@ CREATE TABLE mart.[Action]
     ,Title nvarchar(100) NOT NULL
     ,[Description] nvarchar(max) NOT NULL
     ,AssignedTo nvarchar(100) NOT NULL
+    ,AssignedToEmail nvarchar(256) NOT NULL
     ,ActionPriority_key int NOT NULL
     ,DueOn date NOT NULL
     ,OriginalDueOn date NOT NULL

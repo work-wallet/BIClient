@@ -1,5 +1,4 @@
 -- Permits: add the Extended status enumeration value (back-fixed in 0006 script)
-
 IF NOT EXISTS (SELECT 1 FROM mart.PermitStatus WHERE PermitStatusCode = 8)
 BEGIN
     INSERT INTO mart.PermitStatus (PermitStatusCode, PermitStatus) VALUES (8, N'Extended');
@@ -19,4 +18,17 @@ BEGIN
     ALTER TABLE mart.Permit DROP CONSTRAINT DF_Permit_HasBeenExtended;
 
 END
+
+-- Actions: add AssignedToEmail column to Action table
+-- (has been back-fixed in the 0007 script)
+IF NOT EXISTS(select 1 from sys.columns where [Name] = N'AssignedToEmail' and Object_ID = Object_ID(N'mart.[Action]'))
+BEGIN
+    ALTER TABLE
+        mart.[Action]
+    ADD
+        AssignedToEmail nvarchar(256) NOT NULL
+        CONSTRAINT DF_Action_AssignedToEmail DEFAULT '[not captured when downloaded]' WITH VALUES;
+    ALTER TABLE mart.[Action] DROP CONSTRAINT DF_Action_AssignedToEmail;
+END
+
 GO

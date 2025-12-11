@@ -70,6 +70,7 @@ Some datasets are hybrid, using placeholders in original fields and omitted fiel
       "Title": "Replace damaged ladder at Warehouse 3",
       "Description": "Inspect the damaged ladder reported during shift change and replace it with a certified unit. Tag out the old ladder and record disposal.",
       "AssignedTo": "Avery Example",
+      "AssignedToEmail": "avery@example.invalid",
       "PriorityCode": 4,
       "DueOn": "2025-09-20",
       "OriginalDueOn": "2025-09-20",
