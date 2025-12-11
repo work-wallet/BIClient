@@ -71,11 +71,11 @@ table Action
 
 		annotation SummarizationSetBy = Automatic
 
-	column 'Assigned To'
+	column Name
 		dataType: string
 		lineageTag: bd0ed0dc-3cee-4066-a420-507b0aacd3d9
 		summarizeBy: none
-		sourceColumn: Assigned To
+		sourceColumn: Name
 
 		annotation SummarizationSetBy = Automatic
 
@@ -180,14 +180,28 @@ table Action
 
 		annotation UnderlyingDateTimeDataType = Date
 
+	column Email
+		dataType: string
+		lineageTag: ae5a1c2e-c50d-41e3-8062-a5de975c453a
+		summarizeBy: none
+		sourceColumn: Email
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Assigned To' = IF (OR('Action'[Email] = "[not captured when downloaded]", 'Action'[Email] = ""), 'Action'[Name],  'Action'[Name] & " (" & 'Action'[Email] & ")")
+		lineageTag: a35fc76a-65f7-4538-b102-2b8cc7bc6351
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
 	partition Action = m
 		mode: import
 		source =
 				let
-				    Source = Sql.Database("ww-powerbi-demo.database.windows.net", "powerbi"),
+				    Source = Sql.Database("CAKESOFBREAD", "WorkWalletBIClient_Local"),
 				    mart_Action = Source{[Schema="mart",Item="Action"]}[Data],
 				    #"Removed Columns" = Table.RemoveColumns(mart_Action,{"_created", "_edited"}),
-				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"TargetReference", "Target Reference"}, {"AssignedTo", "Assigned To"}, {"DueOn", "Due On"}, {"CreatedOn", "Created On"}, {"OriginalDueOn", "Original Due On"}})
+				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"TargetReference", "Target Reference"}, {"AssignedTo", "Name"}, {"DueOn", "Due On"}, {"CreatedOn", "Created On"}, {"OriginalDueOn", "Original Due On"}, {"AssignedToEmail", "Email"}})
 				in
 				    #"Renamed Columns"
 

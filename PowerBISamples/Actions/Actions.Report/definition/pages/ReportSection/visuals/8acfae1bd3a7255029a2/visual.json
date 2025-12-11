@@ -3,10 +3,10 @@
   "name": "8acfae1bd3a7255029a2",
   "position": {
     "x": 0,
-    "y": 93.153638814016162,
+    "y": 93.400503778337523,
     "z": 0,
-    "height": 627.06199460916434,
-    "width": 1280
+    "height": 626.59949622166243,
+    "width": 1280.4030226700252
   },
   "visual": {
     "visualType": "tableEx",
@@ -92,6 +92,20 @@
                       "Entity": "Action"
                     }
                   },
+                  "Property": "Assigned To"
+                }
+              },
+              "queryRef": "Action.Assigned To",
+              "nativeQueryRef": "Assigned To"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Action"
+                    }
+                  },
                   "Property": "Due On"
                 }
               },
@@ -111,10 +125,10 @@
                     "Entity": "Action"
                   }
                 },
-                "Property": "Created On"
+                "Property": "Assigned To"
               }
             },
-            "direction": "Descending"
+            "direction": "Ascending"
           }
         ]
       }
@@ -182,7 +196,7 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "510.2862230971864D"
+                  "Value": "434.09643282434973D"
                 }
               }
             }
@@ -196,13 +210,27 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "258.99185511200346D"
+                  "Value": "93.03723534573896D"
                 }
               }
             }
           },
           "selector": {
             "metadata": "Action.Due On"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "289.0931989539847D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Action.Assigned To"
           }
         }
       ]

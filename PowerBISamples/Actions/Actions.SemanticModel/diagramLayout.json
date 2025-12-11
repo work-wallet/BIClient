@@ -10,8 +10,8 @@
       "nodes": [
         {
           "location": {
-            "x": 350.26721224059611,
-            "y": 244.94042218215139
+            "x": 390.26721224059611,
+            "y": 204.94042218215139
           },
           "nodeIndex": "Action",
           "size": {
@@ -22,8 +22,8 @@
         },
         {
           "location": {
-            "x": 637.29240636058307,
-            "y": 548.22346205273311
+            "x": 677.29240636058307,
+            "y": 508.22346205273311
           },
           "nodeIndex": "Priority",
           "size": {
@@ -34,8 +34,8 @@
         },
         {
           "location": {
-            "x": 134.01723023786792,
-            "y": -10
+            "x": 174.01723023786789,
+            "y": -50
           },
           "nodeIndex": "Status",
           "size": {
@@ -46,8 +46,8 @@
         },
         {
           "location": {
-            "x": 637.3129310301,
-            "y": 107.47851744164933
+            "x": 677.3129310301,
+            "y": 67.478517441649331
           },
           "nodeIndex": "Type",
           "size": {
@@ -58,8 +58,8 @@
         },
         {
           "location": {
-            "x": 10,
-            "y": 194.92127596277808
+            "x": 50,
+            "y": 154.92127596277808
           },
           "nodeIndex": "Action Update",
           "size": {
@@ -70,8 +70,8 @@
         },
         {
           "location": {
-            "x": 63.246534104192847,
-            "y": 547.181304406557
+            "x": 103.24653410419285,
+            "y": 507.1813044065571
           },
           "nodeIndex": "Wallet",
           "size": {
@@ -82,7 +82,7 @@
         }
       ],
       "name": "All tables",
-      "zoomValue": 100,
+      "zoomValue": 98.861615037737224,
       "pinKeyFieldsToTop": false,
       "showExtraHeaderInfo": false,
       "hideKeyFieldsWhenCollapsed": false,
@@ -97,21 +97,21 @@
       "nodes": [
         {
           "location": {
-            "x": 274,
-            "y": 243
+            "x": 416,
+            "y": 15
           },
           "nodeIndex": "Action",
           "nodeLineageTag": "12176f96-9cf3-4217-974c-5a09a67864cc",
           "size": {
-            "height": 512,
+            "height": 550,
             "width": 234
           },
           "zIndex": 4
         },
         {
           "location": {
-            "x": 14,
-            "y": 0
+            "x": 16,
+            "y": 393
           },
           "nodeIndex": "Priority",
           "nodeLineageTag": "4032f1a5-adc4-433d-921e-96584b1b539b",
@@ -123,7 +123,7 @@
         },
         {
           "location": {
-            "x": 544,
+            "x": 789,
             "y": 0
           },
           "nodeIndex": "Status",
@@ -132,11 +132,11 @@
             "height": 152,
             "width": 234
           },
-          "zIndex": 2
+          "zIndex": 5
         },
         {
           "location": {
-            "x": 274,
+            "x": 17,
             "y": 0
           },
           "nodeIndex": "Type",
@@ -145,12 +145,12 @@
             "height": 152,
             "width": 234
           },
-          "zIndex": 3
+          "zIndex": 2
         },
         {
           "location": {
-            "x": 764,
-            "y": 314
+            "x": 783,
+            "y": 326
           },
           "nodeIndex": "Action Update",
           "nodeLineageTag": "42e497ec-68cb-424a-ba56-053747a9e19b",
@@ -158,7 +158,7 @@
             "height": 347,
             "width": 234
           },
-          "zIndex": 5
+          "zIndex": 3
         }
       ],
       "name": "Main",
