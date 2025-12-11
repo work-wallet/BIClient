@@ -4,6 +4,18 @@ All notable changes to this project will be documented in this file.
 
 The format loosely follows Keep a Changelog principles (dates in YYYY-MM-DD). Version numbers align with assembly versions unless otherwise noted.
 
+## [4.4.0] - Unreleased
+
+### Added (4.4.0)
+
+- Permits: add support for the new workflow component types.
+
+### Changed (4.4.0)
+
+- Permits: support the new permit `Extended` status.
+- PPE: PPE Group's are now captured against PPE Types.
+- Actions: add the email address for the person an action is assigned to.
+
 ## [4.3.0] - 2025-12-09
 
 ### Added (4.3.0)
