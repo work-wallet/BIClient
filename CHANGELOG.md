@@ -9,12 +9,14 @@ The format loosely follows Keep a Changelog principles (dates in YYYY-MM-DD). Ve
 ### Added (4.4.0)
 
 - Permits: add support for the new workflow component types.
+- PPE: add support for the new PPE custom fields.
+- PPE: PPE Group's are now captured against PPE Types.
 
 ### Changed (4.4.0)
 
-- Permits: support the new permit `Extended` status.
-- PPE: PPE Group's are now captured against PPE Types.
 - Actions: add the email address for the person an action is assigned to.
+- Assets: add support for the new shared custom properties (shared across all asset types).
+- Permits: support the new permit `Extended` status.
 
 ## [4.3.0] - 2025-12-09
 
