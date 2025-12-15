@@ -918,13 +918,13 @@ Notes
   ],
   "PPETypes": [
     {
-      "PPETypeId": "11111111-2222-3333-4444-555555555555",
-      "PPETypeVariantId": "66666666-7777-8888-9999-000000000001",
-      "Type": "Safety Helmet",
-      "Variant": "White, Size M",
-      "VariantOrder": 1,
-      "LifespanDays": 730,
-      "Value": 35.50,
+      "PPETypeId": "8f3a7b2c-1d44-4e1f-9a20-3f7a2b1c8d44",
+      "PPETypeVariantId": "9e2b6c5d-4a3f-4b2e-8c1d-7e6f5a4b3c2e",
+      "Type": "High Visibility Vest",
+      "Variant": "Yellow, Size L",
+      "VariantOrder": 2,
+      "LifespanDays": 365,
+      "Value": 15.75,
       "TypeDeleted": false,
       "VariantDeleted": false,
       "WalletId": "a3e1c9f2-5d4b-4330-9c2f-1c2b8f0d9a77"
@@ -934,8 +934,8 @@ Notes
     {
       "PPEStockId": "e9b2c0a1-1f0e-4a3d-9d4e-6b5a2c1d0e9f",
       "LocationId": "0f5a3c2b-1e2d-4c5b-9a8f-7e6d5c4b3a21",
-      "PPETypeId": "11111111-2222-3333-4444-555555555555",
-      "PPETypeVariantId": "66666666-7777-8888-9999-000000000001",
+      "PPETypeId": "8f3a7b2c-1d44-4e1f-9a20-3f7a2b1c8d44",
+      "PPETypeVariantId": "9e2b6c5d-4a3f-4b2e-8c1d-7e6f5a4b3c2e",
       "StockQuantity": 24,
       "WarningQuantity": 5,
       "WalletId": "a3e1c9f2-5d4b-4330-9c2f-1c2b8f0d9a77"
@@ -954,8 +954,8 @@ Notes
     {
       "PPEAssignmentId": "aa111111-bb22-cc33-dd44-ee5555555555",
       "AssignedToContactId": "c0ffee00-1234-5678-9abc-def012345678",
-      "PPETypeId": "11111111-2222-3333-4444-555555555555",
-      "PPETypeVariantId": "66666666-7777-8888-9999-000000000001",
+      "PPETypeId": "8f3a7b2c-1d44-4e1f-9a20-3f7a2b1c8d44",
+      "PPETypeVariantId": "9e2b6c5d-4a3f-4b2e-8c1d-7e6f5a4b3c2e",
       "AssignedOn": "2025-08-25",
       "ExpiredOn": null,
       "PPEStatusCode": 1,
@@ -1047,13 +1047,13 @@ Notes
   ],
   "PPETypes": [
     {
-      "PPETypeId": "3d2c1b0a-9f8e-4d7c-b6a5-4e3f2a1b0c9d",
-      "PPETypeVariantId": "6a5b4c3d-2e1f-4a0b-9c8d-7e6f5a4b3c2d",
-      "Type": "Hard Hat",
-      "Variant": "Yellow",
-      "VariantOrder": 1,
-      "LifespanDays": 1095,
-      "Value": 12.50,
+      "PPETypeId": "8f3a7b2c-1d44-4e1f-9a20-3f7a2b1c8d44",
+      "PPETypeVariantId": "9e2b6c5d-4a3f-4b2e-8c1d-7e6f5a4b3c2e",
+      "Type": "High Visibility Vest",
+      "Variant": "Yellow, Size L",
+      "VariantOrder": 2,
+      "LifespanDays": 365,
+      "Value": 15.75,
       "TypeDeleted": false,
       "VariantDeleted": false,
       "WalletId": "a3e1c9f2-5d4b-4330-9c2f-1c2b8f0d9a77"
@@ -1063,8 +1063,8 @@ Notes
     {
       "PPEStockId": "9c8b7a6d-5e4f-4a3b-8c2d-1e0f9a8b7c6d",
       "LocationId": "f3a7b2c1-9d44-4e1f-8a20-3a7f2b1c9d44",
-      "PPETypeId": "3d2c1b0a-9f8e-4d7c-b6a5-4e3f2a1b0c9d",
-      "PPETypeVariantId": "6a5b4c3d-2e1f-4a0b-9c8d-7e6f5a4b3c2d",
+      "PPETypeId": "8f3a7b2c-1d44-4e1f-9a20-3f7a2b1c8d44",
+      "PPETypeVariantId": "9e2b6c5d-4a3f-4b2e-8c1d-7e6f5a4b3c2e",
       "StockQuantity": 150,
       "WarningQuantity": 25,
       "WalletId": "a3e1c9f2-5d4b-4330-9c2f-1c2b8f0d9a77"
@@ -1088,7 +1088,7 @@ Notes
       "StockQuantity": 20,
       "ActionedByContactId": "2f1e0d3c-4b5a-6e7f-8091-a2b3c4d5e6f7",
       "ActionedOn": "2025-09-09T09:15:00+00:00",
-      "Notes": "Received delivery of 20 hard hats from supplier.",
+      "Notes": "Received delivery of 20 high visibility vests from supplier.",
       "WalletId": "a3e1c9f2-5d4b-4330-9c2f-1c2b8f0d9a77"
     }
   ]
@@ -1158,15 +1158,35 @@ Notes
   ],
   "PPETypes": [
     {
-      "PPETypeId": "6a7b8c9d-0e1f-4a2b-9c3d-4e5f60718293",
-      "PPETypeVariantId": "7b8c9d0e-1f2a-4b3c-8d4e-5f60718293a4",
-      "Type": "Safety Helmet",
-      "Variant": "Blue - Medium",
+      "PPETypeId": "8f3a7b2c-1d44-4e1f-9a20-3f7a2b1c8d44",
+      "PPETypeVariantId": "9e2b6c5d-4a3f-4b2e-8c1d-7e6f5a4b3c2e",
+      "Type": "High Visibility Vest",
+      "Variant": "Yellow, Size L",
       "VariantOrder": 2,
-      "LifespanDays": 730,
-      "Value": 19.99,
+      "LifespanDays": 365,
+      "Value": 15.75,
       "TypeDeleted": false,
       "VariantDeleted": false,
+      "WalletId": "a3e1c9f2-5d4b-4330-9c2f-1c2b8f0d9a77"
+    }
+  ],
+  "Properties": [
+    {
+      "PPETypeId": "8f3a7b2c-1d44-4e1f-9a20-3f7a2b1c8d44",
+      "PropertyId": "3c4d5e6f-7a8b-9c0d-1e2f-3a4b5c6d7e8f",
+      "Property": "Manufacturer",
+      "PropertyType": "Text",
+      "DisplayOrder": 1,
+      "Value": "SafeWear Industries",
+      "WalletId": "a3e1c9f2-5d4b-4330-9c2f-1c2b8f0d9a77"
+    },
+    {
+      "PPETypeId": "8f3a7b2c-1d44-4e1f-9a20-3f7a2b1c8d44",
+      "PropertyId": "4d5e6f7a-8b9c-0d1e-2f3a-4b5c6d7e8f9a",
+      "Property": "Compliance Standard",
+      "PropertyType": "Select",
+      "DisplayOrder": 2,
+      "Value": "EN ISO 20471:2013",
       "WalletId": "a3e1c9f2-5d4b-4330-9c2f-1c2b8f0d9a77"
     }
   ],
@@ -1174,8 +1194,8 @@ Notes
     {
       "PPEStockId": "8c9d0e1f-2a3b-4c5d-8e6f-701928374655",
       "LocationId": "d9f9a9b1-4c6f-4e93-bf2c-5b0b9f9a1c2d",
-      "PPETypeId": "6a7b8c9d-0e1f-4a2b-9c3d-4e5f60718293",
-      "PPETypeVariantId": "7b8c9d0e-1f2a-4b3c-8d4e-5f60718293a4",
+      "PPETypeId": "8f3a7b2c-1d44-4e1f-9a20-3f7a2b1c8d44",
+      "PPETypeVariantId": "9e2b6c5d-4a3f-4b2e-8c1d-7e6f5a4b3c2e",
       "StockQuantity": 120,
       "WarningQuantity": 25,
       "WalletId": "a3e1c9f2-5d4b-4330-9c2f-1c2b8f0d9a77"
