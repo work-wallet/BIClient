@@ -109,6 +109,36 @@ BEGIN
 
         EXEC mart.ETL_MaintainPPETypeDimension @ppeTypeTable = @ppeTypeTable;
 
+        -- load the PPEProperty data
+
+        DECLARE @ppePropertyTable mart.ETL_PPETypePropertyTable;
+
+        INSERT INTO @ppePropertyTable
+        (
+            PPETypeId
+            ,Property
+            ,PropertyType
+            ,DisplayOrder
+            ,[Value]
+            ,WalletId
+        )
+        SELECT * FROM OPENJSON(@json, '$.Properties')
+        WITH
+        (
+            PPETypeId uniqueidentifier
+            ,Property nvarchar(250)
+            ,PropertyType nvarchar(20)
+            ,DisplayOrder int
+            ,[Value] nvarchar(max)
+            ,WalletId uniqueidentifier
+        );
+
+        EXEC mart.ETL_MaintainPPEPropertyDimension @ppePropertyTable = @ppePropertyTable;
+
+        EXEC mart.ETL_DeletePPEPropertyFacts @ppeTypeTable = @ppeTypeTable;
+
+        EXEC mart.ETL_LoadPPEPropertyFact @ppePropertyTable = @ppePropertyTable;
+
         -- maintain PPEStock dimension
 
         DECLARE @ppeStockTable mart.ETL_PPEStockTable;

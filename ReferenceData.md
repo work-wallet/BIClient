@@ -204,6 +204,15 @@ Note: The actual `ResponseText` values are defined per checklist and may vary.
 
 ## PPEStocks
 
+| PPEPropertyType |
+| --- |
+| Date |
+| DateTime |
+| Number |
+| Select |
+| Text |
+| Time |
+
 ## ReportedIssues
 
 BodyPart API representation:
