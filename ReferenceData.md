@@ -189,6 +189,7 @@ Note: The actual `ResponseText` values are defined per checklist and may vary.
 | 5 | Closed |
 | 6 | Archived |
 | 7 | Deleted |
+| 8 | Extended |
 
 ## PPEAssignments
 
