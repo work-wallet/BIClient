@@ -330,6 +330,7 @@ Notes
   "Properties": [
     {
       "AssetId": "2a1bdc44-6e3b-4d2c-9ab7-1e5c0b9f3a21",
+      "IsSharedProperty": false,
       "PropertyId": "1a2b3c4d-5e6f-4a78-9b01-c2d3e4f5a6b7",
       "Property": "Load Capacity (kg)",
       "PropertyType": "Number",
@@ -339,6 +340,7 @@ Notes
     },
     {
       "AssetId": "2a1bdc44-6e3b-4d2c-9ab7-1e5c0b9f3a21",
+      "IsSharedProperty": false,
       "PropertyId": "2b3c4d5e-6f7a-4b89-ac12-d3e4f5a6b7c8",
       "Property": "Last Service Date",
       "PropertyType": "Date",
@@ -348,6 +350,7 @@ Notes
     },
     {
       "AssetId": "2a1bdc44-6e3b-4d2c-9ab7-1e5c0b9f3a21",
+      "IsSharedProperty": false,
       "PropertyId": "3c4d5e6f-7a8b-4c90-bd23-e4f5a6b7c8d9",
       "Property": "Fuel Type",
       "PropertyType": "Select",

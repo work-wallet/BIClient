@@ -10,6 +10,7 @@ BEGIN
     USING (
         SELECT DISTINCT
             apt.AssetPropertyType_key
+            ,a.IsSharedProperty
             ,a.Property
             ,w.Wallet_key
         FROM
@@ -19,15 +20,18 @@ BEGIN
     ) AS source
     ON
         target.AssetPropertyType_key = source.AssetPropertyType_key
+        AND target.IsSharedProperty = source.IsSharedProperty
         AND target.Property = source.Property
         AND target.Wallet_key = source.Wallet_key
     WHEN NOT MATCHED BY TARGET THEN
         INSERT (
             AssetPropertyType_key
+            ,IsSharedProperty
             ,Property
             ,Wallet_key
         ) VALUES (
             source.AssetPropertyType_key
+            ,source.IsSharedProperty
             ,source.Property
             ,source.Wallet_key
         );

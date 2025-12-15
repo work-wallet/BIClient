@@ -67,6 +67,7 @@ BEGIN
         INSERT INTO @assetPropertyTable
         (
             AssetId
+            ,IsSharedProperty
             ,Property
             ,PropertyType
             ,[Value]
@@ -76,6 +77,7 @@ BEGIN
         WITH
         (
             AssetId uniqueidentifier
+            ,IsSharedProperty bit
             ,Property nvarchar(250)
             ,PropertyType nvarchar(20)
             ,[Value] nvarchar(max)

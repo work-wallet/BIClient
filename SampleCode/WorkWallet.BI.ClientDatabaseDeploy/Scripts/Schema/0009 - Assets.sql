@@ -64,10 +64,12 @@ CREATE TABLE mart.AssetProperty
 (
     AssetProperty_key int IDENTITY
     ,AssetPropertyType_key int NOT NULL
+    ,IsSharedProperty bit NOT NULL
     ,Property nvarchar(250) NOT NULL
     ,Wallet_key int NOT NULL
     ,_created datetime2(7) NOT NULL CONSTRAINT [DF_mart.AssetProperty__created] DEFAULT SYSUTCDATETIME()
     ,CONSTRAINT [PK_mart.AssetProperty] PRIMARY KEY (AssetProperty_key)
+    ,CONSTRAINT [UQ_mart.AssetProperty_Business_Key] UNIQUE(AssetPropertyType_key, IsSharedProperty, Property, Wallet_key)
     ,CONSTRAINT [FK_mart.AssetProperty_mart.AssetPropertyType_AssetPropertyType_key] FOREIGN KEY(AssetPropertyType_key) REFERENCES mart.AssetPropertyType
     ,CONSTRAINT [FK_mart.AssetProperty_mart.Wallet_Wallet_key] FOREIGN KEY(Wallet_key) REFERENCES mart.Wallet
 );
