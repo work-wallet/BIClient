@@ -1,13 +1,13 @@
-DROP PROCEDURE IF EXISTS mart.ETL_LoadPPETypeGroupFact;
+DROP PROCEDURE IF EXISTS mart.ETL_LoadPPEGroupFact;
 GO
 
-CREATE PROCEDURE mart.ETL_LoadPPETypeGroupFact
+CREATE PROCEDURE mart.ETL_LoadPPEGroupFact
     @ppeTypeGroupTable mart.ETL_PPETypeGroupTable READONLY
 AS
 BEGIN
     SET NOCOUNT ON;
 
-    INSERT INTO mart.PPETypeGroupFact
+    INSERT INTO mart.PPEGroupFact
     (
         PPEType_key
         ,PPEGroup_key
@@ -23,6 +23,6 @@ BEGIN
         INNER JOIN mart.PPEType AS pt ON ptg.PPETypeId = pt.PPETypeId
         INNER JOIN mart.PPEGroup AS pg ON ptg.PPEGroupId = pg.PPEGroupId;
 
-    PRINT 'INSERT mart.PPETypeGroupFact, number of rows = ' + CAST(@@ROWCOUNT AS varchar);
+    PRINT 'INSERT mart.PPEGroupFact, number of rows = ' + CAST(@@ROWCOUNT AS varchar);
 END
 GO

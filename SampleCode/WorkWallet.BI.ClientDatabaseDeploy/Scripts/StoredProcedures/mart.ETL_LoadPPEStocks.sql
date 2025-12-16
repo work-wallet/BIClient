@@ -149,9 +149,9 @@ BEGIN
             ,WalletId uniqueidentifier
         );
 
-        EXEC mart.ETL_DeletePPETypeGroupFacts @ppeTypeTable = @ppeTypeTable;
+        EXEC mart.ETL_DeletePPEGroupFacts @ppeTypeTable = @ppeTypeTable;
 
-        EXEC mart.ETL_LoadPPETypeGroupFact @ppeTypeGroupTable = @ppeTypeGroupTable;
+        EXEC mart.ETL_LoadPPEGroupFact @ppeTypeGroupTable = @ppeTypeGroupTable;
 
         -- load the PPEProperty data
 
