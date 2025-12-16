@@ -67,7 +67,7 @@ table 'PPE Type'
 		dataType: int64
 		formatString: 0
 		lineageTag: 402de710-6b56-4f67-a53f-9723caaef09f
-		summarizeBy: none
+		summarizeBy: sum
 		sourceColumn: Lifespan Days
 
 		annotation SummarizationSetBy = Automatic
@@ -75,7 +75,7 @@ table 'PPE Type'
 	column Value
 		dataType: double
 		lineageTag: f729f68d-1c1e-4a99-868d-1e2286c22371
-		summarizeBy: none
+		summarizeBy: sum
 		sourceColumn: Value
 
 		annotation SummarizationSetBy = Automatic
@@ -128,7 +128,7 @@ table 'PPE Type'
 		mode: import
 		source =
 				let
-				    Source = Sql.Database("ww-powerbi-demo.database.windows.net", "powerbi"),
+				    Source = Sql.Database("CAKESOFBREAD", "WorkWalletBIClient_Local"),
 				    mart_PPEType = Source{[Schema="mart",Item="PPEType"]}[Data],
 				    #"Removed Columns" = Table.RemoveColumns(mart_PPEType,{"_created", "_edited"}),
 				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"Type", "PPE Type"}, {"Variant", "PPE Variant"}, {"LifespanDays", "Lifespan Days"}, {"TypeDeleted", "Type Deleted"}, {"VariantDeleted", "Variant Deleted"}})

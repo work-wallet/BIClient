@@ -76,7 +76,7 @@ table 'Assigned To Contact'
 		mode: import
 		source =
 				let
-				    Source = Sql.Database("ww-powerbi-demo.database.windows.net", "powerbi"),
+				    Source = Sql.Database("CAKESOFBREAD", "WorkWalletBIClient_Local"),
 				    mart_Contact = Source{[Schema="mart",Item="Contact"]}[Data],
 				    #"Renamed Columns" = Table.RenameColumns(mart_Contact,{{"EmailAddress", "Email"}, {"CompanyName", "Company"}, {"Name", "Contact Name"}}),
 				    #"Removed Columns" = Table.RemoveColumns(#"Renamed Columns",{"_created", "_edited"})

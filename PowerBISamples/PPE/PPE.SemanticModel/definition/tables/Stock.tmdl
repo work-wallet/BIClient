@@ -105,7 +105,7 @@ table Stock
 		mode: import
 		source =
 				let
-				    Source = Sql.Database("ww-powerbi-demo.database.windows.net", "powerbi"),
+				    Source = Sql.Database("CAKESOFBREAD", "WorkWalletBIClient_Local"),
 				    mart_PPEStock = Source{[Schema="mart",Item="PPEStock"]}[Data],
 				    #"Removed Columns" = Table.RemoveColumns(mart_PPEStock,{"_created", "_edited"}),
 				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"WarningQuantity", "Warning Quantity"}, {"StockQuantity", "Stock Quantity"}})

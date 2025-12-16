@@ -171,3 +171,66 @@ relationship 27e11d97-fd2a-3f6a-ce86-8516e1f87eb5
 	fromColumn: Assignment.AssignedToContact_key
 	toColumn: 'Assigned To Contact'.Contact_key
 
+relationship 5c885b69-dbad-493e-9d58-fff1590e97c1
+	fromColumn: 'Property Fact'.PPEProperty_key
+	toColumn: Property.PPEProperty_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship 57425056-3acb-445c-813b-4a0987a5b57f
+	isActive: false
+	fromColumn: Assignment.AssignedToContact_key
+	toColumn: 'Actioned By Contact'.Contact_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship 0f4da81d-3874-4b80-a2f5-600e909323fa
+	fromColumn: Assignment.PPEType_key
+	toColumn: 'PPE Type'.PPEType_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship 97a7067f-886c-49f6-8fd4-d21c941accaa
+	isActive: false
+	fromColumn: 'Assignment History'.ActionedByContact_key
+	toColumn: 'Assigned To Contact'.Contact_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship cde677f6-33a6-4f93-bb94-41fa06f53efb
+	fromColumn: 'Stock History'.ActionedByContact_key
+	toColumn: 'Assigned To Contact'.Contact_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship 1d137a7d-582c-adc0-3c3c-6e00031999ba
+	crossFilteringBehavior: bothDirections
+	fromColumn: 'PPE Type'.PPETypeId
+	toColumn: 'PPE Type Master'.PPETypeId
+
+relationship 1e9f0486-77a9-8ed3-403e-2a17d81a4e32
+	isActive: false
+	fromColumn: 'PPE Type Master'.Wallet_key
+	toColumn: Wallet.Wallet_key
+
+relationship 3472d380-9e8e-b864-ca64-5659265765c9
+	isActive: false
+	fromColumn: 'Property Fact'.Wallet_key
+	toColumn: Wallet.Wallet_key
+
+relationship 196aa00c-e577-9237-3f64-47c256f8dc43
+	isActive: false
+	fromColumn: Property.Wallet_key
+	toColumn: Wallet.Wallet_key
+
+relationship 4ec72909-a81f-d5c1-b0f8-9f7f0b10cf34
+	crossFilteringBehavior: bothDirections
+	fromColumn: 'Property Fact'.PPETypeId
+	toColumn: 'PPE Type Master'.PPETypeId
+
+relationship 772aa0d6-30fa-31e0-4059-ac5799fbcf6d
+	fromColumn: Property.PPEPropertyType_key
+	toColumn: 'Property Type'.PPEPropertyType_key
+
+	annotation PBI_IsFromSource = FS
+
