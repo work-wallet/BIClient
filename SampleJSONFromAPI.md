@@ -1170,6 +1170,27 @@ Notes
       "WalletId": "a3e1c9f2-5d4b-4330-9c2f-1c2b8f0d9a77"
     }
   ],
+  "PPEGroups": [
+    {
+      "PPEGroupId": "1a2b3c4d-5e6f-4789-8abc-def012345678",
+      "PPEGroup": "Head Protection",
+      "Active": true,
+      "WalletId": "a3e1c9f2-5d4b-4330-9c2f-1c2b8f0d9a77"
+    },
+    {
+      "PPEGroupId": "2b3c4d5e-6f7a-4890-9bcd-ef0123456789",
+      "PPEGroup": "High Visibility Clothing",
+      "Active": true,
+      "WalletId": "a3e1c9f2-5d4b-4330-9c2f-1c2b8f0d9a77"
+    }
+  ],
+  "PPETypeGroups": [
+    {
+      "PPETypeId": "8f3a7b2c-1d44-4e1f-9a20-3f7a2b1c8d44",
+      "PPEGroupId": "2b3c4d5e-6f7a-4890-9bcd-ef0123456789",
+      "WalletId": "a3e1c9f2-5d4b-4330-9c2f-1c2b8f0d9a77"
+    }
+  ],
   "Properties": [
     {
       "PPETypeId": "8f3a7b2c-1d44-4e1f-9a20-3f7a2b1c8d44",

@@ -9,7 +9,7 @@ The format loosely follows Keep a Changelog principles (dates in YYYY-MM-DD). Ve
 ### Added (4.4.0)
 
 - Permits: add support for the new workflow component types.
-- PPE: add support for the new PPE custom fields.
+- PPE: add support for the new PPE custom fields (properties).
 - PPE: PPE Group's are now captured against PPE Types.
 
 ### Changed (4.4.0)
