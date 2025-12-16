@@ -109,6 +109,50 @@ BEGIN
 
         EXEC mart.ETL_MaintainPPETypeDimension @ppeTypeTable = @ppeTypeTable;
 
+        -- maintain PPEGroup dimension
+
+        DECLARE @ppeGroupTable mart.ETL_PPEGroupTable;
+
+        INSERT INTO @ppeGroupTable
+        (
+            PPEGroupId
+            ,PPEGroup
+            ,Active
+            ,WalletId
+        )
+        SELECT * FROM OPENJSON(@json, '$.PPEGroups')
+        WITH
+        (
+            PPEGroupId uniqueidentifier
+            ,PPEGroup nvarchar(100)
+            ,Active bit
+            ,WalletId uniqueidentifier
+        );
+
+        EXEC mart.ETL_MaintainPPEGroupDimension @ppeGroupTable = @ppeGroupTable;
+
+        -- load PPETypeGroup facts
+
+        DECLARE @ppeTypeGroupTable mart.ETL_PPETypeGroupTable;
+
+        INSERT INTO @ppeTypeGroupTable
+        (
+            PPETypeId
+            ,PPEGroupId
+            ,WalletId
+        )
+        SELECT * FROM OPENJSON(@json, '$.PPETypeGroups')
+        WITH
+        (
+            PPETypeId uniqueidentifier
+            ,PPEGroupId uniqueidentifier
+            ,WalletId uniqueidentifier
+        );
+
+        EXEC mart.ETL_DeletePPETypeGroupFacts @ppeTypeTable = @ppeTypeTable;
+
+        EXEC mart.ETL_LoadPPETypeGroupFact @ppeTypeGroupTable = @ppeTypeGroupTable;
+
         -- load the PPEProperty data
 
         DECLARE @ppePropertyTable mart.ETL_PPETypePropertyTable;

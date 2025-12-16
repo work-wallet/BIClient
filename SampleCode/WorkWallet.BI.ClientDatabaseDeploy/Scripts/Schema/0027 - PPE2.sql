@@ -53,4 +53,40 @@ BEGIN
     );
 END
 
+-- PPE: add PPEGroup dimension table
+IF NOT EXISTS (SELECT 1 FROM sys.objects WHERE object_id = OBJECT_ID(N'mart.PPEGroup') AND type = N'U')
+BEGIN
+    CREATE TABLE mart.PPEGroup
+    (
+        PPEGroup_key int IDENTITY
+        ,PPEGroupId uniqueidentifier NOT NULL /* business key */
+        ,PPEGroup nvarchar(100) NOT NULL
+        ,Active bit NOT NULL
+        ,Wallet_key int NOT NULL
+        ,_created datetime2(7) NOT NULL CONSTRAINT [DF_mart.PPEGroup__created] DEFAULT SYSUTCDATETIME()
+        ,_edited datetime2(7) NULL
+        ,CONSTRAINT [PK_mart.PPEGroup] PRIMARY KEY (PPEGroup_key)
+        ,CONSTRAINT [UQ_mart.PPEGroup_PPEGroupId] UNIQUE (PPEGroupId)
+        ,CONSTRAINT [FK_mart.PPEGroup_mart.Wallet_Wallet_key] FOREIGN KEY(Wallet_key) REFERENCES mart.Wallet
+    );
+END
+
+-- PPE: add PPETypeGroupFact table (many-to-many relationship between PPEType and PPEGroup)
+IF NOT EXISTS (SELECT 1 FROM sys.objects WHERE object_id = OBJECT_ID(N'mart.PPETypeGroupFact') AND type = N'U')
+BEGIN
+    CREATE TABLE mart.PPETypeGroupFact
+    (
+        PPETypeGroupFact_key int IDENTITY
+        ,PPEType_key int NOT NULL
+        ,PPEGroup_key int NOT NULL
+        ,Wallet_key int NOT NULL
+        ,_created datetime2(7) NOT NULL CONSTRAINT [DF_mart.PPETypeGroupFact__created] DEFAULT SYSUTCDATETIME()
+        ,CONSTRAINT [PK_mart.PPETypeGroupFact] PRIMARY KEY (PPETypeGroupFact_key)
+        ,CONSTRAINT [UQ_mart.PPETypeGroupFact_Business_Key] UNIQUE (PPEType_key, PPEGroup_key)
+        ,CONSTRAINT [FK_mart.PPETypeGroupFact_mart.PPEType_PPEType_key] FOREIGN KEY(PPEType_key) REFERENCES mart.PPEType
+        ,CONSTRAINT [FK_mart.PPETypeGroupFact_mart.PPEGroup_PPEGroup_key] FOREIGN KEY(PPEGroup_key) REFERENCES mart.PPEGroup
+        ,CONSTRAINT [FK_mart.PPETypeGroupFact_mart.Wallet_Wallet_key] FOREIGN KEY(Wallet_key) REFERENCES mart.Wallet
+    );
+END
+
 GO
