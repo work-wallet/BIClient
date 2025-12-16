@@ -76,6 +76,20 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
+                      "Entity": "Property"
+                    }
+                  },
+                  "Property": "Is Shared Property"
+                }
+              },
+              "queryRef": "Property.Is Shared Property",
+              "nativeQueryRef": "Is Shared Property"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
                       "Entity": "Property Fact"
                     }
                   },
@@ -95,10 +109,23 @@
               "Column": {
                 "Expression": {
                   "SourceRef": {
-                    "Entity": "Property"
+                    "Entity": "Asset"
                   }
                 },
-                "Property": "Property"
+                "Property": "Asset Type"
+              }
+            },
+            "direction": "Ascending"
+          },
+          {
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "Asset"
+                  }
+                },
+                "Property": "Reference"
               }
             },
             "direction": "Ascending"
@@ -169,13 +196,27 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "165.39083557951483D"
+                  "Value": "273.69598424838176D"
                 }
               }
             }
           },
           "selector": {
             "metadata": "Property Fact.Property Value"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "155.49217080233166D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Property.Is Shared Property"
           }
         }
       ]

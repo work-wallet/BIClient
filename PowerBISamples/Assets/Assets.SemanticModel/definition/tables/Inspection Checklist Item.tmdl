@@ -79,7 +79,7 @@ table 'Inspection Checklist Item'
 		mode: import
 		source =
 				let
-				    Source = Sql.Database("ww-powerbi-demo.database.windows.net", "powerbi"),
+				    Source = Sql.Database("CAKESOFBREAD", "WorkWalletBIClient_Local"),
 				    mart_AssetInspectionChecklistItem = Source{[Schema="mart",Item="AssetInspectionChecklistItem"]}[Data],
 				    #"Removed Columns" = Table.RemoveColumns(mart_AssetInspectionChecklistItem,{"_created", "_edited"}),
 				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"ChecklistName", "Checklist Name"}, {"ChecklistItemName", "Checklist Item Name"}, {"ChecklistItemDisplayOrder", "Checklist Item Display Order"}})

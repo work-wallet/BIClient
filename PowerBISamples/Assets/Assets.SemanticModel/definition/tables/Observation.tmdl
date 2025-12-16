@@ -171,7 +171,7 @@ table Observation
 		mode: import
 		source =
 				let
-				    Source = Sql.Database("ww-powerbi-demo.database.windows.net", "powerbi"),
+				    Source = Sql.Database("CAKESOFBREAD", "WorkWalletBIClient_Local"),
 				    mart_AssetObservation = Source{[Schema="mart",Item="AssetObservation"]}[Data],
 				    #"Removed Columns" = Table.RemoveColumns(mart_AssetObservation,{"_created", "_edited"}),
 				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"Details", "Observation"}, {"ActionTaken", "Action Taken"}}),

@@ -49,7 +49,7 @@ table 'Inspection Property'
 		mode: import
 		source =
 				let
-				    Source = Sql.Database("ww-powerbi-demo.database.windows.net", "powerbi"),
+				    Source = Sql.Database("CAKESOFBREAD", "WorkWalletBIClient_Local"),
 				    mart_AssetInspectionProperty = Source{[Schema="mart",Item="AssetInspectionProperty"]}[Data],
 				    #"Removed Columns" = Table.RemoveColumns(mart_AssetInspectionProperty,{"_created"})
 				in

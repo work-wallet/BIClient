@@ -139,7 +139,7 @@ table Inspection
 		mode: import
 		source =
 				let
-				    Source = Sql.Database("ww-powerbi-demo.database.windows.net", "powerbi"),
+				    Source = Sql.Database("CAKESOFBREAD", "WorkWalletBIClient_Local"),
 				    mart_AssetInspection = Source{[Schema="mart",Item="AssetInspection"]}[Data],
 				    #"Removed Columns" = Table.RemoveColumns(mart_AssetInspection,{"_created", "_edited"}),
 				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"InspectionType", "Inspection Type"}, {"InspectionDate", "Inspection Date"}, {"InspectedBy", "Inspected By"}})
