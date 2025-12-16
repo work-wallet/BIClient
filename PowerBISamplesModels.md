@@ -121,6 +121,10 @@ Jump to the relevant section:
 
 ![PPE Assignments Model](Images/PowerBIModelDiagrams/PPE_Assignments.png)
 
+### PPE - Properties
+
+![PPE Properties Model](Images/PowerBIModelDiagrams/PPE_Properties.png)
+
 ## Reported Issues
 
 ### Reported Issues - Main
