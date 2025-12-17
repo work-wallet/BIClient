@@ -1,0 +1,70 @@
+table Group
+	lineageTag: 2e197281-8002-4d70-a215-9d3e825bca9e
+
+	column PPEGroup_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 97b36e7d-43a5-408b-b8aa-c65860a00e02
+		summarizeBy: none
+		sourceColumn: PPEGroup_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column PPEGroupId
+		dataType: string
+		isHidden
+		lineageTag: 7f523b13-d790-46d7-b20c-c771ee750b6b
+		summarizeBy: none
+		sourceColumn: PPEGroupId
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Group
+		dataType: string
+		lineageTag: caaf0b8c-5b3b-42c2-ab3e-ee1bc5c0c1a5
+		summarizeBy: none
+		sourceColumn: Group
+
+		annotation SummarizationSetBy = Automatic
+
+	column Active
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: e1a54c21-1221-49f9-845a-2205a78ee4ce
+		summarizeBy: none
+		sourceColumn: Active
+
+		annotation SummarizationSetBy = Automatic
+
+	column Wallet_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: e0b51e8c-ea18-4b18-a744-812ec1b764c2
+		summarizeBy: none
+		sourceColumn: Wallet_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Group = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("CAKESOFBREAD", "WorkWalletBIClient_Local"),
+				    mart_PPEGroup = Source{[Schema="mart",Item="PPEGroup"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(mart_PPEGroup,{"_created", "_edited"}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"PPEGroup", "Group"}})
+				in
+				    #"Renamed Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

@@ -10,8 +10,8 @@
       "nodes": [
         {
           "location": {
-            "x": 650.75639546720731,
-            "y": 1642.3459632759241
+            "x": 240.64734386626264,
+            "y": 559.00274777001516
           },
           "nodeIndex": "Location",
           "size": {
@@ -22,8 +22,8 @@
         },
         {
           "location": {
-            "x": 1143.8513488096405,
-            "y": 1164.3331816220291
+            "x": 1541.3533107294165,
+            "y": 340.178678378654
           },
           "nodeIndex": "Wallet",
           "nodeLineageTag": "c5071c3c-bb18-4bf8-af75-410c48a300ed",
@@ -35,8 +35,8 @@
         },
         {
           "location": {
-            "x": 502.89723450124916,
-            "y": 660.477004841174
+            "x": 655.98796089499228,
+            "y": 946.93725300414189
           },
           "nodeIndex": "Assignment",
           "nodeLineageTag": "4cd4c7b8-78ce-4f8e-927e-e92f949db79b",
@@ -48,8 +48,8 @@
         },
         {
           "location": {
-            "x": 924.52681201580606,
-            "y": -50
+            "x": 1545.3380772312389,
+            "y": 1490.0558265165523
           },
           "nodeIndex": "Assignment History",
           "nodeLineageTag": "f13c365b-f484-4874-9dad-268ce4e01777",
@@ -61,8 +61,8 @@
         },
         {
           "location": {
-            "x": 214.4464342639111,
-            "y": 567.62156733002666
+            "x": 358.80728609953019,
+            "y": 1188.7171125344582
           },
           "nodeIndex": "PPE Action",
           "nodeLineageTag": "7a623cea-ad5b-4c08-b3b0-717eb86e0a12",
@@ -75,7 +75,7 @@
         {
           "location": {
             "x": 50,
-            "y": 809.848467096075
+            "y": 923.340000481476
           },
           "nodeIndex": "PPE Status",
           "nodeLineageTag": "7dc20fc1-263a-445d-b9d4-643b3da800a5",
@@ -87,8 +87,8 @@
         },
         {
           "location": {
-            "x": 940.5800069477923,
-            "y": 1372.0097201125764
+            "x": 862.68763836179824,
+            "y": 190.99872109775424
           },
           "nodeIndex": "PPE Type",
           "nodeLineageTag": "784865e7-41be-46a5-a713-88e990e53228",
@@ -100,8 +100,8 @@
         },
         {
           "location": {
-            "x": 735.7670326717307,
-            "y": 1014.8375574255439
+            "x": 831.50545582455663,
+            "y": 579.03338986205074
           },
           "nodeIndex": "Stock",
           "nodeLineageTag": "bbf0fdac-d372-411b-8f0a-b5b754d6ea2d",
@@ -113,8 +113,8 @@
         },
         {
           "location": {
-            "x": 737.93899805999729,
-            "y": 307.12980042579716
+            "x": 967.65786527808382,
+            "y": 1330.4948452064427
           },
           "nodeIndex": "Stock History",
           "nodeLineageTag": "5f547d8f-0fbd-45e3-b10a-b114ab53ed5c",
@@ -126,8 +126,8 @@
         },
         {
           "location": {
-            "x": 258.3265575761194,
-            "y": 1017.6765373411362
+            "x": 474.77611135950087,
+            "y": 191.00778609624513
           },
           "nodeIndex": "PPE Assignment Type",
           "nodeLineageTag": "3028bc43-9111-4896-8e0a-213ce3ca20ad",
@@ -139,8 +139,8 @@
         },
         {
           "location": {
-            "x": 1169.1787404619472,
-            "y": 306.6354165324567
+            "x": 1799.9109632692357,
+            "y": 1175.403788628086
           },
           "nodeIndex": "Assigned To Contact",
           "nodeLineageTag": "eff9a1d0-5fd9-43fb-a398-29f9e7684c26",
@@ -152,8 +152,8 @@
         },
         {
           "location": {
-            "x": 438.50596779197,
-            "y": 289.02062982842472
+            "x": 1142.7601283268759,
+            "y": 1040.4567168690212
           },
           "nodeIndex": "Actioned By Contact",
           "size": {
@@ -164,8 +164,8 @@
         },
         {
           "location": {
-            "x": 1689.7628520875735,
-            "y": 960.39604063920467
+            "x": 2083.344191943766,
+            "y": 917.33695633318007
           },
           "nodeIndex": "Property",
           "nodeLineageTag": "df9536b3-45a7-42c5-bc2f-643f81ac4fcc",
@@ -177,8 +177,8 @@
         },
         {
           "location": {
-            "x": 1411.144452792769,
-            "y": 1371.071406978188
+            "x": 1520.9937392477932,
+            "y": 914.96185516829769
           },
           "nodeIndex": "Property Fact",
           "nodeLineageTag": "08a8be58-6617-45ef-9b84-577aeddfa70b",
@@ -190,8 +190,8 @@
         },
         {
           "location": {
-            "x": 1979.7630989515828,
-            "y": 1074.4055584939424
+            "x": 537.377868127257,
+            "y": 623.19601854595976
           },
           "nodeIndex": "Property Type",
           "nodeLineageTag": "112b2631-209c-4c33-b3be-e20c2573f9a6",
@@ -203,10 +203,36 @@
         },
         {
           "location": {
-            "x": 1230.4582246038658,
-            "y": 1675.5181201739185
+            "x": 1155.5470629164502,
+            "y": -49.863534918743653
           },
           "nodeIndex": "PPE Type Master",
+          "size": {
+            "height": 176,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1800.4445412413568,
+            "y": 662.46469243047432
+          },
+          "nodeIndex": "Group",
+          "nodeLineageTag": "2e197281-8002-4d70-a215-9d3e825bca9e",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 738.60219468428477,
+            "y": -50
+          },
+          "nodeIndex": "Group Fact",
+          "nodeLineageTag": "f1a138ce-1ba8-4d43-b029-4e1890637c27",
           "size": {
             "height": 176,
             "width": 234
@@ -215,7 +241,7 @@
         }
       ],
       "name": "All tables",
-      "zoomValue": 38.28238800173839,
+      "zoomValue": 41.287471682617891,
       "pinKeyFieldsToTop": false,
       "showExtraHeaderInfo": false,
       "hideKeyFieldsWhenCollapsed": false,
@@ -230,8 +256,8 @@
       "nodes": [
         {
           "location": {
-            "x": 762,
-            "y": 48
+            "x": 1135.3351606969704,
+            "y": 37.943834055300464
           },
           "nodeIndex": "Location",
           "nodeLineageTag": "0c282e94-763a-47f5-94ca-832dc2919c25",
@@ -239,12 +265,12 @@
             "height": 657,
             "width": 234
           },
-          "zIndex": 4
+          "zIndex": 5
         },
         {
           "location": {
-            "x": 373,
-            "y": 154
+            "x": 789.07386596194351,
+            "y": 36.611112379042737
           },
           "nodeIndex": "Stock",
           "nodeLineageTag": "bbf0fdac-d372-411b-8f0a-b5b754d6ea2d",
@@ -252,12 +278,12 @@
             "height": 341,
             "width": 234
           },
-          "zIndex": 3
+          "zIndex": 4
         },
         {
           "location": {
-            "x": 0,
-            "y": 0
+            "x": 444.98534305295459,
+            "y": 45.252746751147924
           },
           "nodeIndex": "PPE Type",
           "nodeLineageTag": "784865e7-41be-46a5-a713-88e990e53228",
@@ -265,12 +291,12 @@
             "height": 420,
             "width": 234
           },
-          "zIndex": 1
+          "zIndex": 2
         },
         {
           "location": {
-            "x": 0,
-            "y": 504
+            "x": 162.15567585828012,
+            "y": 43.930408029996023
           },
           "nodeIndex": "PPE Type Master",
           "nodeLineageTag": "a62ff8c5-4b9b-4222-b8bb-d3364a72962b",
@@ -278,11 +304,37 @@
             "height": 190,
             "width": 234
           },
-          "zIndex": 2
+          "zIndex": 3
+        },
+        {
+          "location": {
+            "x": 802.637943996327,
+            "y": 476.60604522947881
+          },
+          "nodeIndex": "Group",
+          "nodeLineageTag": "2e197281-8002-4d70-a215-9d3e825bca9e",
+          "size": {
+            "height": 238.11975838078058,
+            "width": 234
+          },
+          "zIndex": 1
+        },
+        {
+          "location": {
+            "x": 442.78010034239281,
+            "y": 527.38801237961445
+          },
+          "nodeIndex": "Group Fact",
+          "nodeLineageTag": "f1a138ce-1ba8-4d43-b029-4e1890637c27",
+          "size": {
+            "height": 186.09052427726544,
+            "width": 234
+          },
+          "zIndex": 6
         }
       ],
       "name": "Stock",
-      "zoomValue": 100,
+      "zoomValue": 79.553182037699813,
       "pinKeyFieldsToTop": false,
       "showExtraHeaderInfo": false,
       "hideKeyFieldsWhenCollapsed": false,

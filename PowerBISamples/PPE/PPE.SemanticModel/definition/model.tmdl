@@ -6,7 +6,7 @@ model Model
 		legacyRedirects
 		returnErrorValuesAsNull
 
-annotation PBI_QueryOrder = ["Location","Wallet","PPE Action","Assignment","Assignment History","PPE Status","Stock","Stock History","PPE Type","PPE Assignment Type","Actioned By Contact","Assigned To Contact","Property Type","Property","Property Fact"]
+annotation PBI_QueryOrder = ["Location","Wallet","PPE Action","Assignment","Assignment History","PPE Status","Stock","Stock History","PPE Type","PPE Assignment Type","Actioned By Contact","Assigned To Contact","Property Type","Property","Property Fact","Group","Group Fact"]
 
 annotation __PBI_TimeIntelligenceEnabled = 1
 
@@ -34,6 +34,8 @@ ref table 'Property Type'
 ref table Property
 ref table 'Property Fact'
 ref table 'PPE Type Master'
+ref table Group
+ref table 'Group Fact'
 
 ref cultureInfo en-GB
 

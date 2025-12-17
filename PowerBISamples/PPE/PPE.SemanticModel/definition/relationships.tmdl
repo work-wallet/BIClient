@@ -234,3 +234,24 @@ relationship 772aa0d6-30fa-31e0-4059-ac5799fbcf6d
 
 	annotation PBI_IsFromSource = FS
 
+relationship f72949aa-0832-45f4-85aa-042ebb4d992a
+	fromColumn: 'Group Fact'.PPEGroup_key
+	toColumn: Group.PPEGroup_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship 6b8a8ace-ff3f-e83e-e9fd-c7da26e5383a
+	isActive: false
+	fromColumn: Group.Wallet_key
+	toColumn: Wallet.Wallet_key
+
+relationship 4a6f6d33-ba06-2bbd-9573-aa3d368a0f65
+	isActive: false
+	fromColumn: 'Group Fact'.Wallet_key
+	toColumn: Wallet.Wallet_key
+
+relationship 7ebfa17b-bcc1-d846-4316-effa534dadcb
+	crossFilteringBehavior: bothDirections
+	fromColumn: 'Group Fact'.PPETypeId
+	toColumn: 'PPE Type Master'.PPETypeId
+
