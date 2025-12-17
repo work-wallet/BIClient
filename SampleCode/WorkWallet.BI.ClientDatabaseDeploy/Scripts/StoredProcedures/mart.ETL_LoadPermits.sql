@@ -200,9 +200,18 @@ BEGIN
             ,WalletId uniqueidentifier
         );
 
+        -- Process checklist data into old implementation (PermitChecklistAnswer dimension, PermitChecklistAnswerFact)
+        -- This maintains backward compatibility with existing reports and queries
         EXEC mart.ETL_MaintainPermitChecklistAnswerDimension @permitToWorkChecklistAnswerTable = @permitToWorkChecklistAnswerTable;
 
         EXEC mart.ETL_LoadPermitChecklistAnswerFact @permitToWorkChecklistAnswerTable = @permitToWorkChecklistAnswerTable;
+
+        -- Process checklist data into new implementation (PermitChecklistOption dimension, PermitChecklistAnswerFact2)
+        -- The new implementation includes additional fields: Mandatory, Order, CategorySectionTypeId, SectionId, and related section fields
+        -- This supersedes the old implementation and provides complete metadata for checklist questions
+        EXEC mart.ETL_MaintainPermitChecklistOptionDimension @permitToWorkChecklistAnswerTable = @permitToWorkChecklistAnswerTable;
+
+        EXEC mart.ETL_LoadPermitChecklistAnswerFact2 @permitToWorkChecklistAnswerTable = @permitToWorkChecklistAnswerTable;
 
         -- load the PermitNumericAnswers data
 
