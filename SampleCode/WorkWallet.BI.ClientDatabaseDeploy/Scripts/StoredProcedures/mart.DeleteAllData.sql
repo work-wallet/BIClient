@@ -89,7 +89,13 @@ BEGIN
     PRINT 'Deleting Permits dataset tables...';
     
     DELETE FROM mart.PermitChecklistAnswerFact;
+    DELETE FROM mart.PermitNumericAnswerFact;
+    DELETE FROM mart.PermitDateTimeAnswerFact;
+    DELETE FROM mart.PermitBranchOptionFact;
     DELETE FROM mart.PermitChecklistAnswer;
+    DELETE FROM mart.PermitNumericQuestion;
+    DELETE FROM mart.PermitDateTimeQuestion;
+    DELETE FROM mart.PermitBranchOption;
     DELETE FROM mart.Permit;
     DELETE FROM mart.PermitCategory;
 
