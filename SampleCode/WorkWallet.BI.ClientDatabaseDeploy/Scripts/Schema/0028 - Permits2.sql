@@ -52,6 +52,7 @@ END
 CREATE TABLE mart.PermitNumericQuestion
 (
     PermitNumericQuestion_key int IDENTITY
+    ,QuestionId uniqueidentifier NOT NULL
     ,Question nvarchar(1000) NOT NULL
     ,Scale int NOT NULL
     ,Unit_key int NOT NULL
@@ -83,6 +84,7 @@ CREATE TABLE mart.PermitNumericAnswerFact
 CREATE TABLE mart.PermitDateTimeQuestion
 (
     PermitDateTimeQuestion_key int IDENTITY
+    ,QuestionId uniqueidentifier NOT NULL
     ,Question nvarchar(1000) NOT NULL
     ,[Date] bit NOT NULL
     ,[Time] bit NOT NULL
@@ -101,7 +103,9 @@ CREATE TABLE mart.PermitDateTimeAnswerFact
 (
     Permit_key int NOT NULL
     ,PermitDateTimeQuestion_key int NOT NULL
-    ,Answer datetime NOT NULL
+    ,AnswerDateTime smalldatetime NULL -- allow null
+    ,AnswerDate date NULL -- allow null
+    ,AnswerTime time(0) NULL -- allow null
     ,Wallet_key int NOT NULL
     ,_created datetime2(7) NOT NULL CONSTRAINT [DF_mart.PermitDateTimeAnswerFact__created] DEFAULT SYSUTCDATETIME()
     ,CONSTRAINT [PK_mart.PermitDateTimeAnswerFact] PRIMARY KEY (Permit_key, PermitDateTimeQuestion_key)
@@ -113,6 +117,8 @@ CREATE TABLE mart.PermitDateTimeAnswerFact
 CREATE TABLE mart.PermitBranchOption
 (
     PermitBranchOption_key int IDENTITY
+    ,BranchId uniqueidentifier NOT NULL
+    ,OptionId uniqueidentifier NOT NULL
     ,Branch nvarchar(1000) NOT NULL
     ,[Value] nvarchar(250) NOT NULL
     ,[Order] int NOT NULL
