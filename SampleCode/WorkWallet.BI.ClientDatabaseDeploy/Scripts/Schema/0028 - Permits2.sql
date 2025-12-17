@@ -5,9 +5,12 @@ CREATE TABLE mart.PermitNumericQuestion
     PermitNumericQuestion_key int IDENTITY
     ,QuestionId uniqueidentifier NOT NULL
     ,Question nvarchar(1000) NOT NULL
+    ,Mandatory bit NOT NULL
     ,Scale int NOT NULL
     ,Unit_key int NOT NULL
+    ,CategorySectionTypeId int NOT NULL
     ,CategorySectionType nvarchar(50) NOT NULL
+    ,SectionId uniqueidentifier NOT NULL
     ,Section nvarchar(100) NOT NULL
     ,SectionOrder int NOT NULL
     ,OrderInSection int NOT NULL
@@ -38,9 +41,12 @@ CREATE TABLE mart.PermitDateTimeQuestion
     PermitDateTimeQuestion_key int IDENTITY
     ,QuestionId uniqueidentifier NOT NULL
     ,Question nvarchar(1000) NOT NULL
+    ,Mandatory bit NOT NULL
     ,[Date] bit NOT NULL
     ,[Time] bit NOT NULL
+    ,CategorySectionTypeId int NOT NULL
     ,CategorySectionType nvarchar(50) NOT NULL
+    ,SectionId uniqueidentifier NOT NULL
     ,Section nvarchar(100) NOT NULL
     ,SectionOrder int NOT NULL
     ,OrderInSection int NOT NULL
@@ -75,7 +81,9 @@ CREATE TABLE mart.PermitBranchOption
     ,Branch nvarchar(1000) NOT NULL
     ,[Value] nvarchar(250) NOT NULL
     ,[Order] int NOT NULL
+    ,CategorySectionTypeId int NOT NULL
     ,CategorySectionType nvarchar(50) NOT NULL
+    ,SectionId uniqueidentifier NOT NULL
     ,Section nvarchar(100) NOT NULL
     ,SectionOrder int NOT NULL
     ,OrderInSection int NOT NULL

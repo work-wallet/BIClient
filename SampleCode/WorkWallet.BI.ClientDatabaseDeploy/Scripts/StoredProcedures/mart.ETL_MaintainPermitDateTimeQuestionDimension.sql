@@ -11,9 +11,12 @@ BEGIN
         SELECT DISTINCT
             a.QuestionId
             ,a.Question
+            ,a.Mandatory
             ,a.[Date]
             ,a.[Time]
+            ,a.CategorySectionTypeId
             ,a.CategorySectionType
+            ,a.SectionId
             ,a.Section
             ,a.SectionOrder
             ,a.OrderInSection
@@ -25,9 +28,12 @@ BEGIN
     ON target.QuestionId = source.QuestionId
     WHEN MATCHED AND (
         target.Question <> source.Question
+        OR target.Mandatory <> source.Mandatory
         OR target.[Date] <> source.[Date]
         OR target.[Time] <> source.[Time]
+        OR target.CategorySectionTypeId <> source.CategorySectionTypeId
         OR target.CategorySectionType <> source.CategorySectionType
+        OR target.SectionId <> source.SectionId
         OR target.Section <> source.Section
         OR target.SectionOrder <> source.SectionOrder
         OR target.OrderInSection <> source.OrderInSection
@@ -36,9 +42,12 @@ BEGIN
     THEN
         UPDATE SET
             Question = source.Question
+            ,Mandatory = source.Mandatory
             ,[Date] = source.[Date]
             ,[Time] = source.[Time]
+            ,CategorySectionTypeId = source.CategorySectionTypeId
             ,CategorySectionType = source.CategorySectionType
+            ,SectionId = source.SectionId
             ,Section = source.Section
             ,SectionOrder = source.SectionOrder
             ,OrderInSection = source.OrderInSection
@@ -48,9 +57,12 @@ BEGIN
         INSERT (
             QuestionId
             ,Question
+            ,Mandatory
             ,[Date]
             ,[Time]
+            ,CategorySectionTypeId
             ,CategorySectionType
+            ,SectionId
             ,Section
             ,SectionOrder
             ,OrderInSection
@@ -58,9 +70,12 @@ BEGIN
         ) VALUES (
             source.QuestionId
             ,source.Question
+            ,source.Mandatory
             ,source.[Date]
             ,source.[Time]
+            ,source.CategorySectionTypeId
             ,source.CategorySectionType
+            ,source.SectionId
             ,source.Section
             ,source.SectionOrder
             ,source.OrderInSection

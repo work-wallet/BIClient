@@ -14,7 +14,9 @@ BEGIN
             ,a.Branch
             ,a.[Value]
             ,a.[Order]
+            ,a.CategorySectionTypeId
             ,a.CategorySectionType
+            ,a.SectionId
             ,a.Section
             ,a.SectionOrder
             ,a.OrderInSection
@@ -28,7 +30,9 @@ BEGIN
         target.Branch <> source.Branch
         OR target.[Value] <> source.[Value]
         OR target.[Order] <> source.[Order]
+        OR target.CategorySectionTypeId <> source.CategorySectionTypeId
         OR target.CategorySectionType <> source.CategorySectionType
+        OR target.SectionId <> source.SectionId
         OR target.Section <> source.Section
         OR target.SectionOrder <> source.SectionOrder
         OR target.OrderInSection <> source.OrderInSection
@@ -39,7 +43,9 @@ BEGIN
             Branch = source.Branch
             ,[Value] = source.[Value]
             ,[Order] = source.[Order]
+            ,CategorySectionTypeId = source.CategorySectionTypeId
             ,CategorySectionType = source.CategorySectionType
+            ,SectionId = source.SectionId
             ,Section = source.Section
             ,SectionOrder = source.SectionOrder
             ,OrderInSection = source.OrderInSection
@@ -52,7 +58,9 @@ BEGIN
             ,Branch
             ,[Value]
             ,[Order]
+            ,CategorySectionTypeId
             ,CategorySectionType
+            ,SectionId
             ,Section
             ,SectionOrder
             ,OrderInSection
@@ -63,7 +71,9 @@ BEGIN
             ,source.Branch
             ,source.[Value]
             ,source.[Order]
+            ,source.CategorySectionTypeId
             ,source.CategorySectionType
+            ,source.SectionId
             ,source.Section
             ,source.SectionOrder
             ,source.OrderInSection
