@@ -8,8 +8,11 @@ CREATE TYPE mart.ETL_PermitToWorkChecklistAnswerTable AS TABLE
     ,OptionId uniqueidentifier NOT NULL
     ,Question nvarchar(1000) NOT NULL
     ,[Option] nvarchar(250) NOT NULL
+    ,Mandatory bit NOT NULL
     ,[Order] int NOT NULL
+    ,CategorySectionTypeId int NOT NULL
     ,CategorySectionType nvarchar(50) NOT NULL
+    ,SectionId uniqueidentifier NOT NULL
     ,Section nvarchar(100) NOT NULL
     ,SectionOrder int NOT NULL
     ,OrderInSection int NOT NULL

@@ -171,8 +171,11 @@ BEGIN
             ,OptionId
             ,Question
             ,[Option]
+            ,Mandatory
             ,[Order]
+            ,CategorySectionTypeId
             ,CategorySectionType
+            ,SectionId
             ,Section
             ,SectionOrder
             ,OrderInSection
@@ -186,8 +189,11 @@ BEGIN
             ,OptionId uniqueidentifier
             ,Question nvarchar(1000)
             ,[Option] nvarchar(250)
+            ,Mandatory bit
             ,[Order] int
+            ,CategorySectionTypeId int
             ,CategorySectionType nvarchar(50)
+            ,SectionId uniqueidentifier
             ,Section nvarchar(100)
             ,SectionOrder int
             ,OrderInSection int
@@ -207,10 +213,13 @@ BEGIN
             PermitToWorkId
             ,QuestionId
             ,Question
+            ,Mandatory
             ,Scale
             ,UnitCode
             ,Answer
+            ,CategorySectionTypeId
             ,CategorySectionType
+            ,SectionId
             ,Section
             ,SectionOrder
             ,OrderInSection
@@ -222,10 +231,13 @@ BEGIN
             PermitToWorkId uniqueidentifier
             ,QuestionId uniqueidentifier
             ,Question nvarchar(1000)
+            ,Mandatory bit
             ,Scale int
             ,UnitCode int
             ,Answer decimal(35,6)
+            ,CategorySectionTypeId int
             ,CategorySectionType nvarchar(50)
+            ,SectionId uniqueidentifier
             ,Section nvarchar(100)
             ,SectionOrder int
             ,OrderInSection int
@@ -245,10 +257,13 @@ BEGIN
             PermitToWorkId
             ,QuestionId
             ,Question
+            ,Mandatory
             ,[Date]
             ,[Time]
             ,Answer
+            ,CategorySectionTypeId
             ,CategorySectionType
+            ,SectionId
             ,Section
             ,SectionOrder
             ,OrderInSection
@@ -260,10 +275,13 @@ BEGIN
             PermitToWorkId uniqueidentifier
             ,QuestionId uniqueidentifier
             ,Question nvarchar(1000)
+            ,Mandatory bit
             ,[Date] bit
             ,[Time] bit
             ,Answer datetime
+            ,CategorySectionTypeId int
             ,CategorySectionType nvarchar(50)
+            ,SectionId uniqueidentifier
             ,Section nvarchar(100)
             ,SectionOrder int
             ,OrderInSection int
@@ -286,7 +304,9 @@ BEGIN
             ,Branch
             ,[Value]
             ,[Order]
+            ,CategorySectionTypeId
             ,CategorySectionType
+            ,SectionId
             ,Section
             ,SectionOrder
             ,OrderInSection
@@ -301,7 +321,9 @@ BEGIN
             ,Branch nvarchar(1000)
             ,[Value] nvarchar(250)
             ,[Order] int
+            ,CategorySectionTypeId int
             ,CategorySectionType nvarchar(50)
+            ,SectionId uniqueidentifier
             ,Section nvarchar(100)
             ,SectionOrder int
             ,OrderInSection int
