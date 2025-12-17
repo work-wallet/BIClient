@@ -98,6 +98,10 @@ BEGIN
     -- ========================================
     PRINT 'Deleting PPE dataset tables...';
     
+    DELETE FROM mart.PPEPropertyFact;
+    DELETE FROM mart.PPEGroupFact;
+    DELETE FROM mart.PPEProperty;
+    DELETE FROM mart.PPEGroup;
     DELETE FROM mart.PPEAssignmentHistory;
     DELETE FROM mart.PPEAssignment;
     DELETE FROM mart.PPEStockHistory;
@@ -164,6 +168,7 @@ BEGIN
     -- - mart.InductionTakenStatus
     -- - mart.PermitStatus
     -- - mart.PPEAction
+    -- - mart.PPEPropertyType
     -- - mart.PPEStatus
     -- - mart.ReportedIssueBodyPartEnum
     -- - mart.ReportedIssueRootCauseAnalysisType

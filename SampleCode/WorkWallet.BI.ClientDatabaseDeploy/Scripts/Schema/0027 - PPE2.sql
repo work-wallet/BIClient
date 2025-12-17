@@ -31,6 +31,7 @@ CREATE TABLE mart.PPEProperty
 
 -- PPE: add PPEPropertyFact table
 -- Note: Uses PPETypeId natural key instead of PPEType_key surrogate because properties are scoped to Type level, not Type+Variant level
+-- Note: No unique constraint on (PPETypeId, PPEProperty_key) because some property types (e.g., multi-select) can have multiple values
 CREATE TABLE mart.PPEPropertyFact
 (
     PPEPropertyFact_key int IDENTITY
@@ -60,16 +61,16 @@ CREATE TABLE mart.PPEGroup
 );
 
 -- PPE: add PPEGroupFact table (many-to-many relationship between PPEType and PPEGroup)
+-- Note: Uses PPETypeId natural key instead of PPEType_key surrogate because groups are scoped to Type level, not Type+Variant level
 CREATE TABLE mart.PPEGroupFact
 (
     PPEGroupFact_key int IDENTITY
-    ,PPEType_key int NOT NULL
+    ,PPETypeId uniqueidentifier NOT NULL
     ,PPEGroup_key int NOT NULL
     ,Wallet_key int NOT NULL
     ,_created datetime2(7) NOT NULL CONSTRAINT [DF_mart.PPEGroupFact__created] DEFAULT SYSUTCDATETIME()
     ,CONSTRAINT [PK_mart.PPEGroupFact] PRIMARY KEY (PPEGroupFact_key)
-    ,CONSTRAINT [UQ_mart.PPEGroupFact_Business_Key] UNIQUE (PPEType_key, PPEGroup_key)
-    ,CONSTRAINT [FK_mart.PPEGroupFact_mart.PPEType_PPEType_key] FOREIGN KEY(PPEType_key) REFERENCES mart.PPEType
+    ,CONSTRAINT [UQ_mart.PPEGroupFact_Business_Key] UNIQUE (PPETypeId, PPEGroup_key)
     ,CONSTRAINT [FK_mart.PPEGroupFact_mart.PPEGroup_PPEGroup_key] FOREIGN KEY(PPEGroup_key) REFERENCES mart.PPEGroup
     ,CONSTRAINT [FK_mart.PPEGroupFact_mart.Wallet_Wallet_key] FOREIGN KEY(Wallet_key) REFERENCES mart.Wallet
 );
