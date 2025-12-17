@@ -1,15 +1,15 @@
-DROP TYPE IF EXISTS mart.ETL_PermitToWorkChecklistAnswerTable;
+DROP TYPE IF EXISTS mart.ETL_PermitToWorkDateTimeAnswerTable;
 GO
 
-CREATE TYPE mart.ETL_PermitToWorkChecklistAnswerTable AS TABLE
+CREATE TYPE mart.ETL_PermitToWorkDateTimeAnswerTable AS TABLE
 (
     PermitToWorkId uniqueidentifier NOT NULL
-    ,ChecklistId uniqueidentifier NOT NULL
-    ,OptionId uniqueidentifier NOT NULL
+    ,QuestionId uniqueidentifier NOT NULL
     ,Question nvarchar(1000) NOT NULL
-    ,[Option] nvarchar(250) NOT NULL
     ,Mandatory bit NOT NULL
-    ,[Order] int NOT NULL
+    ,[Date] bit NOT NULL
+    ,[Time] bit NOT NULL
+    ,Answer datetime NOT NULL
     ,CategorySectionTypeId int NOT NULL
     ,CategorySectionType nvarchar(50) NOT NULL
     ,SectionId uniqueidentifier NOT NULL
@@ -17,6 +17,6 @@ CREATE TYPE mart.ETL_PermitToWorkChecklistAnswerTable AS TABLE
     ,SectionOrder int NOT NULL
     ,OrderInSection int NOT NULL
     ,WalletId uniqueidentifier NOT NULL
-    ,PRIMARY KEY (PermitToWorkId, ChecklistId, OptionId)
+    ,PRIMARY KEY (PermitToWorkId, QuestionId)
 );
 GO

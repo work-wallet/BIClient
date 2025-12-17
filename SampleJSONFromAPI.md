@@ -845,10 +845,85 @@ Notes
       "PermitToWorkId": "d2a7b3e9-0c41-4da2-9c23-6a5b3c2d1e0f",
       "ChecklistId": "0b1c2d3e-4f5a-6789-abcd-ef0123456789",
       "OptionId": "123e4567-e89b-12d3-a456-426614174000",
-      "CategorySectionTypeId": 1,
-      "CategorySectionType": "Assignment",
       "Question": "Confirm fire extinguishers are present, inspected, and within 10m of the work area.",
       "Option": "Yes",
+      "Mandatory": true,
+      "Order": 1,
+      "CategorySectionTypeId": 1,
+      "CategorySectionType": "Assignment",
+      "SectionId": "5a6b7c8d-9e0f-1a2b-3c4d-5e6f7a8b9c0d",
+      "Section": "Fire Safety",
+      "SectionOrder": 2,
+      "OrderInSection": 1,
+      "WalletId": "a3e1c9f2-5d4b-4330-9c2f-1c2b8f0d9a77"
+    },
+    {
+      "PermitToWorkId": "d2a7b3e9-0c41-4da2-9c23-6a5b3c2d1e0f",
+      "ChecklistId": "1c2d3e4f-5a6b-789a-bcde-f0123456789a",
+      "OptionId": "234f5678-f90c-23e4-b567-537725285111",
+      "Question": "Have all personnel been briefed on the hot work procedure?",
+      "Option": "Yes",
+      "Mandatory": true,
+      "Order": 1,
+      "CategorySectionTypeId": 1,
+      "CategorySectionType": "Assignment",
+      "SectionId": "5a6b7c8d-9e0f-1a2b-3c4d-5e6f7a8b9c0d",
+      "Section": "Fire Safety",
+      "SectionOrder": 2,
+      "OrderInSection": 2,
+      "WalletId": "a3e1c9f2-5d4b-4330-9c2f-1c2b8f0d9a77"
+    }
+  ],
+  "PermitNumericAnswers": [
+    {
+      "PermitToWorkId": "d2a7b3e9-0c41-4da2-9c23-6a5b3c2d1e0f",
+      "QuestionId": "6b7c8d9e-0f1a-2b3c-4d5e-6f7a8b9c0d1e",
+      "Question": "What is the estimated temperature (°C)?",
+      "Mandatory": false,
+      "Scale": 1,
+      "UnitCode": 16,
+      "Answer": 850.5,
+      "CategorySectionTypeId": 1,
+      "CategorySectionType": "Assignment",
+      "SectionId": "5a6b7c8d-9e0f-1a2b-3c4d-5e6f7a8b9c0d",
+      "Section": "Fire Safety",
+      "SectionOrder": 2,
+      "OrderInSection": 3,
+      "WalletId": "a3e1c9f2-5d4b-4330-9c2f-1c2b8f0d9a77"
+    }
+  ],
+  "PermitDateTimeAnswers": [
+    {
+      "PermitToWorkId": "d2a7b3e9-0c41-4da2-9c23-6a5b3c2d1e0f",
+      "QuestionId": "7c8d9e0f-1a2b-3c4d-5e6f-7a8b9c0d1e2f",
+      "Question": "When was the last fire drill conducted?",
+      "Mandatory": true,
+      "Date": true,
+      "Time": false,
+      "Answer": "2025-08-15T00:00:00",
+      "CategorySectionTypeId": 1,
+      "CategorySectionType": "Assignment",
+      "SectionId": "5a6b7c8d-9e0f-1a2b-3c4d-5e6f7a8b9c0d",
+      "Section": "Fire Safety",
+      "SectionOrder": 2,
+      "OrderInSection": 4,
+      "WalletId": "a3e1c9f2-5d4b-4330-9c2f-1c2b8f0d9a77"
+    }
+  ],
+  "PermitBranchOptions": [
+    {
+      "PermitToWorkId": "d2a7b3e9-0c41-4da2-9c23-6a5b3c2d1e0f",
+      "BranchId": "8d9e0f1a-2b3c-4d5e-6f7a-8b9c0d1e2f3a",
+      "OptionId": "345f6789-012d-34f5-c678-648836396222",
+      "Branch": "What type of hot work is being performed?",
+      "Value": "Welding",
+      "Order": 1,
+      "CategorySectionTypeId": 1,
+      "CategorySectionType": "Assignment",
+      "SectionId": "5a6b7c8d-9e0f-1a2b-3c4d-5e6f7a8b9c0d",
+      "Section": "Fire Safety",
+      "SectionOrder": 2,
+      "OrderInSection": 5,
       "WalletId": "a3e1c9f2-5d4b-4330-9c2f-1c2b8f0d9a77"
     }
   ]
@@ -871,6 +946,9 @@ Notes
   - **StatusId**: deprecated, use **StatusId2** instead (supports the `Extended` enum value)
 - PermitCategories
   - **ValidityPeriodMinutes**: `0` indicates no data
+- PermitNumericAnswers
+  - **Scale**: decimal places for the numeric value
+  - **UnitCode**: `0` indicates no unit specified
 
 ## PPEAssignments
 
