@@ -12,10 +12,6 @@ BEGIN
             a.CategorySectionType
             ,a.Question
             ,a.[Option]
-            ,a.[Order]
-            ,a.Section
-            ,a.SectionOrder
-            ,a.OrderInSection
             ,w.Wallet_key
         FROM
             @permitToWorkChecklistAnswerTable AS a
@@ -25,39 +21,16 @@ BEGIN
         target.Wallet_key = source.Wallet_key
         AND target.Question = source.Question
         AND target.[Option] = source.[Option]
-    WHEN MATCHED AND (
-        target.CategorySectionType <> source.CategorySectionType
-        OR target.[Order] <> source.[Order]
-        OR target.Section <> source.Section
-        OR target.SectionOrder <> source.SectionOrder
-        OR target.OrderInSection <> source.OrderInSection
-    )
-    THEN
-        UPDATE SET
-            CategorySectionType = source.CategorySectionType
-            ,[Order] = source.[Order]
-            ,Section = source.Section
-            ,SectionOrder = source.SectionOrder
-            ,OrderInSection = source.OrderInSection
-            ,_edited = SYSUTCDATETIME()
     WHEN NOT MATCHED BY TARGET THEN
         INSERT (
             CategorySectionType
             ,Question
             ,[Option]
-            ,[Order]
-            ,Section
-            ,SectionOrder
-            ,OrderInSection
             ,Wallet_key
         ) VALUES (
             source.CategorySectionType
             ,source.Question
             ,source.[Option]
-            ,source.[Order]
-            ,source.Section
-            ,source.SectionOrder
-            ,source.OrderInSection
             ,source.Wallet_key
         );
 
