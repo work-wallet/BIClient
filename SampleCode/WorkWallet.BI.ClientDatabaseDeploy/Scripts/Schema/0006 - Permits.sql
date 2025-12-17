@@ -91,7 +91,6 @@ CREATE TABLE mart.PermitChecklistAnswerFact
     ,PermitChecklistAnswer_key int NOT NULL
     ,Wallet_key int NOT NULL
     ,_created datetime2(7) NOT NULL CONSTRAINT [DF_mart.PermitChecklistAnswerFact__created] DEFAULT SYSUTCDATETIME()
-    ,_edited datetime2(7) NULL
     ,CONSTRAINT [PK_mart.PermitChecklistAnswerFact] PRIMARY KEY (Permit_key, PermitChecklistAnswer_key)
     ,CONSTRAINT [FK_mart.PermitChecklistAnswerFact_mart.Permit_Permit_key] FOREIGN KEY(Permit_key) REFERENCES mart.Permit
     ,CONSTRAINT [FK_mart.PermitChecklistAnswerFact_mart.PermitChecklistAnswer_PermitChecklistAnswer_key] FOREIGN KEY(PermitChecklistAnswer_key) REFERENCES mart.PermitChecklistAnswer
