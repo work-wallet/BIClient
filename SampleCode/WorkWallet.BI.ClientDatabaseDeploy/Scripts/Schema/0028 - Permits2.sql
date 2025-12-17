@@ -107,4 +107,39 @@ CREATE TABLE mart.PermitBranchOptionFact
     ,CONSTRAINT [FK_mart.PermitBranchOptionFact_mart.Wallet_Wallet_key] FOREIGN KEY(Wallet_key) REFERENCES mart.Wallet
 );
 
+CREATE TABLE mart.PermitChecklistOption
+(
+    PermitChecklistOption_key int IDENTITY
+    ,ChecklistId uniqueidentifier NOT NULL
+    ,OptionId uniqueidentifier NOT NULL
+    ,Question nvarchar(1000) NOT NULL
+    ,[Option] nvarchar(250) NOT NULL
+    ,Mandatory bit NOT NULL
+    ,[Order] int NOT NULL
+    ,CategorySectionTypeId int NOT NULL
+    ,CategorySectionType nvarchar(50) NOT NULL
+    ,SectionId uniqueidentifier NOT NULL
+    ,Section nvarchar(100) NOT NULL
+    ,SectionOrder int NOT NULL
+    ,OrderInSection int NOT NULL
+    ,Wallet_key int NOT NULL
+    ,_created datetime2(7) NOT NULL CONSTRAINT [DF_mart.PermitChecklistOption__created] DEFAULT SYSUTCDATETIME()
+    ,_edited datetime2(7) NULL
+    ,CONSTRAINT [PK_mart.PermitChecklistOption] PRIMARY KEY (PermitChecklistOption_key)
+    ,CONSTRAINT [UQ_mart.PermitChecklistOption_ChecklistId_OptionId] UNIQUE(ChecklistId, OptionId)
+    ,CONSTRAINT [FK_mart.PermitChecklistOption_mart.Wallet_Wallet_key] FOREIGN KEY(Wallet_key) REFERENCES mart.Wallet
+);
+
+CREATE TABLE mart.PermitChecklistAnswerFact2
+(
+    Permit_key int NOT NULL
+    ,PermitChecklistOption_key int NOT NULL
+    ,Wallet_key int NOT NULL
+    ,_created datetime2(7) NOT NULL CONSTRAINT [DF_mart.PermitChecklistAnswerFact2__created] DEFAULT SYSUTCDATETIME()
+    ,CONSTRAINT [PK_mart.PermitChecklistAnswerFact2] PRIMARY KEY (Permit_key, PermitChecklistOption_key)
+    ,CONSTRAINT [FK_mart.PermitChecklistAnswerFact2_mart.Permit_Permit_key] FOREIGN KEY(Permit_key) REFERENCES mart.Permit
+    ,CONSTRAINT [FK_mart.PermitChecklistAnswerFact2_mart.PermitChecklistOption_PermitChecklistOption_key] FOREIGN KEY(PermitChecklistOption_key) REFERENCES mart.PermitChecklistOption
+    ,CONSTRAINT [FK_mart.PermitChecklistAnswerFact2_mart.Wallet_Wallet_key] FOREIGN KEY(Wallet_key) REFERENCES mart.Wallet
+);
+
 GO
