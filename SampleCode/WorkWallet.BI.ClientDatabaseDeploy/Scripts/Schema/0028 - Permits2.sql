@@ -64,6 +64,7 @@ CREATE TABLE mart.PermitNumericQuestion
     ,_created datetime2(7) NOT NULL CONSTRAINT [DF_mart.PermitNumericQuestion__created] DEFAULT SYSUTCDATETIME()
     ,_edited datetime2(7) NULL
     ,CONSTRAINT [PK_mart.PermitNumericQuestion] PRIMARY KEY (PermitNumericQuestion_key)
+    ,CONSTRAINT [UQ_mart.PermitNumericQuestion_QuestionId] UNIQUE(QuestionId)
     ,CONSTRAINT [FK_mart.PermitNumericQuestion_mart.Unit_Unit_key] FOREIGN KEY(Unit_key) REFERENCES mart.Unit
     ,CONSTRAINT [FK_mart.PermitNumericQuestion_mart.Wallet_Wallet_key] FOREIGN KEY(Wallet_key) REFERENCES mart.Wallet
 );
@@ -96,6 +97,7 @@ CREATE TABLE mart.PermitDateTimeQuestion
     ,_created datetime2(7) NOT NULL CONSTRAINT [DF_mart.PermitDateTimeQuestion__created] DEFAULT SYSUTCDATETIME()
     ,_edited datetime2(7) NULL
     ,CONSTRAINT [PK_mart.PermitDateTimeQuestion] PRIMARY KEY (PermitDateTimeQuestion_key)
+    ,CONSTRAINT [UQ_mart.PermitDateTimeQuestion_QuestionId] UNIQUE(QuestionId)
     ,CONSTRAINT [FK_mart.PermitDateTimeQuestion_mart.Wallet_Wallet_key] FOREIGN KEY(Wallet_key) REFERENCES mart.Wallet
 );
 
@@ -130,6 +132,7 @@ CREATE TABLE mart.PermitBranchOption
     ,_created datetime2(7) NOT NULL CONSTRAINT [DF_mart.PermitBranchOption__created] DEFAULT SYSUTCDATETIME()
     ,_edited datetime2(7) NULL
     ,CONSTRAINT [PK_mart.PermitBranchOption] PRIMARY KEY (PermitBranchOption_key)
+    ,CONSTRAINT [UQ_mart.PermitBranchOption_BranchId_OptionId] UNIQUE(BranchId, OptionId)
     ,CONSTRAINT [FK_mart.PermitBranchOption_mart.Wallet_Wallet_key] FOREIGN KEY(Wallet_key) REFERENCES mart.Wallet
 );
 
