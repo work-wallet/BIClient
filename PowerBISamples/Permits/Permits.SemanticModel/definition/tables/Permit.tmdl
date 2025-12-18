@@ -24,11 +24,11 @@ table Permit
 
 		annotation SummarizationSetBy = Automatic
 
-	column Reference
+	column 'Permit Reference'
 		dataType: string
 		lineageTag: f4c7059d-4998-4509-af20-6f102238298f
 		summarizeBy: none
-		sourceColumn: Reference
+		sourceColumn: Permit Reference
 
 		annotation SummarizationSetBy = Automatic
 
@@ -183,6 +183,15 @@ table Permit
 
 		annotation SummarizationSetBy = Automatic
 
+	column 'Has Been Extended'
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 5a0e1481-8965-4150-b265-ae769574f31d
+		summarizeBy: none
+		sourceColumn: Has Been Extended
+
+		annotation SummarizationSetBy = Automatic
+
 	partition Permit = m
 		mode: import
 		source =
@@ -190,9 +199,11 @@ table Permit
 				    Source = Sql.Database("ww-powerbi-demo.database.windows.net", "powerbi"),
 				    mart_Permit = Source{[Schema="mart",Item="Permit"]}[Data],
 				    #"Removed Columns" = Table.RemoveColumns(mart_Permit,{"_created", "_edited"}),
-				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"PermitReference", "Reference"}, {"PermitDescription", "Permit"}, {"IssuedToCompany", "Issued To Company"}, {"IssuedOn", "Issued On"}, {"IssuedForMinutes", "Issued For Minutes"}, {"IssuedExpiry", "Issued Expiry"}, {"ClosedOn", "Closed On"}, {"HasBeenExpired", "Has Been Expired"}, {"HasBeenClosed", "Has Been Closed"}})
+				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"PermitReference", "Permit Reference"}, {"PermitDescription", "Permit"}, {"IssuedToCompany", "Issued To Company"}, {"IssuedOn", "Issued On"}, {"IssuedForMinutes", "Issued For Minutes"}, {"IssuedExpiry", "Issued Expiry"}, {"ClosedOn", "Closed On"}, {"HasBeenExpired", "Has Been Expired"}, {"HasBeenClosed", "Has Been Closed"}, {"HasBeenExtended", "Has Been Extended"}})
 				in
 				    #"Renamed Columns"
 
 	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
 

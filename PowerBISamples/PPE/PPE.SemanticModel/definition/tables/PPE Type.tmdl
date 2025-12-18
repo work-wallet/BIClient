@@ -67,7 +67,7 @@ table 'PPE Type'
 		dataType: int64
 		formatString: 0
 		lineageTag: 402de710-6b56-4f67-a53f-9723caaef09f
-		summarizeBy: none
+		summarizeBy: sum
 		sourceColumn: Lifespan Days
 
 		annotation SummarizationSetBy = Automatic
@@ -75,7 +75,7 @@ table 'PPE Type'
 	column Value
 		dataType: double
 		lineageTag: f729f68d-1c1e-4a99-868d-1e2286c22371
-		summarizeBy: none
+		summarizeBy: sum
 		sourceColumn: Value
 
 		annotation SummarizationSetBy = Automatic

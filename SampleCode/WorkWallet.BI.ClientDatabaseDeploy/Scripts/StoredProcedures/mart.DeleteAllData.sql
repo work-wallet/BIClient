@@ -89,7 +89,15 @@ BEGIN
     PRINT 'Deleting Permits dataset tables...';
     
     DELETE FROM mart.PermitChecklistAnswerFact;
+    DELETE FROM mart.PermitChecklistAnswerFact2;
+    DELETE FROM mart.PermitNumericAnswerFact;
+    DELETE FROM mart.PermitDateTimeAnswerFact;
+    DELETE FROM mart.PermitBranchOptionFact;
     DELETE FROM mart.PermitChecklistAnswer;
+    DELETE FROM mart.PermitChecklistOption;
+    DELETE FROM mart.PermitNumericQuestion;
+    DELETE FROM mart.PermitDateTimeQuestion;
+    DELETE FROM mart.PermitBranchOption;
     DELETE FROM mart.Permit;
     DELETE FROM mart.PermitCategory;
 
@@ -98,6 +106,10 @@ BEGIN
     -- ========================================
     PRINT 'Deleting PPE dataset tables...';
     
+    DELETE FROM mart.PPEPropertyFact;
+    DELETE FROM mart.PPEGroupFact;
+    DELETE FROM mart.PPEProperty;
+    DELETE FROM mart.PPEGroup;
     DELETE FROM mart.PPEAssignmentHistory;
     DELETE FROM mart.PPEAssignment;
     DELETE FROM mart.PPEStockHistory;
@@ -164,6 +176,7 @@ BEGIN
     -- - mart.InductionTakenStatus
     -- - mart.PermitStatus
     -- - mart.PPEAction
+    -- - mart.PPEPropertyType
     -- - mart.PPEStatus
     -- - mart.ReportedIssueBodyPartEnum
     -- - mart.ReportedIssueRootCauseAnalysisType

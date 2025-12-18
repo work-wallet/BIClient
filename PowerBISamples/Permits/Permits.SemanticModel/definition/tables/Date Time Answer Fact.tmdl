@@ -1,0 +1,102 @@
+table 'Date Time Answer Fact'
+	lineageTag: a32245ff-dfe5-4efb-a022-de22841c74c8
+
+	column Permit_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 998788fb-c160-46ac-bff8-5a3606cc468c
+		summarizeBy: none
+		sourceColumn: Permit_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column PermitDateTimeQuestion_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 2968cab4-dda6-4a24-818b-7118e46abe65
+		summarizeBy: none
+		sourceColumn: PermitDateTimeQuestion_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Date and Time Answer'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: fdd1c594-4bb6-4fcc-8490-84afdf9a960d
+		summarizeBy: none
+		sourceColumn: Date and Time Answer
+
+		variation Variation
+			isDefault
+			relationship: 58bb680a-c793-4552-8523-2d77dab09ef8
+			defaultHierarchy: LocalDateTable_414ff22d-d6cf-400c-ac4f-15462bf39fd2.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Date Answer'
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: debb5247-69f1-4919-981e-df8ff5b8c5c1
+		summarizeBy: none
+		sourceColumn: Date Answer
+
+		variation Variation
+			isDefault
+			relationship: 0f1f0039-44b9-45e9-84f3-3d4c8b84ba9a
+			defaultHierarchy: LocalDateTable_4b44a87c-15fb-443f-8fd9-c006193fd982.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Time Answer'
+		dataType: dateTime
+		formatString: Long Time
+		lineageTag: f2ce7c54-fbba-4daa-bb0a-1b79a63d3757
+		summarizeBy: none
+		sourceColumn: Time Answer
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Time
+
+	column Wallet_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: ce2c3c22-de12-4733-a134-c94066af3a2f
+		summarizeBy: none
+		sourceColumn: Wallet_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column 'Date Time Answer Count' = 1
+		formatString: 0
+		lineageTag: b45a80c0-2812-4e19-a4c8-b8b371a2c932
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Date Time Answer Fact' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("ww-powerbi-demo.database.windows.net", "powerbi"),
+				    mart_PermitDateTimeAnswerFact = Source{[Schema="mart",Item="PermitDateTimeAnswerFact"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(mart_PermitDateTimeAnswerFact,{"_created"}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"AnswerDateTime", "Date and Time Answer"}, {"AnswerDate", "Date Answer"}, {"AnswerTime", "Time Answer"}})
+				in
+				    #"Renamed Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

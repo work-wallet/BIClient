@@ -1,0 +1,167 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
+  "name": "b9f1f62319d31211d757",
+  "position": {
+    "x": 0,
+    "y": 120.60790273556232,
+    "z": 0,
+    "height": 149.78723404255319,
+    "width": 1280,
+    "tabOrder": 0
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Checklist Option"
+                    }
+                  },
+                  "Property": "Section Type"
+                }
+              },
+              "queryRef": "Checklist Option.Section Type",
+              "nativeQueryRef": "Section Type"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Checklist Option"
+                    }
+                  },
+                  "Property": "Section"
+                }
+              },
+              "queryRef": "Checklist Option.Section",
+              "nativeQueryRef": "Section"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Checklist Option"
+                    }
+                  },
+                  "Property": "Question"
+                }
+              },
+              "queryRef": "Checklist Option.Question",
+              "nativeQueryRef": "Question"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Checklist Option"
+                    }
+                  },
+                  "Property": "Answer"
+                }
+              },
+              "queryRef": "Checklist Option.Answer",
+              "nativeQueryRef": "Answer"
+            }
+          ]
+        }
+      }
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Checklist Answers'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "dd8095e36c56bfa7b9ba",
+        "ordinal": 0,
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Checklist Option"
+              }
+            },
+            "Property": "Answer"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "0279ffe8925e2cc60934",
+        "ordinal": 1,
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Checklist Option"
+              }
+            },
+            "Property": "Question"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "10c2410a9a3241717f6a",
+        "ordinal": 2,
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Checklist Option"
+              }
+            },
+            "Property": "Section"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "3c5980cd6624a1f9940b",
+        "ordinal": 3,
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Checklist Option"
+              }
+            },
+            "Property": "Section Type"
+          }
+        },
+        "type": "Categorical"
+      }
+    ],
+    "filterSortOrder": "Custom"
+  }
+}

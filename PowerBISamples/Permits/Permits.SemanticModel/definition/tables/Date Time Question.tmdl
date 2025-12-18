@@ -1,0 +1,159 @@
+table 'Date Time Question'
+	lineageTag: ea084e6b-59a8-4daa-8025-fd23d06e41ae
+
+	column PermitDateTimeQuestion_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: e45bb1bd-acf8-457b-9430-3dc1d0f6ca89
+		summarizeBy: none
+		sourceColumn: PermitDateTimeQuestion_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column QuestionId
+		dataType: string
+		isHidden
+		lineageTag: 0f2ccc67-2e7a-4283-b7be-a75f301511c5
+		summarizeBy: none
+		sourceColumn: QuestionId
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Date Time Question'
+		dataType: string
+		lineageTag: 4b8e1a51-7fee-4662-b7f3-8bee5d266cbf
+		summarizeBy: none
+		sourceColumn: Date Time Question
+
+		annotation SummarizationSetBy = Automatic
+
+	column Mandatory
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: d3dbbfd0-5a67-40ea-94d0-f32802c6b2e4
+		summarizeBy: none
+		sourceColumn: Mandatory
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Date
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 4932ba75-3709-4f95-ac91-58cd2696354a
+		summarizeBy: none
+		sourceColumn: Date
+
+		annotation SummarizationSetBy = Automatic
+
+	column Time
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 37728ae6-d484-4ea7-807c-f729f4711307
+		summarizeBy: none
+		sourceColumn: Time
+
+		annotation SummarizationSetBy = Automatic
+
+	column SectionTypeId
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: a3b409ba-f9fd-48ae-a056-0b6b77659421
+		summarizeBy: none
+		sourceColumn: SectionTypeId
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column 'Section Type'
+		dataType: string
+		lineageTag: f3d1e573-fff1-47d5-b96c-535d39d4e35c
+		summarizeBy: none
+		sourceColumn: Section Type
+
+		annotation SummarizationSetBy = Automatic
+
+	column SectionId
+		dataType: string
+		isHidden
+		lineageTag: c58c24d7-d1c8-4203-b506-0f1e87901b8c
+		summarizeBy: none
+		sourceColumn: SectionId
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Section
+		dataType: string
+		lineageTag: 6c35ea3b-3c95-45d3-aa16-c1f1bb6a7153
+		summarizeBy: none
+		sourceColumn: Section
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Section Order'
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 40015e27-2755-40ae-b23e-fa97422144d0
+		summarizeBy: none
+		sourceColumn: Section Order
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column 'Order In Section'
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: cd7060e3-20fc-4525-8eb6-69f26929d55d
+		summarizeBy: none
+		sourceColumn: Order In Section
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column Wallet_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 46be1a04-191c-45c6-966d-93863b9418dc
+		summarizeBy: none
+		sourceColumn: Wallet_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column Question = Format('Date Time Question'[Order In Section], "00") & " - " & 'Date Time Question'[Date Time Question]
+		lineageTag: aa7f91e5-351a-4059-b3ce-532b7623a0f7
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Date Time Question' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("ww-powerbi-demo.database.windows.net", "powerbi"),
+				    mart_PermitDateTimeQuestion = Source{[Schema="mart",Item="PermitDateTimeQuestion"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(mart_PermitDateTimeQuestion,{"_created", "_edited"}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"CategorySectionTypeId", "SectionTypeId"}, {"CategorySectionType", "Section Type"}, {"SectionOrder", "Section Order"}, {"OrderInSection", "Order In Section"}, {"Question", "Date Time Question"}})
+				in
+				    #"Renamed Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

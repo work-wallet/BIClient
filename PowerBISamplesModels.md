@@ -107,6 +107,22 @@ Jump to the relevant section:
 
 ![Permits Main Model](Images/PowerBIModelDiagrams/Permits_Main.png)
 
+### Permits - Numeric Answer
+
+![Permits Numeric Answer Model](Images/PowerBIModelDiagrams/Permits_NumericAnswer.png)
+
+### Permits - Date Time Answer
+
+![Permits Date Time Answer Model](Images/PowerBIModelDiagrams/Permits_DateTimeAnswer.png)
+
+### Permits - Checklist Answer
+
+![Permits Checklist Answer Model](Images/PowerBIModelDiagrams/Permits_ChecklistAnswer.png)
+
+### Permits - Branch Option
+
+![Permits Branch Option Model](Images/PowerBIModelDiagrams/Permits_BranchOption.png)
+
 ## PPE
 
 ### PPE - Stock
@@ -120,6 +136,10 @@ Jump to the relevant section:
 ### PPE - Assignments
 
 ![PPE Assignments Model](Images/PowerBIModelDiagrams/PPE_Assignments.png)
+
+### PPE - Properties
+
+![PPE Properties Model](Images/PowerBIModelDiagrams/PPE_Properties.png)
 
 ## Reported Issues
 

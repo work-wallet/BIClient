@@ -1,0 +1,73 @@
+table 'Property Fact'
+	lineageTag: 08a8be58-6617-45ef-9b84-577aeddfa70b
+
+	column PPEPropertyFact_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: f4ceee1d-eb17-4660-9b53-a80bc8e0d212
+		summarizeBy: none
+		sourceColumn: PPEPropertyFact_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column PPETypeId
+		dataType: string
+		isHidden
+		lineageTag: e9c93969-6f16-4ebf-b83a-9d2db05439f6
+		summarizeBy: none
+		sourceColumn: PPETypeId
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column PPEProperty_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 0e0c5c6c-a325-479a-af32-62bab547898a
+		summarizeBy: none
+		sourceColumn: PPEProperty_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Property Value'
+		dataType: string
+		lineageTag: 64b4fd46-c1db-4509-b1e3-c785a2d1de9e
+		summarizeBy: none
+		sourceColumn: Property Value
+
+		annotation SummarizationSetBy = Automatic
+
+	column Wallet_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: ff52de93-4baa-4b32-b620-90a6636f3496
+		summarizeBy: none
+		sourceColumn: Wallet_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	partition 'Property Fact' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("ww-powerbi-demo.database.windows.net", "powerbi"),
+				    mart_PPEPropertyFact = Source{[Schema="mart",Item="PPEPropertyFact"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(mart_PPEPropertyFact,{"_created"}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"Value", "Property Value"}})
+				in
+				    #"Renamed Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

@@ -18,7 +18,7 @@ Two distinct usage paths serve different user scenarios:
 4. Quick Start: Stored procs in `mart` schema parse JSON into star schema tables.
 5. Direct API: Users handle JSON processing and storage themselves.
 
-Supported datasets (see `DataSets.cs` for mapping): Actions, Assets, Audits (AUDIT2), Inductions, Permits, PPEAssignments, PPEStockHistories, PPEStocks, ReportedIssues, SafetyCards.
+Supported datasets (see `DataSets.cs` for mapping): Actions, Assets (three modules: Assets, AssetInspections, AssetObservations), Audits (AUDIT2), Inductions, Permits, PPE (three modules: PPEAssignments, PPEStockHistories, PPEStocks), ReportedIssues, SafetyCards.
 
 ## 3. Config & Deployment
 - Multiple wallets: `AgentWallets[]` in config.
@@ -42,8 +42,40 @@ Rules: empty `Context.Error` = success; respect current API limits (may vary per
 ## 5. Extension Points
 - Progress output: implement `IProgressService`.
 - Alternative storage: implement `IDataStoreService`.
-- New dataset: add to `DataSets.cs`, create SQL processing proc(s), update docs & changelog.
 - Post-processing: `ETL_PostProcess*` procedures are intentionally empty placeholders for users to add custom business logic after data loading.
+
+### 5.1 Dataset Changes (New Datasets or Additional Fields)
+When adding a new dataset or extending existing datasets with additional JSON fields/blocks, updates are required across multiple layers:
+
+**Code Layer:**
+1. Add new dataset to `DataSets.cs` enumeration and mapping (if new dataset).
+
+**Database Layer:**
+2. Schema changes: add/modify dimension and fact tables in `Scripts/Schema/` (DbUp, RunOnce group).
+3. Types: add/modify user-defined table types in `Scripts/Types/` for JSON staging (RunOnce).
+4. Update `mart.ETL_Load[Dataset].sql`: procedure that reads JSON from API into staging (StoredProcedures, RunAlways).
+5. Update processing procedures (StoredProcedures, RunAlways):
+   - Dimension maintenance: `mart.ETL_Maintain[ModulePrefix][DimensionName]Dimension.sql` (e.g., `mart.ETL_MaintainPPETypeDimension.sql`, `mart.ETL_MaintainAuditChecklistOptionDimension.sql`).
+   - Fact loading: `mart.ETL_Load[ModulePrefix][FactName]Fact.sql` (e.g., `mart.ETL_LoadPPEPropertyFact.sql`, `mart.ETL_LoadAuditScoredResponseFact.sql`).
+   - Optional fact deletion: `mart.ETL_Delete[Dataset]Facts.sql` if clearing facts before reload.
+   - Empty placeholder: `mart.ETL_PostProcess[Dataset].sql` for user customization.
+6. Update `mart.DeleteAllData.sql`: add DELETE statements for new tables in correct FK dependency order (delete child tables before parent tables).
+
+**Power BI Layer:**
+7. Create or update Power BI sample projects in `PowerBISamples/[Dataset]/`:
+   - `.pbip` project file.
+   - `.Report/` folder with visuals and definition.
+   - `.SemanticModel/` folder with model definition, relationships, measures.
+8. Update `PowerBISamplesModels.md`: add/update model diagram screenshots and relationship documentation.
+9. Export and save semantic model diagrams to `Images/PowerBIModelDiagrams/`.
+
+**Documentation Layer:**
+10. Update `SampleJSONFromAPI.md`: add representative JSON sample for new dataset or new fields.
+11. Update `ReferenceData.md`: document any new reference data, enumerations, or lookup values.
+12. Update `README.md`:
+    - Add dataset to Supported Datasets list if new.
+    - Update Force Data Reset table with new dataset reset mapping if new.
+13. Update `CHANGELOG.md`: document changes under Unreleased > Added or Changed, noting DB deploy + optional full reload if required.
 
 ## 6. Database Design Notes
 - Empty `ETL_PostProcess*` stored procedures are deliberate extension points for repository users to implement custom post-processing logic.
@@ -52,11 +84,11 @@ Rules: empty `Context.Error` = success; respect current API limits (may vary per
 
 ## 7. Documentation Structure & Rules
 - Single canonical guide: `README.md` with numbered section hierarchy (1-9).
-- Two main usage paths clearly separated: Quick Start (section 5) and Direct API (section 6).
+- Two main usage paths clearly separated: Quick Start and Direct API Usage.
 - Embed sample config JSON inline in relevant sections (not a separate section).
 - Keep README TOC explicitly numbered; leave other markdown to standard lint auto-numbering.
 - Add rationale or clarifications under existing headings instead of creating new top-level ones unless substantial.
-- Architecture section (5.3) explains data flow, design principles, and benefits for Quick Start users.
+- Architecture section explains data flow, design principles, and benefits for Quick Start users.
 
 ## 8. Changelog Updates
 - Use `CHANGELOG.md` with Unreleased → versioned sections on release.
@@ -82,7 +114,7 @@ Follow markdownlint defaults. Single H1 per file. Use fenced code blocks with la
 ## 12. Common Tasks
 | Task | Action |
 | --- | --- |
-| Add dataset | Update `DataSets.cs`, SQL procs, README tables, changelog. |
-| Schema change | Add/adjust DbUp script + procs; update Power BI model if needed. |
+| Add dataset or new fields | Follow complete checklist in section 5.1 across code, database, Power BI, and documentation layers. |
+| Schema change | Add/adjust DbUp script + procs; update Power BI model if needed; update DeleteAllData.sql for new tables. |
 
 ---

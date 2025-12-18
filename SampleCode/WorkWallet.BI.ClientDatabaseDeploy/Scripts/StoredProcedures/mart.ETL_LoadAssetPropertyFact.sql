@@ -27,6 +27,7 @@ BEGIN
         INNER JOIN mart.Wallet AS w ON a.WalletId = w.WalletId
         INNER JOIN mart.AssetProperty AS ap ON
             apt.AssetPropertyType_key = ap.AssetPropertyType_key
+            AND a.IsSharedProperty = ap.IsSharedProperty
             AND a.Property = ap.Property
             AND a.WalletId = w.WalletId;
 

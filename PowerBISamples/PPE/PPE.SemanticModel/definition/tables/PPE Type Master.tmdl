@@ -1,0 +1,53 @@
+table 'PPE Type Master'
+	lineageTag: a62ff8c5-4b9b-4222-b8bb-d3364a72962b
+
+	column PPETypeId
+		isHidden
+		lineageTag: dbf64634-82b0-4a27-995e-7774de309bf3
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: PPE Type[PPETypeId]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'PPE Type'
+		lineageTag: 9138f94c-7b52-4696-860f-04060cf90546
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: PPE Type[PPE Type]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Type Deleted'
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 62146f89-5882-4cda-a868-6baeac1258e4
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: PPE Type[Type Deleted]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Wallet_key
+		isHidden
+		formatString: 0
+		lineageTag: cc9ef7e2-778f-461e-bf24-185dd358c953
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: PPE Type[Wallet_key]
+
+		annotation SummarizationSetBy = User
+
+	partition 'PPE Type Master' = calculated
+		mode: import
+		source =
+				
+				SUMMARIZE(
+				    'PPE Type',
+				    'PPE Type'[PPETypeId],
+				    'PPE Type'[PPE Type],
+				    'PPE Type'[Type Deleted],
+				    'PPE Type'[Wallet_key]
+				)
+
+	annotation PBI_Id = 270db0c46a4c4bb1a26fb3e1aff7cf47
+

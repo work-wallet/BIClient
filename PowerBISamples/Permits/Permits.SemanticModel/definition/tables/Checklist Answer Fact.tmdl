@@ -1,35 +1,35 @@
 table 'Checklist Answer Fact'
-	lineageTag: 6791d632-1557-432c-924a-a025d353f446
+	lineageTag: 85685a26-4860-4aa5-af79-e396ebb40c0d
 
 	column Permit_key
 		dataType: int64
 		isHidden
 		formatString: 0
-		lineageTag: 99bfeadf-d2fd-4324-b745-67dd94f153b1
+		lineageTag: 8bdb6408-45e4-469b-8900-b17d865192aa
 		summarizeBy: none
 		sourceColumn: Permit_key
 
 		changedProperty = IsHidden
 
-		annotation SummarizationSetBy = Automatic
+		annotation SummarizationSetBy = User
 
-	column PermitChecklistAnswer_key
+	column PermitChecklistOption_key
 		dataType: int64
 		isHidden
 		formatString: 0
-		lineageTag: 7f1cdddc-b77c-4674-9cee-7d75af645eff
+		lineageTag: 99bbb9d5-7a02-4a3f-bc8c-1c0fb768ff00
 		summarizeBy: none
-		sourceColumn: PermitChecklistAnswer_key
+		sourceColumn: PermitChecklistOption_key
 
 		changedProperty = IsHidden
 
-		annotation SummarizationSetBy = User
+		annotation SummarizationSetBy = Automatic
 
 	column Wallet_key
 		dataType: int64
 		isHidden
 		formatString: 0
-		lineageTag: ee3f7be8-88fd-4f19-983a-1eefb8c7b044
+		lineageTag: 57f04a17-2d77-4245-9c76-922a51ffb1dd
 		summarizeBy: none
 		sourceColumn: Wallet_key
 
@@ -39,7 +39,7 @@ table 'Checklist Answer Fact'
 
 	column 'Checklist Answer Count' = 1
 		formatString: 0
-		lineageTag: f950dd5f-aae5-4984-9ec9-a8a6d9d139f4
+		lineageTag: 86f0d861-80fb-4336-9185-0ef7529b4d4e
 		summarizeBy: sum
 
 		annotation SummarizationSetBy = Automatic
@@ -49,10 +49,12 @@ table 'Checklist Answer Fact'
 		source =
 				let
 				    Source = Sql.Database("ww-powerbi-demo.database.windows.net", "powerbi"),
-				    mart_PermitChecklistAnswerFact = Source{[Schema="mart",Item="PermitChecklistAnswerFact"]}[Data],
-				    #"Removed Columns" = Table.RemoveColumns(mart_PermitChecklistAnswerFact,{"_created", "_edited"})
+				    mart_PermitChecklistAnswerFact2 = Source{[Schema="mart",Item="PermitChecklistAnswerFact2"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(mart_PermitChecklistAnswerFact2,{"_created"})
 				in
 				    #"Removed Columns"
+
+	annotation PBI_NavigationStepName = Navigation
 
 	annotation PBI_ResultType = Table
 

@@ -1,0 +1,67 @@
+table 'Group Fact'
+	isHidden
+	lineageTag: f1a138ce-1ba8-4d43-b029-4e1890637c27
+
+	column PPEGroupFact_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: d9a4f731-deb0-4938-acb1-c0980054c9d4
+		summarizeBy: none
+		sourceColumn: PPEGroupFact_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column PPEGroup_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 889ad3b5-a5d7-4ddc-b06c-26f805992557
+		summarizeBy: none
+		sourceColumn: PPEGroup_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Wallet_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: d6ed1251-b355-4a8f-b894-b7456af54398
+		summarizeBy: none
+		sourceColumn: Wallet_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column PPETypeId
+		dataType: string
+		isHidden
+		lineageTag: b4854283-71c2-481a-8360-35349af55050
+		summarizeBy: none
+		sourceColumn: PPETypeId
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Group Fact' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("ww-powerbi-demo.database.windows.net", "powerbi"),
+				    mart_PPEGroupFact = Source{[Schema="mart",Item="PPEGroupFact"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(mart_PPEGroupFact,{"_created"})
+				in
+				    #"Removed Columns"
+
+	changedProperty = IsHidden
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

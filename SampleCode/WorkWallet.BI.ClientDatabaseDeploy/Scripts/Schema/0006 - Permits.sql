@@ -16,6 +16,7 @@ INSERT INTO mart.PermitStatus (PermitStatusCode, PermitStatus) VALUES (4, N'Expi
 INSERT INTO mart.PermitStatus (PermitStatusCode, PermitStatus) VALUES (5, N'Closed');
 INSERT INTO mart.PermitStatus (PermitStatusCode, PermitStatus) VALUES (6, N'Archived');
 INSERT INTO mart.PermitStatus (PermitStatusCode, PermitStatus) VALUES (7, N'Deleted');
+INSERT INTO mart.PermitStatus (PermitStatusCode, PermitStatus) VALUES (8, N'Extended');
 
 CREATE TABLE mart.PermitCategory
 (
@@ -55,6 +56,7 @@ CREATE TABLE mart.Permit
     ,PermitStatus_key int NOT NULL
     ,HasBeenExpired bit NOT NULL
     ,HasBeenClosed bit NOT NULL
+    ,HasBeenExtended bit NOT NULL
     ,Wallet_key int NOT NULL
     ,_created datetime2(7) NOT NULL CONSTRAINT [DF_mart.Permit__created] DEFAULT SYSUTCDATETIME()
     ,_edited datetime2(7) NULL

@@ -1,0 +1,37 @@
+table 'Property Type'
+	lineageTag: 112b2631-209c-4c33-b3be-e20c2573f9a6
+
+	column PPEPropertyType_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: c1319ce7-4aaf-43d6-911f-be0876b6d6a5
+		summarizeBy: none
+		sourceColumn: PPEPropertyType_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column 'Property Type'
+		dataType: string
+		lineageTag: 95a38a10-97e5-4081-9208-108ef5c20096
+		summarizeBy: none
+		sourceColumn: Property Type
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Property Type' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("ww-powerbi-demo.database.windows.net", "powerbi"),
+				    mart_PPEPropertyType = Source{[Schema="mart",Item="PPEPropertyType"]}[Data],
+				    #"Renamed Columns" = Table.RenameColumns(mart_PPEPropertyType,{{"PPEPropertyType", "Property Type"}})
+				in
+				    #"Renamed Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

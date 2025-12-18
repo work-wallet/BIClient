@@ -41,6 +41,7 @@ BEGIN
             ,Title
             ,[Description]
             ,AssignedTo
+            ,AssignedToEmail
             ,PriorityCode
             ,DueOn
             ,OriginalDueOn
@@ -59,6 +60,7 @@ BEGIN
             ,Title nvarchar(100)
             ,[Description] nvarchar(max)
             ,AssignedTo nvarchar(100)
+            ,AssignedToEmail nvarchar(256)
             ,PriorityCode int
             ,DueOn date
             ,OriginalDueOn date
