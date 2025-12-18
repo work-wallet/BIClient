@@ -1,0 +1,174 @@
+table 'Numeric Question'
+	lineageTag: eb129f4e-4e1d-46ea-9c79-89457a87d9d2
+
+	column PermitNumericQuestion_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 8720c63f-4f7b-4447-8f85-8ac1579066b7
+		summarizeBy: none
+		sourceColumn: PermitNumericQuestion_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column QuestionId
+		dataType: string
+		isHidden
+		lineageTag: 28d70dd2-f318-47f2-9afc-6ac43458a09b
+		summarizeBy: none
+		sourceColumn: QuestionId
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Numeric Question'
+		dataType: string
+		lineageTag: 47b46919-419a-4928-96fc-1a7c91e6a6b9
+		summarizeBy: none
+		sourceColumn: Numeric Question
+
+		annotation SummarizationSetBy = Automatic
+
+	column Mandatory
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: c18c72e1-8b24-4908-8d79-2ca738dd9ee8
+		summarizeBy: none
+		sourceColumn: Mandatory
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Scale
+		dataType: int64
+		formatString: 0
+		lineageTag: 007b7119-5684-47ed-9101-5d2a2b07bc13
+		summarizeBy: none
+		sourceColumn: Scale
+
+		annotation SummarizationSetBy = User
+
+	column Unit_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: dc77e7f6-2618-436c-80c6-1c3f3888cbee
+		summarizeBy: none
+		sourceColumn: Unit_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column SectionTypeId
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 297dc11c-dbee-49c0-b991-bd1dd2bc6a7f
+		summarizeBy: none
+		sourceColumn: SectionTypeId
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column 'Section Type'
+		dataType: string
+		lineageTag: 7e6979ad-d96a-4811-bae5-49cfde287e7e
+		summarizeBy: none
+		sourceColumn: Section Type
+
+		annotation SummarizationSetBy = Automatic
+
+	column SectionId
+		dataType: string
+		isHidden
+		lineageTag: 655b32ec-8219-48c7-af77-f77168ef29c0
+		summarizeBy: none
+		sourceColumn: SectionId
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Section
+		dataType: string
+		lineageTag: 83ce6db2-6662-43d5-be8e-7a1dd5c3d2b9
+		summarizeBy: none
+		sourceColumn: Section
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Section Order'
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 64154593-3708-4237-9717-00131f93f227
+		summarizeBy: none
+		sourceColumn: Section Order
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column 'Order In Section'
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: ed348326-0212-4916-a7df-420c7a2ef83a
+		summarizeBy: none
+		sourceColumn: Order In Section
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column Wallet_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 2bec3e63-2efa-4cab-ac5c-83b3c9bb2624
+		summarizeBy: none
+		sourceColumn: Wallet_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column Question = Format('Numeric Question'[Order In Section], "00") & " - " & 'Numeric Question'[Numeric Question]
+		lineageTag: 3a1d769c-671b-4e60-ab52-d0013607abe0
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column Unit = RELATED(Unit[Unit])
+		lineageTag: 03c6cfa1-9e56-48d5-8862-9e14e997b11f
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Unit Acronym' = RELATED(Unit[Unit Acronym])
+		lineageTag: 6d3d0320-8cfd-48e7-8105-a67ac877ac94
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Numeric Question' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("CAKESOFBREAD", "WorkWalletBIClient_Local"),
+				    mart_PermitNumericQuestion = Source{[Schema="mart",Item="PermitNumericQuestion"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(mart_PermitNumericQuestion,{"_created", "_edited"}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"CategorySectionTypeId", "SectionTypeId"}, {"CategorySectionType", "Section Type"}, {"SectionOrder", "Section Order"}, {"OrderInSection", "Order In Section"}, {"Question", "Numeric Question"}})
+				in
+				    #"Renamed Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

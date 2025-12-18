@@ -1,0 +1,255 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
+  "name": "116e9a41ddbfc2ac659f",
+  "position": {
+    "x": 0,
+    "y": 420.18237082066872,
+    "z": 4,
+    "height": 149.78723404255319,
+    "width": 1280,
+    "tabOrder": 3
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Date Time Question"
+                    }
+                  },
+                  "Property": "Section Type"
+                }
+              },
+              "queryRef": "Date Time Question.Section Type",
+              "nativeQueryRef": "Section Type"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Date Time Question"
+                    }
+                  },
+                  "Property": "Section"
+                }
+              },
+              "queryRef": "Date Time Question.Section",
+              "nativeQueryRef": "Section"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Date Time Question"
+                    }
+                  },
+                  "Property": "Question"
+                }
+              },
+              "queryRef": "Date Time Question.Question",
+              "nativeQueryRef": "Question"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Date Time Answer Fact"
+                    }
+                  },
+                  "Property": "Date Answer"
+                }
+              },
+              "queryRef": "Date Time Answer Fact.Date Answer",
+              "nativeQueryRef": "Date Answer"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Date Time Answer Fact"
+                    }
+                  },
+                  "Property": "Time Answer"
+                }
+              },
+              "queryRef": "Date Time Answer Fact.Time Answer",
+              "nativeQueryRef": "Time Answer"
+            }
+          ]
+        }
+      }
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Date Time Answers'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "dd8095e36c56bfa7b9ba",
+        "ordinal": 0,
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Checklist Option"
+              }
+            },
+            "Property": "Answer"
+          }
+        },
+        "type": "Categorical",
+        "howCreated": "User"
+      },
+      {
+        "name": "0279ffe8925e2cc60934",
+        "ordinal": 1,
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Checklist Option"
+              }
+            },
+            "Property": "Question"
+          }
+        },
+        "type": "Categorical",
+        "howCreated": "User"
+      },
+      {
+        "name": "10c2410a9a3241717f6a",
+        "ordinal": 2,
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Checklist Option"
+              }
+            },
+            "Property": "Section"
+          }
+        },
+        "type": "Categorical",
+        "howCreated": "User"
+      },
+      {
+        "name": "3c5980cd6624a1f9940b",
+        "ordinal": 3,
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Checklist Option"
+              }
+            },
+            "Property": "Section Type"
+          }
+        },
+        "type": "Categorical",
+        "howCreated": "User"
+      },
+      {
+        "name": "4de2e9fb579b85d29360",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Date Time Question"
+              }
+            },
+            "Property": "Section Type"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "356dfc6c6c894cf3f0bc",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Date Time Question"
+              }
+            },
+            "Property": "Section"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "86d1df20e9b8bb279652",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Date Time Question"
+              }
+            },
+            "Property": "Question"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "f4f5574bc7495ba8e3f6",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Date Time Answer Fact"
+              }
+            },
+            "Property": "Date Answer"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "747b69e9389d955117fb",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Date Time Answer Fact"
+              }
+            },
+            "Property": "Time Answer"
+          }
+        },
+        "type": "Categorical"
+      }
+    ],
+    "filterSortOrder": "Custom"
+  }
+}

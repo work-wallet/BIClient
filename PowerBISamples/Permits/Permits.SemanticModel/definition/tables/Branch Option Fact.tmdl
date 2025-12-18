@@ -1,11 +1,11 @@
-table 'Checklist Answer Fact'
-	lineageTag: 85685a26-4860-4aa5-af79-e396ebb40c0d
+table 'Branch Option Fact'
+	lineageTag: 8b34dc55-f937-404e-8caf-baeca11ddb5b
 
 	column Permit_key
 		dataType: int64
 		isHidden
 		formatString: 0
-		lineageTag: 8bdb6408-45e4-469b-8900-b17d865192aa
+		lineageTag: 5a8c5740-f898-41d1-9643-970ad2920479
 		summarizeBy: none
 		sourceColumn: Permit_key
 
@@ -13,13 +13,13 @@ table 'Checklist Answer Fact'
 
 		annotation SummarizationSetBy = User
 
-	column PermitChecklistOption_key
+	column PermitBranchOption_key
 		dataType: int64
 		isHidden
 		formatString: 0
-		lineageTag: 99bbb9d5-7a02-4a3f-bc8c-1c0fb768ff00
+		lineageTag: be439bdc-0fa9-4dce-94f8-e99aeab0beb6
 		summarizeBy: none
-		sourceColumn: PermitChecklistOption_key
+		sourceColumn: PermitBranchOption_key
 
 		changedProperty = IsHidden
 
@@ -29,7 +29,7 @@ table 'Checklist Answer Fact'
 		dataType: int64
 		isHidden
 		formatString: 0
-		lineageTag: 57f04a17-2d77-4245-9c76-922a51ffb1dd
+		lineageTag: d70d6d7c-3328-4269-a23b-c05dae6feb3b
 		summarizeBy: none
 		sourceColumn: Wallet_key
 
@@ -37,20 +37,20 @@ table 'Checklist Answer Fact'
 
 		annotation SummarizationSetBy = User
 
-	column 'Checklist Answer Count' = 1
+	column 'Branch Option Counnt' = 1
 		formatString: 0
-		lineageTag: 86f0d861-80fb-4336-9185-0ef7529b4d4e
+		lineageTag: f71ab16f-fc84-443a-89fc-8f4baa060ef4
 		summarizeBy: sum
 
 		annotation SummarizationSetBy = Automatic
 
-	partition 'Checklist Answer Fact' = m
+	partition 'Branch Option Fact' = m
 		mode: import
 		source =
 				let
 				    Source = Sql.Database("CAKESOFBREAD", "WorkWalletBIClient_Local"),
-				    mart_PermitChecklistAnswerFact2 = Source{[Schema="mart",Item="PermitChecklistAnswerFact2"]}[Data],
-				    #"Removed Columns" = Table.RemoveColumns(mart_PermitChecklistAnswerFact2,{"_created"})
+				    mart_PermitBranchOptionFact = Source{[Schema="mart",Item="PermitBranchOptionFact"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(mart_PermitBranchOptionFact,{"_created"})
 				in
 				    #"Removed Columns"
 

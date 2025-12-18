@@ -24,11 +24,11 @@ table Permit
 
 		annotation SummarizationSetBy = Automatic
 
-	column Reference
+	column 'Permit Reference'
 		dataType: string
 		lineageTag: f4c7059d-4998-4509-af20-6f102238298f
 		summarizeBy: none
-		sourceColumn: Reference
+		sourceColumn: Permit Reference
 
 		annotation SummarizationSetBy = Automatic
 
@@ -199,7 +199,7 @@ table Permit
 				    Source = Sql.Database("CAKESOFBREAD", "WorkWalletBIClient_Local"),
 				    mart_Permit = Source{[Schema="mart",Item="Permit"]}[Data],
 				    #"Removed Columns" = Table.RemoveColumns(mart_Permit,{"_created", "_edited"}),
-				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"PermitReference", "Reference"}, {"PermitDescription", "Permit"}, {"IssuedToCompany", "Issued To Company"}, {"IssuedOn", "Issued On"}, {"IssuedForMinutes", "Issued For Minutes"}, {"IssuedExpiry", "Issued Expiry"}, {"ClosedOn", "Closed On"}, {"HasBeenExpired", "Has Been Expired"}, {"HasBeenClosed", "Has Been Closed"}, {"HasBeenExtended", "Has Been Extended"}})
+				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"PermitReference", "Permit Reference"}, {"PermitDescription", "Permit"}, {"IssuedToCompany", "Issued To Company"}, {"IssuedOn", "Issued On"}, {"IssuedForMinutes", "Issued For Minutes"}, {"IssuedExpiry", "Issued Expiry"}, {"ClosedOn", "Closed On"}, {"HasBeenExpired", "Has Been Expired"}, {"HasBeenClosed", "Has Been Closed"}, {"HasBeenExtended", "Has Been Extended"}})
 				in
 				    #"Renamed Columns"
 

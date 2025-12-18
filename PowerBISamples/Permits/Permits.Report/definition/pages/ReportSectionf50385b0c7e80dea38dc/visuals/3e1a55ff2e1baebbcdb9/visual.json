@@ -22,11 +22,12 @@
                       "Entity": "Permit"
                     }
                   },
-                  "Property": "Reference"
+                  "Property": "Permit Reference"
                 }
               },
               "queryRef": "Permit.Reference",
-              "nativeQueryRef": "Reference"
+              "nativeQueryRef": "Reference",
+              "displayName": "Reference"
             },
             {
               "field": {
@@ -153,7 +154,7 @@
                     "Entity": "Permit"
                   }
                 },
-                "Property": "Reference"
+                "Property": "Permit Reference"
               }
             },
             "direction": "Descending"
@@ -307,5 +308,135 @@
       ]
     },
     "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "009a6e2011a0264f8ba7",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Permit"
+              }
+            },
+            "Property": "Permit Reference"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "806032872733e997c992",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Permit"
+              }
+            },
+            "Property": "Issued On"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "6f1c4e75ee72cb2ac1e3",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Category"
+              }
+            },
+            "Property": "Category"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "f09f8d1ecc166c0f3c37",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Permit"
+              }
+            },
+            "Property": "Permit"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "52f014102120cdab0681",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Status"
+              }
+            },
+            "Property": "Status"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "4fff67a0aa8bc33be6a2",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Permit"
+              }
+            },
+            "Property": "Issued To Company"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "375f6887e274b1e9930e",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Location"
+              }
+            },
+            "Property": "Company"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "f27e229b27ee872f3b2f",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Location"
+              }
+            },
+            "Property": "Site"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "79d83c7332fe611fe5c6",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Permit"
+              }
+            },
+            "Property": "Issued Expiry"
+          }
+        },
+        "type": "Categorical"
+      }
+    ]
   }
 }

@@ -1,0 +1,319 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
+  "name": "debd9ef631fd19b58945",
+  "position": {
+    "x": 0,
+    "y": 270.3951367781155,
+    "z": 3,
+    "height": 149.78723404255319,
+    "width": 1280,
+    "tabOrder": 2
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Numeric Question"
+                    }
+                  },
+                  "Property": "Section Type"
+                }
+              },
+              "queryRef": "Numeric Question.Section Type",
+              "nativeQueryRef": "Section Type"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Numeric Question"
+                    }
+                  },
+                  "Property": "Section"
+                }
+              },
+              "queryRef": "Numeric Question.Section",
+              "nativeQueryRef": "Section"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Numeric Question"
+                    }
+                  },
+                  "Property": "Question"
+                }
+              },
+              "queryRef": "Numeric Question.Question",
+              "nativeQueryRef": "Question"
+            },
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Numeric Answer Fact"
+                        }
+                      },
+                      "Property": "Numeric Answer"
+                    }
+                  },
+                  "Function": 0
+                }
+              },
+              "queryRef": "Sum(Numeric Answer Fact.Numeric Answer)",
+              "nativeQueryRef": "Answer",
+              "displayName": "Answer"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Numeric Question"
+                    }
+                  },
+                  "Property": "Unit"
+                }
+              },
+              "queryRef": "Numeric Question.Unit",
+              "nativeQueryRef": "Unit"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Aggregation": {
+                "Expression": {
+                  "Column": {
+                    "Expression": {
+                      "SourceRef": {
+                        "Entity": "Numeric Answer Fact"
+                      }
+                    },
+                    "Property": "Numeric Answer"
+                  }
+                },
+                "Function": 0
+              }
+            },
+            "direction": "Descending"
+          }
+        ]
+      }
+    },
+    "objects": {
+      "columnWidth": [
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "464.5611112020959D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Numeric Question.Question"
+          }
+        }
+      ],
+      "total": [
+        {
+          "properties": {
+            "totals": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Numeric Answers'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "dd8095e36c56bfa7b9ba",
+        "ordinal": 0,
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Checklist Option"
+              }
+            },
+            "Property": "Answer"
+          }
+        },
+        "type": "Categorical",
+        "howCreated": "User"
+      },
+      {
+        "name": "0279ffe8925e2cc60934",
+        "ordinal": 1,
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Checklist Option"
+              }
+            },
+            "Property": "Question"
+          }
+        },
+        "type": "Categorical",
+        "howCreated": "User"
+      },
+      {
+        "name": "10c2410a9a3241717f6a",
+        "ordinal": 2,
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Checklist Option"
+              }
+            },
+            "Property": "Section"
+          }
+        },
+        "type": "Categorical",
+        "howCreated": "User"
+      },
+      {
+        "name": "3c5980cd6624a1f9940b",
+        "ordinal": 3,
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Checklist Option"
+              }
+            },
+            "Property": "Section Type"
+          }
+        },
+        "type": "Categorical",
+        "howCreated": "User"
+      },
+      {
+        "name": "4a985a885ce4f6155e3e",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Numeric Question"
+              }
+            },
+            "Property": "Section Type"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "138390bc6e7094b37945",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Numeric Question"
+              }
+            },
+            "Property": "Section"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "d74bc9064a6d26e53bbb",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Numeric Question"
+              }
+            },
+            "Property": "Question"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "6865be1a018bfd677358",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Numeric Question"
+              }
+            },
+            "Property": "Unit"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "8f2e16367efa4b9bb953",
+        "field": {
+          "Aggregation": {
+            "Expression": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "Numeric Answer Fact"
+                  }
+                },
+                "Property": "Numeric Answer"
+              }
+            },
+            "Function": 0
+          }
+        },
+        "type": "Advanced"
+      }
+    ],
+    "filterSortOrder": "Custom"
+  }
+}
