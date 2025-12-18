@@ -48,7 +48,7 @@ table 'Branch Option Fact'
 		mode: import
 		source =
 				let
-				    Source = Sql.Database("CAKESOFBREAD", "WorkWalletBIClient_Local"),
+				    Source = Sql.Database("ww-powerbi-demo.database.windows.net", "powerbi"),
 				    mart_PermitBranchOptionFact = Source{[Schema="mart",Item="PermitBranchOptionFact"]}[Data],
 				    #"Removed Columns" = Table.RemoveColumns(mart_PermitBranchOptionFact,{"_created"})
 				in

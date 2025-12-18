@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
   "name": "6732226e4b6de9f1efff",
   "position": {
-    "x": 9.9748110831234253,
+    "x": 0,
     "y": 0,
     "z": 0,
     "height": 720,
-    "width": 1270.4282115869016,
+    "width": 1280.4030226700252,
     "tabOrder": 0
   },
   "visual": {
@@ -200,5 +200,70 @@
       ]
     },
     "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "4fac5f4477ed09e54d23",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Property"
+              }
+            },
+            "Property": "Property"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "676459641c936687c7fd",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "PPE Type Master"
+              }
+            },
+            "Property": "PPE Type"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "fa0e08db0aa8e412deda",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "PPE Type"
+              }
+            },
+            "Property": "PPE Variant"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "119f49ad4b2d93b24096",
+        "field": {
+          "Aggregation": {
+            "Expression": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "Property Fact"
+                  }
+                },
+                "Property": "Property Value"
+              }
+            },
+            "Function": 3
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
   }
 }

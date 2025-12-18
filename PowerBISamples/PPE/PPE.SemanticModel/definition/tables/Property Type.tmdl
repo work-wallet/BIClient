@@ -25,7 +25,7 @@ table 'Property Type'
 		mode: import
 		source =
 				let
-				    Source = Sql.Database("CAKESOFBREAD", "WorkWalletBIClient_Local"),
+				    Source = Sql.Database("ww-powerbi-demo.database.windows.net", "powerbi"),
 				    mart_PPEPropertyType = Source{[Schema="mart",Item="PPEPropertyType"]}[Data],
 				    #"Renamed Columns" = Table.RenameColumns(mart_PPEPropertyType,{{"PPEPropertyType", "Property Type"}})
 				in

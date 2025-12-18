@@ -40,7 +40,7 @@ table Priority
 		mode: import
 		source =
 				let
-				    Source = Sql.Database("CAKESOFBREAD", "WorkWalletBIClient_Local"),
+				    Source = Sql.Database("ww-powerbi-demo.database.windows.net", "powerbi"),
 				    mart_ActionPriority = Source{[Schema="mart",Item="ActionPriority"]}[Data],
 				    #"Removed Columns" = Table.RemoveColumns(mart_ActionPriority,{"_created", "_edited"}),
 				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"ActionPriority", "Priority"}})

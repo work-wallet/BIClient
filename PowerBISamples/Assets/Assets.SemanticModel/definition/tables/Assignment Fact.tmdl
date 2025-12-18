@@ -123,7 +123,7 @@ table 'Assignment Fact'
 		mode: import
 		source =
 				let
-				    Source = Sql.Database("CAKESOFBREAD", "WorkWalletBIClient_Local"),
+				    Source = Sql.Database("ww-powerbi-demo.database.windows.net", "powerbi"),
 				    mart_AssetAssignmentFact = Source{[Schema="mart",Item="AssetAssignmentFact"]}[Data],
 				    #"Removed Columns" = Table.RemoveColumns(mart_AssetAssignmentFact,{"_created"}),
 				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"AssignedOn", "From"}, {"IsLatest", "Is Latest"}, {"AssignedEnd", "To"}, {"AssignmentNumber", "Assignment Number"}})

@@ -57,7 +57,7 @@ table Group
 		mode: import
 		source =
 				let
-				    Source = Sql.Database("CAKESOFBREAD", "WorkWalletBIClient_Local"),
+				    Source = Sql.Database("ww-powerbi-demo.database.windows.net", "powerbi"),
 				    mart_PPEGroup = Source{[Schema="mart",Item="PPEGroup"]}[Data],
 				    #"Removed Columns" = Table.RemoveColumns(mart_PPEGroup,{"_created", "_edited"}),
 				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"PPEGroup", "Group"}})

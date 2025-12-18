@@ -37,7 +37,7 @@ table 'Asset Status'
 		mode: import
 		source =
 				let
-				    Source = Sql.Database("CAKESOFBREAD", "WorkWalletBIClient_Local"),
+				    Source = Sql.Database("ww-powerbi-demo.database.windows.net", "powerbi"),
 				    mart_AssetStatus = Source{[Schema="mart",Item="AssetStatus"]}[Data],
 				    #"Removed Columns" = Table.RemoveColumns(mart_AssetStatus,{"_created", "_edited"}),
 				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"AssetStatus", "Asset Status"}})

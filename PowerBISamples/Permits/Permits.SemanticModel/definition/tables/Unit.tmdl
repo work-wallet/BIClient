@@ -63,7 +63,7 @@ table Unit
 		mode: import
 		source =
 				let
-				    Source = Sql.Database("CAKESOFBREAD", "WorkWalletBIClient_Local"),
+				    Source = Sql.Database("ww-powerbi-demo.database.windows.net", "powerbi"),
 				    mart_Unit = Source{[Schema="mart",Item="Unit"]}[Data],
 				    #"Removed Columns" = Table.RemoveColumns(mart_Unit,{"_created", "_edited"}),
 				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"UnitAcronym", "Unit Acronym"}, {"Group", "Unit Group"}})

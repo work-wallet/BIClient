@@ -48,7 +48,7 @@ table 'Checklist Answer Fact'
 		mode: import
 		source =
 				let
-				    Source = Sql.Database("CAKESOFBREAD", "WorkWalletBIClient_Local"),
+				    Source = Sql.Database("ww-powerbi-demo.database.windows.net", "powerbi"),
 				    mart_PermitChecklistAnswerFact2 = Source{[Schema="mart",Item="PermitChecklistAnswerFact2"]}[Data],
 				    #"Removed Columns" = Table.RemoveColumns(mart_PermitChecklistAnswerFact2,{"_created"})
 				in

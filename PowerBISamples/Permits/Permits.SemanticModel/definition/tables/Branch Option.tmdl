@@ -154,7 +154,7 @@ table 'Branch Option'
 		mode: import
 		source =
 				let
-				    Source = Sql.Database("CAKESOFBREAD", "WorkWalletBIClient_Local"),
+				    Source = Sql.Database("ww-powerbi-demo.database.windows.net", "powerbi"),
 				    mart_PermitBranchOption = Source{[Schema="mart",Item="PermitBranchOption"]}[Data],
 				    #"Removed Columns" = Table.RemoveColumns(mart_PermitBranchOption,{"_created", "_edited"}),
 				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"CategorySectionType", "Section Type"}, {"CategorySectionTypeId", "SectionTypeId"}, {"Value", "Branch Option"}, {"SectionOrder", "Section Order"}, {"OrderInSection", "Order In Section"}})

@@ -126,7 +126,7 @@ table Category
 		mode: import
 		source =
 				let
-				    Source = Sql.Database("CAKESOFBREAD", "WorkWalletBIClient_Local"),
+				    Source = Sql.Database("ww-powerbi-demo.database.windows.net", "powerbi"),
 				    mart_PermitCategory = Source{[Schema="mart",Item="PermitCategory"]}[Data],
 				    #"Removed Columns" = Table.RemoveColumns(mart_PermitCategory,{"_created", "_edited"}),
 				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"CategoryVersion", "Category Version"}, {"CategoryName", "Category"}, {"ExpiryType", "Expiry"}, {"ValidityPeriod", "Validity Period"}, {"ValidityPeriodMinutes", "Validity Period Minutes"}, {"IssueType", "Issue Type"}})

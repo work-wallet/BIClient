@@ -198,7 +198,7 @@ table Action
 		mode: import
 		source =
 				let
-				    Source = Sql.Database("CAKESOFBREAD", "WorkWalletBIClient_Local"),
+				    Source = Sql.Database("ww-powerbi-demo.database.windows.net", "powerbi"),
 				    mart_Action = Source{[Schema="mart",Item="Action"]}[Data],
 				    #"Removed Columns" = Table.RemoveColumns(mart_Action,{"_created", "_edited"}),
 				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"TargetReference", "Target Reference"}, {"AssignedTo", "Name"}, {"DueOn", "Due On"}, {"CreatedOn", "Created On"}, {"OriginalDueOn", "Original Due On"}, {"AssignedToEmail", "Email"}})

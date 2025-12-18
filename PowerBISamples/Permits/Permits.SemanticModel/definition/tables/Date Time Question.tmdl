@@ -146,7 +146,7 @@ table 'Date Time Question'
 		mode: import
 		source =
 				let
-				    Source = Sql.Database("CAKESOFBREAD", "WorkWalletBIClient_Local"),
+				    Source = Sql.Database("ww-powerbi-demo.database.windows.net", "powerbi"),
 				    mart_PermitDateTimeQuestion = Source{[Schema="mart",Item="PermitDateTimeQuestion"]}[Data],
 				    #"Removed Columns" = Table.RemoveColumns(mart_PermitDateTimeQuestion,{"_created", "_edited"}),
 				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"CategorySectionTypeId", "SectionTypeId"}, {"CategorySectionType", "Section Type"}, {"SectionOrder", "Section Order"}, {"OrderInSection", "Order In Section"}, {"Question", "Date Time Question"}})
