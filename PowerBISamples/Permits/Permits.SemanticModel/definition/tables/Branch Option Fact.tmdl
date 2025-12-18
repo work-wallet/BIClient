@@ -37,7 +37,7 @@ table 'Branch Option Fact'
 
 		annotation SummarizationSetBy = User
 
-	column 'Branch Option Counnt' = 1
+	column 'Branch Option Count' = 1
 		formatString: 0
 		lineageTag: f71ab16f-fc84-443a-89fc-8f4baa060ef4
 		summarizeBy: sum
