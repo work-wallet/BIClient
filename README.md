@@ -343,10 +343,10 @@ Key app settings:
 | `FuncOptions:AgentApiUrl` | `https://bi.work-wallet.com` | Base API URL |
 | `FuncOptions:AgentPageSize` | `500` | Max recommended 500 |
 | `FuncOptions:AgentWallets:[0]:WalletId` | | Repeat per wallet |
-| `FuncOptions:AgentWallets:[0]:WalletSecret` | |  |
+| `FuncOptions:AgentWallets:[0]:WalletSecret` | | |
 | `FuncOptions:ApiAccessAuthority` | `https://identity.work-wallet.com` | Auth endpoint |
-| `FuncOptions:ApiAccessClientId` | |  |
-| `FuncOptions:ApiAccessClientSecret` | |  |
+| `FuncOptions:ApiAccessClientId` | | |
+| `FuncOptions:ApiAccessClientSecret` | | |
 | `FuncOptions:ApiAccessScope` | `ww_bi_extract` | Scope constant |
 | `sqldb_connection` | | SQL connection string |
 
@@ -473,6 +473,11 @@ Ensure any default filters (e.g. date, site, status) reflect values present in y
 | Auth failure (401) | Invalid client credentials | Re-check `ApiAccessClientId` / secret; wallet enabled? |
 | Network errors | Firewall / proxy blocking | Allow outbound HTTPS to API + identity endpoints. |
 | High DB log growth | Large initial ingest | Ensure regular log backups (full recovery) or switch to simple during first load. |
+| MERGE fails with duplicate match error (Assets) | Upgrading from pre-4.3.0 schema: multiple contacts share the same `AssignedTo` name in legacy data without `Contact_key` | Perform [5.8 Force Data Reset](#58-force-data-reset) for Assets. |
+
+#### Upgrade Notes
+
+> **Assets Contact Migration (v4.3.0+):** Older schemas stored user assignments by name only (`AssignedTo`). Version 4.3.0+ captures full contact records via `Contact_key`. During the transition, the merge logic attempts fallback matching on `AssignedTo` for legacy records. If multiple contacts share the same name, this can cause duplicate match errors. Resolution: reset the Assets dataset and perform a full reload.
 
 ### 5.11 Security Notes
 
