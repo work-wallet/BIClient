@@ -138,6 +138,10 @@ Note: The actual `ResponseText` values are defined per checklist and may vary.
 | 1 | Out of Service |
 | 2 | Decommissioned |
 | 3 | Deleted |
+| 4 | Ordered |
+| 5 | Off-Hired |
+| 6 | Lost / Write-Off |
+| 7 | Disposed |
 
 | AssignmentType |
 | --- |
