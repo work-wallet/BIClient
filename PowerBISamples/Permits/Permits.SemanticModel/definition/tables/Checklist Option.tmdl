@@ -1,0 +1,180 @@
+table 'Checklist Option'
+	lineageTag: f5bb8971-e971-47f0-b917-9aeae664eef9
+
+	column PermitChecklistOption_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 2eb47664-9380-45e0-85ee-20afc076ca31
+		summarizeBy: none
+		sourceColumn: PermitChecklistOption_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column ChecklistId
+		dataType: string
+		isHidden
+		lineageTag: bfe0bda4-46a0-431d-995c-61178b66a0ec
+		summarizeBy: none
+		sourceColumn: ChecklistId
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column OptionId
+		dataType: string
+		isHidden
+		lineageTag: d1d16079-a980-493b-9662-be274d6d3cec
+		summarizeBy: none
+		sourceColumn: OptionId
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Checklist Question'
+		dataType: string
+		lineageTag: 20cdff6b-a673-449c-9547-98871fc7d101
+		summarizeBy: none
+		sourceColumn: Checklist Question
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Checklist Answer'
+		dataType: string
+		lineageTag: a137ce16-7782-4fd6-9232-8ac8d2193716
+		summarizeBy: none
+		sourceColumn: Checklist Answer
+
+		annotation SummarizationSetBy = Automatic
+
+	column Mandatory
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 1ef36634-1f36-4709-a9e7-b4c7f2fc6aa8
+		summarizeBy: none
+		sourceColumn: Mandatory
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Order
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: e67c2582-d18d-44b7-9bbb-cbf5cdfd00e9
+		summarizeBy: none
+		sourceColumn: Order
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column SectionTypeId
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: cb52edfe-ec04-472a-96c1-1e4659cc6a9a
+		summarizeBy: none
+		sourceColumn: SectionTypeId
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column 'Section Type'
+		dataType: string
+		lineageTag: 4745d29c-d154-45eb-9caa-c1fdb1bfb9ea
+		summarizeBy: none
+		sourceColumn: Section Type
+
+		annotation SummarizationSetBy = Automatic
+
+	column SectionId
+		dataType: string
+		isHidden
+		lineageTag: fec6dc60-54a7-4d29-90f0-daf1f6b0a9d3
+		summarizeBy: none
+		sourceColumn: SectionId
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Section
+		dataType: string
+		lineageTag: e5e4ccf2-b33a-418c-94e5-c5bc18b224d7
+		summarizeBy: none
+		sourceColumn: Section
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Section Order'
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 3ee36028-dda9-4819-96bd-392867503142
+		summarizeBy: none
+		sourceColumn: Section Order
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column 'Order In Section'
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 671bb2f5-6940-4006-9f97-87a624574877
+		summarizeBy: none
+		sourceColumn: Order In Section
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column Wallet_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: b1ab09e2-0c16-435d-a671-b666ffda75f5
+		summarizeBy: none
+		sourceColumn: Wallet_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column Answer = ```
+			'Checklist Option'[Order] & " - " & 'Checklist Option'[Checklist Answer] 
+			```
+		lineageTag: f907028f-7842-46b8-87b7-7d587d4b06b7
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column Question = Format('Checklist Option'[Order In Section], "00") & " - " & 'Checklist Option'[Checklist Question]
+		lineageTag: e17cd9c9-8ba3-41c4-9d03-7978aa1a2205
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Checklist Option' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("ww-powerbi-demo.database.windows.net", "powerbi"),
+				    mart_PermitChecklistOption = Source{[Schema="mart",Item="PermitChecklistOption"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(mart_PermitChecklistOption,{"_created", "_edited"}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"CategorySectionTypeId", "SectionTypeId"}, {"CategorySectionType", "Section Type"}, {"SectionOrder", "Section Order"}, {"OrderInSection", "Order In Section"}, {"Question", "Checklist Question"}, {"Option", "Checklist Answer"}})
+				in
+				    #"Renamed Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

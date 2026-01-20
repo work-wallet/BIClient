@@ -1,0 +1,67 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
+  "name": "81db95ea619e3757438a",
+  "position": {
+    "x": 411.68765743073044,
+    "y": 0,
+    "z": 6,
+    "height": 120.60453400503778,
+    "width": 240.30226700251887,
+    "tabOrder": 5
+  },
+  "visual": {
+    "visualType": "cardVisual",
+    "query": {
+      "queryState": {
+        "Data": {
+          "projections": [
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Permit"
+                        }
+                      },
+                      "Property": "Permit Reference"
+                    }
+                  },
+                  "Function": 3
+                }
+              },
+              "queryRef": "Min(Permit.Permit Reference)",
+              "nativeQueryRef": "Reference",
+              "displayName": "Reference"
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "ac520ff416b607920666",
+        "field": {
+          "Aggregation": {
+            "Expression": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "Permit"
+                  }
+                },
+                "Property": "Permit Reference"
+              }
+            },
+            "Function": 3
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
+  }
+}

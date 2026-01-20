@@ -40,6 +40,9 @@ BEGIN
             -- Transitional logic: if target.Contact_key is NULL (legacy data), match on AssignedTo to allow
             -- the MERGE to update the record with the new Contact_key. Once Contact_key is populated in target,
             -- future matches will use Contact_key only, ensuring stable identity even if AssignedTo name changes.
+            -- LIMITATION: If multiple Contacts share the same AssignedTo name in legacy data, the fallback
+            -- matching will cause MERGE to fail with duplicate match error.
+            -- Resolution: delete all Assets data and reload (or temporarily use small page sizes to isolate duplicates).
             (
                 source.AssignmentType = N'User'
                 AND

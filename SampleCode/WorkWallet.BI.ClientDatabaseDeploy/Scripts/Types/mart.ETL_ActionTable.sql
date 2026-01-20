@@ -10,6 +10,7 @@ CREATE TYPE mart.ETL_ActionTable AS TABLE
     ,Title nvarchar(100) NOT NULL
     ,[Description] nvarchar(max) NOT NULL
     ,AssignedTo nvarchar(100) NOT NULL
+    ,AssignedToEmail nvarchar(256) NOT NULL
     ,PriorityCode int NOT NULL
     ,DueOn date NOT NULL
     ,OriginalDueOn date NOT NULL

@@ -3,10 +3,10 @@
   "name": "a9d0a663a162b7d0f458",
   "position": {
     "x": 0,
-    "y": 0.62561094819159335,
+    "y": 72.544080604534,
     "z": 0,
-    "height": 719.4525904203324,
-    "width": 1280
+    "height": 647.45591939546591,
+    "width": 1280.4030226700252
   },
   "visual": {
     "visualType": "pivotTable",
@@ -57,7 +57,7 @@
               },
               "queryRef": "PPE Type.PPE Type",
               "nativeQueryRef": "PPE Type",
-              "active": false
+              "active": true
             },
             {
               "field": {
@@ -189,7 +189,41 @@
             "isPinned": true
           }
         ],
-        "root": {}
+        "root": {
+          "children": [
+            {
+              "identityValues": [
+                {
+                  "Literal": {
+                    "Value": "'Luton Factory'"
+                  }
+                }
+              ],
+              "children": [
+                {
+                  "identityValues": [
+                    {
+                      "Literal": {
+                        "Value": "'Loading Bay'"
+                      }
+                    }
+                  ],
+                  "isToggled": true
+                },
+                {
+                  "identityValues": [
+                    {
+                      "Literal": {
+                        "Value": "'Warehouse'"
+                      }
+                    }
+                  ],
+                  "isToggled": true
+                }
+              ]
+            }
+          ]
+        }
       }
     ],
     "objects": {

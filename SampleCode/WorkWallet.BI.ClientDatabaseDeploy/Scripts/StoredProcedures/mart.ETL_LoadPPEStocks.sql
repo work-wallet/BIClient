@@ -109,6 +109,76 @@ BEGIN
 
         EXEC mart.ETL_MaintainPPETypeDimension @ppeTypeTable = @ppeTypeTable;
 
+        -- maintain PPEGroup dimension
+
+        DECLARE @ppeGroupTable mart.ETL_PPEGroupTable;
+
+        INSERT INTO @ppeGroupTable
+        (
+            PPEGroupId
+            ,PPEGroup
+            ,Active
+            ,WalletId
+        )
+        SELECT * FROM OPENJSON(@json, '$.PPEGroups')
+        WITH
+        (
+            PPEGroupId uniqueidentifier
+            ,PPEGroup nvarchar(100)
+            ,Active bit
+            ,WalletId uniqueidentifier
+        );
+
+        EXEC mart.ETL_MaintainPPEGroupDimension @ppeGroupTable = @ppeGroupTable;
+
+        -- load PPETypeGroup facts
+
+        DECLARE @ppeTypeGroupTable mart.ETL_PPETypeGroupTable;
+
+        INSERT INTO @ppeTypeGroupTable
+        (
+            PPETypeId
+            ,PPEGroupId
+            ,WalletId
+        )
+        SELECT * FROM OPENJSON(@json, '$.PPETypeGroups')
+        WITH
+        (
+            PPETypeId uniqueidentifier
+            ,PPEGroupId uniqueidentifier
+            ,WalletId uniqueidentifier
+        );
+
+        EXEC mart.ETL_LoadPPEGroupFact @ppeTypeGroupTable = @ppeTypeGroupTable;
+
+        -- load the PPEProperty data
+
+        DECLARE @ppePropertyTable mart.ETL_PPETypePropertyTable;
+
+        INSERT INTO @ppePropertyTable
+        (
+            PPETypeId
+            ,Property
+            ,PropertyType
+            ,DisplayOrder
+            ,[Value]
+            ,WalletId
+        )
+        SELECT * FROM OPENJSON(@json, '$.Properties')
+        WITH
+        (
+            PPETypeId uniqueidentifier
+            ,Property nvarchar(250)
+            ,PropertyType nvarchar(20)
+            ,DisplayOrder int
+            ,[Value] nvarchar(max)
+            ,WalletId uniqueidentifier
+        );
+
+        EXEC mart.ETL_MaintainPPEPropertyDimension @ppePropertyTable = @ppePropertyTable;
+
+        EXEC mart.ETL_LoadPPEPropertyFact @ppePropertyTable = @ppePropertyTable;
+
         -- maintain PPEStock dimension
 
         DECLARE @ppeStockTable mart.ETL_PPEStockTable;

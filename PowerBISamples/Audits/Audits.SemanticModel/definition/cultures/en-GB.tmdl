@@ -8241,7 +8241,7 @@ cultureInfo en-GB
 			      "Definition": {
 			        "Binding": {
 			          "ConceptualEntity": "Branch Option Fact",
-			          "ConceptualProperty": "Branch Option Counnt"
+			          "ConceptualProperty": "Branch Option Count"
 			        }
 			      },
 			      "State": "Generated",

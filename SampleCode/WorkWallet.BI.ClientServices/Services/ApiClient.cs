@@ -41,10 +41,10 @@ public class ApiClient(HttpClient httpClient) : IApiClient
 
         string url = $"dataextract/{dataType}?{query}";
 
-        var request = new HttpRequestMessage(HttpMethod.Get, url);
+        using var request = new HttpRequestMessage(HttpMethod.Get, url);
         request.Headers.Add("DataRegion", walletContext.DataRegion);
 
-        var response = await httpClient.SendAsync(request, cancellationToken);
+        using var response = await httpClient.SendAsync(request, cancellationToken);
         if (!response.IsSuccessStatusCode)
         {
             if (response.StatusCode == HttpStatusCode.BadRequest)

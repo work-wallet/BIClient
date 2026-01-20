@@ -30,6 +30,21 @@ table 'Asset Status'
 		lineageTag: bd4c877e-9b69-4926-b077-458a8bfb9bd8
 		summarizeBy: none
 		sourceColumn: Asset Status
+		sortByColumn: 'Display Order'
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Display Order'
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: da7559ea-f528-47d4-bf21-b4971b3fc9d7
+		summarizeBy: none
+		sourceColumn: Display Order
+
+		changedProperty = IsHidden
 
 		annotation SummarizationSetBy = Automatic
 
@@ -40,9 +55,11 @@ table 'Asset Status'
 				    Source = Sql.Database("ww-powerbi-demo.database.windows.net", "powerbi"),
 				    mart_AssetStatus = Source{[Schema="mart",Item="AssetStatus"]}[Data],
 				    #"Removed Columns" = Table.RemoveColumns(mart_AssetStatus,{"_created", "_edited"}),
-				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"AssetStatus", "Asset Status"}})
+				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"AssetStatus", "Asset Status"}, {"DisplayOrder", "Display Order"}})
 				in
 				    #"Renamed Columns"
 
 	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
 

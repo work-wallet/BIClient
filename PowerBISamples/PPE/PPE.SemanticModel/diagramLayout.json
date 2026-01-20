@@ -10,8 +10,8 @@
       "nodes": [
         {
           "location": {
-            "x": 53.103433583703747,
-            "y": 1288.4504176131977
+            "x": 240.64734386626264,
+            "y": 559.00274777001516
           },
           "nodeIndex": "Location",
           "size": {
@@ -22,8 +22,8 @@
         },
         {
           "location": {
-            "x": 226.32706225565903,
-            "y": 1081.7834524149152
+            "x": 1541.3533107294165,
+            "y": 340.178678378654
           },
           "nodeIndex": "Wallet",
           "nodeLineageTag": "c5071c3c-bb18-4bf8-af75-410c48a300ed",
@@ -35,8 +35,8 @@
         },
         {
           "location": {
-            "x": 339.95773631278695,
-            "y": 226.12064939614493
+            "x": 655.98796089499228,
+            "y": 946.93725300414189
           },
           "nodeIndex": "Assignment",
           "nodeLineageTag": "4cd4c7b8-78ce-4f8e-927e-e92f949db79b",
@@ -48,21 +48,21 @@
         },
         {
           "location": {
-            "x": 672.67348135913835,
-            "y": 305.27928180278195
+            "x": 1545.3380772312389,
+            "y": 1490.0558265165523
           },
           "nodeIndex": "Assignment History",
           "nodeLineageTag": "f13c365b-f484-4874-9dad-268ce4e01777",
           "size": {
-            "height": 248,
+            "height": 300,
             "width": 234
           },
           "zIndex": 2
         },
         {
           "location": {
-            "x": 1069.3330857484807,
-            "y": 402.17163635316228
+            "x": 358.80728609953019,
+            "y": 1188.7171125344582
           },
           "nodeIndex": "PPE Action",
           "nodeLineageTag": "7a623cea-ad5b-4c08-b3b0-717eb86e0a12",
@@ -74,8 +74,8 @@
         },
         {
           "location": {
-            "x": 50.000000000000014,
-            "y": 112.20190891415496
+            "x": 50,
+            "y": 923.340000481476
           },
           "nodeIndex": "PPE Status",
           "nodeLineageTag": "7dc20fc1-263a-445d-b9d4-643b3da800a5",
@@ -87,8 +87,8 @@
         },
         {
           "location": {
-            "x": 815.403990492999,
-            "y": 1206.5665579402894
+            "x": 862.68763836179824,
+            "y": 190.99872109775424
           },
           "nodeIndex": "PPE Type",
           "nodeLineageTag": "784865e7-41be-46a5-a713-88e990e53228",
@@ -100,8 +100,8 @@
         },
         {
           "location": {
-            "x": 514.15708283857884,
-            "y": 756.972431553487
+            "x": 831.50545582455663,
+            "y": 579.03338986205074
           },
           "nodeIndex": "Stock",
           "nodeLineageTag": "bbf0fdac-d372-411b-8f0a-b5b754d6ea2d",
@@ -113,8 +113,8 @@
         },
         {
           "location": {
-            "x": 802.87693546146886,
-            "y": 609.90906094790682
+            "x": 967.65786527808382,
+            "y": 1330.4948452064427
           },
           "nodeIndex": "Stock History",
           "nodeLineageTag": "5f547d8f-0fbd-45e3-b10a-b114ab53ed5c",
@@ -126,8 +126,8 @@
         },
         {
           "location": {
-            "x": 629.74303878426576,
-            "y": -50
+            "x": 474.77611135950087,
+            "y": 191.00778609624513
           },
           "nodeIndex": "PPE Assignment Type",
           "nodeLineageTag": "3028bc43-9111-4896-8e0a-213ce3ca20ad",
@@ -139,11 +139,23 @@
         },
         {
           "location": {
-            "x": 134.0198802005211,
-            "y": 582.56469466537681
+            "x": 1799.9109632692357,
+            "y": 1175.403788628086
           },
           "nodeIndex": "Assigned To Contact",
           "nodeLineageTag": "eff9a1d0-5fd9-43fb-a398-29f9e7684c26",
+          "size": {
+            "height": 248,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1142.7601283268759,
+            "y": 1040.4567168690212
+          },
+          "nodeIndex": "Actioned By Contact",
           "size": {
             "height": 224,
             "width": 234
@@ -152,19 +164,84 @@
         },
         {
           "location": {
-            "x": 1088.767798001184,
-            "y": 926.0399799283523
+            "x": 2083.344191943766,
+            "y": 917.33695633318007
           },
-          "nodeIndex": "Actioned By Contact",
+          "nodeIndex": "Property",
+          "nodeLineageTag": "df9536b3-45a7-42c5-bc2f-643f81ac4fcc",
           "size": {
-            "height": 224,
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1520.9937392477932,
+            "y": 914.96185516829769
+          },
+          "nodeIndex": "Property Fact",
+          "nodeLineageTag": "08a8be58-6617-45ef-9b84-577aeddfa70b",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 537.377868127257,
+            "y": 623.19601854595976
+          },
+          "nodeIndex": "Property Type",
+          "nodeLineageTag": "112b2631-209c-4c33-b3be-e20c2573f9a6",
+          "size": {
+            "height": 128,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1155.5470629164502,
+            "y": -49.863534918743653
+          },
+          "nodeIndex": "PPE Type Master",
+          "size": {
+            "height": 176,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1800.4445412413568,
+            "y": 662.46469243047432
+          },
+          "nodeIndex": "Group",
+          "nodeLineageTag": "2e197281-8002-4d70-a215-9d3e825bca9e",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 738.60219468428477,
+            "y": -50
+          },
+          "nodeIndex": "Group Fact",
+          "nodeLineageTag": "f1a138ce-1ba8-4d43-b029-4e1890637c27",
+          "size": {
+            "height": 176,
             "width": 234
           },
           "zIndex": 0
         }
       ],
       "name": "All tables",
-      "zoomValue": 52.978215005089723,
+      "zoomValue": 41.287471682617891,
       "pinKeyFieldsToTop": false,
       "showExtraHeaderInfo": false,
       "hideKeyFieldsWhenCollapsed": false,
@@ -179,8 +256,8 @@
       "nodes": [
         {
           "location": {
-            "x": 762,
-            "y": 48
+            "x": 1135.3351606969704,
+            "y": 37.943834055300464
           },
           "nodeIndex": "Location",
           "nodeLineageTag": "0c282e94-763a-47f5-94ca-832dc2919c25",
@@ -188,12 +265,12 @@
             "height": 657,
             "width": 234
           },
-          "zIndex": 2
+          "zIndex": 5
         },
         {
           "location": {
-            "x": 373,
-            "y": 154
+            "x": 789.07386596194351,
+            "y": 36.611112379042737
           },
           "nodeIndex": "Stock",
           "nodeLineageTag": "bbf0fdac-d372-411b-8f0a-b5b754d6ea2d",
@@ -201,12 +278,12 @@
             "height": 341,
             "width": 234
           },
-          "zIndex": 1
+          "zIndex": 4
         },
         {
           "location": {
-            "x": 0,
-            "y": 0
+            "x": 444.98534305295459,
+            "y": 45.252746751147924
           },
           "nodeIndex": "PPE Type",
           "nodeLineageTag": "784865e7-41be-46a5-a713-88e990e53228",
@@ -214,11 +291,50 @@
             "height": 420,
             "width": 234
           },
-          "zIndex": 0
+          "zIndex": 2
+        },
+        {
+          "location": {
+            "x": 162.15567585828012,
+            "y": 43.930408029996023
+          },
+          "nodeIndex": "PPE Type Master",
+          "nodeLineageTag": "a62ff8c5-4b9b-4222-b8bb-d3364a72962b",
+          "size": {
+            "height": 190,
+            "width": 234
+          },
+          "zIndex": 3
+        },
+        {
+          "location": {
+            "x": 802.637943996327,
+            "y": 476.60604522947881
+          },
+          "nodeIndex": "Group",
+          "nodeLineageTag": "2e197281-8002-4d70-a215-9d3e825bca9e",
+          "size": {
+            "height": 238.11975838078058,
+            "width": 234
+          },
+          "zIndex": 1
+        },
+        {
+          "location": {
+            "x": 442.78010034239281,
+            "y": 527.38801237961445
+          },
+          "nodeIndex": "Group Fact",
+          "nodeLineageTag": "f1a138ce-1ba8-4d43-b029-4e1890637c27",
+          "size": {
+            "height": 186.09052427726544,
+            "width": 234
+          },
+          "zIndex": 6
         }
       ],
       "name": "Stock",
-      "zoomValue": 100,
+      "zoomValue": 79.553182037699813,
       "pinKeyFieldsToTop": false,
       "showExtraHeaderInfo": false,
       "hideKeyFieldsWhenCollapsed": false,
@@ -297,7 +413,7 @@
         }
       ],
       "name": "Stock History",
-      "zoomValue": 100,
+      "zoomValue": 81.304884371706663,
       "pinKeyFieldsToTop": false,
       "showExtraHeaderInfo": false,
       "hideKeyFieldsWhenCollapsed": false,
@@ -338,13 +454,13 @@
         },
         {
           "location": {
-            "x": 859,
-            "y": 292
+            "x": 861.59612983770285,
+            "y": 234.88514357053685
           },
           "nodeIndex": "Assignment History",
           "nodeLineageTag": "f13c365b-f484-4874-9dad-268ce4e01777",
           "size": {
-            "height": 273,
+            "height": 343.09550561797755,
             "width": 234
           },
           "zIndex": 0
@@ -390,13 +506,13 @@
         },
         {
           "location": {
-            "x": 869.25,
-            "y": 630
+            "x": 860.16354556804,
+            "y": 670.24001248439458
           },
           "nodeIndex": "Assigned To Contact",
           "nodeLineageTag": "eff9a1d0-5fd9-43fb-a398-29f9e7684c26",
           "size": {
-            "height": 250.25,
+            "height": 282.70162297128593,
             "width": 234
           },
           "zIndex": 0
@@ -416,13 +532,93 @@
         }
       ],
       "name": "Assignments",
-      "zoomValue": 100,
+      "zoomValue": 77.037749459004573,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    },
+    {
+      "ordinal": 4,
+      "scrollPosition": {
+        "x": 0,
+        "y": 0
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 0,
+            "y": 21.864104301740134
+          },
+          "nodeIndex": "PPE Type",
+          "nodeLineageTag": "784865e7-41be-46a5-a713-88e990e53228",
+          "size": {
+            "height": 425,
+            "width": 234
+          },
+          "zIndex": 3
+        },
+        {
+          "location": {
+            "x": 715.61699580775758,
+            "y": 72.426606775519858
+          },
+          "nodeIndex": "Property Type",
+          "nodeLineageTag": "112b2631-209c-4c33-b3be-e20c2573f9a6",
+          "size": {
+            "height": 145,
+            "width": 234
+          },
+          "zIndex": 5
+        },
+        {
+          "location": {
+            "x": 302.77564832908905,
+            "y": 385.89873097359975
+          },
+          "nodeIndex": "Property Fact",
+          "nodeLineageTag": "08a8be58-6617-45ef-9b84-577aeddfa70b",
+          "size": {
+            "height": 241,
+            "width": 234
+          },
+          "zIndex": 4
+        },
+        {
+          "location": {
+            "x": 650.46831350203593,
+            "y": 310.89622002189952
+          },
+          "nodeIndex": "Property",
+          "nodeLineageTag": "df9536b3-45a7-42c5-bc2f-643f81ac4fcc",
+          "size": {
+            "height": 249,
+            "width": 234
+          },
+          "zIndex": 1
+        },
+        {
+          "location": {
+            "x": 0,
+            "y": 586.84518462099982
+          },
+          "nodeIndex": "PPE Type Master",
+          "nodeLineageTag": "a62ff8c5-4b9b-4222-b8bb-d3364a72962b",
+          "size": {
+            "height": 194,
+            "width": 234
+          },
+          "zIndex": 2
+        }
+      ],
+      "name": "Properties",
+      "zoomValue": 86.050829207021437,
       "pinKeyFieldsToTop": false,
       "showExtraHeaderInfo": false,
       "hideKeyFieldsWhenCollapsed": false,
       "tablesLocked": false
     }
   ],
-  "selectedDiagram": "Assignments",
+  "selectedDiagram": "Stock",
   "defaultDiagram": "All tables"
 }

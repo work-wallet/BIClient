@@ -23,6 +23,7 @@ BEGIN
             ,ps.PermitStatus_key
             ,a.HasBeenExpired
             ,a.HasBeenClosed
+            ,a.HasBeenExtended
             ,w.Wallet_key
         FROM
             @permitToWorkTable AS a
@@ -46,6 +47,7 @@ BEGIN
         OR target.PermitStatus_key <> source.PermitStatus_key
         OR target.HasBeenExpired <> source.HasBeenExpired
         OR target.HasBeenClosed <> source.HasBeenClosed
+        OR target.HasBeenExtended <> source.HasBeenExtended
         OR target.Wallet_key <> source.Wallet_key
     )
     THEN
@@ -63,6 +65,7 @@ BEGIN
             ,PermitStatus_key = source.PermitStatus_key
             ,HasBeenExpired = source.HasBeenExpired
             ,HasBeenClosed = source.HasBeenClosed
+            ,HasBeenExtended = source.HasBeenExtended
             ,Wallet_key = source.Wallet_key
             ,_edited = SYSUTCDATETIME()
     WHEN NOT MATCHED BY TARGET THEN
@@ -81,6 +84,7 @@ BEGIN
             ,PermitStatus_key
             ,HasBeenExpired
             ,HasBeenClosed
+            ,HasBeenExtended
             ,Wallet_key
         ) VALUES (
             source.PermitToWorkId
@@ -97,6 +101,7 @@ BEGIN
             ,source.PermitStatus_key
             ,source.HasBeenExpired
             ,source.HasBeenClosed
+            ,source.HasBeenExtended
             ,source.Wallet_key
         );
 

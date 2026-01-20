@@ -1,0 +1,167 @@
+table 'Branch Option'
+	lineageTag: a172f50f-8315-48d6-bd47-5acf3e796d5e
+
+	column PermitBranchOption_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: e2273042-1946-4235-ac68-4662f2c5da39
+		summarizeBy: none
+		sourceColumn: PermitBranchOption_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column BranchId
+		dataType: string
+		isHidden
+		lineageTag: 34284c28-77b8-4de0-a971-98eda0a9c13e
+		summarizeBy: none
+		sourceColumn: BranchId
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column OptionId
+		dataType: string
+		isHidden
+		lineageTag: af90977f-09af-4a56-892a-f4d4014da028
+		summarizeBy: none
+		sourceColumn: OptionId
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Branch
+		dataType: string
+		lineageTag: cd87e208-6021-47da-9d13-09e24bd87c73
+		summarizeBy: none
+		sourceColumn: Branch
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Branch Option'
+		dataType: string
+		lineageTag: 0c8af97d-ec04-450b-ab1b-b5b4bec5de16
+		summarizeBy: none
+		sourceColumn: Branch Option
+
+		annotation SummarizationSetBy = Automatic
+
+	column Order
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 8a1b0bb1-2427-4add-bbed-7715ef9ec4da
+		summarizeBy: none
+		sourceColumn: Order
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column SectionTypeId
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: b7b662be-ef72-4e48-8d0f-c877ac5de7ca
+		summarizeBy: none
+		sourceColumn: SectionTypeId
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column 'Section Type'
+		dataType: string
+		lineageTag: 81ec8369-de07-41df-a0dc-cd46dbc2607e
+		summarizeBy: none
+		sourceColumn: Section Type
+
+		annotation SummarizationSetBy = Automatic
+
+	column SectionId
+		dataType: string
+		isHidden
+		lineageTag: 9e190c35-8350-46f4-9eb8-7422eba19950
+		summarizeBy: none
+		sourceColumn: SectionId
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Section
+		dataType: string
+		lineageTag: 82d0e8cc-2788-4812-a825-beffb962b6c4
+		summarizeBy: none
+		sourceColumn: Section
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Section Order'
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 3923b131-ca00-4dbb-accb-1c718b03f28b
+		summarizeBy: none
+		sourceColumn: Section Order
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column 'Order In Section'
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 6e407425-aa57-4b84-9750-a68dd06eb898
+		summarizeBy: none
+		sourceColumn: Order In Section
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column Wallet_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 2a641002-2b44-4159-affd-0bce42ca9672
+		summarizeBy: none
+		sourceColumn: Wallet_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column Option = 'Branch Option'[Order] & " - " & 'Branch Option'[Branch Option]
+		lineageTag: acd54027-859b-4d43-ad11-f9482b52dd49
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column Question = Format('Branch Option'[Order In Section], "00") & " - " & 'Branch Option'[Branch]
+		lineageTag: 81beae24-2666-4f8c-a44a-fce59c8eb927
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Branch Option' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("ww-powerbi-demo.database.windows.net", "powerbi"),
+				    mart_PermitBranchOption = Source{[Schema="mart",Item="PermitBranchOption"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(mart_PermitBranchOption,{"_created", "_edited"}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"CategorySectionType", "Section Type"}, {"CategorySectionTypeId", "SectionTypeId"}, {"Value", "Branch Option"}, {"SectionOrder", "Section Order"}, {"OrderInSection", "Order In Section"}})
+				in
+				    #"Renamed Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

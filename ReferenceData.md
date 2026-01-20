@@ -138,6 +138,10 @@ Note: The actual `ResponseText` values are defined per checklist and may vary.
 | 1 | Out of Service |
 | 2 | Decommissioned |
 | 3 | Deleted |
+| 4 | Ordered |
+| 5 | Off-Hired |
+| 6 | Lost / Write-Off |
+| 7 | Disposed |
 
 | AssignmentType |
 | --- |
@@ -189,6 +193,7 @@ Note: The actual `ResponseText` values are defined per checklist and may vary.
 | 5 | Closed |
 | 6 | Archived |
 | 7 | Deleted |
+| 8 | Extended |
 
 ## PPEAssignments
 
@@ -202,6 +207,15 @@ Note: The actual `ResponseText` values are defined per checklist and may vary.
 ## PPEStockHistories
 
 ## PPEStocks
+
+| PPEPropertyType |
+| --- |
+| Date |
+| DateTime |
+| Number |
+| Select |
+| Text |
+| Time |
 
 ## ReportedIssues
 

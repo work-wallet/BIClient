@@ -70,6 +70,7 @@ Some datasets are hybrid, using placeholders in original fields and omitted fiel
       "Title": "Replace damaged ladder at Warehouse 3",
       "Description": "Inspect the damaged ladder reported during shift change and replace it with a certified unit. Tag out the old ladder and record disposal.",
       "AssignedTo": "Avery Example",
+      "AssignedToEmail": "avery@example.invalid",
       "PriorityCode": 4,
       "DueOn": "2025-09-20",
       "OriginalDueOn": "2025-09-20",
@@ -329,6 +330,7 @@ Notes
   "Properties": [
     {
       "AssetId": "2a1bdc44-6e3b-4d2c-9ab7-1e5c0b9f3a21",
+      "IsSharedProperty": false,
       "PropertyId": "1a2b3c4d-5e6f-4a78-9b01-c2d3e4f5a6b7",
       "Property": "Load Capacity (kg)",
       "PropertyType": "Number",
@@ -338,6 +340,7 @@ Notes
     },
     {
       "AssetId": "2a1bdc44-6e3b-4d2c-9ab7-1e5c0b9f3a21",
+      "IsSharedProperty": false,
       "PropertyId": "2b3c4d5e-6f7a-4b89-ac12-d3e4f5a6b7c8",
       "Property": "Last Service Date",
       "PropertyType": "Date",
@@ -347,6 +350,7 @@ Notes
     },
     {
       "AssetId": "2a1bdc44-6e3b-4d2c-9ab7-1e5c0b9f3a21",
+      "IsSharedProperty": false,
       "PropertyId": "3c4d5e6f-7a8b-4c90-bd23-e4f5a6b7c8d9",
       "Property": "Fuel Type",
       "PropertyType": "Select",
@@ -814,8 +818,10 @@ Notes
       "IssuedExpiry": "2025-09-08T17:15:00",
       "ClosedOn": "1900-01-01T00:00:00",
       "StatusId": 3,
+      "StatusId2": 3,
       "HasBeenExpired": false,
       "HasBeenClosed": false,
+      "HasBeenExtended": false,
       "WalletId": "a3e1c9f2-5d4b-4330-9c2f-1c2b8f0d9a77"
     }
   ],
@@ -839,10 +845,85 @@ Notes
       "PermitToWorkId": "d2a7b3e9-0c41-4da2-9c23-6a5b3c2d1e0f",
       "ChecklistId": "0b1c2d3e-4f5a-6789-abcd-ef0123456789",
       "OptionId": "123e4567-e89b-12d3-a456-426614174000",
-      "CategorySectionTypeId": 1,
-      "CategorySectionType": "Assignment",
       "Question": "Confirm fire extinguishers are present, inspected, and within 10m of the work area.",
       "Option": "Yes",
+      "Mandatory": true,
+      "Order": 1,
+      "CategorySectionTypeId": 1,
+      "CategorySectionType": "Assignment",
+      "SectionId": "5a6b7c8d-9e0f-1a2b-3c4d-5e6f7a8b9c0d",
+      "Section": "Fire Safety",
+      "SectionOrder": 2,
+      "OrderInSection": 1,
+      "WalletId": "a3e1c9f2-5d4b-4330-9c2f-1c2b8f0d9a77"
+    },
+    {
+      "PermitToWorkId": "d2a7b3e9-0c41-4da2-9c23-6a5b3c2d1e0f",
+      "ChecklistId": "1c2d3e4f-5a6b-789a-bcde-f0123456789a",
+      "OptionId": "234f5678-f90c-23e4-b567-537725285111",
+      "Question": "Have all personnel been briefed on the hot work procedure?",
+      "Option": "Yes",
+      "Mandatory": true,
+      "Order": 1,
+      "CategorySectionTypeId": 1,
+      "CategorySectionType": "Assignment",
+      "SectionId": "5a6b7c8d-9e0f-1a2b-3c4d-5e6f7a8b9c0d",
+      "Section": "Fire Safety",
+      "SectionOrder": 2,
+      "OrderInSection": 2,
+      "WalletId": "a3e1c9f2-5d4b-4330-9c2f-1c2b8f0d9a77"
+    }
+  ],
+  "PermitNumericAnswers": [
+    {
+      "PermitToWorkId": "d2a7b3e9-0c41-4da2-9c23-6a5b3c2d1e0f",
+      "QuestionId": "6b7c8d9e-0f1a-2b3c-4d5e-6f7a8b9c0d1e",
+      "Question": "What is the estimated temperature (°C)?",
+      "Mandatory": false,
+      "Scale": 1,
+      "UnitCode": 16,
+      "Answer": 850.5,
+      "CategorySectionTypeId": 1,
+      "CategorySectionType": "Assignment",
+      "SectionId": "5a6b7c8d-9e0f-1a2b-3c4d-5e6f7a8b9c0d",
+      "Section": "Fire Safety",
+      "SectionOrder": 2,
+      "OrderInSection": 3,
+      "WalletId": "a3e1c9f2-5d4b-4330-9c2f-1c2b8f0d9a77"
+    }
+  ],
+  "PermitDateTimeAnswers": [
+    {
+      "PermitToWorkId": "d2a7b3e9-0c41-4da2-9c23-6a5b3c2d1e0f",
+      "QuestionId": "7c8d9e0f-1a2b-3c4d-5e6f-7a8b9c0d1e2f",
+      "Question": "When was the last fire drill conducted?",
+      "Mandatory": true,
+      "Date": true,
+      "Time": false,
+      "Answer": "2025-08-15T00:00:00",
+      "CategorySectionTypeId": 1,
+      "CategorySectionType": "Assignment",
+      "SectionId": "5a6b7c8d-9e0f-1a2b-3c4d-5e6f7a8b9c0d",
+      "Section": "Fire Safety",
+      "SectionOrder": 2,
+      "OrderInSection": 4,
+      "WalletId": "a3e1c9f2-5d4b-4330-9c2f-1c2b8f0d9a77"
+    }
+  ],
+  "PermitBranchOptions": [
+    {
+      "PermitToWorkId": "d2a7b3e9-0c41-4da2-9c23-6a5b3c2d1e0f",
+      "BranchId": "8d9e0f1a-2b3c-4d5e-6f7a-8b9c0d1e2f3a",
+      "OptionId": "345f6789-012d-34f5-c678-648836396222",
+      "Branch": "What type of hot work is being performed?",
+      "Value": "Welding",
+      "Order": 1,
+      "CategorySectionTypeId": 1,
+      "CategorySectionType": "Assignment",
+      "SectionId": "5a6b7c8d-9e0f-1a2b-3c4d-5e6f7a8b9c0d",
+      "Section": "Fire Safety",
+      "SectionOrder": 2,
+      "OrderInSection": 5,
       "WalletId": "a3e1c9f2-5d4b-4330-9c2f-1c2b8f0d9a77"
     }
   ]
@@ -862,8 +943,12 @@ Notes
   - **IssuedForMinutes**: `0` indicates no data
   - **IssuedExpiry**: `1900-01-01T00:00:00` indicates no data
   - **ClosedOn**: `1900-01-01T00:00:00` indicates no data
+  - **StatusId**: deprecated, use **StatusId2** instead (supports the `Extended` enum value)
 - PermitCategories
   - **ValidityPeriodMinutes**: `0` indicates no data
+- PermitNumericAnswers
+  - **Scale**: decimal places for the numeric value
+  - **UnitCode**: `0` indicates no unit specified
 
 ## PPEAssignments
 
@@ -911,13 +996,13 @@ Notes
   ],
   "PPETypes": [
     {
-      "PPETypeId": "11111111-2222-3333-4444-555555555555",
-      "PPETypeVariantId": "66666666-7777-8888-9999-000000000001",
-      "Type": "Safety Helmet",
-      "Variant": "White, Size M",
-      "VariantOrder": 1,
-      "LifespanDays": 730,
-      "Value": 35.50,
+      "PPETypeId": "8f3a7b2c-1d44-4e1f-9a20-3f7a2b1c8d44",
+      "PPETypeVariantId": "9e2b6c5d-4a3f-4b2e-8c1d-7e6f5a4b3c2e",
+      "Type": "High Visibility Vest",
+      "Variant": "Yellow, Size L",
+      "VariantOrder": 2,
+      "LifespanDays": 365,
+      "Value": 15.75,
       "TypeDeleted": false,
       "VariantDeleted": false,
       "WalletId": "a3e1c9f2-5d4b-4330-9c2f-1c2b8f0d9a77"
@@ -927,8 +1012,8 @@ Notes
     {
       "PPEStockId": "e9b2c0a1-1f0e-4a3d-9d4e-6b5a2c1d0e9f",
       "LocationId": "0f5a3c2b-1e2d-4c5b-9a8f-7e6d5c4b3a21",
-      "PPETypeId": "11111111-2222-3333-4444-555555555555",
-      "PPETypeVariantId": "66666666-7777-8888-9999-000000000001",
+      "PPETypeId": "8f3a7b2c-1d44-4e1f-9a20-3f7a2b1c8d44",
+      "PPETypeVariantId": "9e2b6c5d-4a3f-4b2e-8c1d-7e6f5a4b3c2e",
       "StockQuantity": 24,
       "WarningQuantity": 5,
       "WalletId": "a3e1c9f2-5d4b-4330-9c2f-1c2b8f0d9a77"
@@ -947,8 +1032,8 @@ Notes
     {
       "PPEAssignmentId": "aa111111-bb22-cc33-dd44-ee5555555555",
       "AssignedToContactId": "c0ffee00-1234-5678-9abc-def012345678",
-      "PPETypeId": "11111111-2222-3333-4444-555555555555",
-      "PPETypeVariantId": "66666666-7777-8888-9999-000000000001",
+      "PPETypeId": "8f3a7b2c-1d44-4e1f-9a20-3f7a2b1c8d44",
+      "PPETypeVariantId": "9e2b6c5d-4a3f-4b2e-8c1d-7e6f5a4b3c2e",
       "AssignedOn": "2025-08-25",
       "ExpiredOn": null,
       "PPEStatusCode": 1,
@@ -1040,13 +1125,13 @@ Notes
   ],
   "PPETypes": [
     {
-      "PPETypeId": "3d2c1b0a-9f8e-4d7c-b6a5-4e3f2a1b0c9d",
-      "PPETypeVariantId": "6a5b4c3d-2e1f-4a0b-9c8d-7e6f5a4b3c2d",
-      "Type": "Hard Hat",
-      "Variant": "Yellow",
-      "VariantOrder": 1,
-      "LifespanDays": 1095,
-      "Value": 12.50,
+      "PPETypeId": "8f3a7b2c-1d44-4e1f-9a20-3f7a2b1c8d44",
+      "PPETypeVariantId": "9e2b6c5d-4a3f-4b2e-8c1d-7e6f5a4b3c2e",
+      "Type": "High Visibility Vest",
+      "Variant": "Yellow, Size L",
+      "VariantOrder": 2,
+      "LifespanDays": 365,
+      "Value": 15.75,
       "TypeDeleted": false,
       "VariantDeleted": false,
       "WalletId": "a3e1c9f2-5d4b-4330-9c2f-1c2b8f0d9a77"
@@ -1056,8 +1141,8 @@ Notes
     {
       "PPEStockId": "9c8b7a6d-5e4f-4a3b-8c2d-1e0f9a8b7c6d",
       "LocationId": "f3a7b2c1-9d44-4e1f-8a20-3a7f2b1c9d44",
-      "PPETypeId": "3d2c1b0a-9f8e-4d7c-b6a5-4e3f2a1b0c9d",
-      "PPETypeVariantId": "6a5b4c3d-2e1f-4a0b-9c8d-7e6f5a4b3c2d",
+      "PPETypeId": "8f3a7b2c-1d44-4e1f-9a20-3f7a2b1c8d44",
+      "PPETypeVariantId": "9e2b6c5d-4a3f-4b2e-8c1d-7e6f5a4b3c2e",
       "StockQuantity": 150,
       "WarningQuantity": 25,
       "WalletId": "a3e1c9f2-5d4b-4330-9c2f-1c2b8f0d9a77"
@@ -1081,7 +1166,7 @@ Notes
       "StockQuantity": 20,
       "ActionedByContactId": "2f1e0d3c-4b5a-6e7f-8091-a2b3c4d5e6f7",
       "ActionedOn": "2025-09-09T09:15:00+00:00",
-      "Notes": "Received delivery of 20 hard hats from supplier.",
+      "Notes": "Received delivery of 20 high visibility vests from supplier.",
       "WalletId": "a3e1c9f2-5d4b-4330-9c2f-1c2b8f0d9a77"
     }
   ]
@@ -1151,15 +1236,56 @@ Notes
   ],
   "PPETypes": [
     {
-      "PPETypeId": "6a7b8c9d-0e1f-4a2b-9c3d-4e5f60718293",
-      "PPETypeVariantId": "7b8c9d0e-1f2a-4b3c-8d4e-5f60718293a4",
-      "Type": "Safety Helmet",
-      "Variant": "Blue - Medium",
+      "PPETypeId": "8f3a7b2c-1d44-4e1f-9a20-3f7a2b1c8d44",
+      "PPETypeVariantId": "9e2b6c5d-4a3f-4b2e-8c1d-7e6f5a4b3c2e",
+      "Type": "High Visibility Vest",
+      "Variant": "Yellow, Size L",
       "VariantOrder": 2,
-      "LifespanDays": 730,
-      "Value": 19.99,
+      "LifespanDays": 365,
+      "Value": 15.75,
       "TypeDeleted": false,
       "VariantDeleted": false,
+      "WalletId": "a3e1c9f2-5d4b-4330-9c2f-1c2b8f0d9a77"
+    }
+  ],
+  "PPEGroups": [
+    {
+      "PPEGroupId": "1a2b3c4d-5e6f-4789-8abc-def012345678",
+      "PPEGroup": "Head Protection",
+      "Active": true,
+      "WalletId": "a3e1c9f2-5d4b-4330-9c2f-1c2b8f0d9a77"
+    },
+    {
+      "PPEGroupId": "2b3c4d5e-6f7a-4890-9bcd-ef0123456789",
+      "PPEGroup": "High Visibility Clothing",
+      "Active": true,
+      "WalletId": "a3e1c9f2-5d4b-4330-9c2f-1c2b8f0d9a77"
+    }
+  ],
+  "PPETypeGroups": [
+    {
+      "PPETypeId": "8f3a7b2c-1d44-4e1f-9a20-3f7a2b1c8d44",
+      "PPEGroupId": "2b3c4d5e-6f7a-4890-9bcd-ef0123456789",
+      "WalletId": "a3e1c9f2-5d4b-4330-9c2f-1c2b8f0d9a77"
+    }
+  ],
+  "Properties": [
+    {
+      "PPETypeId": "8f3a7b2c-1d44-4e1f-9a20-3f7a2b1c8d44",
+      "PropertyId": "3c4d5e6f-7a8b-9c0d-1e2f-3a4b5c6d7e8f",
+      "Property": "Manufacturer",
+      "PropertyType": "Text",
+      "DisplayOrder": 1,
+      "Value": "SafeWear Industries",
+      "WalletId": "a3e1c9f2-5d4b-4330-9c2f-1c2b8f0d9a77"
+    },
+    {
+      "PPETypeId": "8f3a7b2c-1d44-4e1f-9a20-3f7a2b1c8d44",
+      "PropertyId": "4d5e6f7a-8b9c-0d1e-2f3a-4b5c6d7e8f9a",
+      "Property": "Compliance Standard",
+      "PropertyType": "Select",
+      "DisplayOrder": 2,
+      "Value": "EN ISO 20471:2013",
       "WalletId": "a3e1c9f2-5d4b-4330-9c2f-1c2b8f0d9a77"
     }
   ],
@@ -1167,8 +1293,8 @@ Notes
     {
       "PPEStockId": "8c9d0e1f-2a3b-4c5d-8e6f-701928374655",
       "LocationId": "d9f9a9b1-4c6f-4e93-bf2c-5b0b9f9a1c2d",
-      "PPETypeId": "6a7b8c9d-0e1f-4a2b-9c3d-4e5f60718293",
-      "PPETypeVariantId": "7b8c9d0e-1f2a-4b3c-8d4e-5f60718293a4",
+      "PPETypeId": "8f3a7b2c-1d44-4e1f-9a20-3f7a2b1c8d44",
+      "PPETypeVariantId": "9e2b6c5d-4a3f-4b2e-8c1d-7e6f5a4b3c2e",
       "StockQuantity": 120,
       "WarningQuantity": 25,
       "WalletId": "a3e1c9f2-5d4b-4330-9c2f-1c2b8f0d9a77"

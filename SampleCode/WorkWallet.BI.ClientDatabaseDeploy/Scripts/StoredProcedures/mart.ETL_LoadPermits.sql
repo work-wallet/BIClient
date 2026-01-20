@@ -131,6 +131,7 @@ BEGIN
             ,StatusId
             ,HasBeenExpired
             ,HasBeenClosed
+            ,HasBeenExtended
             ,WalletId
         )
         SELECT * FROM OPENJSON(@json, '$.Permits')
@@ -148,9 +149,10 @@ BEGIN
             ,IssuedForMinutes int
             ,IssuedExpiry datetime
             ,ClosedOn datetime
-            ,StatusId int
+            ,StatusId2 int -- StatusId is deprecated, replaced by StatusId2
             ,HasBeenExpired bit
             ,HasBeenClosed bit
+            ,HasBeenExtended bit
             ,WalletId uniqueidentifier
         );
 
@@ -167,10 +169,16 @@ BEGIN
             PermitToWorkId
             ,ChecklistId
             ,OptionId
-            ,CategorySectionTypeId
-            ,CategorySectionType
             ,Question
             ,[Option]
+            ,Mandatory
+            ,[Order]
+            ,CategorySectionTypeId
+            ,CategorySectionType
+            ,SectionId
+            ,Section
+            ,SectionOrder
+            ,OrderInSection
             ,WalletId
         )
         SELECT * FROM OPENJSON(@json, '$.PermitChecklistAnswers')
@@ -179,16 +187,161 @@ BEGIN
             PermitToWorkId uniqueidentifier
             ,ChecklistId uniqueidentifier
             ,OptionId uniqueidentifier
-            ,CategorySectionTypeId int
-            ,CategorySectionType nvarchar(50)
             ,Question nvarchar(1000)
             ,[Option] nvarchar(250)
+            ,Mandatory bit
+            ,[Order] int
+            ,CategorySectionTypeId int
+            ,CategorySectionType nvarchar(50)
+            ,SectionId uniqueidentifier
+            ,Section nvarchar(100)
+            ,SectionOrder int
+            ,OrderInSection int
             ,WalletId uniqueidentifier
         );
 
+        -- Process checklist data into old implementation (PermitChecklistAnswer dimension, PermitChecklistAnswerFact)
+        -- This maintains backward compatibility with existing reports and queries
         EXEC mart.ETL_MaintainPermitChecklistAnswerDimension @permitToWorkChecklistAnswerTable = @permitToWorkChecklistAnswerTable;
 
         EXEC mart.ETL_LoadPermitChecklistAnswerFact @permitToWorkChecklistAnswerTable = @permitToWorkChecklistAnswerTable;
+
+        -- Process checklist data into new implementation (PermitChecklistOption dimension, PermitChecklistAnswerFact2)
+        -- The new implementation includes additional fields: Mandatory, Order, CategorySectionTypeId, SectionId, and related section fields
+        -- This supersedes the old implementation and provides complete metadata for checklist questions
+        EXEC mart.ETL_MaintainPermitChecklistOptionDimension @permitToWorkChecklistAnswerTable = @permitToWorkChecklistAnswerTable;
+
+        EXEC mart.ETL_LoadPermitChecklistAnswerFact2 @permitToWorkChecklistAnswerTable = @permitToWorkChecklistAnswerTable;
+
+        -- load the PermitNumericAnswers data
+
+        DECLARE @permitToWorkNumericAnswerTable mart.ETL_PermitToWorkNumericAnswerTable;
+
+        INSERT INTO @permitToWorkNumericAnswerTable
+        (
+            PermitToWorkId
+            ,QuestionId
+            ,Question
+            ,Mandatory
+            ,Scale
+            ,UnitCode
+            ,Answer
+            ,CategorySectionTypeId
+            ,CategorySectionType
+            ,SectionId
+            ,Section
+            ,SectionOrder
+            ,OrderInSection
+            ,WalletId
+        )
+        SELECT * FROM OPENJSON(@json, '$.PermitNumericAnswers')
+        WITH
+        (
+            PermitToWorkId uniqueidentifier
+            ,QuestionId uniqueidentifier
+            ,Question nvarchar(1000)
+            ,Mandatory bit
+            ,Scale int
+            ,UnitCode int
+            ,Answer decimal(35,6)
+            ,CategorySectionTypeId int
+            ,CategorySectionType nvarchar(50)
+            ,SectionId uniqueidentifier
+            ,Section nvarchar(100)
+            ,SectionOrder int
+            ,OrderInSection int
+            ,WalletId uniqueidentifier
+        );
+
+        EXEC mart.ETL_MaintainPermitNumericQuestionDimension @permitToWorkNumericAnswerTable = @permitToWorkNumericAnswerTable;
+
+        EXEC mart.ETL_LoadPermitNumericAnswerFact @permitToWorkNumericAnswerTable = @permitToWorkNumericAnswerTable;
+
+        -- load the PermitDateTimeAnswers data
+
+        DECLARE @permitToWorkDateTimeAnswerTable mart.ETL_PermitToWorkDateTimeAnswerTable;
+
+        INSERT INTO @permitToWorkDateTimeAnswerTable
+        (
+            PermitToWorkId
+            ,QuestionId
+            ,Question
+            ,Mandatory
+            ,[Date]
+            ,[Time]
+            ,Answer
+            ,CategorySectionTypeId
+            ,CategorySectionType
+            ,SectionId
+            ,Section
+            ,SectionOrder
+            ,OrderInSection
+            ,WalletId
+        )
+        SELECT * FROM OPENJSON(@json, '$.PermitDateTimeAnswers')
+        WITH
+        (
+            PermitToWorkId uniqueidentifier
+            ,QuestionId uniqueidentifier
+            ,Question nvarchar(1000)
+            ,Mandatory bit
+            ,[Date] bit
+            ,[Time] bit
+            ,Answer datetime
+            ,CategorySectionTypeId int
+            ,CategorySectionType nvarchar(50)
+            ,SectionId uniqueidentifier
+            ,Section nvarchar(100)
+            ,SectionOrder int
+            ,OrderInSection int
+            ,WalletId uniqueidentifier
+        );
+
+        EXEC mart.ETL_MaintainPermitDateTimeQuestionDimension @permitToWorkDateTimeAnswerTable = @permitToWorkDateTimeAnswerTable;
+
+        EXEC mart.ETL_LoadPermitDateTimeAnswerFact @permitToWorkDateTimeAnswerTable = @permitToWorkDateTimeAnswerTable;
+
+        -- load the PermitBranchOptions data
+
+        DECLARE @permitToWorkBranchOptionTable mart.ETL_PermitToWorkBranchOptionTable;
+
+        INSERT INTO @permitToWorkBranchOptionTable
+        (
+            PermitToWorkId
+            ,BranchId
+            ,OptionId
+            ,Branch
+            ,[Value]
+            ,[Order]
+            ,CategorySectionTypeId
+            ,CategorySectionType
+            ,SectionId
+            ,Section
+            ,SectionOrder
+            ,OrderInSection
+            ,WalletId
+        )
+        SELECT * FROM OPENJSON(@json, '$.PermitBranchOptions')
+        WITH
+        (
+            PermitToWorkId uniqueidentifier
+            ,BranchId uniqueidentifier
+            ,OptionId uniqueidentifier
+            ,Branch nvarchar(1000)
+            ,[Value] nvarchar(250)
+            ,[Order] int
+            ,CategorySectionTypeId int
+            ,CategorySectionType nvarchar(50)
+            ,SectionId uniqueidentifier
+            ,Section nvarchar(100)
+            ,SectionOrder int
+            ,OrderInSection int
+            ,WalletId uniqueidentifier
+        );
+
+        EXEC mart.ETL_MaintainPermitBranchOptionDimension @permitToWorkBranchOptionTable = @permitToWorkBranchOptionTable;
+
+        EXEC mart.ETL_LoadPermitBranchOptionFact @permitToWorkBranchOptionTable = @permitToWorkBranchOptionTable;
 
         COMMIT TRANSACTION;
     END TRY

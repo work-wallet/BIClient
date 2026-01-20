@@ -16,6 +16,7 @@ BEGIN
             ,a.Title
             ,a.[Description]
             ,a.AssignedTo
+            ,a.AssignedToEmail
             ,ap.ActionPriority_key
             ,a.DueOn
             ,a.OriginalDueOn
@@ -38,6 +39,7 @@ BEGIN
         OR target.Title <> source.Title
         OR target.[Description] <> source.[Description]
         OR target.AssignedTo <> source.AssignedTo
+        OR target.AssignedToEmail <> source.AssignedToEmail
         OR target.ActionPriority_key <> source.ActionPriority_key
         OR target.DueOn <> source.DueOn
         OR target.OriginalDueOn <> source.OriginalDueOn
@@ -54,6 +56,7 @@ BEGIN
             ,Title = source.Title
             ,[Description] = source.[Description]
             ,AssignedTo = source.AssignedTo
+            ,AssignedToEmail = source.AssignedToEmail
             ,ActionPriority_key = source.ActionPriority_key
             ,DueOn = source.DueOn
             ,OriginalDueOn = source.OriginalDueOn
@@ -71,6 +74,7 @@ BEGIN
             ,Title
             ,[Description]
             ,AssignedTo
+            ,AssignedToEmail
             ,ActionPriority_key
             ,DueOn
             ,OriginalDueOn
@@ -86,6 +90,7 @@ BEGIN
             ,source.Title
             ,source.[Description]
             ,source.AssignedTo
+            ,source.AssignedToEmail
             ,source.ActionPriority_key
             ,source.DueOn
             ,source.OriginalDueOn

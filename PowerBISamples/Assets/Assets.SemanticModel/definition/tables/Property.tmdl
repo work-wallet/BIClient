@@ -45,15 +45,27 @@ table Property
 
 		annotation SummarizationSetBy = User
 
+	column 'Is Shared Property'
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 6539e4c2-a742-4405-aff0-3ff8dcee597f
+		summarizeBy: none
+		sourceColumn: Is Shared Property
+
+		annotation SummarizationSetBy = Automatic
+
 	partition Property = m
 		mode: import
 		source =
 				let
 				    Source = Sql.Database("ww-powerbi-demo.database.windows.net", "powerbi"),
 				    mart_AssetProperty = Source{[Schema="mart",Item="AssetProperty"]}[Data],
-				    #"Removed Columns" = Table.RemoveColumns(mart_AssetProperty,{"_created"})
+				    #"Removed Columns" = Table.RemoveColumns(mart_AssetProperty,{"_created"}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"IsSharedProperty", "Is Shared Property"}})
 				in
-				    #"Removed Columns"
+				    #"Renamed Columns"
 
 	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
 

@@ -6,7 +6,7 @@ model Model
 		legacyRedirects
 		returnErrorValuesAsNull
 
-annotation PBI_QueryOrder = ["Location","Permit","Category","Checklist Answer","Checklist Answer Fact","Status","Wallet"]
+annotation PBI_QueryOrder = ["Location","Permit","Category","Status","Wallet","Branch Option","Branch Option Fact","Checklist Option","Checklist Answer Fact","Date Time Answer Fact","Date Time Question","Numeric Answer Fact","Numeric Question","Unit"]
 
 annotation __PBI_TimeIntelligenceEnabled = 1
 
@@ -19,10 +19,19 @@ ref table LocalDateTable_55b7fdf5-ca9f-42af-a60a-4aef862a76d8
 ref table LocalDateTable_1849e61a-88cf-4015-aad3-d07751c2d5c7
 ref table LocalDateTable_5994158e-734d-437f-b126-414813922861
 ref table Category
-ref table 'Checklist Answer'
-ref table 'Checklist Answer Fact'
 ref table Status
 ref table Wallet
+ref table 'Branch Option'
+ref table 'Branch Option Fact'
+ref table 'Checklist Option'
+ref table 'Checklist Answer Fact'
+ref table 'Date Time Answer Fact'
+ref table LocalDateTable_414ff22d-d6cf-400c-ac4f-15462bf39fd2
+ref table LocalDateTable_4b44a87c-15fb-443f-8fd9-c006193fd982
+ref table 'Date Time Question'
+ref table 'Numeric Answer Fact'
+ref table 'Numeric Question'
+ref table Unit
 
 ref cultureInfo en-GB
 

@@ -51,30 +51,129 @@ relationship c0432ef2-bc8a-42b7-8422-039f975fe918
 
 	annotation PBI_IsFromSource = FS
 
-relationship 6d2ebced-f405-4118-a9b4-5603a2e5e6f8
+relationship 58bb680a-c793-4552-8523-2d77dab09ef8
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'Date Time Answer Fact'.'Date and Time Answer'
+	toColumn: LocalDateTable_414ff22d-d6cf-400c-ac4f-15462bf39fd2.Date
+
+relationship 0f1f0039-44b9-45e9-84f3-3d4c8b84ba9a
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'Date Time Answer Fact'.'Date Answer'
+	toColumn: LocalDateTable_4b44a87c-15fb-443f-8fd9-c006193fd982.Date
+
+relationship 46ed92a3-0e00-4b09-a924-b9fd349054f8
 	isActive: false
-	fromColumn: 'Checklist Answer'.Wallet_key
+	fromColumn: 'Checklist Option'.Wallet_key
 	toColumn: Wallet.Wallet_key
 
 	annotation PBI_IsFromSource = FS
 
-relationship 269efab6-11ae-431e-9471-6eb544bdd2f2
+relationship ab1834b4-f5e9-46f6-ac35-6f7525cd68af
 	crossFilteringBehavior: bothDirections
 	fromColumn: 'Checklist Answer Fact'.Permit_key
 	toColumn: Permit.Permit_key
 
 	annotation PBI_IsFromSource = FS
 
-relationship a751d58b-4dfb-4ddd-a5a8-86f46ac16ec7
-	fromColumn: 'Checklist Answer Fact'.PermitChecklistAnswer_key
-	toColumn: 'Checklist Answer'.PermitChecklistAnswer_key
-
-	annotation PBI_IsFromSource = FS
-
-relationship 718eecc1-5ef2-46ee-83ee-4c4178ffde7d
+relationship c08f79bd-eedc-4506-b25e-1741325a302a
 	isActive: false
 	fromColumn: 'Checklist Answer Fact'.Wallet_key
 	toColumn: Wallet.Wallet_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship c93612b1-4429-400b-9c58-cfc0f9696a09
+	isActive: false
+	fromColumn: 'Numeric Answer Fact'.Wallet_key
+	toColumn: Wallet.Wallet_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship 820165e8-352a-426f-aa11-2a1f39d04e0c
+	isActive: false
+	fromColumn: 'Numeric Question'.Wallet_key
+	toColumn: Wallet.Wallet_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship 25915101-78d1-f300-f96c-7eb9f864ef38
+	fromColumn: 'Numeric Question'.Unit_key
+	toColumn: Unit.Unit_key
+
+relationship 854448be-1c87-e9ff-88ca-2e559b3b5a27
+	crossFilteringBehavior: bothDirections
+	fromColumn: 'Numeric Answer Fact'.Permit_key
+	toColumn: Permit.Permit_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship 4636432d-5832-f3e0-ba32-5d31d3d034eb
+	crossFilteringBehavior: bothDirections
+	fromColumn: 'Numeric Answer Fact'.PermitNumericQuestion_key
+	toColumn: 'Numeric Question'.PermitNumericQuestion_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship a2381c8b-d045-b83e-f66b-0b72f55779b5
+	isActive: false
+	fromColumn: 'Date Time Question'.Wallet_key
+	toColumn: Wallet.Wallet_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship a83a8aa6-9887-4ccf-0fa5-627d962ea696
+	isActive: false
+	fromColumn: 'Date Time Answer Fact'.Wallet_key
+	toColumn: Wallet.Wallet_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship a6bfd14e-effd-28d5-01ae-b7ca63961851
+	crossFilteringBehavior: bothDirections
+	fromColumn: 'Date Time Answer Fact'.PermitDateTimeQuestion_key
+	toColumn: 'Date Time Question'.PermitDateTimeQuestion_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship 9f92eb2c-1821-9885-9192-ecf65183850a
+	crossFilteringBehavior: bothDirections
+	fromColumn: 'Date Time Answer Fact'.Permit_key
+	toColumn: Permit.Permit_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship c28e5fac-6e11-d7e4-a1a7-8b28c5c574a6
+	crossFilteringBehavior: bothDirections
+	fromColumn: 'Checklist Answer Fact'.PermitChecklistOption_key
+	toColumn: 'Checklist Option'.PermitChecklistOption_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship 1160bf14-c271-cc57-28f9-a4c6655b5289
+	crossFilteringBehavior: bothDirections
+	fromColumn: 'Branch Option Fact'.PermitBranchOption_key
+	toColumn: 'Branch Option'.PermitBranchOption_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship cd44936b-1d31-7ea6-0060-8b2747163bdf
+	isActive: false
+	fromColumn: 'Branch Option'.Wallet_key
+	toColumn: Wallet.Wallet_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship ef425cee-b0d0-ee79-8442-d7a52b15852d
+	isActive: false
+	fromColumn: 'Branch Option Fact'.Wallet_key
+	toColumn: Wallet.Wallet_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship 0e3a1ed9-9ebb-9324-5983-9a666fc0c504
+	crossFilteringBehavior: bothDirections
+	fromColumn: 'Branch Option Fact'.Permit_key
+	toColumn: Permit.Permit_key
 
 	annotation PBI_IsFromSource = FS
 

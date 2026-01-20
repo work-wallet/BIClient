@@ -1,0 +1,74 @@
+table Property
+	lineageTag: df9536b3-45a7-42c5-bc2f-643f81ac4fcc
+
+	column PPEProperty_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 064961d2-56b8-437a-94dd-c1d338f3d29e
+		summarizeBy: none
+		sourceColumn: PPEProperty_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column PPEPropertyType_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: e14e63ac-db4a-437a-afd7-fe5bbd0c889a
+		summarizeBy: none
+		sourceColumn: PPEPropertyType_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Property
+		dataType: string
+		lineageTag: 3e01f2c6-05ff-44af-94b2-c803516f7fcc
+		summarizeBy: none
+		sourceColumn: Property
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Display Order'
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 7c5b2b8c-3fc4-4fd1-9a8a-2f664e54a623
+		summarizeBy: none
+		sourceColumn: Display Order
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column Wallet_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 0f6d56ae-af31-47e0-b3de-7e63848737a5
+		summarizeBy: none
+		sourceColumn: Wallet_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	partition Property = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("ww-powerbi-demo.database.windows.net", "powerbi"),
+				    mart_PPEProperty = Source{[Schema="mart",Item="PPEProperty"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(mart_PPEProperty,{"_created"}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"DisplayOrder", "Display Order"}})
+				in
+				    #"Renamed Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

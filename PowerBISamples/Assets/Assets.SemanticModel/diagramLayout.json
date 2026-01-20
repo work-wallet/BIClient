@@ -271,7 +271,7 @@
           "nodeIndex": "Asset Status",
           "nodeLineageTag": "36224508-1e80-4ff9-a562-7a442a8360d9",
           "size": {
-            "height": 152,
+            "height": 182,
             "width": 234
           },
           "zIndex": 0
@@ -687,6 +687,6 @@
       "tablesLocked": false
     }
   ],
-  "selectedDiagram": "Inspection Observation",
+  "selectedDiagram": "Main",
   "defaultDiagram": "All tables"
 }
