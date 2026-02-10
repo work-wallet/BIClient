@@ -1,5 +1,5 @@
 -- Add AllDepartments column to existing Location table
--- (has been back-fixed in the 0006 script)
+-- (has been back-fixed in the 0001 script)
 IF NOT EXISTS(select 1 from sys.columns where [Name] = N'AllDepartments' and Object_ID = Object_ID(N'mart.Location'))
 BEGIN
 

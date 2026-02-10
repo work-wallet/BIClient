@@ -445,7 +445,7 @@ Notes
       "SiteLocationId": "5b4c3d2e-1f0a-413b-8c9d-7e6f5a4b3c2d",
       "Department": "Maintenance",
       "AllDepartments": "Maintenance|Operations",
-      "ExternalIdentifier": "LOC-OPS-WH1",
+      "ExternalIdentifier": "LOC-MNT-WH1",
       "WalletId": "a3e1c9f2-5d4b-4330-9c2f-1c2b8f0d9a77"
     }
   ],
@@ -1129,7 +1129,7 @@ Notes
       "SiteLocationId": "0a1b2c3d-4e5f-6789-a0b1-c2d3e4f5a6b7",
       "Department": "Maintenance",
       "AllDepartments": "Maintenance|Operations",
-      "ExternalIdentifier": "NW-OPS-WH1",
+      "ExternalIdentifier": "NW-MNT-WH1",
       "WalletId": "a3e1c9f2-5d4b-4330-9c2f-1c2b8f0d9a77"
     }
   ],
@@ -1243,7 +1243,7 @@ Notes
       "SiteLocationId": "e1f2a3b4-c5d6-4e7f-8901-23456789abcd",
       "Department": "Maintenance",
       "AllDepartments": "Maintenance|Operations",
-      "ExternalIdentifier": "NWC-OPS-WH1",
+      "ExternalIdentifier": "NWC-MNT-WH1",
       "WalletId": "a3e1c9f2-5d4b-4330-9c2f-1c2b8f0d9a77"
     }
   ],
@@ -1564,7 +1564,7 @@ Notes
       "SiteLocationId": "a1b2c3d4-5678-49ab-90cd-ef0123456789",
       "Department": "Maintenance",
       "AllDepartments": "Maintenance|Operations",
-      "ExternalIdentifier": "NWC-OPS-001",
+      "ExternalIdentifier": "NWC-MNT-001",
       "WalletId": "a3e1c9f2-5d4b-4330-9c2f-1c2b8f0d9a77"
     }
   ],
