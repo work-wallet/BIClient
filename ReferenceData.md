@@ -27,7 +27,7 @@ Jump to the relevant section:
 
 | UnitCode | Group | Unit | UnitAcronym |
 | --- | --- | --- | --- |
-| 0 | None |  |  |
+| 0 | None | | |
 | 1 | Distance | Inch | in |
 | 2 | Distance | Foot | ft |
 | 3 | Distance | Mile | mi |
