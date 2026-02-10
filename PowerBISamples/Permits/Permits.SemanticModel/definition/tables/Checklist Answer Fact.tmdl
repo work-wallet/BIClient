@@ -13,18 +13,6 @@ table 'Checklist Answer Fact'
 
 		annotation SummarizationSetBy = User
 
-	column PermitChecklistOption_key
-		dataType: int64
-		isHidden
-		formatString: 0
-		lineageTag: 99bbb9d5-7a02-4a3f-bc8c-1c0fb768ff00
-		summarizeBy: none
-		sourceColumn: PermitChecklistOption_key
-
-		changedProperty = IsHidden
-
-		annotation SummarizationSetBy = Automatic
-
 	column Wallet_key
 		dataType: int64
 		isHidden
@@ -44,6 +32,18 @@ table 'Checklist Answer Fact'
 
 		annotation SummarizationSetBy = Automatic
 
+	column PermitChecklistOption_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 99bbb9d5-7a02-4a3f-bc8c-1c0fb768ff00
+		summarizeBy: none
+		sourceColumn: PermitChecklistOption_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
 	partition 'Checklist Answer Fact' = m
 		mode: import
 		source =
@@ -54,7 +54,7 @@ table 'Checklist Answer Fact'
 				in
 				    #"Removed Columns"
 
-	annotation PBI_NavigationStepName = Navigation
-
 	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
 

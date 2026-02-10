@@ -113,7 +113,7 @@
         }
       ],
       "name": "All tables",
-      "zoomValue": 93.198188805183761,
+      "zoomValue": 100,
       "pinKeyFieldsToTop": false,
       "showExtraHeaderInfo": false,
       "hideKeyFieldsWhenCollapsed": false,
@@ -123,7 +123,7 @@
       "ordinal": 1,
       "scrollPosition": {
         "x": 0,
-        "y": 7.7777777777777777
+        "y": 14.545454545454545
       },
       "nodes": [
         {
@@ -147,7 +147,7 @@
           "nodeIndex": "Location",
           "nodeLineageTag": "187194fd-4417-4e1b-955b-f5ceb409025f",
           "size": {
-            "height": 628,
+            "height": 660.2222222222224,
             "width": 234
           },
           "zIndex": 5
@@ -219,7 +219,7 @@
         }
       ],
       "name": "Main",
-      "zoomValue": 90,
+      "zoomValue": 100,
       "pinKeyFieldsToTop": false,
       "showExtraHeaderInfo": false,
       "hideKeyFieldsWhenCollapsed": false,

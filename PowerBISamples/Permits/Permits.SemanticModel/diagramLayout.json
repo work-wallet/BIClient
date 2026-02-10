@@ -187,7 +187,7 @@
         }
       ],
       "name": "All tables",
-      "zoomValue": 40.425154368594669,
+      "zoomValue": 58.593763073581037,
       "pinKeyFieldsToTop": false,
       "showExtraHeaderInfo": false,
       "hideKeyFieldsWhenCollapsed": false,
@@ -234,7 +234,7 @@
           "nodeIndex": "Location",
           "nodeLineageTag": "187194fd-4417-4e1b-955b-f5ceb409025f",
           "size": {
-            "height": 626,
+            "height": 667.11111111111109,
             "width": 234
           },
           "zIndex": 3
@@ -254,7 +254,7 @@
         }
       ],
       "name": "Main",
-      "zoomValue": 90,
+      "zoomValue": 100,
       "pinKeyFieldsToTop": false,
       "showExtraHeaderInfo": false,
       "hideKeyFieldsWhenCollapsed": false,
