@@ -48,6 +48,7 @@ BEGIN
             ,Job
             ,SiteLocationId
             ,Department
+            ,AllDepartments
             ,ExternalIdentifier
             ,WalletId
         )
@@ -68,6 +69,7 @@ BEGIN
             ,Job nvarchar(50)
             ,SiteLocationId uniqueidentifier
             ,Department nvarchar(30)
+            ,AllDepartments nvarchar(max)
             ,ExternalIdentifier nvarchar(255)
             ,WalletId uniqueidentifier
         );
