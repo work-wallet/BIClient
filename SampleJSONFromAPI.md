@@ -443,8 +443,9 @@ Notes
       "JobId": "00000000-0000-0000-0000-000000000000",
       "Job": "",
       "SiteLocationId": "5b4c3d2e-1f0a-413b-8c9d-7e6f5a4b3c2d",
-      "Department": "Operations",
-      "ExternalIdentifier": "LOC-OPS-WH1",
+      "Department": "Maintenance",
+      "AllDepartments": "Maintenance|Operations",
+      "ExternalIdentifier": "LOC-MNT-WH1",
       "WalletId": "a3e1c9f2-5d4b-4330-9c2f-1c2b8f0d9a77"
     }
   ],
@@ -644,6 +645,8 @@ Notes:
   - **AreaId**: `00000000-0000-0000-0000-000000000000` indicates no data
   - **JobId**: `00000000-0000-0000-0000-000000000000` indicates no data
   - **SiteLocationId**: `00000000-0000-0000-0000-000000000000` indicates no data
+  - **Department**: Contains the first department name when the location is associated with one or more departments
+  - **AllDepartments**: Pipe-separated list of all department names associated with the location
 - GradingSetOptions
   - **GradingSetId** & **GradingSetOptionId**: `00000000-0000-0000-0000-000000000000` indicates 'null' entry (other fields also zeroed/blank)
 - AuditTypes
@@ -798,7 +801,8 @@ Notes
       "JobId": "00000000-0000-0000-0000-000000000000",
       "Job": "",
       "SiteLocationId": "f4b0f6a1-9f1a-4c2c-8b2c-1ee7e6f1a2b3",
-      "Department": "Operations",
+      "Department": "Maintenance",
+      "AllDepartments": "Maintenance|Operations",
       "ExternalIdentifier": "EXT-LOC-0001",
       "WalletId": "a3e1c9f2-5d4b-4330-9c2f-1c2b8f0d9a77"
     }
@@ -938,6 +942,8 @@ Notes
   - **AreaId**: `00000000-0000-0000-0000-000000000000` indicates no data
   - **JobId**: `00000000-0000-0000-0000-000000000000` indicates no data
   - **SiteLocationId**: `00000000-0000-0000-0000-000000000000` indicates no data
+  - **Department**: Contains the first department name when the location is associated with one or more departments
+  - **AllDepartments**: Pipe-separated list of all department names associated with the location
 - Permits
   - **IssuedOn**: `1900-01-01T00:00:00` indicates no data (should not occur in practice as draft permits are not returned)
   - **IssuedForMinutes**: `0` indicates no data
@@ -989,7 +995,8 @@ Notes
       "JobId": "00000000-0000-0000-0000-000000000000",
       "Job": "",
       "SiteLocationId": "13572468-2468-1357-2468-135724681357",
-      "Department": "Operations",
+      "Department": "Maintenance",
+      "AllDepartments": "Maintenance|Operations",
       "ExternalIdentifier": "OPS-RDV-WH1",
       "WalletId": "a3e1c9f2-5d4b-4330-9c2f-1c2b8f0d9a77"
     }
@@ -1061,6 +1068,8 @@ Notes
 
 - Locations
   - **JobId**: `00000000-0000-0000-0000-000000000000` indicates no data (not applicable to PPEAssignments)
+  - **Department**: Contains the first department name when the location is associated with one or more departments
+  - **AllDepartments**: Pipe-separated list of all department names associated with the location
 - PPETypes
   - **PPETypeVariantId**: `00000000-0000-0000-0000-000000000000` indicates no variant
   - **Variant**: if `null` no field will be returned
@@ -1118,8 +1127,9 @@ Notes
       "JobId": "00000000-0000-0000-0000-000000000000",
       "Job": "",
       "SiteLocationId": "0a1b2c3d-4e5f-6789-a0b1-c2d3e4f5a6b7",
-      "Department": "Operations",
-      "ExternalIdentifier": "NW-OPS-WH1",
+      "Department": "Maintenance",
+      "AllDepartments": "Maintenance|Operations",
+      "ExternalIdentifier": "NW-MNT-WH1",
       "WalletId": "a3e1c9f2-5d4b-4330-9c2f-1c2b8f0d9a77"
     }
   ],
@@ -1177,6 +1187,8 @@ Notes
 
 - Locations
   - **JobId**: `00000000-0000-0000-0000-000000000000` indicates no data (not applicable to PPEStockHistories)
+  - **Department**: Contains the first department name when the location is associated with one or more departments
+  - **AllDepartments**: Pipe-separated list of all department names associated with the location
 - PPETypes
   - **PPETypeVariantId**: `00000000-0000-0000-0000-000000000000` indicates no variant
   - **Variant**: if `null` no field will be returned
@@ -1229,8 +1241,9 @@ Notes
       "JobId": "00000000-0000-0000-0000-000000000000",
       "Job": "",
       "SiteLocationId": "e1f2a3b4-c5d6-4e7f-8901-23456789abcd",
-      "Department": "Operations",
-      "ExternalIdentifier": "NWC-OPS-WH1",
+      "Department": "Maintenance",
+      "AllDepartments": "Maintenance|Operations",
+      "ExternalIdentifier": "NWC-MNT-WH1",
       "WalletId": "a3e1c9f2-5d4b-4330-9c2f-1c2b8f0d9a77"
     }
   ],
@@ -1307,6 +1320,8 @@ Notes
 
 - Locations
   - **JobId**: `00000000-0000-0000-0000-000000000000` indicates no data (not applicable to PPEStocks)
+  - **Department**: Contains the first department name when the location is associated with one or more departments
+  - **AllDepartments**: Pipe-separated list of all department names associated with the location
 - PPETypes
   - **PPETypeVariantId**: `00000000-0000-0000-0000-000000000000` indicates no variant
   - **Variant**: if `null` no field will be returned
@@ -1356,7 +1371,8 @@ Notes
       "JobId": "00000000-0000-0000-0000-000000000000",
       "Job": "",
       "SiteLocationId": "3e7a5f22-1c34-4d68-b2f1-0a9d22c1b4e0",
-      "Department": "Operations",
+      "Department": "Maintenance",
+      "AllDepartments": "Maintenance|Operations",
       "ExternalIdentifier": "NW-W01",
       "WalletId": "a3e1c9f2-5d4b-4330-9c2f-1c2b8f0d9a77"
     }
@@ -1501,6 +1517,8 @@ Notes
   - **AreaId**: `00000000-0000-0000-0000-000000000000` indicates no data
   - **JobId**: `00000000-0000-0000-0000-000000000000` indicates no data
   - **SiteLocationId**: `00000000-0000-0000-0000-000000000000` indicates no data
+  - **Department**: Contains the first department name when the location is associated with one or more departments
+  - **AllDepartments**: Pipe-separated list of all department names associated with the location
 - ReportedIssues
   - **ReportedIssueSeverityCode**: `-1` indicates no data
   - **CloseDate**: `0001-01-01T00:00:00+00:00` indicates no data
@@ -1544,8 +1562,9 @@ Notes
       "JobId": "00000000-0000-0000-0000-000000000000",
       "Job": "",
       "SiteLocationId": "a1b2c3d4-5678-49ab-90cd-ef0123456789",
-      "Department": "Operations",
-      "ExternalIdentifier": "NWC-OPS-001",
+      "Department": "Maintenance",
+      "AllDepartments": "Maintenance|Operations",
+      "ExternalIdentifier": "NWC-MNT-001",
       "WalletId": "a3e1c9f2-5d4b-4330-9c2f-1c2b8f0d9a77"
     }
   ],
@@ -1600,6 +1619,8 @@ Notes
   - **AreaId**: `00000000-0000-0000-0000-000000000000` indicates no data
   - **JobId**: `00000000-0000-0000-0000-000000000000` indicates no data
   - **SiteLocationId**: `00000000-0000-0000-0000-000000000000` indicates no data
+  - **Department**: Contains the first department name when the location is associated with one or more departments
+  - **AllDepartments**: Pipe-separated list of all department names associated with the location
 - SafetyCards
   - **EmployeeContactId**: if `null` no field will be returned
   - **OccupationRoleCode**: `-1` indicates no data

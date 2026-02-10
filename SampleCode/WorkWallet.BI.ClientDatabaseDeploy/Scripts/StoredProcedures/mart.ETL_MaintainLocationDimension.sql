@@ -23,6 +23,7 @@ BEGIN
             ,a.Job
             ,a.SiteLocationId
             ,a.Department
+            ,a.AllDepartments
             ,a.ExternalIdentifier
             ,w.Wallet_key
         FROM
@@ -44,6 +45,7 @@ BEGIN
         OR target.Job <> source.Job
         OR target.SiteLocationId <> source.SiteLocationId
         OR target.Department <> source.Department
+        OR target.AllDepartments <> source.AllDepartments
         OR target.ExternalIdentifier <> source.ExternalIdentifier
         OR target.Wallet_key <> source.Wallet_key
     ) THEN
@@ -61,6 +63,7 @@ BEGIN
             ,Job = source.Job
             ,SiteLocationId = source.SiteLocationId
             ,Department = source.Department
+            ,AllDepartments = source.AllDepartments
             ,ExternalIdentifier = source.ExternalIdentifier
             ,Wallet_key = source.Wallet_key
             ,_edited = SYSUTCDATETIME()
@@ -80,6 +83,7 @@ BEGIN
             ,Job
             ,SiteLocationId
             ,Department
+            ,AllDepartments
             ,ExternalIdentifier
             ,Wallet_key
         )
@@ -98,6 +102,7 @@ BEGIN
             ,source.Job
             ,source.SiteLocationId
             ,source.Department
+            ,source.AllDepartments
             ,source.ExternalIdentifier
             ,source.Wallet_key
         );

@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 
 The format loosely follows Keep a Changelog principles (dates in YYYY-MM-DD). Version numbers align with assembly versions unless otherwise noted.
 
+## [4.4.2] - 2026-02-10
+
+### Changed
+
+- Locations: add `AllDepartments` field (pipe-separated list) in addition to original `Department` field to support locations associated with multiple departments.
+
 ## [4.4.1] - 2026-01-20
 
 ### Added (4.4.1)

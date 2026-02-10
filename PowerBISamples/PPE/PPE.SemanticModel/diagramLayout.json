@@ -241,7 +241,7 @@
         }
       ],
       "name": "All tables",
-      "zoomValue": 41.287471682617891,
+      "zoomValue": 59.843638730985482,
       "pinKeyFieldsToTop": false,
       "showExtraHeaderInfo": false,
       "hideKeyFieldsWhenCollapsed": false,
@@ -334,7 +334,7 @@
         }
       ],
       "name": "Stock",
-      "zoomValue": 79.553182037699813,
+      "zoomValue": 100,
       "pinKeyFieldsToTop": false,
       "showExtraHeaderInfo": false,
       "hideKeyFieldsWhenCollapsed": false,
@@ -413,7 +413,7 @@
         }
       ],
       "name": "Stock History",
-      "zoomValue": 81.304884371706663,
+      "zoomValue": 100,
       "pinKeyFieldsToTop": false,
       "showExtraHeaderInfo": false,
       "hideKeyFieldsWhenCollapsed": false,
@@ -532,7 +532,7 @@
         }
       ],
       "name": "Assignments",
-      "zoomValue": 77.037749459004573,
+      "zoomValue": 100,
       "pinKeyFieldsToTop": false,
       "showExtraHeaderInfo": false,
       "hideKeyFieldsWhenCollapsed": false,
@@ -612,7 +612,7 @@
         }
       ],
       "name": "Properties",
-      "zoomValue": 86.050829207021437,
+      "zoomValue": 100,
       "pinKeyFieldsToTop": false,
       "showExtraHeaderInfo": false,
       "hideKeyFieldsWhenCollapsed": false,
