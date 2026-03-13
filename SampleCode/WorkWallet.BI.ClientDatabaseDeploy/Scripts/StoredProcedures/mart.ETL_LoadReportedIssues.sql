@@ -222,7 +222,7 @@ BEGIN
             ReportedIssueId uniqueidentifier
             ,BranchId uniqueidentifier
             ,OptionId uniqueidentifier
-            ,Branch nvarchar(100)
+            ,Branch nvarchar(500)
             ,[Option] nvarchar(250)
             ,WalletId uniqueidentifier
         );
@@ -248,7 +248,7 @@ BEGIN
         (
             ReportedIssueId uniqueidentifier
             ,ReportedIssueBodyPartId uniqueidentifier
-            ,Question nvarchar(100)
+            ,Question nvarchar(500)
             ,BodyParts bigint
             ,WalletId uniqueidentifier
         );
@@ -276,7 +276,7 @@ BEGIN
             ReportedIssueId uniqueidentifier
             ,ChecklistId uniqueidentifier
             ,OptionId uniqueidentifier
-            ,Question nvarchar(100)
+            ,Question nvarchar(500)
             ,[Option] nvarchar(250)
             ,WalletId uniqueidentifier
         );
@@ -304,7 +304,7 @@ BEGIN
             ReportedIssueId uniqueidentifier
             ,PersonId uniqueidentifier
             ,OptionId uniqueidentifier
-            ,Question nvarchar(100)
+            ,Question nvarchar(500)
             ,[Option] nvarchar(50)
             ,WalletId uniqueidentifier
         );
@@ -332,7 +332,7 @@ BEGIN
             ReportedIssueId uniqueidentifier
             ,BranchId uniqueidentifier
             ,OptionId uniqueidentifier
-            ,Branch nvarchar(100)
+            ,Branch nvarchar(500)
             ,[Option] nvarchar(250)
             ,WalletId uniqueidentifier
         );
@@ -358,7 +358,7 @@ BEGIN
         (
             ReportedIssueId uniqueidentifier
             ,ReportedIssueBodyPartId uniqueidentifier
-            ,Question nvarchar(100)
+            ,Question nvarchar(500)
             ,BodyParts bigint
             ,WalletId uniqueidentifier
         );
@@ -386,7 +386,7 @@ BEGIN
             ReportedIssueId uniqueidentifier
             ,ChecklistId uniqueidentifier
             ,OptionId uniqueidentifier
-            ,Question nvarchar(100)
+            ,Question nvarchar(500)
             ,[Option] nvarchar(250)
             ,WalletId uniqueidentifier
         );
@@ -414,7 +414,7 @@ BEGIN
             ReportedIssueId uniqueidentifier
             ,PersonId uniqueidentifier
             ,OptionId uniqueidentifier
-            ,Question nvarchar(100)
+            ,Question nvarchar(500)
             ,[Option] nvarchar(50)
             ,WalletId uniqueidentifier
         );

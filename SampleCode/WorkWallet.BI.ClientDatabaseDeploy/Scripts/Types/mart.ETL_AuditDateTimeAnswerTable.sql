@@ -5,7 +5,7 @@ CREATE TYPE mart.ETL_AuditDateTimeAnswerTable AS TABLE
 (
     AuditId uniqueidentifier NOT NULL
     ,QuestionId uniqueidentifier NOT NULL
-    ,Question nvarchar(500) NOT NULL
+    ,Question nvarchar(max) NOT NULL
     ,Mandatory bit NOT NULL
     ,[Date] bit NOT NULL
     ,[Time] bit NOT NULL

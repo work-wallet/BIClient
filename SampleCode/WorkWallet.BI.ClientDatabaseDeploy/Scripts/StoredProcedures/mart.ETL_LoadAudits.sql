@@ -277,7 +277,7 @@ BEGIN
         (
             AuditId uniqueidentifier
             ,QuestionId uniqueidentifier
-            ,Question nvarchar(500)
+            ,Question nvarchar(max)
             ,Mandatory bit
             ,Scale int
             ,UnitCode int
@@ -314,7 +314,7 @@ BEGIN
         (
             AuditId uniqueidentifier
             ,QuestionId uniqueidentifier
-            ,Question nvarchar(500)
+            ,Question nvarchar(max)
             ,Mandatory bit
             ,[Date] bit
             ,[Time] bit
@@ -352,7 +352,7 @@ BEGIN
             AuditId uniqueidentifier
             ,ChecklistId uniqueidentifier
             ,OptionId uniqueidentifier
-            ,Question nvarchar(100)
+            ,Question nvarchar(max)
             ,[Value] nvarchar(250)
             ,Mandatory bit
             ,[Order] int
@@ -388,7 +388,7 @@ BEGIN
             AuditId uniqueidentifier
             ,BranchId uniqueidentifier
             ,OptionId uniqueidentifier
-            ,Branch nvarchar(100)
+            ,Branch nvarchar(max)
             ,[Value] nvarchar(250)
             ,[Order] int
             ,SectionId uniqueidentifier
@@ -428,7 +428,7 @@ BEGIN
             AuditId uniqueidentifier
             ,BranchId uniqueidentifier
             ,OptionId uniqueidentifier
-            ,Branch nvarchar(500)
+            ,Branch nvarchar(max)
             ,[Value] nvarchar(100)
             ,[Order] int
             ,TotalScore int
