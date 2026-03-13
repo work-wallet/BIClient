@@ -4,9 +4,17 @@ All notable changes to this project will be documented in this file.
 
 The format loosely follows Keep a Changelog principles (dates in YYYY-MM-DD). Version numbers align with assembly versions unless otherwise noted.
 
+## [4.4.3] - 2026-03-14
+
+### Changed (4.4.3)
+
+- Locations: add `SiteStatus` field to support customer-configurable site status tracking.
+- Audits: increase Question column length to `nvarchar(max)` for compatibility with Work Wallet updates.
+- ReportedIssues: increase Question and Branch column lengths to `nvarchar(500)` for compatibility with Work Wallet updates.
+
 ## [4.4.2] - 2026-02-10
 
-### Changed
+### Changed (4.4.2)
 
 - Locations: add `AllDepartments` field (pipe-separated list) in addition to original `Department` field to support locations associated with multiple departments.
 
