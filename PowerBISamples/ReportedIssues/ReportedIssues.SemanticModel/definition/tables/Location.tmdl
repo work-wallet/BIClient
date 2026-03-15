@@ -175,6 +175,14 @@ table Location
 
 		annotation SummarizationSetBy = Automatic
 
+	column 'Site Status'
+		dataType: string
+		lineageTag: 0e5cd90b-c846-4f79-8537-70a43c352c73
+		summarizeBy: none
+		sourceColumn: Site Status
+
+		annotation SummarizationSetBy = Automatic
+
 	hierarchy 'Company Hierarchy'
 		lineageTag: 75777fbc-dcf3-4852-9ca7-1935ee7ce74d
 
@@ -197,7 +205,7 @@ table Location
 				    Source = Sql.Database("ww-powerbi-demo.database.windows.net", "powerbi"),
 				    mart_Location = Source{[Schema="mart",Item="Location"]}[Data],
 				    #"Removed Columns" = Table.RemoveColumns(mart_Location,{"_created", "_edited"}),
-				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"LocationType", "Location Type"}, {"ExternalIdentifier", "Location External Identifier"}, {"AllDepartments", "All Departments"}})
+				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"LocationType", "Location Type"}, {"ExternalIdentifier", "Location External Identifier"}, {"AllDepartments", "All Departments"}, {"SiteStatus", "Site Status"}})
 				in
 				    #"Renamed Columns"
 
