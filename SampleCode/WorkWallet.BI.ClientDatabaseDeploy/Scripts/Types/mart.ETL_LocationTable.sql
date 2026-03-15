@@ -19,6 +19,7 @@ CREATE TYPE mart.ETL_LocationTable AS TABLE
     ,Department nvarchar(30) NOT NULL
     ,AllDepartments nvarchar(max) NOT NULL
     ,ExternalIdentifier nvarchar(255) NOT NULL
+    ,SiteStatus nvarchar(80) NOT NULL
     ,WalletId uniqueidentifier NOT NULL
     ,PRIMARY KEY (LocationId)
 );

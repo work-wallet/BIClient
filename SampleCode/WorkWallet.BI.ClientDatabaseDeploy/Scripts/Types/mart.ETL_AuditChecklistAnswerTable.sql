@@ -6,7 +6,7 @@ CREATE TYPE mart.ETL_AuditChecklistAnswerTable AS TABLE
     AuditId uniqueidentifier NOT NULL
     ,ChecklistId uniqueidentifier NOT NULL
     ,OptionId uniqueidentifier NOT NULL
-    ,Question nvarchar(100) NOT NULL
+    ,Question nvarchar(max) NOT NULL
     ,[Value] nvarchar(250) NOT NULL
     ,Mandatory bit NOT NULL
     ,[Order] int NOT NULL

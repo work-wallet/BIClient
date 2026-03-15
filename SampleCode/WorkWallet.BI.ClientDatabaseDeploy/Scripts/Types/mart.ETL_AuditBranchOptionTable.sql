@@ -6,7 +6,7 @@ CREATE TYPE mart.ETL_AuditBranchOptionTable AS TABLE
     AuditId uniqueidentifier NOT NULL
     ,BranchId uniqueidentifier NOT NULL
     ,OptionId uniqueidentifier NOT NULL
-    ,Branch nvarchar(100) NOT NULL
+    ,Branch nvarchar(max) NOT NULL
     ,[Value] nvarchar(250) NOT NULL
     ,[Order] int NOT NULL
     ,SectionId uniqueidentifier NOT NULL

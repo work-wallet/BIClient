@@ -6,7 +6,7 @@ CREATE TYPE mart.ETL_AuditScoredResponseTable AS TABLE
     AuditId uniqueidentifier NOT NULL
     ,BranchId uniqueidentifier NOT NULL
     ,OptionId uniqueidentifier NOT NULL
-    ,Branch nvarchar(500) NOT NULL
+    ,Branch nvarchar(max) NOT NULL
     ,[Value] nvarchar(100) NOT NULL
     ,[Order] int NOT NULL
     ,TotalScore int NOT NULL

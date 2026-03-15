@@ -50,6 +50,7 @@ BEGIN
             ,Department
             ,AllDepartments
             ,ExternalIdentifier
+            ,SiteStatus
             ,WalletId
         )
         SELECT * FROM OPENJSON(@json, '$.Locations')
@@ -71,6 +72,7 @@ BEGIN
             ,Department nvarchar(30)
             ,AllDepartments nvarchar(max)
             ,ExternalIdentifier nvarchar(255)
+            ,SiteStatus nvarchar(80)
             ,WalletId uniqueidentifier
         );
 
