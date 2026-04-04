@@ -129,10 +129,11 @@ All binaries target .NET 8. Install the [.NET 8 runtime](https://dotnet.microsof
 
 Download from GitHub [Releases](https://github.com/work-wallet/BIClient/releases) (or build from source):
 
-| Tool | Executable | Config File |
+| Tool | Release asset (zip contains…) | Configuration |
 | --- | --- | --- |
-| Database Deployment | `WorkWallet.BI.ClientDatabaseDeploy.exe` | `appsettings.json` |
-| Data Extraction (Console) | `WorkWallet.BI.ClientSample.exe` | `appsettings.json` |
+| Database Deployment | `WorkWallet.BI.ClientDatabaseDeploy.exe` | `appsettings.json` alongside the executable |
+| Data Extraction (Console) | `WorkWallet.BI.ClientSample.exe` | `appsettings.json` alongside the executable |
+| Azure Function | zip deployed directly to function app | Environment variables (see [5.7](#57-azure-function-deployment)) |
 
 ### 5.2 Prerequisites
 
@@ -147,7 +148,7 @@ Required:
 
 Optional:
 
-- Visual Studio Code or Visual Studio 2022 (or just the `dotnet` CLI) to modify/build
+- Visual Studio Code or Visual Studio 2026 (or just the `dotnet` CLI) to modify/build
 - Power BI Desktop (for provided sample models)
 - Azure Subscription (if using Azure Functions)
 
