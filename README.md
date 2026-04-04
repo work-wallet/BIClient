@@ -329,26 +329,106 @@ Error `Invalid lastSynchronizationVersion`: usually means extraction gap exceede
 
 Project: `WorkWallet.BI.ClientFunction` (timer trigger).
 
-Recommended host creation settings:
+Assumes an Azure SQL Database as the target store. A low-cost DTU-based tier (Basic or Standard) is sufficient for most workloads. When deploying the schema (see [section 5.5](#55-database-deployment)) interactively against Azure SQL, use `Authentication=Active Directory Interactive` in the deployer connection string — it prompts for browser-based Entra ID sign-in without requiring a stored password:
 
-- Runtime stack: .NET 8 (Isolated)
-- OS: Windows
-- Application Insights: Enabled
+```text
+Server=<SQL_SERVER>.database.windows.net;Authentication=Active Directory Interactive;Encrypt=True;Database=<DATABASE_NAME>;
+```
 
-Key app settings:
+**During the creation wizard:**
+
+- **Hosting plan**: Flex Consumption
+- **Runtime stack**: .NET 8 (Isolated)
+- **OS**: Linux
+- **Instance Memory**: 2048 MB
+- **Monitoring**: Enable Application Insights
+- **Networking**: leave defaults (public access On, virtual network integration Off) unless your organisation requires private networking
+- **Durable Functions**: this client does not use Durable Functions; leave the default backend provider ("Bring your own: Azure Storage") and move on
+
+**After creation:**
+
+- **Identity**: under Settings → Identity, enable the system-assigned managed identity. This is required for passwordless authentication to Azure SQL (see below).
+
+#### Managed Identity & Database Access
+
+Use the system-assigned managed identity of the function app (enabled above) to authenticate to Azure SQL — no password stored in configuration. Grant database access via a Microsoft Entra ID security group so that adding or rotating identities requires no SQL changes.
+
+**Step 1 — Create an Entra ID security group and add the function app's managed identity:**
+
+In the Azure portal (or using your preferred tooling), create a Microsoft Entra ID security group (e.g. `WorkWallet_BI_Database_Access`) and add the function app's system-assigned managed identity as a member.
+
+**Step 2 — Grant the group permissions on the Azure SQL database (run as an Entra ID admin against the target database):**
+
+```sql
+-- Create a database user mapped to the Entra ID group
+CREATE USER [WorkWallet_BI_Database_Access] FROM EXTERNAL PROVIDER;
+
+-- Create a role that allows stored procedure execution
+CREATE ROLE db_executor;
+GRANT EXECUTE TO db_executor;
+
+-- Grant the group membership of all required roles
+ALTER ROLE db_datareader ADD MEMBER [WorkWallet_BI_Database_Access];
+ALTER ROLE db_datawriter ADD MEMBER [WorkWallet_BI_Database_Access];
+ALTER ROLE db_ddladmin   ADD MEMBER [WorkWallet_BI_Database_Access];
+ALTER ROLE db_executor   ADD MEMBER [WorkWallet_BI_Database_Access];
+```
+
+#### App Settings
+
+Key environment variables (app settings) using the convention for Linux containers:
 
 | Setting | Example | Notes |
 | --- | --- | --- |
-| `BITimerTriggerSchedule` | `0 30 21 * * *` | NCRONTAB expression (UTC) |
-| `FuncOptions:AgentApiUrl` | `https://bi.work-wallet.com` | Base API URL |
-| `FuncOptions:AgentPageSize` | `500` | Max recommended 500 |
-| `FuncOptions:AgentWallets:[0]:WalletId` | | Repeat per wallet |
-| `FuncOptions:AgentWallets:[0]:WalletSecret` | | |
-| `FuncOptions:ApiAccessAuthority` | `https://identity.work-wallet.com` | Auth endpoint |
-| `FuncOptions:ApiAccessClientId` | | |
-| `FuncOptions:ApiAccessClientSecret` | | |
-| `FuncOptions:ApiAccessScope` | `ww_bi_extract` | Scope constant |
-| `sqldb_connection` | | SQL connection string |
+| `BITimerTriggerSchedule` | `0 17 21 * * *` | NCRONTAB expression (UTC); choose a randomised time — see [5.6.1](#561-scheduling-recommendations) |
+| `FuncOptions__AgentApiUrl` | `https://bi.work-wallet.com` | Base API URL |
+| `FuncOptions__AgentPageSize` | `500` | Max recommended 500 |
+| `FuncOptions__AgentWallets__0__WalletId` | | Repeat per wallet |
+| `FuncOptions__AgentWallets__0__WalletSecret` | | |
+| `FuncOptions__ApiAccessAuthority` | `https://identity.work-wallet.com` | Auth endpoint |
+| `FuncOptions__ApiAccessClientId` | | |
+| `FuncOptions__ApiAccessClientSecret` | | |
+| `FuncOptions__ApiAccessScope` | `ww_bi_extract` | Scope constant |
+| `sqldb_connection` | | See format in script below |
+
+Rather than entering settings manually through the Azure portal, use the az CLI. Fixed values are provided below; replace placeholders marked with `<...>` with your environment-specific values.
+
+> **Shell quoting notes:**
+>
+> - Line continuation: scripts below use `\` (bash/zsh). In PowerShell, replace each `\` with a backtick (`` ` ``).
+> - Special characters in values (e.g. `$` in a secret): in bash/zsh use single quotes around that value — `'abc$def'` — to prevent shell expansion. In PowerShell, escape `$` with a backtick: `` "abc`$def" ``.
+
+```bash
+az functionapp config appsettings set \
+  --name <FUNCTION_APP_NAME> \
+  --resource-group <RESOURCE_GROUP> \
+  --settings \
+    "BITimerTriggerSchedule=0 17 21 * * *" \  # example only — choose a randomised time (see section 5.6.1)
+    "FuncOptions__AgentApiUrl=https://bi.work-wallet.com" \
+    "FuncOptions__AgentPageSize=500" \
+    "FuncOptions__AgentWallets__0__WalletId=<WALLET_ID>" \
+    "FuncOptions__AgentWallets__0__WalletSecret=<WALLET_SECRET>" \
+    "FuncOptions__ApiAccessAuthority=https://identity.work-wallet.com" \
+    "FuncOptions__ApiAccessClientId=<API_ACCESS_CLIENT_ID>" \
+    "FuncOptions__ApiAccessClientSecret=<API_ACCESS_CLIENT_SECRET>" \
+    "FuncOptions__ApiAccessScope=ww_bi_extract" \
+    "sqldb_connection=Server=<SQL_SERVER>.database.windows.net;Database=<DATABASE_NAME>;Authentication=Active Directory Default;"
+```
+
+For multiple wallets, append additional `FuncOptions__AgentWallets__1__WalletId` / `FuncOptions__AgentWallets__1__WalletSecret` pairs to the same command.
+
+#### Deploying the Function App
+
+A pre-built zip of the function app is available from [GitHub Releases](https://github.com/work-wallet/BIClient/releases). Deploy it using the az CLI:
+
+```bash
+az functionapp deployment source config-zip \
+  --resource-group <RESOURCE_GROUP> \
+  --name <FUNCTION_APP_NAME> \
+  --src "<PATH_TO_ZIP>"
+```
+
+#### Local Development
 
 Local development requires `local.settings.json`.
 Include `APPLICATIONINSIGHTS_CONNECTION_STRING` if you want to see structured logs (some info-level events bypass console output).
