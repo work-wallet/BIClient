@@ -4,6 +4,14 @@ All notable changes to this project will be documented in this file.
 
 The format loosely follows Keep a Changelog principles (dates in YYYY-MM-DD). Version numbers align with assembly versions unless otherwise noted.
 
+## [4.5.0] - unreleased
+
+### Changed (4.5.0)
+
+- Upgrade to .NET 10.
+- Locations: increase `Department` column length to match updated field length in the Work Wallet source solution.
+- ReportedIssues: capture additional fields.
+
 ## [4.4.3] - 2026-03-15
 
 ### Changed (4.4.3)
