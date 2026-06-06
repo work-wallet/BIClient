@@ -69,7 +69,7 @@ BEGIN
             ,JobId uniqueidentifier
             ,Job nvarchar(50)
             ,SiteLocationId uniqueidentifier
-            ,Department nvarchar(30)
+            ,Department nvarchar(50)
             ,AllDepartments nvarchar(max)
             ,ExternalIdentifier nvarchar(255)
             ,SiteStatus nvarchar(80)
