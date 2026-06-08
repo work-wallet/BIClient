@@ -48,7 +48,7 @@ Repository (source & releases): [work-wallet/BIClient](https://github.com/work-w
 - A ready-made SQL Server data mart (star schema) and deployment tool
 - A robust, paged, change-tracking extraction client (console + Azure Function)
 - Sample Power BI project (.pbip) files with semantic models & reports
-- Extensible, strongly-typed .NET 8 code you can adopt or adapt
+- Extensible, strongly-typed .NET 10 code you can adopt or adapt
 
 You can use the binaries directly (no code changes required), customise the solution, or treat it as a reference implementation for your own stack.
 
@@ -125,7 +125,7 @@ These values are required for both the Quick Start and Direct API usage.
 
 ### 5.1 Binaries / Downloads
 
-All binaries target .NET 8. Install the [.NET 8 runtime](https://dotnet.microsoft.com/en-us/download/dotnet/8.0) if not already present.
+All binaries target .NET 10. Install the [.NET 10 runtime](https://dotnet.microsoft.com/en-us/download/dotnet/10.0) if not already present.
 
 Download from GitHub [Releases](https://github.com/work-wallet/BIClient/releases) (or build from source):
 
@@ -144,7 +144,7 @@ Required:
 - SQL Server (Azure SQL, LocalDB, Express, Developer, Standard, etc.)
 - A SQL connection string compatible with `Microsoft.Data.SqlClient`
 - Internet access (firewall allows: `bi.work-wallet.com`, `identity.work-wallet.com`)
-- .NET 8 runtime (for running) or SDK (if building from source)
+- .NET 10 runtime (for running) or SDK (if building from source)
 
 Optional:
 
@@ -339,7 +339,7 @@ Server=<SQL_SERVER>.database.windows.net;Authentication=Active Directory Interac
 **During the creation wizard:**
 
 - **Hosting plan**: Flex Consumption
-- **Runtime stack**: .NET 8 (Isolated)
+- **Runtime stack**: .NET 10 (Isolated)
 - **OS**: Linux
 - **Instance Memory**: 2048 MB
 - **Monitoring**: Enable Application Insights
