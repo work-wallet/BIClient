@@ -164,7 +164,7 @@ table 'Audit Type'
 		mode: import
 		source =
 				let
-				    Source = Sql.Database("ww-powerbi-demo.database.windows.net", "powerbi"),
+				    Source = Sql.Database("demo-workwalletbi.database.windows.net", "demo-workwalletbi"),
 				    mart_AuditType = Source{[Schema="mart",Item="AuditType"]}[Data],
 				    #"Removed Columns" = Table.RemoveColumns(mart_AuditType,{"_created", "_edited"}),
 				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"AuditTypeVersion", "Audit Type Version"}, {"AuditType", "Audit Type"}, {"ScoringEnabled", "Scoring Enabled"}, {"DisplayPercentage", "Display Percentage"}, {"DisplayTotalScore", "Display Total Score"}, {"DisplayAverageScore", "Display Average Score"}, {"GradingSet", "Grading Set"}, {"Description", "Audit Type Description"}, {"GradingSetIsPercentage", "Grading Set Is Percentage"}, {"GradingSetIsScore", "Grading Set Is Score"}, {"ReportingEnabled", "Reporting Enabled"}, {"ReportingAbbreviation", "Reporting Abbreviation"}})

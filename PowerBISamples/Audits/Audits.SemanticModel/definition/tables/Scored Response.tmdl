@@ -111,7 +111,7 @@ table 'Scored Response'
 		mode: import
 		source =
 				let
-				    Source = Sql.Database("ww-powerbi-demo.database.windows.net", "powerbi"),
+				    Source = Sql.Database("demo-workwalletbi.database.windows.net", "demo-workwalletbi"),
 				    mart_AuditScoredResponse = Source{[Schema="mart",Item="AuditScoredResponse"]}[Data],
 				    #"Removed Columns" = Table.RemoveColumns(mart_AuditScoredResponse,{"_created", "_edited"}),
 				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"Branch", "Scored Response Question"}, {"Value", "Scored Response Answer"}, {"OrderInSection", "Order In Section"}})

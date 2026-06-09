@@ -56,7 +56,7 @@ table Person
 		mode: import
 		source =
 				let
-				    Source = Sql.Database("ww-powerbi-demo.database.windows.net", "powerbi"),
+				    Source = Sql.Database("demo-workwalletbi.database.windows.net", "demo-workwalletbi"),
 				    mart_ReportedIssuePerson = Source{[Schema="mart",Item="ReportedIssuePerson"]}[Data],
 				    #"Removed Columns" = Table.RemoveColumns(mart_ReportedIssuePerson,{"_created", "_edited"}),
 				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"Question", "Person Question"}, {"Option", "Person"}})

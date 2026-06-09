@@ -58,7 +58,7 @@ table 'Numeric Answer Fact'
 		mode: import
 		source =
 				let
-				    Source = Sql.Database("ww-powerbi-demo.database.windows.net", "powerbi"),
+				    Source = Sql.Database("demo-workwalletbi.database.windows.net", "demo-workwalletbi"),
 				    mart_AuditNumericAnswerFact = Source{[Schema="mart",Item="AuditNumericAnswerFact"]}[Data],
 				    #"Removed Columns" = Table.RemoveColumns(mart_AuditNumericAnswerFact,{"_created", "_edited"}),
 				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"Answer", "Numeric Answer"}})

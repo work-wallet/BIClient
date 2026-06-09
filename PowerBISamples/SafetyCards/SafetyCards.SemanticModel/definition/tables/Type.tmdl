@@ -40,7 +40,7 @@ table Type
 		mode: import
 		source =
 				let
-				    Source = Sql.Database("ww-powerbi-demo.database.windows.net", "powerbi"),
+				    Source = Sql.Database("demo-workwalletbi.database.windows.net", "demo-workwalletbi"),
 				    mart_SafetyCardType = Source{[Schema="mart",Item="SafetyCardType"]}[Data],
 				    #"Renamed Columns" = Table.RenameColumns(mart_SafetyCardType,{{"SafetyCardType", "Type"}}),
 				    #"Removed Columns" = Table.RemoveColumns(#"Renamed Columns",{"_created", "_edited"})

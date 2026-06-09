@@ -143,7 +143,7 @@ table 'Grading Set Option'
 		mode: import
 		source =
 				let
-				    Source = Sql.Database("ww-powerbi-demo.database.windows.net", "powerbi"),
+				    Source = Sql.Database("demo-workwalletbi.database.windows.net", "demo-workwalletbi"),
 				    mart_GradingSetOption = Source{[Schema="mart",Item="GradingSetOption"]}[Data],
 				    #"Removed Columns" = Table.RemoveColumns(mart_GradingSetOption,{"_created", "_edited"}),
 				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"GradingSet", "Grading Set"}, {"GradingSetOption", "Grading"}, {"ColourHex", "Grading Colour"}, {"GradingSetIsPercentage", "Grading Set Is Percentage"}, {"GradingSetIsScore", "Grading Set Is Score"}, {"Value", "Grading Value"}})

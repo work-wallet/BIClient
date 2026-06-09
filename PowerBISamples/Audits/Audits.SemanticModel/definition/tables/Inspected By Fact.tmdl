@@ -48,7 +48,7 @@ table 'Inspected By Fact'
 		mode: import
 		source =
 				let
-				    Source = Sql.Database("ww-powerbi-demo.database.windows.net", "powerbi"),
+				    Source = Sql.Database("demo-workwalletbi.database.windows.net", "demo-workwalletbi"),
 				    mart_AuditInspectedByFact = Source{[Schema="mart",Item="AuditInspectedByFact"]}[Data],
 				    #"Removed Columns" = Table.RemoveColumns(mart_AuditInspectedByFact,{"_created", "_edited"})
 				in

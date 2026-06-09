@@ -130,7 +130,7 @@ table 'Scored Response Fact'
 		mode: import
 		source =
 				let
-				    Source = Sql.Database("ww-powerbi-demo.database.windows.net", "powerbi"),
+				    Source = Sql.Database("demo-workwalletbi.database.windows.net", "demo-workwalletbi"),
 				    mart_AuditScoredResponseFact = Source{[Schema="mart",Item="AuditScoredResponseFact"]}[Data],
 				    #"Removed Columns" = Table.RemoveColumns(mart_AuditScoredResponseFact,{"_created", "_edited"}),
 				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"TotalScore", "Score"}, {"TotalPotentialScore", "Potential Score"}, {"PercentageScore", "Percentage Score"}})

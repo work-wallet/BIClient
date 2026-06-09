@@ -37,7 +37,7 @@ table 'Occupation Role'
 		mode: import
 		source =
 				let
-				    Source = Sql.Database("ww-powerbi-demo.database.windows.net", "powerbi"),
+				    Source = Sql.Database("demo-workwalletbi.database.windows.net", "demo-workwalletbi"),
 				    mart_SafetyCardOccupationRole = Source{[Schema="mart",Item="SafetyCardOccupationRole"]}[Data],
 				    #"Renamed Columns" = Table.RenameColumns(mart_SafetyCardOccupationRole,{{"OccupationRole", "Occupation Role"}}),
 				    #"Removed Columns" = Table.RemoveColumns(#"Renamed Columns",{"_created", "_edited"})

@@ -83,7 +83,7 @@ table 'Score Section'
 		mode: import
 		source =
 				let
-				    Source = Sql.Database("ww-powerbi-demo.database.windows.net", "powerbi"),
+				    Source = Sql.Database("demo-workwalletbi.database.windows.net", "demo-workwalletbi"),
 				    mart_AuditScoreSection = Source{[Schema="mart",Item="AuditScoreSection"]}[Data],
 				    #"Removed Columns" = Table.RemoveColumns(mart_AuditScoreSection,{"_created", "_edited"}),
 				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"DisplayScore", "Display Score"}})

@@ -101,7 +101,7 @@ table 'Date Time Question'
 		mode: import
 		source =
 				let
-				    Source = Sql.Database("ww-powerbi-demo.database.windows.net", "powerbi"),
+				    Source = Sql.Database("demo-workwalletbi.database.windows.net", "demo-workwalletbi"),
 				    mart_AuditDateTimeQuestion = Source{[Schema="mart",Item="AuditDateTimeQuestion"]}[Data],
 				    #"Removed Columns" = Table.RemoveColumns(mart_AuditDateTimeQuestion,{"_created", "_edited"}),
 				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"Question", "Date Time Question"}, {"OrderInSection", "Order In Section"}})

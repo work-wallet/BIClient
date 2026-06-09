@@ -1,5 +1,5 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.9.0/schema.json",
   "name": "c65ad40734e7e7c19805",
   "position": {
     "x": 0,
@@ -197,7 +197,7 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "100D"
+                  "Value": "135.56325973699072D"
                 }
               }
             }
@@ -295,7 +295,7 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "220.81407671233245D"
+                  "Value": "187.71841468282767D"
                 }
               }
             }
@@ -317,6 +317,11 @@
           "selector": {
             "metadata": "Assignment.Assigned To"
           }
+        }
+      ],
+      "columnHeaders": [
+        {
+          "properties": {}
         }
       ]
     },

@@ -48,7 +48,7 @@ table 'Custom Question Fact'
 		mode: import
 		source =
 				let
-				    Source = Sql.Database("ww-powerbi-demo.database.windows.net", "powerbi"),
+				    Source = Sql.Database("demo-workwalletbi.database.windows.net", "demo-workwalletbi"),
 				    mart_InductionCustomQuestionFact = Source{[Schema="mart",Item="InductionCustomQuestionFact"]}[Data],
 				    #"Removed Columns" = Table.RemoveColumns(mart_InductionCustomQuestionFact,{"_created", "_edited"})
 				in

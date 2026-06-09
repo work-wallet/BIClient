@@ -1,5 +1,5 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.9.0/schema.json",
   "name": "83a9cbad77c397cdc6b2",
   "position": {
     "x": 10.256410256410257,
@@ -189,6 +189,11 @@
           "selector": {
             "metadata": "PPE Assignment Type.PPE"
           }
+        }
+      ],
+      "columnHeaders": [
+        {
+          "properties": {}
         }
       ]
     },

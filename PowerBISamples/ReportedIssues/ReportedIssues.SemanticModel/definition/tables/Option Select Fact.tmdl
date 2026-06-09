@@ -63,7 +63,7 @@ table 'Option Select Fact'
 		mode: import
 		source =
 				let
-				    Source = Sql.Database("ww-powerbi-demo.database.windows.net", "powerbi"),
+				    Source = Sql.Database("demo-workwalletbi.database.windows.net", "demo-workwalletbi"),
 				    mart_ReportedIssueOptionSelectFact = Source{[Schema="mart",Item="ReportedIssueOptionSelectFact"]}[Data],
 				    #"Removed Columns" = Table.RemoveColumns(mart_ReportedIssueOptionSelectFact,{"_created", "_edited"})
 				in

@@ -37,7 +37,7 @@ table 'Root Cause Analysis Type'
 		mode: import
 		source =
 				let
-				    Source = Sql.Database("ww-powerbi-demo.database.windows.net", "powerbi"),
+				    Source = Sql.Database("demo-workwalletbi.database.windows.net", "demo-workwalletbi"),
 				    mart_ReportedIssueRootCauseAnalysisType = Source{[Schema="mart",Item="ReportedIssueRootCauseAnalysisType"]}[Data],
 				    #"Removed Columns" = Table.RemoveColumns(mart_ReportedIssueRootCauseAnalysisType,{"_created", "_edited"}),
 				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"ReportedIssueRootCauseAnalysisType", "Root Cause Analysis Type"}})

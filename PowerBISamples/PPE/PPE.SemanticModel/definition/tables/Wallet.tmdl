@@ -38,7 +38,7 @@ table Wallet
 		mode: import
 		source =
 				let
-				    Source = Sql.Database("ww-powerbi-demo.database.windows.net", "powerbi"),
+				    Source = Sql.Database("demo-workwalletbi.database.windows.net", "demo-workwalletbi"),
 				    mart_Wallet = Source{[Schema="mart",Item="Wallet"]}[Data],
 				    #"Removed Columns" = Table.RemoveColumns(mart_Wallet,{"_created", "_edited"})
 				in
