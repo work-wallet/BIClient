@@ -6,6 +6,10 @@ The format loosely follows Keep a Changelog principles (dates in YYYY-MM-DD). Ve
 
 ## [4.5.0] - unreleased
 
+### Added (4.5.0)
+
+- Azure deployment: `azd`-based infrastructure provisioning for the `ClientFunction` Azure Function app, including Key Vault for credentials, Application Insights, and Flex Consumption hosting plan (`AzureDeployment/`).
+
 ### Changed (4.5.0)
 
 - Upgrade to .NET 10.
