@@ -7,6 +7,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <AssemblyVersion>4.4.3.0</AssemblyVersion>
     <Nullable>enable</Nullable>
+    <UserSecretsId>38e051e0-115b-431b-b2c5-7881e7cbf47b</UserSecretsId>
   </PropertyGroup>
   <ItemGroup>
     <None Remove="appsettings.json" />

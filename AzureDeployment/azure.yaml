@@ -1,0 +1,30 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-dev/main/schemas/v1.0/azure.yaml.json
+
+name: workwallet-bi-client
+metadata:
+  template: workwallet-bi-client@0.0.1
+services:
+  function:
+    project: ../SampleCode/WorkWallet.BI.ClientFunction
+    language: dotnet
+    host: function
+hooks:
+  postprovision:
+    # After provisioning, the function app resource can take a few seconds to become
+    # discoverable by its 'azd-service-name' tag. Without this pause, azd's publish
+    # step fails with "resource not found" on first deploy.
+    windows:
+      shell: pwsh
+      run: Start-Sleep -Seconds 30
+    posix:
+      shell: sh
+      run: sleep 30
+  postdeploy:
+    # Flex Consumption apps take a few seconds to start after a fresh deploy.
+    # Without this pause, azd's trigger-sync check hits a 503 (site unavailable).
+    windows:
+      shell: pwsh
+      run: Start-Sleep -Seconds 30
+    posix:
+      shell: sh
+      run: sleep 30
