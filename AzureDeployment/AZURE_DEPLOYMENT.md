@@ -40,6 +40,13 @@ azd auth login
 azd env new <ENVIRONMENT_NAME>    # e.g. contoso-wwbi, northwind-wwbi, acme-corp-wwbi
 ```
 
+> **Returning to an existing environment:** if the environment already exists (e.g. on a different machine or after re-cloning), use `azd env list` to see available environments and `azd env select` to activate one instead of creating a new one:
+>
+> ```bash
+> azd env list # show all environments and which is currently active
+> azd env select <ENVIRONMENT_NAME> # switch to an existing environment
+> ```
+
 The environment name is used directly as the prefix for all Azure resource names (e.g. `contoso-wwbi-lrhfnk` for the function app, `contosowwbilrhfnk` for the storage account). Choose a name that clearly identifies the client — this is especially useful when hosting multiple clients in a single Azure subscription.
 
 **Environment name guidelines:**
@@ -167,9 +174,9 @@ Then set the secret values:
 
 ```powershell
 # PowerShell
-az keyvault secret set --vault-name <KEY_VAULT_NAME> --name ApiAccessClientId       --value "<API_ACCESS_CLIENT_ID>"
-az keyvault secret set --vault-name <KEY_VAULT_NAME> --name ApiAccessClientSecret   --% --value <API_ACCESS_CLIENT_SECRET>
-az keyvault secret set --vault-name <KEY_VAULT_NAME> --name AgentWallet0WalletId    --value "<WALLET_ID>"
+az keyvault secret set --vault-name <KEY_VAULT_NAME> --name ApiAccessClientId --value "<API_ACCESS_CLIENT_ID>"
+az keyvault secret set --vault-name <KEY_VAULT_NAME> --name ApiAccessClientSecret --% --value <API_ACCESS_CLIENT_SECRET>
+az keyvault secret set --vault-name <KEY_VAULT_NAME> --name AgentWallet0WalletId --value "<WALLET_ID>"
 az keyvault secret set --vault-name <KEY_VAULT_NAME> --name AgentWallet0WalletSecret --% --value <WALLET_SECRET>
 ```
 
