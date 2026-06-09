@@ -22,6 +22,9 @@
     },
     "keyVaultAdminObjectId": {
       "value": "${KEY_VAULT_ADMIN_OBJECT_ID}"
+    },
+    "keyVaultAdminPrincipalType": {
+      "value": "${KEY_VAULT_ADMIN_PRINCIPAL_TYPE}"
     }
   }
 }

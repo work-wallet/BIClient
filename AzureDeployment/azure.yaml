@@ -10,15 +10,16 @@ services:
     host: function
 hooks:
   postprovision:
-    # After provisioning, the function app resource can take a few seconds to become
-    # discoverable by its 'azd-service-name' tag. Without this pause, azd's publish
-    # step fails with "resource not found" on first deploy.
+    # After provisioning, Azure RBAC role assignments (Storage Blob Data Owner and Key Vault
+    # role assignments) can take up to 2 minutes to propagate. Without this pause, azd's zip
+    # deploy fails with a 403 because the function app's managed identity doesn't yet have
+    # blob write access. The tag-based resource discovery delay is also covered by this wait.
     windows:
       shell: pwsh
-      run: Start-Sleep -Seconds 30
+      run: Start-Sleep -Seconds 60
     posix:
       shell: sh
-      run: sleep 30
+      run: sleep 60
   postdeploy:
     # Flex Consumption apps take a few seconds to start after a fresh deploy.
     # Without this pause, azd's trigger-sync check hits a 503 (site unavailable).

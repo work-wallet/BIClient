@@ -61,11 +61,23 @@ azd env set AZURE_SQL_SERVER_NAME <SQL_SERVER_NAME> # hostname only, without .da
 azd env set AZURE_SQL_DATABASE_NAME <DATABASE_NAME>
 azd env set TIMER_SCHEDULE '0 0 22 * * *' # NCRONTAB in UTC — see scheduling guidance below
 azd env set WALLET_COUNT 1 # number of agent wallets; omit to default to 1
-# Recommended: grants you Key Vault Secrets Officer so you can set secrets after deployment
-# PowerShell:
+
+# Recommended: grants Key Vault Secrets Officer so you can set secrets after deployment.
+# Use your own user object ID, or an Entra ID group object ID.
+
+# PowerShell — individual user:
 azd env set KEY_VAULT_ADMIN_OBJECT_ID (az ad signed-in-user show --query id --output tsv)
-# bash/zsh:
+
+# PowerShell — Entra ID group (set both):
+azd env set KEY_VAULT_ADMIN_OBJECT_ID (az ad group show --group "<GROUP_NAME>" --query id --output tsv)
+azd env set KEY_VAULT_ADMIN_PRINCIPAL_TYPE Group
+
+# bash/zsh — individual user:
 # azd env set KEY_VAULT_ADMIN_OBJECT_ID $(az ad signed-in-user show --query id --output tsv)
+
+# bash/zsh — Entra ID group (set both):
+# azd env set KEY_VAULT_ADMIN_OBJECT_ID $(az ad group show --group "<GROUP_NAME>" --query id --output tsv)
+# azd env set KEY_VAULT_ADMIN_PRINCIPAL_TYPE Group
 ```
 
 > **Resource group naming:** use a dedicated group for this function app (e.g. `contoso-wwbi-app`). Keep the Azure SQL Server it in a separate group (e.g. `contoso-wwbi-db`) — this way `azd down` can tear down the function app infrastructure without touching the database.

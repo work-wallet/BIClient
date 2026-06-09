@@ -33,6 +33,10 @@ param walletCount int = 1
 @description('Object ID of the principal (user or group) to grant Key Vault Secrets Officer access, enabling them to set secret values post-deployment. Run `az ad signed-in-user show --query id --output tsv` to obtain your own ID. Set KEY_VAULT_ADMIN_OBJECT_ID in the azd environment. Leave empty to skip this role assignment.')
 param keyVaultAdminObjectId string = ''
 
+@allowed(['User', 'Group', 'ServicePrincipal'])
+@description('Principal type for the keyVaultAdminObjectId. Defaults to User. Set KEY_VAULT_ADMIN_PRINCIPAL_TYPE to Group when using an Entra ID security group.')
+param keyVaultAdminPrincipalType string = 'User'
+
 // ---------------------------------------------------------------------------
 // Variables
 // ---------------------------------------------------------------------------
@@ -288,7 +292,7 @@ resource keyVaultSecretsOfficer 'Microsoft.Authorization/roleAssignments@2022-04
   properties: {
     roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', keyVaultSecretsOfficerRoleId)
     principalId: keyVaultAdminObjectId
-    principalType: 'User'
+    principalType: keyVaultAdminPrincipalType
   }
 }
 
