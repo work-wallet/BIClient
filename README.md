@@ -398,7 +398,13 @@ Rather than entering settings manually through the Azure portal, use the az CLI.
 > **Shell quoting notes:**
 >
 > - Line continuation: scripts below use `\` (bash/zsh). In PowerShell, replace each `\` with a backtick (`` ` ``).
-> - Special characters in values (e.g. `$` in a secret): in bash/zsh use single quotes around that value — `'abc$def'` — to prevent shell expansion. In PowerShell, escape `$` with a backtick: `` "abc`$def" ``.
+> - Special characters in values (e.g. `$` in a secret): in bash/zsh use single quotes around that value — `'abc$def'`. In PowerShell, assign each secret to a variable first (single quotes work correctly for assignment), then reference the variable in the `--settings` argument — PowerShell expands the variable but does not re-process its contents:
+>
+>   ```powershell
+>   $walletSecret = 'abc$def'
+>   $apiSecret    = 'xyz$123'
+>   az functionapp config appsettings set ... --settings "FuncOptions__AgentWallets__0__WalletSecret=$walletSecret" "FuncOptions__ApiAccessClientSecret=$apiSecret"
+>   ```
 
 ```bash
 az functionapp config appsettings set \

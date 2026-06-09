@@ -165,18 +165,25 @@ azd env get-values | grep keyVaultName
 
 Then set the secret values:
 
-```bash
-az keyvault secret set --vault-name <KEY_VAULT_NAME> --name ApiAccessClientId     --value "<API_ACCESS_CLIENT_ID>"
-az keyvault secret set --vault-name <KEY_VAULT_NAME> --name ApiAccessClientSecret --value "<API_ACCESS_CLIENT_SECRET>"
-az keyvault secret set --vault-name <KEY_VAULT_NAME> --name AgentWallet0WalletId  --value "<WALLET_ID>"
-az keyvault secret set --vault-name <KEY_VAULT_NAME> --name AgentWallet0WalletSecret --value "<WALLET_SECRET>"
+```powershell
+# PowerShell
+az keyvault secret set --vault-name <KEY_VAULT_NAME> --name ApiAccessClientId       --value "<API_ACCESS_CLIENT_ID>"
+az keyvault secret set --vault-name <KEY_VAULT_NAME> --name ApiAccessClientSecret   --% --value <API_ACCESS_CLIENT_SECRET>
+az keyvault secret set --vault-name <KEY_VAULT_NAME> --name AgentWallet0WalletId    --value "<WALLET_ID>"
+az keyvault secret set --vault-name <KEY_VAULT_NAME> --name AgentWallet0WalletSecret --% --value <WALLET_SECRET>
 ```
 
 For additional wallets, increment the index in the secret name (e.g. `AgentWallet1WalletId`, `AgentWallet1WalletSecret`, etc.).
 
 > **Access note:** to run these commands your account needs **Key Vault Secrets Officer** on the Key Vault. If you set `KEY_VAULT_ADMIN_OBJECT_ID` before running `azd up`, this role was granted automatically. Otherwise, assign it in the Azure portal (Key Vault → Access control (IAM)) or via az CLI before running the commands above.
 >
-> **Special characters in secret values** (e.g. `$`): in bash/zsh wrap the value in single quotes — `'abc$def'`. In PowerShell, escape `$` with a backtick: `` "abc`$def" ``.
+> **Special characters in secret values** (e.g. `$`): in bash/zsh wrap the value in single quotes — `'abc$def'`. In PowerShell, use the stop-parsing symbol `--%` immediately before `--value` — PowerShell passes everything after it verbatim to `az.cmd` without any variable expansion:
+>
+> ```powershell
+> az keyvault secret set --vault-name <KEY_VAULT_NAME> --name <SECRET_NAME> --% --value abc$def
+> ```
+>
+> If the value contains spaces, wrap it in double quotes after `--%`: `--% --value "abc $def"`. Note that PowerShell variables cannot be used after `--%`.
 
 ## Updating After Initial Deployment
 
