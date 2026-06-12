@@ -69,7 +69,7 @@ BEGIN
             ,JobId uniqueidentifier
             ,Job nvarchar(50)
             ,SiteLocationId uniqueidentifier
-            ,Department nvarchar(30)
+            ,Department nvarchar(50)
             ,AllDepartments nvarchar(max)
             ,ExternalIdentifier nvarchar(255)
             ,SiteStatus nvarchar(80)
@@ -152,6 +152,7 @@ BEGIN
             ,ReportedIssueSeverityCode
             ,WalletId
             ,CloseDate
+            ,LeadInvestigatorContactId
         )
         SELECT * FROM OPENJSON(@json, '$.ReportedIssues')
         WITH
@@ -171,6 +172,7 @@ BEGIN
             ,ReportedIssueSeverityCode int
             ,WalletId uniqueidentifier
             ,CloseDate datetimeoffset(7)
+            ,LeadInvestigatorContactId uniqueidentifier -- nullable; key omitted from JSON when no lead investigator assigned
         );
 
         EXEC mart.ETL_MaintainReportedIssueDimension @reportedIssueTable = @reportedIssueTable;
@@ -424,6 +426,26 @@ BEGIN
         EXEC mart.ETL_MaintainReportedIssuePersonDimension @reportedIssuePersonTable = @reportedIssueInvestigationPersonTable;
 
         EXEC mart.ETL_LoadReportedIssuePersonFact @reportedIssuePersonTable = @reportedIssueInvestigationPersonTable, @investigation = 1;
+
+        -- load the ReportedIssueInvestigationTeam data
+
+        DECLARE @reportedIssueInvestigationTeamTable mart.ETL_ReportedIssueInvestigationTeamTable;
+
+        INSERT INTO @reportedIssueInvestigationTeamTable
+        (
+            ReportedIssueId
+            ,ContactId
+            ,WalletId
+        )
+        SELECT * FROM OPENJSON(@json, '$.ReportedIssueInvestigationTeam')
+        WITH
+        (
+            ReportedIssueId uniqueidentifier
+            ,ContactId uniqueidentifier
+            ,WalletId uniqueidentifier
+        );
+
+        EXEC mart.ETL_LoadReportedIssueInvestigationTeamFact @reportedIssueInvestigationTeamTable = @reportedIssueInvestigationTeamTable;
 
         COMMIT TRANSACTION;
     END TRY

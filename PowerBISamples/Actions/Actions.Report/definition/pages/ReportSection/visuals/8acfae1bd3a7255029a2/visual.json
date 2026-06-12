@@ -1,5 +1,5 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.9.0/schema.json",
   "name": "8acfae1bd3a7255029a2",
   "position": {
     "x": 0,
@@ -125,10 +125,10 @@
                     "Entity": "Action"
                   }
                 },
-                "Property": "Assigned To"
+                "Property": "Created On"
               }
             },
-            "direction": "Ascending"
+            "direction": "Descending"
           }
         ]
       }
@@ -232,6 +232,11 @@
           "selector": {
             "metadata": "Action.Assigned To"
           }
+        }
+      ],
+      "columnHeaders": [
+        {
+          "properties": {}
         }
       ]
     },

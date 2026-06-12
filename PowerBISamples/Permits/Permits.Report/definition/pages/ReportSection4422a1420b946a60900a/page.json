@@ -1,5 +1,5 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/page/2.0.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/page/2.1.0/schema.json",
   "name": "ReportSection4422a1420b946a60900a",
   "displayName": "Workflow Answers",
   "displayOption": "FitToPage",
@@ -49,7 +49,7 @@
                     [
                       {
                         "Literal": {
-                          "Value": "'WW-00863'"
+                          "Value": "'WW-00927'"
                         }
                       }
                     ]
@@ -70,8 +70,6 @@
       {
         "name": "571104569aee708c39ea",
         "boundFilter": "50a42caf920434b42e2d",
-        "asAggregation": false,
-        "qnaSingleSelectRequired": false,
         "fieldExpr": {
           "Column": {
             "Expression": {

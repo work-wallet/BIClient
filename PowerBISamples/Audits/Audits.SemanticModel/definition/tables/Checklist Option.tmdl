@@ -122,7 +122,7 @@ table 'Checklist Option'
 		mode: import
 		source =
 				let
-				    Source = Sql.Database("ww-powerbi-demo.database.windows.net", "powerbi"),
+				    Source = Sql.Database("demo-workwalletbi.database.windows.net", "demo-workwalletbi"),
 				    mart_AuditChecklistOption = Source{[Schema="mart",Item="AuditChecklistOption"]}[Data],
 				    #"Removed Columns" = Table.RemoveColumns(mart_AuditChecklistOption,{"_created", "_edited"}),
 				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"Value", "Checklist Answer"}, {"Question", "Checklist Question"}, {"OrderInSection", "Order In Section"}})

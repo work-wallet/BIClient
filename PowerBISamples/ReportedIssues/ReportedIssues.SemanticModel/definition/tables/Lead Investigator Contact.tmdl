@@ -1,0 +1,62 @@
+table 'Lead Investigator Contact'
+	lineageTag: 756bd7a7-fc52-4353-a90b-e5afade92330
+
+	column Contact_key
+		isHidden
+		formatString: 0
+		lineageTag: f234ac18-c37f-4681-9da3-69c90e745474
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: Contact[Contact_key]
+
+		annotation SummarizationSetBy = User
+
+	column ContactId
+		isHidden
+		lineageTag: 11e4a7e4-184a-4856-ae3a-092f1e1f8499
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: Contact[ContactId]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Contact Name'
+		lineageTag: 4becb04f-a4d1-43bc-a36d-fc322324a19c
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: Contact[Contact Name]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Wallet_key
+		isHidden
+		formatString: 0
+		lineageTag: f18e22e7-518f-4c1f-a77e-f327aa5ff82a
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: Contact[Wallet_key]
+
+		annotation SummarizationSetBy = User
+
+	column Email
+		lineageTag: 631adf95-c18a-47c3-9640-317e1f9d467d
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: Contact[Email]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Company
+		lineageTag: 88cba4b6-9ccc-4e5c-9973-6a3e8105bd82
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: Contact[Company]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Lead Investigator Contact' = calculated
+		mode: import
+		source = Contact
+
+	annotation PBI_Id = 1bb6644278dc435bb7d7fb55b78bff76
+

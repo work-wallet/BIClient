@@ -116,7 +116,7 @@ table 'Numeric Question'
 		mode: import
 		source =
 				let
-				    Source = Sql.Database("ww-powerbi-demo.database.windows.net", "powerbi"),
+				    Source = Sql.Database("demo-workwalletbi.database.windows.net", "demo-workwalletbi"),
 				    mart_AuditNumericQuestion = Source{[Schema="mart",Item="AuditNumericQuestion"]}[Data],
 				    #"Removed Columns" = Table.RemoveColumns(mart_AuditNumericQuestion,{"_created", "_edited"}),
 				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"Question", "Numeric Question"}, {"OrderInSection", "Order In Section"}})

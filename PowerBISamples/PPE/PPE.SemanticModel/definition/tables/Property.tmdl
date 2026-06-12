@@ -61,7 +61,7 @@ table Property
 		mode: import
 		source =
 				let
-				    Source = Sql.Database("ww-powerbi-demo.database.windows.net", "powerbi"),
+				    Source = Sql.Database("demo-workwalletbi.database.windows.net", "demo-workwalletbi"),
 				    mart_PPEProperty = Source{[Schema="mart",Item="PPEProperty"]}[Data],
 				    #"Removed Columns" = Table.RemoveColumns(mart_PPEProperty,{"_created"}),
 				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"DisplayOrder", "Display Order"}})

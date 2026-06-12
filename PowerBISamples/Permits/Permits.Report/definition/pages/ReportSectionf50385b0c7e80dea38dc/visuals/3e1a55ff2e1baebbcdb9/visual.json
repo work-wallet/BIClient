@@ -1,12 +1,13 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
   "name": "3e1a55ff2e1baebbcdb9",
   "position": {
     "x": 0,
-    "y": 102.74028629856851,
+    "y": 102.32235701906411,
     "z": 0,
-    "height": 617.09611451942737,
-    "width": 1280
+    "height": 617.67764298093584,
+    "width": 1280.2772963604853,
+    "tabOrder": 3000
   },
   "visual": {
     "visualType": "tableEx",
@@ -76,6 +77,20 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
+                      "Entity": "Category"
+                    }
+                  },
+                  "Property": "Issue Type"
+                }
+              },
+              "queryRef": "Category.Issue Type",
+              "nativeQueryRef": "Issue Type"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
                       "Entity": "Status"
                     }
                   },
@@ -118,6 +133,20 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
+                      "Entity": "Permit"
+                    }
+                  },
+                  "Property": "Assignees"
+                }
+              },
+              "queryRef": "Permit.Assignees",
+              "nativeQueryRef": "Assignees"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
                       "Entity": "Location"
                     }
                   },
@@ -140,6 +169,20 @@
               },
               "queryRef": "Permit.Issued Expiry",
               "nativeQueryRef": "Issued Expiry"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Permit"
+                    }
+                  },
+                  "Property": "Signatories"
+                }
+              },
+              "queryRef": "Permit.Signatories",
+              "nativeQueryRef": "Signatories"
             }
           ]
         }
@@ -197,7 +240,7 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "171.31581552455438D"
+                  "Value": "136.4402047163798D"
                 }
               }
             }
@@ -211,7 +254,7 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "344.46153985274134D"
+                  "Value": "117.06113238625191D"
                 }
               }
             }
@@ -267,7 +310,7 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "128D"
+                  "Value": "146.09359087106412D"
                 }
               }
             }
@@ -289,6 +332,39 @@
           "selector": {
             "metadata": "Permit.Issued Expiry"
           }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "162.6470039690117D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Permit.Assignees"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "100.74350142175109D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Category.Issue Type"
+          }
+        }
+      ],
+      "columnHeaders": [
+        {
+          "properties": {}
         }
       ]
     },
@@ -308,135 +384,5 @@
       ]
     },
     "drillFilterOtherVisuals": true
-  },
-  "filterConfig": {
-    "filters": [
-      {
-        "name": "009a6e2011a0264f8ba7",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "Permit"
-              }
-            },
-            "Property": "Permit Reference"
-          }
-        },
-        "type": "Categorical"
-      },
-      {
-        "name": "806032872733e997c992",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "Permit"
-              }
-            },
-            "Property": "Issued On"
-          }
-        },
-        "type": "Categorical"
-      },
-      {
-        "name": "6f1c4e75ee72cb2ac1e3",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "Category"
-              }
-            },
-            "Property": "Category"
-          }
-        },
-        "type": "Categorical"
-      },
-      {
-        "name": "f09f8d1ecc166c0f3c37",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "Permit"
-              }
-            },
-            "Property": "Permit"
-          }
-        },
-        "type": "Categorical"
-      },
-      {
-        "name": "52f014102120cdab0681",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "Status"
-              }
-            },
-            "Property": "Status"
-          }
-        },
-        "type": "Categorical"
-      },
-      {
-        "name": "4fff67a0aa8bc33be6a2",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "Permit"
-              }
-            },
-            "Property": "Issued To Company"
-          }
-        },
-        "type": "Categorical"
-      },
-      {
-        "name": "375f6887e274b1e9930e",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "Location"
-              }
-            },
-            "Property": "Company"
-          }
-        },
-        "type": "Categorical"
-      },
-      {
-        "name": "f27e229b27ee872f3b2f",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "Location"
-              }
-            },
-            "Property": "Site"
-          }
-        },
-        "type": "Categorical"
-      },
-      {
-        "name": "79d83c7332fe611fe5c6",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "Permit"
-              }
-            },
-            "Property": "Issued Expiry"
-          }
-        },
-        "type": "Categorical"
-      }
-    ]
   }
 }

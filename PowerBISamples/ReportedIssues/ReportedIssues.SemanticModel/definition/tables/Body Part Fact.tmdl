@@ -66,7 +66,7 @@ table 'Body Part Fact'
 		mode: import
 		source =
 				let
-				    Source = Sql.Database("ww-powerbi-demo.database.windows.net", "powerbi"),
+				    Source = Sql.Database("demo-workwalletbi.database.windows.net", "demo-workwalletbi"),
 				    mart_ReportedIssueBodyPartFact = Source{[Schema="mart",Item="ReportedIssueBodyPartFact"]}[Data],
 				    #"Removed Columns" = Table.RemoveColumns(mart_ReportedIssueBodyPartFact,{"_created", "_edited"})
 				in

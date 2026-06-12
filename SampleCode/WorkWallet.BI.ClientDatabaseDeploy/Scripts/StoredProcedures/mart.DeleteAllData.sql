@@ -93,6 +93,8 @@ BEGIN
     DELETE FROM mart.PermitNumericAnswerFact;
     DELETE FROM mart.PermitDateTimeAnswerFact;
     DELETE FROM mart.PermitBranchOptionFact;
+    DELETE FROM mart.PermitAssigneeFact;
+    DELETE FROM mart.PermitSignatureFact;
     DELETE FROM mart.PermitChecklistAnswer;
     DELETE FROM mart.PermitChecklistOption;
     DELETE FROM mart.PermitNumericQuestion;
@@ -126,6 +128,7 @@ BEGIN
     DELETE FROM mart.ReportedIssueOptionSelectFact;
     DELETE FROM mart.ReportedIssuePersonFact;
     DELETE FROM mart.ReportedIssueRootCauseAnalysisFact;
+    DELETE FROM mart.ReportedIssueInvestigationTeamFact;
     DELETE FROM mart.ReportedIssueBodyPart;
     DELETE FROM mart.ReportedIssueBranchOption;
     DELETE FROM mart.ReportedIssueOptionSelect;

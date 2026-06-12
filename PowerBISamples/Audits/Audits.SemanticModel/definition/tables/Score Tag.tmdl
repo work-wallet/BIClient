@@ -60,7 +60,7 @@ table 'Score Tag'
 		mode: import
 		source =
 				let
-				    Source = Sql.Database("ww-powerbi-demo.database.windows.net", "powerbi"),
+				    Source = Sql.Database("demo-workwalletbi.database.windows.net", "demo-workwalletbi"),
 				    mart_AuditScoreTag = Source{[Schema="mart",Item="AuditScoreTag"]}[Data],
 				    #"Removed Columns" = Table.RemoveColumns(mart_AuditScoreTag,{"_created", "_edited"}),
 				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"TagVersion", "Tag Version"}})

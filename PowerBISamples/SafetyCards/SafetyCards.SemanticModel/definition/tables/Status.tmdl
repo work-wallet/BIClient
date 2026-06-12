@@ -37,7 +37,7 @@ table Status
 		mode: import
 		source =
 				let
-				    Source = Sql.Database("ww-powerbi-demo.database.windows.net", "powerbi"),
+				    Source = Sql.Database("demo-workwalletbi.database.windows.net", "demo-workwalletbi"),
 				    mart_SafetyCardStatus = Source{[Schema="mart",Item="SafetyCardStatus"]}[Data],
 				    #"Renamed Columns" = Table.RenameColumns(mart_SafetyCardStatus,{{"SafetyCardStatus", "Status"}}),
 				    #"Removed Columns" = Table.RemoveColumns(#"Renamed Columns",{"_created", "_edited"})

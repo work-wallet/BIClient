@@ -1,5 +1,5 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.9.0/schema.json",
   "name": "3182cc7309ca0a035353",
   "position": {
     "x": 0,
@@ -73,7 +73,7 @@
             "relativeDuration": {
               "expr": {
                 "Literal": {
-                  "Value": "3D"
+                  "Value": "1D"
                 }
               }
             },
@@ -127,7 +127,7 @@
                                     "TimeUnit": 0
                                   }
                                 },
-                                "Amount": -3,
+                                "Amount": -1,
                                 "TimeUnit": 3
                               }
                             },

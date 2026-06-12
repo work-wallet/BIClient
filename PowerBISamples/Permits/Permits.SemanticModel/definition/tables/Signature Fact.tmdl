@@ -1,0 +1,105 @@
+table 'Signature Fact'
+	lineageTag: 39bb3628-d362-423d-97a4-1ddef4e4f3ce
+
+	column PermitSignatureId
+		dataType: string
+		isHidden
+		lineageTag: ebb12ce3-4207-4e2d-9a26-786c56c1ef29
+		summarizeBy: none
+		sourceColumn: PermitSignatureId
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Permit_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: cc231cc7-d2bf-4796-b090-1e37c7f00761
+		summarizeBy: none
+		sourceColumn: Permit_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column 'Signed By'
+		dataType: string
+		lineageTag: 0e5c1d6f-646b-45d9-9735-e18832a94968
+		summarizeBy: none
+		sourceColumn: Signed By
+
+		annotation SummarizationSetBy = Automatic
+
+	column Contact_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 62f19c6b-dda4-4108-a4d5-f4d9ddccc019
+		summarizeBy: none
+		sourceColumn: Contact_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Job Title'
+		dataType: string
+		lineageTag: f9e4624b-35ad-48f0-bbd4-e97ac61d83d8
+		summarizeBy: none
+		sourceColumn: Job Title
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Signed At'
+		dataType: dateTime
+		formatString: dd/mm/yy hh:nn
+		lineageTag: 9de71233-ab17-4de2-9645-23605a407cd3
+		summarizeBy: none
+		sourceColumn: Signed At
+
+		variation Variation
+			isDefault
+			relationship: 6077e9c4-f181-4e4d-a551-3c24f771d282
+			defaultHierarchy: LocalDateTable_0e6b3a7f-f87f-4d4f-9fb0-c41484a01042.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column Wallet_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 71847921-ed08-4fa6-90a3-2e2fabe9e62f
+		summarizeBy: none
+		sourceColumn: Wallet_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column 'Signature Description'
+		dataType: string
+		lineageTag: 55d6af41-49ea-4c31-8a73-41a51693a50c
+		summarizeBy: none
+		sourceColumn: Signature Description
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Signature Fact' = m
+		mode: import
+		source =
+				let
+				  Source = Sql.Database("demo-workwalletbi.database.windows.net", "demo-workwalletbi"),
+				  #"Navigation 1" = Source{[Schema = "mart", Item = "PermitSignatureFact"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(#"Navigation 1",{"_created", "_edited"}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"JobTitle", "Job Title"}, {"SignedOn", "Signed At"}, {"Name", "Signed By"}, {"Description", "Signature Description"}})
+				in
+				    #"Renamed Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

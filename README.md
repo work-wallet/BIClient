@@ -48,7 +48,7 @@ Repository (source & releases): [work-wallet/BIClient](https://github.com/work-w
 - A ready-made SQL Server data mart (star schema) and deployment tool
 - A robust, paged, change-tracking extraction client (console + Azure Function)
 - Sample Power BI project (.pbip) files with semantic models & reports
-- Extensible, strongly-typed .NET 8 code you can adopt or adapt
+- Extensible, strongly-typed .NET 10 code you can adopt or adapt
 
 You can use the binaries directly (no code changes required), customise the solution, or treat it as a reference implementation for your own stack.
 
@@ -125,7 +125,7 @@ These values are required for both the Quick Start and Direct API usage.
 
 ### 5.1 Binaries / Downloads
 
-All binaries target .NET 8. Install the [.NET 8 runtime](https://dotnet.microsoft.com/en-us/download/dotnet/8.0) if not already present.
+All binaries target .NET 10. Install the [.NET 10 runtime](https://dotnet.microsoft.com/en-us/download/dotnet/10.0) if not already present.
 
 Download from GitHub [Releases](https://github.com/work-wallet/BIClient/releases) (or build from source):
 
@@ -144,7 +144,7 @@ Required:
 - SQL Server (Azure SQL, LocalDB, Express, Developer, Standard, etc.)
 - A SQL connection string compatible with `Microsoft.Data.SqlClient`
 - Internet access (firewall allows: `bi.work-wallet.com`, `identity.work-wallet.com`)
-- .NET 8 runtime (for running) or SDK (if building from source)
+- .NET 10 runtime (for running) or SDK (if building from source)
 
 Optional:
 
@@ -330,6 +330,8 @@ Error `Invalid lastSynchronizationVersion`: usually means extraction gap exceede
 
 Project: `WorkWallet.BI.ClientFunction` (timer trigger).
 
+> **Automated infrastructure provisioning**: [`AzureDeployment/AZURE_DEPLOYMENT.md`](AzureDeployment/AZURE_DEPLOYMENT.md) describes how to provision all required Azure resources (storage, Application Insights, Flex Consumption plan, function app) and deploy the function in a single `azd up` command using the Azure Developer CLI. Read this section first for context on configuration and managed identity setup, then refer to that guide for the `azd` workflow.
+
 Assumes an Azure SQL Database as the target store. A low-cost DTU-based tier (Basic or Standard) is sufficient for most workloads. When deploying the schema (see [section 5.5](#55-database-deployment)) interactively against Azure SQL, use `Authentication=Active Directory Interactive` in the deployer connection string — it prompts for browser-based Entra ID sign-in without requiring a stored password:
 
 ```text
@@ -339,7 +341,7 @@ Server=<SQL_SERVER>.database.windows.net;Authentication=Active Directory Interac
 **During the creation wizard:**
 
 - **Hosting plan**: Flex Consumption
-- **Runtime stack**: .NET 8 (Isolated)
+- **Runtime stack**: .NET 10 (Isolated)
 - **OS**: Linux
 - **Instance Memory**: 2048 MB
 - **Monitoring**: Enable Application Insights
@@ -371,7 +373,6 @@ GRANT EXECUTE TO db_executor;
 -- Grant the group membership of all required roles
 ALTER ROLE db_datareader ADD MEMBER [WorkWallet_BI_Database_Access];
 ALTER ROLE db_datawriter ADD MEMBER [WorkWallet_BI_Database_Access];
-ALTER ROLE db_ddladmin   ADD MEMBER [WorkWallet_BI_Database_Access];
 ALTER ROLE db_executor   ADD MEMBER [WorkWallet_BI_Database_Access];
 ```
 
@@ -397,7 +398,13 @@ Rather than entering settings manually through the Azure portal, use the az CLI.
 > **Shell quoting notes:**
 >
 > - Line continuation: scripts below use `\` (bash/zsh). In PowerShell, replace each `\` with a backtick (`` ` ``).
-> - Special characters in values (e.g. `$` in a secret): in bash/zsh use single quotes around that value — `'abc$def'` — to prevent shell expansion. In PowerShell, escape `$` with a backtick: `` "abc`$def" ``.
+> - Special characters in values (e.g. `$` in a secret): in bash/zsh use single quotes around that value — `'abc$def'`. In PowerShell, assign each secret to a variable first (single quotes work correctly for assignment), then reference the variable in the `--settings` argument — PowerShell expands the variable but does not re-process its contents:
+>
+>   ```powershell
+>   $walletSecret = 'abc$def'
+>   $apiSecret    = 'xyz$123'
+>   az functionapp config appsettings set ... --settings "FuncOptions__AgentWallets__0__WalletSecret=$walletSecret" "FuncOptions__ApiAccessClientSecret=$apiSecret"
+>   ```
 
 ```bash
 az functionapp config appsettings set \

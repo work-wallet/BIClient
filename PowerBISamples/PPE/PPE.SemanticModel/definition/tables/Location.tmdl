@@ -202,7 +202,7 @@ table Location
 		mode: import
 		source =
 				let
-				    Source = Sql.Database("ww-powerbi-demo.database.windows.net", "powerbi"),
+				    Source = Sql.Database("demo-workwalletbi.database.windows.net", "demo-workwalletbi"),
 				    mart_Location = Source{[Schema="mart",Item="Location"]}[Data],
 				    #"Removed Columns" = Table.RemoveColumns(mart_Location,{"_created", "_edited"}),
 				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"LocationType", "Location Type"}, {"ExternalIdentifier", "Location External Identifier"}, {"AllDepartments", "All Departments"}, {"SiteStatus", "Site Status"}})

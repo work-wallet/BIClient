@@ -56,7 +56,7 @@ table 'Option Select'
 		mode: import
 		source =
 				let
-				    Source = Sql.Database("ww-powerbi-demo.database.windows.net", "powerbi"),
+				    Source = Sql.Database("demo-workwalletbi.database.windows.net", "demo-workwalletbi"),
 				    mart_ReportedIssueOptionSelect = Source{[Schema="mart",Item="ReportedIssueOptionSelect"]}[Data],
 				    #"Removed Columns" = Table.RemoveColumns(mart_ReportedIssueOptionSelect,{"_created", "_edited"}),
 				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"Question", "Option Question"}, {"Option", "Option"}})

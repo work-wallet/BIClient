@@ -40,5 +40,19 @@ BEGIN
     INNER JOIN @permitToWorkTable AS a ON p.PermitId = a.PermitToWorkId;
 
     PRINT 'DELETE mart.PermitBranchOptionFact, number of rows = ' + CAST(@@ROWCOUNT AS varchar);
+
+    DELETE mart.PermitAssigneeFact
+    FROM mart.PermitAssigneeFact AS d
+    INNER JOIN mart.Permit AS p ON d.Permit_key = p.Permit_key
+    INNER JOIN @permitToWorkTable AS a ON p.PermitId = a.PermitToWorkId;
+
+    PRINT 'DELETE mart.PermitAssigneeFact, number of rows = ' + CAST(@@ROWCOUNT AS varchar);
+
+    DELETE mart.PermitSignatureFact
+    FROM mart.PermitSignatureFact AS d
+    INNER JOIN mart.Permit AS p ON d.Permit_key = p.Permit_key
+    INNER JOIN @permitToWorkTable AS a ON p.PermitId = a.PermitToWorkId;
+
+    PRINT 'DELETE mart.PermitSignatureFact, number of rows = ' + CAST(@@ROWCOUNT AS varchar);
 END
 GO

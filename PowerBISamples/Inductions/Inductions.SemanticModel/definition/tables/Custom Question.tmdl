@@ -45,7 +45,7 @@ table 'Custom Question'
 		mode: import
 		source =
 				let
-				    Source = Sql.Database("ww-powerbi-demo.database.windows.net", "powerbi"),
+				    Source = Sql.Database("demo-workwalletbi.database.windows.net", "demo-workwalletbi"),
 				    mart_InductionCustomQuestion = Source{[Schema="mart",Item="InductionCustomQuestion"]}[Data],
 				    #"Removed Columns" = Table.RemoveColumns(mart_InductionCustomQuestion,{"_created", "_edited"}),
 				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"Title", "Question"}, {"Value", "Answer"}})

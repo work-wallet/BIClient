@@ -192,11 +192,55 @@ table Permit
 
 		annotation SummarizationSetBy = Automatic
 
+	column Assignees =
+			
+			VAR _Assignees =
+			    ADDCOLUMNS(
+			        RELATEDTABLE('Assignee Fact'),
+			        "@Name", RELATED(Contact[Contact Name])
+			    )
+			RETURN
+			    IF(
+			        ISEMPTY(_Assignees),
+			        BLANK(),
+			        CONCATENATEX(_Assignees, [@Name], ", ", [@Name], ASC)
+			    )
+		lineageTag: a06e8cc7-bf0c-4df4-93cc-bf5d4510f001
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column Signatories =
+			
+			VAR _Signatories =
+			    ADDCOLUMNS(
+			        RELATEDTABLE('Signature Fact'),
+			        "@Entry",
+			            VAR _Name = 'Signature Fact'[Signed By]
+			            VAR _Desc = 'Signature Fact'[Signature Description]
+			            RETURN
+			                IF(
+			                    ISBLANK(_Desc),
+			                    _Name,
+			                    _Name & " (" & _Desc & ")"
+			                )
+			    )
+			RETURN
+			    IF(
+			        ISEMPTY(_Signatories),
+			        BLANK(),
+			        CONCATENATEX(_Signatories, [@Entry], ", ", [@Entry], ASC)
+			    )
+		lineageTag: 6a79637b-80b8-48b7-8922-44b17a70d109
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
 	partition Permit = m
 		mode: import
 		source =
 				let
-				    Source = Sql.Database("ww-powerbi-demo.database.windows.net", "powerbi"),
+				    Source = Sql.Database("demo-workwalletbi.database.windows.net", "demo-workwalletbi"),
 				    mart_Permit = Source{[Schema="mart",Item="Permit"]}[Data],
 				    #"Removed Columns" = Table.RemoveColumns(mart_Permit,{"_created", "_edited"}),
 				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"PermitReference", "Permit Reference"}, {"PermitDescription", "Permit"}, {"IssuedToCompany", "Issued To Company"}, {"IssuedOn", "Issued On"}, {"IssuedForMinutes", "Issued For Minutes"}, {"IssuedExpiry", "Issued Expiry"}, {"ClosedOn", "Closed On"}, {"HasBeenExpired", "Has Been Expired"}, {"HasBeenClosed", "Has Been Closed"}, {"HasBeenExtended", "Has Been Extended"}})

@@ -197,11 +197,23 @@ table Issue
 
 		annotation SummarizationSetBy = User
 
+	column LeadInvestigatorContact_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 67c8e57d-8200-4180-afd8-716b3bc1de62
+		summarizeBy: none
+		sourceColumn: LeadInvestigatorContact_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
 	partition Issue-6d9dfa8c-c90c-4cb1-a4bf-ad691525c771 = m
 		mode: import
 		source =
 				let
-				    Source = Sql.Database("ww-powerbi-demo.database.windows.net", "powerbi"),
+				    Source = Sql.Database("demo-workwalletbi.database.windows.net", "demo-workwalletbi"),
 				    mart_ReportedIssue = Source{[Schema="mart",Item="ReportedIssue"]}[Data],
 				    #"Removed Columns" = Table.RemoveColumns(mart_ReportedIssue,{"_created", "_edited"}),
 				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"ReportedIssueReference", "Issue Reference"}, {"OccurredOn", "Occurred On"}, {"ReportedOn", "Reported On"}, {"ReportedBy", "Reported By Person"}, {"ReportedIssueOverview", "Issue Overview"}, {"CloseDate", "Close Date"}, {"ReportedByCompany", "Reported By Company"}})

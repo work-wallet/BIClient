@@ -40,5 +40,12 @@ BEGIN
     INNER JOIN @reportedIssueTable AS a ON ri.ReportedIssueId = a.ReportedIssueId;
 
     PRINT 'DELETE mart.ReportedIssuePersonFact, number of rows = ' + CAST(@@ROWCOUNT AS varchar);
+
+    DELETE mart.ReportedIssueInvestigationTeamFact
+    FROM mart.ReportedIssueInvestigationTeamFact AS d
+    INNER JOIN mart.ReportedIssue AS ri ON d.ReportedIssue_key = ri.ReportedIssue_key
+    INNER JOIN @reportedIssueTable AS a ON ri.ReportedIssueId = a.ReportedIssueId;
+
+    PRINT 'DELETE mart.ReportedIssueInvestigationTeamFact, number of rows = ' + CAST(@@ROWCOUNT AS varchar);
 END
 GO

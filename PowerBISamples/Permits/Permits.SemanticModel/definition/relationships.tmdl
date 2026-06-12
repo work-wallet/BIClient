@@ -177,3 +177,52 @@ relationship 0e3a1ed9-9ebb-9324-5983-9a666fc0c504
 
 	annotation PBI_IsFromSource = FS
 
+relationship 6077e9c4-f181-4e4d-a551-3c24f771d282
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'Signature Fact'.'Signed At'
+	toColumn: LocalDateTable_0e6b3a7f-f87f-4d4f-9fb0-c41484a01042.Date
+
+relationship 6206ba4c-4704-4c7b-a22d-9e739019b03a
+	fromColumn: 'Assignee Fact'.Contact_key
+	toColumn: Contact.Contact_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship 97ebed39-43b0-47b3-85da-6c4d9260a425
+	fromColumn: 'Signature Fact'.Contact_key
+	toColumn: Contact.Contact_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship 6b03a483-43f7-805a-c460-b626fe23a291
+	isActive: false
+	fromColumn: 'Assignee Fact'.Wallet_key
+	toColumn: Wallet.Wallet_key
+
+relationship 3d2c7590-60fb-63cf-fb39-aa77707f221c
+	isActive: false
+	fromColumn: Contact.Wallet_key
+	toColumn: Wallet.Wallet_key
+
+relationship 8b307093-5c17-2389-50b9-ca7626d7f633
+	isActive: false
+	fromColumn: 'Signed By Contact'.Wallet_key
+	toColumn: Wallet.Wallet_key
+
+relationship 73199581-11dc-7344-c489-800361b08110
+	fromColumn: 'Assignee Fact'.Permit_key
+	toColumn: Permit.Permit_key
+
+relationship 23e4dc5a-56b9-eb7f-e6b3-9f3c306573cc
+	isActive: false
+	fromColumn: 'Signature Fact'.Wallet_key
+	toColumn: Wallet.Wallet_key
+
+relationship fd19f57f-52fa-1e1b-f306-ccd405fea283
+	fromColumn: 'Signature Fact'.Permit_key
+	toColumn: Permit.Permit_key
+
+relationship 04565500-6280-c638-8526-3332dddd0a07
+	fromColumn: 'Signature Fact'.Contact_key
+	toColumn: 'Signed By Contact'.Contact_key
+

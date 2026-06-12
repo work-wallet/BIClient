@@ -10,8 +10,8 @@
       "nodes": [
         {
           "location": {
-            "x": 368.89794447669055,
-            "y": 1522.7753208069394
+            "x": 1453.4520213305627,
+            "y": 292.50066526899423
           },
           "nodeIndex": "Location",
           "size": {
@@ -22,8 +22,8 @@
         },
         {
           "location": {
-            "x": 854.824988798833,
-            "y": 1306.1520015874498
+            "x": 1114.5505620660354,
+            "y": 652.07881498696588
           },
           "nodeIndex": "Wallet",
           "size": {
@@ -34,8 +34,8 @@
         },
         {
           "location": {
-            "x": 1431.234789651372,
-            "y": 1494.6455530427925
+            "x": 951.68844206092922,
+            "y": 145.63748068305154
           },
           "nodeIndex": "Body Part",
           "size": {
@@ -46,8 +46,8 @@
         },
         {
           "location": {
-            "x": 1721.2830947423079,
-            "y": 1340.7683868220554
+            "x": 1239.5938937957803,
+            "y": -50
           },
           "nodeIndex": "Body Part Enum",
           "size": {
@@ -58,8 +58,8 @@
         },
         {
           "location": {
-            "x": 1169.0150333556371,
-            "y": 736.87302599051372
+            "x": 626.94684624749209,
+            "y": 225.17412948202309
           },
           "nodeIndex": "Body Part Fact",
           "size": {
@@ -70,8 +70,8 @@
         },
         {
           "location": {
-            "x": 819.30365097898,
-            "y": 1792.213701897299
+            "x": 807.81282011776818,
+            "y": 1426.2458020371785
           },
           "nodeIndex": "Branch Option",
           "size": {
@@ -82,8 +82,8 @@
         },
         {
           "location": {
-            "x": 1143.0727133430883,
-            "y": 1219.792390926124
+            "x": 1097.6662351200875,
+            "y": 1214.5923723148744
           },
           "nodeIndex": "Branch Option Fact",
           "size": {
@@ -94,8 +94,8 @@
         },
         {
           "location": {
-            "x": 879.60619867301341,
-            "y": 507.37251423598809
+            "x": 730.82817793620541,
+            "y": 782.72515064321021
           },
           "nodeIndex": "Category",
           "size": {
@@ -106,8 +106,8 @@
         },
         {
           "location": {
-            "x": 589.74499438970486,
-            "y": 785.10765650271321
+            "x": 1307.3074861751618,
+            "y": 858.05772519008883
           },
           "nodeIndex": "Issue",
           "size": {
@@ -118,8 +118,8 @@
         },
         {
           "location": {
-            "x": 339.96991722031157,
-            "y": 479.24001517188753
+            "x": 1885.3268389771645,
+            "y": 996.6674837939421
           },
           "nodeIndex": "Option Select",
           "size": {
@@ -130,8 +130,8 @@
         },
         {
           "location": {
-            "x": 301.12531321025654,
-            "y": 885.32742007642025
+            "x": 1596.2675099948297,
+            "y": 869.28834293357033
           },
           "nodeIndex": "Option Select Fact",
           "size": {
@@ -142,8 +142,8 @@
         },
         {
           "location": {
-            "x": 1470.9718024402116,
-            "y": 1725.1139001055708
+            "x": 1096.9179200938547,
+            "y": 1512.4915514603174
           },
           "nodeIndex": "Person",
           "size": {
@@ -154,8 +154,8 @@
         },
         {
           "location": {
-            "x": 658.02796018582421,
-            "y": 1512.3304708992757
+            "x": 1386.1258448481703,
+            "y": 1214.5882836259414
           },
           "nodeIndex": "Person Fact",
           "size": {
@@ -166,8 +166,8 @@
         },
         {
           "location": {
-            "x": 464.84615627335177,
-            "y": -50
+            "x": 1951.0500712838384,
+            "y": 716.80592458566048
           },
           "nodeIndex": "Root Cause Analysis Fact",
           "size": {
@@ -178,8 +178,8 @@
         },
         {
           "location": {
-            "x": 1365.6328488773115,
-            "y": 1013.9816454038303
+            "x": 2240.1116414614862,
+            "y": 942.47262002626394
           },
           "nodeIndex": "Root Cause Analysis Type",
           "size": {
@@ -190,8 +190,8 @@
         },
         {
           "location": {
-            "x": 50.000000000000014,
-            "y": 680.95937203544736
+            "x": 358.77603013736268,
+            "y": 18.769113933714607
           },
           "nodeIndex": "Severity",
           "size": {
@@ -202,8 +202,8 @@
         },
         {
           "location": {
-            "x": 92.0033926773472,
-            "y": 1164.3235988604333
+            "x": 1483.0077395092662,
+            "y": 1492.5861694072992
           },
           "nodeIndex": "Status",
           "size": {
@@ -214,8 +214,8 @@
         },
         {
           "location": {
-            "x": 732.46930916713575,
-            "y": 229.60611865837063
+            "x": 1164.0485606333264,
+            "y": 373.76372717444951
           },
           "nodeIndex": "Contact",
           "nodeLineageTag": "f5afb02f-10a5-4b61-a7b2-ff1ecb864cf4",
@@ -224,10 +224,46 @@
             "width": 234
           },
           "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 338.385665397279,
+            "y": 385.89778536692938
+          },
+          "nodeIndex": "Investigation Team Fact",
+          "size": {
+            "height": 152,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 50,
+            "y": 527.10338175707125
+          },
+          "nodeIndex": "Investigation Team Contact",
+          "size": {
+            "height": 224,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 793.98538369630933,
+            "y": 502.29456492989311
+          },
+          "nodeIndex": "Lead Investigator Contact",
+          "size": {
+            "height": 224,
+            "width": 234
+          },
+          "zIndex": 0
         }
       ],
       "name": "All tables",
-      "zoomValue": 53.008526017085444,
+      "zoomValue": 60.769700819277084,
       "pinKeyFieldsToTop": false,
       "showExtraHeaderInfo": false,
       "hideKeyFieldsWhenCollapsed": false,
@@ -248,7 +284,7 @@
           "nodeIndex": "Issue",
           "nodeLineageTag": "ab79b25f-fd82-4d1a-a3dc-b16162ac25df",
           "size": {
-            "height": 537.63440860215053,
+            "height": 551.61290322580635,
             "width": 266.258064516129
           },
           "zIndex": 1
@@ -317,10 +353,23 @@
             "width": 234
           },
           "zIndex": 6
+        },
+        {
+          "location": {
+            "x": 320.25806451612897,
+            "y": 795.81720430107521
+          },
+          "nodeIndex": "Investigation Team Fact",
+          "nodeLineageTag": "21b6a6ca-3f1a-4b1d-b3a0-13879c5d8284",
+          "size": {
+            "height": 169.73118279569894,
+            "width": 234
+          },
+          "zIndex": 7
         }
       ],
       "name": "Main",
-      "zoomValue": 93,
+      "zoomValue": 100,
       "pinKeyFieldsToTop": false,
       "showExtraHeaderInfo": false,
       "hideKeyFieldsWhenCollapsed": false,
@@ -341,7 +390,7 @@
           "nodeIndex": "Issue",
           "nodeLineageTag": "ab79b25f-fd82-4d1a-a3dc-b16162ac25df",
           "size": {
-            "height": 535,
+            "height": 559,
             "width": 277
           },
           "zIndex": 4
@@ -408,7 +457,7 @@
           "nodeIndex": "Issue",
           "nodeLineageTag": "ab79b25f-fd82-4d1a-a3dc-b16162ac25df",
           "size": {
-            "height": 531,
+            "height": 547,
             "width": 267
           },
           "zIndex": 0
@@ -462,7 +511,7 @@
           "nodeIndex": "Issue",
           "nodeLineageTag": "ab79b25f-fd82-4d1a-a3dc-b16162ac25df",
           "size": {
-            "height": 535,
+            "height": 554,
             "width": 272
           },
           "zIndex": 0
@@ -516,7 +565,7 @@
           "nodeIndex": "Issue",
           "nodeLineageTag": "ab79b25f-fd82-4d1a-a3dc-b16162ac25df",
           "size": {
-            "height": 525,
+            "height": 550,
             "width": 256
           },
           "zIndex": 0
@@ -603,6 +652,73 @@
         }
       ],
       "name": "Root Cause Analysis",
+      "zoomValue": 100,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    },
+    {
+      "ordinal": 7,
+      "scrollPosition": {
+        "x": 0,
+        "y": 0
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 115,
+            "y": 145
+          },
+          "nodeIndex": "Issue",
+          "nodeLineageTag": "ab79b25f-fd82-4d1a-a3dc-b16162ac25df",
+          "size": {
+            "height": 566,
+            "width": 234
+          },
+          "zIndex": 2
+        },
+        {
+          "location": {
+            "x": 518,
+            "y": 559
+          },
+          "nodeIndex": "Investigation Team Fact",
+          "nodeLineageTag": "21b6a6ca-3f1a-4b1d-b3a0-13879c5d8284",
+          "size": {
+            "height": 160,
+            "width": 289
+          },
+          "zIndex": 3
+        },
+        {
+          "location": {
+            "x": 860,
+            "y": 281
+          },
+          "nodeIndex": "Investigation Team Contact",
+          "nodeLineageTag": "282fcc04-321a-4e73-8ea8-74e63fa0edfa",
+          "size": {
+            "height": 249,
+            "width": 279
+          },
+          "zIndex": 1
+        },
+        {
+          "location": {
+            "x": 512,
+            "y": 11
+          },
+          "nodeIndex": "Lead Investigator Contact",
+          "nodeLineageTag": "756bd7a7-fc52-4353-a90b-e5afade92330",
+          "size": {
+            "height": 236,
+            "width": 304
+          },
+          "zIndex": 4
+        }
+      ],
+      "name": "Investigation Team",
       "zoomValue": 100,
       "pinKeyFieldsToTop": false,
       "showExtraHeaderInfo": false,

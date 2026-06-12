@@ -1,0 +1,4 @@
+# Azure Developer CLI creates this folder to store environment-specific state:
+# subscription ID, resource group name, deployed resource names, and resolved
+# parameter values. It must NOT be committed — each user/client has their own.
+.azure/

@@ -126,7 +126,7 @@ table Induction
 		mode: import
 		source =
 				let
-				    Source = Sql.Database("ww-powerbi-demo.database.windows.net", "powerbi"),
+				    Source = Sql.Database("demo-workwalletbi.database.windows.net", "demo-workwalletbi"),
 				    mart_Induction = Source{[Schema="mart",Item="Induction"]}[Data],
 				    #"Removed Columns" = Table.RemoveColumns(mart_Induction,{"_created", "_edited"}),
 				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"InductionVersion", "Induction Version"}, {"InductionName", "Induction"}, {"ValidForDays", "Valid For Days"}, {"CreatedOn", "Created On"}, {"TestPassMark", "Test Pass Mark"}, {"TestQuestionCount", "Test Question Count"}})

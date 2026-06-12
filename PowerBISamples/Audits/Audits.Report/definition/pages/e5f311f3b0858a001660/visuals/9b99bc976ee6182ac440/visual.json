@@ -1,5 +1,5 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.2.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.9.0/schema.json",
   "name": "9b99bc976ee6182ac440",
   "position": {
     "x": 419.19137466307274,
@@ -81,7 +81,7 @@
                           [
                             {
                               "Literal": {
-                                "Value": "'Scoring - Percentage and Grading'"
+                                "Value": "'Fire Safety Risk Assessment'"
                               }
                             }
                           ]

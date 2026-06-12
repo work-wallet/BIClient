@@ -4,5 +4,10 @@
         "**/bin": true,
         "**/obj": true
     },
-    "azureFunctions.projectSubpath": "SampleCode\\WorkWallet.BI.ClientFunction"
+    "azureFunctions.projectSubpath": "SampleCode\\WorkWallet.BI.ClientFunction",
+    "github.copilot.chat.commitMessageGeneration.instructions": [
+        {
+            "file": ".github/commit-instructions.md"
+        }
+    ]
 }

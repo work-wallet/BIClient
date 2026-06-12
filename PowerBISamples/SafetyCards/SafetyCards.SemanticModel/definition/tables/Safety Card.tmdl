@@ -215,7 +215,7 @@ table 'Safety Card'
 		mode: import
 		source =
 				let
-				    Source = Sql.Database("ww-powerbi-demo.database.windows.net", "powerbi"),
+				    Source = Sql.Database("demo-workwalletbi.database.windows.net", "demo-workwalletbi"),
 				    mart_SafetyCard = Source{[Schema="mart",Item="SafetyCard"]}[Data],
 				    #"Removed Columns" = Table.RemoveColumns(mart_SafetyCard,{"_created", "_edited"}),
 				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"ExternalIdentifier", "External Identifier"}, {"SafetyCardReference", "Reference"}, {"ReportedByUser", "Reported By User"}, {"ReportedDateTime", "Reported Time"}, {"InductionNumber", "Induction Number"}, {"ReportDetails", "Report Details"}, {"HasSignature", "Has Signature"}, {"SignatureDate", "Signature Date"}})

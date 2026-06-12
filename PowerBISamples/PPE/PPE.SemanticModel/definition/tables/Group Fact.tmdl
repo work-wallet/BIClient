@@ -53,7 +53,7 @@ table 'Group Fact'
 		mode: import
 		source =
 				let
-				    Source = Sql.Database("ww-powerbi-demo.database.windows.net", "powerbi"),
+				    Source = Sql.Database("demo-workwalletbi.database.windows.net", "demo-workwalletbi"),
 				    mart_PPEGroupFact = Source{[Schema="mart",Item="PPEGroupFact"]}[Data],
 				    #"Removed Columns" = Table.RemoveColumns(mart_PPEGroupFact,{"_created"})
 				in

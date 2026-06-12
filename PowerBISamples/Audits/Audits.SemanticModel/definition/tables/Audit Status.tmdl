@@ -40,7 +40,7 @@ table 'Audit Status'
 		mode: import
 		source =
 				let
-				    Source = Sql.Database("ww-powerbi-demo.database.windows.net", "powerbi"),
+				    Source = Sql.Database("demo-workwalletbi.database.windows.net", "demo-workwalletbi"),
 				    mart_AuditStatus = Source{[Schema="mart",Item="AuditStatus"]}[Data],
 				    #"Removed Columns" = Table.RemoveColumns(mart_AuditStatus,{"_created", "_edited"}),
 				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"AuditStatus", "Audit Status"}})
