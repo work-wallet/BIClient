@@ -4,7 +4,7 @@ All notable changes to this project will be documented in this file.
 
 The format loosely follows Keep a Changelog principles (dates in YYYY-MM-DD). Version numbers align with assembly versions unless otherwise noted.
 
-## [4.5.0] - unreleased
+## [4.5.0] - 2026-06-12
 
 ### Added (4.5.0)
 
@@ -13,7 +13,7 @@ The format loosely follows Keep a Changelog principles (dates in YYYY-MM-DD). Ve
 ### Changed (4.5.0)
 
 - Upgrade to .NET 10.
-- Locations: increase `Department` column length to match updated field length in the Work Wallet source solution.
+- Locations: increase `Department` column length to match updated field length in the Work Wallet source solution. Requires DB deploy and optional full reload.
 - ReportedIssues: add `LeadInvestigatorContactId` (nullable GUID) to each issue; add `ReportedIssueInvestigationTeamFact` table and supporting ETL for the new `ReportedIssueInvestigationTeam` array. Requires DB deploy and optional full reload.
 - Permits: add `Contacts` lookup array; add `PermitAssignees` and `PermitSignatures` arrays with supporting ETL (`PermitAssigneeFact`, `PermitSignatureFact` tables). Requires DB deploy and optional full reload.
 
