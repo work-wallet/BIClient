@@ -197,6 +197,18 @@ table Issue
 
 		annotation SummarizationSetBy = User
 
+	column LeadInvestigatorContact_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 67c8e57d-8200-4180-afd8-716b3bc1de62
+		summarizeBy: none
+		sourceColumn: LeadInvestigatorContact_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
 	partition Issue-6d9dfa8c-c90c-4cb1-a4bf-ad691525c771 = m
 		mode: import
 		source =

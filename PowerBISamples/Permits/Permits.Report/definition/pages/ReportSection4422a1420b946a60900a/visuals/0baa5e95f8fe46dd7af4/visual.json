@@ -1,13 +1,13 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
   "name": "0baa5e95f8fe46dd7af4",
   "position": {
     "x": 0,
     "y": 569.96960486322189,
-    "z": 5,
+    "z": 5000,
     "height": 149.78723404255319,
     "width": 1280,
-    "tabOrder": 4
+    "tabOrder": 4000
   },
   "visual": {
     "visualType": "tableEx",
@@ -164,62 +164,6 @@
         },
         "type": "Categorical",
         "howCreated": "User"
-      },
-      {
-        "name": "b6042123f4306afca24e",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "Branch Option"
-              }
-            },
-            "Property": "Section Type"
-          }
-        },
-        "type": "Categorical"
-      },
-      {
-        "name": "574e7000d6a9c43d2131",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "Branch Option"
-              }
-            },
-            "Property": "Section"
-          }
-        },
-        "type": "Categorical"
-      },
-      {
-        "name": "a03182c0e0101b951b56",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "Branch Option"
-              }
-            },
-            "Property": "Question"
-          }
-        },
-        "type": "Categorical"
-      },
-      {
-        "name": "863ed17a2fad0f33b98c",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "Branch Option"
-              }
-            },
-            "Property": "Option"
-          }
-        },
-        "type": "Categorical"
       }
     ],
     "filterSortOrder": "Custom"

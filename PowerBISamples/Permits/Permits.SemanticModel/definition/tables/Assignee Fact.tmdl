@@ -1,0 +1,56 @@
+table 'Assignee Fact'
+	isHidden
+	lineageTag: c3e8ee60-36eb-4f7e-b6ae-219d7e83d684
+
+	column Permit_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: bd1be6af-045c-4e81-b50a-42cbf7ae68ee
+		summarizeBy: none
+		sourceColumn: Permit_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column Contact_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 306d9a0c-0a1b-43ae-908a-87349e49a637
+		summarizeBy: none
+		sourceColumn: Contact_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Wallet_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 22fc39a2-3c4b-4ee1-960e-c5d2427cc2de
+		summarizeBy: none
+		sourceColumn: Wallet_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	partition 'Assignee Fact' = m
+		mode: import
+		source =
+				let
+				  Source = Sql.Database("demo-workwalletbi.database.windows.net", "demo-workwalletbi"),
+				  #"Navigation 1" = Source{[Schema = "mart", Item = "PermitAssigneeFact"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(#"Navigation 1",{"_created", "_edited"})
+				in
+				  #"Removed Columns"
+
+	changedProperty = IsHidden
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

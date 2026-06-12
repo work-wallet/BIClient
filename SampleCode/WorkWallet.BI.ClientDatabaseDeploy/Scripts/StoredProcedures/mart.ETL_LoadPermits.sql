@@ -78,6 +78,29 @@ BEGIN
 
         EXEC mart.ETL_MaintainLocationDimension @locationTable = @locationTable;
 
+        -- load the Contact dimension
+
+        DECLARE @contactTable mart.ETL_ContactTable;
+        INSERT INTO @contactTable
+        (
+            ContactId
+            ,[Name]
+            ,EmailAddress
+            ,CompanyName
+            ,WalletId
+        )
+        SELECT * FROM OPENJSON(@json, '$.Contacts')
+        WITH
+        (
+            ContactId uniqueidentifier
+            ,[Name] nvarchar(max)
+            ,EmailAddress nvarchar(max)
+            ,CompanyName nvarchar(max)
+            ,WalletId uniqueidentifier
+        );
+
+        EXEC mart.ETL_MaintainContactDimension @contactTable = @contactTable;
+
         -- maintain PermitCategory dimension
 
         DECLARE @permitToWorkCategoryTable mart.ETL_PermitToWorkCategoryTable;
@@ -346,6 +369,56 @@ BEGIN
         EXEC mart.ETL_MaintainPermitBranchOptionDimension @permitToWorkBranchOptionTable = @permitToWorkBranchOptionTable;
 
         EXEC mart.ETL_LoadPermitBranchOptionFact @permitToWorkBranchOptionTable = @permitToWorkBranchOptionTable;
+
+        -- load the PermitAssignees data
+
+        DECLARE @permitToWorkAssigneeTable mart.ETL_PermitToWorkAssigneeTable;
+
+        INSERT INTO @permitToWorkAssigneeTable
+        (
+            PermitToWorkId
+            ,ContactId
+            ,WalletId
+        )
+        SELECT * FROM OPENJSON(@json, '$.PermitAssignees')
+        WITH
+        (
+            PermitToWorkId uniqueidentifier
+            ,ContactId uniqueidentifier
+            ,WalletId uniqueidentifier
+        );
+
+        EXEC mart.ETL_LoadPermitAssigneeFact @permitToWorkAssigneeTable = @permitToWorkAssigneeTable;
+
+        -- load the PermitSignatures data
+
+        DECLARE @permitToWorkSignatureTable mart.ETL_PermitToWorkSignatureTable;
+
+        INSERT INTO @permitToWorkSignatureTable
+        (
+            PermitToWorkSignatureId
+            ,PermitToWorkId
+            ,[Name]
+            ,ContactId
+            ,JobTitle
+            ,[Description]
+            ,SignedOn
+            ,WalletId
+        )
+        SELECT * FROM OPENJSON(@json, '$.PermitSignatures')
+        WITH
+        (
+            PermitToWorkSignatureId uniqueidentifier
+            ,PermitToWorkId uniqueidentifier
+            ,[Name] nvarchar(max)
+            ,ContactId uniqueidentifier -- nullable; null for free-text signatories
+            ,JobTitle nvarchar(50)
+            ,[Description] nvarchar(max)
+            ,SignedOn datetime -- nullable; null if not provided by client at time of signing
+            ,WalletId uniqueidentifier
+        );
+
+        EXEC mart.ETL_LoadPermitSignatureFact @permitToWorkSignatureTable = @permitToWorkSignatureTable;
 
         COMMIT TRANSACTION;
     END TRY

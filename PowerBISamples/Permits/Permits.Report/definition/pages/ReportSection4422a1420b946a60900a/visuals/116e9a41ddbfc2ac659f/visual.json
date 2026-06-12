@@ -1,13 +1,13 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
   "name": "116e9a41ddbfc2ac659f",
   "position": {
     "x": 0,
     "y": 420.18237082066872,
-    "z": 4,
+    "z": 4000,
     "height": 149.78723404255319,
     "width": 1280,
-    "tabOrder": 3
+    "tabOrder": 3000
   },
   "visual": {
     "visualType": "tableEx",
@@ -178,76 +178,6 @@
         },
         "type": "Categorical",
         "howCreated": "User"
-      },
-      {
-        "name": "4de2e9fb579b85d29360",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "Date Time Question"
-              }
-            },
-            "Property": "Section Type"
-          }
-        },
-        "type": "Categorical"
-      },
-      {
-        "name": "356dfc6c6c894cf3f0bc",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "Date Time Question"
-              }
-            },
-            "Property": "Section"
-          }
-        },
-        "type": "Categorical"
-      },
-      {
-        "name": "86d1df20e9b8bb279652",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "Date Time Question"
-              }
-            },
-            "Property": "Question"
-          }
-        },
-        "type": "Categorical"
-      },
-      {
-        "name": "f4f5574bc7495ba8e3f6",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "Date Time Answer Fact"
-              }
-            },
-            "Property": "Date Answer"
-          }
-        },
-        "type": "Categorical"
-      },
-      {
-        "name": "747b69e9389d955117fb",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "Date Time Answer Fact"
-              }
-            },
-            "Property": "Time Answer"
-          }
-        },
-        "type": "Categorical"
       }
     ],
     "filterSortOrder": "Custom"

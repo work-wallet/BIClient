@@ -14,7 +14,8 @@ The format loosely follows Keep a Changelog principles (dates in YYYY-MM-DD). Ve
 
 - Upgrade to .NET 10.
 - Locations: increase `Department` column length to match updated field length in the Work Wallet source solution.
-- ReportedIssues: capture additional fields.
+- ReportedIssues: add `LeadInvestigatorContactId` (nullable GUID) to each issue; add `ReportedIssueInvestigationTeamFact` table and supporting ETL for the new `ReportedIssueInvestigationTeam` array. Requires DB deploy and optional full reload.
+- Permits: add `Contacts` lookup array; add `PermitAssignees` and `PermitSignatures` arrays with supporting ETL (`PermitAssigneeFact`, `PermitSignatureFact` tables). Requires DB deploy and optional full reload.
 
 ## [4.4.3] - 2026-03-15
 

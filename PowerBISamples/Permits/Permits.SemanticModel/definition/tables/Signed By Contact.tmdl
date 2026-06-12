@@ -1,0 +1,62 @@
+table 'Signed By Contact'
+	lineageTag: d96bd04a-f1eb-43a5-bf7c-23cd3c6b66a8
+
+	column Contact_key
+		isHidden
+		formatString: 0
+		lineageTag: a6101c80-201e-474e-892b-e9ff6fbc18bf
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: Contact[Contact_key]
+
+		annotation SummarizationSetBy = User
+
+	column ContactId
+		isHidden
+		lineageTag: 73cdddd2-658f-4772-ae04-194849e79b9d
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: Contact[ContactId]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Contact Name'
+		lineageTag: 2b5be2c0-50db-4353-a405-d5e987634418
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: Contact[Contact Name]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Email
+		lineageTag: f63fe5e5-c5df-4505-83b4-3785fd26beb2
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: Contact[Email]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Company
+		lineageTag: b56b0f5f-7f0e-481d-bede-526ae69280a2
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: Contact[Company]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Wallet_key
+		isHidden
+		formatString: 0
+		lineageTag: 13a08cd0-605e-4185-ae76-b73b31021213
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: Contact[Wallet_key]
+
+		annotation SummarizationSetBy = User
+
+	partition 'Signed By Contact' = calculated
+		mode: import
+		source = Contact
+
+	annotation PBI_Id = c5f5ee0e21ad4397bf58201a84d1e67b
+

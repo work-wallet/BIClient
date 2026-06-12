@@ -51,8 +51,8 @@ When adding a new dataset or extending existing datasets with additional JSON fi
 1. Add new dataset to `DataSets.cs` enumeration and mapping (if new dataset).
 
 **Database Layer:**
-2. Schema changes: add/modify dimension and fact tables in `Scripts/Schema/` (DbUp, RunOnce group).
-3. Types: add/modify user-defined table types in `Scripts/Types/` for JSON staging (RunOnce).
+2. Schema changes: add/modify dimension and fact tables in `Scripts/Schema/` (DbUp, RunOnce — new numbered scripts only; do not edit old scripts).
+3. Types: add/modify user-defined table types in `Scripts/Types/` for JSON staging (DbUp, RunAlways — edit the type file directly).
 4. Update `mart.ETL_Load[Dataset].sql`: procedure that reads JSON from API into staging (StoredProcedures, RunAlways).
 5. Update processing procedures (StoredProcedures, RunAlways):
    - Dimension maintenance: `mart.ETL_Maintain[ModulePrefix][DimensionName]Dimension.sql` (e.g., `mart.ETL_MaintainPPETypeDimension.sql`, `mart.ETL_MaintainAuditChecklistOptionDimension.sql`).
@@ -78,6 +78,7 @@ When adding a new dataset or extending existing datasets with additional JSON fi
 13. Update `CHANGELOG.md`: document changes under Unreleased > Added or Changed, noting DB deploy + optional full reload if required.
 
 ## 6. Database Design Notes
+- **DbUp deployment order**: (1) drop all stored procedures, (2) run new `Schema` scripts (RunOnce), (3) drop and recreate **all** `Types` scripts (RunAlways), (4) drop and recreate **all** `StoredProcedures` scripts (RunAlways). Type and stored-procedure changes only need the relevant file edited — no migration scripts required. Schema changes always require a new numbered migration script; old schema scripts are never edited.
 - Empty `ETL_PostProcess*` stored procedures are deliberate extension points for repository users to implement custom post-processing logic.
 - Leading comma convention used throughout SQL code (comma at start of line, not end).
 - MERGE statements use simple `<>` comparisons for NOT NULL columns, `IS DISTINCT FROM` for nullable columns.

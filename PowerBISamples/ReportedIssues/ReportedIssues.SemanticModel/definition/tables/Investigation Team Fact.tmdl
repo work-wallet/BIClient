@@ -1,0 +1,56 @@
+table 'Investigation Team Fact'
+	isHidden
+	lineageTag: 21b6a6ca-3f1a-4b1d-b3a0-13879c5d8284
+
+	column ReportedIssue_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: b9080262-5e6e-48a7-8e35-cfde6ca8f22d
+		summarizeBy: none
+		sourceColumn: ReportedIssue_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column Contact_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 034d0fc7-5bf3-444f-8411-7bd5b6208a04
+		summarizeBy: none
+		sourceColumn: Contact_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column Wallet_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: d1206af8-80bd-46ae-83aa-5c20af8a5d82
+		summarizeBy: none
+		sourceColumn: Wallet_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	partition 'Investigation Team Fact' = m
+		mode: import
+		source =
+				let
+				  Source = Sql.Database("demo-workwalletbi.database.windows.net", "demo-workwalletbi"),
+				  #"Navigation 1" = Source{[Schema = "mart", Item = "ReportedIssueInvestigationTeamFact"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(#"Navigation 1",{"_created", "_edited"})
+				in
+				  #"Removed Columns"
+
+	changedProperty = IsHidden
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

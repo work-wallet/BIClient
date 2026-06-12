@@ -123,6 +123,10 @@ Jump to the relevant section:
 
 ![Permits Branch Option Model](Images/PowerBIModelDiagrams/Permits_BranchOption.png)
 
+### Permits - Signed By
+
+![Permits Signed By Model](Images/PowerBIModelDiagrams/Permits_SignedBy.png)
+
 ## PPE
 
 ### PPE - Stock
@@ -166,6 +170,10 @@ Jump to the relevant section:
 ### Reported Issues - Root Cause Analysis
 
 ![Reported Issues Root Cause Analysis Model](Images/PowerBIModelDiagrams/ReportedIssues_RootCauseAnalysis.png)
+
+### Reported Issues - Investigation Team
+
+![Reported Issues Investigation Team Model](Images/PowerBIModelDiagrams/ReportedIssues_InvestigationTeam.png)
 
 ## Safety Cards
 

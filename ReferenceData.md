@@ -195,6 +195,11 @@ Note: The actual `ResponseText` values are defined per checklist and may vary.
 | 7 | Deleted |
 | 8 | Extended |
 
+| IssueTypeId | IssueType |
+| --- | --- |
+| 1 | To Individuals |
+| 2 | To a Company |
+
 ## PPEAssignments
 
 | PPEStatusCode | PPEStatus |

@@ -201,3 +201,33 @@ relationship 39dfb936-1475-a8ec-dc91-2804e8f12c9c
 	fromColumn: Issue.ReportedByContact_key
 	toColumn: Contact.Contact_key
 
+relationship 441de85a-400d-4e47-8803-a0e44222eca0
+	isActive: false
+	fromColumn: 'Investigation Team Fact'.Wallet_key
+	toColumn: Wallet.Wallet_key
+
+relationship 658bc265-6f9c-d73f-8f5c-b58f2b331014
+	crossFilteringBehavior: bothDirections
+	fromColumn: 'Investigation Team Fact'.ReportedIssue_key
+	toColumn: Issue.ReportedIssue_key
+
+relationship a0fe30bb-70a5-8f02-ff7c-24ffdc959667
+	isActive: false
+	fromColumn: 'Investigation Team Contact'.Wallet_key
+	toColumn: Wallet.Wallet_key
+
+relationship 3e8a692a-8f68-5fac-6fec-b5a784d4d659
+	isActive: false
+	fromColumn: 'Lead Investigator Contact'.Wallet_key
+	toColumn: Wallet.Wallet_key
+
+relationship a9cb1001-acf2-4da0-1663-dd5fff5eae8c
+	crossFilteringBehavior: bothDirections
+	fromColumn: 'Investigation Team Fact'.Contact_key
+	toColumn: 'Investigation Team Contact'.Contact_key
+
+relationship b51b35c8-0832-3298-2d74-ba4cc235f728
+	crossFilteringBehavior: bothDirections
+	fromColumn: Issue.LeadInvestigatorContact_key
+	toColumn: 'Lead Investigator Contact'.Contact_key
+

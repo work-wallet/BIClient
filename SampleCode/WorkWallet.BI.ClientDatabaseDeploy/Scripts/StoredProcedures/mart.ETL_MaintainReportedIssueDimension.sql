@@ -22,6 +22,7 @@ BEGIN
             ,a.ReportedIssueOverview
             ,riv.ReportedIssueSeverity_key
             ,a.CloseDate
+            ,lc.Contact_key AS LeadInvestigatorContact_key
             ,w.Wallet_key
         FROM
             @reportedIssueTable AS a
@@ -30,6 +31,7 @@ BEGIN
             INNER JOIN mart.[Location] AS ol ON a.LocationId = ol.LocationId
             INNER JOIN mart.Contact AS c ON a.ReportedByContactId = c.ContactId
             INNER JOIN mart.ReportedIssueSeverity AS riv ON a.ReportedIssueSeverityCode = riv.ReportedIssueSeverityCode
+            LEFT JOIN mart.Contact AS lc ON a.LeadInvestigatorContactId = lc.ContactId
             INNER JOIN mart.Wallet AS w ON a.WalletId = w.WalletId
     ) AS source
     ON target.ReportedIssueId = source.ReportedIssueId
@@ -46,6 +48,7 @@ BEGIN
             OR target.ReportedIssueOverview <> source.ReportedIssueOverview
             OR target.ReportedIssueSeverity_key <> source.ReportedIssueSeverity_key
             OR target.CloseDate <> source.CloseDate
+            OR target.LeadInvestigatorContact_key IS DISTINCT FROM source.LeadInvestigatorContact_key
             OR target.Wallet_key <> source.Wallet_key
         ) THEN
         UPDATE SET
@@ -61,6 +64,7 @@ BEGIN
             ,ReportedIssueOverview = source.ReportedIssueOverview
             ,ReportedIssueSeverity_key = source.ReportedIssueSeverity_key
             ,CloseDate = source.CloseDate
+            ,LeadInvestigatorContact_key = source.LeadInvestigatorContact_key
             ,Wallet_key = source.Wallet_key
             ,_edited = SYSUTCDATETIME()
     WHEN NOT MATCHED BY TARGET THEN
@@ -78,6 +82,7 @@ BEGIN
             ,ReportedIssueOverview
             ,ReportedIssueSeverity_key
             ,CloseDate
+            ,LeadInvestigatorContact_key
             ,Wallet_key
         )
         VALUES (
@@ -94,6 +99,7 @@ BEGIN
             ,source.ReportedIssueOverview
             ,source.ReportedIssueSeverity_key
             ,source.CloseDate
+            ,source.LeadInvestigatorContact_key
             ,source.Wallet_key
         );
 
