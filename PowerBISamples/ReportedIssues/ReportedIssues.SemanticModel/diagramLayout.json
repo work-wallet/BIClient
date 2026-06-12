@@ -353,19 +353,6 @@
             "width": 234
           },
           "zIndex": 6
-        },
-        {
-          "location": {
-            "x": 320.25806451612897,
-            "y": 795.81720430107521
-          },
-          "nodeIndex": "Investigation Team Fact",
-          "nodeLineageTag": "21b6a6ca-3f1a-4b1d-b3a0-13879c5d8284",
-          "size": {
-            "height": 169.73118279569894,
-            "width": 234
-          },
-          "zIndex": 7
         }
       ],
       "name": "Main",

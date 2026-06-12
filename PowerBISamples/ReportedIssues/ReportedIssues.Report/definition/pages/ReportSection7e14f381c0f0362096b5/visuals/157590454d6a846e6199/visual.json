@@ -1,5 +1,5 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.9.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
   "name": "157590454d6a846e6199",
   "position": {
     "x": 0,
@@ -131,6 +131,21 @@
                 }
               },
               "queryRef": "Severity.Severity"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Lead Investigator Contact"
+                    }
+                  },
+                  "Property": "Contact Name"
+                }
+              },
+              "queryRef": "Lead Investigator Contact.Contact Name",
+              "nativeQueryRef": "Lead Investigator",
+              "displayName": "Lead Investigator"
             }
           ]
         }
