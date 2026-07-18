@@ -91,7 +91,7 @@ table Audit
 
 	column 'Inspected On'
 		dataType: dateTime
-		formatString: dd/mm/yyyy hh:nn
+		formatString: dd/mm/yy hh:nn
 		lineageTag: 01d48a76-705f-46d4-8194-31e303bc5476
 		summarizeBy: none
 		sourceColumn: Inspected On
@@ -241,7 +241,7 @@ table Audit
 
 	column 'Planned Status Date'
 		dataType: dateTime
-		formatString: General Date
+		formatString: dd/mm/yy hh:nn
 		lineageTag: 8e7aeb09-d7a9-42eb-b50c-e1c666773c20
 		summarizeBy: none
 		sourceColumn: Planned Status Date
@@ -253,9 +253,11 @@ table Audit
 
 		annotation SummarizationSetBy = Automatic
 
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
 	column 'Report In Progress Status Date'
 		dataType: dateTime
-		formatString: General Date
+		formatString: dd/mm/yy hh:nn
 		lineageTag: 595995b0-4165-4f67-b48a-275910a94711
 		summarizeBy: none
 		sourceColumn: Report In Progress Status Date
@@ -267,9 +269,11 @@ table Audit
 
 		annotation SummarizationSetBy = Automatic
 
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
 	column 'Ready For Review Status Date'
 		dataType: dateTime
-		formatString: General Date
+		formatString: dd/mm/yy hh:nn
 		lineageTag: 15d013a9-972e-4639-9769-54d9059a05da
 		summarizeBy: none
 		sourceColumn: Ready For Review Status Date
@@ -281,9 +285,11 @@ table Audit
 
 		annotation SummarizationSetBy = Automatic
 
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
 	column 'Complete Status Date'
 		dataType: dateTime
-		formatString: General Date
+		formatString: dd/mm/yy hh:nn
 		lineageTag: 848eb857-6f02-44c3-b188-38d3af8c89b1
 		summarizeBy: none
 		sourceColumn: Complete Status Date
@@ -295,9 +301,11 @@ table Audit
 
 		annotation SummarizationSetBy = Automatic
 
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
 	column 'Closed Status Date'
 		dataType: dateTime
-		formatString: General Date
+		formatString: dd/mm/yy hh:nn
 		lineageTag: 8212c06a-17ed-47b5-ad8e-72daff2e1c44
 		summarizeBy: none
 		sourceColumn: Closed Status Date
@@ -308,6 +316,8 @@ table Audit
 			defaultHierarchy: LocalDateTable_82e4754d-c2c2-4548-acbf-270c54686ffc.'Date Hierarchy'
 
 		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
 
 	partition Audit = m
 		mode: import
