@@ -137,7 +137,7 @@ table Issue
 
 	column 'Close Date'
 		dataType: dateTime
-		formatString: dd/mm/yyyy hh:nn
+		formatString: dd/mm/yy hh:nn
 		lineageTag: 41aab329-7c6c-4c28-89c1-3d978f64da31
 		summarizeBy: none
 		sourceColumn: Close Date
@@ -213,7 +213,7 @@ table Issue
 
 	column 'Under Investigation Date'
 		dataType: dateTime
-		formatString: dd/mm/yyyy hh:nn
+		formatString: dd/mm/yy hh:nn
 		lineageTag: 33bd60d0-54b8-4d10-b23d-0d093e1df3d9
 		summarizeBy: none
 		sourceColumn: Under Investigation Date
