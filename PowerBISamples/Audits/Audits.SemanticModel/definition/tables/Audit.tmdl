@@ -239,6 +239,76 @@ table Audit
 
 		annotation SummarizationSetBy = Automatic
 
+	column 'Planned Status Date'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 8e7aeb09-d7a9-42eb-b50c-e1c666773c20
+		summarizeBy: none
+		sourceColumn: Planned Status Date
+
+		variation Variation
+			isDefault
+			relationship: 23050eba-1e80-4f4e-8e25-3ae5ee536e9e
+			defaultHierarchy: LocalDateTable_fda11284-a3ee-40cf-813b-3696b4901676.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Report In Progress Status Date'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 595995b0-4165-4f67-b48a-275910a94711
+		summarizeBy: none
+		sourceColumn: Report In Progress Status Date
+
+		variation Variation
+			isDefault
+			relationship: 6b9b4ca0-d4cc-4adf-b171-dd7424b63eec
+			defaultHierarchy: LocalDateTable_bb722a11-fc1e-4341-87a1-270cad5e0332.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Ready For Review Status Date'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 15d013a9-972e-4639-9769-54d9059a05da
+		summarizeBy: none
+		sourceColumn: Ready For Review Status Date
+
+		variation Variation
+			isDefault
+			relationship: c406fbc0-f7e4-469c-a97b-eb4f3e83bad3
+			defaultHierarchy: LocalDateTable_f43044b6-27ef-4aac-8e48-e015f1e27b14.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Complete Status Date'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 848eb857-6f02-44c3-b188-38d3af8c89b1
+		summarizeBy: none
+		sourceColumn: Complete Status Date
+
+		variation Variation
+			isDefault
+			relationship: 75474c1b-f62a-432d-a96a-5a676472f39f
+			defaultHierarchy: LocalDateTable_9ed60e5b-72de-44e1-ac21-bcec5f161ce0.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Closed Status Date'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 8212c06a-17ed-47b5-ad8e-72daff2e1c44
+		summarizeBy: none
+		sourceColumn: Closed Status Date
+
+		variation Variation
+			isDefault
+			relationship: 6655d580-c13e-44e1-827c-6614a74d4e17
+			defaultHierarchy: LocalDateTable_82e4754d-c2c2-4548-acbf-270c54686ffc.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
 	partition Audit = m
 		mode: import
 		source =
@@ -246,9 +316,10 @@ table Audit
 				    Source = Sql.Database("demo-workwalletbi.database.windows.net", "demo-workwalletbi"),
 				    mart_Audit = Source{[Schema="mart",Item="Audit"]}[Data],
 				    #"Removed Columns" = Table.RemoveColumns(mart_Audit,{"_created", "_edited"}),
-				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"AuditReference", "Audit Reference"}, {"InspectedOn", "Inspected On"}, {"TotalScore", "Score"}, {"TotalPotentialScore", "Potential Score"}, {"AverageScore", "Average Score"}, {"AveragePotentialScore", "Average Potential Score"}, {"PercentageScore", "Percentage Score"}, {"ExternalIdentifier", "External Identifier"}})
+				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"AuditReference", "Audit Reference"}, {"InspectedOn", "Inspected On"}, {"TotalScore", "Score"}, {"TotalPotentialScore", "Potential Score"}, {"AverageScore", "Average Score"}, {"AveragePotentialScore", "Average Potential Score"}, {"PercentageScore", "Percentage Score"}, {"ExternalIdentifier", "External Identifier"}, {"PlannedStatusDate", "Planned Status Date"}, {"ReportInProgressStatusDate", "Report In Progress Status Date"}, {"ReadyForReviewStatusDate", "Ready For Review Status Date"}, {"CompleteStatusDate", "Complete Status Date"}, {"ClosedStatusDate", "Closed Status Date"}}),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Renamed Columns",{{"Report In Progress Status Date", type datetime}, {"Planned Status Date", type datetime}, {"Ready For Review Status Date", type datetime}, {"Complete Status Date", type datetime}, {"Closed Status Date", type datetime}})
 				in
-				    #"Renamed Columns"
+				    #"Changed Type"
 
 	annotation PBI_NavigationStepName = Navigation
 
