@@ -231,3 +231,8 @@ relationship b51b35c8-0832-3298-2d74-ba4cc235f728
 	fromColumn: Issue.LeadInvestigatorContact_key
 	toColumn: 'Lead Investigator Contact'.Contact_key
 
+relationship fd9f608b-66ee-402a-95d8-1d0f4a117fa9
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Issue.'Under Investigation Date'
+	toColumn: LocalDateTable_4113c75e-2ddf-4c5a-ac16-c0a9c2a98c42.Date
+

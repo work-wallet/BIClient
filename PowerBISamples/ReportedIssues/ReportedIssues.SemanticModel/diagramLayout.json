@@ -10,8 +10,8 @@
       "nodes": [
         {
           "location": {
-            "x": 1453.4520213305627,
-            "y": 292.50066526899423
+            "x": 1453.4518936068771,
+            "y": 292.50068996811638
           },
           "nodeIndex": "Location",
           "size": {
@@ -22,8 +22,8 @@
         },
         {
           "location": {
-            "x": 1114.5505620660354,
-            "y": 652.07881498696588
+            "x": 1114.5504189133094,
+            "y": 652.07883968011822
           },
           "nodeIndex": "Wallet",
           "size": {
@@ -34,8 +34,8 @@
         },
         {
           "location": {
-            "x": 951.68844206092922,
-            "y": 145.63748068305154
+            "x": 951.68828028868847,
+            "y": 145.63750566829572
           },
           "nodeIndex": "Body Part",
           "size": {
@@ -46,7 +46,7 @@
         },
         {
           "location": {
-            "x": 1239.5938937957803,
+            "x": 1239.5937319419404,
             "y": -50
           },
           "nodeIndex": "Body Part Enum",
@@ -58,8 +58,8 @@
         },
         {
           "location": {
-            "x": 626.94684624749209,
-            "y": 225.17412948202309
+            "x": 626.94684636150055,
+            "y": 225.17411627121714
           },
           "nodeIndex": "Body Part Fact",
           "size": {
@@ -70,8 +70,8 @@
         },
         {
           "location": {
-            "x": 807.81282011776818,
-            "y": 1426.2458020371785
+            "x": 807.81268092955224,
+            "y": 1426.2458170023529
           },
           "nodeIndex": "Branch Option",
           "size": {
@@ -82,8 +82,8 @@
         },
         {
           "location": {
-            "x": 1097.6662351200875,
-            "y": 1214.5923723148744
+            "x": 1097.6660959339242,
+            "y": 1214.5923970454949
           },
           "nodeIndex": "Branch Option Fact",
           "size": {
@@ -94,8 +94,8 @@
         },
         {
           "location": {
-            "x": 730.82817793620541,
-            "y": 782.72515064321021
+            "x": 730.82800772942,
+            "y": 782.72513771045408
           },
           "nodeIndex": "Category",
           "size": {
@@ -106,8 +106,8 @@
         },
         {
           "location": {
-            "x": 1307.3074861751618,
-            "y": 858.05772519008883
+            "x": 1307.3073529212152,
+            "y": 858.05774992839054
           },
           "nodeIndex": "Issue",
           "size": {
@@ -118,8 +118,8 @@
         },
         {
           "location": {
-            "x": 1885.3268389771645,
-            "y": 996.6674837939421
+            "x": 1885.3267057984608,
+            "y": 996.66750559728575
           },
           "nodeIndex": "Option Select",
           "size": {
@@ -130,8 +130,8 @@
         },
         {
           "location": {
-            "x": 1596.2675099948297,
-            "y": 869.28834293357033
+            "x": 1596.2673767785463,
+            "y": 869.28842346185115
           },
           "nodeIndex": "Option Select Fact",
           "size": {
@@ -142,8 +142,8 @@
         },
         {
           "location": {
-            "x": 1096.9179200938547,
-            "y": 1512.4915514603174
+            "x": 1096.9177807681442,
+            "y": 1512.4915839609575
           },
           "nodeIndex": "Person",
           "size": {
@@ -154,8 +154,8 @@
         },
         {
           "location": {
-            "x": 1386.1258448481703,
-            "y": 1214.5882836259414
+            "x": 1386.12570567751,
+            "y": 1214.5883083651554
           },
           "nodeIndex": "Person Fact",
           "size": {
@@ -166,8 +166,8 @@
         },
         {
           "location": {
-            "x": 1951.0500712838384,
-            "y": 716.80592458566048
+            "x": 1951.0499343068445,
+            "y": 716.805946392042
           },
           "nodeIndex": "Root Cause Analysis Fact",
           "size": {
@@ -178,8 +178,8 @@
         },
         {
           "location": {
-            "x": 2240.1116414614862,
-            "y": 942.47262002626394
+            "x": 2240.1115045220863,
+            "y": 942.47264170448386
           },
           "nodeIndex": "Root Cause Analysis Type",
           "size": {
@@ -190,8 +190,8 @@
         },
         {
           "location": {
-            "x": 358.77603013736268,
-            "y": 18.769113933714607
+            "x": 358.77576766121967,
+            "y": 18.769100939656255
           },
           "nodeIndex": "Severity",
           "size": {
@@ -202,8 +202,8 @@
         },
         {
           "location": {
-            "x": 1483.0077395092662,
-            "y": 1492.5861694072992
+            "x": 1483.00757288162,
+            "y": 1492.586194223516
           },
           "nodeIndex": "Status",
           "size": {
@@ -214,8 +214,8 @@
         },
         {
           "location": {
-            "x": 1164.0485606333264,
-            "y": 373.76372717444951
+            "x": 1164.0484329120093,
+            "y": 373.76375191275042
           },
           "nodeIndex": "Contact",
           "nodeLineageTag": "f5afb02f-10a5-4b61-a7b2-ff1ecb864cf4",
@@ -227,8 +227,8 @@
         },
         {
           "location": {
-            "x": 338.385665397279,
-            "y": 385.89778536692938
+            "x": 338.38566540898762,
+            "y": 385.8978011003735
           },
           "nodeIndex": "Investigation Team Fact",
           "size": {
@@ -240,7 +240,7 @@
         {
           "location": {
             "x": 50,
-            "y": 527.10338175707125
+            "y": 527.1034282784176
           },
           "nodeIndex": "Investigation Team Contact",
           "size": {
@@ -251,8 +251,8 @@
         },
         {
           "location": {
-            "x": 793.98538369630933,
-            "y": 502.29456492989311
+            "x": 793.98521467736339,
+            "y": 502.29455193489366
           },
           "nodeIndex": "Lead Investigator Contact",
           "size": {
@@ -263,7 +263,7 @@
         }
       ],
       "name": "All tables",
-      "zoomValue": 60.769700819277084,
+      "zoomValue": 60.769699785483375,
       "pinKeyFieldsToTop": false,
       "showExtraHeaderInfo": false,
       "hideKeyFieldsWhenCollapsed": false,
@@ -284,7 +284,7 @@
           "nodeIndex": "Issue",
           "nodeLineageTag": "ab79b25f-fd82-4d1a-a3dc-b16162ac25df",
           "size": {
-            "height": 551.61290322580635,
+            "height": 587.61290322580635,
             "width": 266.258064516129
           },
           "zIndex": 1
@@ -372,12 +372,12 @@
         {
           "location": {
             "x": 0,
-            "y": 281.11884566681942
+            "y": 244.11884566681942
           },
           "nodeIndex": "Issue",
           "nodeLineageTag": "ab79b25f-fd82-4d1a-a3dc-b16162ac25df",
           "size": {
-            "height": 559,
+            "height": 595,
             "width": 277
           },
           "zIndex": 4
@@ -439,15 +439,15 @@
         {
           "location": {
             "x": 0,
-            "y": 247
+            "y": 216
           },
           "nodeIndex": "Issue",
           "nodeLineageTag": "ab79b25f-fd82-4d1a-a3dc-b16162ac25df",
           "size": {
-            "height": 547,
+            "height": 578,
             "width": 267
           },
-          "zIndex": 0
+          "zIndex": 3
         },
         {
           "location": {
@@ -460,7 +460,7 @@
             "height": 264,
             "width": 274
           },
-          "zIndex": 0
+          "zIndex": 1
         },
         {
           "location": {
@@ -473,7 +473,7 @@
             "height": 274,
             "width": 278
           },
-          "zIndex": 0
+          "zIndex": 2
         }
       ],
       "name": "Branch Option",
@@ -493,12 +493,12 @@
         {
           "location": {
             "x": 0,
-            "y": 280
+            "y": 253
           },
           "nodeIndex": "Issue",
           "nodeLineageTag": "ab79b25f-fd82-4d1a-a3dc-b16162ac25df",
           "size": {
-            "height": 554,
+            "height": 581,
             "width": 272
           },
           "zIndex": 0
@@ -547,12 +547,12 @@
         {
           "location": {
             "x": 0,
-            "y": 296
+            "y": 276
           },
           "nodeIndex": "Issue",
           "nodeLineageTag": "ab79b25f-fd82-4d1a-a3dc-b16162ac25df",
           "size": {
-            "height": 550,
+            "height": 570,
             "width": 256
           },
           "zIndex": 0
@@ -601,12 +601,12 @@
         {
           "location": {
             "x": 0,
-            "y": 274
+            "y": 232
           },
           "nodeIndex": "Issue",
           "nodeLineageTag": "ab79b25f-fd82-4d1a-a3dc-b16162ac25df",
           "size": {
-            "height": 543,
+            "height": 585,
             "width": 251
           },
           "zIndex": 1
@@ -655,12 +655,12 @@
         {
           "location": {
             "x": 115,
-            "y": 145
+            "y": 114
           },
           "nodeIndex": "Issue",
           "nodeLineageTag": "ab79b25f-fd82-4d1a-a3dc-b16162ac25df",
           "size": {
-            "height": 566,
+            "height": 597,
             "width": 234
           },
           "zIndex": 2
