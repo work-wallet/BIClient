@@ -21,6 +21,7 @@ BEGIN
             ,ol.Location_key
             ,a.ReportedIssueOverview
             ,riv.ReportedIssueSeverity_key
+            ,a.UnderInvestigationDate
             ,a.CloseDate
             ,lc.Contact_key AS LeadInvestigatorContact_key
             ,w.Wallet_key
@@ -47,6 +48,7 @@ BEGIN
             OR target.Location_key <> source.Location_key
             OR target.ReportedIssueOverview <> source.ReportedIssueOverview
             OR target.ReportedIssueSeverity_key <> source.ReportedIssueSeverity_key
+            OR target.UnderInvestigationDate <> source.UnderInvestigationDate
             OR target.CloseDate <> source.CloseDate
             OR target.LeadInvestigatorContact_key IS DISTINCT FROM source.LeadInvestigatorContact_key
             OR target.Wallet_key <> source.Wallet_key
@@ -63,6 +65,7 @@ BEGIN
             ,Location_key = source.Location_key
             ,ReportedIssueOverview = source.ReportedIssueOverview
             ,ReportedIssueSeverity_key = source.ReportedIssueSeverity_key
+            ,UnderInvestigationDate = source.UnderInvestigationDate
             ,CloseDate = source.CloseDate
             ,LeadInvestigatorContact_key = source.LeadInvestigatorContact_key
             ,Wallet_key = source.Wallet_key
@@ -81,6 +84,7 @@ BEGIN
             ,Location_key
             ,ReportedIssueOverview
             ,ReportedIssueSeverity_key
+            ,UnderInvestigationDate
             ,CloseDate
             ,LeadInvestigatorContact_key
             ,Wallet_key
@@ -98,6 +102,7 @@ BEGIN
             ,source.Location_key
             ,source.ReportedIssueOverview
             ,source.ReportedIssueSeverity_key
+            ,source.UnderInvestigationDate
             ,source.CloseDate
             ,source.LeadInvestigatorContact_key
             ,source.Wallet_key

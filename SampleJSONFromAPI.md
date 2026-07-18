@@ -504,6 +504,10 @@ Notes
       "Flags": 0,
       "GradingSetOptionId": "c3d4e5f6-a1b2-4c3d-9e8f-001122334455",
       "ExternalIdentifier": "AUD-2025-0001",
+      "PlannedStatusDate": "2025-09-01T09:00:00+00:00",
+      "ReportInProgressStatusDate": "2025-09-03T14:30:00+00:00",
+      "ReadyForReviewStatusDate": "2025-09-04T10:00:00+00:00",
+      "CompleteStatusDate": "2025-09-05T09:15:00+00:00",
       "WalletId": "a3e1c9f2-5d4b-4330-9c2f-1c2b8f0d9a77"
     }
   ],
@@ -661,6 +665,11 @@ Notes:
   - **AveragePotentialScore**: `-1` indicates no data
   - **PercentageScore**: `-1` indicates no data
   - **GradingSetOptionId**: `00000000-0000-0000-0000-000000000000` indicates no data
+  - **PlannedStatusDate**: omitted when null (null if `AuditStatusCode` is Cancelled)
+  - **ReportInProgressStatusDate**: omitted when null (null if `AuditStatusCode` is Planned or Cancelled)
+  - **ReadyForReviewStatusDate**: omitted when null (null if `AuditStatusCode` is Planned, Report In Progress, or Cancelled)
+  - **CompleteStatusDate**: omitted when null (null unless `AuditStatusCode` is Complete, Closed, Archived, or Deleted-after-complete)
+  - **ClosedStatusDate**: omitted when null (only populated when `AuditStatusCode` is Closed, Archived, or Deleted-after-close)
 - AuditNumericAnswers
   - **Scale**: `0` indicates no data
   - **UnitCode**: `0` indicates no data
@@ -1465,6 +1474,7 @@ Notes
       "ReportedIssueOverview": "Near-miss: pallet shifted during manual handling; no injury sustained but potential head impact risk identified.",
       "ReportedIssueSeverityCode": 2,
       "WalletId": "a3e1c9f2-5d4b-4330-9c2f-1c2b8f0d9a77",
+      "UnderInvestigationDate": "2025-09-08T10:30:00+00:00",
       "CloseDate": "0001-01-01T00:00:00+00:00",
       "LeadInvestigatorContactId": "b2c3d4e5-f6a7-4b8c-9d0e-1f2a3b4c5d6e"
     }
@@ -1592,6 +1602,7 @@ Notes
   - **AllDepartments**: Pipe-separated list of all department names associated with the location
 - ReportedIssues
   - **ReportedIssueSeverityCode**: `-1` indicates no data
+  - **UnderInvestigationDate**: `0001-01-01T00:00:00+00:00` indicates no data
   - **CloseDate**: `0001-01-01T00:00:00+00:00` indicates no data
   - **LeadInvestigatorContactId**: if `null` no field will be returned
   

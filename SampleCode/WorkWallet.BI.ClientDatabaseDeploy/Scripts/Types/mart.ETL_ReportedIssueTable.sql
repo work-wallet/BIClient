@@ -17,6 +17,7 @@ CREATE TYPE mart.ETL_ReportedIssueTable AS TABLE
     ,ReportedIssueOverview nvarchar(max) NOT NULL
     ,ReportedIssueSeverityCode int NOT NULL
     ,WalletId uniqueidentifier NOT NULL
+    ,UnderInvestigationDate datetimeoffset(7) NOT NULL
     ,CloseDate datetimeoffset(7) NOT NULL
     ,LeadInvestigatorContactId uniqueidentifier NULL
     ,PRIMARY KEY (ReportedIssueReference, ReportedIssueId) -- putting ReportedIssueReference first to order the data load

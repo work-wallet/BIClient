@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 
 The format loosely follows Keep a Changelog principles (dates in YYYY-MM-DD). Version numbers align with assembly versions unless otherwise noted.
 
+## [4.5.1] - 2026-07-18
+
+### Changed (4.5.1)
+
+- Audits: add status change date columns (`PlannedStatusDate`, `ReportInProgressStatusDate`, `ReadyForReviewStatusDate`, `CompleteStatusDate`, `ClosedStatusDate`) to the `Audit` dimension. Requires DB deploy and optional full reload.
+- ReportedIssues: add `UnderInvestigationDate` column to the `ReportedIssue` dimension. Requires DB deploy and optional full reload.
+
 ## [4.5.0] - 2026-06-12
 
 ### Added (4.5.0)

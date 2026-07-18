@@ -25,6 +25,11 @@ BEGIN
             ,a.Flags
             ,gso.GradingSetOption_key
             ,a.ExternalIdentifier
+            ,a.PlannedStatusDate
+            ,a.ReportInProgressStatusDate
+            ,a.ReadyForReviewStatusDate
+            ,a.CompleteStatusDate
+            ,a.ClosedStatusDate
             ,w.Wallet_key
         FROM
             @auditTable AS a
@@ -52,6 +57,11 @@ BEGIN
         OR target.Flags <> source.Flags
         OR target.GradingSetOption_key <> source.GradingSetOption_key
         OR target.ExternalIdentifier <> source.ExternalIdentifier
+        OR target.PlannedStatusDate IS DISTINCT FROM source.PlannedStatusDate
+        OR target.ReportInProgressStatusDate IS DISTINCT FROM source.ReportInProgressStatusDate
+        OR target.ReadyForReviewStatusDate IS DISTINCT FROM source.ReadyForReviewStatusDate
+        OR target.CompleteStatusDate IS DISTINCT FROM source.CompleteStatusDate
+        OR target.ClosedStatusDate IS DISTINCT FROM source.ClosedStatusDate
         OR target.Wallet_key <> source.Wallet_key
     )
     THEN
@@ -71,6 +81,11 @@ BEGIN
             ,Flags = source.Flags
             ,GradingSetOption_key = source.GradingSetOption_key
             ,ExternalIdentifier = source.ExternalIdentifier
+            ,PlannedStatusDate = source.PlannedStatusDate
+            ,ReportInProgressStatusDate = source.ReportInProgressStatusDate
+            ,ReadyForReviewStatusDate = source.ReadyForReviewStatusDate
+            ,CompleteStatusDate = source.CompleteStatusDate
+            ,ClosedStatusDate = source.ClosedStatusDate
             ,Wallet_key = source.Wallet_key
             ,_edited = SYSUTCDATETIME()
     WHEN NOT MATCHED BY TARGET THEN
@@ -91,6 +106,11 @@ BEGIN
             ,Flags
             ,GradingSetOption_key
             ,ExternalIdentifier
+            ,PlannedStatusDate
+            ,ReportInProgressStatusDate
+            ,ReadyForReviewStatusDate
+            ,CompleteStatusDate
+            ,ClosedStatusDate
             ,Wallet_key
         ) VALUES (
             source.AuditId
@@ -109,6 +129,11 @@ BEGIN
             ,source.Flags
             ,source.GradingSetOption_key
             ,source.ExternalIdentifier
+            ,source.PlannedStatusDate
+            ,source.ReportInProgressStatusDate
+            ,source.ReadyForReviewStatusDate
+            ,source.CompleteStatusDate
+            ,source.ClosedStatusDate
             ,source.Wallet_key
         );
 
