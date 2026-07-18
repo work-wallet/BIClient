@@ -44,6 +44,11 @@ ref table 'Audit Grading Set Option'
 ref table 'Score Tag Grading Set Option'
 ref table 'Score Section Grading Set Option'
 ref table 'Scored Response Grading Set Option'
+ref table LocalDateTable_fda11284-a3ee-40cf-813b-3696b4901676
+ref table LocalDateTable_bb722a11-fc1e-4341-87a1-270cad5e0332
+ref table LocalDateTable_f43044b6-27ef-4aac-8e48-e015f1e27b14
+ref table LocalDateTable_9ed60e5b-72de-44e1-ac21-bcec5f161ce0
+ref table LocalDateTable_82e4754d-c2c2-4548-acbf-270c54686ffc
 
 ref cultureInfo en-GB
 

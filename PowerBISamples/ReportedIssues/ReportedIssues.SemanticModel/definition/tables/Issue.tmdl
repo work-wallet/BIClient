@@ -137,7 +137,7 @@ table Issue
 
 	column 'Close Date'
 		dataType: dateTime
-		formatString: General Date
+		formatString: dd/mm/yy hh:nn
 		lineageTag: 41aab329-7c6c-4c28-89c1-3d978f64da31
 		summarizeBy: none
 		sourceColumn: Close Date
@@ -148,6 +148,8 @@ table Issue
 			defaultHierarchy: LocalDateTable_d42af790-e611-47ac-becb-b8ec788208a5.'Date Hierarchy'
 
 		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
 
 	column Wallet_key
 		dataType: int64
@@ -209,6 +211,22 @@ table Issue
 
 		annotation SummarizationSetBy = User
 
+	column 'Under Investigation Date'
+		dataType: dateTime
+		formatString: dd/mm/yy hh:nn
+		lineageTag: 33bd60d0-54b8-4d10-b23d-0d093e1df3d9
+		summarizeBy: none
+		sourceColumn: Under Investigation Date
+
+		variation Variation
+			isDefault
+			relationship: fd9f608b-66ee-402a-95d8-1d0f4a117fa9
+			defaultHierarchy: LocalDateTable_4113c75e-2ddf-4c5a-ac16-c0a9c2a98c42.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
 	partition Issue-6d9dfa8c-c90c-4cb1-a4bf-ad691525c771 = m
 		mode: import
 		source =
@@ -216,9 +234,10 @@ table Issue
 				    Source = Sql.Database("demo-workwalletbi.database.windows.net", "demo-workwalletbi"),
 				    mart_ReportedIssue = Source{[Schema="mart",Item="ReportedIssue"]}[Data],
 				    #"Removed Columns" = Table.RemoveColumns(mart_ReportedIssue,{"_created", "_edited"}),
-				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"ReportedIssueReference", "Issue Reference"}, {"OccurredOn", "Occurred On"}, {"ReportedOn", "Reported On"}, {"ReportedBy", "Reported By Person"}, {"ReportedIssueOverview", "Issue Overview"}, {"CloseDate", "Close Date"}, {"ReportedByCompany", "Reported By Company"}})
+				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"ReportedIssueReference", "Issue Reference"}, {"OccurredOn", "Occurred On"}, {"ReportedOn", "Reported On"}, {"ReportedBy", "Reported By Person"}, {"ReportedIssueOverview", "Issue Overview"}, {"CloseDate", "Close Date"}, {"ReportedByCompany", "Reported By Company"}, {"UnderInvestigationDate", "Under Investigation Date"}}),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Renamed Columns",{{"Under Investigation Date", type datetime}})
 				in
-				    #"Renamed Columns"
+				    #"Changed Type"
 
 	annotation PBI_ResultType = Table
 

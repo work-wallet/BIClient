@@ -151,6 +151,7 @@ BEGIN
             ,ReportedIssueOverview
             ,ReportedIssueSeverityCode
             ,WalletId
+            ,UnderInvestigationDate
             ,CloseDate
             ,LeadInvestigatorContactId
         )
@@ -171,6 +172,7 @@ BEGIN
             ,ReportedIssueOverview nvarchar(max)
             ,ReportedIssueSeverityCode int
             ,WalletId uniqueidentifier
+            ,UnderInvestigationDate datetimeoffset(7)
             ,CloseDate datetimeoffset(7)
             ,LeadInvestigatorContactId uniqueidentifier -- nullable; key omitted from JSON when no lead investigator assigned
         );

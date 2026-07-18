@@ -37,6 +37,7 @@ ref table Contact
 ref table 'Investigation Team Fact'
 ref table 'Investigation Team Contact'
 ref table 'Lead Investigator Contact'
+ref table LocalDateTable_4113c75e-2ddf-4c5a-ac16-c0a9c2a98c42
 
 ref cultureInfo en-GB
 

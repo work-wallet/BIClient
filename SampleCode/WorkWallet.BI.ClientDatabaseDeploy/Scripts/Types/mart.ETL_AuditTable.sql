@@ -21,6 +21,11 @@ CREATE TYPE mart.ETL_AuditTable AS TABLE
     ,Flags int NOT NULL
     ,GradingSetOptionId uniqueidentifier NOT NULL
     ,ExternalIdentifier nvarchar(255) NOT NULL
+    ,PlannedStatusDate datetimeoffset(7) NULL
+    ,ReportInProgressStatusDate datetimeoffset(7) NULL
+    ,ReadyForReviewStatusDate datetimeoffset(7) NULL
+    ,CompleteStatusDate datetimeoffset(7) NULL
+    ,ClosedStatusDate datetimeoffset(7) NULL
     ,WalletId uniqueidentifier NOT NULL
     ,PRIMARY KEY (Reference, AuditId) -- putting Reference first to order the data load
 );

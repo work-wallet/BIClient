@@ -182,6 +182,11 @@ BEGIN
             ,Flags
             ,GradingSetOptionId
             ,ExternalIdentifier
+            ,PlannedStatusDate
+            ,ReportInProgressStatusDate
+            ,ReadyForReviewStatusDate
+            ,CompleteStatusDate
+            ,ClosedStatusDate
             ,WalletId
         )
         SELECT * FROM OPENJSON(@json, '$.Audits')
@@ -205,6 +210,11 @@ BEGIN
             ,Flags int
             ,GradingSetOptionId uniqueidentifier
             ,ExternalIdentifier nvarchar(255)
+            ,PlannedStatusDate datetimeoffset(7) -- nullable; key omitted from JSON when null
+            ,ReportInProgressStatusDate datetimeoffset(7) -- nullable; key omitted from JSON when null
+            ,ReadyForReviewStatusDate datetimeoffset(7) -- nullable; key omitted from JSON when null
+            ,CompleteStatusDate datetimeoffset(7) -- nullable; key omitted from JSON when null
+            ,ClosedStatusDate datetimeoffset(7) -- nullable; key omitted from JSON when null
             ,WalletId uniqueidentifier
         );
 
