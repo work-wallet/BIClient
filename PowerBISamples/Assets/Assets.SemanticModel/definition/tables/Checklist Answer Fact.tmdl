@@ -1,0 +1,64 @@
+table 'Checklist Answer Fact'
+	lineageTag: a8d27f46-5ec5-414e-af85-8c682c35bffc
+
+	column AssetInspection_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: c0a06a9c-a2a3-4871-9d95-7f6da01bdfdc
+		summarizeBy: none
+		sourceColumn: AssetInspection_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column AssetInspectionChecklistOption_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: b41ad5af-72df-4138-922d-0f8bc251bf18
+		summarizeBy: none
+		sourceColumn: AssetInspectionChecklistOption_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Wallet_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 97225c58-b06e-48bd-bc47-6345a2487a3c
+		summarizeBy: none
+		sourceColumn: Wallet_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column 'Checklist Answer Count' = 1
+		formatString: 0
+		lineageTag: 9326d1dc-5ad3-4592-9a7d-7418fb636554
+		summarizeBy: sum
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Checklist Answer Fact' = m
+		mode: import
+		source =
+				let
+				  Source = Sql.Database("CAKESOFBREAD", "WorkWalletBIClient_Local"),
+				  #"Navigation 1" = Source{[Schema = "mart", Item = "AssetInspectionChecklistAnswerFact"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(#"Navigation 1",{"_created", "_edited"})
+				in
+				  #"Removed Columns"
+
+	changedProperty = IsHidden
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

@@ -49,13 +49,41 @@ Jump to the relevant section:
 
 ![Assets Observation Model](Images/PowerBIModelDiagrams/Assets_Observation.png)
 
-### Assets - Inspection Property
-
-![Assets Inspection Property Model](Images/PowerBIModelDiagrams/Assets_InspectionProperty.png)
-
 ### Assets - Inspection Observation
 
 ![Assets Inspection Observation Model](Images/PowerBIModelDiagrams/Assets_InspectionObservation.png)
+
+### Assets - Inspected By
+
+![Assets Inspected By Model](Images/PowerBIModelDiagrams/Assets_InspectedBy.png)
+
+### Assets - Scored Response
+
+![Assets Scored Response Model](Images/PowerBIModelDiagrams/Assets_ScoredResponse.png)
+
+### Assets - Score Section
+
+![Assets Score Section Model](Images/PowerBIModelDiagrams/Assets_ScoreSection.png)
+
+### Assets - Score Tag
+
+![Assets Score Tag Model](Images/PowerBIModelDiagrams/Assets_ScoreTag.png)
+
+### Assets - Numeric Answer
+
+![Assets Numeric Answer Model](Images/PowerBIModelDiagrams/Assets_NumericAnswer.png)
+
+### Assets - Date Time Answer
+
+![Assets Date Time Answer Model](Images/PowerBIModelDiagrams/Assets_DateTimeAnswer.png)
+
+### Assets - Checklist Answer
+
+![Assets Checklist Answer Model](Images/PowerBIModelDiagrams/Assets_ChecklistAnswer.png)
+
+### Assets - Branch Option
+
+![Assets Branch Option Model](Images/PowerBIModelDiagrams/Assets_BranchOption.png)
 
 ## Audits
 

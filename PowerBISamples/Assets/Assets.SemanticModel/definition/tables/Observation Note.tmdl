@@ -1,0 +1,126 @@
+table 'Observation Note'
+	lineageTag: 7063d69b-1639-48bc-a4f9-1f7f8049f1c3
+
+	column AssetObservationNote_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 4c1d3ff0-0446-47ae-a293-0c54ba666a5b
+		summarizeBy: none
+		sourceColumn: AssetObservationNote_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column NoteId
+		dataType: string
+		isHidden
+		lineageTag: 3b7c22a7-a719-44f5-bab2-8468ef818ce5
+		summarizeBy: none
+		sourceColumn: NoteId
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column AssetObservation_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: f3b39cd1-fbc6-44ae-9fac-f0d370d3e431
+		summarizeBy: none
+		sourceColumn: AssetObservation_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column Notes
+		dataType: string
+		lineageTag: 224d6ca5-65e2-447c-a0ec-dc4204dd48f9
+		summarizeBy: none
+		sourceColumn: Notes
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Created On'
+		dataType: dateTime
+		formatString: dd/mm/yyyy hh:nn
+		lineageTag: dc165147-1c10-4cf0-926d-120efd6ab8ef
+		summarizeBy: none
+		sourceColumn: Created On
+
+		variation Variation
+			isDefault
+			relationship: 28c8acbf-2464-49fd-98e5-480b541f460a
+			defaultHierarchy: LocalDateTable_340854e5-c2b0-43a0-aeb0-db77543a8c8a.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column CreatedByContact_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 6a616d98-7c76-434c-8c14-f87778f0c989
+		summarizeBy: none
+		sourceColumn: CreatedByContact_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column 'Edited On'
+		dataType: dateTime
+		formatString: dd/mm/yyyy hh:nn
+		lineageTag: ffaf0fe5-8df6-4147-a1eb-675e6dc9f7f3
+		summarizeBy: none
+		sourceColumn: Edited On
+
+		variation Variation
+			isDefault
+			relationship: 8e85dd64-b541-4188-b3f8-c7f5a87c18e5
+			defaultHierarchy: LocalDateTable_768cd4ff-e152-468f-86fc-7173ebb8fe3a.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column Deleted
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: d11d9fcb-4f78-408e-aca7-ff80fa86e826
+		summarizeBy: none
+		sourceColumn: Deleted
+
+		annotation SummarizationSetBy = Automatic
+
+	column Wallet_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 1902ea41-1937-4b0f-95b4-6fadf6bfefee
+		summarizeBy: none
+		sourceColumn: Wallet_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	partition 'Observation Note' = m
+		mode: import
+		source =
+				let
+				  Source = Sql.Database("CAKESOFBREAD", "WorkWalletBIClient_Local"),
+				  #"Navigation 1" = Source{[Schema = "mart", Item = "AssetObservationNote"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(#"Navigation 1",{"_created", "_edited"}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"CreatedOn", "Created On"}, {"EditedOn", "Edited On"}})
+				in
+				  #"Renamed Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

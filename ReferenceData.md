@@ -4,8 +4,8 @@ Jump to the relevant section:
 
 - [General](#general)
 - [Actions](#actions)
-- [AssetInspections](#assetinspections)
-- [AssetObservations](#assetobservations)
+- [AssetInspections2](#assetinspections2)
+- [AssetObservations2](#assetobservations2)
 - [Assets](#assets)
 - [Audits](#audits)
 - [Inductions](#inductions)
@@ -70,6 +70,19 @@ Jump to the relevant section:
 | 40 | Currency | Euro | € |
 | 41 | Currency | Yen | ¥ |
 
+| WorkflowComponentTypeCode | Name |
+| --- | --- |
+| 5 | AskChecklistQuestion |
+| 6 | AskTextQuestion |
+| 7 | RequestSignature |
+| 8 | RequestImage |
+| 11 | Branch |
+| 12 | RequestBodyPart |
+| 13 | RequestPerson |
+| 15 | AskNumericQuestion |
+| 17 | AskDateTimeQuestion |
+| 18 | ScoredBranch |
+
 ## Actions
 
 | ActionPriorityCode | ActionPriority |
@@ -94,26 +107,18 @@ Jump to the relevant section:
 | 8 | Asset |
 | 16 | Briefing |
 
-## AssetInspections
+## AssetInspections2
 
-| AssetPropertyType |
-| --- |
-| Number |
-| Select |
-| Text |
-
-Checklist item response codes are specific to each checklist configuration. Common examples include:
-
-| Response | ResponseText (Example) |
+| InspectionStatusCode | InspectionStatus |
 | --- | --- |
-| 0 | N/A |
-| 1 | Major Failure |
-| 2 | Minor Failure |
-| 3 | No Issues |
+| 0 | Complete |
+| 1 | Adjustment (internal placeholder, never returned) |
+| 2 | InProgress |
+| 3 | Deleted |
+| 4 | ReadyForReview |
+| 5 | Archived |
 
-Note: The actual `ResponseText` values are defined per checklist and may vary.
-
-## AssetObservations
+## AssetObservations2
 
 | AssetObservationStatusCode | AssetObservationStatus |
 | --- | --- |

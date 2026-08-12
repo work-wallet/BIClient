@@ -1,0 +1,125 @@
+table 'Inspection Grading Set Option'
+	lineageTag: 3e671f4c-0844-4cf7-97aa-1f09202624f8
+
+	column GradingSetOption_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 61776b23-fc3a-4781-b3b4-6e44d51706b8
+		summarizeBy: none
+		sourceColumn: GradingSetOption_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column GradingSetId
+		dataType: string
+		isHidden
+		lineageTag: 8ee6724c-6839-48c8-8bba-8344af566959
+		summarizeBy: none
+		sourceColumn: GradingSetId
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column GradingSetVersion
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 400cae54-070a-4130-99b2-6404f4c80bfd
+		summarizeBy: none
+		sourceColumn: GradingSetVersion
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column GradingSetOptionId
+		dataType: string
+		isHidden
+		lineageTag: 27aaff75-11a5-4d47-8f6a-1e9f5dc1a927
+		summarizeBy: none
+		sourceColumn: GradingSetOptionId
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Inspection Grading Set'
+		dataType: string
+		lineageTag: 0dc53561-6d1d-4805-954a-2e02e2f731d7
+		summarizeBy: none
+		sourceColumn: Inspection Grading Set
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Inspection Grading'
+		dataType: string
+		lineageTag: 5fcf0196-b46a-45b5-affd-959f2540cca6
+		summarizeBy: none
+		sourceColumn: Inspection Grading
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Inspection Grading Value'
+		dataType: int64
+		formatString: 0
+		lineageTag: a7baa82e-6289-45bf-b9bb-7e6d312dad01
+		summarizeBy: none
+		sourceColumn: Inspection Grading Value
+
+		annotation SummarizationSetBy = User
+
+	column 'Inspection Grading Colour'
+		dataType: string
+		lineageTag: 83f32f6a-5e04-4297-94f5-3df5d84c0f1e
+		summarizeBy: none
+		sourceColumn: Inspection Grading Colour
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Inspection Grading Set Is Percentage'
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 0c13ab5a-d818-4d1f-81ad-cbb95ac2966a
+		summarizeBy: none
+		sourceColumn: Inspection Grading Set Is Percentage
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Inspection Grading Set Is Score'
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 5f5b7cda-46dc-4509-90c7-3e7006832993
+		summarizeBy: none
+		sourceColumn: Inspection Grading Set Is Score
+
+		annotation SummarizationSetBy = Automatic
+
+	column Wallet_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 7b509990-f254-4f4f-bc8f-47af5eaa211a
+		summarizeBy: none
+		sourceColumn: Wallet_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	partition 'Inspection Grading Set Option' = m
+		mode: import
+		source =
+				let
+				    Source = #"Grading Set Option",
+				    #"Renamed Columns" = Table.RenameColumns(Source,{{"Grading", "Inspection Grading"}, {"Grading Set", "Inspection Grading Set"}, {"Grading Value", "Inspection Grading Value"}, {"Grading Colour", "Inspection Grading Colour"}, {"Grading Set Is Percentage", "Inspection Grading Set Is Percentage"}, {"Grading Set Is Score", "Inspection Grading Set Is Score"}})
+				in
+				    #"Renamed Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

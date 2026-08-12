@@ -1,0 +1,125 @@
+table 'Score Section Grading Set Option'
+	lineageTag: d27b6efb-5485-4e97-9896-e7301be37580
+
+	column GradingSetOption_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: bc425687-10ac-43b0-90cf-ad2b7174ff2d
+		summarizeBy: none
+		sourceColumn: GradingSetOption_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column GradingSetId
+		dataType: string
+		isHidden
+		lineageTag: 5255f324-3237-4e15-8bd3-14652305d30e
+		summarizeBy: none
+		sourceColumn: GradingSetId
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column GradingSetVersion
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: d92d9998-debe-4d52-8bcb-a19fc38f0558
+		summarizeBy: none
+		sourceColumn: GradingSetVersion
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column GradingSetOptionId
+		dataType: string
+		isHidden
+		lineageTag: a4dc26e6-4035-4a08-a197-dd2c1f4b484a
+		summarizeBy: none
+		sourceColumn: GradingSetOptionId
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Score Section Grading Set'
+		dataType: string
+		lineageTag: f12d366c-8346-42f0-8cfa-1c9103bf3dc1
+		summarizeBy: none
+		sourceColumn: Score Section Grading Set
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Score Section Grading'
+		dataType: string
+		lineageTag: 2af53aac-e501-4c5a-8208-9724cdf253d5
+		summarizeBy: none
+		sourceColumn: Score Section Grading
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Score Section Grading Value'
+		dataType: int64
+		formatString: 0
+		lineageTag: b755a96a-5232-45b5-9d2a-fb181d7eaaff
+		summarizeBy: none
+		sourceColumn: Score Section Grading Value
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Score Section Grading Colour'
+		dataType: string
+		lineageTag: 14644f4c-7193-432e-9a8c-9903d7907458
+		summarizeBy: none
+		sourceColumn: Score Section Grading Colour
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Score Section Grading Set Is Percentage'
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 2fbf3d54-a3b9-4239-8331-325a79514cd4
+		summarizeBy: none
+		sourceColumn: Score Section Grading Set Is Percentage
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Score Section Grading Set Is Score'
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 96c43c2c-3001-4a4b-899d-a52165298d7e
+		summarizeBy: none
+		sourceColumn: Score Section Grading Set Is Score
+
+		annotation SummarizationSetBy = Automatic
+
+	column Wallet_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: deaa7bf1-9e6f-436b-bcdc-73e4439673cb
+		summarizeBy: none
+		sourceColumn: Wallet_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Score Section Grading Set Option' = m
+		mode: import
+		source =
+				let
+				    Source = #"Grading Set Option",
+				    #"Renamed Columns" = Table.RenameColumns(Source,{{"Grading Set", "Score Section Grading Set"}, {"Grading", "Score Section Grading"}, {"Grading Value", "Score Section Grading Value"}, {"Grading Colour", "Score Section Grading Colour"}, {"Grading Set Is Percentage", "Score Section Grading Set Is Percentage"}, {"Grading Set Is Score", "Score Section Grading Set Is Score"}})
+				in
+				    #"Renamed Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

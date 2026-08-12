@@ -1,0 +1,143 @@
+table 'Scored Response Fact'
+	lineageTag: 4861131b-fd90-4598-8a10-df51089f3380
+
+	column AssetInspection_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: e3edda6f-abea-4747-b5ca-2aa21495182a
+		summarizeBy: none
+		sourceColumn: AssetInspection_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column AssetInspectionScoredResponse_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 80fedb89-759a-403d-b3ee-ef1600ef4863
+		summarizeBy: none
+		sourceColumn: AssetInspectionScoredResponse_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Score
+		dataType: int64
+		formatString: 0
+		lineageTag: affa9dfc-9db2-46d5-848d-d2ecf5d5b69c
+		summarizeBy: sum
+		sourceColumn: Score
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Potential Score'
+		dataType: int64
+		formatString: 0
+		lineageTag: 25cea7fb-2df3-4ca7-8503-c09cfcba5c61
+		summarizeBy: sum
+		sourceColumn: Potential Score
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Percentage Score'
+		dataType: double
+		lineageTag: e436aeaa-4c03-480c-a7d3-d56d1546c729
+		summarizeBy: none
+		sourceColumn: Percentage Score
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Defect
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 6eb06c88-000c-4a0c-b27d-225a70bb75ff
+		summarizeBy: none
+		sourceColumn: Defect
+
+		annotation SummarizationSetBy = Automatic
+
+	column GradingSetOption_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 5115febf-c24a-44fb-9f73-ee934854c44c
+		summarizeBy: none
+		sourceColumn: GradingSetOption_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column Wallet_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: b1987a17-22f8-4705-b211-f0f8478ab310
+		summarizeBy: none
+		sourceColumn: Wallet_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column 'Score Response Count' = 1
+		formatString: 0
+		lineageTag: a834859a-dd0f-42bb-95fc-6c59e41669b3
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Score Display' =
+			
+			VAR DisplayScore =
+			    AND(RELATED('Inspection Type'[Display Total Score]), 'Scored Response Fact'[Score] <> -1)
+			VAR DisplayPercentage =
+			    AND(RELATED('Inspection Type'[Display Percentage]), 'Scored Response Fact'[Percentage Score] <> -1)
+			VAR ScoreText =
+			    IF(DisplayScore, 'Scored Response Fact'[Score] & "/" & 'Scored Response Fact'[Potential Score], "")
+			VAR PercentageText =
+			    IF(DisplayPercentage, FORMAT('Scored Response Fact'[Percentage Score], "#%"), "")
+			RETURN
+			    IF(
+			        RELATED('Inspection Type'[Scoring Enabled]),
+			        IF(
+			            AND(DisplayScore, DisplayPercentage),
+			            ScoreText & " (" & PercentageText & ")",
+			            IF(
+			                DisplayScore,
+			                ScoreText,
+			                IF(
+			                    DisplayPercentage,
+			                    PercentageText,
+			                    ""
+			                )
+			            )
+			        ),
+			        "scoring not enabled"
+			    )
+		lineageTag: a1ab4696-5978-4de2-8639-237157dfd2b6
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Scored Response Fact' = m
+		mode: import
+		source =
+				let
+				  Source = Sql.Database("CAKESOFBREAD", "WorkWalletBIClient_Local"),
+				  #"Navigation 1" = Source{[Schema = "mart", Item = "AssetInspectionScoredResponseFact"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(#"Navigation 1",{"_created", "_edited"}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"TotalScore", "Score"}, {"TotalPotentialScore", "Potential Score"}, {"PercentageScore", "Percentage Score"}})
+				in
+				  #"Renamed Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

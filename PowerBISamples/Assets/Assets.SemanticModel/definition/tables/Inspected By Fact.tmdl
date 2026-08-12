@@ -1,0 +1,60 @@
+table 'Inspected By Fact'
+	lineageTag: fed990d0-25cd-482b-a7ad-8782496fdc85
+
+	column AssetInspection_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 71f819b4-09bf-47e1-9dc5-e30d9945baeb
+		summarizeBy: none
+		sourceColumn: AssetInspection_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column Contact_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: a292fb94-c703-4df6-aa67-6ac008c021c0
+		summarizeBy: none
+		sourceColumn: Contact_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Wallet_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 32949e9d-f887-444f-8f7d-a3880cd1b7f4
+		summarizeBy: none
+		sourceColumn: Wallet_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column 'Inspected By Count' = 1
+		formatString: 0
+		lineageTag: f813518d-a3cd-40d6-af14-799ae9b8b04b
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Inspected By Fact' = m
+		mode: import
+		source =
+				let
+				  Source = Sql.Database("CAKESOFBREAD", "WorkWalletBIClient_Local"),
+				  #"Navigation 1" = Source{[Schema = "mart", Item = "AssetInspectionInspectedByFact"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(#"Navigation 1",{"_created", "_edited"})
+				in
+				  #"Removed Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

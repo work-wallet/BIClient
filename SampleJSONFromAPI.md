@@ -11,8 +11,8 @@ Each sample shows the standard response structure including:
 Jump to the relevant section:
 
 - [Actions](#actions)
-- [AssetInspections](#assetinspections)
-- [AssetObservations](#assetobservations)
+- [AssetInspections2](#assetinspections2)
+- [AssetObservations2](#assetobservations2)
 - [Assets](#assets)
 - [Audits](#audits)
 - [Inductions](#inductions)
@@ -76,6 +76,8 @@ Some datasets are hybrid, using placeholders in original fields and omitted fiel
       "OriginalDueOn": "2025-09-20",
       "ActionStatusCode": 2,
       "Deleted": false,
+      "IsDeleted": false,
+      "IsOrphaned": false,
       "CreatedOn": "2025-09-01T08:30:15.1234567+00:00",
       "WalletId": "a3e1c9f2-5d4b-4330-9c2f-1c2b8f0d9a77"
     }
@@ -99,13 +101,14 @@ Notes
 - Actions
   - **DueOn**: `1900-01-01` indicates no data
   - **OriginalDueOn**: `1900-01-01` indicates no data
+  - **Deleted**: DEPRECATED, use `IsDeleted` and `IsOrphaned` instead.
 
-## AssetInspections
+## AssetInspections2
 
 ```json
 {
   "Context": {
-    "Dataset": "AssetInspections",
+    "Dataset": "AssetInspections2",
     "Version": 1,
     "Count": 1,
     "FullCount": 1,
@@ -116,7 +119,7 @@ Notes
     "MinValidSynchronizationVersion": 900,
     "Error": "",
     "UTC": "2025-09-10T11:45:00Z",
-    "ExecutionTimeMs": 171,
+    "ExecutionTimeMs": 210
   },
   "Wallets": [
     {
@@ -136,65 +139,198 @@ Notes
       "WalletId": "a3e1c9f2-5d4b-4330-9c2f-1c2b8f0d9a77"
     }
   ],
+  "GradingSetOptions": [
+    {
+      "GradingSetId": "b2a1c3d4-e5f6-4789-ab12-34567890abcd",
+      "GradingSetVersion": 1,
+      "GradingSetOptionId": "c3d4e5f6-a1b2-4c3d-9e8f-001122334455",
+      "GradingSet": "Pass/Fail",
+      "GradingSetOption": "Pass",
+      "Value": 100,
+      "ColourHex": "#4CAF50",
+      "GradingSetIsPercentage": false,
+      "GradingSetIsScore": true,
+      "WalletId": "a3e1c9f2-5d4b-4330-9c2f-1c2b8f0d9a77"
+    },
+    {
+      "GradingSetId": "00000000-0000-0000-0000-000000000000",
+      "GradingSetVersion": 0,
+      "GradingSetOptionId": "00000000-0000-0000-0000-000000000000",
+      "GradingSet": "",
+      "GradingSetOption": "",
+      "Value": 0,
+      "ColourHex": "",
+      "GradingSetIsPercentage": false,
+      "GradingSetIsScore": false,
+      "WalletId": "a3e1c9f2-5d4b-4330-9c2f-1c2b8f0d9a77"
+    }
+  ],
+  "InspectionTypes": [
+    {
+      "InspectionTypeId": "77e298df-9b87-430b-8a12-c9b15757fd62",
+      "InspectionTypeVersion": 1,
+      "InspectionType": "Daily Check",
+      "Description": "Daily pre-use forklift inspection.",
+      "ScoringEnabled": true,
+      "DisplayPercentage": false,
+      "DisplayTotalScore": true,
+      "DisplayAverageScore": false,
+      "GradingSetId": "b2a1c3d4-e5f6-4789-ab12-34567890abcd",
+      "GradingSetVersion": 1,
+      "GradingSet": "Pass/Fail",
+      "GradingSetIsPercentage": false,
+      "GradingSetIsScore": true,
+      "WalletId": "a3e1c9f2-5d4b-4330-9c2f-1c2b8f0d9a77"
+    }
+  ],
   "Inspections": [
     {
-      "AssetId": "5b9c97f1-22ff-41fa-9434-7b4b0f8f5d79",
       "InspectionId": "45bc057d-2bae-4d05-a842-037d054fe60a",
+      "AssetId": "5b9c97f1-22ff-41fa-9434-7b4b0f8f5d79",
+      "InspectionStatusCode": 0,
       "InspectionTypeId": "77e298df-9b87-430b-8a12-c9b15757fd62",
-      "InspectionType": "Daily Check",
-      "InspectionDate": "2025-09-05T11:45:00",
-      "InspectedBy": "Taylor Example",
-      "Deleted": false,
+      "InspectionTypeVersion": 1,
+      "InspectedOn": "2025-09-05T11:45:00",
+      "TotalScore": 8,
+      "TotalPotentialScore": 10,
+      "AverageScore": 4.0,
+      "AveragePotentialScore": 5.0,
+      "PercentageScore": 0.8,
+      "Defects": 1,
+      "Passed": 1,
+      "GradingSetOptionId": "c3d4e5f6-a1b2-4c3d-9e8f-001122334455",
+      "ExternalIdentifier": "",
+      "InspectedByCompany": "",
+      "InProgressStatusDate": "2025-09-05T11:40:00+00:00",
+      "CompleteStatusDate": "2025-09-05T11:45:00+00:00",
       "WalletId": "a3e1c9f2-5d4b-4330-9c2f-1c2b8f0d9a77"
     }
   ],
-  "ChecklistItemStatuses": [
+  "Contacts": [
     {
-      "AssetId": "5b9c97f1-22ff-41fa-9434-7b4b0f8f5d79",
-      "InspectionId": "45bc057d-2bae-4d05-a842-037d054fe60a",
-      "ChecklistId": "5ba73a16-d3db-40fa-9e35-77818778e8b6",
-      "ChecklistName": "Pre-Operation Checks",
-      "ChecklistDisplayOrder": 1,
-      "ChecklistItemId": "22b18b57-4eda-4df4-b674-66d11a11017f",
-      "ChecklistItemName": "Hydraulic System",
-      "ChecklistItemDisplayOrder": 1,
-      "Response": 3,
-      "ResponseText": "No Issues",
-      "WalletId": "a3e1c9f2-5d4b-4330-9c2f-1c2b8f0d9a77"
-    },
-    {
-      "AssetId": "5b9c97f1-22ff-41fa-9434-7b4b0f8f5d79",
-      "InspectionId": "45bc057d-2bae-4d05-a842-037d054fe60a",
-      "ChecklistId": "5ba73a16-d3db-40fa-9e35-77818778e8b6",
-      "ChecklistName": "Pre-Operation Checks",
-      "ChecklistDisplayOrder": 1,
-      "ChecklistItemId": "6f054a65-2a87-41e5-afde-8cc88e3cff7b",
-      "ChecklistItemName": "Brakes",
-      "ChecklistItemDisplayOrder": 2,
-      "Response": 2,
-      "ResponseText": "Minor Failure",
+      "ContactId": "0aa1bb22-cc33-4dd4-8ee5-ff6677889900",
+      "Name": "Taylor Example",
+      "EmailAddress": "taylor.example@example.invalid",
+      "CompanyName": "Northwind Construction Ltd",
       "WalletId": "a3e1c9f2-5d4b-4330-9c2f-1c2b8f0d9a77"
     }
   ],
-  "InspectionProperties": [
+  "InspectionInspectors": [
     {
-      "AssetId": "5b9c97f1-22ff-41fa-9434-7b4b0f8f5d79",
       "InspectionId": "45bc057d-2bae-4d05-a842-037d054fe60a",
-      "PropertyId": "2a86b228-c6e6-4c4c-aa7e-d346a21fdb89",
-      "Property": "Fuel Level",
-      "PropertyType": "Number",
-      "DisplayOrder": 1,
-      "Value": "75",
+      "ContactId": "0aa1bb22-cc33-4dd4-8ee5-ff6677889900",
       "WalletId": "a3e1c9f2-5d4b-4330-9c2f-1c2b8f0d9a77"
-    },
+    }
+  ],
+  "InspectionNumericAnswers": [
     {
-      "AssetId": "5b9c97f1-22ff-41fa-9434-7b4b0f8f5d79",
       "InspectionId": "45bc057d-2bae-4d05-a842-037d054fe60a",
-      "PropertyId": "3b97c339-d7f7-5d5d-bb8f-e457b32aec9a",
-      "Property": "Weather Conditions",
-      "PropertyType": "Text",
-      "DisplayOrder": 2,
-      "Value": "Clear",
+      "QuestionId": "ab12cd34-ef56-4789-90ab-cdef12345678",
+      "Question": "Fuel level (%)",
+      "Mandatory": true,
+      "Scale": 0,
+      "UnitCode": 32,
+      "Answer": 75,
+      "SectionId": "22334455-6677-4888-99aa-bbccddeeff00",
+      "Section": "Pre-Operation Checks",
+      "OrderInSection": 1,
+      "WalletId": "a3e1c9f2-5d4b-4330-9c2f-1c2b8f0d9a77"
+    }
+  ],
+  "InspectionDateTimeAnswers": [
+    {
+      "InspectionId": "45bc057d-2bae-4d05-a842-037d054fe60a",
+      "QuestionId": "bb22cc33-dd44-4ee5-9ff6-001122334466",
+      "Question": "Last service date",
+      "Mandatory": false,
+      "Date": true,
+      "Time": false,
+      "Answer": "2025-07-01T00:00:00",
+      "SectionId": "33445566-7788-4999-aabb-ccddeeff0011",
+      "Section": "Pre-Operation Checks",
+      "OrderInSection": 2,
+      "WalletId": "a3e1c9f2-5d4b-4330-9c2f-1c2b8f0d9a77"
+    }
+  ],
+  "InspectionChecklistAnswers": [
+    {
+      "InspectionId": "45bc057d-2bae-4d05-a842-037d054fe60a",
+      "ChecklistId": "5ba73a16-d3db-40fa-9e35-77818778e8b6",
+      "OptionId": "22b18b57-4eda-4df4-b674-66d11a11017f",
+      "Question": "Hydraulic System",
+      "Value": "No Issues",
+      "Mandatory": true,
+      "Order": 1,
+      "SectionId": "44556677-8899-4aaa-bbcc-ddeeff001122",
+      "Section": "Pre-Operation Checks",
+      "OrderInSection": 3,
+      "WalletId": "a3e1c9f2-5d4b-4330-9c2f-1c2b8f0d9a77"
+    }
+  ],
+  "InspectionBranchOptions": [
+    {
+      "InspectionId": "45bc057d-2bae-4d05-a842-037d054fe60a",
+      "BranchId": "ee55ff66-0011-4222-8333-445566778899",
+      "OptionId": "ff66aabb-1122-4333-8444-5566778899aa",
+      "Branch": "Tyre Condition",
+      "Value": "Worn",
+      "Order": 2,
+      "SectionId": "55667788-99aa-4bbb-ccdd-eeff00112233",
+      "Section": "Equipment",
+      "OrderInSection": 4,
+      "WalletId": "a3e1c9f2-5d4b-4330-9c2f-1c2b8f0d9a77"
+    }
+  ],
+  "InspectionScoredResponses": [
+    {
+      "InspectionId": "45bc057d-2bae-4d05-a842-037d054fe60a",
+      "BranchId": "11aa22bb-33cc-44dd-85ee-66778899aabb",
+      "OptionId": "22bb33cc-44dd-46ee-86ff-778899aabbcc",
+      "Branch": "Brakes",
+      "Value": "Minor Failure",
+      "Order": 2,
+      "TotalScore": 6,
+      "TotalPotentialScore": 10,
+      "PercentageScore": 0.6,
+      "Defect": true,
+      "GradingSetOptionId": "00000000-0000-0000-0000-000000000000",
+      "SectionId": "66778899-aabb-4ccc-ddee-ff0011223344",
+      "Section": "Pre-Operation Checks",
+      "OrderInSection": 5,
+      "WalletId": "a3e1c9f2-5d4b-4330-9c2f-1c2b8f0d9a77"
+    }
+  ],
+  "InspectionScoreSections": [
+    {
+      "InspectionId": "45bc057d-2bae-4d05-a842-037d054fe60a",
+      "SectionId": "66778899-aabb-4ccc-ddee-ff0011223344",
+      "Section": "Pre-Operation Checks",
+      "DisplayScore": true,
+      "Order": 1,
+      "TotalScore": 8,
+      "TotalPotentialScore": 10,
+      "AverageScore": 4.0,
+      "AveragePotentialScore": 5.0,
+      "PercentageScore": 0.8,
+      "Defects": 1,
+      "Passed": 1,
+      "GradingSetOptionId": "c3d4e5f6-a1b2-4c3d-9e8f-001122334455",
+      "WalletId": "a3e1c9f2-5d4b-4330-9c2f-1c2b8f0d9a77"
+    }
+  ],
+  "InspectionScoreTags": [
+    {
+      "InspectionId": "45bc057d-2bae-4d05-a842-037d054fe60a",
+      "TagId": "77889900-aabb-4ccc-8ddd-eeff00112233",
+      "TagVersion": 1,
+      "Tag": "Mechanical",
+      "TotalScore": 8,
+      "TotalPotentialScore": 10,
+      "AverageScore": 4.0,
+      "AveragePotentialScore": 5.0,
+      "PercentageScore": 0.8,
+      "Defects": 1,
+      "GradingSetOptionId": "c3d4e5f6-a1b2-4c3d-9e8f-001122334455",
       "WalletId": "a3e1c9f2-5d4b-4330-9c2f-1c2b8f0d9a77"
     }
   ],
@@ -202,14 +338,23 @@ Notes
     {
       "AssetId": "5b9c97f1-22ff-41fa-9434-7b4b0f8f5d79",
       "ObservationId": "a21b224a-df1c-4a89-a4b7-bf9291d18555",
-      "Details": "Brake pads showing wear. Replacement recommended within next 2 weeks.",
-      "ActionTaken": "Tagged for maintenance",
       "ObservationStatusCode": 1,
       "ObservedOn": "2025-09-05T11:46:00+00:00",
-      "ObservedBy": "Taylor Example",
+      "ObservedByContactId": "0aa1bb22-cc33-4dd4-8ee5-ff6677889900",
       "Deleted": false,
-      "ClosedBy": "",
       "ClosureNotes": "",
+      "IsFinalised": true,
+      "WalletId": "a3e1c9f2-5d4b-4330-9c2f-1c2b8f0d9a77"
+    }
+  ],
+  "ObservationNotes": [
+    {
+      "ObservationId": "a21b224a-df1c-4a89-a4b7-bf9291d18555",
+      "NoteId": "9a8b7c6d-5e4f-4a3b-9c2d-1e0f9a8b7c6d",
+      "Notes": "Brake pads showing wear. Replacement recommended within next 2 weeks.",
+      "CreatedOn": "2025-09-05T11:46:00+00:00",
+      "CreatedByContactId": "0aa1bb22-cc33-4dd4-8ee5-ff6677889900",
+      "Deleted": false,
       "WalletId": "a3e1c9f2-5d4b-4330-9c2f-1c2b8f0d9a77"
     }
   ],
@@ -217,7 +362,9 @@ Notes
     {
       "InspectionId": "45bc057d-2bae-4d05-a842-037d054fe60a",
       "ObservationId": "a21b224a-df1c-4a89-a4b7-bf9291d18555",
-      "ChecklistItemId": "6f054a65-2a87-41e5-afde-8cc88e3cff7b",
+      "WorkflowComponentId": "11aa22bb-33cc-44dd-85ee-66778899aabb",
+      "WorkflowComponentTypeCode": 5,
+      "WorkflowComponentDescription": "Are the brake pads within acceptable wear limits?",
       "New": true,
       "WalletId": "a3e1c9f2-5d4b-4330-9c2f-1c2b8f0d9a77"
     }
@@ -227,17 +374,69 @@ Notes
 
 Notes
 
+- GradingSetOptions
+  - Always includes a "null grading set" sentinel row with all-zero GUIDs and empty strings, used by inspections/responses that have no grading set configured
+  - **GradingSetId** & **GradingSetOptionId**: `00000000-0000-0000-0000-000000000000` indicates 'null' entry (other fields also zeroed/blank)
+- InspectionTypes
+  - **GradingSetId**: `00000000-0000-0000-0000-000000000000` indicates no data
+  - **GradingSetVersion**: `0` indicates no data
+- Inspections
+  - **Passed**: `-1` = not applicable/unknown, `0` = failed, `1` = passed
+  - **TotalScore**: `-1` indicates no data
+  - **TotalPotentialScore**: `-1` indicates no data
+  - **AverageScore**: `-1` indicates no data
+  - **AveragePotentialScore**: `-1` indicates no data
+  - **PercentageScore**: `-1` indicates no data
+  - **Defects**: `-1` indicates no data
+  - **GradingSetOptionId**: `00000000-0000-0000-0000-000000000000` indicates no data
+  - **InspectedByCompany**: empty string if the inspection was not performed by an external company
+  - **InProgressStatusDate**: omitted when null (always populated once the inspection first enters InProgress; unaffected by later status changes)
+  - **ReadyForReviewStatusDate**: omitted when null (null if `InspectionStatusCode` is InProgress)
+  - **CompleteStatusDate**: omitted when null (null if `InspectionStatusCode` is InProgress or ReadyForReview)
+  - **ArchivedStatusDate**: omitted when null (only populated when `InspectionStatusCode` is Archived, or Deleted having previously been archived)
+- InspectionNumericAnswers
+  - **Scale**: `0` indicates no data
+  - **UnitCode**: `0` indicates no data
+- InspectionScoredResponses
+  - **TotalScore**: `-1` indicates no data
+  - **TotalPotentialScore**: `-1` indicates no data
+  - **PercentageScore**: `-1` indicates no data
+  - **GradingSetOptionId**: `00000000-0000-0000-0000-000000000000` indicates no data
+- InspectionScoreSections
+  - **TotalScore**: `-1` indicates no data
+  - **TotalPotentialScore**: `-1` indicates no data
+  - **AverageScore**: `-1` indicates no data
+  - **AveragePotentialScore**: `-1` indicates no data
+  - **PercentageScore**: `-1` indicates no data
+  - **Defects**: `-1` indicates no data
+  - **Passed**: `-1` = not applicable/unknown, `0` = failed, `1` = passed
+  - **GradingSetOptionId**: `00000000-0000-0000-0000-000000000000` indicates no data
+- InspectionScoreTags
+  - **TotalScore**: `-1` indicates no data
+  - **TotalPotentialScore**: `-1` indicates no data
+  - **AverageScore**: `-1` indicates no data
+  - **AveragePotentialScore**: `-1` indicates no data
+  - **PercentageScore**: `-1` indicates no data
+  - **Defects**: `-1` indicates no data
+  - **GradingSetOptionId**: `00000000-0000-0000-0000-000000000000` indicates no data
 - Observations
+  - **ObservedByContactId**: if `null` no field will be returned
+  - **ClosedByContactId**: if `null` no field will be returned
   - **ClosedOn**: if `null` no field will be returned
+  - **ObservationStatusCode**: `0` = observation, `1` = defect (open), `32` = defect (closed)
+- ObservationNotes
+  - **CreatedByContactId**: if `null` no field will be returned
+  - **EditedOn**: if `null` no field will be returned
 - InspectionObservations
-  - **ChecklistItemId**: if `null` no field will be returned
+  - **WorkflowComponentId**: if `null` no field will be returned
+  - **WorkflowComponentTypeCode**: if `null` no field will be returned
 
-## AssetObservations
+## AssetObservations2
 
 ```json
 {
   "Context": {
-    "Dataset": "AssetObservations",
+    "Dataset": "AssetObservations2",
     "Version": 1,
     "Count": 1,
     "FullCount": 1,
@@ -248,7 +447,7 @@ Notes
     "MinValidSynchronizationVersion": 900,
     "Error": "",
     "UTC": "2025-09-10T16:54:00Z",
-    "ExecutionTimeMs": 74,
+    "ExecutionTimeMs": 88
   },
   "Wallets": [
     {
@@ -268,18 +467,36 @@ Notes
       "WalletId": "a3e1c9f2-5d4b-4330-9c2f-1c2b8f0d9a77"
     }
   ],
+  "Contacts": [
+    {
+      "ContactId": "1bb22cc3-3dd4-4ee5-8ff6-778899aabbcc",
+      "Name": "Jordan Example",
+      "EmailAddress": "jordan.example@example.invalid",
+      "CompanyName": "Northwind Construction Ltd",
+      "WalletId": "a3e1c9f2-5d4b-4330-9c2f-1c2b8f0d9a77"
+    }
+  ],
   "Observations": [
     {
       "AssetId": "67efa50f-ff76-4c95-9800-bb54ac57cdab",
       "ObservationId": "94041a6a-7295-451f-91b0-18ef8e357d4e",
-      "Details": "Unusual vibration detected during operation. Requires investigation.",
-      "ActionTaken": "Machine taken offline for inspection",
       "ObservationStatusCode": 1,
       "ObservedOn": "2025-09-03T16:54:24.2830000+00:00",
-      "ObservedBy": "Jordan Example",
+      "ObservedByContactId": "1bb22cc3-3dd4-4ee5-8ff6-778899aabbcc",
       "Deleted": false,
-      "ClosedBy": "",
       "ClosureNotes": "",
+      "IsFinalised": false,
+      "WalletId": "a3e1c9f2-5d4b-4330-9c2f-1c2b8f0d9a77"
+    }
+  ],
+  "ObservationNotes": [
+    {
+      "ObservationId": "94041a6a-7295-451f-91b0-18ef8e357d4e",
+      "NoteId": "2cc33dd4-4ee5-46ff-8001-1223344556677",
+      "Notes": "Unusual vibration detected during operation. Requires investigation.",
+      "CreatedOn": "2025-09-03T16:54:24.2830000+00:00",
+      "CreatedByContactId": "1bb22cc3-3dd4-4ee5-8ff6-778899aabbcc",
+      "Deleted": false,
       "WalletId": "a3e1c9f2-5d4b-4330-9c2f-1c2b8f0d9a77"
     }
   ]
@@ -289,7 +506,13 @@ Notes
 Notes
 
 - Observations
+  - **ObservedByContactId**: if `null` no field will be returned
+  - **ClosedByContactId**: if `null` no field will be returned
   - **ClosedOn**: if `null` no field will be returned
+  - **ObservationStatusCode**: `0` = observation, `1` = defect (open), `32` = defect (closed)
+- ObservationNotes
+  - **CreatedByContactId**: if `null` no field will be returned
+  - **EditedOn**: if `null` no field will be returned
 
 ## Assets
 
@@ -460,6 +683,18 @@ Notes
       "Value": 90,
       "ColourHex": "#4CAF50",
       "GradingSetIsPercentage": true,
+      "GradingSetIsScore": false,
+      "WalletId": "a3e1c9f2-5d4b-4330-9c2f-1c2b8f0d9a77"
+    },
+    {
+      "GradingSetId": "00000000-0000-0000-0000-000000000000",
+      "GradingSetVersion": 0,
+      "GradingSetOptionId": "00000000-0000-0000-0000-000000000000",
+      "GradingSet": "",
+      "GradingSetOption": "",
+      "Value": 0,
+      "ColourHex": "",
+      "GradingSetIsPercentage": false,
       "GradingSetIsScore": false,
       "WalletId": "a3e1c9f2-5d4b-4330-9c2f-1c2b8f0d9a77"
     }
@@ -642,7 +877,7 @@ Notes
 }
 ```
 
-Notes:
+Notes
 
 - Locations
   - **CompanyId**: `00000000-0000-0000-0000-000000000000` indicates no data
@@ -653,6 +888,7 @@ Notes:
   - **Department**: Contains the first department name when the location is associated with one or more departments
   - **AllDepartments**: Pipe-separated list of all department names associated with the location
 - GradingSetOptions
+  - Always includes a "null grading set" sentinel row with all-zero GUIDs and empty strings, used by audits/responses that have no grading set configured
   - **GradingSetId** & **GradingSetOptionId**: `00000000-0000-0000-0000-000000000000` indicates 'null' entry (other fields also zeroed/blank)
 - AuditTypes
   - **GradingSetId**: `00000000-0000-0000-0000-000000000000` indicates no data

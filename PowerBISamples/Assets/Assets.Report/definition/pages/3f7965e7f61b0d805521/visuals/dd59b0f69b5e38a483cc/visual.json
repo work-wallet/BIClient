@@ -1,5 +1,5 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.11.0/schema.json",
   "name": "dd59b0f69b5e38a483cc",
   "position": {
     "x": 0,
@@ -23,11 +23,11 @@
                       "Entity": "Inspection"
                     }
                   },
-                  "Property": "Inspection Date"
+                  "Property": "Inspected On"
                 }
               },
-              "queryRef": "Inspection.Inspection Date",
-              "nativeQueryRef": "Inspection Date",
+              "queryRef": "Inspection.Inspected On",
+              "nativeQueryRef": "Inspected On",
               "active": true
             }
           ]
@@ -43,7 +43,7 @@
                     "Entity": "Inspection"
                   }
                 },
-                "Property": "Inspection Date"
+                "Property": "Inspected On"
               }
             },
             "direction": "Ascending"
@@ -124,7 +124,7 @@
                                 "Source": "i"
                               }
                             },
-                            "Property": "Inspection Date"
+                            "Property": "Inspected On"
                           }
                         },
                         "LowerBound": {
@@ -134,7 +134,13 @@
                                 "Expression": {
                                   "DateAdd": {
                                     "Expression": {
-                                      "Now": {}
+                                      "DateAdd": {
+                                        "Expression": {
+                                          "Now": {}
+                                        },
+                                        "Amount": -1,
+                                        "TimeUnit": 0
+                                      }
                                     },
                                     "Amount": 1,
                                     "TimeUnit": 0
@@ -150,7 +156,13 @@
                         "UpperBound": {
                           "DateSpan": {
                             "Expression": {
-                              "Now": {}
+                              "DateAdd": {
+                                "Expression": {
+                                  "Now": {}
+                                },
+                                "Amount": -1,
+                                "TimeUnit": 0
+                              }
                             },
                             "TimeUnit": 0
                           }

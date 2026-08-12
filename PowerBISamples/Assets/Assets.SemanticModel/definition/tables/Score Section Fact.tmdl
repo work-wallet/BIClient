@@ -1,0 +1,172 @@
+table 'Score Section Fact'
+	lineageTag: 2b33c01c-931b-4e27-bf37-34c8cadb2ef6
+
+	column AssetInspection_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: b109a6d2-636a-4018-b7e7-ab2f9c6821f8
+		summarizeBy: none
+		sourceColumn: AssetInspection_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column AssetInspectionScoreSection_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 14df13ed-8702-40ef-a0ab-0986dd0b04d7
+		summarizeBy: none
+		sourceColumn: AssetInspectionScoreSection_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Score
+		dataType: int64
+		formatString: 0
+		lineageTag: 795608e0-d80a-41fa-88f3-e88a85df47c1
+		summarizeBy: sum
+		sourceColumn: Score
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Potential Score'
+		dataType: int64
+		formatString: 0
+		lineageTag: d94f41e0-1eed-4039-a407-39add1000419
+		summarizeBy: sum
+		sourceColumn: Potential Score
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Average Score'
+		dataType: double
+		lineageTag: a71951ce-8ea0-4f0a-8e29-69044ae8edf0
+		summarizeBy: none
+		sourceColumn: Average Score
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Average Potential Score'
+		dataType: double
+		lineageTag: 609734b5-570b-42d4-b692-2b402ed9ab5a
+		summarizeBy: none
+		sourceColumn: Average Potential Score
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Percentage Score'
+		dataType: double
+		lineageTag: c1013e82-03ed-4036-b837-f472501c5ea3
+		summarizeBy: none
+		sourceColumn: Percentage Score
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Defects
+		dataType: int64
+		formatString: 0
+		lineageTag: 08d2f938-4445-4d53-b8c6-c5ac9b5bee0f
+		summarizeBy: sum
+		sourceColumn: Defects
+
+		annotation SummarizationSetBy = Automatic
+
+	column Passed
+		dataType: int64
+		formatString: 0
+		lineageTag: d9474be5-ac8a-4e13-af15-c287adac2bce
+		summarizeBy: none
+		sourceColumn: Passed
+
+		annotation SummarizationSetBy = User
+
+	column GradingSetOption_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: dbad3496-fbc9-4478-9d9f-3b3dc8ac1aa9
+		summarizeBy: none
+		sourceColumn: GradingSetOption_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column Wallet_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: b627d7b8-784f-4d55-913c-51e4b2826681
+		summarizeBy: none
+		sourceColumn: Wallet_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column 'Score Section Count' = 1
+		formatString: 0
+		lineageTag: faf24703-0048-4ee8-97b8-bcd5f3fb846a
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Score Display' =
+			
+			VAR DisplayScore =
+			    AND(RELATED('Inspection Type'[Display Total Score]), 'Score Section Fact'[Score] <> -1)
+			VAR DisplayPercentage =
+			    AND(RELATED('Inspection Type'[Display Percentage]), 'Score Section Fact'[Percentage Score] <> -1)
+			VAR ScoreText =
+			    IF(DisplayScore, 'Score Section Fact'[Score] & "/" & 'Score Section Fact'[Potential Score], "")
+			VAR PercentageText =
+			    IF(DisplayPercentage, FORMAT('Score Section Fact'[Percentage Score], "#%"), "")
+			RETURN
+			    IF(
+			        RELATED('Inspection Type'[Scoring Enabled]),
+			        IF(
+			            AND(DisplayScore, DisplayPercentage),
+			            ScoreText & " (" & PercentageText & ")",
+			            IF(
+			                DisplayScore,
+			                ScoreText,
+			                IF(
+			                    DisplayPercentage,
+			                    PercentageText,
+			                    ""
+			                )
+			            )
+			        ),
+			        "scoring not enabled"
+			    )
+		lineageTag: d10ce574-e771-4227-9eca-b1658161ebd6
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Score Section Fact' = m
+		mode: import
+		source =
+				let
+				  Source = Sql.Database("CAKESOFBREAD", "WorkWalletBIClient_Local"),
+				  #"Navigation 1" = Source{[Schema = "mart", Item = "AssetInspectionScoreSectionFact"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(#"Navigation 1",{"_created", "_edited"}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"TotalScore", "Score"}, {"TotalPotentialScore", "Potential Score"}, {"AverageScore", "Average Score"}, {"AveragePotentialScore", "Average Potential Score"}, {"PercentageScore", "Percentage Score"}})
+				in
+				  #"Renamed Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

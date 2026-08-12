@@ -1,0 +1,124 @@
+table 'Branch Option'
+	lineageTag: 8f67d2d3-3609-4553-adc7-570fe37a0c43
+
+	column AssetInspectionBranchOption_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: c3cf2317-3833-4ba1-a696-d7b7d6551508
+		summarizeBy: none
+		sourceColumn: AssetInspectionBranchOption_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column BranchId
+		dataType: string
+		isHidden
+		lineageTag: 2276b66b-a046-4398-af6d-62dd148f6f69
+		summarizeBy: none
+		sourceColumn: BranchId
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column OptionId
+		dataType: string
+		isHidden
+		lineageTag: f54fc4d4-df33-4d37-ae17-d02de3cff0d9
+		summarizeBy: none
+		sourceColumn: OptionId
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Branch
+		dataType: string
+		lineageTag: 54a86c56-8496-4a0e-94f4-458b4ab36389
+		summarizeBy: none
+		sourceColumn: Branch
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Branch Option'
+		dataType: string
+		lineageTag: 70983171-0aec-4c60-94e3-5145b3cb9c8d
+		summarizeBy: none
+		sourceColumn: Branch Option
+
+		annotation SummarizationSetBy = Automatic
+
+	column Order
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: a49d11a4-ba8c-41cf-a917-b7c450994183
+		summarizeBy: none
+		sourceColumn: Order
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column Section
+		dataType: string
+		lineageTag: f3cbb02f-6661-496a-87c9-5d53bb00ac20
+		summarizeBy: none
+		sourceColumn: Section
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Order In Section'
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: adb2e5a4-be29-420a-8871-43d3960f332e
+		summarizeBy: none
+		sourceColumn: Order In Section
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column Wallet_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 2a969337-50c7-4702-b49e-60226a3d48e9
+		summarizeBy: none
+		sourceColumn: Wallet_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Option = 'Branch Option'[Order] & " - " & 'Branch Option'[Branch Option]
+		lineageTag: f4e8de08-560e-47e8-8b35-8b8a0525a596
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column Question = Format('Branch Option'[Order In Section], "00") & " - " & 'Branch Option'[Branch]
+		lineageTag: 0bdcdd7d-3593-4a2d-aa61-f0c433d50d33
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Branch Option' = m
+		mode: import
+		source =
+				let
+				  Source = Sql.Database("CAKESOFBREAD", "WorkWalletBIClient_Local"),
+				  #"Navigation 1" = Source{[Schema = "mart", Item = "AssetInspectionBranchOption"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(#"Navigation 1",{"_created", "_edited"}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"OrderInSection", "Order In Section"}, {"Value", "Branch Option"}})
+				in
+				  #"Renamed Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

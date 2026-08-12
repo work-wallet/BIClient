@@ -47,6 +47,8 @@ BEGIN
             ,OriginalDueOn
             ,ActionStatusCode
             ,Deleted
+            ,IsDeleted
+            ,IsOrphaned
             ,CreatedOn
             ,WalletId
         )
@@ -66,6 +68,8 @@ BEGIN
             ,OriginalDueOn date
             ,ActionStatusCode int
             ,Deleted bit
+            ,IsDeleted bit
+            ,IsOrphaned bit
             ,CreatedOn datetimeoffset(7)
             ,WalletId uniqueidentifier
         );

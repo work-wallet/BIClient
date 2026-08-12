@@ -119,15 +119,6 @@ table Action
 
 		annotation SummarizationSetBy = Automatic
 
-	column Deleted
-		dataType: boolean
-		formatString: """TRUE"";""TRUE"";""FALSE"""
-		lineageTag: 57ce35b3-d3eb-48ae-b850-f5f0d130b951
-		summarizeBy: none
-		sourceColumn: Deleted
-
-		annotation SummarizationSetBy = Automatic
-
 	column 'Created On'
 		dataType: dateTime
 		formatString: Short Date
@@ -194,14 +185,32 @@ table Action
 
 		annotation SummarizationSetBy = Automatic
 
+	column 'Is Deleted'
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 642771fa-049f-4add-9b0e-cd171490d097
+		summarizeBy: none
+		sourceColumn: Is Deleted
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Is Orphaned'
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 531f1be0-b605-4e97-84ac-503e6c6e67e4
+		summarizeBy: none
+		sourceColumn: Is Orphaned
+
+		annotation SummarizationSetBy = Automatic
+
 	partition Action = m
 		mode: import
 		source =
 				let
-				    Source = Sql.Database("demo-workwalletbi.database.windows.net", "demo-workwalletbi"),
+				    Source = Sql.Database("CAKESOFBREAD", "WorkWalletBIClient_Local"),
 				    mart_Action = Source{[Schema="mart",Item="Action"]}[Data],
-				    #"Removed Columns" = Table.RemoveColumns(mart_Action,{"_created", "_edited"}),
-				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"TargetReference", "Target Reference"}, {"AssignedTo", "Name"}, {"DueOn", "Due On"}, {"CreatedOn", "Created On"}, {"OriginalDueOn", "Original Due On"}, {"AssignedToEmail", "Email"}})
+				    #"Removed Columns" = Table.RemoveColumns(mart_Action,{"_created", "_edited", "Deleted"}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"TargetReference", "Target Reference"}, {"AssignedTo", "Name"}, {"DueOn", "Due On"}, {"CreatedOn", "Created On"}, {"OriginalDueOn", "Original Due On"}, {"AssignedToEmail", "Email"}, {"IsOrphaned", "Is Orphaned"}, {"IsDeleted", "Is Deleted"}})
 				in
 				    #"Renamed Columns"
 

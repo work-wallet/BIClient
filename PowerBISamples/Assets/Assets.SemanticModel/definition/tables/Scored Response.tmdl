@@ -1,0 +1,124 @@
+table 'Scored Response'
+	lineageTag: d15a6c05-e72c-4300-9f4e-9c2e16532f55
+
+	column AssetInspectionScoredResponse_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 57c63da3-96b1-41c3-baf2-e4c4e1bd955f
+		summarizeBy: none
+		sourceColumn: AssetInspectionScoredResponse_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column BranchId
+		dataType: string
+		isHidden
+		lineageTag: 506fe87f-86e3-4f22-891e-39022e2433b7
+		summarizeBy: none
+		sourceColumn: BranchId
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column OptionId
+		dataType: string
+		isHidden
+		lineageTag: 4d2bf057-65a7-4fa6-88bd-19c44649f0a7
+		summarizeBy: none
+		sourceColumn: OptionId
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Scored Response Question'
+		dataType: string
+		lineageTag: b4200036-fdc7-4f7a-9ea8-314a2b0c5260
+		summarizeBy: none
+		sourceColumn: Scored Response Question
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Scored Response Answer'
+		dataType: string
+		lineageTag: 948b9b79-6ab6-43f1-8427-6880ba059ec6
+		summarizeBy: none
+		sourceColumn: Scored Response Answer
+
+		annotation SummarizationSetBy = Automatic
+
+	column Order
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: c487cbcf-0bcc-4cae-8a6a-dcba98437fee
+		summarizeBy: none
+		sourceColumn: Order
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column Section
+		dataType: string
+		lineageTag: 2b1e1640-ab4b-4752-9f1d-82ff021c28c3
+		summarizeBy: none
+		sourceColumn: Section
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Order In Section'
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 2348db3a-c9cf-40ea-be25-7736e6ed47dd
+		summarizeBy: none
+		sourceColumn: Order In Section
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column Wallet_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: d2253787-a031-438e-9ddf-78e714eb857e
+		summarizeBy: none
+		sourceColumn: Wallet_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column Question = Format('Scored Response'[Order In Section], "00") & " - " & 'Scored Response'[Scored Response Question]
+		lineageTag: 486a85df-9c9f-4405-89bd-610d8b33083c
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column Response = 'Scored Response'[Order] & " - " & 'Scored Response'[Scored Response Answer]
+		lineageTag: f1e554e5-7d60-4d27-af5c-e9ecf6778d97
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Scored Response' = m
+		mode: import
+		source =
+				let
+				  Source = Sql.Database("CAKESOFBREAD", "WorkWalletBIClient_Local"),
+				  #"Navigation 1" = Source{[Schema = "mart", Item = "AssetInspectionScoredResponse"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(#"Navigation 1",{"_created", "_edited"}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"OrderInSection", "Order In Section"}, {"Branch", "Scored Response Question"}, {"Value", "Scored Response Answer"}})
+				in
+				  #"Renamed Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

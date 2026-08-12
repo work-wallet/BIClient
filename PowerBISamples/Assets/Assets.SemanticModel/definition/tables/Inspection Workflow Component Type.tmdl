@@ -1,0 +1,50 @@
+table 'Inspection Workflow Component Type'
+	lineageTag: dd985094-93ae-4f4e-af73-236db0baeeb2
+
+	column InspectionWorkflowComponentType_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 4e99d6bd-b6fa-4f71-b2a1-eeeb0448cf47
+		summarizeBy: none
+		sourceColumn: InspectionWorkflowComponentType_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column WorkflowComponentTypeCode
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: fbef406b-5f91-42ae-9d9f-e95d9260a5cf
+		summarizeBy: none
+		sourceColumn: WorkflowComponentTypeCode
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Workflow Component Type'
+		dataType: string
+		lineageTag: 0722e1c1-d011-48ab-b947-2d07361fb7ab
+		summarizeBy: none
+		sourceColumn: Workflow Component Type
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Inspection Workflow Component Type' = m
+		mode: import
+		source =
+				let
+				  Source = Sql.Database("CAKESOFBREAD", "WorkWalletBIClient_Local"),
+				  #"Navigation 1" = Source{[Schema = "mart", Item = "InspectionWorkflowComponentType"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(#"Navigation 1",{"_created", "_edited"}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"WorkflowComponentType", "Workflow Component Type"}})
+				in
+				  #"Renamed Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,71 @@
+table 'Numeric Answer Fact'
+	lineageTag: 09559d4b-3170-4f95-a697-1caae9a1cae4
+
+	column AssetInspection_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: b3b97836-5987-4918-9d28-44b3917bae55
+		summarizeBy: none
+		sourceColumn: AssetInspection_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column AssetInspectionNumericQuestion_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 0d645e5e-e797-408d-8103-06acca5158d8
+		summarizeBy: none
+		sourceColumn: AssetInspectionNumericQuestion_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Numeric Answer'
+		dataType: double
+		lineageTag: 08ac47d5-ac4b-4cf0-8fde-7e02523cbcb6
+		summarizeBy: sum
+		sourceColumn: Numeric Answer
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Wallet_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: d0abc48f-4005-4f08-ad68-461112332cfb
+		summarizeBy: sum
+		sourceColumn: Wallet_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Numeric Answer Count' = 1
+		formatString: 0
+		lineageTag: b9eb0f26-51e8-49c0-ac50-7efb54677e2b
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Numeric Answer Fact' = m
+		mode: import
+		source =
+				let
+				  Source = Sql.Database("CAKESOFBREAD", "WorkWalletBIClient_Local"),
+				  #"Navigation 1" = Source{[Schema = "mart", Item = "AssetInspectionNumericAnswerFact"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(#"Navigation 1",{"_created", "_edited"}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"Answer", "Numeric Answer"}})
+				in
+				  #"Renamed Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

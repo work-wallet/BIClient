@@ -1,0 +1,129 @@
+table 'Numeric Question'
+	lineageTag: 13aca2de-bfc1-4381-990f-642b54a6ea98
+
+	column AssetInspectionNumericQuestion_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 57c4bb84-ff23-49d2-bd7f-6245ad7486c7
+		summarizeBy: none
+		sourceColumn: AssetInspectionNumericQuestion_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column QuestionId
+		dataType: string
+		isHidden
+		lineageTag: 1e363571-eb8a-4e44-8c26-d39a3b579cb7
+		summarizeBy: none
+		sourceColumn: QuestionId
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Numeric Question'
+		dataType: string
+		lineageTag: af291d0b-2f59-4adf-ae52-879c223ca6eb
+		summarizeBy: none
+		sourceColumn: Numeric Question
+
+		annotation SummarizationSetBy = Automatic
+
+	column Mandatory
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 28298ce7-45e2-4d1c-8a35-205a86504357
+		summarizeBy: none
+		sourceColumn: Mandatory
+
+		annotation SummarizationSetBy = Automatic
+
+	column Scale
+		dataType: int64
+		formatString: 0
+		lineageTag: 56e710fb-deae-4f3d-8b68-3327f753ddc2
+		summarizeBy: none
+		sourceColumn: Scale
+
+		annotation SummarizationSetBy = User
+
+	column Unit_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: ae59127f-c17a-4c30-a9ec-c927d6f6e256
+		summarizeBy: none
+		sourceColumn: Unit_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Section
+		dataType: string
+		lineageTag: ebbfb49e-fdf1-4609-bf3e-09df6d5c63bc
+		summarizeBy: none
+		sourceColumn: Section
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Order In Section'
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 0259e556-e627-4113-9839-5d1a9b80df37
+		summarizeBy: none
+		sourceColumn: Order In Section
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column Wallet_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 0f1b2530-839a-4f48-aafb-333a5a938556
+		summarizeBy: none
+		sourceColumn: Wallet_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column Question = Format('Numeric Question'[Order In Section], "00") & " - " & 'Numeric Question'[Numeric Question]
+		lineageTag: 13a44536-9751-436f-9ca5-700ecc166b81
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column Unit = RELATED(Unit[Unit])
+		lineageTag: db1e3484-4401-4cc9-8806-eb22927ba87a
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Unit Acronym' = RELATED(Unit[Unit Acronym])
+		lineageTag: 360c889d-c92e-464b-9fe6-63c0cb411650
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Numeric Question' = m
+		mode: import
+		source =
+				let
+				  Source = Sql.Database("CAKESOFBREAD", "WorkWalletBIClient_Local"),
+				  #"Navigation 1" = Source{[Schema = "mart", Item = "AssetInspectionNumericQuestion"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(#"Navigation 1",{"_created", "_edited"}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"OrderInSection", "Order In Section"}, {"Question", "Numeric Question"}})
+				in
+				  #"Renamed Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

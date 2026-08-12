@@ -69,8 +69,8 @@ The API currently enables download of:
 
 - Actions
 - Assets (three modules):
-  - AssetInspections
-  - AssetObservations
+  - AssetInspections2
+  - AssetObservations2
   - Assets
 - Audits
 - Inductions
@@ -488,8 +488,8 @@ DELETE FROM mart.ETL_ChangeDetection WHERE LogType = 'AUDIT2_UPDATED';
 | --- | --- |
 | Actions | ACTION_UPDATED |
 | Assets | ASSET_UPDATED |
-| AssetInspections | ASSET_INSPECTION_UPDATED |
-| AssetObservations | ASSET_OBSERVATION_UPDATED |
+| AssetInspections2 | ASSET_INSPECTION2_UPDATED |
+| AssetObservations2 | ASSET_OBSERVATION2_UPDATED |
 | Audits | AUDIT2_UPDATED |
 | Inductions | INDUCTION_UPDATED |
 | Permits | PERMIT_UPDATED |

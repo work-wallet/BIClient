@@ -1,0 +1,78 @@
+table Unit
+	isHidden
+	lineageTag: 346e92c1-b251-4488-8605-b254d7776b87
+
+	column Unit_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 546cb8e2-56dd-4b29-bc92-5e3fb9ece284
+		summarizeBy: none
+		sourceColumn: Unit_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column UnitCode
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: b48e9d0f-5412-4b2b-8d29-e6419293aa55
+		summarizeBy: none
+		sourceColumn: UnitCode
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column 'Unit Group'
+		dataType: string
+		isHidden
+		lineageTag: 8be22f6c-47b6-4aea-92ab-eafbcc8dffdb
+		summarizeBy: none
+		sourceColumn: Unit Group
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Unit
+		dataType: string
+		isHidden
+		lineageTag: 15c330b4-9ddf-460d-a791-62e947239f62
+		summarizeBy: none
+		sourceColumn: Unit
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Unit Acronym'
+		dataType: string
+		isHidden
+		lineageTag: 72fef616-d5e1-4a3b-9ce0-4f1a1aab113c
+		summarizeBy: none
+		sourceColumn: Unit Acronym
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Unit = m
+		mode: import
+		source =
+				let
+				  Source = Sql.Database("CAKESOFBREAD", "WorkWalletBIClient_Local"),
+				  #"Navigation 1" = Source{[Schema = "mart", Item = "Unit"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(#"Navigation 1",{"_created", "_edited"}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"UnitAcronym", "Unit Acronym"}, {"Group", "Unit Group"}})
+				in
+				  #"Renamed Columns"
+
+	changedProperty = IsHidden
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

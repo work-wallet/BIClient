@@ -31,23 +31,35 @@ BEGIN
     -- Note: Asset dimension is shared - truncated in Common section
 
     -- ========================================
-    -- AssetInspections Dataset
+    -- AssetInspections2 Dataset
     -- ========================================
-    PRINT 'Deleting AssetInspections dataset tables...';
-    
-    DELETE FROM mart.AssetInspectionPropertyFact;
-    DELETE FROM mart.AssetInspectionChecklistItemFact;
+    PRINT 'Deleting AssetInspections2 dataset tables...';
+
+    DELETE FROM mart.AssetInspectionInspectedByFact;
+    DELETE FROM mart.AssetInspectionNumericAnswerFact;
+    DELETE FROM mart.AssetInspectionDateTimeAnswerFact;
+    DELETE FROM mart.AssetInspectionChecklistAnswerFact;
+    DELETE FROM mart.AssetInspectionBranchOptionFact;
+    DELETE FROM mart.AssetInspectionScoredResponseFact;
+    DELETE FROM mart.AssetInspectionScoreSectionFact;
+    DELETE FROM mart.AssetInspectionScoreTagFact;
     DELETE FROM mart.AssetInspectionObservationFact;
-    DELETE FROM mart.AssetInspectionProperty;
-    DELETE FROM mart.AssetInspectionChecklistItem;
+    DELETE FROM mart.AssetInspectionScoreSection;
+    DELETE FROM mart.AssetInspectionScoreTag;
+    DELETE FROM mart.AssetInspectionScoredResponse;
+    DELETE FROM mart.AssetInspectionBranchOption;
+    DELETE FROM mart.AssetInspectionChecklistOption;
+    DELETE FROM mart.AssetInspectionDateTimeQuestion;
+    DELETE FROM mart.AssetInspectionNumericQuestion;
     DELETE FROM mart.AssetInspection;
+    DELETE FROM mart.AssetInspectionType;
 
     -- ========================================
-    -- AssetObservations Dataset
+    -- AssetObservations2 Dataset
     -- (No dataset-specific tables - observations handled in Common section)
     -- ========================================
-    PRINT 'Deleting AssetObservations dataset tables...';
-    -- Note: AssetObservation dimension is shared - truncated in Common section
+    PRINT 'Deleting AssetObservations2 dataset tables...';
+    -- Note: AssetObservation/AssetObservationNote dimensions are shared - truncated in Common section
 
     -- ========================================
     -- Audits Dataset
@@ -149,10 +161,11 @@ BEGIN
     -- ========================================
     PRINT 'Deleting shared dimension tables...';
     
-    -- Shared across AssetInspections and AssetObservations
+    -- Shared across AssetInspections2 and AssetObservations2
+    DELETE FROM mart.AssetObservationNote;
     DELETE FROM mart.AssetObservation;
     
-    -- Shared across Assets, AssetInspections, and AssetObservations
+    -- Shared across Assets, AssetInspections2, and AssetObservations2
     DELETE FROM mart.Asset;
     
     -- Shared dimensions
@@ -171,6 +184,7 @@ BEGIN
     -- - mart.ActionStatus
     -- - mart.ActionType
     -- - mart.AssetAssignmentType
+    -- - mart.AssetInspectionStatus
     -- - mart.AssetObservationStatus
     -- - mart.AssetPropertyType
     -- - mart.AssetStatus

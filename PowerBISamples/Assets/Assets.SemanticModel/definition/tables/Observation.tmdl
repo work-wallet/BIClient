@@ -36,22 +36,6 @@ table Observation
 
 		annotation SummarizationSetBy = User
 
-	column Observation
-		dataType: string
-		lineageTag: a989b7bd-454d-471d-8489-c7dfbd3022bc
-		summarizeBy: none
-		sourceColumn: Observation
-
-		annotation SummarizationSetBy = Automatic
-
-	column 'Action Taken'
-		dataType: string
-		lineageTag: c2904051-2c13-4e27-b7cf-f4aacc3fd571
-		summarizeBy: none
-		sourceColumn: Action Taken
-
-		annotation SummarizationSetBy = Automatic
-
 	column AssetObservationStatus_key
 		dataType: int64
 		isHidden
@@ -64,12 +48,12 @@ table Observation
 
 		annotation SummarizationSetBy = Automatic
 
-	column ObservedOn
+	column 'Observed On'
 		dataType: dateTime
 		formatString: dd/mm/yyyy hh:nn
 		lineageTag: a610fdae-038f-47f8-bcbe-590bc6425751
 		summarizeBy: none
-		sourceColumn: ObservedOn
+		sourceColumn: Observed On
 
 		variation Variation
 			isDefault
@@ -80,20 +64,12 @@ table Observation
 
 		annotation PBI_FormatHint = {"isDateTimeCustom":true}
 
-	column ObservedBy
-		dataType: string
-		lineageTag: 58feb9bb-0344-4ee9-84f3-1f3b43c15bb6
-		summarizeBy: none
-		sourceColumn: ObservedBy
-
-		annotation SummarizationSetBy = Automatic
-
-	column ClosedOn
+	column 'Closed On'
 		dataType: dateTime
-		formatString: General Date
+		formatString: dd/mm/yyyy hh:nn
 		lineageTag: 97f8b651-8fd3-4b84-beb4-a41645c721a4
 		summarizeBy: none
-		sourceColumn: ClosedOn
+		sourceColumn: Closed On
 
 		variation Variation
 			isDefault
@@ -102,19 +78,13 @@ table Observation
 
 		annotation SummarizationSetBy = Automatic
 
-	column ClosedBy
-		dataType: string
-		lineageTag: ba15dfe7-0345-4fb9-9e8d-5e3c3393b240
-		summarizeBy: none
-		sourceColumn: ClosedBy
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
 
-		annotation SummarizationSetBy = Automatic
-
-	column ClosureNotes
+	column 'Closure Notes'
 		dataType: string
 		lineageTag: 530be007-3f19-454f-b314-0cc84bc1a9ce
 		summarizeBy: none
-		sourceColumn: ClosureNotes
+		sourceColumn: Closure Notes
 
 		annotation SummarizationSetBy = Automatic
 
@@ -167,14 +137,53 @@ table Observation
 
 		annotation SummarizationSetBy = Automatic
 
+	column ObservedByContact_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 9395f753-85ec-48d6-b2b6-1e6d7ecaeaba
+		summarizeBy: none
+		sourceColumn: ObservedByContact_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column ClosedByContact_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: a0848de6-a453-4e4a-9c2d-fd3bc7c72788
+		summarizeBy: none
+		sourceColumn: ClosedByContact_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column 'Observation Notes' = CONCATENATEX (RELATEDTABLE('Observation Note'), 'Observation Note'[Notes], ", ", 'Observation Note'[Notes], ASC)
+		lineageTag: bd9692ca-cf5f-4922-8dc9-251aa9447b61
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column IsFinalised
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 9230c0f6-e2f3-45f0-aa9f-4981cbca9309
+		summarizeBy: none
+		sourceColumn: IsFinalised
+
+		annotation SummarizationSetBy = Automatic
+
 	partition Observation = m
 		mode: import
 		source =
 				let
-				    Source = Sql.Database("demo-workwalletbi.database.windows.net", "demo-workwalletbi"),
+				    Source = Sql.Database("CAKESOFBREAD", "WorkWalletBIClient_Local"),
 				    mart_AssetObservation = Source{[Schema="mart",Item="AssetObservation"]}[Data],
 				    #"Removed Columns" = Table.RemoveColumns(mart_AssetObservation,{"_created", "_edited"}),
-				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"Details", "Observation"}, {"ActionTaken", "Action Taken"}}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"ClosedOn", "Closed On"}, {"ObservedOn", "Observed On"}, {"ClosureNotes", "Closure Notes"}}),
 				    #"Filtered Rows" = Table.SelectRows(#"Renamed Columns", each true)
 				in
 				    #"Filtered Rows"

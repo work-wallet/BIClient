@@ -1,0 +1,23 @@
+DROP TYPE IF EXISTS mart.ETL_AssetInspectionScoredResponseTable;
+GO
+
+CREATE TYPE mart.ETL_AssetInspectionScoredResponseTable AS TABLE
+(
+    InspectionId uniqueidentifier NOT NULL
+    ,BranchId uniqueidentifier NOT NULL
+    ,OptionId uniqueidentifier NOT NULL
+    ,Branch nvarchar(max) NOT NULL
+    ,[Value] nvarchar(100) NOT NULL
+    ,[Order] int NOT NULL
+    ,TotalScore int NOT NULL
+    ,TotalPotentialScore int NOT NULL
+    ,PercentageScore decimal(7,6) NOT NULL
+    ,Defect bit NOT NULL
+    ,GradingSetOptionId uniqueidentifier NOT NULL
+    ,SectionId uniqueidentifier NOT NULL
+    ,Section nvarchar(250) NOT NULL
+    ,OrderInSection int NOT NULL
+    ,WalletId uniqueidentifier NOT NULL
+    ,PRIMARY KEY (InspectionId, BranchId, OptionId)
+);
+GO

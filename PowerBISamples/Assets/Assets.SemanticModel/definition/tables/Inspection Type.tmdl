@@ -1,0 +1,166 @@
+table 'Inspection Type'
+	lineageTag: 64368020-40f9-4b66-a078-cd9047e7bb11
+
+	column AssetInspectionType_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: f3a85025-c971-4f27-ae5f-32324a7a7a92
+		summarizeBy: none
+		sourceColumn: AssetInspectionType_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column InspectionTypeId
+		dataType: string
+		isHidden
+		lineageTag: 4f4c0e8a-5db2-4029-a293-030d7d6c7567
+		summarizeBy: none
+		sourceColumn: InspectionTypeId
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Inspection Type Version'
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: d24a6d47-3f45-4d33-a4bf-f28f4594199d
+		summarizeBy: none
+		sourceColumn: Inspection Type Version
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Inspection Type'
+		dataType: string
+		lineageTag: e286d556-6a46-4ca4-953f-383e8c282bd5
+		summarizeBy: none
+		sourceColumn: Inspection Type
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Inspection Type Description'
+		dataType: string
+		lineageTag: f8b83466-5505-40cc-bc46-3350788685f4
+		summarizeBy: none
+		sourceColumn: Inspection Type Description
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Scoring Enabled'
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: d1622300-5359-4cdf-afd7-a078ec49e6cf
+		summarizeBy: none
+		sourceColumn: Scoring Enabled
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Display Percentage'
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 287303e1-fed2-425f-a3c4-aefd5bba2bde
+		summarizeBy: none
+		sourceColumn: Display Percentage
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Display Total Score'
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: c1815c72-a72a-4365-85f5-1e09b1aad680
+		summarizeBy: none
+		sourceColumn: Display Total Score
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Display Average Score'
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: c2ced678-af9c-4939-b477-efd54af952b0
+		summarizeBy: none
+		sourceColumn: Display Average Score
+
+		annotation SummarizationSetBy = Automatic
+
+	column GradingSetId
+		dataType: string
+		isHidden
+		lineageTag: 78440965-1a93-4a08-a305-620de39ee56c
+		summarizeBy: none
+		sourceColumn: GradingSetId
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column GradingSetVersion
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 85226030-7654-4836-ba4e-5b2438e98efc
+		summarizeBy: none
+		sourceColumn: GradingSetVersion
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Grading Set'
+		dataType: string
+		lineageTag: 8cbe00d3-43d0-4849-bfb7-c852a994352f
+		summarizeBy: none
+		sourceColumn: Grading Set
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Grading Set Is Percentage'
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: cb7a0087-2055-4e6f-937a-e1ff5aa26188
+		summarizeBy: none
+		sourceColumn: Grading Set Is Percentage
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Grading Set Is Score'
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: ff3812e8-3bbe-4e6d-85d5-7987011b0974
+		summarizeBy: none
+		sourceColumn: Grading Set Is Score
+
+		annotation SummarizationSetBy = Automatic
+
+	column Wallet_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 6faefbf6-6e27-4e37-862f-f528da473940
+		summarizeBy: none
+		sourceColumn: Wallet_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Inspection Type' = m
+		mode: import
+		source =
+				let
+				  Source = Sql.Database("CAKESOFBREAD", "WorkWalletBIClient_Local"),
+				  #"Navigation 1" = Source{[Schema = "mart", Item = "AssetInspectionType"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(#"Navigation 1",{"_created", "_edited"}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"InspectionTypeVersion", "Inspection Type Version"}, {"InspectionType", "Inspection Type"}, {"Description", "Inspection Type Description"}, {"ScoringEnabled", "Scoring Enabled"}, {"DisplayPercentage", "Display Percentage"}, {"DisplayTotalScore", "Display Total Score"}, {"DisplayAverageScore", "Display Average Score"}, {"GradingSetIsPercentage", "Grading Set Is Percentage"}, {"GradingSetIsScore", "Grading Set Is Score"}, {"GradingSet", "Grading Set"}})
+				in
+				  #"Renamed Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

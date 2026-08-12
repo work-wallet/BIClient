@@ -18,7 +18,7 @@ Two distinct usage paths serve different user scenarios:
 4. Quick Start: Stored procs in `mart` schema parse JSON into star schema tables.
 5. Direct API: Users handle JSON processing and storage themselves.
 
-Supported datasets (see `DataSets.cs` for mapping): Actions, Assets (three modules: Assets, AssetInspections, AssetObservations), Audits (AUDIT2), Inductions, Permits, PPE (three modules: PPEAssignments, PPEStockHistories, PPEStocks), ReportedIssues, SafetyCards.
+Supported datasets (see `DataSets.cs` for mapping): Actions, Assets (three modules: Assets, AssetInspections2, AssetObservations2), Audits (AUDIT2), Inductions, Permits, PPE (three modules: PPEAssignments, PPEStockHistories, PPEStocks), ReportedIssues, SafetyCards.
 
 ## 3. Config & Deployment
 - Multiple wallets: `AgentWallets[]` in config.

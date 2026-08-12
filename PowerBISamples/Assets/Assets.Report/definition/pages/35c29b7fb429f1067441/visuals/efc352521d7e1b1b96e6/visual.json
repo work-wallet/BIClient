@@ -1,5 +1,5 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.11.0/schema.json",
   "name": "efc352521d7e1b1b96e6",
   "position": {
     "x": 0,
@@ -28,7 +28,7 @@
                             }
                           },
                           "Name": "Variation",
-                          "Property": "ObservedOn"
+                          "Property": "Observed On"
                         }
                       },
                       "Hierarchy": "Date Hierarchy"
@@ -54,7 +54,7 @@
                             }
                           },
                           "Name": "Variation",
-                          "Property": "ObservedOn"
+                          "Property": "Observed On"
                         }
                       },
                       "Hierarchy": "Date Hierarchy"
@@ -80,7 +80,7 @@
                             }
                           },
                           "Name": "Variation",
-                          "Property": "ObservedOn"
+                          "Property": "Observed On"
                         }
                       },
                       "Hierarchy": "Date Hierarchy"

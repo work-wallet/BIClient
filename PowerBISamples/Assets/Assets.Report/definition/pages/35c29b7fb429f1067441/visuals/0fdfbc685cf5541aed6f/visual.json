@@ -1,5 +1,5 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.11.0/schema.json",
   "name": "0fdfbc685cf5541aed6f",
   "position": {
     "x": 0,
@@ -23,7 +23,7 @@
                       "Entity": "Observation"
                     }
                   },
-                  "Property": "ObservedOn"
+                  "Property": "Observed On"
                 }
               },
               "queryRef": "Observation.ObservedOn",
@@ -43,7 +43,7 @@
                     "Entity": "Observation"
                   }
                 },
-                "Property": "ObservedOn"
+                "Property": "Observed On"
               }
             },
             "direction": "Ascending"
@@ -124,7 +124,7 @@
                                 "Source": "o"
                               }
                             },
-                            "Property": "ObservedOn"
+                            "Property": "Observed On"
                           }
                         },
                         "LowerBound": {

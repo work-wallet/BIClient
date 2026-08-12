@@ -6,7 +6,7 @@ model Model
 		legacyRedirects
 		returnErrorValuesAsNull
 
-annotation PBI_QueryOrder = ["Asset","Assignment","Assignment Fact","Assignment Type","Property","Property Fact","Property Type","Asset Status","Wallet","Contact","Inspection Checklist Item","Inspection Checklist Item Fact","Inspection Observation Fact","Inspection Property","Inspection Property Fact","Observation","Observation Status","Inspection"]
+annotation PBI_QueryOrder = ["Asset","Assignment","Assignment Fact","Assignment Type","Property","Property Fact","Property Type","Asset Status","Wallet","Contact","Inspection Observation Fact","Observation","Observation Status","Inspection","Branch Option","Branch Option Fact","Checklist Answer Fact","Checklist Option","Date Time Answer Fact","Date Time Question","Inspected By Fact","Numeric Answer Fact","Numeric Question","Scored Response","Scored Response Fact","Score Section","Score Section Fact","Score Tag","Score Tag Fact","Inspection Status","Inspection Type","Observation Note","Grading Set Option","Unit","Inspection Grading Set Option","Score Tag Grading Set Option","Score Section Grading Set Option","Scored Response Grading Set Option","Inspection Workflow Component Type"]
 
 annotation __PBI_TimeIntelligenceEnabled = 1
 
@@ -26,18 +26,47 @@ ref table 'Asset Status'
 ref table Wallet
 ref table LocalDateTable_9ad9a484-b478-496a-8fab-70e22744f21a
 ref table Contact
-ref table 'Inspection Checklist Item'
-ref table 'Inspection Checklist Item Fact'
 ref table 'Inspection Observation Fact'
-ref table 'Inspection Property'
-ref table 'Inspection Property Fact'
 ref table Observation
 ref table LocalDateTable_0f8b1d9b-09e1-4b61-bd48-b9c9f1d9c3b4
 ref table LocalDateTable_dd78a9fb-3b9f-416c-b429-1578f95c2eb0
 ref table 'Observation Status'
 ref table Inspection
-ref table LocalDateTable_2dee3fba-5892-488e-bf9f-c421d29d1206
 ref table LocalDateTable_63a987a6-743d-4041-aed1-6b8fe393d68e
+ref table LocalDateTable_6f97f8c7-3065-4a3a-a9af-6233a93072c8
+ref table LocalDateTable_667c89c4-6ac5-42c7-ae87-415e9f161b4a
+ref table LocalDateTable_724f1fd4-ed70-495c-9bec-2ae3a2ca53fa
+ref table LocalDateTable_cbf297e1-76d7-4564-a3c8-52c69430838f
+ref table LocalDateTable_a50c46dd-af9d-44c6-ab1d-e8e6381159df
+ref table 'Branch Option'
+ref table 'Branch Option Fact'
+ref table 'Checklist Answer Fact'
+ref table 'Checklist Option'
+ref table 'Date Time Answer Fact'
+ref table LocalDateTable_4a2d7749-8217-4e21-bc03-8e4adafc252b
+ref table LocalDateTable_6be0e690-bde4-4587-9c54-7d753e50fe6b
+ref table 'Date Time Question'
+ref table 'Inspected By Fact'
+ref table 'Numeric Answer Fact'
+ref table 'Numeric Question'
+ref table 'Scored Response'
+ref table 'Scored Response Fact'
+ref table 'Score Section'
+ref table 'Score Section Fact'
+ref table 'Score Tag'
+ref table 'Score Tag Fact'
+ref table 'Inspection Status'
+ref table 'Inspection Type'
+ref table 'Observation Note'
+ref table LocalDateTable_340854e5-c2b0-43a0-aeb0-db77543a8c8a
+ref table LocalDateTable_768cd4ff-e152-468f-86fc-7173ebb8fe3a
+ref table 'Grading Set Option'
+ref table Unit
+ref table 'Inspection Grading Set Option'
+ref table 'Score Tag Grading Set Option'
+ref table 'Score Section Grading Set Option'
+ref table 'Scored Response Grading Set Option'
+ref table 'Inspection Workflow Component Type'
 
 ref cultureInfo en-GB
 

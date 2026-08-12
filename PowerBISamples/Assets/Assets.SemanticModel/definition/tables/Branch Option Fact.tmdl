@@ -1,0 +1,60 @@
+table 'Branch Option Fact'
+	lineageTag: 68f628c0-b241-4cef-81a1-c385dbdf836c
+
+	column AssetInspection_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 6529427a-9ba0-4459-bbf0-f6505bc877a9
+		summarizeBy: none
+		sourceColumn: AssetInspection_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column AssetInspectionBranchOption_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 6e3e03f8-11a8-48be-b242-7fa59b27e16a
+		summarizeBy: none
+		sourceColumn: AssetInspectionBranchOption_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Wallet_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 0f82d2dc-237a-4ba0-a411-af8866f1b5d6
+		summarizeBy: none
+		sourceColumn: Wallet_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column 'Branch Option Count' = 1
+		formatString: 0
+		lineageTag: 3ef4c348-2971-43e4-8a43-e9a750f78cc0
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Branch Option Fact' = m
+		mode: import
+		source =
+				let
+				  Source = Sql.Database("CAKESOFBREAD", "WorkWalletBIClient_Local"),
+				  #"Navigation 1" = Source{[Schema = "mart", Item = "AssetInspectionBranchOptionFact"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(#"Navigation 1",{"_created", "_edited"})
+				in
+				  #"Removed Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

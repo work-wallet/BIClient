@@ -11,80 +11,76 @@ BEGIN
         SELECT
             o.ObservationId
             ,a.Asset_key
-            ,o.Details
-            ,o.ActionTaken
-            ,aostat.AssetObservationStatus_key
+            ,s.AssetObservationStatus_key
             ,o.ObservedOn
-            ,o.ObservedBy
+            ,observer.Contact_key AS ObservedByContact_key
             ,o.Deleted
             ,o.ClosedOn
-            ,o.ClosedBy
+            ,closer.Contact_key AS ClosedByContact_key
             ,o.ClosureNotes
+            ,o.IsFinalised
             ,w.Wallet_key
         FROM
             @observationTable AS o
             INNER JOIN mart.Asset AS a ON o.AssetId = a.AssetId
-            INNER JOIN mart.AssetObservationStatus AS aostat ON o.ObservationStatusCode = aostat.AssetObservationStatusCode
+            INNER JOIN mart.AssetObservationStatus AS s ON o.ObservationStatusCode = s.AssetObservationStatusCode
+            LEFT JOIN mart.Contact AS observer ON o.ObservedByContactId = observer.ContactId
+            LEFT JOIN mart.Contact AS closer ON o.ClosedByContactId = closer.ContactId
             INNER JOIN mart.Wallet AS w ON o.WalletId = w.WalletId
     ) AS source
     ON target.ObservationId = source.ObservationId
     WHEN MATCHED AND (
         target.Asset_key <> source.Asset_key
-        OR target.Details <> source.Details
-        OR target.ActionTaken <> source.ActionTaken
         OR target.AssetObservationStatus_key <> source.AssetObservationStatus_key
         OR target.ObservedOn <> source.ObservedOn
-        OR target.ObservedBy <> source.ObservedBy
+        OR target.ObservedByContact_key IS DISTINCT FROM source.ObservedByContact_key
         OR target.Deleted <> source.Deleted
         OR target.ClosedOn IS DISTINCT FROM source.ClosedOn
-        OR target.ClosedBy <> source.ClosedBy
+        OR target.ClosedByContact_key IS DISTINCT FROM source.ClosedByContact_key
         OR target.ClosureNotes <> source.ClosureNotes
+        OR target.IsFinalised <> source.IsFinalised
         OR target.Wallet_key <> source.Wallet_key
     )
     THEN
         UPDATE SET
             Asset_key = source.Asset_key
-            ,Details = source.Details
-            ,ActionTaken = source.ActionTaken
             ,AssetObservationStatus_key = source.AssetObservationStatus_key
             ,ObservedOn = source.ObservedOn
-            ,ObservedBy = source.ObservedBy
+            ,ObservedByContact_key = source.ObservedByContact_key
             ,Deleted = source.Deleted
             ,ClosedOn = source.ClosedOn
-            ,ClosedBy = source.ClosedBy
+            ,ClosedByContact_key = source.ClosedByContact_key
             ,ClosureNotes = source.ClosureNotes
+            ,IsFinalised = source.IsFinalised
             ,Wallet_key = source.Wallet_key
             ,_edited = SYSUTCDATETIME()
     WHEN NOT MATCHED BY TARGET THEN
         INSERT (
             ObservationId
             ,Asset_key
-            ,Details
-            ,ActionTaken
             ,AssetObservationStatus_key
             ,ObservedOn
-            ,ObservedBy
+            ,ObservedByContact_key
             ,Deleted
             ,ClosedOn
-            ,ClosedBy
+            ,ClosedByContact_key
             ,ClosureNotes
+            ,IsFinalised
             ,Wallet_key
         ) VALUES (
             source.ObservationId
             ,source.Asset_key
-            ,source.Details
-            ,source.ActionTaken
             ,source.AssetObservationStatus_key
             ,source.ObservedOn
-            ,source.ObservedBy
+            ,source.ObservedByContact_key
             ,source.Deleted
             ,source.ClosedOn
-            ,source.ClosedBy
+            ,source.ClosedByContact_key
             ,source.ClosureNotes
+            ,source.IsFinalised
             ,source.Wallet_key
         );
 
     PRINT 'MERGE mart.AssetObservation, number of rows = ' + CAST(@@ROWCOUNT AS varchar);
-
 END
 GO

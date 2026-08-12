@@ -10,8 +10,8 @@
       "nodes": [
         {
           "location": {
-            "x": 390.26721224059611,
-            "y": 204.94042218215139
+            "x": 390.26721224058696,
+            "y": 204.94042218207642
           },
           "nodeIndex": "Action",
           "size": {
@@ -22,8 +22,8 @@
         },
         {
           "location": {
-            "x": 677.29240636058307,
-            "y": 508.22346205273311
+            "x": 677.292406360574,
+            "y": 508.22346205264125
           },
           "nodeIndex": "Priority",
           "size": {
@@ -34,7 +34,7 @@
         },
         {
           "location": {
-            "x": 174.01723023786789,
+            "x": 174.01723023780033,
             "y": -50
           },
           "nodeIndex": "Status",
@@ -46,8 +46,8 @@
         },
         {
           "location": {
-            "x": 677.3129310301,
-            "y": 67.478517441649331
+            "x": 677.31293103009079,
+            "y": 67.478517441584017
           },
           "nodeIndex": "Type",
           "size": {
@@ -59,7 +59,7 @@
         {
           "location": {
             "x": 50,
-            "y": 154.92127596277808
+            "y": 154.92127596277805
           },
           "nodeIndex": "Action Update",
           "size": {
@@ -70,8 +70,8 @@
         },
         {
           "location": {
-            "x": 103.24653410419285,
-            "y": 507.1813044065571
+            "x": 103.2465341041837,
+            "y": 507.18130440655784
           },
           "nodeIndex": "Wallet",
           "size": {
@@ -82,7 +82,7 @@
         }
       ],
       "name": "All tables",
-      "zoomValue": 98.861615037737224,
+      "zoomValue": 100,
       "pinKeyFieldsToTop": false,
       "showExtraHeaderInfo": false,
       "hideKeyFieldsWhenCollapsed": false,
@@ -103,7 +103,7 @@
           "nodeIndex": "Action",
           "nodeLineageTag": "12176f96-9cf3-4217-974c-5a09a67864cc",
           "size": {
-            "height": 550,
+            "height": 575,
             "width": 234
           },
           "zIndex": 4

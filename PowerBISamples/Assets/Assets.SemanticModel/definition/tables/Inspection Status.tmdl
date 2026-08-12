@@ -1,0 +1,50 @@
+table 'Inspection Status'
+	lineageTag: e152c48b-5883-4ad6-a815-bbc2e7824bd9
+
+	column AssetInspectionStatus_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: f1137981-3d40-452c-96b7-25d6126f26a8
+		summarizeBy: none
+		sourceColumn: AssetInspectionStatus_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column InspectionStatusCode
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: a8a87000-bfeb-4435-9493-3eac6736a86a
+		summarizeBy: none
+		sourceColumn: InspectionStatusCode
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Inspection Status'
+		dataType: string
+		lineageTag: 8f844264-6cb5-4029-b9a1-055c8a1dc54a
+		summarizeBy: none
+		sourceColumn: Inspection Status
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Inspection Status' = m
+		mode: import
+		source =
+				let
+				  Source = Sql.Database("CAKESOFBREAD", "WorkWalletBIClient_Local"),
+				  #"Navigation 1" = Source{[Schema = "mart", Item = "AssetInspectionStatus"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(#"Navigation 1",{"_created", "_edited"}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"InspectionStatus", "Inspection Status"}})
+				in
+				  #"Renamed Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

@@ -4,6 +4,23 @@ All notable changes to this project will be documented in this file.
 
 The format loosely follows Keep a Changelog principles (dates in YYYY-MM-DD). Version numbers align with assembly versions unless otherwise noted.
 
+## [5.0.0] - not yet released
+
+Work Wallet has rewritten Asset Inspections and Asset Observations, bringing them the same rich workflow
+capabilities as Audits (scoring, grading sets, sections/tags, branch logic). This release brings the repo in
+line with that change by replacing the old, simple `AssetInspections`/`AssetObservations` datasets with the
+new `AssetInspections2`/`AssetObservations2` equivalents. **Assets itself is unaffected.**
+
+### Removed (5.0.0)
+
+- **BREAKING**: `AssetInspections` and `AssetObservations` datasets removed entirely - the old v1 API endpoints are dead-ended (always return empty data). Deploying the updated database drops the old asset inspection/observation tables outright; any existing data in them is lost. Back up your database first if you need to retain it.
+
+### Added (5.0.0)
+
+- `AssetInspections2` and `AssetObservations2` datasets, replacing `AssetInspections`/`AssetObservations` with the new audit-style workflow shape (scoring, grading sets, sections, tags, branch logic). Contact identity (inspectors, observers, closers, note authors) is now resolved via `Contacts`/`Contact_key` rather than denormalised name strings, and observation notes are now a proper 1:N dataset rather than single `Details`/`ActionTaken` fields. Requires DB deploy and full reload for the new datasets.
+- `DataSets.cs` and sample `appsettings.json` now reference `AssetInspections2`/`AssetObservations2` in place of the old dataset names.
+- Actions: add `IsDeleted` and `IsOrphaned` columns to `mart.[Action]`, splitting the previously conflated `Deleted` flag into the real delete flag (`IsDeleted`) and an orphan/deactivation flag (`IsOrphaned`). `Deleted` is kept for backward compatibility but is now deprecated.
+
 ## [4.5.1] - 2026-07-18
 
 ### Changed (4.5.1)

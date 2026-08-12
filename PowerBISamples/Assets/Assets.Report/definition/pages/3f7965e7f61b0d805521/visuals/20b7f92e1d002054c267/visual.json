@@ -1,5 +1,5 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.11.0/schema.json",
   "name": "20b7f92e1d002054c267",
   "position": {
     "x": 0,
@@ -28,7 +28,7 @@
                             }
                           },
                           "Name": "Variation",
-                          "Property": "Inspection Date"
+                          "Property": "Inspected On"
                         }
                       },
                       "Hierarchy": "Date Hierarchy"
@@ -37,8 +37,8 @@
                   "Level": "Year"
                 }
               },
-              "queryRef": "Inspection.Inspection Date.Variation.Date Hierarchy.Year",
-              "nativeQueryRef": "Inspection Date Year",
+              "queryRef": "Inspection.Inspected On.Variation.Date Hierarchy.Year",
+              "nativeQueryRef": "Inspected On Year",
               "active": true
             },
             {
@@ -54,7 +54,7 @@
                             }
                           },
                           "Name": "Variation",
-                          "Property": "Inspection Date"
+                          "Property": "Inspected On"
                         }
                       },
                       "Hierarchy": "Date Hierarchy"
@@ -63,8 +63,8 @@
                   "Level": "Month"
                 }
               },
-              "queryRef": "Inspection.Inspection Date.Variation.Date Hierarchy.Month",
-              "nativeQueryRef": "Inspection Date Month",
+              "queryRef": "Inspection.Inspected On.Variation.Date Hierarchy.Month",
+              "nativeQueryRef": "Inspected On Month",
               "active": true
             },
             {
@@ -80,7 +80,7 @@
                             }
                           },
                           "Name": "Variation",
-                          "Property": "Inspection Date"
+                          "Property": "Inspected On"
                         }
                       },
                       "Hierarchy": "Date Hierarchy"
@@ -89,8 +89,8 @@
                   "Level": "Day"
                 }
               },
-              "queryRef": "Inspection.Inspection Date.Variation.Date Hierarchy.Day",
-              "nativeQueryRef": "Inspection Date Day",
+              "queryRef": "Inspection.Inspected On.Variation.Date Hierarchy.Day",
+              "nativeQueryRef": "Inspected On Day",
               "active": false
             }
           ]
@@ -102,13 +102,13 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Inspection"
+                      "Entity": "Inspection Type"
                     }
                   },
                   "Property": "Inspection Type"
                 }
               },
-              "queryRef": "Inspection.Inspection Type",
+              "queryRef": "Inspection Type.Inspection Type",
               "nativeQueryRef": "Inspection Type"
             }
           ]

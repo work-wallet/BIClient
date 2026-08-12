@@ -6,8 +6,8 @@ internal static class DataSets
     private static Dictionary<string, string> _entries = new()
     {
         { "Actions", "ACTION_UPDATED" },
-        { "AssetInspections", "ASSET_INSPECTION_UPDATED" },
-        { "AssetObservations", "ASSET_OBSERVATION_UPDATED" },
+        { "AssetInspections2", "ASSET_INSPECTION2_UPDATED" },
+        { "AssetObservations2", "ASSET_OBSERVATION2_UPDATED" },
         { "Assets", "ASSET_UPDATED" },
         { "Audits", "AUDIT2_UPDATED" },
         { "Inductions", "INDUCTION_UPDATED" },

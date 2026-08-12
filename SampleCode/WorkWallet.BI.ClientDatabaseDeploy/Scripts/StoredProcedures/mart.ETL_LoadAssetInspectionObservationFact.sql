@@ -10,21 +10,25 @@ BEGIN
     (
         AssetInspection_key
         ,AssetObservation_key
-        ,AssetInspectionChecklistItem_key
+        ,WorkflowComponentId
+        ,InspectionWorkflowComponentType_key
+        ,WorkflowComponentDescription
         ,[New]
         ,Wallet_key
     )
     SELECT
         ai.AssetInspection_key
         ,ao.AssetObservation_key
-        ,aici.AssetInspectionChecklistItem_key
+        ,io.WorkflowComponentId
+        ,wct.InspectionWorkflowComponentType_key
+        ,io.WorkflowComponentDescription
         ,io.[New]
         ,w.Wallet_key
     FROM
         @inspectionObservationTable AS io
         INNER JOIN mart.AssetInspection AS ai ON io.InspectionId = ai.InspectionId
         INNER JOIN mart.AssetObservation AS ao ON io.ObservationId = ao.ObservationId
-        LEFT JOIN mart.AssetInspectionChecklistItem AS aici ON io.ChecklistItemId = aici.ChecklistItemId
+        LEFT JOIN mart.InspectionWorkflowComponentType AS wct ON io.WorkflowComponentTypeCode = wct.WorkflowComponentTypeCode
         INNER JOIN mart.Wallet AS w ON io.WalletId = w.WalletId;
 
     PRINT 'INSERT INTO mart.AssetInspectionObservationFact, number of rows = ' + CAST(@@ROWCOUNT AS varchar);

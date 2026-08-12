@@ -1,12 +1,12 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.9.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.11.0/schema.json",
   "name": "8acfae1bd3a7255029a2",
   "position": {
     "x": 0,
-    "y": 93.400503778337523,
+    "y": 93.587521663778162,
     "z": 0,
-    "height": 626.59949622166243,
-    "width": 1280.4030226700252
+    "height": 626.41247833622185,
+    "width": 1280.2772963604853
   },
   "visual": {
     "visualType": "tableEx",
@@ -241,5 +241,107 @@
       ]
     },
     "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "6d6affac08cb4ecb9106",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Action"
+              }
+            },
+            "Property": "Created On"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "cd95d795c89350565485",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Type"
+              }
+            },
+            "Property": "Type"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "93e49a800090627c2d1c",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Action"
+              }
+            },
+            "Property": "Target Reference"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "eba6bee40c96400d30c9",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Priority"
+              }
+            },
+            "Property": "Priority"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "2964adf26755e9d1d715",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Action"
+              }
+            },
+            "Property": "Title"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "c0076b4d2d6ae32ada4c",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Action"
+              }
+            },
+            "Property": "Assigned To"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "7cfedc41c408a56c9060",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Action"
+              }
+            },
+            "Property": "Due On"
+          }
+        },
+        "type": "Categorical"
+      }
+    ]
   }
 }

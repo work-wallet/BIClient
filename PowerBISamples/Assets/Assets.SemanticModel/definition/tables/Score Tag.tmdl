@@ -1,0 +1,73 @@
+table 'Score Tag'
+	lineageTag: f061b916-c1b9-4296-965c-26e8d4fbb1d1
+
+	column AssetInspectionScoreTag_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 86f4e64d-3c7c-45fc-af43-f0991116ffb4
+		summarizeBy: none
+		sourceColumn: AssetInspectionScoreTag_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column TagId
+		dataType: string
+		isHidden
+		lineageTag: 977374d1-13f5-4e21-ada3-7fef285ef7c6
+		summarizeBy: none
+		sourceColumn: TagId
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Tag Version'
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 22387b36-5646-41b2-944a-3bfffdd2302b
+		summarizeBy: none
+		sourceColumn: Tag Version
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column Tag
+		dataType: string
+		lineageTag: 0a1fc201-516e-498a-a3a6-d37f2019d4c5
+		summarizeBy: none
+		sourceColumn: Tag
+
+		annotation SummarizationSetBy = Automatic
+
+	column Wallet_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 00660082-aa94-462b-8ac7-765aff61b2ec
+		summarizeBy: none
+		sourceColumn: Wallet_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Score Tag' = m
+		mode: import
+		source =
+				let
+				  Source = Sql.Database("CAKESOFBREAD", "WorkWalletBIClient_Local"),
+				  #"Navigation 1" = Source{[Schema = "mart", Item = "AssetInspectionScoreTag"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(#"Navigation 1",{"_created", "_edited"}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"TagVersion", "Tag Version"}})
+				in
+				  #"Renamed Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

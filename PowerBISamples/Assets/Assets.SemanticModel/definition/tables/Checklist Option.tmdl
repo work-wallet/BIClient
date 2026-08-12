@@ -1,0 +1,135 @@
+table 'Checklist Option'
+	lineageTag: a3d807e9-4d9b-4781-9fbc-cc808100bdd7
+
+	column AssetInspectionChecklistOption_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 90537c17-f733-4b4e-abb1-0c8ffc0511c0
+		summarizeBy: none
+		sourceColumn: AssetInspectionChecklistOption_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column ChecklistId
+		dataType: string
+		isHidden
+		lineageTag: aaa03c89-1f77-43c7-8e7f-247cf0de46f9
+		summarizeBy: none
+		sourceColumn: ChecklistId
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column OptionId
+		dataType: string
+		isHidden
+		lineageTag: f441bb04-4ebb-4e56-950a-e48762b8eafa
+		summarizeBy: none
+		sourceColumn: OptionId
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Checklist Question'
+		dataType: string
+		lineageTag: 13820ed2-1c2f-4c1a-a8cf-cd5c47013fe0
+		summarizeBy: none
+		sourceColumn: Checklist Question
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Checklist Answer'
+		dataType: string
+		lineageTag: 3410d099-91be-4a2a-a9a7-8416f9d01a6f
+		summarizeBy: none
+		sourceColumn: Checklist Answer
+
+		annotation SummarizationSetBy = Automatic
+
+	column Mandatory
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 8ffe4fe0-a319-4479-8cc8-b2f5c66e1ce2
+		summarizeBy: none
+		sourceColumn: Mandatory
+
+		annotation SummarizationSetBy = Automatic
+
+	column Order
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: cc5591d3-15cf-4ecb-842c-7bae2b9d078d
+		summarizeBy: none
+		sourceColumn: Order
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column Section
+		dataType: string
+		lineageTag: d18cede8-a01d-4e51-b711-0ff3266b5731
+		summarizeBy: none
+		sourceColumn: Section
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Order In Section'
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 730003af-0d8e-4394-9c19-d164a19a9e44
+		summarizeBy: none
+		sourceColumn: Order In Section
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column Wallet_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 2f661c10-59bb-41ad-b7c4-c208428c7b60
+		summarizeBy: none
+		sourceColumn: Wallet_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column Question = Format('Checklist Option'[Order In Section], "00") & " - " & 'Checklist Option'[Checklist Question]
+		lineageTag: 44e8592e-e9f4-4ffd-ab4b-9e6153a2bd0d
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column Answer = ```
+			'Checklist Option'[Order] & " - " & 'Checklist Option'[Checklist Answer] 
+			```
+		lineageTag: 52c58ab1-3295-43b6-a0e5-cf234929f9e1
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Checklist Option' = m
+		mode: import
+		source =
+				let
+				  Source = Sql.Database("CAKESOFBREAD", "WorkWalletBIClient_Local"),
+				  #"Navigation 1" = Source{[Schema = "mart", Item = "AssetInspectionChecklistOption"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(#"Navigation 1",{"_created", "_edited"}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"Value", "Checklist Answer"}, {"OrderInSection", "Order In Section"}, {"Question", "Checklist Question"}})
+				in
+				  #"Renamed Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

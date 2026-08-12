@@ -22,6 +22,8 @@ BEGIN
             ,a.OriginalDueOn
             ,astat.ActionStatus_key
             ,a.Deleted
+            ,a.IsDeleted
+            ,a.IsOrphaned
             ,a.CreatedOn
             ,w.Wallet_key
         FROM
@@ -45,6 +47,8 @@ BEGIN
         OR target.OriginalDueOn <> source.OriginalDueOn
         OR target.ActionStatus_key <> source.ActionStatus_key
         OR target.Deleted <> source.Deleted
+        OR target.IsDeleted <> source.IsDeleted
+        OR target.IsOrphaned <> source.IsOrphaned
         OR target.CreatedOn <> source.CreatedOn
         OR target.Wallet_key <> source.Wallet_key
     )
@@ -62,6 +66,8 @@ BEGIN
             ,OriginalDueOn = source.OriginalDueOn
             ,ActionStatus_key = source.ActionStatus_key
             ,Deleted = source.Deleted
+            ,IsDeleted = source.IsDeleted
+            ,IsOrphaned = source.IsOrphaned
             ,CreatedOn = source.CreatedOn
             ,Wallet_key = source.Wallet_key
             ,_edited = SYSUTCDATETIME()
@@ -80,6 +86,8 @@ BEGIN
             ,OriginalDueOn
             ,ActionStatus_key
             ,Deleted
+            ,IsDeleted
+            ,IsOrphaned
             ,CreatedOn
             ,Wallet_key
         ) VALUES (
@@ -96,6 +104,8 @@ BEGIN
             ,source.OriginalDueOn
             ,source.ActionStatus_key
             ,source.Deleted
+            ,source.IsDeleted
+            ,source.IsOrphaned
             ,source.CreatedOn
             ,source.Wallet_key
         );

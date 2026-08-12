@@ -1,5 +1,5 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.9.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.11.0/schema.json",
   "name": "11e04c0ca9f4ccd8cc60",
   "position": {
     "x": 0,
@@ -50,13 +50,13 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Inspection"
+                      "Entity": "Inspection Type"
                     }
                   },
                   "Property": "Inspection Type"
                 }
               },
-              "queryRef": "Inspection.Inspection Type",
+              "queryRef": "Inspection Type.Inspection Type",
               "nativeQueryRef": "Inspection Type"
             },
             {
@@ -67,10 +67,10 @@
                       "Entity": "Inspection"
                     }
                   },
-                  "Property": "Inspection Date"
+                  "Property": "Inspected On"
                 }
               },
-              "queryRef": "Inspection.Inspection Date",
+              "queryRef": "Inspection.Inspected On",
               "nativeQueryRef": "Date of Inspection",
               "displayName": "Date of Inspection"
             },
@@ -110,23 +110,6 @@
             }
           ]
         }
-      },
-      "sortDefinition": {
-        "sort": [
-          {
-            "field": {
-              "Column": {
-                "Expression": {
-                  "SourceRef": {
-                    "Entity": "Inspection"
-                  }
-                },
-                "Property": "Inspection Date"
-              }
-            },
-            "direction": "Descending"
-          }
-        ]
       }
     },
     "objects": {
@@ -143,20 +126,6 @@
           },
           "selector": {
             "metadata": "Asset.Reference"
-          }
-        },
-        {
-          "properties": {
-            "value": {
-              "expr": {
-                "Literal": {
-                  "Value": "244.42479292980298D"
-                }
-              }
-            }
-          },
-          "selector": {
-            "metadata": "Inspection.Inspection Type"
           }
         },
         {
@@ -220,35 +189,7 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "126D"
-                }
-              }
-            }
-          },
-          "selector": {
-            "metadata": "Inspection.Inspection Date"
-          }
-        },
-        {
-          "properties": {
-            "value": {
-              "expr": {
-                "Literal": {
-                  "Value": "136.0151934521623D"
-                }
-              }
-            }
-          },
-          "selector": {
-            "metadata": "Inspection.Inspected By"
-          }
-        },
-        {
-          "properties": {
-            "value": {
-              "expr": {
-                "Literal": {
-                  "Value": "273.83870967741933D"
+                  "Value": "310.0485996158426D"
                 }
               }
             }
@@ -269,6 +210,48 @@
           },
           "selector": {
             "metadata": "Sum(Inspection.Defects Raised)"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "266.4401897957055D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Inspection Type.Inspection Type"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "312.3067576366768D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Inspection.Inspected On"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "136.889083349266D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Inspection.Inspected By"
           }
         }
       ],

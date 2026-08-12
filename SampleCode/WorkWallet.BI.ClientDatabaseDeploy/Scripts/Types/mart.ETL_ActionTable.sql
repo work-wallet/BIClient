@@ -15,7 +15,9 @@ CREATE TYPE mart.ETL_ActionTable AS TABLE
     ,DueOn date NOT NULL
     ,OriginalDueOn date NOT NULL
     ,ActionStatusCode int NOT NULL
-    ,Deleted bit NOT NULL
+    ,Deleted bit NOT NULL -- DEPRECATED: historically true if either actually deleted or orphaned; use IsDeleted/IsOrphaned instead
+    ,IsDeleted bit NOT NULL
+    ,IsOrphaned bit NOT NULL
     ,CreatedOn datetimeoffset(7) NOT NULL
     ,WalletId uniqueidentifier NOT NULL
     ,PRIMARY KEY (CreatedOn, ActionId, ActionTypeCode) -- putting CreatedOn first to order the data load

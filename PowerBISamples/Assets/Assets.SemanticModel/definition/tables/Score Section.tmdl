@@ -1,0 +1,101 @@
+table 'Score Section'
+	lineageTag: de37126a-94e6-42d4-a3bc-14df97aa4373
+
+	column AssetInspectionScoreSection_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 85c3cd2a-0e0f-4493-ac2c-09ed1db18a0b
+		summarizeBy: none
+		sourceColumn: AssetInspectionScoreSection_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column AssetInspectionType_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: f222b5d3-866f-4ba8-bf9d-fa8bb947579e
+		summarizeBy: none
+		sourceColumn: AssetInspectionType_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column SectionId
+		dataType: string
+		isHidden
+		lineageTag: 8c164d16-d932-4271-9fb7-ea08b032cfae
+		summarizeBy: none
+		sourceColumn: SectionId
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Section
+		dataType: string
+		lineageTag: b88462bf-47dd-4efb-82b9-8d2fa7046b61
+		summarizeBy: none
+		sourceColumn: Section
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Display Score'
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 28def11c-eaec-47a0-8adc-5d6531e27332
+		summarizeBy: none
+		sourceColumn: Display Score
+
+		annotation SummarizationSetBy = Automatic
+
+	column Order
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: b7d74620-28ec-420d-9ce6-6f186fc7c0b6
+		summarizeBy: none
+		sourceColumn: Order
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column Wallet_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: c9f7e281-7244-45ab-b01c-c707aedc5a10
+		summarizeBy: none
+		sourceColumn: Wallet_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column 'Score Section Count' = 1
+		formatString: 0
+		lineageTag: af5fcc67-d9de-4afa-806b-2595a8ff936e
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Score Section' = m
+		mode: import
+		source =
+				let
+				  Source = Sql.Database("CAKESOFBREAD", "WorkWalletBIClient_Local"),
+				  #"Navigation 1" = Source{[Schema = "mart", Item = "AssetInspectionScoreSection"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(#"Navigation 1",{"_created", "_edited"}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"DisplayScore", "Display Score"}})
+				in
+				  #"Renamed Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

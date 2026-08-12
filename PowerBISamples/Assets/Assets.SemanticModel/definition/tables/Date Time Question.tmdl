@@ -1,0 +1,114 @@
+table 'Date Time Question'
+	lineageTag: ddd548db-ed5c-438b-ae2f-a01e3adcd506
+
+	column AssetInspectionDateTimeQuestion_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: cff26d32-8d71-4f66-87d3-2415ab3c887b
+		summarizeBy: none
+		sourceColumn: AssetInspectionDateTimeQuestion_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column QuestionId
+		dataType: string
+		isHidden
+		lineageTag: a33de032-1f2a-4fec-a43c-081ec35718c2
+		summarizeBy: none
+		sourceColumn: QuestionId
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Date Time Question'
+		dataType: string
+		lineageTag: d8b19cde-c950-4411-9e47-46d396396870
+		summarizeBy: none
+		sourceColumn: Date Time Question
+
+		annotation SummarizationSetBy = Automatic
+
+	column Mandatory
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 634de61f-1f06-44e4-a849-b998e781d632
+		summarizeBy: none
+		sourceColumn: Mandatory
+
+		annotation SummarizationSetBy = Automatic
+
+	column Date
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 2fad7acd-6ad9-49f4-8233-34d0e5fb4ce4
+		summarizeBy: none
+		sourceColumn: Date
+
+		annotation SummarizationSetBy = Automatic
+
+	column Time
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 41e30ed6-e934-4eda-ab48-571712dbea5a
+		summarizeBy: none
+		sourceColumn: Time
+
+		annotation SummarizationSetBy = Automatic
+
+	column Section
+		dataType: string
+		lineageTag: e87fdaeb-c27c-4e3f-b034-a7e823416d8d
+		summarizeBy: none
+		sourceColumn: Section
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Order In Section'
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 1819435b-129a-44f2-9280-ee63be6d058e
+		summarizeBy: none
+		sourceColumn: Order In Section
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column Wallet_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 154f0886-2424-49e9-83f5-b722082e9516
+		summarizeBy: none
+		sourceColumn: Wallet_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column Question = Format('Date Time Question'[Order In Section], "00") & " - " & 'Date Time Question'[Date Time Question]
+		lineageTag: 74d12a70-3d5e-408f-ba1c-a253fb1afc9d
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Date Time Question' = m
+		mode: import
+		source =
+				let
+				  Source = Sql.Database("CAKESOFBREAD", "WorkWalletBIClient_Local"),
+				  #"Navigation 1" = Source{[Schema = "mart", Item = "AssetInspectionDateTimeQuestion"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(#"Navigation 1",{"_created", "_edited"}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"Question", "Date Time Question"}, {"OrderInSection", "Order In Section"}})
+				in
+				  #"Renamed Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

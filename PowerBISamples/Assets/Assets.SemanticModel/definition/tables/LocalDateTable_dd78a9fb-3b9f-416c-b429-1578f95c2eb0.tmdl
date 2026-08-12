@@ -105,7 +105,7 @@ table LocalDateTable_dd78a9fb-3b9f-416c-b429-1578f95c2eb0
 
 	partition LocalDateTable_dd78a9fb-3b9f-416c-b429-1578f95c2eb0 = calculated
 		mode: import
-		source = Calendar(Date(Year(MIN('Observation'[ClosedOn])), 1, 1), Date(Year(MAX('Observation'[ClosedOn])), 12, 31))
+		source = Calendar(Date(Year(MIN('Observation'[Closed On])), 1, 1), Date(Year(MAX('Observation'[Closed On])), 12, 31))
 
 	annotation __PBI_LocalDateTable = true
 
