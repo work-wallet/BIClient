@@ -153,7 +153,7 @@ table 'Inspection Type'
 		mode: import
 		source =
 				let
-				  Source = Sql.Database("CAKESOFBREAD", "WorkWalletBIClient_Local"),
+				  Source = Sql.Database("demo-workwalletbi.database.windows.net", "demo-workwalletbi"),
 				  #"Navigation 1" = Source{[Schema = "mart", Item = "AssetInspectionType"]}[Data],
 				    #"Removed Columns" = Table.RemoveColumns(#"Navigation 1",{"_created", "_edited"}),
 				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"InspectionTypeVersion", "Inspection Type Version"}, {"InspectionType", "Inspection Type"}, {"Description", "Inspection Type Description"}, {"ScoringEnabled", "Scoring Enabled"}, {"DisplayPercentage", "Display Percentage"}, {"DisplayTotalScore", "Display Total Score"}, {"DisplayAverageScore", "Display Average Score"}, {"GradingSetIsPercentage", "Grading Set Is Percentage"}, {"GradingSetIsScore", "Grading Set Is Score"}, {"GradingSet", "Grading Set"}})

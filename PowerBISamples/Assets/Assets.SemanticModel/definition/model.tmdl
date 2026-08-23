@@ -12,6 +12,8 @@ annotation __PBI_TimeIntelligenceEnabled = 1
 
 annotation PBI_ProTooling = ["DevMode"]
 
+annotation PBI_RemovedChildren = [{"remoteItemId":{"foreignKeyRelationship":{"fromTableLocalLineageTag":"4861131b-fd90-4598-8a10-df51089f3380","fromColumnLocalLineageTag":"5115febf-c24a-44fb-9f73-ee934854c44c","toTableLocalLineageTag":"cb3169d4-1e03-420c-b28a-cc0318777229","toColumnLocalLineageTag":"84223e28-7fc5-4283-8085-73e0280cf62e"}},"objectType":"Relationship"}]
+
 ref table Asset
 ref table DateTableTemplate_0c6d385d-5454-474d-88d8-d563a721fbcf
 ref table LocalDateTable_37a1848f-35ef-46e0-8dbf-84012bdaf89c

@@ -971,8 +971,8 @@
       "nodes": [
         {
           "location": {
-            "x": 151,
-            "y": 142
+            "x": 0,
+            "y": 247.82599137459943
           },
           "nodeIndex": "Inspection",
           "nodeLineageTag": "9cb6e7f8-8551-4efe-946a-8bf11e22d406",
@@ -984,8 +984,8 @@
         },
         {
           "location": {
-            "x": 538,
-            "y": 334
+            "x": 426.71345121301738,
+            "y": 442.80391771034465
           },
           "nodeIndex": "Scored Response Fact",
           "nodeLineageTag": "4861131b-fd90-4598-8a10-df51089f3380",
@@ -993,12 +993,12 @@
             "height": 351,
             "width": 297
           },
-          "zIndex": 3
+          "zIndex": 4
         },
         {
           "location": {
-            "x": 944,
-            "y": 72
+            "x": 892.21177962516686,
+            "y": 85.994167186431241
           },
           "nodeIndex": "Scored Response",
           "nodeLineageTag": "d15a6c05-e72c-4300-9f4e-9c2e16532f55",
@@ -1006,18 +1006,18 @@
             "height": 374,
             "width": 291
           },
-          "zIndex": 4
+          "zIndex": 3
         },
         {
           "location": {
-            "x": 916,
-            "y": 542
+            "x": 836,
+            "y": 625.51855626966722
           },
           "nodeIndex": "Scored Response Grading Set Option",
           "nodeLineageTag": "b311e01f-6a21-4fc4-a4a4-ded19da78708",
           "size": {
             "height": 372,
-            "width": 347
+            "width": 402
           },
           "zIndex": 2
         }
@@ -1393,6 +1393,6 @@
       "tablesLocked": false
     }
   ],
-  "selectedDiagram": "Observation",
+  "selectedDiagram": "Main",
   "defaultDiagram": "All tables"
 }

@@ -122,7 +122,7 @@ table 'Checklist Option'
 		mode: import
 		source =
 				let
-				  Source = Sql.Database("CAKESOFBREAD", "WorkWalletBIClient_Local"),
+				  Source = Sql.Database("demo-workwalletbi.database.windows.net", "demo-workwalletbi"),
 				  #"Navigation 1" = Source{[Schema = "mart", Item = "AssetInspectionChecklistOption"]}[Data],
 				    #"Removed Columns" = Table.RemoveColumns(#"Navigation 1",{"_created", "_edited"}),
 				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"Value", "Checklist Answer"}, {"OrderInSection", "Order In Section"}, {"Question", "Checklist Question"}})

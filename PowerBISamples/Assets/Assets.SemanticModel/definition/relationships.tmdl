@@ -235,7 +235,6 @@ relationship 43ec5899-9f3c-4a86-b9d8-bdb244497e45
 
 relationship 7192f08c-a640-4d01-b545-48240346eaba
 	crossFilteringBehavior: bothDirections
-	fromCardinality: one
 	fromColumn: 'Scored Response Fact'.AssetInspectionScoredResponse_key
 	toColumn: 'Scored Response'.AssetInspectionScoredResponse_key
 
@@ -519,15 +518,6 @@ relationship f44b3def-7b22-0479-8213-1a09060d5678
 
 relationship 42cc1dc0-87fa-46b1-a6b6-ba43d82b365a
 	fromColumn: Inspection.GradingSetOption_key
-	toColumn: 'Grading Set Option'.GradingSetOption_key
-
-	annotation PBI_IsFromSource = FS
-
-relationship 97eff86b-3948-4707-a86c-91f4e1ee3063
-	isActive: false
-	crossFilteringBehavior: bothDirections
-	fromCardinality: one
-	fromColumn: 'Scored Response Fact'.GradingSetOption_key
 	toColumn: 'Grading Set Option'.GradingSetOption_key
 
 	annotation PBI_IsFromSource = FS

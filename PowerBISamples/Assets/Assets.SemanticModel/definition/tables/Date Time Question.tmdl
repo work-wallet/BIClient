@@ -101,7 +101,7 @@ table 'Date Time Question'
 		mode: import
 		source =
 				let
-				  Source = Sql.Database("CAKESOFBREAD", "WorkWalletBIClient_Local"),
+				  Source = Sql.Database("demo-workwalletbi.database.windows.net", "demo-workwalletbi"),
 				  #"Navigation 1" = Source{[Schema = "mart", Item = "AssetInspectionDateTimeQuestion"]}[Data],
 				    #"Removed Columns" = Table.RemoveColumns(#"Navigation 1",{"_created", "_edited"}),
 				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"Question", "Date Time Question"}, {"OrderInSection", "Order In Section"}})

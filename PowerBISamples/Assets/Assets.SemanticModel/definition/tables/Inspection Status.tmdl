@@ -37,7 +37,7 @@ table 'Inspection Status'
 		mode: import
 		source =
 				let
-				  Source = Sql.Database("CAKESOFBREAD", "WorkWalletBIClient_Local"),
+				  Source = Sql.Database("demo-workwalletbi.database.windows.net", "demo-workwalletbi"),
 				  #"Navigation 1" = Source{[Schema = "mart", Item = "AssetInspectionStatus"]}[Data],
 				    #"Removed Columns" = Table.RemoveColumns(#"Navigation 1",{"_created", "_edited"}),
 				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"InspectionStatus", "Inspection Status"}})
