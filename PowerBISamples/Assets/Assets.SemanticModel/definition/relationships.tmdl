@@ -15,7 +15,6 @@ relationship 2cc9e861-2519-4afd-a59e-b6a20db322e5
 	annotation PBI_IsFromSource = FS
 
 relationship bea07cc6-c6bf-469a-8af9-4e5afdfe97b5
-	isActive: false
 	fromColumn: Asset.Wallet_key
 	toColumn: Wallet.Wallet_key
 
