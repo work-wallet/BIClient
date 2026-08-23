@@ -12,7 +12,7 @@ annotation __PBI_TimeIntelligenceEnabled = 1
 
 annotation PBI_ProTooling = ["DevMode"]
 
-annotation PBI_RemovedChildren = [{"remoteItemId":{"foreignKeyRelationship":{"fromTableLocalLineageTag":"4861131b-fd90-4598-8a10-df51089f3380","fromColumnLocalLineageTag":"5115febf-c24a-44fb-9f73-ee934854c44c","toTableLocalLineageTag":"cb3169d4-1e03-420c-b28a-cc0318777229","toColumnLocalLineageTag":"84223e28-7fc5-4283-8085-73e0280cf62e"}},"objectType":"Relationship"}]
+annotation PBI_RemovedChildren = [{"remoteItemId":{"foreignKeyRelationship":{"fromTableLocalLineageTag":"4861131b-fd90-4598-8a10-df51089f3380","fromColumnLocalLineageTag":"5115febf-c24a-44fb-9f73-ee934854c44c","toTableLocalLineageTag":"cb3169d4-1e03-420c-b28a-cc0318777229","toColumnLocalLineageTag":"84223e28-7fc5-4283-8085-73e0280cf62e"}},"objectType":"Relationship"},{"remoteItemId":{"foreignKeyRelationship":{"fromTableLocalLineageTag":"a8a748bb-f5c4-4a00-a189-549b29f1b776","fromColumnLocalLineageTag":"f9f40eec-f022-444f-9383-b5133ae67a6b","toTableLocalLineageTag":"cb3169d4-1e03-420c-b28a-cc0318777229","toColumnLocalLineageTag":"84223e28-7fc5-4283-8085-73e0280cf62e"}},"objectType":"Relationship"},{"remoteItemId":{"foreignKeyRelationship":{"fromTableLocalLineageTag":"2b33c01c-931b-4e27-bf37-34c8cadb2ef6","fromColumnLocalLineageTag":"dbad3496-fbc9-4478-9d9f-3b3dc8ac1aa9","toTableLocalLineageTag":"cb3169d4-1e03-420c-b28a-cc0318777229","toColumnLocalLineageTag":"84223e28-7fc5-4283-8085-73e0280cf62e"}},"objectType":"Relationship"}]
 
 ref table Asset
 ref table DateTableTemplate_0c6d385d-5454-474d-88d8-d563a721fbcf

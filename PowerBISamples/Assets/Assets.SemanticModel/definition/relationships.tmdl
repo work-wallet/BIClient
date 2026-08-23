@@ -521,24 +521,6 @@ relationship 42cc1dc0-87fa-46b1-a6b6-ba43d82b365a
 
 	annotation PBI_IsFromSource = FS
 
-relationship cc6277ee-c3df-4c31-9302-c3ca8ea211cb
-	isActive: false
-	crossFilteringBehavior: bothDirections
-	fromCardinality: one
-	fromColumn: 'Score Section Fact'.GradingSetOption_key
-	toColumn: 'Grading Set Option'.GradingSetOption_key
-
-	annotation PBI_IsFromSource = FS
-
-relationship 92b3289b-72bc-47b6-90ff-de833729e387
-	isActive: false
-	crossFilteringBehavior: bothDirections
-	fromCardinality: one
-	fromColumn: 'Score Tag Fact'.GradingSetOption_key
-	toColumn: 'Grading Set Option'.GradingSetOption_key
-
-	annotation PBI_IsFromSource = FS
-
 relationship 1a2cd48e-2f49-c7c5-a11b-81d0b5639198
 	fromColumn: 'Inspection Observation Fact'.InspectionWorkflowComponentType_key
 	toColumn: 'Inspection Workflow Component Type'.InspectionWorkflowComponentType_key
