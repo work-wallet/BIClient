@@ -19,9 +19,9 @@ BEGIN
     SELECT DISTINCT
         i.AssetInspection_key
         ,q.AssetInspectionDateTimeQuestion_key
-        ,CASE WHEN q.[Date] = 1 AND q.[Time] = 1 THEN CAST(x.Answer AS smalldatetime) END
-        ,CASE WHEN q.[Date] = 1 AND q.[Time] = 0 THEN CAST(x.Answer AS date) END
-        ,CASE WHEN q.[Date] = 0 AND q.[Time] = 1 THEN CAST(x.Answer AS time(0)) END
+        ,CASE WHEN q.[Date] = 1 AND q.[Time] = 1 THEN CAST(x.Answer AS smalldatetime) END AS AnswerDateTime
+        ,CASE WHEN q.[Date] = 1 THEN CAST(x.Answer AS date) END AS AnswerDate
+        ,CASE WHEN q.[Time] = 1 THEN CAST(x.Answer AS time(0)) END AS AnswerTime
         ,w.Wallet_key
     FROM
         @assetInspectionDateTimeAnswerTable AS x
