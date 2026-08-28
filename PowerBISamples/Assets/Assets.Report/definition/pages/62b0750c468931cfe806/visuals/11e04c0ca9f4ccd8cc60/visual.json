@@ -3,7 +3,7 @@
   "name": "11e04c0ca9f4ccd8cc60",
   "position": {
     "x": 0,
-    "y": 79.483870967741936,
+    "y": 78.613518197573654,
     "z": 1000,
     "height": 641.0322580645161,
     "width": 1280,
@@ -107,6 +107,20 @@
               "queryRef": "Sum(Inspection.Defects Raised)",
               "nativeQueryRef": "Defects Raised",
               "displayName": "Defects Raised"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Inspection"
+                    }
+                  },
+                  "Property": "Url"
+                }
+              },
+              "queryRef": "Inspection.Url",
+              "nativeQueryRef": "Url"
             }
           ]
         }
@@ -234,7 +248,7 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "266.4401897957055D"
+                  "Value": "372.87046684848644D"
                 }
               }
             }
@@ -248,7 +262,7 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "312.3067576366768D"
+                  "Value": "147.84833119106258D"
                 }
               }
             }
@@ -262,7 +276,7 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "136.889083349266D"
+                  "Value": "164.66510394052213D"
                 }
               }
             }
@@ -288,6 +302,32 @@
       "columnHeaders": [
         {
           "properties": {}
+        }
+      ],
+      "values": [
+        {
+          "properties": {},
+          "selector": {
+            "data": [
+              {
+                "dataViewWildcard": {
+                  "matchingOption": 1
+                }
+              }
+            ],
+            "metadata": "Asset.Reference"
+          }
+        },
+        {
+          "properties": {
+            "urlIcon": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
         }
       ]
     },
@@ -324,6 +364,109 @@
             }
           ]
         }
+      },
+      {
+        "name": "21d77701e30194152fde",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Asset"
+              }
+            },
+            "Property": "Asset"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "18a011fb648e66a86066",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Asset"
+              }
+            },
+            "Property": "Reference"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "dfd9128988c3da388520",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Inspection Type"
+              }
+            },
+            "Property": "Inspection Type"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "6a33d445921e3bdfdd17",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Inspection"
+              }
+            },
+            "Property": "Inspected On"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "643a2f87990bd083cad3",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Inspection"
+              }
+            },
+            "Property": "Inspected By"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "527fb313a9ccb59bb702",
+        "field": {
+          "Aggregation": {
+            "Expression": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "Inspection"
+                  }
+                },
+                "Property": "Defects Raised"
+              }
+            },
+            "Function": 0
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "47103c2dd91dc9646dd5",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Inspection"
+              }
+            },
+            "Property": "Url"
+          }
+        },
+        "type": "Categorical"
       }
     ]
   }

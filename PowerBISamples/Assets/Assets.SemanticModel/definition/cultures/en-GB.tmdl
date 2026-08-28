@@ -6656,6 +6656,16 @@ cultureInfo en-GB
 			            },
 			            "Weight": 0.727
 			          }
+			        },
+			        {
+			          "Asset": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
 			        }
 			      ],
 			      "NameType": "Name"
@@ -11171,6 +11181,9 @@ cultureInfo en-GB
 			        }
 			      },
 			      "State": "Generated",
+			      "Visibility": {
+			        "Value": "Hidden"
+			      },
 			      "Terms": [
 			        {
 			          "workflow component id": {
@@ -11186,12 +11199,6 @@ cultureInfo en-GB
 			        },
 			        {
 			          "component": {
-			            "State": "Generated",
-			            "Weight": 0.97
-			          }
-			        },
-			        {
-			          "workflow component": {
 			            "State": "Generated",
 			            "Weight": 0.97
 			          }
@@ -11283,23 +11290,23 @@ cultureInfo en-GB
 			          }
 			        },
 			        {
-			          "workflow module": {
+			          "module": {
 			            "Type": "Noun",
 			            "State": "Suggested",
 			            "Source": {
 			              "Agent": "Thesaurus"
 			            },
-			            "Weight": 0.5
+			            "Weight": 0.491
 			          }
 			        },
 			        {
-			          "workflow element": {
+			          "element": {
 			            "Type": "Noun",
 			            "State": "Suggested",
 			            "Source": {
 			              "Agent": "Thesaurus"
 			            },
-			            "Weight": 0.5
+			            "Weight": 0.491
 			          }
 			        }
 			      ]
@@ -11663,7 +11670,7 @@ cultureInfo en-GB
 			        }
 			      ]
 			    },
-			    "inspection.defect_raised": {
+			    "inspection.defects_raised": {
 			      "Definition": {
 			        "Binding": {
 			          "ConceptualEntity": "Inspection",
@@ -11673,88 +11680,15 @@ cultureInfo en-GB
 			      "State": "Generated",
 			      "Terms": [
 			        {
-			          "defect raised": {
+			          "'defects raised'": {
 			            "State": "Generated"
 			          }
 			        },
 			        {
-			          "imperfection raised": {
+			          "'defect raised'": {
 			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.5
-			          }
-			        },
-			        {
-			          "shortcoming raised": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.5
-			          }
-			        },
-			        {
-			          "deficiency raised": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.5
-			          }
-			        },
-			        {
-			          "weakness raised": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.5
-			          }
-			        },
-			        {
-			          "flaw raised": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.485
-			          }
-			        },
-			        {
-			          "fault raised": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.485
-			          }
-			        },
-			        {
-			          "blemish raised": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.485
-			          }
-			        },
-			        {
-			          "failing raised": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.485
+			            "State": "Generated",
+			            "Weight": 0.78
 			          }
 			        }
 			      ]
@@ -25859,7 +25793,8 @@ cultureInfo en-GB
 			      "Terms": [
 			        {
 			          "numeric question": {
-			            "State": "Generated"
+			            "State": "Generated",
+			            "Weight": 0.87
 			          }
 			        },
 			        {
@@ -26171,11 +26106,6 @@ cultureInfo en-GB
 			          }
 			        },
 			        {
-			          "numeric question name": {
-			            "State": "Generated"
-			          }
-			        },
-			        {
 			          "numeric enquiry": {
 			            "Type": "Noun",
 			            "State": "Suggested",
@@ -26275,8 +26205,7 @@ cultureInfo en-GB
 			            "Weight": 0.461
 			          }
 			        }
-			      ],
-			      "NameType": "Name"
+			      ]
 			    },
 			    "numeric_question.mandatory": {
 			      "Definition": {
@@ -40161,7 +40090,7 @@ cultureInfo en-GB
 			        }
 			      ]
 			    },
-			    "inspection_grading_set": {
+			    "inspection_grading_set_option": {
 			      "Definition": {
 			        "Binding": {
 			          "ConceptualEntity": "Inspection Grading Set Option"
@@ -40170,60 +40099,125 @@ cultureInfo en-GB
 			      "State": "Generated",
 			      "Terms": [
 			        {
-			          "inspection grading set": {
+			          "inspection grading set option": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "set option": {
 			            "State": "Generated",
-			            "Weight": 0.87
+			            "Weight": 0.97
 			          }
 			        },
 			        {
-			          "set": {
+			          "grading set option": {
 			            "State": "Generated",
-			            "Weight": 0.8439
+			            "Weight": 0.97
 			          }
 			        },
 			        {
-			          "usual": {
+			          "inspection grading set selection": {
 			            "Type": "Noun",
 			            "State": "Suggested",
 			            "Source": {
 			              "Agent": "Thesaurus"
 			            },
-			            "Weight": 0.476
+			            "Weight": 0.514
 			          }
 			        },
 			        {
-			          "regular": {
+			          "inspection grading set decision": {
 			            "Type": "Noun",
 			            "State": "Suggested",
 			            "Source": {
 			              "Agent": "Thesaurus"
 			            },
-			            "Weight": 0.476
+			            "Weight": 0.514
 			          }
 			        },
 			        {
-			          "firm": {
+			          "inspection grading set possibility": {
 			            "Type": "Noun",
 			            "State": "Suggested",
 			            "Source": {
 			              "Agent": "Thesaurus"
 			            },
-			            "Weight": 0.452
+			            "Weight": 0.514
 			          }
 			        },
 			        {
-			          "solid": {
+			          "inspection grading set opportunity": {
 			            "Type": "Noun",
 			            "State": "Suggested",
 			            "Source": {
 			              "Agent": "Thesaurus"
 			            },
-			            "Weight": 0.452
+			            "Weight": 0.514
+			          }
+			        },
+			        {
+			          "inspection grading set preference": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.514
+			          }
+			        },
+			        {
+			          "grading set selection": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.508
+			          }
+			        },
+			        {
+			          "grading set decision": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.508
+			          }
+			        },
+			        {
+			          "grading set possibility": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.508
+			          }
+			        },
+			        {
+			          "grading set opportunity": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.508
+			          }
+			        },
+			        {
+			          "grading set preference": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.508
 			          }
 			        }
 			      ]
 			    },
-			    "inspection_grading_set.grading_set_option_key": {
+			    "inspection_grading_set_option.grading_set_option_key": {
 			      "Definition": {
 			        "Binding": {
 			          "ConceptualEntity": "Inspection Grading Set Option",
@@ -40367,7 +40361,7 @@ cultureInfo en-GB
 			        }
 			      ]
 			    },
-			    "inspection_grading_set.grading_set_id": {
+			    "inspection_grading_set_option.grading_set_id": {
 			      "Definition": {
 			        "Binding": {
 			          "ConceptualEntity": "Inspection Grading Set Option",
@@ -40505,7 +40499,7 @@ cultureInfo en-GB
 			        }
 			      ]
 			    },
-			    "inspection_grading_set.grading_set_version": {
+			    "inspection_grading_set_option.grading_set_version": {
 			      "Definition": {
 			        "Binding": {
 			          "ConceptualEntity": "Inspection Grading Set Option",
@@ -40643,7 +40637,7 @@ cultureInfo en-GB
 			        }
 			      ]
 			    },
-			    "inspection_grading_set.grading_set_option_id": {
+			    "inspection_grading_set_option.grading_set_option_id": {
 			      "Definition": {
 			        "Binding": {
 			          "ConceptualEntity": "Inspection Grading Set Option",
@@ -40793,7 +40787,7 @@ cultureInfo en-GB
 			        }
 			      ]
 			    },
-			    "inspection_grading_set.inspection_grading_set": {
+			    "inspection_grading_set_option.inspection_grading_set": {
 			      "Definition": {
 			        "Binding": {
 			          "ConceptualEntity": "Inspection Grading Set Option",
@@ -40855,7 +40849,7 @@ cultureInfo en-GB
 			        }
 			      ]
 			    },
-			    "inspection_grading_set.inspection_grading": {
+			    "inspection_grading_set_option.inspection_grading": {
 			      "Definition": {
 			        "Binding": {
 			          "ConceptualEntity": "Inspection Grading Set Option",
@@ -40877,7 +40871,7 @@ cultureInfo en-GB
 			        }
 			      ]
 			    },
-			    "inspection_grading_set.inspection_grading_value": {
+			    "inspection_grading_set_option.inspection_grading_value": {
 			      "Definition": {
 			        "Binding": {
 			          "ConceptualEntity": "Inspection Grading Set Option",
@@ -41005,7 +40999,7 @@ cultureInfo en-GB
 			        }
 			      ]
 			    },
-			    "inspection_grading_set.inspection_grading_colour": {
+			    "inspection_grading_set_option.inspection_grading_colour": {
 			      "Definition": {
 			        "Binding": {
 			          "ConceptualEntity": "Inspection Grading Set Option",
@@ -41033,7 +41027,7 @@ cultureInfo en-GB
 			        }
 			      ]
 			    },
-			    "inspection_grading_set.inspection_grading_set_is_percentage": {
+			    "inspection_grading_set_option.inspection_grading_set_is_percentage": {
 			      "Definition": {
 			        "Binding": {
 			          "ConceptualEntity": "Inspection Grading Set Option",
@@ -41161,7 +41155,7 @@ cultureInfo en-GB
 			        }
 			      ]
 			    },
-			    "inspection_grading_set.inspection_grading_set_is_score": {
+			    "inspection_grading_set_option.inspection_grading_set_is_score": {
 			      "Definition": {
 			        "Binding": {
 			          "ConceptualEntity": "Inspection Grading Set Option",
@@ -41289,7 +41283,7 @@ cultureInfo en-GB
 			        }
 			      ]
 			    },
-			    "inspection_grading_set.wallet_key": {
+			    "inspection_grading_set_option.wallet_key": {
 			      "Definition": {
 			        "Binding": {
 			          "ConceptualEntity": "Inspection Grading Set Option",
@@ -45663,9 +45657,1037 @@ cultureInfo en-GB
 			          }
 			        }
 			      ]
+			    },
+			    "inspection_observation_fact.inspection_workflow_component_type_key": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Inspection Observation Fact",
+			          "ConceptualProperty": "InspectionWorkflowComponentType_key"
+			        }
+			      },
+			      "State": "Generated",
+			      "Visibility": {
+			        "Value": "Hidden"
+			      },
+			      "Terms": [
+			        {
+			          "inspection workflow component type key": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "InspectionWorkflowComponentType_key": {
+			            "Type": "Noun",
+			            "State": "Generated",
+			            "Weight": 0.99
+			          }
+			        },
+			        {
+			          "key": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "type key": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "component type key": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "workflow component type key": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "inspection workflow component category key": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.624
+			          }
+			        },
+			        {
+			          "inspection workflow component genre key": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.624
+			          }
+			        },
+			        {
+			          "inspection workflow component manner key": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.624
+			          }
+			        },
+			        {
+			          "inspection workflow component variety key": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.624
+			          }
+			        },
+			        {
+			          "workflow component category key": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.617
+			          }
+			        },
+			        {
+			          "workflow component genre key": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.617
+			          }
+			        },
+			        {
+			          "workflow component manner key": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.617
+			          }
+			        },
+			        {
+			          "workflow component variety key": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.617
+			          }
+			        },
+			        {
+			          "component category key": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.609
+			          }
+			        },
+			        {
+			          "component genre key": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.609
+			          }
+			        }
+			      ]
+			    },
+			    "inspection_observation_fact.workflow_component": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Inspection Observation Fact",
+			          "ConceptualProperty": "Workflow Component"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "workflow component": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "component": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "workflow module": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.5
+			          }
+			        },
+			        {
+			          "workflow element": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.5
+			          }
+			        },
+			        {
+			          "module": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.491
+			          }
+			        },
+			        {
+			          "element": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.491
+			          }
+			        },
+			        {
+			          "workflow constituent": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.485
+			          }
+			        },
+			        {
+			          "workflow section": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.485
+			          }
+			        },
+			        {
+			          "workflow factor": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.485
+			          }
+			        },
+			        {
+			          "workflow piece": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.485
+			          }
+			        },
+			        {
+			          "workflow part": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.485
+			          }
+			        },
+			        {
+			          "workflow cog": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.485
+			          }
+			        }
+			      ]
+			    },
+			    "observation.is_finalised": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Observation",
+			          "ConceptualProperty": "IsFinalised"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "is finalised": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "IsFinalised": {
+			            "Type": "Noun",
+			            "State": "Generated",
+			            "Weight": 0.99
+			          }
+			        }
+			      ]
+			    },
+			    "inspection_workflow_component_type": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Inspection Workflow Component Type"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "inspection workflow component type": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "type": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "component type": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "inspection workflow component category": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.771
+			          }
+			        },
+			        {
+			          "inspection workflow component genre": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.771
+			          }
+			        },
+			        {
+			          "inspection workflow component manner": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.771
+			          }
+			        },
+			        {
+			          "inspection workflow component variety": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.771
+			          }
+			        },
+			        {
+			          "component category": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.75
+			          }
+			        },
+			        {
+			          "component genre": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.75
+			          }
+			        },
+			        {
+			          "component manner": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.75
+			          }
+			        },
+			        {
+			          "component variety": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.75
+			          }
+			        },
+			        {
+			          "inspection workflow component brand": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.748
+			          }
+			        },
+			        {
+			          "inspection workflow component class": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.748
+			          }
+			        }
+			      ]
+			    },
+			    "inspection_workflow_component_type.inspection_workflow_component_type_key": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Inspection Workflow Component Type",
+			          "ConceptualProperty": "InspectionWorkflowComponentType_key"
+			        }
+			      },
+			      "State": "Generated",
+			      "Visibility": {
+			        "Value": "Hidden"
+			      },
+			      "Terms": [
+			        {
+			          "inspection workflow component type key": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "InspectionWorkflowComponentType_key": {
+			            "Type": "Noun",
+			            "State": "Generated",
+			            "Weight": 0.99
+			          }
+			        },
+			        {
+			          "key": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "type key": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "component type key": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "workflow component type key": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "inspection workflow component category key": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.624
+			          }
+			        },
+			        {
+			          "inspection workflow component genre key": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.624
+			          }
+			        },
+			        {
+			          "inspection workflow component manner key": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.624
+			          }
+			        },
+			        {
+			          "inspection workflow component variety key": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.624
+			          }
+			        },
+			        {
+			          "workflow component category key": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.617
+			          }
+			        },
+			        {
+			          "workflow component genre key": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.617
+			          }
+			        },
+			        {
+			          "workflow component manner key": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.617
+			          }
+			        },
+			        {
+			          "workflow component variety key": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.617
+			          }
+			        },
+			        {
+			          "component category key": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.609
+			          }
+			        },
+			        {
+			          "component genre key": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.609
+			          }
+			        }
+			      ]
+			    },
+			    "inspection_workflow_component_type.workflow_component_type_code": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Inspection Workflow Component Type",
+			          "ConceptualProperty": "WorkflowComponentTypeCode"
+			        }
+			      },
+			      "State": "Generated",
+			      "Visibility": {
+			        "Value": "Hidden"
+			      },
+			      "Terms": [
+			        {
+			          "workflow component type code": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "WorkflowComponentTypeCode": {
+			            "Type": "Noun",
+			            "State": "Generated",
+			            "Weight": 0.99
+			          }
+			        },
+			        {
+			          "type code": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "component type code": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "workflow component type id": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.771
+			          }
+			        },
+			        {
+			          "component type id": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.762
+			          }
+			        },
+			        {
+			          "workflow component category code": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.617
+			          }
+			        },
+			        {
+			          "workflow component genre code": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.617
+			          }
+			        },
+			        {
+			          "workflow component manner code": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.617
+			          }
+			        },
+			        {
+			          "workflow component variety code": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.617
+			          }
+			        },
+			        {
+			          "component category code": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.609
+			          }
+			        },
+			        {
+			          "component genre code": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.609
+			          }
+			        },
+			        {
+			          "component manner code": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.609
+			          }
+			        },
+			        {
+			          "component variety code": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.609
+			          }
+			        }
+			      ]
+			    },
+			    "inspection_workflow_component_type.workflow_component_type": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Inspection Workflow Component Type",
+			          "ConceptualProperty": "Workflow Component Type"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "workflow component type": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "type": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "component type": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "workflow component category": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.762
+			          }
+			        },
+			        {
+			          "workflow component genre": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.762
+			          }
+			        },
+			        {
+			          "workflow component manner": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.762
+			          }
+			        },
+			        {
+			          "workflow component variety": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.762
+			          }
+			        },
+			        {
+			          "component category": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.75
+			          }
+			        },
+			        {
+			          "component genre": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.75
+			          }
+			        },
+			        {
+			          "component manner": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.75
+			          }
+			        },
+			        {
+			          "component variety": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.75
+			          }
+			        },
+			        {
+			          "workflow component brand": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.739
+			          }
+			        },
+			        {
+			          "workflow component class": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.739
+			          }
+			        }
+			      ]
+			    },
+			    "asset.url": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Asset",
+			          "ConceptualProperty": "Url"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "url": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "website": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.736
+			          }
+			        },
+			        {
+			          "web address": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.571
+			          }
+			        }
+			      ]
+			    },
+			    "observation.new_defect_count": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Observation",
+			          "ConceptualProperty": "New Defect Count"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "new defect count": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "new defect amount": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.739
+			          }
+			        }
+			      ]
+			    },
+			    "inspection.url": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Inspection",
+			          "ConceptualProperty": "Url"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "url": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "website": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.736
+			          }
+			        },
+			        {
+			          "web address": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.571
+			          }
+			        }
+			      ]
+			    },
+			    "inspection_observation_fact.recorded_defect_count": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Inspection Observation Fact",
+			          "ConceptualProperty": "Recorded Defect Count"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "'recorded defect count'": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "'recorded defect amount '": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.605
+			          }
+			        }
+			      ]
 			    }
 			  },
 			  "Relationships": {
+			    "inspection_archived_status_date_date_hierarchy_has_inspection_archived_status_date_month": {
+			      "Binding": {
+			        "ConceptualEntity": "Inspection"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "inspection.archived_status_date.date_hierarchy": {
+			          "Target": {
+			            "Entity": "inspection.archived_status_date.date_hierarchy"
+			          }
+			        },
+			        "inspection.archived_status_date.month": {
+			          "Target": {
+			            "Entity": "inspection.archived_status_date.month"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "inspection.archived_status_date.date_hierarchy"
+			            },
+			            "Object": {
+			              "Role": "inspection.archived_status_date.month"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "archived_status_date_hierarchies_have_archived_status_months"
+			        }
+			      ]
+			    },
+			    "inspection_archived_status_date_date_hierarchy_has_inspection_archived_status_date_quarter": {
+			      "Binding": {
+			        "ConceptualEntity": "Inspection"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "inspection.archived_status_date.date_hierarchy": {
+			          "Target": {
+			            "Entity": "inspection.archived_status_date.date_hierarchy"
+			          }
+			        },
+			        "inspection.archived_status_date.quarter": {
+			          "Target": {
+			            "Entity": "inspection.archived_status_date.quarter"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "inspection.archived_status_date.date_hierarchy"
+			            },
+			            "Object": {
+			              "Role": "inspection.archived_status_date.quarter"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "archived_status_date_hierarchies_have_archived_status_quarters"
+			        }
+			      ]
+			    },
 			    "inspection_archived_status_date_date_hierarchy_has_inspection_archived_status_date_year": {
 			      "Binding": {
 			        "ConceptualEntity": "Inspection"
@@ -47958,27 +48980,7 @@ cultureInfo en-GB
 			          "State": "Generated",
 			          "Weight": 0.99,
 			          "ID": "scored_response_facts_have_scored_responses"
-			        }
-			      ]
-			    },
-			    "scored_response_has_scored_response_fact": {
-			      "Binding": {
-			        "ConceptualEntity": "Scored Response"
-			      },
-			      "State": "Generated",
-			      "Roles": {
-			        "scored_response": {
-			          "Target": {
-			            "Entity": "scored_response"
-			          }
 			        },
-			        "scored_response_fact": {
-			          "Target": {
-			            "Entity": "scored_response_fact"
-			          }
-			        }
-			      },
-			      "Phrasings": [
 			        {
 			          "Attribute": {
 			            "Subject": {
@@ -48134,6 +49136,19 @@ cultureInfo en-GB
 			          "State": "Generated",
 			          "Weight": 0.99,
 			          "ID": "inspected_by_fact_have_inspections"
+			        },
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "inspection"
+			            },
+			            "Object": {
+			              "Role": "inspected_by_fact"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "inspections_have_inspected_by_fact"
 			        }
 			      ]
 			    },
@@ -48459,7 +49474,7 @@ cultureInfo en-GB
 			        }
 			      ]
 			    },
-			    "inspection_has_inspection_grading_set": {
+			    "inspection_has_grading_set_option": {
 			      "Binding": {
 			        "ConceptualEntity": "Inspection"
 			      },
@@ -48470,42 +49485,14 @@ cultureInfo en-GB
 			            "Entity": "inspection"
 			          }
 			        },
-			        "inspection_grading_set": {
+			        "grading_set_option": {
 			          "Target": {
-			            "Entity": "inspection_grading_set"
+			            "Entity": "grading_set_option"
 			          }
 			        }
-			      },
-			      "Phrasings": [
-			        {
-			          "Attribute": {
-			            "Subject": {
-			              "Role": "inspection"
-			            },
-			            "Object": {
-			              "Role": "inspection_grading_set"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99,
-			          "ID": "inspections_have_inspection_grading_sets"
-			        },
-			        {
-			          "Attribute": {
-			            "Subject": {
-			              "Role": "inspection_grading_set"
-			            },
-			            "Object": {
-			              "Role": "inspection"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99,
-			          "ID": "inspection_grading_sets_have_inspections"
-			        }
-			      ]
+			      }
 			    },
-			    "inspection_has_inspected_by_fact": {
+			    "inspection_has_inspection_grading_set_option": {
 			      "Binding": {
 			        "ConceptualEntity": "Inspection"
 			      },
@@ -48516,9 +49503,9 @@ cultureInfo en-GB
 			            "Entity": "inspection"
 			          }
 			        },
-			        "inspected_by_fact": {
+			        "inspection_grading_set_option": {
 			          "Target": {
-			            "Entity": "inspected_by_fact"
+			            "Entity": "inspection_grading_set_option"
 			          }
 			        }
 			      },
@@ -48529,12 +49516,25 @@ cultureInfo en-GB
 			              "Role": "inspection"
 			            },
 			            "Object": {
-			              "Role": "inspected_by_fact"
+			              "Role": "inspection_grading_set_option"
 			            }
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "inspections_have_inspected_by_fact"
+			          "ID": "inspections_have_inspection_grading_set_options"
+			        },
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "inspection_grading_set_option"
+			            },
+			            "Object": {
+			              "Role": "inspection"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "inspection_grading_set_options_have_inspections"
 			        }
 			      ]
 			    },
@@ -48727,7 +49727,7 @@ cultureInfo en-GB
 			            },
 			            "Verbs": [
 			              {
-			                "close": {
+			                "observe": {
 			                  "State": "Generated"
 			                }
 			              }
@@ -48738,7 +49738,7 @@ cultureInfo en-GB
 			          },
 			          "State": "Generated",
 			          "Weight": 0.95,
-			          "ID": "contacts_close_observations"
+			          "ID": "contacts_observe_observations"
 			        }
 			      ]
 			    },
@@ -48831,6 +49831,52 @@ cultureInfo en-GB
 			          "State": "Generated",
 			          "Weight": 0.99,
 			          "ID": "observation_statuses_have_observations"
+			        }
+			      ]
+			    },
+			    "inspection_observation_fact_has_inspection_workflow_component_type": {
+			      "Binding": {
+			        "ConceptualEntity": "Inspection Observation Fact"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "inspection_observation_fact": {
+			          "Target": {
+			            "Entity": "inspection_observation_fact"
+			          }
+			        },
+			        "inspection_workflow_component_type": {
+			          "Target": {
+			            "Entity": "inspection_workflow_component_type"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "inspection_observation_fact"
+			            },
+			            "Object": {
+			              "Role": "inspection_workflow_component_type"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "inspection_observation_facts_have_inspection_workflow_component_types"
+			        },
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "inspection_workflow_component_type"
+			            },
+			            "Object": {
+			              "Role": "inspection_observation_fact"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "inspection_workflow_component_types_have_inspection_observation_facts"
 			        }
 			      ]
 			    },
@@ -49202,6 +50248,52 @@ cultureInfo en-GB
 			        }
 			      ]
 			    },
+			    "asset_has_wallet": {
+			      "Binding": {
+			        "ConceptualEntity": "Asset"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "asset": {
+			          "Target": {
+			            "Entity": "asset"
+			          }
+			        },
+			        "wallet": {
+			          "Target": {
+			            "Entity": "wallet"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "asset"
+			            },
+			            "Object": {
+			              "Role": "wallet"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "assets_have_wallets"
+			        },
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "wallet"
+			            },
+			            "Object": {
+			              "Role": "asset"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "wallets_have_assets"
+			        }
+			      ]
+			    },
 			    "asset_has_asset_status": {
 			      "Binding": {
 			        "ConceptualEntity": "Asset"
@@ -49245,6 +50337,237 @@ cultureInfo en-GB
 			          "State": "Generated",
 			          "Weight": 0.99,
 			          "ID": "asset_statuses_have_assets"
+			        }
+			      ]
+			    },
+			    "inspection_observation_fact_has_recorded_defect_count": {
+			      "Binding": {
+			        "ConceptualEntity": "Inspection Observation Fact"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "inspection_observation_fact": {
+			          "Target": {
+			            "Entity": "inspection_observation_fact"
+			          }
+			        },
+			        "inspection_observation_fact.recorded_defect_count": {
+			          "Target": {
+			            "Entity": "inspection_observation_fact.recorded_defect_count"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "inspection_observation_fact"
+			            },
+			            "Object": {
+			              "Role": "inspection_observation_fact.recorded_defect_count"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "inspection_observation_facts_have_recorded_defect_counts"
+			        }
+			      ]
+			    },
+			    "inspection_has_url": {
+			      "Binding": {
+			        "ConceptualEntity": "Inspection"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "inspection": {
+			          "Target": {
+			            "Entity": "inspection"
+			          }
+			        },
+			        "inspection.url": {
+			          "Target": {
+			            "Entity": "inspection.url"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "inspection"
+			            },
+			            "Object": {
+			              "Role": "inspection.url"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "inspections_have_urls"
+			        }
+			      ]
+			    },
+			    "observation_has_new_defect_count": {
+			      "Binding": {
+			        "ConceptualEntity": "Observation"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "observation": {
+			          "Target": {
+			            "Entity": "observation"
+			          }
+			        },
+			        "observation.new_defect_count": {
+			          "Target": {
+			            "Entity": "observation.new_defect_count"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "observation"
+			            },
+			            "Object": {
+			              "Role": "observation.new_defect_count"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "observations_have_new_defect_counts"
+			        }
+			      ]
+			    },
+			    "asset_has_url": {
+			      "Binding": {
+			        "ConceptualEntity": "Asset"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "asset": {
+			          "Target": {
+			            "Entity": "asset"
+			          }
+			        },
+			        "asset.url": {
+			          "Target": {
+			            "Entity": "asset.url"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "asset"
+			            },
+			            "Object": {
+			              "Role": "asset.url"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "assets_have_urls"
+			        }
+			      ]
+			    },
+			    "inspection_workflow_component_type_has_workflow_component_type": {
+			      "Binding": {
+			        "ConceptualEntity": "Inspection Workflow Component Type"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "inspection_workflow_component_type": {
+			          "Target": {
+			            "Entity": "inspection_workflow_component_type"
+			          }
+			        },
+			        "inspection_workflow_component_type.workflow_component_type": {
+			          "Target": {
+			            "Entity": "inspection_workflow_component_type.workflow_component_type"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "inspection_workflow_component_type"
+			            },
+			            "Object": {
+			              "Role": "inspection_workflow_component_type.workflow_component_type"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "inspection_workflow_component_types_have_workflow_component_types"
+			        }
+			      ]
+			    },
+			    "observation_has_is_finalised": {
+			      "Binding": {
+			        "ConceptualEntity": "Observation"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "observation": {
+			          "Target": {
+			            "Entity": "observation"
+			          }
+			        },
+			        "observation.is_finalised": {
+			          "Target": {
+			            "Entity": "observation.is_finalised"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "observation"
+			            },
+			            "Object": {
+			              "Role": "observation.is_finalised"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "observations_have_is_finalised"
+			        }
+			      ]
+			    },
+			    "inspection_observation_fact_has_workflow_component": {
+			      "Binding": {
+			        "ConceptualEntity": "Inspection Observation Fact"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "inspection_observation_fact": {
+			          "Target": {
+			            "Entity": "inspection_observation_fact"
+			          }
+			        },
+			        "inspection_observation_fact.workflow_component": {
+			          "Target": {
+			            "Entity": "inspection_observation_fact.workflow_component"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "inspection_observation_fact"
+			            },
+			            "Object": {
+			              "Role": "inspection_observation_fact.workflow_component"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "inspection_observation_facts_have_workflow_components"
 			        }
 			      ]
 			    },
@@ -49928,20 +51251,20 @@ cultureInfo en-GB
 			        }
 			      ]
 			    },
-			    "inspection_grading_set_has_inspection_grading_set_is_score": {
+			    "inspection_grading_set_option_has_inspection_grading_set_is_score": {
 			      "Binding": {
 			        "ConceptualEntity": "Inspection Grading Set Option"
 			      },
 			      "State": "Generated",
 			      "Roles": {
-			        "inspection_grading_set": {
+			        "inspection_grading_set_option": {
 			          "Target": {
-			            "Entity": "inspection_grading_set"
+			            "Entity": "inspection_grading_set_option"
 			          }
 			        },
-			        "inspection_grading_set.inspection_grading_set_is_score": {
+			        "inspection_grading_set_option.inspection_grading_set_is_score": {
 			          "Target": {
-			            "Entity": "inspection_grading_set.inspection_grading_set_is_score"
+			            "Entity": "inspection_grading_set_option.inspection_grading_set_is_score"
 			          }
 			        }
 			      },
@@ -49949,32 +51272,32 @@ cultureInfo en-GB
 			        {
 			          "Attribute": {
 			            "Subject": {
-			              "Role": "inspection_grading_set"
+			              "Role": "inspection_grading_set_option"
 			            },
 			            "Object": {
-			              "Role": "inspection_grading_set.inspection_grading_set_is_score"
+			              "Role": "inspection_grading_set_option.inspection_grading_set_is_score"
 			            }
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "inspection_grading_sets_have_inspection_grading_set_is_scores"
+			          "ID": "inspection_grading_set_options_have_inspection_grading_set_is_scores"
 			        }
 			      ]
 			    },
-			    "inspection_grading_set_has_inspection_grading_set_is_percentage": {
+			    "inspection_grading_set_option_has_inspection_grading_set_is_percentage": {
 			      "Binding": {
 			        "ConceptualEntity": "Inspection Grading Set Option"
 			      },
 			      "State": "Generated",
 			      "Roles": {
-			        "inspection_grading_set": {
+			        "inspection_grading_set_option": {
 			          "Target": {
-			            "Entity": "inspection_grading_set"
+			            "Entity": "inspection_grading_set_option"
 			          }
 			        },
-			        "inspection_grading_set.inspection_grading_set_is_percentage": {
+			        "inspection_grading_set_option.inspection_grading_set_is_percentage": {
 			          "Target": {
-			            "Entity": "inspection_grading_set.inspection_grading_set_is_percentage"
+			            "Entity": "inspection_grading_set_option.inspection_grading_set_is_percentage"
 			          }
 			        }
 			      },
@@ -49982,32 +51305,32 @@ cultureInfo en-GB
 			        {
 			          "Attribute": {
 			            "Subject": {
-			              "Role": "inspection_grading_set"
+			              "Role": "inspection_grading_set_option"
 			            },
 			            "Object": {
-			              "Role": "inspection_grading_set.inspection_grading_set_is_percentage"
+			              "Role": "inspection_grading_set_option.inspection_grading_set_is_percentage"
 			            }
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "inspection_grading_sets_have_inspection_grading_set_is_percentages"
+			          "ID": "inspection_grading_set_options_have_inspection_grading_set_is_percentages"
 			        }
 			      ]
 			    },
-			    "inspection_grading_set_has_inspection_grading_colour": {
+			    "inspection_grading_set_option_has_inspection_grading_colour": {
 			      "Binding": {
 			        "ConceptualEntity": "Inspection Grading Set Option"
 			      },
 			      "State": "Generated",
 			      "Roles": {
-			        "inspection_grading_set": {
+			        "inspection_grading_set_option": {
 			          "Target": {
-			            "Entity": "inspection_grading_set"
+			            "Entity": "inspection_grading_set_option"
 			          }
 			        },
-			        "inspection_grading_set.inspection_grading_colour": {
+			        "inspection_grading_set_option.inspection_grading_colour": {
 			          "Target": {
-			            "Entity": "inspection_grading_set.inspection_grading_colour"
+			            "Entity": "inspection_grading_set_option.inspection_grading_colour"
 			          }
 			        }
 			      },
@@ -50015,32 +51338,32 @@ cultureInfo en-GB
 			        {
 			          "Attribute": {
 			            "Subject": {
-			              "Role": "inspection_grading_set"
+			              "Role": "inspection_grading_set_option"
 			            },
 			            "Object": {
-			              "Role": "inspection_grading_set.inspection_grading_colour"
+			              "Role": "inspection_grading_set_option.inspection_grading_colour"
 			            }
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "inspection_grading_sets_have_inspection_grading_colours"
+			          "ID": "inspection_grading_set_options_have_inspection_grading_colours"
 			        }
 			      ]
 			    },
-			    "inspection_grading_set_has_inspection_grading_value": {
+			    "inspection_grading_set_option_has_inspection_grading_value": {
 			      "Binding": {
 			        "ConceptualEntity": "Inspection Grading Set Option"
 			      },
 			      "State": "Generated",
 			      "Roles": {
-			        "inspection_grading_set": {
+			        "inspection_grading_set_option": {
 			          "Target": {
-			            "Entity": "inspection_grading_set"
+			            "Entity": "inspection_grading_set_option"
 			          }
 			        },
-			        "inspection_grading_set.inspection_grading_value": {
+			        "inspection_grading_set_option.inspection_grading_value": {
 			          "Target": {
-			            "Entity": "inspection_grading_set.inspection_grading_value"
+			            "Entity": "inspection_grading_set_option.inspection_grading_value"
 			          }
 			        }
 			      },
@@ -50048,32 +51371,32 @@ cultureInfo en-GB
 			        {
 			          "Attribute": {
 			            "Subject": {
-			              "Role": "inspection_grading_set"
+			              "Role": "inspection_grading_set_option"
 			            },
 			            "Object": {
-			              "Role": "inspection_grading_set.inspection_grading_value"
+			              "Role": "inspection_grading_set_option.inspection_grading_value"
 			            }
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "inspection_grading_sets_have_inspection_grading_values"
+			          "ID": "inspection_grading_set_options_have_inspection_grading_values"
 			        }
 			      ]
 			    },
-			    "inspection_grading_set_has_inspection_grading": {
+			    "inspection_grading_set_option_has_inspection_grading": {
 			      "Binding": {
 			        "ConceptualEntity": "Inspection Grading Set Option"
 			      },
 			      "State": "Generated",
 			      "Roles": {
-			        "inspection_grading_set": {
+			        "inspection_grading_set_option": {
 			          "Target": {
-			            "Entity": "inspection_grading_set"
+			            "Entity": "inspection_grading_set_option"
 			          }
 			        },
-			        "inspection_grading_set.inspection_grading": {
+			        "inspection_grading_set_option.inspection_grading": {
 			          "Target": {
-			            "Entity": "inspection_grading_set.inspection_grading"
+			            "Entity": "inspection_grading_set_option.inspection_grading"
 			          }
 			        }
 			      },
@@ -50081,32 +51404,32 @@ cultureInfo en-GB
 			        {
 			          "Attribute": {
 			            "Subject": {
-			              "Role": "inspection_grading_set"
+			              "Role": "inspection_grading_set_option"
 			            },
 			            "Object": {
-			              "Role": "inspection_grading_set.inspection_grading"
+			              "Role": "inspection_grading_set_option.inspection_grading"
 			            }
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "inspection_grading_sets_have_inspection_grading"
+			          "ID": "inspection_grading_set_options_have_inspection_grading"
 			        }
 			      ]
 			    },
-			    "inspection_grading_set_has_inspection_grading_set": {
+			    "inspection_grading_set_option_has_inspection_grading_set": {
 			      "Binding": {
 			        "ConceptualEntity": "Inspection Grading Set Option"
 			      },
 			      "State": "Generated",
 			      "Roles": {
-			        "inspection_grading_set": {
+			        "inspection_grading_set_option": {
 			          "Target": {
-			            "Entity": "inspection_grading_set"
+			            "Entity": "inspection_grading_set_option"
 			          }
 			        },
-			        "inspection_grading_set.inspection_grading_set": {
+			        "inspection_grading_set_option.inspection_grading_set": {
 			          "Target": {
-			            "Entity": "inspection_grading_set.inspection_grading_set"
+			            "Entity": "inspection_grading_set_option.inspection_grading_set"
 			          }
 			        }
 			      },
@@ -50114,15 +51437,15 @@ cultureInfo en-GB
 			        {
 			          "Attribute": {
 			            "Subject": {
-			              "Role": "inspection_grading_set"
+			              "Role": "inspection_grading_set_option"
 			            },
 			            "Object": {
-			              "Role": "inspection_grading_set.inspection_grading_set"
+			              "Role": "inspection_grading_set_option.inspection_grading_set"
 			            }
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "inspection_grading_sets_have_inspection_grading_sets"
+			          "ID": "inspection_grading_set_options_have_inspection_grading_sets"
 			        }
 			      ]
 			    },
@@ -51918,19 +53241,6 @@ cultureInfo en-GB
 			          "State": "Generated",
 			          "Weight": 0.99,
 			          "ID": "numeric_questions_have_numeric_questions"
-			        },
-			        {
-			          "Name": {
-			            "Subject": {
-			              "Role": "numeric_question"
-			            },
-			            "Name": {
-			              "Role": "numeric_question.numeric_question"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99,
-			          "ID": "numeric_questions_are_names_IDs_of_numeric_questions"
 			        }
 			      ]
 			    },
@@ -53584,7 +54894,7 @@ cultureInfo en-GB
 			        }
 			      ]
 			    },
-			    "inspection_has_defect_raised": {
+			    "inspection_has_defects_raised": {
 			      "Binding": {
 			        "ConceptualEntity": "Inspection"
 			      },
@@ -53595,9 +54905,9 @@ cultureInfo en-GB
 			            "Entity": "inspection"
 			          }
 			        },
-			        "inspection.defect_raised": {
+			        "inspection.defects_raised": {
 			          "Target": {
-			            "Entity": "inspection.defect_raised"
+			            "Entity": "inspection.defects_raised"
 			          }
 			        }
 			      },
@@ -53608,12 +54918,12 @@ cultureInfo en-GB
 			              "Role": "inspection"
 			            },
 			            "Object": {
-			              "Role": "inspection.defect_raised"
+			              "Role": "inspection.defects_raised"
 			            }
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "inspections_have_defect_raised"
+			          "ID": "inspections_have_defects_raiseds"
 			        }
 			      ]
 			    },
@@ -53680,39 +54990,6 @@ cultureInfo en-GB
 			          "State": "Generated",
 			          "Weight": 0.99,
 			          "ID": "properties_have_is_shared_properties"
-			        }
-			      ]
-			    },
-			    "inspection_observation_fact_has_workflow_component_id": {
-			      "Binding": {
-			        "ConceptualEntity": "Inspection Observation Fact"
-			      },
-			      "State": "Generated",
-			      "Roles": {
-			        "inspection_observation_fact": {
-			          "Target": {
-			            "Entity": "inspection_observation_fact"
-			          }
-			        },
-			        "inspection_observation_fact.workflow_component_id": {
-			          "Target": {
-			            "Entity": "inspection_observation_fact.workflow_component_id"
-			          }
-			        }
-			      },
-			      "Phrasings": [
-			        {
-			          "Attribute": {
-			            "Subject": {
-			              "Role": "inspection_observation_fact"
-			            },
-			            "Object": {
-			              "Role": "inspection_observation_fact.workflow_component_id"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99,
-			          "ID": "inspection_observation_facts_have_workflow_component_ids"
 			        }
 			      ]
 			    },
@@ -55318,6 +56595,56 @@ cultureInfo en-GB
 			        }
 			      ]
 			    },
+			    "observation_is_finalised": {
+			      "Binding": {
+			        "ConceptualEntity": "Observation"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "observation": {
+			          "Target": {
+			            "Entity": "observation"
+			          }
+			        },
+			        "observation.is_finalised": {
+			          "Target": {
+			            "Entity": "observation.is_finalised"
+			          }
+			        }
+			      },
+			      "Conditions": [
+			        {
+			          "Target": {
+			            "Role": "observation.is_finalised"
+			          },
+			          "Operator": "Equals",
+			          "Value": {
+			            "Boolean": [
+			              true
+			            ]
+			          }
+			        }
+			      ],
+			      "Phrasings": [
+			        {
+			          "Adjective": {
+			            "Subject": {
+			              "Role": "observation"
+			            },
+			            "Adjectives": [
+			              {
+			                "finalised": {
+			                  "State": "Generated"
+			                }
+			              }
+			            ]
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "some_observations_are_finalised_observations"
+			        }
+			      ]
+			    },
 			    "observation_note_is_deleted": {
 			      "Binding": {
 			        "ConceptualEntity": "Observation Note"
@@ -55570,72 +56897,6 @@ cultureInfo en-GB
 			          "State": "Generated",
 			          "Weight": 0.99,
 			          "ID": "some_assignment_facts_are_late_assignment_facts"
-			        }
-			      ]
-			    },
-			    "inspection_archived_status_date_date_hierarchy_has_inspection_archived_status_date_quarter": {
-			      "Binding": {
-			        "ConceptualEntity": "Inspection"
-			      },
-			      "State": "Generated",
-			      "Roles": {
-			        "inspection.archived_status_date.date_hierarchy": {
-			          "Target": {
-			            "Entity": "inspection.archived_status_date.date_hierarchy"
-			          }
-			        },
-			        "inspection.archived_status_date.quarter": {
-			          "Target": {
-			            "Entity": "inspection.archived_status_date.quarter"
-			          }
-			        }
-			      },
-			      "Phrasings": [
-			        {
-			          "Attribute": {
-			            "Subject": {
-			              "Role": "inspection.archived_status_date.date_hierarchy"
-			            },
-			            "Object": {
-			              "Role": "inspection.archived_status_date.quarter"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99,
-			          "ID": "archived_status_date_hierarchies_have_archived_status_quarters"
-			        }
-			      ]
-			    },
-			    "inspection_archived_status_date_date_hierarchy_has_inspection_archived_status_date_month": {
-			      "Binding": {
-			        "ConceptualEntity": "Inspection"
-			      },
-			      "State": "Generated",
-			      "Roles": {
-			        "inspection.archived_status_date.date_hierarchy": {
-			          "Target": {
-			            "Entity": "inspection.archived_status_date.date_hierarchy"
-			          }
-			        },
-			        "inspection.archived_status_date.month": {
-			          "Target": {
-			            "Entity": "inspection.archived_status_date.month"
-			          }
-			        }
-			      },
-			      "Phrasings": [
-			        {
-			          "Attribute": {
-			            "Subject": {
-			              "Role": "inspection.archived_status_date.date_hierarchy"
-			            },
-			            "Object": {
-			              "Role": "inspection.archived_status_date.month"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99,
-			          "ID": "archived_status_date_hierarchies_have_archived_status_months"
 			        }
 			      ]
 			    },

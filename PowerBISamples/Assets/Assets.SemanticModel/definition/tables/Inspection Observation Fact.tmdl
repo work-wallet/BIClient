@@ -91,6 +91,22 @@ table 'Inspection Observation Fact'
 
 		annotation SummarizationSetBy = Automatic
 
+	column 'Recorded Defect Count' =
+			
+			IF (
+			    'Inspection Observation Fact'[New] = TRUE,
+			    LOOKUPVALUE (
+			        Observation[New Defect Count],
+			        Observation[AssetObservation_key], 'Inspection Observation Fact'[AssetObservation_key]
+			    ),
+			    0
+			)
+		formatString: 0
+		lineageTag: 83f31789-5b7c-4a6f-9b8d-88b15af236f9
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
 	partition 'Inspection Observation Fact' = m
 		mode: import
 		source =

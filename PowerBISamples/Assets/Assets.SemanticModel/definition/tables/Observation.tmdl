@@ -107,7 +107,7 @@ table Observation
 
 		annotation SummarizationSetBy = Automatic
 
-	column 'Open Defect Count' = IF(AND(Observation[Deleted] = FALSE(), RELATED('Observation Status'[AssetObservationStatusCode]) = 1), 1, 0)
+	column 'Open Defect Count' = IF(AND(Observation[Deleted] = FALSE(), AND(Observation[IsFinalised] = TRUE(), RELATED('Observation Status'[AssetObservationStatusCode]) = 1)), 1, 0)
 		formatString: 0
 		lineageTag: 0f3d0ea7-3ca2-4d30-97b0-83dd33003c19
 		summarizeBy: sum
@@ -121,7 +121,7 @@ table Observation
 
 		annotation SummarizationSetBy = Automatic
 
-	column 'Defect Count' = IF(AND(Observation[Deleted] = FALSE(), RELATED('Observation Status'[AssetObservationStatusCode]) IN {1, 32}), 1, 0)
+	column 'Defect Count' = IF(AND(Observation[Deleted] = FALSE(), AND(Observation[IsFinalised] = TRUE(), RELATED('Observation Status'[AssetObservationStatusCode]) IN {1, 32})), 1, 0)
 		formatString: 0
 		lineageTag: 217415af-72d6-451b-963a-eca948a879ff
 		summarizeBy: sum
@@ -173,6 +173,29 @@ table Observation
 		lineageTag: 9230c0f6-e2f3-45f0-aa9f-4981cbca9309
 		summarizeBy: none
 		sourceColumn: IsFinalised
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'New Defect Count' =
+			
+			VAR CurrentObservationKey = Observation[AssetObservation_key]
+			RETURN
+			IF (
+			    Observation[Defect Count] = 1
+			        && COUNTROWS (
+			            FILTER (
+			                'Inspection Observation Fact',
+			                'Inspection Observation Fact'[AssetObservation_key] = CurrentObservationKey
+			                    && 'Inspection Observation Fact'[New] = TRUE
+			                    && RELATED ( 'Inspection Status'[InspectionStatusCode] ) = 0
+			            )
+			        ) > 0,
+			    1,
+			    0
+			)
+		formatString: 0
+		lineageTag: 6ec5cb3a-0180-49bc-a509-6b616d41878b
+		summarizeBy: sum
 
 		annotation SummarizationSetBy = Automatic
 

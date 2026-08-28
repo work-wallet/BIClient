@@ -1,0 +1,8 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/page/2.1.0/schema.json",
+  "name": "a1b0befd78952e4019fc",
+  "displayName": "KPIs - Trending Defects Recorded",
+  "displayOption": "FitToPage",
+  "height": 720,
+  "width": 1280
+}

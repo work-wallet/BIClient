@@ -31,6 +31,8 @@ table 'Inspection Status'
 		summarizeBy: none
 		sourceColumn: Inspection Status
 
+		changedProperty = SortByColumn
+
 		annotation SummarizationSetBy = Automatic
 
 	partition 'Inspection Status' = m

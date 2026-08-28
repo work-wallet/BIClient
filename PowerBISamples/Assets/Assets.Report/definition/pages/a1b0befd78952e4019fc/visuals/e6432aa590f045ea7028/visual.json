@@ -1,13 +1,13 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.12.0/schema.json",
-  "name": "0fdfbc685cf5541aed6f",
+  "name": "e6432aa590f045ea7028",
   "position": {
     "x": 0,
     "y": 0,
-    "z": 1000,
+    "z": 1,
     "height": 87.8495170310117,
     "width": 717.76309100152525,
-    "tabOrder": 1000
+    "tabOrder": 1
   },
   "visual": {
     "visualType": "slicer",
@@ -20,14 +20,14 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Observation"
+                      "Entity": "Inspection"
                     }
                   },
-                  "Property": "Observed On"
+                  "Property": "Inspected On"
                 }
               },
-              "queryRef": "Observation.Observed On",
-              "nativeQueryRef": "Observed On",
+              "queryRef": "Inspection.Inspected On",
+              "nativeQueryRef": "Inspected On",
               "active": true
             }
           ]
@@ -40,10 +40,10 @@
               "Column": {
                 "Expression": {
                   "SourceRef": {
-                    "Entity": "Observation"
+                    "Entity": "Inspection"
                   }
                 },
-                "Property": "Observed On"
+                "Property": "Inspected On"
               }
             },
             "direction": "Ascending"
@@ -108,8 +108,8 @@
                 "Version": 2,
                 "From": [
                   {
-                    "Name": "o",
-                    "Entity": "Observation",
+                    "Name": "i",
+                    "Entity": "Inspection",
                     "Type": 0
                   }
                 ],
@@ -121,10 +121,10 @@
                           "Column": {
                             "Expression": {
                               "SourceRef": {
-                                "Source": "o"
+                                "Source": "i"
                               }
                             },
-                            "Property": "Observed On"
+                            "Property": "Inspected On"
                           }
                         },
                         "LowerBound": {
@@ -165,25 +165,20 @@
         }
       ]
     },
-    "syncGroup": {
-      "groupName": "Observed On",
-      "fieldChanges": true,
-      "filterChanges": true
-    },
     "drillFilterOtherVisuals": true
   },
   "filterConfig": {
     "filters": [
       {
-        "name": "6b49bee41ea11bb63c44",
+        "name": "4e7ab6ed7844275a1e1c",
         "field": {
           "Column": {
             "Expression": {
               "SourceRef": {
-                "Entity": "Observation"
+                "Entity": "Inspection"
               }
             },
-            "Property": "Observed On"
+            "Property": "Inspected On"
           }
         },
         "type": "Categorical"

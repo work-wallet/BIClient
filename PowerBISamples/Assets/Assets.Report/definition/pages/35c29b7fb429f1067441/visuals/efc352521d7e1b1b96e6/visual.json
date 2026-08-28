@@ -1,9 +1,9 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.11.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.12.0/schema.json",
   "name": "efc352521d7e1b1b96e6",
   "position": {
     "x": 0,
-    "y": 87.8495170310117,
+    "y": 88.841430859583554,
     "z": 0,
     "height": 631.8657854600915,
     "width": 1280,
@@ -37,8 +37,8 @@
                   "Level": "Year"
                 }
               },
-              "queryRef": "Observation.ObservedOn.Variation.Date Hierarchy.Year",
-              "nativeQueryRef": "ObservedOn Year",
+              "queryRef": "Observation.Observed On.Variation.Date Hierarchy.Year",
+              "nativeQueryRef": "Observed On Year",
               "active": true
             },
             {
@@ -63,35 +63,9 @@
                   "Level": "Month"
                 }
               },
-              "queryRef": "Observation.ObservedOn.Variation.Date Hierarchy.Month",
-              "nativeQueryRef": "ObservedOn Month",
+              "queryRef": "Observation.Observed On.Variation.Date Hierarchy.Month",
+              "nativeQueryRef": "Observed On Month",
               "active": true
-            },
-            {
-              "field": {
-                "HierarchyLevel": {
-                  "Expression": {
-                    "Hierarchy": {
-                      "Expression": {
-                        "PropertyVariationSource": {
-                          "Expression": {
-                            "SourceRef": {
-                              "Entity": "Observation"
-                            }
-                          },
-                          "Name": "Variation",
-                          "Property": "Observed On"
-                        }
-                      },
-                      "Hierarchy": "Date Hierarchy"
-                    }
-                  },
-                  "Level": "Day"
-                }
-              },
-              "queryRef": "Observation.ObservedOn.Variation.Date Hierarchy.Day",
-              "nativeQueryRef": "ObservedOn Day",
-              "active": false
             }
           ]
         },
@@ -107,13 +81,13 @@
                           "Entity": "Observation"
                         }
                       },
-                      "Property": "Defect Count"
+                      "Property": "New Defect Count"
                     }
                   },
                   "Function": 0
                 }
               },
-              "queryRef": "Sum(Observation.Defect Count)",
+              "queryRef": "Sum(Observation.'New Defect Count')",
               "nativeQueryRef": "Defects raised",
               "displayName": "Defects raised"
             }
@@ -178,5 +152,78 @@
       ]
     },
     "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "a9b4255aa46c613c21bb",
+        "field": {
+          "Aggregation": {
+            "Expression": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "Observation"
+                  }
+                },
+                "Property": "New Defect Count"
+              }
+            },
+            "Function": 0
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "90281a4aec1fa439c162",
+        "field": {
+          "HierarchyLevel": {
+            "Expression": {
+              "Hierarchy": {
+                "Expression": {
+                  "PropertyVariationSource": {
+                    "Expression": {
+                      "SourceRef": {
+                        "Entity": "Observation"
+                      }
+                    },
+                    "Name": "Variation",
+                    "Property": "Observed On"
+                  }
+                },
+                "Hierarchy": "Date Hierarchy"
+              }
+            },
+            "Level": "Year"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "ebaeaa3085cbccd2e887",
+        "field": {
+          "HierarchyLevel": {
+            "Expression": {
+              "Hierarchy": {
+                "Expression": {
+                  "PropertyVariationSource": {
+                    "Expression": {
+                      "SourceRef": {
+                        "Entity": "Observation"
+                      }
+                    },
+                    "Name": "Variation",
+                    "Property": "Observed On"
+                  }
+                },
+                "Hierarchy": "Date Hierarchy"
+              }
+            },
+            "Level": "Month"
+          }
+        },
+        "type": "Categorical"
+      }
+    ]
   }
 }

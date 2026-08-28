@@ -1,5 +1,5 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.11.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.12.0/schema.json",
   "name": "26c839914555745e96e1",
   "position": {
     "x": 0,
@@ -27,8 +27,8 @@
                 }
               },
               "queryRef": "Asset Status.Asset Status",
-              "nativeQueryRef": "Status",
-              "displayName": "Status"
+              "nativeQueryRef": "Asset",
+              "displayName": "Asset"
             },
             {
               "field": {
@@ -109,6 +109,20 @@
               "queryRef": "Sum(Asset.Open Defects)",
               "nativeQueryRef": "Sum of Open Defects",
               "displayName": "Open Defects"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Asset"
+                    }
+                  },
+                  "Property": "Url"
+                }
+              },
+              "queryRef": "Asset.Url",
+              "nativeQueryRef": "Url"
             }
           ]
         }
@@ -138,21 +152,7 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "68D"
-                }
-              }
-            }
-          },
-          "selector": {
-            "metadata": "Asset Status.Asset Status"
-          }
-        },
-        {
-          "properties": {
-            "value": {
-              "expr": {
-                "Literal": {
-                  "Value": "285D"
+                  "Value": "371.0834390859724D"
                 }
               }
             }
@@ -166,7 +166,7 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "105D"
+                  "Value": "187.69087026161236D"
                 }
               }
             }
@@ -194,7 +194,7 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "230.16074450084602D"
+                  "Value": "329.2569260360023D"
                 }
               }
             }
@@ -264,13 +264,27 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "123.55267245648815D"
+                  "Value": "139.45503403498643D"
                 }
               }
             }
           },
           "selector": {
             "metadata": "Asset.Last Inspection Date"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "82.40878227426344D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Asset Status.Asset Status"
           }
         }
       ],
@@ -291,8 +305,141 @@
         {
           "properties": {}
         }
+      ],
+      "values": [
+        {
+          "properties": {
+            "urlIcon": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        },
+        {
+          "properties": {},
+          "selector": {
+            "data": [
+              {
+                "dataViewWildcard": {
+                  "matchingOption": 1
+                }
+              }
+            ],
+            "metadata": "Asset.Reference"
+          }
+        }
       ]
     },
     "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "a834c87d473c31660ddf",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Asset"
+              }
+            },
+            "Property": "Asset"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "57b75cde99b9f7cd1629",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Asset"
+              }
+            },
+            "Property": "Reference"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "b89e29185d713b9835ea",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Asset"
+              }
+            },
+            "Property": "Latest Assigned To"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "df473a68b30087b22b84",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Asset"
+              }
+            },
+            "Property": "Last Inspection Date"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "707f9e62e8834898890a",
+        "field": {
+          "Aggregation": {
+            "Expression": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "Asset"
+                  }
+                },
+                "Property": "Open Defects"
+              }
+            },
+            "Function": 0
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "299d7fa78f9a592076ec",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Asset Status"
+              }
+            },
+            "Property": "Asset Status"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "c41ed1d5e10bd01d8ed3",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Asset"
+              }
+            },
+            "Property": "Url"
+          }
+        },
+        "type": "Categorical"
+      }
+    ]
   }
 }

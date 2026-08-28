@@ -139,7 +139,10 @@ table Asset
 			
 			COALESCE(
 			    MAXX(
-			        RELATEDTABLE(Inspection),
+			        FILTER(
+			            RELATEDTABLE(Inspection),
+			            RELATED('Inspection Status'[Inspection Status]) = "Complete"
+			        ),
 			        Inspection[Inspected On]
 			    ),
 			    BLANK()
@@ -188,6 +191,13 @@ table Asset
 		formatString: 0
 		lineageTag: f53223c4-64fe-4136-8cc5-731be9425a7d
 		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column Url = "https://portal.work-wallet.com/Company/Assets/" & Asset[AssetId] & "/Detail"
+		lineageTag: 241ca1cd-bded-47e6-a047-7e9bbc3a9ed3
+		dataCategory: WebUrl
+		summarizeBy: none
 
 		annotation SummarizationSetBy = Automatic
 

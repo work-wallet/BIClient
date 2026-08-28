@@ -71,7 +71,8 @@ table Inspection
 			            RETURN
 			            CALCULATE(
 			                SUM(Observation[Defect Count]),
-			                Observation[AssetObservation_key] = ObsKey
+			                Observation[AssetObservation_key] = ObsKey,
+			                Observation[IsFinalised] = TRUE()
 			            )
 			        )
 			    ),
@@ -314,8 +315,21 @@ table Inspection
 
 		annotation SummarizationSetBy = Automatic
 
-	column 'Inspected By' = CONCATENATEX (RELATEDTABLE(Contact), Contact[Contact Name], ", ", Contact[Contact Name], ASC)
+	column 'Inspected By' =
+			
+			IF (
+			    Inspection[Inspected By Company] <> "",
+			    Inspection[Inspected By Company],
+			    CONCATENATEX ( RELATEDTABLE ( Contact ), Contact[Contact Name], ", ", Contact[Contact Name], ASC )
+			)
 		lineageTag: 648411c9-6a78-4366-b241-528532136a49
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column Url = "https://portal.work-wallet.com/Company/Assets/" & RELATED(Asset[AssetId]) & "/Detail/Inspections/" & Inspection[InspectionId]
+		lineageTag: b5d9cb7a-a0b0-4489-8299-873a0d0ebaac
+		dataCategory: WebUrl
 		summarizeBy: none
 
 		annotation SummarizationSetBy = Automatic

@@ -1,5 +1,5 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.11.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.12.0/schema.json",
   "name": "dd59b0f69b5e38a483cc",
   "position": {
     "x": 0,
@@ -93,7 +93,7 @@
             "includeToday": {
               "expr": {
                 "Literal": {
-                  "Value": "false"
+                  "Value": "true"
                 }
               }
             }
@@ -134,13 +134,7 @@
                                 "Expression": {
                                   "DateAdd": {
                                     "Expression": {
-                                      "DateAdd": {
-                                        "Expression": {
-                                          "Now": {}
-                                        },
-                                        "Amount": -1,
-                                        "TimeUnit": 0
-                                      }
+                                      "Now": {}
                                     },
                                     "Amount": 1,
                                     "TimeUnit": 0
@@ -156,13 +150,7 @@
                         "UpperBound": {
                           "DateSpan": {
                             "Expression": {
-                              "DateAdd": {
-                                "Expression": {
-                                  "Now": {}
-                                },
-                                "Amount": -1,
-                                "TimeUnit": 0
-                              }
+                              "Now": {}
                             },
                             "TimeUnit": 0
                           }
@@ -177,6 +165,29 @@
         }
       ]
     },
+    "syncGroup": {
+      "groupName": "Inspected On",
+      "fieldChanges": true,
+      "filterChanges": true
+    },
     "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "2a3a211079e1ee5c13ca",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Inspection"
+              }
+            },
+            "Property": "Inspected On"
+          }
+        },
+        "type": "Categorical"
+      }
+    ]
   }
 }
