@@ -158,9 +158,9 @@ static string BuildIndexMarkdown(List<(string FolderName, string Title, List<(Di
     sb.AppendLine("semantic model and how the tables relate, without installing Power BI Desktop or having a");
     sb.AppendLine("Power BI licence.");
     sb.AppendLine();
-    sb.AppendLine("Each linked page corresponds to one page of the Power BI Desktop model view for that");
-    sb.AppendLine("semantic model (the built-in \"All tables\" page is skipped, since it is overwhelming). The");
-    sb.AppendLine("Wallet dimension table is omitted from every diagram for clarity. Dashed lines indicate an");
+    sb.AppendLine("Each diagram corresponds to one page of the Power BI Desktop model view for that semantic");
+    sb.AppendLine("model (the built-in \"All tables\" page is skipped, since it is overwhelming). The Wallet");
+    sb.AppendLine("dimension table is omitted from every diagram for clarity. Dashed lines indicate an");
     sb.AppendLine("inactive relationship. Each column is prefixed with its kind instead of its data type:");
     sb.AppendLine();
     sb.AppendLine("| Prefix | Meaning |");

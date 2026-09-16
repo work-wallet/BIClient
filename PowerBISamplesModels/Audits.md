@@ -8,8 +8,6 @@
 ---
 config:
   theme: neutral
-  er:
-    useMaxWidth: false
 ---
 erDiagram
     "Audit" {
@@ -86,8 +84,6 @@ erDiagram
 ---
 config:
   theme: neutral
-  er:
-    useMaxWidth: false
 ---
 erDiagram
     "Audit" {
@@ -128,8 +124,6 @@ erDiagram
 ---
 config:
   theme: neutral
-  er:
-    useMaxWidth: false
 ---
 erDiagram
     "Audit" {
@@ -186,8 +180,6 @@ erDiagram
 ---
 config:
   theme: neutral
-  er:
-    useMaxWidth: false
 ---
 erDiagram
     "Audit" {
@@ -243,8 +235,6 @@ erDiagram
 ---
 config:
   theme: neutral
-  er:
-    useMaxWidth: false
 ---
 erDiagram
     "Audit" {
@@ -299,8 +289,6 @@ erDiagram
 ---
 config:
   theme: neutral
-  er:
-    useMaxWidth: false
 ---
 erDiagram
     "Audit" {
@@ -349,8 +337,6 @@ erDiagram
 ---
 config:
   theme: neutral
-  er:
-    useMaxWidth: false
 ---
 erDiagram
     "Audit" {
@@ -397,8 +383,6 @@ erDiagram
 ---
 config:
   theme: neutral
-  er:
-    useMaxWidth: false
 ---
 erDiagram
     "Audit" {
@@ -442,8 +426,6 @@ erDiagram
 ---
 config:
   theme: neutral
-  er:
-    useMaxWidth: false
 ---
 erDiagram
     "Audit" {

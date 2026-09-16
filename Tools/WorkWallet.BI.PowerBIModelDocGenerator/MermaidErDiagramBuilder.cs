@@ -15,12 +15,10 @@ public static class MermaidErDiagramBuilder
 
         var sb = new StringBuilder();
         sb.AppendLine("```mermaid");
-        // Fixed (non-auto-scaling) size keeps font size consistent across busy/simple diagrams.
+        // Explicit theme keeps relationship lines visible regardless of viewer theme.
         sb.AppendLine("---");
         sb.AppendLine("config:");
         sb.AppendLine("  theme: neutral");
-        sb.AppendLine("  er:");
-        sb.AppendLine("    useMaxWidth: false");
         sb.AppendLine("---");
         sb.AppendLine("erDiagram");
 

@@ -8,8 +8,6 @@
 ---
 config:
   theme: neutral
-  er:
-    useMaxWidth: false
 ---
 erDiagram
     "Location" {
@@ -64,8 +62,6 @@ erDiagram
 ---
 config:
   theme: neutral
-  er:
-    useMaxWidth: false
 ---
 erDiagram
     "Stock" {
@@ -115,8 +111,6 @@ erDiagram
 ---
 config:
   theme: neutral
-  er:
-    useMaxWidth: false
 ---
 erDiagram
     "Stock" {
@@ -190,8 +184,6 @@ erDiagram
 ---
 config:
   theme: neutral
-  er:
-    useMaxWidth: false
 ---
 erDiagram
     "PPE Type" {

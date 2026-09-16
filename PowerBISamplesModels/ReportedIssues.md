@@ -8,8 +8,6 @@
 ---
 config:
   theme: neutral
-  er:
-    useMaxWidth: false
 ---
 erDiagram
     "Issue" {
@@ -64,8 +62,6 @@ erDiagram
 ---
 config:
   theme: neutral
-  er:
-    useMaxWidth: false
 ---
 erDiagram
     "Issue" {
@@ -100,8 +96,6 @@ erDiagram
 ---
 config:
   theme: neutral
-  er:
-    useMaxWidth: false
 ---
 erDiagram
     "Issue" {
@@ -132,8 +126,6 @@ erDiagram
 ---
 config:
   theme: neutral
-  er:
-    useMaxWidth: false
 ---
 erDiagram
     "Issue" {
@@ -165,8 +157,6 @@ erDiagram
 ---
 config:
   theme: neutral
-  er:
-    useMaxWidth: false
 ---
 erDiagram
     "Issue" {
@@ -198,8 +188,6 @@ erDiagram
 ---
 config:
   theme: neutral
-  er:
-    useMaxWidth: false
 ---
 erDiagram
     "Issue" {
@@ -229,8 +217,6 @@ erDiagram
 ---
 config:
   theme: neutral
-  er:
-    useMaxWidth: false
 ---
 erDiagram
     "Issue" {

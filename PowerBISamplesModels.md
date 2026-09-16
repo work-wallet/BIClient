@@ -5,9 +5,9 @@ sample reports are presented here. They give a sense of what data is available i
 semantic model and how the tables relate, without installing Power BI Desktop or having a
 Power BI licence.
 
-Each linked page corresponds to one page of the Power BI Desktop model view for that
-semantic model (the built-in "All tables" page is skipped, since it is overwhelming). The
-Wallet dimension table is omitted from every diagram for clarity. Dashed lines indicate an
+Each diagram corresponds to one page of the Power BI Desktop model view for that semantic
+model (the built-in "All tables" page is skipped, since it is overwhelming). The Wallet
+dimension table is omitted from every diagram for clarity. Dashed lines indicate an
 inactive relationship. Each column is prefixed with its kind instead of its data type:
 
 | Prefix | Meaning |

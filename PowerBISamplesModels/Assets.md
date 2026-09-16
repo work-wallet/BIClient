@@ -8,8 +8,6 @@
 ---
 config:
   theme: neutral
-  er:
-    useMaxWidth: false
 ---
 erDiagram
     "Asset" {
@@ -40,8 +38,6 @@ erDiagram
 ---
 config:
   theme: neutral
-  er:
-    useMaxWidth: false
 ---
 erDiagram
     "Asset" {
@@ -92,8 +88,6 @@ erDiagram
 ---
 config:
   theme: neutral
-  er:
-    useMaxWidth: false
 ---
 erDiagram
     "Asset" {
@@ -133,8 +127,6 @@ erDiagram
 ---
 config:
   theme: neutral
-  er:
-    useMaxWidth: false
 ---
 erDiagram
     "Inspection" {
@@ -208,8 +200,6 @@ erDiagram
 ---
 config:
   theme: neutral
-  er:
-    useMaxWidth: false
 ---
 erDiagram
     "Asset" {
@@ -269,8 +259,6 @@ erDiagram
 ---
 config:
   theme: neutral
-  er:
-    useMaxWidth: false
 ---
 erDiagram
     "Inspection Observation Fact" {
@@ -326,8 +314,6 @@ erDiagram
 ---
 config:
   theme: neutral
-  er:
-    useMaxWidth: false
 ---
 erDiagram
     "Inspection" {
@@ -369,8 +355,6 @@ erDiagram
 ---
 config:
   theme: neutral
-  er:
-    useMaxWidth: false
 ---
 erDiagram
     "Inspection" {
@@ -428,8 +412,6 @@ erDiagram
 ---
 config:
   theme: neutral
-  er:
-    useMaxWidth: false
 ---
 erDiagram
     "Inspection" {
@@ -488,8 +470,6 @@ erDiagram
 ---
 config:
   theme: neutral
-  er:
-    useMaxWidth: false
 ---
 erDiagram
     "Inspection" {
@@ -545,8 +525,6 @@ erDiagram
 ---
 config:
   theme: neutral
-  er:
-    useMaxWidth: false
 ---
 erDiagram
     "Inspection" {
@@ -596,8 +574,6 @@ erDiagram
 ---
 config:
   theme: neutral
-  er:
-    useMaxWidth: false
 ---
 erDiagram
     "Inspection" {
@@ -645,8 +621,6 @@ erDiagram
 ---
 config:
   theme: neutral
-  er:
-    useMaxWidth: false
 ---
 erDiagram
     "Inspection" {
@@ -691,8 +665,6 @@ erDiagram
 ---
 config:
   theme: neutral
-  er:
-    useMaxWidth: false
 ---
 erDiagram
     "Inspection" {

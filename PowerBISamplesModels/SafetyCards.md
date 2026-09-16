@@ -8,8 +8,6 @@
 ---
 config:
   theme: neutral
-  er:
-    useMaxWidth: false
 ---
 erDiagram
     "Safety Card" {

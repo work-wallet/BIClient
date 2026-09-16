@@ -8,8 +8,6 @@
 ---
 config:
   theme: neutral
-  er:
-    useMaxWidth: false
 ---
 erDiagram
     "Permit" {
@@ -70,8 +68,6 @@ erDiagram
 ---
 config:
   theme: neutral
-  er:
-    useMaxWidth: false
 ---
 erDiagram
     "Numeric Answer Fact" {
@@ -116,8 +112,6 @@ erDiagram
 ---
 config:
   theme: neutral
-  er:
-    useMaxWidth: false
 ---
 erDiagram
     "Permit" {
@@ -160,8 +154,6 @@ erDiagram
 ---
 config:
   theme: neutral
-  er:
-    useMaxWidth: false
 ---
 erDiagram
     "Permit" {
@@ -201,8 +193,6 @@ erDiagram
 ---
 config:
   theme: neutral
-  er:
-    useMaxWidth: false
 ---
 erDiagram
     "Branch Option Fact" {
@@ -241,8 +231,6 @@ erDiagram
 ---
 config:
   theme: neutral
-  er:
-    useMaxWidth: false
 ---
 erDiagram
     "Permit" {
