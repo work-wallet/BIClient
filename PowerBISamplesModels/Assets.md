@@ -15,6 +15,7 @@ erDiagram
         attr Reference
         attr AssetName
         attr AssetNotes
+        attr CreatedOn
         calc AssetCount
         calc Asset
         calc OpenDefects
