@@ -4,6 +4,18 @@ All notable changes to this project will be documented in this file.
 
 The format loosely follows Keep a Changelog principles (dates in YYYY-MM-DD). Version numbers align with assembly versions unless otherwise noted.
 
+## [Unreleased]
+
+### Added (Unreleased)
+
+- `Tools/WorkWallet.BI.PowerBIModelDocGenerator`: generates `PowerBISamplesModels.md` and the per-module diagram files under `PowerBISamplesModels/` directly from each Power BI `.SemanticModel`'s TMDL/`diagramLayout.json` files, replacing the hand-maintained model-view screenshots. Not referenced by `WorkWallet.BI.Client.sln` (maintainer-only tool). Run it (optionally with `-- --check`) to regenerate/verify the docs.
+- `.github/workflows/ci.yml`: CI now builds the solution and fails if the generated Power BI model docs are stale.
+
+### Changed (Unreleased)
+
+- `PowerBISamplesModels.md` restructured into a lightweight index linking to one generated Mermaid-diagram file per module under `PowerBISamplesModels/`; the `Images/PowerBIModelDiagrams/` screenshots have been removed.
+- `Build-ReleaseAssets.ps1` moved to `Tools/`.
+
 ## [5.0.0] - 2026-08-23
 
 Work Wallet has rewritten Asset Inspections and Asset Observations, bringing them the same rich workflow

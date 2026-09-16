@@ -1,210 +1,120 @@
 # Power BI Samples - Semantic Models
 
-For convenience, the Power BI semantic models used in the sample reports are presented here.
-This information is also available within the Power BI projects in the `Model View`
-(and is the most current and accurate).
+For convenience, entity-relationship diagrams for the Power BI semantic models used in the
+sample reports are presented here. They give a sense of what data is available in each
+semantic model and how the tables relate, without installing Power BI Desktop or having a
+Power BI licence.
 
-The diagrams for each area are broken down into multiple layouts for readability.
-The Wallet dimension table is not shown for clarity. Each diagram shows the relationships
-between fact tables and dimension tables within that specific domain area.
+Each diagram corresponds to one page of the Power BI Desktop model view for that semantic
+model (the built-in "All tables" page is skipped, since it is overwhelming). The Wallet
+dimension table is omitted from every diagram for clarity. Dashed lines indicate an
+inactive relationship. Each column is prefixed with its kind instead of its data type:
 
-To fully explore the models it is recommended that you open the relevant sample Power BI project file.
-
-Jump to the relevant section:
-
-* [Actions](#actions)
-* [Assets](#assets)
-* [Audits](#audits)
-* [Inductions](#inductions)
-* [Permits](#permits)
-* [PPE](#ppe)
-* [Reported Issues](#reported-issues)
-* [Safety Cards](#safety-cards)
+| Prefix | Meaning |
+| --- | --- |
+| `attr` | Plain source column |
+| `calc` | DAX calculated column |
+| `measure` | DAX measure |
+| `agg` | Source column with a non-default implicit aggregation (e.g. sum) |
 
 ## Actions
 
-### Actions - Main
+[Actions diagrams](PowerBISamplesModels/Actions.md)
 
-![Actions Main Model](Images/PowerBIModelDiagrams/Actions_Main.png)
+* [Actions - Main](PowerBISamplesModels/Actions.md#actions---main)
 
 ## Assets
 
-### Assets - Main
+[Assets diagrams](PowerBISamplesModels/Assets.md)
 
-![Assets Main Model](Images/PowerBIModelDiagrams/Assets_Main.png)
-
-### Assets - Assignment
-
-![Assets Assignment Model](Images/PowerBIModelDiagrams/Assets_Assignment.png)
-
-### Assets - Property
-
-![Assets Property Model](Images/PowerBIModelDiagrams/Assets_Property.png)
-
-### Assets - Inspection
-
-![Assets Inspection Model](Images/PowerBIModelDiagrams/Assets_Inspection.png)
-
-### Assets - Observation
-
-![Assets Observation Model](Images/PowerBIModelDiagrams/Assets_Observation.png)
-
-### Assets - Inspection Observation
-
-![Assets Inspection Observation Model](Images/PowerBIModelDiagrams/Assets_InspectionObservation.png)
-
-### Assets - Inspected By
-
-![Assets Inspected By Model](Images/PowerBIModelDiagrams/Assets_InspectedBy.png)
-
-### Assets - Scored Response
-
-![Assets Scored Response Model](Images/PowerBIModelDiagrams/Assets_ScoredResponse.png)
-
-### Assets - Score Section
-
-![Assets Score Section Model](Images/PowerBIModelDiagrams/Assets_ScoreSection.png)
-
-### Assets - Score Tag
-
-![Assets Score Tag Model](Images/PowerBIModelDiagrams/Assets_ScoreTag.png)
-
-### Assets - Numeric Answer
-
-![Assets Numeric Answer Model](Images/PowerBIModelDiagrams/Assets_NumericAnswer.png)
-
-### Assets - Date Time Answer
-
-![Assets Date Time Answer Model](Images/PowerBIModelDiagrams/Assets_DateTimeAnswer.png)
-
-### Assets - Checklist Answer
-
-![Assets Checklist Answer Model](Images/PowerBIModelDiagrams/Assets_ChecklistAnswer.png)
-
-### Assets - Branch Option
-
-![Assets Branch Option Model](Images/PowerBIModelDiagrams/Assets_BranchOption.png)
+* [Assets - Main](PowerBISamplesModels/Assets.md#assets---main)
+* [Assets - Assignment](PowerBISamplesModels/Assets.md#assets---assignment)
+* [Assets - Property](PowerBISamplesModels/Assets.md#assets---property)
+* [Assets - Inspection](PowerBISamplesModels/Assets.md#assets---inspection)
+* [Assets - Observation](PowerBISamplesModels/Assets.md#assets---observation)
+* [Assets - Inspection Observation](PowerBISamplesModels/Assets.md#assets---inspection-observation)
+* [Assets - Inspected By](PowerBISamplesModels/Assets.md#assets---inspected-by)
+* [Assets - Scored Response](PowerBISamplesModels/Assets.md#assets---scored-response)
+* [Assets - Score Section](PowerBISamplesModels/Assets.md#assets---score-section)
+* [Assets - Score Tag](PowerBISamplesModels/Assets.md#assets---score-tag)
+* [Assets - Numeric Answer](PowerBISamplesModels/Assets.md#assets---numeric-answer)
+* [Assets - Date Time Answer](PowerBISamplesModels/Assets.md#assets---date-time-answer)
+* [Assets - Checklist Answer](PowerBISamplesModels/Assets.md#assets---checklist-answer)
+* [Assets - Branch Option](PowerBISamplesModels/Assets.md#assets---branch-option)
 
 ## Audits
 
-### Audits - Main
+[Audits diagrams](PowerBISamplesModels/Audits.md)
 
-![Audits Main Model](Images/PowerBIModelDiagrams/Audits_Main.png)
-
-### Audits - Inspected By
-
-![Audits Inspected By Model](Images/PowerBIModelDiagrams/Audits_InspectedBy.png)
-
-### Audits - Scored Response
-
-![Audits Scored Response Model](Images/PowerBIModelDiagrams/Audits_ScoredResponse.png)
-
-### Audits - Score Section
-
-![Audits Score Section Model](Images/PowerBIModelDiagrams/Audits_ScoreSection.png)
-
-### Audits - Score Tag
-
-![Audits Score Tag Model](Images/PowerBIModelDiagrams/Audits_ScoreTag.png)
-
-### Audits - Numeric Answer
-
-![Audits Numeric Answer Model](Images/PowerBIModelDiagrams/Audits_NumericAnswer.png)
-
-### Audits - Date Time Answer
-
-![Audits Date Time Answer Model](Images/PowerBIModelDiagrams/Audits_DateTimeAnswer.png)
-
-### Audits - Checklist Answer
-
-![Audits Checklist Answer Model](Images/PowerBIModelDiagrams/Audits_ChecklistAnswer.png)
-
-### Audits - Branch Option
-
-![Audits Branch Option Model](Images/PowerBIModelDiagrams/Audits_BranchOption.png)
+* [Audits - Main](PowerBISamplesModels/Audits.md#audits---main)
+* [Audits - Inspected By](PowerBISamplesModels/Audits.md#audits---inspected-by)
+* [Audits - Scored Response](PowerBISamplesModels/Audits.md#audits---scored-response)
+* [Audits - Score Section](PowerBISamplesModels/Audits.md#audits---score-section)
+* [Audits - Score Tag](PowerBISamplesModels/Audits.md#audits---score-tag)
+* [Audits - Numeric Answer](PowerBISamplesModels/Audits.md#audits---numeric-answer)
+* [Audits - Date Time Answer](PowerBISamplesModels/Audits.md#audits---date-time-answer)
+* [Audits - Checklist Answer](PowerBISamplesModels/Audits.md#audits---checklist-answer)
+* [Audits - Branch Option](PowerBISamplesModels/Audits.md#audits---branch-option)
 
 ## Inductions
 
-### Inductions - Main
+[Inductions diagrams](PowerBISamplesModels/Inductions.md)
 
-![Inductions Main Model](Images/PowerBIModelDiagrams/Inductions_Main.png)
+* [Inductions - Main](PowerBISamplesModels/Inductions.md#inductions---main)
 
 ## Permits
 
-### Permits - Main
+[Permits diagrams](PowerBISamplesModels/Permits.md)
 
-![Permits Main Model](Images/PowerBIModelDiagrams/Permits_Main.png)
-
-### Permits - Numeric Answer
-
-![Permits Numeric Answer Model](Images/PowerBIModelDiagrams/Permits_NumericAnswer.png)
-
-### Permits - Date Time Answer
-
-![Permits Date Time Answer Model](Images/PowerBIModelDiagrams/Permits_DateTimeAnswer.png)
-
-### Permits - Checklist Answer
-
-![Permits Checklist Answer Model](Images/PowerBIModelDiagrams/Permits_ChecklistAnswer.png)
-
-### Permits - Branch Option
-
-![Permits Branch Option Model](Images/PowerBIModelDiagrams/Permits_BranchOption.png)
-
-### Permits - Signed By
-
-![Permits Signed By Model](Images/PowerBIModelDiagrams/Permits_SignedBy.png)
+* [Permits - Main](PowerBISamplesModels/Permits.md#permits---main)
+* [Permits - Numeric Answer](PowerBISamplesModels/Permits.md#permits---numeric-answer)
+* [Permits - Date Time Answer](PowerBISamplesModels/Permits.md#permits---date-time-answer)
+* [Permits - Checklist Answer](PowerBISamplesModels/Permits.md#permits---checklist-answer)
+* [Permits - Branch Option](PowerBISamplesModels/Permits.md#permits---branch-option)
+* [Permits - Signed By](PowerBISamplesModels/Permits.md#permits---signed-by)
 
 ## PPE
 
-### PPE - Stock
+[PPE diagrams](PowerBISamplesModels/PPE.md)
 
-![PPE Stock Model](Images/PowerBIModelDiagrams/PPE_Stock.png)
-
-### PPE - Stock History
-
-![PPE Stock History Model](Images/PowerBIModelDiagrams/PPE_StockHistory.png)
-
-### PPE - Assignments
-
-![PPE Assignments Model](Images/PowerBIModelDiagrams/PPE_Assignments.png)
-
-### PPE - Properties
-
-![PPE Properties Model](Images/PowerBIModelDiagrams/PPE_Properties.png)
+* [PPE - Stock](PowerBISamplesModels/PPE.md#ppe---stock)
+* [PPE - Stock History](PowerBISamplesModels/PPE.md#ppe---stock-history)
+* [PPE - Assignments](PowerBISamplesModels/PPE.md#ppe---assignments)
+* [PPE - Properties](PowerBISamplesModels/PPE.md#ppe---properties)
 
 ## Reported Issues
 
-### Reported Issues - Main
+[Reported Issues diagrams](PowerBISamplesModels/ReportedIssues.md)
 
-![Reported Issues Main Model](Images/PowerBIModelDiagrams/ReportedIssues_Main.png)
-
-### Reported Issues - Body Part
-
-![Reported Issues Body Part Model](Images/PowerBIModelDiagrams/ReportedIssues_BodyPart.png)
-
-### Reported Issues - Branch Option
-
-![Reported Issues Branch Option Model](Images/PowerBIModelDiagrams/ReportedIssues_BranchOption.png)
-
-### Reported Issues - Option Select
-
-![Reported Issues Option Select Model](Images/PowerBIModelDiagrams/ReportedIssues_OptionSelect.png)
-
-### Reported Issues - Person
-
-![Reported Issues Person Model](Images/PowerBIModelDiagrams/ReportedIssues_Person.png)
-
-### Reported Issues - Root Cause Analysis
-
-![Reported Issues Root Cause Analysis Model](Images/PowerBIModelDiagrams/ReportedIssues_RootCauseAnalysis.png)
-
-### Reported Issues - Investigation Team
-
-![Reported Issues Investigation Team Model](Images/PowerBIModelDiagrams/ReportedIssues_InvestigationTeam.png)
+* [Reported Issues - Main](PowerBISamplesModels/ReportedIssues.md#reported-issues---main)
+* [Reported Issues - Body Part](PowerBISamplesModels/ReportedIssues.md#reported-issues---body-part)
+* [Reported Issues - Branch Option](PowerBISamplesModels/ReportedIssues.md#reported-issues---branch-option)
+* [Reported Issues - Option Select](PowerBISamplesModels/ReportedIssues.md#reported-issues---option-select)
+* [Reported Issues - Person](PowerBISamplesModels/ReportedIssues.md#reported-issues---person)
+* [Reported Issues - Root Cause Analysis](PowerBISamplesModels/ReportedIssues.md#reported-issues---root-cause-analysis)
+* [Reported Issues - Investigation Team](PowerBISamplesModels/ReportedIssues.md#reported-issues---investigation-team)
 
 ## Safety Cards
 
-### Safety Cards - Main
+[Safety Cards diagrams](PowerBISamplesModels/SafetyCards.md)
 
-![Safety Cards Main Model](Images/PowerBIModelDiagrams/SafetyCards_Main.png)
+* [Safety Cards - Main](PowerBISamplesModels/SafetyCards.md#safety-cards---main)
+
+## For Maintainers
+
+This file and the linked pages under `PowerBISamplesModels/` are auto-generated - do not
+edit them by hand. Update the relevant `.SemanticModel` project(s) in Power BI Desktop
+(including adding/arranging diagram pages), then regenerate the docs by running:
+
+```powershell
+dotnet run --project Tools/WorkWallet.BI.PowerBIModelDocGenerator/WorkWallet.BI.PowerBIModelDocGenerator.csproj
+```
+
+To check whether the docs are stale without regenerating them (for example, before
+opening a pull request), add `-- --check`. This is also what the GitHub ruleset's CI
+check (`.github/workflows/ci.yml`) runs on every push/PR, failing if the docs are out of
+date:
+
+```powershell
+dotnet run --project Tools/WorkWallet.BI.PowerBIModelDocGenerator/WorkWallet.BI.PowerBIModelDocGenerator.csproj -- --check
+```
