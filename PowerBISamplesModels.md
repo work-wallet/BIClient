@@ -62,15 +62,6 @@ inactive relationship. Each column is prefixed with its kind instead of its data
 
 * [Inductions - Main](PowerBISamplesModels/Inductions.md#inductions---main)
 
-## PPE
-
-[PPE diagrams](PowerBISamplesModels/PPE.md)
-
-* [PPE - Stock](PowerBISamplesModels/PPE.md#ppe---stock)
-* [PPE - Stock History](PowerBISamplesModels/PPE.md#ppe---stock-history)
-* [PPE - Assignments](PowerBISamplesModels/PPE.md#ppe---assignments)
-* [PPE - Properties](PowerBISamplesModels/PPE.md#ppe---properties)
-
 ## Permits
 
 [Permits diagrams](PowerBISamplesModels/Permits.md)
@@ -81,6 +72,15 @@ inactive relationship. Each column is prefixed with its kind instead of its data
 * [Permits - Checklist Answer](PowerBISamplesModels/Permits.md#permits---checklist-answer)
 * [Permits - Branch Option](PowerBISamplesModels/Permits.md#permits---branch-option)
 * [Permits - Signed By](PowerBISamplesModels/Permits.md#permits---signed-by)
+
+## PPE
+
+[PPE diagrams](PowerBISamplesModels/PPE.md)
+
+* [PPE - Stock](PowerBISamplesModels/PPE.md#ppe---stock)
+* [PPE - Stock History](PowerBISamplesModels/PPE.md#ppe---stock-history)
+* [PPE - Assignments](PowerBISamplesModels/PPE.md#ppe---assignments)
+* [PPE - Properties](PowerBISamplesModels/PPE.md#ppe---properties)
 
 ## Reported Issues
 

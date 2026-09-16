@@ -14,7 +14,7 @@ var modulesDir = Path.Combine(repoRoot, modulesDirName);
 
 var datasetFolders = Directory.GetDirectories(powerBiSamplesDir)
     .Select(d => new DirectoryInfo(d).Name)
-    .OrderBy(n => n, StringComparer.Ordinal)
+    .OrderBy(n => n, StringComparer.OrdinalIgnoreCase)
     .ToList();
 
 var datasets = new List<(string FolderName, string Title, List<(DiagramPage Page, string Mermaid)> Pages)>();
@@ -29,8 +29,10 @@ foreach (var folderName in datasetFolders)
 
     if (!File.Exists(diagramLayoutPath) || !File.Exists(relationshipsPath) || !Directory.Exists(tablesDir))
     {
-        Console.Error.WriteLine($"Skipping '{folderName}': expected semantic model files not found under {semanticModelDir}");
-        continue;
+        // Fail hard rather than silently skipping: a missing dataset would otherwise drop its
+        // generated page and --check would happily pass, defeating the whole point of the check.
+        throw new InvalidOperationException(
+            $"Expected semantic model files not found under {semanticModelDir}");
     }
 
     var tables = Directory.GetFiles(tablesDir, "*.tmdl")
@@ -120,10 +122,12 @@ return 0;
 
 static string FindRepoRoot(string startDirectory)
 {
+    // Use the (non-generated) solution file as the marker, not PowerBISamplesModels.md itself -
+    // otherwise the tool couldn't find the repo root to recreate that file if it were deleted.
     var dir = new DirectoryInfo(startDirectory);
     while (dir is not null)
     {
-        if (File.Exists(Path.Combine(dir.FullName, "PowerBISamplesModels.md")))
+        if (File.Exists(Path.Combine(dir.FullName, "SampleCode", "WorkWallet.BI.Client.sln")))
         {
             return dir.FullName;
         }
@@ -131,8 +135,7 @@ static string FindRepoRoot(string startDirectory)
         dir = dir.Parent;
     }
 
-    throw new InvalidOperationException(
-        $"Could not locate repo root (no PowerBISamplesModels.md found above '{startDirectory}').");
+    throw new InvalidOperationException($"Could not locate repo root above '{startDirectory}'.");
 }
 
 // "ReportedIssues" -> "Reported Issues"; acronyms like "PPE" are left untouched.
