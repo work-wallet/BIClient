@@ -66,16 +66,15 @@ When adding a new dataset or extending existing datasets with additional JSON fi
    - `.pbip` project file.
    - `.Report/` folder with visuals and definition.
    - `.SemanticModel/` folder with model definition, relationships, measures.
-8. Update `PowerBISamplesModels.md`: add/update model diagram screenshots and relationship documentation.
-9. Export and save semantic model diagrams to `Images/PowerBIModelDiagrams/`.
+8. Regenerate `PowerBISamplesModels.md` (index) and the per-module diagram files under `PowerBISamplesModels/` (one `.md` per dataset, e.g. `Assets.md`, containing all of that dataset's diagram pages) by running `dotnet run --project Tools/WorkWallet.BI.PowerBIModelDocGenerator/WorkWallet.BI.PowerBIModelDocGenerator.csproj` (all auto-generated from the `.SemanticModel` TMDL files and `diagramLayout.json` pages — never edit them by hand, and no images need exporting). This tool is intentionally **not** referenced by `WorkWallet.BI.Client.sln` (that solution is for end users) — do not add it back. CI (`.github/workflows/ci.yml`) builds/runs it separately and fails if the generated docs are stale (`-- --check`).
 
 **Documentation Layer:**
-10. Update `SampleJSONFromAPI.md`: add representative JSON sample for new dataset or new fields.
-11. Update `ReferenceData.md`: document any new reference data, enumerations, or lookup values.
-12. Update `README.md`:
+9. Update `SampleJSONFromAPI.md`: add representative JSON sample for new dataset or new fields.
+10. Update `ReferenceData.md`: document any new reference data, enumerations, or lookup values.
+11. Update `README.md`:
     - Add dataset to Supported Datasets list if new.
     - Update Force Data Reset table with new dataset reset mapping if new.
-13. Update `CHANGELOG.md`: document changes under Unreleased > Added or Changed, noting DB deploy + optional full reload if required.
+12. Update `CHANGELOG.md`: document changes under Unreleased > Added or Changed, noting DB deploy + optional full reload if required.
 
 ## 6. Database Design Notes
 - **DbUp deployment order**: (1) drop all stored procedures, (2) run new `Schema` scripts (RunOnce), (3) drop and recreate **all** `Types` scripts (RunAlways), (4) drop and recreate **all** `StoredProcedures` scripts (RunAlways). Type and stored-procedure changes only need the relevant file edited — no migration scripts required. Schema changes always require a new numbered migration script; old schema scripts are never edited.

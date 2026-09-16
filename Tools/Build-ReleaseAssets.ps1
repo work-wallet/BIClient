@@ -13,7 +13,7 @@
     AssemblyVersion read from WorkWallet.BI.ClientSample.csproj.
 
 .PARAMETER OutputDir
-    Directory to write the publish output and zips to. Defaults to ".\release".
+    Directory to write the publish output and zips to. Defaults to "<repo root>\release".
 
 .EXAMPLE
     ./Build-ReleaseAssets.ps1
@@ -24,12 +24,19 @@
 [CmdletBinding()]
 param(
     [string]$Version,
-    [string]$OutputDir = (Join-Path $PSScriptRoot "release"),
+    [string]$OutputDir,
     [string]$Configuration = "Release",
     [string]$Runtime = "win-x64"
 )
 
 $ErrorActionPreference = "Stop"
+
+# This script lives under Tools/, one level below the repo root.
+$repoRoot = Split-Path -Parent $PSScriptRoot
+
+if (-not $OutputDir) {
+    $OutputDir = Join-Path $repoRoot "release"
+}
 
 $projects = @(
     @{ Name = "WorkWallet.BI.ClientSample"; Path = "SampleCode/WorkWallet.BI.ClientSample/WorkWallet.BI.ClientSample.csproj" }
@@ -44,7 +51,7 @@ function Get-ProjectVersion([string]$csprojPath) {
 }
 
 if (-not $Version) {
-    $Version = Get-ProjectVersion (Join-Path $PSScriptRoot $projects[0].Path)
+    $Version = Get-ProjectVersion (Join-Path $repoRoot $projects[0].Path)
 }
 
 Write-Host "Building release assets for version $Version ($Runtime, $Configuration)" -ForegroundColor Cyan
@@ -55,7 +62,7 @@ if (Test-Path $OutputDir) {
 New-Item -ItemType Directory -Path $OutputDir | Out-Null
 
 foreach ($project in $projects) {
-    $projectPath = Join-Path $PSScriptRoot $project.Path
+    $projectPath = Join-Path $repoRoot $project.Path
     $projectVersion = Get-ProjectVersion $projectPath
 
     if ($projectVersion -ne $Version) {
