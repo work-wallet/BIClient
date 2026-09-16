@@ -197,6 +197,15 @@ static string BuildIndexMarkdown(List<(string FolderName, string Title, List<(Di
     sb.AppendLine("```powershell");
     sb.AppendLine("dotnet run --project Tools/WorkWallet.BI.PowerBIModelDocGenerator/WorkWallet.BI.PowerBIModelDocGenerator.csproj");
     sb.AppendLine("```");
+    sb.AppendLine();
+    sb.AppendLine("To check whether the docs are stale without regenerating them (for example, before");
+    sb.AppendLine("opening a pull request), add `-- --check`. This is also what the GitHub ruleset's CI");
+    sb.AppendLine("check (`.github/workflows/ci.yml`) runs on every push/PR, failing if the docs are out of");
+    sb.AppendLine("date:");
+    sb.AppendLine();
+    sb.AppendLine("```powershell");
+    sb.AppendLine("dotnet run --project Tools/WorkWallet.BI.PowerBIModelDocGenerator/WorkWallet.BI.PowerBIModelDocGenerator.csproj -- --check");
+    sb.AppendLine("```");
 
     return sb.ToString();
 }

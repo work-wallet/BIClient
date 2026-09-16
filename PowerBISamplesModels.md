@@ -109,3 +109,12 @@ edit them by hand. Update the relevant `.SemanticModel` project(s) in Power BI D
 ```powershell
 dotnet run --project Tools/WorkWallet.BI.PowerBIModelDocGenerator/WorkWallet.BI.PowerBIModelDocGenerator.csproj
 ```
+
+To check whether the docs are stale without regenerating them (for example, before
+opening a pull request), add `-- --check`. This is also what the GitHub ruleset's CI
+check (`.github/workflows/ci.yml`) runs on every push/PR, failing if the docs are out of
+date:
+
+```powershell
+dotnet run --project Tools/WorkWallet.BI.PowerBIModelDocGenerator/WorkWallet.BI.PowerBIModelDocGenerator.csproj -- --check
+```
