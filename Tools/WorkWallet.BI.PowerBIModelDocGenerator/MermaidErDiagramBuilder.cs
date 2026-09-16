@@ -4,7 +4,7 @@ using System.Text.RegularExpressions;
 namespace WorkWallet.BI.PowerBIModelDocGenerator;
 
 /// <summary>Renders one Power BI Desktop diagram page as a Mermaid `erDiagram` code block.</summary>
-public static class MermaidErDiagramBuilder
+public static partial class MermaidErDiagramBuilder
 {
     public static string Build(
         DiagramPage page,
@@ -61,5 +61,11 @@ public static class MermaidErDiagramBuilder
     private static string Quote(string value) => $"\"{value}\"";
 
     private static string SanitizeAttributeName(string value) =>
-        Regex.Replace(Regex.Replace(value, @"\s+", string.Empty), @"[^A-Za-z0-9_]", "_");
+        NonAlphanumericOrUnderscoreRegex().Replace(WhitespaceRegex().Replace(value, string.Empty), "_");
+
+    [GeneratedRegex(@"\s+")]
+    private static partial Regex WhitespaceRegex();
+
+    [GeneratedRegex(@"[^A-Za-z0-9_]")]
+    private static partial Regex NonAlphanumericOrUnderscoreRegex();
 }

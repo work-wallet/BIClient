@@ -37,8 +37,10 @@ public static class DiagramLayoutReader
         var root = JsonSerializer.Deserialize<DiagramLayoutRoot>(json, Options)
             ?? throw new InvalidOperationException($"Could not parse {diagramLayoutJsonPath}");
 
-        return root.Diagrams
-            .Where(d => !string.Equals(d.Name, "All tables", StringComparison.OrdinalIgnoreCase))
-            .ToList();
+        return
+        [
+            .. root.Diagrams
+                .Where(d => !string.Equals(d.Name, "All tables", StringComparison.OrdinalIgnoreCase))
+        ];
     }
 }

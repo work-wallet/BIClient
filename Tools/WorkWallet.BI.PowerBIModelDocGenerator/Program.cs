@@ -59,10 +59,10 @@ var outputs = new Dictionary<string, string>(StringComparer.Ordinal)
     ["PowerBISamplesModels.md"] = BuildIndexMarkdown(datasets),
 };
 
-foreach (var dataset in datasets)
+foreach (var (folderName, title, pages) in datasets)
 {
-    var relativePath = $"{modulesDirName}/{dataset.FolderName}.md";
-    outputs[relativePath] = BuildModuleMarkdown(dataset.Title, dataset.Pages);
+    var relativePath = $"{modulesDirName}/{folderName}.md";
+    outputs[relativePath] = BuildModuleMarkdown(title, pages);
 }
 
 if (checkOnly)
@@ -139,14 +139,14 @@ static string FindRepoRoot(string startDirectory)
 }
 
 // "ReportedIssues" -> "Reported Issues"; acronyms like "PPE" are left untouched.
-static string ToDisplayTitle(string folderName) => Regex.Replace(folderName, "(?<=[a-z])(?=[A-Z])", " ");
+static string ToDisplayTitle(string folderName) => GeneratedRegexes.LowerToUpperBoundary().Replace(folderName, " ");
 
 static bool IsAutoDateTable(string tableName) =>
     tableName.StartsWith("LocalDateTable_", StringComparison.Ordinal) ||
     tableName.StartsWith("DateTableTemplate_", StringComparison.Ordinal);
 
 static string Slugify(string heading) =>
-    Regex.Replace(heading.ToLowerInvariant().Replace(' ', '-'), "[^a-z0-9-]", string.Empty);
+    GeneratedRegexes.NonSlugCharacter().Replace(heading.ToLowerInvariant().Replace(' ', '-'), string.Empty);
 
 static string NormalizeLineEndings(string text) => text.Replace("\r\n", "\n");
 
@@ -173,19 +173,19 @@ static string BuildIndexMarkdown(List<(string FolderName, string Title, List<(Di
     sb.AppendLine("| `measure` | DAX measure |");
     sb.AppendLine("| `agg` | Source column with a non-default implicit aggregation (e.g. sum) |");
 
-    foreach (var dataset in datasets)
+    foreach (var (folderName, title, pages) in datasets)
     {
         sb.AppendLine();
-        sb.AppendLine($"## {dataset.Title}");
+        sb.AppendLine($"## {title}");
         sb.AppendLine();
 
-        var modulePath = $"PowerBISamplesModels/{dataset.FolderName}.md";
-        sb.AppendLine($"[{dataset.Title} diagrams]({modulePath})");
+        var modulePath = $"PowerBISamplesModels/{folderName}.md";
+        sb.AppendLine($"[{title} diagrams]({modulePath})");
         sb.AppendLine();
 
-        foreach (var (page, _) in dataset.Pages)
+        foreach (var (page, _) in pages)
         {
-            var heading = $"{dataset.Title} - {page.Name}";
+            var heading = $"{title} - {page.Name}";
             sb.AppendLine($"* [{heading}]({modulePath}#{Slugify(heading)})");
         }
     }
@@ -230,4 +230,15 @@ static string BuildModuleMarkdown(string datasetTitle, List<(DiagramPage Page, s
     }
 
     return sb.ToString();
+}
+
+// GeneratedRegexAttribute needs a partial method on a partial type; top-level statement local
+// functions can't be partial, so the generated regexes live in this small helper type.
+static partial class GeneratedRegexes
+{
+    [GeneratedRegex("(?<=[a-z])(?=[A-Z])")]
+    public static partial Regex LowerToUpperBoundary();
+
+    [GeneratedRegex("[^a-z0-9-]")]
+    public static partial Regex NonSlugCharacter();
 }

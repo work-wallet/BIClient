@@ -21,23 +21,42 @@ public sealed record TmdlRelationship(string FromTable, string FromColumn, strin
 /// generates for this repo's semantic models (single-column relationships, no explicit
 /// cardinality overrides). Not a general-purpose TMDL parser.
 /// </summary>
-public static class TmdlReader
+public static partial class TmdlReader
 {
-    private static readonly Regex TableNameRegex = new(@"^table\s+(?<name>'[^']+'|\S+)", RegexOptions.Compiled);
-    private static readonly Regex MemberRegex = new(
-        @"^\t(?<kind>column|measure)\s+(?<name>'[^']+'|[^\s=]+)(?<rest>.*)$", RegexOptions.Compiled);
-    private static readonly Regex SummarizeByRegex = new(@"^\t\tsummarizeBy:\s*(?<value>\S+)", RegexOptions.Compiled);
+    [GeneratedRegex(@"^table\s+(?<name>'[^']+'|\S+)")]
+    private static partial Regex TableNameRegex();
+
+    [GeneratedRegex(@"^\t(?<kind>column|measure)\s+(?<name>'[^']+'|[^\s=]+)(?<rest>.*)$")]
+    private static partial Regex MemberRegex();
+
+    [GeneratedRegex(@"^\t\tsummarizeBy:\s*(?<value>\S+)")]
+    private static partial Regex SummarizeByRegex();
+
+    [GeneratedRegex(@"^\t(column|measure)\s")]
+    private static partial Regex NextMemberStartRegex();
+
+    [GeneratedRegex(@"\r?\n\r?\n")]
+    private static partial Regex RelationshipBlockSeparatorRegex();
+
+    [GeneratedRegex(@"fromColumn:\s*(?<ref>.+)")]
+    private static partial Regex FromColumnRegex();
+
+    [GeneratedRegex(@"toColumn:\s*(?<ref>.+)")]
+    private static partial Regex ToColumnRegex();
+
+    [GeneratedRegex(@"^\s*isActive:\s*false\s*$", RegexOptions.Multiline)]
+    private static partial Regex InactiveRelationshipRegex();
 
     public static TmdlTable ReadTable(string tableTmdlPath)
     {
         var lines = File.ReadAllLines(tableTmdlPath);
 
-        var tableNameMatch = lines.Select(l => TableNameRegex.Match(l)).First(m => m.Success);
+        var tableNameMatch = lines.Select(l => TableNameRegex().Match(l)).First(m => m.Success);
         var table = new TmdlTable { Name = Unquote(tableNameMatch.Groups["name"].Value) };
 
         for (var i = 0; i < lines.Length; i++)
         {
-            var memberMatch = MemberRegex.Match(lines[i]);
+            var memberMatch = MemberRegex().Match(lines[i]);
             if (!memberMatch.Success)
             {
                 continue;
@@ -52,12 +71,12 @@ public static class TmdlReader
             for (var j = i + 1; j < lines.Length; j++)
             {
                 // Stop scanning this member's properties once the next column/measure starts.
-                if (Regex.IsMatch(lines[j], @"^\t(column|measure)\s"))
+                if (NextMemberStartRegex().IsMatch(lines[j]))
                 {
                     break;
                 }
 
-                var summarizeByMatch = SummarizeByRegex.Match(lines[j]);
+                var summarizeByMatch = SummarizeByRegex().Match(lines[j]);
                 if (summarizeByMatch.Success)
                 {
                     summarizeBy = summarizeByMatch.Groups["value"].Value;
@@ -87,15 +106,15 @@ public static class TmdlReader
     public static List<TmdlRelationship> ReadRelationships(string relationshipsTmdlPath)
     {
         var text = File.ReadAllText(relationshipsTmdlPath);
-        var blocks = Regex.Split(text, @"\r?\n\r?\n")
+        var blocks = RelationshipBlockSeparatorRegex().Split(text)
             .Where(b => b.TrimStart().StartsWith("relationship ", StringComparison.Ordinal));
 
         var relationships = new List<TmdlRelationship>();
 
         foreach (var block in blocks)
         {
-            var fromMatch = Regex.Match(block, @"fromColumn:\s*(?<ref>.+)");
-            var toMatch = Regex.Match(block, @"toColumn:\s*(?<ref>.+)");
+            var fromMatch = FromColumnRegex().Match(block);
+            var toMatch = ToColumnRegex().Match(block);
             if (!fromMatch.Success || !toMatch.Success)
             {
                 continue;
@@ -103,7 +122,7 @@ public static class TmdlReader
 
             var (fromTable, fromColumn) = ParseTableColumnRef(fromMatch.Groups["ref"].Value);
             var (toTable, toColumn) = ParseTableColumnRef(toMatch.Groups["ref"].Value);
-            var isActive = !Regex.IsMatch(block, @"^\s*isActive:\s*false\s*$", RegexOptions.Multiline);
+            var isActive = !InactiveRelationshipRegex().IsMatch(block);
 
             relationships.Add(new TmdlRelationship(fromTable, fromColumn, toTable, toColumn, isActive));
         }
