@@ -1871,6 +1871,52 @@ Notes
       "ContactId": "c3d4e5f6-a7b8-4c9d-8e0f-2a3b4c5d6e7f",
       "WalletId": "a3e1c9f2-5d4b-4330-9c2f-1c2b8f0d9a77"
     }
+  ],
+  "ReportedIssueInvestigationNumericAnswers": [
+    {
+      "ReportedIssueId": "7b2d1c9e-8356-4a9e-b5c1-0e2f4a6b9d31",
+      "NumberId": "8e9f0a1b-2c3d-4e5f-8a6b-7c8d9e0f1a2b",
+      "Question": "Estimated cost of damage",
+      "Scale": 2,
+      "UnitCode": 38,
+      "Answer": 1250.500000,
+      "WalletId": "a3e1c9f2-5d4b-4330-9c2f-1c2b8f0d9a77"
+    }
+  ],
+  "ReportedIssueInvestigationDateTimeAnswers": [
+    {
+      "ReportedIssueId": "7b2d1c9e-8356-4a9e-b5c1-0e2f4a6b9d31",
+      "DateTimeId": "9f0a1b2c-3d4e-4f5a-9b6c-7d8e9f0a1b2c",
+      "Question": "When was the area made safe?",
+      "Date": true,
+      "Time": true,
+      "Answer": "2025-09-08T14:30:00",
+      "WalletId": "a3e1c9f2-5d4b-4330-9c2f-1c2b8f0d9a77"
+    }
+  ],
+  "ReportedIssueInvestigationSignatures": [
+    {
+      "ReportedIssueInvestigationSignatureId": "0a1b2c3d-4e5f-4a6b-8c7d-8e9f0a1b2c3d",
+      "ReportedIssueId": "7b2d1c9e-8356-4a9e-b5c1-0e2f4a6b9d31",
+      "SignatureId": "1b2c3d4e-5f6a-4b7c-9d8e-9f0a1b2c3d4e",
+      "Name": "Jordan Smith",
+      "PersonOptionTypeCode": 3,
+      "ContactId": "c3d4e5f6-a7b8-4c9d-8e0f-2a3b4c5d6e7f",
+      "JobTitle": "Site Manager",
+      "Description": "Investigation signed off by",
+      "SignedOn": "2025-09-09T16:05:00",
+      "WalletId": "a3e1c9f2-5d4b-4330-9c2f-1c2b8f0d9a77"
+    },
+    {
+      "ReportedIssueInvestigationSignatureId": "2c3d4e5f-6a7b-4c8d-9e9f-0a1b2c3d4e5f",
+      "ReportedIssueId": "7b2d1c9e-8356-4a9e-b5c1-0e2f4a6b9d31",
+      "SignatureId": "3d4e5f6a-7b8c-4d9e-8f0a-1b2c3d4e5f6a",
+      "Name": "Sam Visitor",
+      "PersonOptionTypeCode": 1,
+      "JobTitle": "",
+      "Description": "Witness",
+      "WalletId": "a3e1c9f2-5d4b-4330-9c2f-1c2b8f0d9a77"
+    }
   ]
 }
 ```
@@ -1900,6 +1946,20 @@ Notes
   - **PersonOptionTypeCode**: `-1` indicates the question was answered "N/A"; `OptionId` is `00000000-0000-0000-0000-000000000000` and `Option` is `"N/A"` for these rows.
 - ReportedIssuePeople / ReportedIssueInvestigationPeople
   - DEPRECATED, superseded by `ReportedIssuePeople2` / `ReportedIssueInvestigationPeople2`
+- ReportedIssueInvestigationNumericAnswers / ReportedIssueInvestigationDateTimeAnswers / ReportedIssueInvestigationSignatures
+  - Contain the complete current set for each issue in the response; an unanswered question has no row, and a cleared answer or removed signature is simply absent when the issue is next returned
+  - **NumberId**, **DateTimeId**, **SignatureId**: identify the question/signature block within the issue's investigation process version; a new id is generated each time the investigation process is edited, so group the same question across issues by its text rather than its id
+- ReportedIssueInvestigationNumericAnswers
+  - **Scale**: decimal places for the numeric value (`0` if not set)
+  - **UnitCode**: `0` indicates no unit specified
+  - **Answer**: `decimal(35,6)`; parse as a decimal (not floating point) to avoid precision loss
+- ReportedIssueInvestigationDateTimeAnswers
+  - **Answer**: a full datetime with no time zone offset; use **Date** / **Time** to decide which part is meaningful (date only: ignore the time part; time only: ignore the date part)
+- ReportedIssueInvestigationSignatures
+  - **PersonOptionTypeCode**: how the signatory was chosen (`1` = Other, `2` = Contact, `3` = User)
+  - **ContactId**: if `null` no field will be returned (`Other` signatories typed in by name); resolve contact details via `Contacts`
+  - **SignedOn**: if `null` no field will be returned; no time zone offset
+  - **SignatureId**: a signature block can allow multiple signatures; rows with the same `SignatureId` belong to the same block
   
 ## SafetyCards
 

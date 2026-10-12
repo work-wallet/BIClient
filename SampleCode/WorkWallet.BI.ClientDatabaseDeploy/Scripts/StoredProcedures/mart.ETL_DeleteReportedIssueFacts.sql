@@ -54,5 +54,26 @@ BEGIN
     INNER JOIN @reportedIssueTable AS a ON ri.ReportedIssueId = a.ReportedIssueId;
 
     PRINT 'DELETE mart.ReportedIssueInvestigationTeamFact, number of rows = ' + CAST(@@ROWCOUNT AS varchar);
+
+    DELETE mart.ReportedIssueNumericAnswerFact
+    FROM mart.ReportedIssueNumericAnswerFact AS d
+    INNER JOIN mart.ReportedIssue AS ri ON d.ReportedIssue_key = ri.ReportedIssue_key
+    INNER JOIN @reportedIssueTable AS a ON ri.ReportedIssueId = a.ReportedIssueId;
+
+    PRINT 'DELETE mart.ReportedIssueNumericAnswerFact, number of rows = ' + CAST(@@ROWCOUNT AS varchar);
+
+    DELETE mart.ReportedIssueDateTimeAnswerFact
+    FROM mart.ReportedIssueDateTimeAnswerFact AS d
+    INNER JOIN mart.ReportedIssue AS ri ON d.ReportedIssue_key = ri.ReportedIssue_key
+    INNER JOIN @reportedIssueTable AS a ON ri.ReportedIssueId = a.ReportedIssueId;
+
+    PRINT 'DELETE mart.ReportedIssueDateTimeAnswerFact, number of rows = ' + CAST(@@ROWCOUNT AS varchar);
+
+    DELETE mart.ReportedIssueSignatureFact
+    FROM mart.ReportedIssueSignatureFact AS d
+    INNER JOIN mart.ReportedIssue AS ri ON d.ReportedIssue_key = ri.ReportedIssue_key
+    INNER JOIN @reportedIssueTable AS a ON ri.ReportedIssueId = a.ReportedIssueId;
+
+    PRINT 'DELETE mart.ReportedIssueSignatureFact, number of rows = ' + CAST(@@ROWCOUNT AS varchar);
 END
 GO
