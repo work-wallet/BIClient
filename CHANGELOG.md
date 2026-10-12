@@ -8,7 +8,7 @@ The format loosely follows Keep a Changelog principles (dates in YYYY-MM-DD). Ve
 
 ### Changed (Unreleased)
 
-- ReportedIssues: capture answers to the investigation process's new Ask Numeric Question, Ask DateTime Question and Request Signature blocks, from the new `ReportedIssueInvestigationNumericAnswers`, `ReportedIssueInvestigationDateTimeAnswers` and `ReportedIssueInvestigationSignatures` arrays. Adds `mart.ReportedIssueNumericQuestion`/`mart.ReportedIssueNumericAnswerFact`, `mart.ReportedIssueDateTimeQuestion`/`mart.ReportedIssueDateTimeAnswerFact` and `mart.ReportedIssueSignatureFact` (signatory type via the existing `mart.ReportedIssuePersonOptionType`, and contact via `Contact_key`). Like the other ReportedIssue workflow tables, the question dimensions are keyed on question text per wallet, because block ids change each time the investigation process is edited. Payloads without these arrays still load. Requires a DB deploy; run a full ReportedIssues reload afterwards to backfill existing issues.
+- ReportedIssues: investigation reporting now includes the answers to numeric questions (e.g. days lost, cost of damage - with their units), date/time questions (e.g. when the area was made safe) and sign-offs (who signed, whether they were a contact, a Work Wallet user or someone typed in by name, their job title and when they signed). Questions are grouped by their wording, so answers to the same question can be compared across issues even after the investigation process has been edited. Existing ReportedIssues data and reports are unaffected. Requires a DB deploy; run a full ReportedIssues reload afterwards to backfill this detail for existing issues.
 
 ## [5.1.0] - 2026-09-22
 

@@ -25,6 +25,7 @@ Supported datasets (see `DataSets.cs` for mapping): Actions, Assets (three modul
 - Console: `appsettings.json` (user secrets in DEBUG for secrets).
 - Function: `local.settings.json` locally; app settings in Azure (flattened keys like `FuncOptions:AgentWallets:0:WalletId`).
 - Database deploy: run deployer (DbUp groups: Clean, Schema, Types, StoredProcedures).
+- **Agents — beware user secrets when deploying/testing the database**: in DEBUG builds `WorkWallet.BI.ClientDatabaseDeploy/Program.cs` calls `AddUserSecrets` *after* the default configuration sources, so a developer's user-secrets `AppSettings:DatabaseConnectionString` silently overrides environment variables (e.g. `AppSettings__DatabaseConnectionString`) and command-line arguments. To deploy to a scratch database, run a Release build (`dotnet run --project SampleCode/WorkWallet.BI.ClientDatabaseDeploy -c Release`, which skips user secrets) with the connection string supplied via environment variable. Confirm afterwards that the scratch database exists, and never deploy to (or test against) the developer's own databases.
 
 Local run (summary): deploy DB → run console (ESC cancels). Function uses NCRONTAB schedule string.
 

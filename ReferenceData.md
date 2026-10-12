@@ -302,9 +302,6 @@ The API sends this as a bitmask, allowing efficient storage and transmission of 
 | 2 | Contact |
 | 3 | User |
 
-`PersonOptionTypeCode` is used by `ReportedIssuePeople2`, `ReportedIssueInvestigationPeople2` and `ReportedIssueInvestigationSignatures` (signatures never use `-1`).
-`UnitCode` in `ReportedIssueInvestigationNumericAnswers` uses the `UnitCode` values listed under [General](#general).
-
 ## SafetyCards
 
 | OccupationRoleCode | OccupationRole |
