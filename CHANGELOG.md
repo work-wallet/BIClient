@@ -4,9 +4,9 @@ All notable changes to this project will be documented in this file.
 
 The format loosely follows Keep a Changelog principles (dates in YYYY-MM-DD). Version numbers align with assembly versions unless otherwise noted.
 
-## [Unreleased]
+## [5.2.0] - 2026-10-16
 
-### Changed (Unreleased)
+### Changed (5.2.0)
 
 - ReportedIssues: investigation reporting now includes the answers to numeric questions (e.g. days lost, cost of damage - with their units), date/time questions (e.g. when the area was made safe) and sign-offs (who signed, whether they were a contact, a Work Wallet user or someone typed in by name, their job title and when they signed). Questions are grouped by their wording, so answers to the same question can be compared across issues even after the investigation process has been edited. Existing ReportedIssues data and reports are unaffected. Requires a DB deploy; run a full ReportedIssues reload afterwards to backfill this detail for existing issues.
 
