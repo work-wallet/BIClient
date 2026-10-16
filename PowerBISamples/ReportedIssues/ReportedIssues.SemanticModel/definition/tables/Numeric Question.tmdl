@@ -1,0 +1,80 @@
+table 'Numeric Question'
+	lineageTag: efb53a9c-5fc3-4cdd-b717-d569939940f9
+
+	column ReportedIssueNumericQuestion_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 7dae2587-7a88-4d71-a015-4f9620e6c845
+		summarizeBy: none
+		sourceColumn: ReportedIssueNumericQuestion_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Question
+		dataType: string
+		lineageTag: 3b28a0c5-fead-4234-bf97-77b96d039e7a
+		summarizeBy: none
+		sourceColumn: Question
+
+		annotation SummarizationSetBy = Automatic
+
+	column Scale
+		dataType: int64
+		formatString: 0
+		lineageTag: 3084a013-45c1-40b1-b103-1a76fae831da
+		summarizeBy: none
+		sourceColumn: Scale
+
+		annotation SummarizationSetBy = User
+
+	column Unit_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 72231ddc-8f02-4627-816a-85a92ed410cd
+		summarizeBy: none
+		sourceColumn: Unit_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Wallet_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 7d9eee84-a8ba-4bb3-ba8f-dd07dc8f647b
+		summarizeBy: none
+		sourceColumn: Wallet_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column Unit = RELATED(Unit[Unit])
+		lineageTag: 5a1c5759-ae35-46eb-a3a8-97587d1038e4
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Unit Acronym' = RELATED(Unit[Unit Acronym])
+		lineageTag: d13202ee-8b97-4a79-833a-5dae65b0dc61
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Numeric Question' = m
+		mode: import
+		source =
+				let
+				  Source = Sql.Database("demo-workwalletbi.database.windows.net", "demo-workwalletbi"),
+				  #"Navigation 1" = Source{[Schema = "mart", Item = "ReportedIssueNumericQuestion"]}[Data],
+				  #"Removed columns" = Table.RemoveColumns(#"Navigation 1", {"_created", "_edited"})
+				in
+				  #"Removed columns"
+
+	annotation PBI_ResultType = Table
+

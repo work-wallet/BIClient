@@ -263,3 +263,95 @@ relationship ac22db75-eb54-c4d8-4f23-7e65ca99967b
 	fromColumn: 'Person Fact'.Contact_key
 	toColumn: 'Person Contact'.Contact_key
 
+relationship e530c9c0-1fb5-4432-a005-0041d077a851
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'Date Time Answer Fact'.'Date and Time Answer'
+	toColumn: LocalDateTable_6a38ef02-c6fe-4f9a-b058-8766b3f40304.Date
+
+relationship 1501e626-e403-4a5a-96a3-8c23850d36d8
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'Date Time Answer Fact'.'Date Answer'
+	toColumn: LocalDateTable_20613e89-593f-451e-b782-4e4744df7929.Date
+
+relationship 27c710d6-f2b3-4724-b514-fba6b8a1d17c
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'Signature Fact'.'Signed On'
+	toColumn: LocalDateTable_3d20e287-b104-4ee2-89de-f928079e5948.Date
+
+relationship b2e6e0c3-e4f3-4152-84f4-108ea6d73337
+	crossFilteringBehavior: bothDirections
+	fromColumn: 'Date Time Answer Fact'.ReportedIssueDateTimeQuestion_key
+	toColumn: 'Date Time Question'.ReportedIssueDateTimeQuestion_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship 1321c860-c29b-4f41-9a52-8e78d7eaa852
+	crossFilteringBehavior: bothDirections
+	fromColumn: 'Numeric Answer Fact'.ReportedIssueNumericQuestion_key
+	toColumn: 'Numeric Question'.ReportedIssueNumericQuestion_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship ad25dbd4-0704-430d-a043-f114ec7f5dfe
+	isActive: false
+	fromColumn: 'Person Fact'.Contact_key
+	toColumn: Contact.Contact_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship 74c83aeb-5016-3441-d03e-2604ea8ccd01
+	isActive: false
+	fromColumn: 'Numeric Question'.Wallet_key
+	toColumn: Wallet.Wallet_key
+
+relationship 6a74ff8b-dcb5-5f10-665d-4d25750fd158
+	isActive: false
+	fromColumn: 'Numeric Answer Fact'.Wallet_key
+	toColumn: Wallet.Wallet_key
+
+relationship cc27fc91-6a1e-be7e-4b83-11d015e16253
+	isActive: false
+	fromColumn: 'Date Time Question'.Wallet_key
+	toColumn: Wallet.Wallet_key
+
+relationship d3267cb4-119e-7cf2-1279-8d0a330b4f2d
+	isActive: false
+	fromColumn: 'Date Time Answer Fact'.Wallet_key
+	toColumn: Wallet.Wallet_key
+
+relationship e42ca388-dc6b-010f-e534-f4aab197b3ff
+	crossFilteringBehavior: bothDirections
+	fromColumn: 'Date Time Answer Fact'.ReportedIssue_key
+	toColumn: Issue.ReportedIssue_key
+
+relationship bd2c1d7c-fc1e-1d28-501c-bd3ec088fce8
+	crossFilteringBehavior: bothDirections
+	fromColumn: 'Numeric Answer Fact'.ReportedIssue_key
+	toColumn: Issue.ReportedIssue_key
+
+relationship 7260cd23-005a-d69f-2c10-94c75274232d
+	fromColumn: 'Numeric Question'.Unit_key
+	toColumn: Unit.Unit_key
+
+relationship c28bca26-0202-411c-e19c-1fdbcd440c2c
+	isActive: false
+	fromColumn: 'Signature Contact'.Wallet_key
+	toColumn: Wallet.Wallet_key
+
+relationship 0edbc5a2-3e7b-248a-cbde-b139449f37dc
+	isActive: false
+	fromColumn: 'Signature Fact'.Wallet_key
+	toColumn: Wallet.Wallet_key
+
+relationship baac2f01-c903-ee30-2018-428bced7eb0b
+	fromColumn: 'Signature Fact'.ReportedIssue_key
+	toColumn: Issue.ReportedIssue_key
+
+relationship 0c8b1aca-ecd3-2ddb-cfea-992969c1a066
+	fromColumn: 'Signature Fact'.Contact_key
+	toColumn: 'Signature Contact'.Contact_key
+
+relationship 7c266b5c-0f5c-884d-0ff3-2851d025d154
+	fromColumn: 'Signature Fact'.ReportedIssuePersonOptionType_key
+	toColumn: 'Signature Person Option Type'.ReportedIssuePersonOptionType_key
+

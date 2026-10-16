@@ -1,0 +1,91 @@
+table 'Numeric Answer Fact'
+	lineageTag: 8958cafc-4489-4aeb-9a91-866db7d34645
+
+	column ReportedIssue_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 14655181-fa84-42ae-ae18-a229ba1cec36
+		summarizeBy: none
+		sourceColumn: ReportedIssue_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column NumberId
+		dataType: string
+		isHidden
+		lineageTag: f981a0c9-1732-4f2e-9c83-df7b6efe3a7d
+		summarizeBy: none
+		sourceColumn: NumberId
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Investigation
+		dataType: boolean
+		isHidden
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: cd21651f-679b-4e7d-a132-4528137d7b87
+		summarizeBy: none
+		sourceColumn: Investigation
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column ReportedIssueNumericQuestion_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 64a98129-4e93-466f-b2ef-a56c94071a9f
+		summarizeBy: none
+		sourceColumn: ReportedIssueNumericQuestion_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Numeric Answer'
+		dataType: double
+		lineageTag: 512881d3-d23a-4fec-b3c6-b3d3a3d09385
+		summarizeBy: sum
+		sourceColumn: Numeric Answer
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Wallet_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 8369da3e-b614-47d4-acf0-078c17b5551a
+		summarizeBy: none
+		sourceColumn: Wallet_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column 'Workflow Stage (Numeric Answer)' = IF('Numeric Answer Fact'[Investigation], "Investigation Stage", "Reporting Stage")
+		lineageTag: a6aa91fc-5cf4-44ad-902a-826023d49b5f
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Numeric Answer Fact' = m
+		mode: import
+		source =
+				let
+				  Source = Sql.Database("demo-workwalletbi.database.windows.net", "demo-workwalletbi"),
+				  #"Navigation 1" = Source{[Schema = "mart", Item = "ReportedIssueNumericAnswerFact"]}[Data],
+				  #"Removed columns" = Table.RemoveColumns(#"Navigation 1", {"_created", "_edited"}),
+				  #"Renamed columns" = Table.RenameColumns(#"Removed columns", {{"Answer", "Numeric Answer"}})
+				in
+				  #"Renamed columns"
+
+	annotation PBI_ResultType = Table
+

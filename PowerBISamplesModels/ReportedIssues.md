@@ -261,3 +261,111 @@ erDiagram
     "Investigation Team Fact" }o--|| "Investigation Team Contact" : "Contact_key"
     "Issue" }o--|| "Lead Investigator Contact" : "LeadInvestigatorContact_key"
 ```
+
+## Reported Issues - Numeric Answer
+
+```mermaid
+---
+config:
+  theme: neutral
+---
+erDiagram
+    "Numeric Answer Fact" {
+        agg NumericAnswer
+        calc WorkflowStage_NumericAnswer_
+    }
+    "Numeric Question" {
+        attr Question
+        attr Scale
+        calc Unit
+        calc UnitAcronym
+    }
+    "Issue" {
+        attr IssueReference
+        attr OccurredOn
+        attr ReportedOn
+        attr IssueOverview
+        attr CloseDate
+        calc IssueCount
+        calc ReportedBy
+        attr UnderInvestigationDate
+    }
+    "Unit" {
+    }
+    "Numeric Answer Fact" }o--|| "Numeric Question" : "ReportedIssueNumericQuestion_key"
+    "Numeric Answer Fact" }o--|| "Issue" : "ReportedIssue_key"
+    "Numeric Question" }o--|| "Unit" : "Unit_key"
+```
+
+## Reported Issues - Date Time Answer
+
+```mermaid
+---
+config:
+  theme: neutral
+---
+erDiagram
+    "Issue" {
+        attr IssueReference
+        attr OccurredOn
+        attr ReportedOn
+        attr IssueOverview
+        attr CloseDate
+        calc IssueCount
+        calc ReportedBy
+        attr UnderInvestigationDate
+    }
+    "Date Time Question" {
+        attr Question
+        attr Date
+        attr Time
+    }
+    "Date Time Answer Fact" {
+        attr DateandTimeAnswer
+        attr DateAnswer
+        attr TimeAnswer
+        calc WorkflowStage_DateTimeAnswer_
+        calc DateTimeAnswerCount
+    }
+    "Date Time Answer Fact" }o--|| "Date Time Question" : "ReportedIssueDateTimeQuestion_key"
+    "Date Time Answer Fact" }o--|| "Issue" : "ReportedIssue_key"
+```
+
+## Reported Issues - Signature
+
+```mermaid
+---
+config:
+  theme: neutral
+---
+erDiagram
+    "Issue" {
+        attr IssueReference
+        attr OccurredOn
+        attr ReportedOn
+        attr IssueOverview
+        attr CloseDate
+        calc IssueCount
+        calc ReportedBy
+        attr UnderInvestigationDate
+    }
+    "Signature Contact" {
+        attr ContactName
+        attr Email
+        attr Company
+    }
+    "Signature Fact" {
+        attr Investigation
+        attr Name
+        attr JobTitle
+        attr SignatureDescription
+        attr SignedOn
+        calc WorkflowStage_Signature_
+    }
+    "Signature Person Option Type" {
+        attr PersonOptionType
+    }
+    "Signature Fact" }o--|| "Issue" : "ReportedIssue_key"
+    "Signature Fact" }o--|| "Signature Contact" : "Contact_key"
+    "Signature Fact" }o--|| "Signature Person Option Type" : "ReportedIssuePersonOptionType_key"
+```
