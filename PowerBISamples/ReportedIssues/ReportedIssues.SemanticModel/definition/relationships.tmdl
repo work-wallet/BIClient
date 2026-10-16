@@ -344,10 +344,12 @@ relationship 0edbc5a2-3e7b-248a-cbde-b139449f37dc
 	toColumn: Wallet.Wallet_key
 
 relationship baac2f01-c903-ee30-2018-428bced7eb0b
+	crossFilteringBehavior: bothDirections
 	fromColumn: 'Signature Fact'.ReportedIssue_key
 	toColumn: Issue.ReportedIssue_key
 
 relationship 0c8b1aca-ecd3-2ddb-cfea-992969c1a066
+	crossFilteringBehavior: bothDirections
 	fromColumn: 'Signature Fact'.Contact_key
 	toColumn: 'Signature Contact'.Contact_key
 
