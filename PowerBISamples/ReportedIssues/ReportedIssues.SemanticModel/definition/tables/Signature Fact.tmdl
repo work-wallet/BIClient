@@ -1,0 +1,139 @@
+table 'Signature Fact'
+	lineageTag: 12bd3ce1-02a1-4d9c-81e0-68aa3baa09ca
+
+	column ReportedIssueSignatureId
+		dataType: string
+		isHidden
+		lineageTag: e401e34e-7e04-49c7-9073-cc06ef7c5c36
+		summarizeBy: none
+		sourceColumn: ReportedIssueSignatureId
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Investigation
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 272f1428-946d-46b1-ad51-ecab56c1204d
+		summarizeBy: none
+		sourceColumn: Investigation
+
+		annotation SummarizationSetBy = Automatic
+
+	column ReportedIssue_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 01dfd29f-fe46-4495-80ff-180d50f51fd1
+		summarizeBy: none
+		sourceColumn: ReportedIssue_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column SignatureId
+		dataType: string
+		isHidden
+		lineageTag: 91fb3af5-34a5-4173-b555-9fabf9459348
+		summarizeBy: none
+		sourceColumn: SignatureId
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column ReportedIssuePersonOptionType_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 20324982-4929-42c2-a526-6633ee7f5161
+		summarizeBy: none
+		sourceColumn: ReportedIssuePersonOptionType_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column Contact_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: c281bbf0-5094-471e-a86e-8304a35768ac
+		summarizeBy: none
+		sourceColumn: Contact_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Name
+		dataType: string
+		lineageTag: b86710d9-e176-4115-ab41-e6a78a4d3d44
+		summarizeBy: none
+		sourceColumn: Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Job Title'
+		dataType: string
+		lineageTag: 8ee5e79d-6d47-4643-960e-f358a6fac17e
+		summarizeBy: none
+		sourceColumn: Job Title
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Signature Description'
+		dataType: string
+		lineageTag: c0591201-7fba-48b5-b5a0-4652586e641c
+		summarizeBy: none
+		sourceColumn: Signature Description
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Signed On'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 6a2208ac-782b-43d1-93ac-1eecfe3597b7
+		summarizeBy: none
+		sourceColumn: Signed On
+
+		variation Variation
+			isDefault
+			relationship: 27c710d6-f2b3-4724-b514-fba6b8a1d17c
+			defaultHierarchy: LocalDateTable_3d20e287-b104-4ee2-89de-f928079e5948.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column Wallet_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 63355e0a-a58c-490e-857d-0c2de5b69b6c
+		summarizeBy: none
+		sourceColumn: Wallet_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column 'Workflow Stage (Signature)' = IF('Signature Fact'[Investigation], "Investigation Stage", "Reporting Stage")
+		lineageTag: 24aca894-d79b-4a38-962e-75058b6e0e90
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Signature Fact' = m
+		mode: import
+		source =
+				let
+				  Source = Sql.Database("demo-workwalletbi.database.windows.net", "demo-workwalletbi"),
+				  #"Navigation 1" = Source{[Schema = "mart", Item = "ReportedIssueSignatureFact"]}[Data],
+				  #"Removed columns" = Table.RemoveColumns(#"Navigation 1", {"_created", "_edited"}),
+				  #"Renamed columns" = Table.RenameColumns(#"Removed columns", {{"JobTitle", "Job Title"}, {"SignedOn", "Signed On"}, {"Description", "Signature Description"}})
+				in
+				  #"Renamed columns"
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,37 @@
+table 'Signature Person Option Type'
+	lineageTag: b7aca6ab-d716-4c02-8a0c-7ee01f367216
+
+	column ReportedIssuePersonOptionType_key
+		isHidden
+		formatString: 0
+		lineageTag: 5971e7e1-0cc3-4453-bcbe-cb6694698c83
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: Person Option Type[ReportedIssuePersonOptionType_key]
+
+		annotation SummarizationSetBy = User
+
+	column PersonOptionTypeCode
+		isHidden
+		formatString: 0
+		lineageTag: e0181879-5a96-4b89-8748-4776833e78c7
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: Person Option Type[PersonOptionTypeCode]
+
+		annotation SummarizationSetBy = User
+
+	column 'Person Option Type'
+		lineageTag: 6efc9756-22a0-4c73-aeae-3271c5c6afbd
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: Person Option Type[Person Option Type]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Signature Person Option Type' = calculated
+		mode: import
+		source = 'Person Option Type'
+
+	annotation PBI_Id = 72f6c09ccdf248be8ab92982611d34bd
+

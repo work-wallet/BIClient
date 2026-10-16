@@ -1,0 +1,65 @@
+table 'Date Time Question'
+	lineageTag: 8deea187-c513-4ce7-bef0-33c9e5e3cc5d
+
+	column ReportedIssueDateTimeQuestion_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 7f87ed99-5b86-4ef0-99c9-253ae482cb2c
+		summarizeBy: none
+		sourceColumn: ReportedIssueDateTimeQuestion_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Question
+		dataType: string
+		lineageTag: 1ddd256c-ffb5-4691-b816-5c7d4407bca5
+		summarizeBy: none
+		sourceColumn: Question
+
+		annotation SummarizationSetBy = Automatic
+
+	column Date
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 0b98b879-f0ee-4514-bdbc-8a1f0d271947
+		summarizeBy: none
+		sourceColumn: Date
+
+		annotation SummarizationSetBy = Automatic
+
+	column Time
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: fa7bde34-49b2-4f2e-824a-20f1e61dac51
+		summarizeBy: none
+		sourceColumn: Time
+
+		annotation SummarizationSetBy = Automatic
+
+	column Wallet_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 3f0d5695-2d6b-4b2a-9cec-325144e66a0e
+		summarizeBy: none
+		sourceColumn: Wallet_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Date Time Question' = m
+		mode: import
+		source =
+				let
+				  Source = Sql.Database("demo-workwalletbi.database.windows.net", "demo-workwalletbi"),
+				  #"Navigation 1" = Source{[Schema = "mart", Item = "ReportedIssueDateTimeQuestion"]}[Data],
+				  #"Removed columns" = Table.RemoveColumns(#"Navigation 1", {"_created", "_edited"})
+				in
+				  #"Removed columns"
+
+	annotation PBI_ResultType = Table
+

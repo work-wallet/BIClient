@@ -142,6 +142,11 @@ BEGIN
     DELETE FROM mart.ReportedIssuePersonFact2;
     DELETE FROM mart.ReportedIssueRootCauseAnalysisFact;
     DELETE FROM mart.ReportedIssueInvestigationTeamFact;
+    DELETE FROM mart.ReportedIssueNumericAnswerFact;
+    DELETE FROM mart.ReportedIssueDateTimeAnswerFact;
+    DELETE FROM mart.ReportedIssueSignatureFact;
+    DELETE FROM mart.ReportedIssueNumericQuestion;
+    DELETE FROM mart.ReportedIssueDateTimeQuestion;
     DELETE FROM mart.ReportedIssueBodyPart;
     DELETE FROM mart.ReportedIssueBranchOption;
     DELETE FROM mart.ReportedIssueOptionSelect;

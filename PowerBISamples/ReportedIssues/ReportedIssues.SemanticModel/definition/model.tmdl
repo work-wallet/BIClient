@@ -6,7 +6,7 @@ model Model
 		legacyRedirects
 		returnErrorValuesAsNull
 
-annotation PBI_QueryOrder = ["Location","Wallet","Issue","Body Part","Body Part Enum","Body Part Fact","Branch Option","Branch Option Fact","Category","Option Select","Option Select Fact","Person","Person Fact","Root Cause Analysis Fact","Root Cause Analysis Type","Severity","Status","Contact","Investigation Team Fact","Person Option Type"]
+annotation PBI_QueryOrder = ["Location","Wallet","Issue","Body Part","Body Part Enum","Body Part Fact","Branch Option","Branch Option Fact","Category","Option Select","Option Select Fact","Person","Person Fact","Root Cause Analysis Fact","Root Cause Analysis Type","Severity","Status","Contact","Investigation Team Fact","Person Option Type","Date Time Answer Fact","Date Time Question","Numeric Answer Fact","Numeric Question","Signature Fact","Unit"]
 
 annotation __PBI_TimeIntelligenceEnabled = 1
 
@@ -40,6 +40,17 @@ ref table 'Lead Investigator Contact'
 ref table LocalDateTable_4113c75e-2ddf-4c5a-ac16-c0a9c2a98c42
 ref table 'Person Option Type'
 ref table 'Person Contact'
+ref table 'Date Time Answer Fact'
+ref table LocalDateTable_6a38ef02-c6fe-4f9a-b058-8766b3f40304
+ref table LocalDateTable_20613e89-593f-451e-b782-4e4744df7929
+ref table 'Date Time Question'
+ref table 'Numeric Answer Fact'
+ref table 'Numeric Question'
+ref table 'Signature Fact'
+ref table LocalDateTable_3d20e287-b104-4ee2-89de-f928079e5948
+ref table Unit
+ref table 'Signature Contact'
+ref table 'Signature Person Option Type'
 
 ref cultureInfo en-GB
 

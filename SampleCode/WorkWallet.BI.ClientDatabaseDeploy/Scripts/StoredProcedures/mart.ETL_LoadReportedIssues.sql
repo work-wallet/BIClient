@@ -571,6 +571,100 @@ BEGIN
 
         EXEC mart.ETL_LoadReportedIssueInvestigationTeamFact @reportedIssueInvestigationTeamTable = @reportedIssueInvestigationTeamTable;
 
+        -- load the ReportedIssueInvestigationNumericAnswer data
+
+        DECLARE @reportedIssueInvestigationNumericAnswerTable mart.ETL_ReportedIssueNumericAnswerTable;
+
+        INSERT INTO @reportedIssueInvestigationNumericAnswerTable
+        (
+            ReportedIssueId
+            ,NumberId
+            ,Question
+            ,Scale
+            ,UnitCode
+            ,Answer
+            ,WalletId
+        )
+        SELECT * FROM OPENJSON(@json, '$.ReportedIssueInvestigationNumericAnswers')
+        WITH
+        (
+            ReportedIssueId uniqueidentifier
+            ,NumberId uniqueidentifier
+            ,Question nvarchar(500)
+            ,Scale int
+            ,UnitCode int
+            ,Answer decimal(35,6)
+            ,WalletId uniqueidentifier
+        );
+
+        EXEC mart.ETL_MaintainReportedIssueNumericQuestionDimension @reportedIssueNumericAnswerTable = @reportedIssueInvestigationNumericAnswerTable;
+
+        EXEC mart.ETL_LoadReportedIssueNumericAnswerFact @reportedIssueNumericAnswerTable = @reportedIssueInvestigationNumericAnswerTable, @investigation = 1;
+
+        -- load the ReportedIssueInvestigationDateTimeAnswer data
+
+        DECLARE @reportedIssueInvestigationDateTimeAnswerTable mart.ETL_ReportedIssueDateTimeAnswerTable;
+
+        INSERT INTO @reportedIssueInvestigationDateTimeAnswerTable
+        (
+            ReportedIssueId
+            ,DateTimeId
+            ,Question
+            ,[Date]
+            ,[Time]
+            ,Answer
+            ,WalletId
+        )
+        SELECT * FROM OPENJSON(@json, '$.ReportedIssueInvestigationDateTimeAnswers')
+        WITH
+        (
+            ReportedIssueId uniqueidentifier
+            ,DateTimeId uniqueidentifier
+            ,Question nvarchar(500)
+            ,[Date] bit
+            ,[Time] bit
+            ,Answer datetime
+            ,WalletId uniqueidentifier
+        );
+
+        EXEC mart.ETL_MaintainReportedIssueDateTimeQuestionDimension @reportedIssueDateTimeAnswerTable = @reportedIssueInvestigationDateTimeAnswerTable;
+
+        EXEC mart.ETL_LoadReportedIssueDateTimeAnswerFact @reportedIssueDateTimeAnswerTable = @reportedIssueInvestigationDateTimeAnswerTable, @investigation = 1;
+
+        -- load the ReportedIssueInvestigationSignature data
+
+        DECLARE @reportedIssueInvestigationSignatureTable mart.ETL_ReportedIssueSignatureTable;
+
+        INSERT INTO @reportedIssueInvestigationSignatureTable
+        (
+            ReportedIssueSignatureId
+            ,ReportedIssueId
+            ,SignatureId
+            ,[Name]
+            ,PersonOptionTypeCode
+            ,ContactId
+            ,JobTitle
+            ,[Description]
+            ,SignedOn
+            ,WalletId
+        )
+        SELECT * FROM OPENJSON(@json, '$.ReportedIssueInvestigationSignatures')
+        WITH
+        (
+            ReportedIssueSignatureId uniqueidentifier '$.ReportedIssueInvestigationSignatureId'
+            ,ReportedIssueId uniqueidentifier
+            ,SignatureId uniqueidentifier
+            ,[Name] nvarchar(max)
+            ,PersonOptionTypeCode int
+            ,ContactId uniqueidentifier -- nullable; key omitted from JSON for 'Other' (typed-in) signatories
+            ,JobTitle nvarchar(50)
+            ,[Description] nvarchar(250)
+            ,SignedOn datetime -- nullable; key omitted from JSON when not set
+            ,WalletId uniqueidentifier
+        );
+
+        EXEC mart.ETL_LoadReportedIssueSignatureFact @reportedIssueSignatureTable = @reportedIssueInvestigationSignatureTable, @investigation = 1;
+
         COMMIT TRANSACTION;
     END TRY
     BEGIN CATCH

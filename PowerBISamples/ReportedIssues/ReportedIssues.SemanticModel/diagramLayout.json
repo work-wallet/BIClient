@@ -10,8 +10,8 @@
       "nodes": [
         {
           "location": {
-            "x": 340.21371655237476,
-            "y": 286.34125090655448
+            "x": 1758.0175959601645,
+            "y": 1389.9177095671148
           },
           "nodeIndex": "Location",
           "size": {
@@ -22,8 +22,8 @@
         },
         {
           "location": {
-            "x": 787.3649122189529,
-            "y": 997.65350848460253
+            "x": 918.71505675376352,
+            "y": 897.78228276951108
           },
           "nodeIndex": "Wallet",
           "size": {
@@ -34,8 +34,8 @@
         },
         {
           "location": {
-            "x": 1472.5476490420169,
-            "y": 226.72554790139702
+            "x": 2024.9585365854182,
+            "y": -50
           },
           "nodeIndex": "Body Part",
           "size": {
@@ -46,8 +46,8 @@
         },
         {
           "location": {
-            "x": 1762.5435628842606,
-            "y": -50
+            "x": 517.79539555936935,
+            "y": 91.088636797613617
           },
           "nodeIndex": "Body Part Enum",
           "size": {
@@ -58,8 +58,8 @@
         },
         {
           "location": {
-            "x": 1182.6194791675869,
-            "y": 344.28524133865085
+            "x": 1732.9882932743087,
+            "y": 71.892240244459117
           },
           "nodeIndex": "Body Part Fact",
           "size": {
@@ -70,8 +70,8 @@
         },
         {
           "location": {
-            "x": 1540.4013026014341,
-            "y": 901.0459627438604
+            "x": 342.71692760371525,
+            "y": 398.76005913795052
           },
           "nodeIndex": "Branch Option",
           "size": {
@@ -82,8 +82,8 @@
         },
         {
           "location": {
-            "x": 942.27565975857488,
-            "y": 1554.8123844958416
+            "x": 658.81534045238959,
+            "y": 616.416070181132
           },
           "nodeIndex": "Branch Option Fact",
           "size": {
@@ -94,8 +94,8 @@
         },
         {
           "location": {
-            "x": 1075.7144094499727,
-            "y": 904.14410187834983
+            "x": 1935.9687870387365,
+            "y": 1029.147857372792
           },
           "nodeIndex": "Category",
           "size": {
@@ -106,8 +106,8 @@
         },
         {
           "location": {
-            "x": 501.492667407881,
-            "y": 643.59470445073248
+            "x": 1331.5787097239065,
+            "y": 923.90737801480418
           },
           "nodeIndex": "Issue",
           "size": {
@@ -118,8 +118,8 @@
         },
         {
           "location": {
-            "x": 1609.2399209971209,
-            "y": 596.83969130519745
+            "x": 50,
+            "y": 637.85542704266709
           },
           "nodeIndex": "Option Select",
           "size": {
@@ -130,8 +130,8 @@
         },
         {
           "location": {
-            "x": 1320.0934236591,
-            "y": 624.02033835962607
+            "x": 629.29393080856926,
+            "y": 1033.0453879082775
           },
           "nodeIndex": "Option Select Fact",
           "size": {
@@ -142,8 +142,8 @@
         },
         {
           "location": {
-            "x": 1230.0162464576106,
-            "y": 1259.6510851816274
+            "x": 1052.8190343630617,
+            "y": 1647.4043690596479
           },
           "nodeIndex": "Person",
           "size": {
@@ -154,8 +154,8 @@
         },
         {
           "location": {
-            "x": 496.39523742011107,
-            "y": 1809.0846902297726
+            "x": 1344.0698043486514,
+            "y": 1841.8610200867377
           },
           "nodeIndex": "Person Fact",
           "size": {
@@ -166,8 +166,8 @@
         },
         {
           "location": {
-            "x": 593.51986288785611,
-            "y": 5.8962868392773089
+            "x": 761.82502575783428,
+            "y": 1415.4749280775591
           },
           "nodeIndex": "Root Cause Analysis Fact",
           "size": {
@@ -178,8 +178,8 @@
         },
         {
           "location": {
-            "x": 1231.8983167367455,
-            "y": 20.006015172116804
+            "x": 476.54355972233725,
+            "y": 1696.9511882771776
           },
           "nodeIndex": "Root Cause Analysis Type",
           "size": {
@@ -190,8 +190,8 @@
         },
         {
           "location": {
-            "x": 50,
-            "y": 428.03404731239652
+            "x": 2226.81547753946,
+            "y": 971.21583948012631
           },
           "nodeIndex": "Severity",
           "size": {
@@ -202,8 +202,8 @@
         },
         {
           "location": {
-            "x": 180.14049453528929,
-            "y": 1987.8579410300965
+            "x": 2125.7972204640091,
+            "y": 1387.7705289505686
           },
           "nodeIndex": "Status",
           "size": {
@@ -214,8 +214,8 @@
         },
         {
           "location": {
-            "x": 220.66307517413307,
-            "y": 1191.9038295798621
+            "x": 1439.4442534934742,
+            "y": 1467.0919747836592
           },
           "nodeIndex": "Contact",
           "nodeLineageTag": "f5afb02f-10a5-4b61-a7b2-ff1ecb864cf4",
@@ -227,8 +227,8 @@
         },
         {
           "location": {
-            "x": 213.05547159325553,
-            "y": 985.85670373790367
+            "x": 1012.949881785765,
+            "y": 1167.8220166033534
           },
           "nodeIndex": "Investigation Team Fact",
           "size": {
@@ -239,8 +239,8 @@
         },
         {
           "location": {
-            "x": 50.365900619135573,
-            "y": 633.8156534061211
+            "x": 342.68701235642493,
+            "y": 866.37356926298435
           },
           "nodeIndex": "Investigation Team Contact",
           "size": {
@@ -251,8 +251,8 @@
         },
         {
           "location": {
-            "x": 633.3767415440434,
-            "y": 366.575064212077
+            "x": 1210.1190482916604,
+            "y": 640.26097310198134
           },
           "nodeIndex": "Lead Investigator Contact",
           "size": {
@@ -263,8 +263,8 @@
         },
         {
           "location": {
-            "x": 785.03917335768188,
-            "y": 1832.8342597536839
+            "x": 765.99375498533436,
+            "y": 1862.3794954727184
           },
           "nodeIndex": "Person Option Type",
           "size": {
@@ -275,8 +275,8 @@
         },
         {
           "location": {
-            "x": 470.26326368717514,
-            "y": 2165.4455676407915
+            "x": 1636.7759433406402,
+            "y": 1749.552867443123
           },
           "nodeIndex": "Person Contact",
           "size": {
@@ -284,10 +284,105 @@
             "width": 234
           },
           "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1310.5543378036564,
+            "y": 94.309954875554013
+          },
+          "nodeIndex": "Date Time Question",
+          "nodeLineageTag": "8deea187-c513-4ce7-bef0-33c9e5e3cc5d",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1624.3817584932906,
+            "y": 710.90478323678371
+          },
+          "nodeIndex": "Numeric Answer Fact",
+          "nodeLineageTag": "8958cafc-4489-4aeb-9a91-866db7d34645",
+          "size": {
+            "height": 248,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1917.1658599333939,
+            "y": 509.75562412518548
+          },
+          "nodeIndex": "Numeric Question",
+          "nodeLineageTag": "efb53a9c-5fc3-4cdd-b717-d569939940f9",
+          "size": {
+            "height": 248,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 2460.8154775394596,
+            "y": 945.93051004336871
+          },
+          "nodeIndex": "Signature Fact",
+          "nodeLineageTag": "12bd3ce1-02a1-4d9c-81e0-68aa3baa09ca",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 2210.1524396463565,
+            "y": 419.751646754813
+          },
+          "nodeIndex": "Unit",
+          "nodeLineageTag": "25c43e7d-fe30-47a9-b20c-bf50efdd7142",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1500.6473095146687,
+            "y": 353.56288255166419
+          },
+          "nodeIndex": "Date Time Answer Fact",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {},
+          "nodeIndex": "Signature Contact",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {},
+          "nodeIndex": "Signature Person Option Type",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 0
         }
       ],
       "name": "All tables",
-      "zoomValue": 45.7186409031243,
+      "zoomValue": 50.657521979934927,
       "pinKeyFieldsToTop": false,
       "showExtraHeaderInfo": false,
       "hideKeyFieldsWhenCollapsed": false,
@@ -589,7 +684,7 @@
           "nodeIndex": "Person Fact",
           "nodeLineageTag": "042b4ea7-046e-406d-9ab1-8f9a4c9168a2",
           "size": {
-            "height": 431,
+            "height": 459,
             "width": 335
           },
           "zIndex": 2
@@ -756,6 +851,194 @@
         }
       ],
       "name": "Investigation Team",
+      "zoomValue": 100,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    },
+    {
+      "ordinal": 8,
+      "scrollPosition": {
+        "x": 0,
+        "y": 0
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 507,
+            "y": 184
+          },
+          "nodeIndex": "Numeric Answer Fact",
+          "nodeLineageTag": "8958cafc-4489-4aeb-9a91-866db7d34645",
+          "size": {
+            "height": 270,
+            "width": 276
+          },
+          "zIndex": 1
+        },
+        {
+          "location": {
+            "x": 987,
+            "y": 147
+          },
+          "nodeIndex": "Numeric Question",
+          "nodeLineageTag": "efb53a9c-5fc3-4cdd-b717-d569939940f9",
+          "size": {
+            "height": 283,
+            "width": 269
+          },
+          "zIndex": 4
+        },
+        {
+          "location": {
+            "x": 69,
+            "y": 206
+          },
+          "nodeIndex": "Issue",
+          "nodeLineageTag": "ab79b25f-fd82-4d1a-a3dc-b16162ac25df",
+          "size": {
+            "height": 578,
+            "width": 234
+          },
+          "zIndex": 2
+        },
+        {
+          "location": {
+            "x": 922,
+            "y": 586
+          },
+          "nodeIndex": "Unit",
+          "nodeLineageTag": "25c43e7d-fe30-47a9-b20c-bf50efdd7142",
+          "size": {
+            "height": 204,
+            "width": 234
+          },
+          "zIndex": 3
+        }
+      ],
+      "name": "Numeric Answer",
+      "zoomValue": 100,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    },
+    {
+      "ordinal": 9,
+      "scrollPosition": {
+        "x": 0,
+        "y": 0
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 154,
+            "y": 231
+          },
+          "nodeIndex": "Issue",
+          "nodeLineageTag": "ab79b25f-fd82-4d1a-a3dc-b16162ac25df",
+          "size": {
+            "height": 619,
+            "width": 274
+          },
+          "zIndex": 1
+        },
+        {
+          "location": {
+            "x": 962,
+            "y": 18
+          },
+          "nodeIndex": "Date Time Question",
+          "nodeLineageTag": "8deea187-c513-4ce7-bef0-33c9e5e3cc5d",
+          "size": {
+            "height": 246,
+            "width": 234
+          },
+          "zIndex": 2
+        },
+        {
+          "location": {
+            "x": 572,
+            "y": 134
+          },
+          "nodeIndex": "Date Time Answer Fact",
+          "nodeLineageTag": "e95be429-5fd6-4dcd-b0fa-9d6bf9e3021a",
+          "size": {
+            "height": 361,
+            "width": 266
+          },
+          "zIndex": 0
+        }
+      ],
+      "name": "Date Time Answer",
+      "zoomValue": 100,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    },
+    {
+      "ordinal": 10,
+      "scrollPosition": {
+        "x": 0,
+        "y": 0
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 237,
+            "y": 310
+          },
+          "nodeIndex": "Issue",
+          "nodeLineageTag": "ab79b25f-fd82-4d1a-a3dc-b16162ac25df",
+          "size": {
+            "height": 588,
+            "width": 297
+          },
+          "zIndex": 1
+        },
+        {
+          "location": {
+            "x": 1127,
+            "y": 101
+          },
+          "nodeIndex": "Signature Contact",
+          "nodeLineageTag": "0851170e-6056-40a4-a82d-786cec40a19a",
+          "size": {
+            "height": 237,
+            "width": 234
+          },
+          "zIndex": 2
+        },
+        {
+          "location": {
+            "x": 769,
+            "y": 261
+          },
+          "nodeIndex": "Signature Fact",
+          "nodeLineageTag": "12bd3ce1-02a1-4d9c-81e0-68aa3baa09ca",
+          "size": {
+            "height": 425,
+            "width": 286
+          },
+          "zIndex": 3
+        },
+        {
+          "location": {
+            "x": 435,
+            "y": 44
+          },
+          "nodeIndex": "Signature Person Option Type",
+          "nodeLineageTag": "b7aca6ab-d716-4c02-8a0c-7ee01f367216",
+          "size": {
+            "height": 152,
+            "width": 327
+          },
+          "zIndex": 0
+        }
+      ],
+      "name": "Signature",
       "zoomValue": 100,
       "pinKeyFieldsToTop": false,
       "showExtraHeaderInfo": false,

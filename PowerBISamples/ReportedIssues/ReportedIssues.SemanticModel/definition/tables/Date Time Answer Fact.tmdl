@@ -1,0 +1,129 @@
+table 'Date Time Answer Fact'
+	lineageTag: e95be429-5fd6-4dcd-b0fa-9d6bf9e3021a
+
+	column ReportedIssue_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 0c65c40d-b557-4163-bca6-5fca3e20e388
+		summarizeBy: none
+		sourceColumn: ReportedIssue_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column DateTimeId
+		dataType: string
+		isHidden
+		lineageTag: 0e099de4-e77e-4581-9bc0-cd9cf11f2bfc
+		summarizeBy: none
+		sourceColumn: DateTimeId
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Investigation
+		dataType: boolean
+		isHidden
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: b774d50f-c73b-4b0f-acc5-44274313605a
+		summarizeBy: none
+		sourceColumn: Investigation
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column ReportedIssueDateTimeQuestion_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 19b2cdf1-ee16-49ac-80d8-d1316d97fb63
+		summarizeBy: none
+		sourceColumn: ReportedIssueDateTimeQuestion_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Date and Time Answer'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 777401ac-f6d9-45a9-9016-f94dbc2fb6bc
+		summarizeBy: none
+		sourceColumn: Date and Time Answer
+
+		variation Variation
+			isDefault
+			relationship: e530c9c0-1fb5-4432-a005-0041d077a851
+			defaultHierarchy: LocalDateTable_6a38ef02-c6fe-4f9a-b058-8766b3f40304.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Date Answer'
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: a038e2d6-487c-44f0-8d71-ddda2318af87
+		summarizeBy: none
+		sourceColumn: Date Answer
+
+		variation Variation
+			isDefault
+			relationship: 1501e626-e403-4a5a-96a3-8c23850d36d8
+			defaultHierarchy: LocalDateTable_20613e89-593f-451e-b782-4e4744df7929.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Time Answer'
+		dataType: dateTime
+		formatString: Long Time
+		lineageTag: 5abfd4b1-a3a7-4130-a714-18de4a81600c
+		summarizeBy: none
+		sourceColumn: Time Answer
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Time
+
+	column Wallet_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: c0810dfd-3949-4748-a51d-07d8a35088b6
+		summarizeBy: none
+		sourceColumn: Wallet_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column 'Workflow Stage (Date Time Answer)' = IF('Date Time Answer Fact'[Investigation], "Investigation Stage", "Reporting Stage")
+		lineageTag: 88bfba30-8f22-416b-8447-e590a7dbed87
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Date Time Answer Count' = 1
+		formatString: 0
+		lineageTag: e364e188-03db-4670-a0f3-4ae83b56b4b9
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Date Time Answer Fact' = m
+		mode: import
+		source =
+				let
+				  Source = Sql.Database("demo-workwalletbi.database.windows.net", "demo-workwalletbi"),
+				  #"Navigation 1" = Source{[Schema = "mart", Item = "ReportedIssueDateTimeAnswerFact"]}[Data],
+				  #"Removed columns" = Table.RemoveColumns(#"Navigation 1", {"_created", "_edited"}),
+				  #"Renamed columns" = Table.RenameColumns(#"Removed columns", {{"AnswerDateTime", "Date and Time Answer"}, {"AnswerDate", "Date Answer"}, {"AnswerTime", "Time Answer"}})
+				in
+				  #"Renamed columns"
+
+	annotation PBI_ResultType = Table
+
