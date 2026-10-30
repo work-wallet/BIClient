@@ -156,6 +156,21 @@
               },
               "queryRef": "Permit.Outcome",
               "nativeQueryRef": "Outcome"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Permit"
+                    }
+                  },
+                  "Property": "Url"
+                }
+              },
+              "queryRef": "Permit.Url",
+              "nativeQueryRef": "Link",
+              "displayName": "Link"
             }
           ]
         }
@@ -180,6 +195,17 @@
     },
     "objects": {
       "values": [
+        {
+          "properties": {
+            "urlIcon": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        },
         {
           "properties": {
             "fontColorPrimary": {
@@ -247,7 +273,7 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "95D"
+                  "Value": "91D"
                 }
               }
             }
@@ -261,7 +287,7 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "119D"
+                  "Value": "114D"
                 }
               }
             }
@@ -275,7 +301,7 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "131D"
+                  "Value": "125D"
                 }
               }
             }
@@ -289,7 +315,7 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "155D"
+                  "Value": "148D"
                 }
               }
             }
@@ -303,7 +329,7 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "83D"
+                  "Value": "80D"
                 }
               }
             }
@@ -317,7 +343,7 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "119D"
+                  "Value": "114D"
                 }
               }
             }
@@ -331,7 +357,7 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "107D"
+                  "Value": "103D"
                 }
               }
             }
@@ -345,7 +371,7 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "119D"
+                  "Value": "114D"
                 }
               }
             }
@@ -359,7 +385,7 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "119D"
+                  "Value": "114D"
                 }
               }
             }
@@ -373,13 +399,27 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "143D"
+                  "Value": "137D"
                 }
               }
             }
           },
           "selector": {
             "metadata": "Permit.Outcome"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "50D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Permit.Url"
           }
         }
       ],

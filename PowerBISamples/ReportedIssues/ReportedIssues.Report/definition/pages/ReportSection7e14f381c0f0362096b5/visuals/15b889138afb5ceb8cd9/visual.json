@@ -130,6 +130,21 @@
               "queryRef": "Lead Investigator Contact.Contact Name",
               "nativeQueryRef": "Lead investigator",
               "displayName": "Lead investigator"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Issue"
+                    }
+                  },
+                  "Property": "Url"
+                }
+              },
+              "queryRef": "Issue.Url",
+              "nativeQueryRef": "Link",
+              "displayName": "Link"
             }
           ]
         }
@@ -154,6 +169,17 @@
     },
     "objects": {
       "values": [
+        {
+          "properties": {
+            "urlIcon": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        },
         {
           "properties": {
             "fontColorPrimary": {
@@ -221,7 +247,7 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "95D"
+                  "Value": "91D"
                 }
               }
             }
@@ -235,7 +261,7 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "110D"
+                  "Value": "105D"
                 }
               }
             }
@@ -249,7 +275,7 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "160D"
+                  "Value": "153D"
                 }
               }
             }
@@ -263,7 +289,7 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "90D"
+                  "Value": "86D"
                 }
               }
             }
@@ -277,7 +303,7 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "140D"
+                  "Value": "134D"
                 }
               }
             }
@@ -291,7 +317,7 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "250D"
+                  "Value": "240D"
                 }
               }
             }
@@ -305,7 +331,7 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "210D"
+                  "Value": "201D"
                 }
               }
             }
@@ -319,13 +345,27 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "160D"
+                  "Value": "153D"
                 }
               }
             }
           },
           "selector": {
             "metadata": "Lead Investigator Contact.Contact Name"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "50D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Issue.Url"
           }
         }
       ],

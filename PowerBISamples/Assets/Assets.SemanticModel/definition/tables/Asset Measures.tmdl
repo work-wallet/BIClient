@@ -1074,6 +1074,18 @@ table 'Asset Measures'
 		displayFolder: Formatting
 		lineageTag: 57dcb10a-916c-5cc4-9e1c-f1c867f0b2a6
 
+	/// Work Wallet link for the selected asset, for the 'Open in Work Wallet' button on its details page.
+	measure 'Asset Link' = SELECTEDVALUE ( Asset[Url] )
+		isHidden
+		displayFolder: Links
+		lineageTag: 3d7c433f-1a18-5e4b-9324-f5fa2316b9b0
+
+	/// Work Wallet link for the selected inspection, for the 'Open in Work Wallet' button on its details page.
+	measure 'Inspection Link' = SELECTEDVALUE ( Inspection[Url] )
+		isHidden
+		displayFolder: Links
+		lineageTag: be04fff3-76b0-5e8f-92ce-b700815301f9
+
 	column Value
 		dataType: int64
 		isHidden

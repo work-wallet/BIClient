@@ -248,6 +248,18 @@ table 'Taken By'
 
 		annotation SummarizationSetBy = Automatic
 
+	/// Opens this attempt's review page in Work Wallet (in the user's selected wallet). Blank for deleted attempts or inductions.
+	column Url =
+			VAR UrlPath = IF ( RELATED ( 'Taken Status'[InductionTakenStatusCode] ) <> 9 && RELATED ( 'Induction Status'[InductionStatusCode] ) <> 3, "/Users/Inductions/Detail/" & LOWER ( RELATED ( Induction[InductionId] ) ) & "/ReviewInduction/" & LOWER ( 'Taken By'[InductionTakenId] ) )
+			RETURN
+			    IF ( NOT ISBLANK ( UrlPath ), "https://portal.work-wallet.com" & UrlPath )
+		dataType: string
+		lineageTag: eb0687b1-32fa-519d-a239-c6ab4e4b8d4e
+		dataCategory: WebUrl
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
 	partition 'Taken By' = m
 		mode: import
 		source =

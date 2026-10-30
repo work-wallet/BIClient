@@ -131,6 +131,21 @@
               "queryRef": "Taken By.Current Status",
               "nativeQueryRef": "Status",
               "displayName": "Status"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Taken By"
+                    }
+                  },
+                  "Property": "Url"
+                }
+              },
+              "queryRef": "Taken By.Url",
+              "nativeQueryRef": "Link",
+              "displayName": "Link"
             }
           ]
         }
@@ -155,6 +170,17 @@
     },
     "objects": {
       "values": [
+        {
+          "properties": {
+            "urlIcon": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        },
         {
           "properties": {
             "fontColorPrimary": {
@@ -222,7 +248,7 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "179D"
+                  "Value": "171D"
                 }
               }
             }
@@ -236,7 +262,7 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "167D"
+                  "Value": "160D"
                 }
               }
             }
@@ -250,7 +276,7 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "239D"
+                  "Value": "229D"
                 }
               }
             }
@@ -264,7 +290,7 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "131D"
+                  "Value": "126D"
                 }
               }
             }
@@ -278,7 +304,7 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "95D"
+                  "Value": "91D"
                 }
               }
             }
@@ -292,7 +318,7 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "119D"
+                  "Value": "114D"
                 }
               }
             }
@@ -306,7 +332,7 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "83D"
+                  "Value": "80D"
                 }
               }
             }
@@ -320,13 +346,27 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "179D"
+                  "Value": "171D"
                 }
               }
             }
           },
           "selector": {
             "metadata": "Taken By.Current Status"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "50D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Taken By.Url"
           }
         }
       ],

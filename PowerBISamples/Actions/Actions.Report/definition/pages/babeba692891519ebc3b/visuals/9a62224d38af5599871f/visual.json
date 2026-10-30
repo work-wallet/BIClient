@@ -117,6 +117,21 @@
               "queryRef": "Action.Days Overdue",
               "nativeQueryRef": "Days overdue",
               "displayName": "Days overdue"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Action"
+                    }
+                  },
+                  "Property": "Url"
+                }
+              },
+              "queryRef": "Action.Url",
+              "nativeQueryRef": "Link",
+              "displayName": "Link"
             }
           ]
         }
@@ -141,6 +156,17 @@
     },
     "objects": {
       "values": [
+        {
+          "properties": {
+            "urlIcon": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        },
         {
           "properties": {
             "fontColorPrimary": {
@@ -178,7 +204,7 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "107D"
+                  "Value": "103D"
                 }
               }
             }
@@ -192,7 +218,7 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "107D"
+                  "Value": "103D"
                 }
               }
             }
@@ -206,7 +232,7 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "358D"
+                  "Value": "343D"
                 }
               }
             }
@@ -220,7 +246,7 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "95D"
+                  "Value": "91D"
                 }
               }
             }
@@ -234,7 +260,7 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "287D"
+                  "Value": "275D"
                 }
               }
             }
@@ -248,7 +274,7 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "119D"
+                  "Value": "114D"
                 }
               }
             }
@@ -262,13 +288,27 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "119D"
+                  "Value": "114D"
                 }
               }
             }
           },
           "selector": {
             "metadata": "Action.Days Overdue"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "50D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Action.Url"
           }
         }
       ],

@@ -474,6 +474,12 @@ table 'Permit Measures'
 		displayFolder: Formatting
 		lineageTag: bff17611-544f-5720-b488-055dc00578a3
 
+	/// Work Wallet link for the selected permit, for the 'Open in Work Wallet' button on its details page.
+	measure 'Permit Link' = SELECTEDVALUE ( Permit[Url] )
+		isHidden
+		displayFolder: Links
+		lineageTag: cb9ca11a-ef42-5f38-be86-fab2fd47d6db
+
 	column Value
 		dataType: int64
 		isHidden

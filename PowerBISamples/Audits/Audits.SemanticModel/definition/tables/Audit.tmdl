@@ -329,6 +329,18 @@ table Audit
 
 		annotation SummarizationSetBy = Automatic
 
+	/// Opens the audit in Work Wallet (in the user's selected wallet). Blank for deleted audits.
+	column Url =
+			VAR UrlPath = IF ( RELATED ( 'Audit Status'[AuditStatusCode] ) <> 5, "/HealthAndSafety/Audit/" & LOWER ( Audit[AuditId] ) )
+			RETURN
+			    IF ( NOT ISBLANK ( UrlPath ), "https://portal.work-wallet.com" & UrlPath )
+		dataType: string
+		lineageTag: bf16eb32-194c-5de1-8556-599ec5d6814c
+		dataCategory: WebUrl
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
 	partition Audit = m
 		mode: import
 		source =

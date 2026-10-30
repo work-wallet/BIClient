@@ -825,6 +825,12 @@ table 'Issue Measures'
 		displayFolder: Formatting
 		lineageTag: a2de4b47-c000-5f04-9231-7133b0dfd002
 
+	/// Work Wallet link for the selected issue, for the 'Open in Work Wallet' button on its details page.
+	measure 'Issue Link' = SELECTEDVALUE ( Issue[Url] )
+		isHidden
+		displayFolder: Links
+		lineageTag: 9e8055fa-e43c-57c2-b310-c6d7ca5240fc
+
 	column Value
 		dataType: int64
 		isHidden

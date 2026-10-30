@@ -25,6 +25,7 @@ erDiagram
         calc SignedOn
         calc RecipientCompany
         calc Recipient
+        calc Url
     }
     "Location" {
         attr LocationType
@@ -116,6 +117,7 @@ erDiagram
         calc SignedOn
         calc RecipientCompany
         calc Recipient
+        calc Url
     }
     "Safety Card" }o--|| "Date" : "Reported Date"
 ```

@@ -293,6 +293,18 @@ table 'Safety Card'
 
 		annotation SummarizationSetBy = Automatic
 
+	/// Opens the safety card in Work Wallet (in the user's selected wallet). Blank for deleted cards.
+	column Url =
+			VAR UrlPath = IF ( RELATED ( 'Status'[SafetyCardStatusCode] ) <> 3, "/Users/SafetyCardReporting/" & LOWER ( 'Safety Card'[SafetyCardId] ) & "/Detail" )
+			RETURN
+			    IF ( NOT ISBLANK ( UrlPath ), "https://portal.work-wallet.com" & UrlPath )
+		dataType: string
+		lineageTag: 0a18b511-ce3c-5b40-98b3-dc4b4e941ed9
+		dataCategory: WebUrl
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
 	partition 'Safety Card' = m
 		mode: import
 		source =

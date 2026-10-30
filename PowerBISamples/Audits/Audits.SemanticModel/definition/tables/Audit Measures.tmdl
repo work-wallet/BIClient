@@ -546,6 +546,12 @@ table 'Audit Measures'
 		displayFolder: Labels
 		lineageTag: 638af6ed-0f90-558b-bc90-f8358372cea7
 
+	/// Work Wallet link for the selected audit, for the 'Open in Work Wallet' button on its details page.
+	measure 'Audit Link' = SELECTEDVALUE ( Audit[Url] )
+		isHidden
+		displayFolder: Links
+		lineageTag: 3ae229c3-b2c0-59c3-8000-5d3a356a0ba2
+
 	column Value
 		dataType: int64
 		isHidden

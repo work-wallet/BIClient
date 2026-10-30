@@ -140,7 +140,24 @@ The canvas is 1280 × 720. The constants live in `Tools/PowerBI/pbir.py`.
   - With three or more dropdowns, the slicers reach far enough left to cover the subtitle line: end the button before the first slicer's x. `write_page` prints a warning for overlapping visuals (`pbir.find_overlaps`); fix every one before publishing.
   - Bind to a unique column. If the record has no unique reference, bind to its unique `Url` column (as the existing samples do) and show a readable reference in the button text.
   - Check uniqueness with DAX (`DISTINCTCOUNT` against `COUNTROWS`). For people, the same person can be a contact at several companies; binding to name and email groups their records, which is usually what a "person's" page needs. List every company on the page.
-- **Links to Work Wallet**: show `Url` (web URL) columns as a link icon (table `values` `urlIcon: true`), headed "Link".
+- **Links to Work Wallet** (deep links to the record in the portal), wherever a table lists records that have a portal page, and on each record's drillthrough page:
+  - Model: a `Url` calculated column with `dataCategory: WebUrl` on the record's table (`tmdl.portal_url_column`). Use `https://portal.work-wallet.com` for every region. URLs carry no wallet id: the portal opens them in the user's selected wallet.
+  - Wrap ids in `LOWER()`. Paths ignore case, but a `#fragment` must match the portal's lower-case element id exactly. Return blank for deleted records (by status code), which the portal can't show.
+  - Tables: a "Link" column shown as a link icon (`pbir.link_column` in a new table, `pbir.add_link_column` for an existing one, which keeps Desktop edits and narrows the other columns to fit).
+  - Drillthrough pages: an "Open in Work Wallet  ↗" button (`pbir.link_button`) left of the Back button, with its URL from a hidden `<Record> Link` measure (`SELECTEDVALUE ( Record[Url] )`, display folder "Links").
+  - Portal paths, from `mart.ETL_Extract*` ids:
+
+    | Record | Path |
+    | --- | --- |
+    | Asset | `/Company/Assets/{AssetId}/Detail` |
+    | Asset inspection | `/Company/Assets/{AssetId}/Detail/Inspections/{InspectionId}` |
+    | Audit | `/HealthAndSafety/Audit/{AuditId}` |
+    | Induction | `/Users/Inductions/Detail/{InductionId}` |
+    | Induction attempt | `/Users/Inductions/Detail/{InductionId}/ReviewInduction/{InductionTakenId}` |
+    | Permit | `/HealthAndSafety/PermitToWork/{PermitId}` |
+    | Reported issue | `/HealthAndSafety/IssueReporting/{ReportedIssueId}` |
+    | Safety card | `/Users/SafetyCardReporting/{SafetyCardId}/Detail` |
+    | Action | The record it was raised on (`TargetId`), scrolled to the action; the portal has no page for a single action. Audit and issue: the record's path + `?tab=actions#{ActionId}`. Asset: `/Company/Assets/{TargetId}/Detail?tab=actions#{ActionId}`. Briefing: `/Users/Briefings/{TargetId}/Detail?tab=actions#{ActionId}`. Safety card: `/Users/SafetyCardReporting/{TargetId}/Detail#{ActionId}`. |
 - **Charts and tables**:
   - Rank with visual-level Top N filters (`pbir.top_n_filter`).
   - A table's sort only applies to a field that is in the table. To sort by a measure (e.g. "most warnings first"), include it as a column.
@@ -159,6 +176,8 @@ The canvas is 1280 × 720. The constants live in `Tools/PowerBI/pbir.py`.
   - Reference label padding uses different property names: `paddingIndividual` plus `paddingTop` / `paddingBottom` / `paddingLeft` / `paddingRight`. Desktop silently drops `*Margin` names on `referenceLabel`.
 - **Slicer fonts:** relative date slicer inputs ignore text size settings (they render at about 8pt). Set slicer `items` (and `date`) text to 8pt in the theme so dropdowns match.
 - **Drillthrough button:** `visualContainerObjects.visualLink` has `type 'Drillthrough'` and `drillthroughSection` set to the target page name. Style the default, hover and disabled states via selectors `{"id": "default" | "hover" | "disabled"}`.
+- **Button `show` needs its own entry.** Put `show` for a button's `text`, `outline` and `fill` in an entry with no selector, and the styling in the `{"id": "default"}` entry. A `show` inside the default entry is ignored, and the button draws as a bare icon or an empty box.
+- **Web URL button:** `visualLink` `type 'WebUrl'` with `webUrl` set to a measure expression (`pbir.link_button`). The service opens it in a new tab.
 - **Conditional colour from a measure** ("field value") is `{"solid": {"color": {"expr": {"Measure": …}}}}` (`pbir.colour_measure`).
 - **Expanded matrix rows** need both parts of Desktop's "expand all down" form, or the service shows the matrix collapsed:
   - `"active": true` on every shown `Rows` projection;
@@ -246,7 +265,7 @@ The loop: edit files, publish to a dev workspace (seconds), check measures with 
   - `Publish-PbiSemanticModel` for model changes.
   - Measure-only changes need no refresh.
   - Refresh (`Invoke-PbiRefresh -Wait`) after adding tables, columns or calculated tables.
-- **Refresh limits**: Pro workspaces allow 8 API-triggered refreshes in any rolling 24 hours ("exceeded the amount of requests"), so only refresh when needed. When the limit is hit, ask the user to use "Refresh now" on the semantic model in the service; manual refreshes aren't counted.
+- **Refresh limits**: Pro workspaces allow 8 API-triggered refreshes in any rolling 24 hours ("exceeded the amount of requests"), so only refresh when needed. The error says "Retry in 120 seconds", but retrying doesn't help until the oldest of the 8 is 24 hours old; check the model's refresh history. When the limit is hit, ask the user to use "Refresh now" on the semantic model in the service; manual refreshes aren't counted.
 - **Verify measures** after every model change:
   - `Test-PbiMeasures -TmdlPath '<...>/<Module> Measures.tmdl'` evaluates every measure in the file and lists any that fail.
   - Use `Invoke-PbiDax` with `CALCULATETABLE ( ROW ( … ), <filters> )` to test specific contexts (a date range, one record, ties), or `Get-PbiMeasureValues -Filters …` to list every measure's value in one context. DAX errors arrive in the response body of a successful HTTP call; `Invoke-PbiDax` raises them.
@@ -287,12 +306,12 @@ The loop: edit files, publish to a dev workspace (seconds), check measures with 
 - **`Tools/PowerBI/pbir.py`**: report builders and the layout constants. It covers:
   - header (`header`, `page_header`), date and dropdown slicers, the KPI card row, text cards, tables, matrices (optionally expanded), bar and column charts (stacked, or `clustered=True` for side-by-side measures);
   - Top N, not-blank, "is one of" (`in_filter`) and measure (`measure_filter`) filters, gradients, fixed series colours;
-  - drillthrough and Back buttons;
+  - drillthrough, Back and "Open in Work Wallet" (`link_button`) buttons, and Work Wallet link columns (`link_column`, `add_link_column`);
   - pages and report settings: `create_page`, `delete_page`, `set_page_order`, `set_drillthrough` (a hidden drillthrough target), `set_report_filter_in` / `set_report_filter_not_in`, `remove_report_filters`;
   - `write_page` (writes only the given visuals, keeping other visuals, page filters and drillthrough bindings; `replace_all=True` rebuilds the page; `page_filters=` replaces the page filters) and `apply_theme` (`copy_from=` copies the theme from another report).
 - **`Tools/PowerBI/tmdl.py`**:
   - new tables: the `MeasuresTable` builder and the `Date` table; the writers need `overwrite=True` to replace an existing file;
-  - additive edits to an existing model: `add_columns` (`replace=True` updates existing calculated columns in place), `upsert_measures` (replaces by name in place, keeping lineage tags, or inserts), `set_sort_by`, `add_table_refs`, `add_relationship`, `add_diagram_page`;
+  - additive edits to an existing model: `add_columns` (`replace=True` updates existing calculated columns in place), `upsert_measures` (replaces by name in place, keeping lineage tags, or inserts), `set_sort_by`, `add_table_refs`, `add_relationship`, `add_diagram_page`, and `portal_url_column` (a Work Wallet `Url` column for `add_columns`);
   - DAX patterns: previous period, change labels, trend colours, tie-aware leader, truncation, semantic colours.
 - **`Tools/PowerBI/_guard.py`**: the shared check that stops the helpers writing over uncommitted changes (`allow_dirty=True` overrides it).
 - **`Tools/WorkWallet.BI.PowerBIModelDocGenerator`**: generates `PowerBISamplesModels.md` and `PowerBISamplesModels/*.md` from the TMDL and `diagramLayout.json`. Never edit its output by hand.

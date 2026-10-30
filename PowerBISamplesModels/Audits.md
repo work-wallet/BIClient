@@ -29,6 +29,7 @@ erDiagram
         attr ReadyForReviewStatusDate
         attr CompleteStatusDate
         attr ClosedStatusDate
+        calc Url
     }
     "Audit Type" {
         attr AuditType
@@ -105,6 +106,7 @@ erDiagram
         attr ReadyForReviewStatusDate
         attr CompleteStatusDate
         attr ClosedStatusDate
+        calc Url
     }
     "Inspected By Fact" {
         calc InspectedByCount
@@ -145,6 +147,7 @@ erDiagram
         attr ReadyForReviewStatusDate
         attr CompleteStatusDate
         attr ClosedStatusDate
+        calc Url
     }
     "Scored Response" {
         attr ScoredResponseQuestion
@@ -201,6 +204,7 @@ erDiagram
         attr ReadyForReviewStatusDate
         attr CompleteStatusDate
         attr ClosedStatusDate
+        calc Url
     }
     "Score Section Fact" {
         agg Score
@@ -256,6 +260,7 @@ erDiagram
         attr ReadyForReviewStatusDate
         attr CompleteStatusDate
         attr ClosedStatusDate
+        calc Url
     }
     "Score Tag Fact" {
         agg Score
@@ -310,6 +315,7 @@ erDiagram
         attr ReadyForReviewStatusDate
         attr CompleteStatusDate
         attr ClosedStatusDate
+        calc Url
     }
     "Numeric Answer Fact" {
         agg NumericAnswer
@@ -358,6 +364,7 @@ erDiagram
         attr ReadyForReviewStatusDate
         attr CompleteStatusDate
         attr ClosedStatusDate
+        calc Url
     }
     "Date Time Answer Fact" {
         attr DateandTimeAnswer
@@ -404,6 +411,7 @@ erDiagram
         attr ReadyForReviewStatusDate
         attr CompleteStatusDate
         attr ClosedStatusDate
+        calc Url
     }
     "Checklist Answer Fact" {
         calc ChecklistAnswerCount
@@ -447,6 +455,7 @@ erDiagram
         attr ReadyForReviewStatusDate
         attr CompleteStatusDate
         attr ClosedStatusDate
+        calc Url
     }
     "Branch Option Fact" {
         calc BranchOptionCount
@@ -497,6 +506,7 @@ erDiagram
         attr ReadyForReviewStatusDate
         attr CompleteStatusDate
         attr ClosedStatusDate
+        calc Url
     }
     "Audit Measures" {
         measure Audits

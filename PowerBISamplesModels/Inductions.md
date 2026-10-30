@@ -19,6 +19,7 @@ erDiagram
         agg TestPassMark
         agg TestQuestionCount
         calc InductionCount
+        calc Url
     }
     "Taken By" {
         attr Person
@@ -32,6 +33,7 @@ erDiagram
         calc DaysUntilExpiry
         calc CurrentStatus
         calc TestScore
+        calc Url
     }
     "Taken Status" {
         attr TakenStatus
@@ -113,6 +115,7 @@ erDiagram
         calc DaysUntilExpiry
         calc CurrentStatus
         calc TestScore
+        calc Url
     }
     "Taken By" }o--|| "Date" : "Taken Date"
 ```

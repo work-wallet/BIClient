@@ -312,6 +312,18 @@ table Issue
 
 		annotation SummarizationSetBy = Automatic
 
+	/// Opens the issue in Work Wallet (in the user's selected wallet). Blank for deleted issues.
+	column Url =
+			VAR UrlPath = IF ( RELATED ( 'Status'[ReportedIssueStatusCode] ) <> 8, "/HealthAndSafety/IssueReporting/" & LOWER ( Issue[ReportedIssueId] ) )
+			RETURN
+			    IF ( NOT ISBLANK ( UrlPath ), "https://portal.work-wallet.com" & UrlPath )
+		dataType: string
+		lineageTag: ecb7b3a7-7d1f-5839-a7ee-c1a75d47e7c7
+		dataCategory: WebUrl
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
 	partition Issue-6d9dfa8c-c90c-4cb1-a4bf-ad691525c771 = m
 		mode: import
 		source =

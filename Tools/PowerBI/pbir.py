@@ -323,11 +323,14 @@ def kpi_cards(page, tiles, y=KPI_Y, h=KPI_H, key="kpis", value_size=18, padding=
 
 def table(page, key, x, y, w, h, columns, title_text, subtitle=None, sort=None, widths=None, objects=None, z=1000,
           title_size=None, container_extra=None, filters=None, subtitle_measure=None):
-    """Table (tableEx). sort: [(field, 'Ascending'|'Descending')]; widths: per-column px or None."""
+    """Table (tableEx). sort: [(field, 'Ascending'|'Descending')]; widths: per-column px or None.
+    A link_column() among the columns is shown as a link icon."""
     q = {"queryState": {"Values": {"projections": columns}}}
     if sort:
         q["sortDefinition"] = {"sort": [{"field": f, "direction": d} for f, d in sort]}
     obj = dict(objects or {})
+    if any(c.get("displayName") == LINK_DISPLAY for c in columns):
+        _set_url_icon(obj)
     if widths:
         obj["columnWidth"] = [sel_props({"metadata": c["queryRef"]}, value=n(wd)) for c, wd in zip(columns, widths) if wd]
         obj.setdefault("columnHeaders", props())  # Desktop adds an empty columnHeaders to tables with widths
@@ -341,6 +344,73 @@ def table(page, key, x, y, w, h, columns, title_text, subtitle=None, sort=None, 
 def image_grid(width=110, height=20):
     """Table 'grid' settings sizing in-cell images (SVG measures with dataCategory ImageUrl)."""
     return {"grid": props(imageHeight=n(height), imageWidth=n(width))}
+
+
+# ------------------------------------------------------------------------- Work Wallet links
+# Deep links back to the record in the Work Wallet portal. The model holds the URL in a calculated column
+# with dataCategory WebUrl (tmdl.portal_url_column); a table shows it as a link icon in a 'Link' column, and a
+# drillthrough page uses a button that opens the selected record's URL (link_button).
+LINK_DISPLAY = "Link"
+LINK_WIDTH = 50
+
+
+def link_column(entity: str, prop: str = "Url"):
+    """'Link' column for table(): shown as a link icon that opens the record in Work Wallet."""
+    return C(entity, prop, LINK_DISPLAY)
+
+
+def _set_url_icon(objects: dict):
+    """Turns on 'URL icon' (values.urlIcon) so WebUrl columns show an icon rather than the address."""
+    values = objects.get("values", [])
+    general = next((v for v in values if "selector" not in v), None)
+    if general is None:
+        values.insert(0, {"properties": {"urlIcon": b(True)}})
+    else:
+        general["properties"]["urlIcon"] = b(True)
+    rest = {k: v for k, v in objects.items() if k != "values"}
+    objects.clear()
+    objects.update({"values": values, **rest})  # Desktop writes values first
+
+
+def add_link_column(visual_json: Path, entity: str, prop: str = "Url", width: int = LINK_WIDTH,
+                    allow_dirty: bool = False) -> bool:
+    """Adds a 'Link' column (link_column) to the end of an existing table visual, keeping any edits made in
+    Desktop. If the table has fixed column widths, the other columns are narrowed in proportion so the table
+    stays the same width. Returns False if the table already has the column."""
+    visual_json = Path(visual_json)
+    require_clean(visual_json, allow_dirty)
+    v = json.loads(visual_json.read_text(encoding="utf-8-sig"))
+    projections = v["visual"]["query"]["queryState"]["Values"]["projections"]
+    new = link_column(entity, prop)
+    if any(p_["queryRef"] == new["queryRef"] for p_ in projections):
+        return False
+    projections.append(new)
+    objects = v["visual"].setdefault("objects", {})
+    _set_url_icon(objects)
+    widths = objects.get("columnWidth")
+    if widths:
+        def value(entry):
+            return float(entry["properties"]["value"]["expr"]["Literal"]["Value"].rstrip("D"))
+        total = sum(value(e) for e in widths)
+        scale = (total - width) / total
+        for e in widths:
+            e["properties"]["value"] = n(round(value(e) * scale))
+        widths.append(sel_props({"metadata": new["queryRef"]}, value=n(width)))
+        if "columnHeaders" in objects:
+            objects["columnHeaders"] = objects.pop("columnHeaders")
+    write_json(visual_json, v)
+    return True
+
+
+def link_button(page, key, x, y, w, h, url_measure, label="Open in Work Wallet  ↗", entity=None, z=5100):
+    """Button that opens a URL from a measure (e.g. SELECTEDVALUE of the record's Url column) in a new tab,
+    for drillthrough pages about one record. Styled like back_button, to sit beside it in the header."""
+    return container(page, key, "actionButton", x, y, w, h, z, {
+        "objects": {
+            "icon": [sel_props(DEFAULT, shapeType=s("blank")), {"properties": {"show": b(False)}}],
+            **_outlined_button_style(label),
+        }}, {"visualLink": props(show=b(True), type=s("WebUrl"), webUrl={"expr": meas(url_measure, entity)})},
+        extra={"howCreated": "InsertVisualButton"})
 
 
 def bar_chart(page, key, x, y, w, h, category, value, title_text, subtitle=None, fill=None, top_n=None, z=1100,
@@ -499,11 +569,20 @@ def back_button(page, key="back", x=W - MARGIN - 150, y=22, w=150, h=36):
     """Back button for drillthrough pages (top right of the header)."""
     return container(page, key, "actionButton", x, y, w, h, 5000, {
         "objects": {
-            "icon": [sel_props(DEFAULT, shapeType=s("back"), lineColor=colour(INK))],
-            "text": [sel_props(DEFAULT, show=b(True), text=s("Back"), fontColor=colour(INK), fontSize=n(10))],
-            "outline": [sel_props(DEFAULT, show=b(True), lineColor=colour("#C9D1DA"))],
-            "fill": [sel_props(DEFAULT, show=b(True), fillColor=colour("#FFFFFF"))],
+            "icon": [sel_props(DEFAULT, shapeType=s("blank")), {"properties": {"show": b(False)}}],
+            **_outlined_button_style("←  Back"),
         }}, {"visualLink": props(show=b(True), type=s("Back"))}, extra={"howCreated": "InsertVisualButton"})
+
+
+def _outlined_button_style(label):
+    """White, outlined button text/outline/fill. 'show' must be set without a selector: a show inside the
+    default-state entry is ignored and the button draws as a bare icon (or an empty box)."""
+    return {
+        "text": [{"properties": {"show": b(True)}},
+                 sel_props(DEFAULT, text=s(label), fontColor=colour(INK), fontSize=n(10))],
+        "outline": [{"properties": {"show": b(True)}}, sel_props(DEFAULT, lineColor=colour("#C9D1DA"), weight=n(1))],
+        "fill": [{"properties": {"show": b(True)}}, sel_props(DEFAULT, fillColor=colour("#FFFFFF"))],
+    }
 
 
 # ------------------------------------------------------------------------------- more visuals

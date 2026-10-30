@@ -130,6 +130,21 @@
               "queryRef": "Taken By.Valid Until",
               "nativeQueryRef": "Valid until",
               "displayName": "Valid until"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Taken By"
+                    }
+                  },
+                  "Property": "Url"
+                }
+              },
+              "queryRef": "Taken By.Url",
+              "nativeQueryRef": "Link",
+              "displayName": "Link"
             }
           ]
         }
@@ -154,6 +169,17 @@
     },
     "objects": {
       "values": [
+        {
+          "properties": {
+            "urlIcon": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        },
         {
           "properties": {
             "fontColorPrimary": {
@@ -191,7 +217,7 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "131D"
+                  "Value": "126D"
                 }
               }
             }
@@ -205,7 +231,7 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "167D"
+                  "Value": "160D"
                 }
               }
             }
@@ -219,7 +245,7 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "155D"
+                  "Value": "148D"
                 }
               }
             }
@@ -233,7 +259,7 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "215D"
+                  "Value": "206D"
                 }
               }
             }
@@ -247,7 +273,7 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "227D"
+                  "Value": "217D"
                 }
               }
             }
@@ -261,7 +287,7 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "95D"
+                  "Value": "91D"
                 }
               }
             }
@@ -275,7 +301,7 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "95D"
+                  "Value": "91D"
                 }
               }
             }
@@ -289,13 +315,27 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "107D"
+                  "Value": "103D"
                 }
               }
             }
           },
           "selector": {
             "metadata": "Taken By.Valid Until"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "50D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Taken By.Url"
           }
         }
       ],

@@ -122,6 +122,18 @@ table Induction
 
 		annotation SummarizationSetBy = Automatic
 
+	/// Opens the induction in Work Wallet (in the user's selected wallet). Blank for deleted inductions.
+	column Url =
+			VAR UrlPath = IF ( RELATED ( 'Induction Status'[InductionStatusCode] ) <> 3, "/Users/Inductions/Detail/" & LOWER ( Induction[InductionId] ) )
+			RETURN
+			    IF ( NOT ISBLANK ( UrlPath ), "https://portal.work-wallet.com" & UrlPath )
+		dataType: string
+		lineageTag: 13deccf8-e123-504e-ade4-dc6ba8e50a61
+		dataCategory: WebUrl
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
 	partition Induction = m
 		mode: import
 		source =

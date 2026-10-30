@@ -330,6 +330,28 @@ table Action
 
 		annotation SummarizationSetBy = Automatic
 
+	/// Opens the action in Work Wallet: the actions tab of the record it was raised on (audit, issue, safety card, asset or briefing), scrolled to the action. Work Wallet has no page for a single action. Blank for deleted or orphaned actions.
+	column Url =
+			VAR UrlPath = IF (
+			    NOT 'Action'[Is Deleted] && NOT 'Action'[Is Orphaned] && LEN ( 'Action'[TargetId] ) > 0,
+			    SWITCH (
+			        RELATED ( 'Type'[ActionTypeCode] ),
+			        1, "/HealthAndSafety/Audit/" & LOWER ( 'Action'[TargetId] ) & "?tab=actions#" & LOWER ( 'Action'[ActionId] ),
+			        2, "/HealthAndSafety/IssueReporting/" & LOWER ( 'Action'[TargetId] ) & "?tab=actions#" & LOWER ( 'Action'[ActionId] ),
+			        4, "/Users/SafetyCardReporting/" & LOWER ( 'Action'[TargetId] ) & "/Detail#" & LOWER ( 'Action'[ActionId] ),
+			        8, "/Company/Assets/" & LOWER ( 'Action'[TargetId] ) & "/Detail?tab=actions#" & LOWER ( 'Action'[ActionId] ),
+			        16, "/Users/Briefings/" & LOWER ( 'Action'[TargetId] ) & "/Detail?tab=actions#" & LOWER ( 'Action'[ActionId] )
+			    )
+			)
+			RETURN
+			    IF ( NOT ISBLANK ( UrlPath ), "https://portal.work-wallet.com" & UrlPath )
+		dataType: string
+		lineageTag: 47077846-01ab-5df9-ba21-474f9490b521
+		dataCategory: WebUrl
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
 	partition Action = m
 		mode: import
 		source =

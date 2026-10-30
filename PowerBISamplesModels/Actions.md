@@ -29,6 +29,7 @@ erDiagram
         calc DaysOverdue
         calc OverdueBand
         calc Assignee
+        calc Url
     }
     "Priority" {
         attr Priority
@@ -114,6 +115,7 @@ erDiagram
         calc DaysOverdue
         calc OverdueBand
         calc Assignee
+        calc Url
     }
     "Action" }o--|| "Date" : "Raised Date"
     "Action" }o..|| "Date" : "Closed Date"

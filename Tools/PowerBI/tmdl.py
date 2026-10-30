@@ -311,6 +311,22 @@ def calc_column_lines(table, name, expr, dtype, fmt=None, hidden=False, desc=Non
     return out
 
 
+PORTAL = "https://portal.work-wallet.com"
+
+
+def portal_url_column(table, path_expr, desc, name="Url") -> list[str]:
+    """Calculated column (dataCategory WebUrl) linking a record to its page in the Work Wallet portal, for
+    pbir.link_column / pbir.add_link_column and pbir.link_button. path_expr is a DAX text expression for the
+    path after the host, e.g. '"/HealthAndSafety/Audit/" & LOWER ( Audit[AuditId] )'; when it returns BLANK()
+    (e.g. a deleted record) the link is blank. Use LOWER() on ids: the portal writes them in lower case, and
+    a #fragment must match exactly. URLs have no wallet id: the portal opens them in the user's selected wallet."""
+    expr = f"""
+VAR UrlPath = {path_expr.strip()}
+RETURN
+    IF ( NOT ISBLANK ( UrlPath ), "{PORTAL}" & UrlPath )"""
+    return calc_column_lines(table, name, expr, "string", desc=desc, category="WebUrl")
+
+
 def add_columns(table_tmdl: Path, columns: list[list[str]], replace: bool = False) -> list[str]:
     """Inserts calculated columns (from calc_column_lines) before the table's first partition/hierarchy.
     Columns that already exist (by name) are skipped, or replaced in place when replace=True (e.g. to change a

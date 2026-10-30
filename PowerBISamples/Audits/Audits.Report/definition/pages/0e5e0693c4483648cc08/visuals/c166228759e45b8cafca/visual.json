@@ -118,6 +118,21 @@
               },
               "queryRef": "Location.Location",
               "nativeQueryRef": "Location"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Audit"
+                    }
+                  },
+                  "Property": "Url"
+                }
+              },
+              "queryRef": "Audit.Url",
+              "nativeQueryRef": "Link",
+              "displayName": "Link"
             }
           ]
         }
@@ -142,6 +157,17 @@
     },
     "objects": {
       "values": [
+        {
+          "properties": {
+            "urlIcon": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        },
         {
           "properties": {
             "backColor": {
@@ -184,7 +210,7 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "100D"
+                  "Value": "96D"
                 }
               }
             }
@@ -198,7 +224,7 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "130D"
+                  "Value": "125D"
                 }
               }
             }
@@ -212,7 +238,7 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "220D"
+                  "Value": "211D"
                 }
               }
             }
@@ -226,7 +252,7 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "200D"
+                  "Value": "192D"
                 }
               }
             }
@@ -240,7 +266,7 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "120D"
+                  "Value": "115D"
                 }
               }
             }
@@ -254,7 +280,7 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "130D"
+                  "Value": "125D"
                 }
               }
             }
@@ -268,13 +294,27 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "300D"
+                  "Value": "288D"
                 }
               }
             }
           },
           "selector": {
             "metadata": "Location.Location"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "50D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Audit.Url"
           }
         }
       ],

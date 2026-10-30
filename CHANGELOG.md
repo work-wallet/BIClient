@@ -8,7 +8,7 @@ The format loosely follows Keep a Changelog principles (dates in YYYY-MM-DD). Ve
 
 ### Changed (Unreleased)
 
-- Power BI samples: every sample report has had a significant makeover, with a fresh Work Wallet look and feel, consistent and easier-to-read page layouts, headline KPIs showing the trend against the previous period, and a quicker route from a list to a record's full details.
+- Power BI samples: every sample report has had a significant makeover, with a fresh Work Wallet look and feel, consistent and easier-to-read page layouts, headline KPIs showing the trend against the previous period, and a quicker route from a list to a record's full details. Lists and detail pages now link straight to the record in Work Wallet.
 - The sample semantic models are enhanced to support the new reports, with a shared date table and a set of ready-made measures. The measures work with any wallet's data, so the samples remain a solid starting point for your own reports.
 - No database deploy or data reload is needed. Open the updated `.pbip` projects and refresh to see the changes. Reports you have already customised are unaffected.
 

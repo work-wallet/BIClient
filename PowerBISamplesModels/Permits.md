@@ -29,6 +29,7 @@ erDiagram
         calc Closed
         calc HoursOpen
         calc Outcome
+        calc Url
     }
     "Status" {
         attr Status
@@ -110,6 +111,7 @@ erDiagram
         calc Closed
         calc HoursOpen
         calc Outcome
+        calc Url
     }
     "Numeric Question" }o--|| "Unit" : "Unit_key"
     "Numeric Answer Fact" }o--|| "Permit" : "Permit_key"
@@ -143,6 +145,7 @@ erDiagram
         calc Closed
         calc HoursOpen
         calc Outcome
+        calc Url
     }
     "Date Time Answer Fact" {
         attr DateandTimeAnswer
@@ -190,6 +193,7 @@ erDiagram
         calc Closed
         calc HoursOpen
         calc Outcome
+        calc Url
     }
     "Checklist Answer Fact" {
         calc ChecklistAnswerCount
@@ -245,6 +249,7 @@ erDiagram
         calc Closed
         calc HoursOpen
         calc Outcome
+        calc Url
     }
     "Branch Option Fact" }o--|| "Branch Option" : "PermitBranchOption_key"
     "Branch Option Fact" }o--|| "Permit" : "Permit_key"
@@ -277,6 +282,7 @@ erDiagram
         calc Closed
         calc HoursOpen
         calc Outcome
+        calc Url
     }
     "Signed By Contact" {
         attr ContactName
@@ -349,6 +355,7 @@ erDiagram
         calc Closed
         calc HoursOpen
         calc Outcome
+        calc Url
     }
     "Permit" }o--|| "Date" : "Issued Date"
 ```

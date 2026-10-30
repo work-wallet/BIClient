@@ -118,6 +118,21 @@
               "queryRef": "Induction Measures.People Inducted",
               "nativeQueryRef": "People inducted",
               "displayName": "People inducted"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Induction"
+                    }
+                  },
+                  "Property": "Url"
+                }
+              },
+              "queryRef": "Induction.Url",
+              "nativeQueryRef": "Link",
+              "displayName": "Link"
             }
           ]
         }
@@ -141,13 +156,26 @@
       }
     },
     "objects": {
+      "values": [
+        {
+          "properties": {
+            "urlIcon": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ],
       "columnWidth": [
         {
           "properties": {
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "406D"
+                  "Value": "389D"
                 }
               }
             }
@@ -161,7 +189,7 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "119D"
+                  "Value": "114D"
                 }
               }
             }
@@ -175,7 +203,7 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "155D"
+                  "Value": "148D"
                 }
               }
             }
@@ -189,7 +217,7 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "107D"
+                  "Value": "103D"
                 }
               }
             }
@@ -203,7 +231,7 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "119D"
+                  "Value": "114D"
                 }
               }
             }
@@ -217,7 +245,7 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "143D"
+                  "Value": "137D"
                 }
               }
             }
@@ -231,13 +259,27 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "143D"
+                  "Value": "137D"
                 }
               }
             }
           },
           "selector": {
             "metadata": "Induction Measures.People Inducted"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "50D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Induction.Url"
           }
         }
       ],

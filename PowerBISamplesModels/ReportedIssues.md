@@ -25,6 +25,7 @@ erDiagram
         calc DaysToStartInvestigation
         calc DaysToClose
         calc AgeBand
+        calc Url
     }
     "Location" {
         attr LocationType
@@ -88,6 +89,7 @@ erDiagram
         calc DaysToStartInvestigation
         calc DaysToClose
         calc AgeBand
+        calc Url
     }
     "Body Part Fact" {
         calc BodyPartCount
@@ -128,6 +130,7 @@ erDiagram
         calc DaysToStartInvestigation
         calc DaysToClose
         calc AgeBand
+        calc Url
     }
     "Branch Option Fact" {
         calc BranchOptionCount
@@ -164,6 +167,7 @@ erDiagram
         calc DaysToStartInvestigation
         calc DaysToClose
         calc AgeBand
+        calc Url
     }
     "Option Select Fact" {
         calc OptionSelectCount
@@ -201,6 +205,7 @@ erDiagram
         calc DaysToStartInvestigation
         calc DaysToClose
         calc AgeBand
+        calc Url
     }
     "Person Fact" {
         calc PersonCount
@@ -253,6 +258,7 @@ erDiagram
         calc DaysToStartInvestigation
         calc DaysToClose
         calc AgeBand
+        calc Url
     }
     "Root Cause Analysis Fact" {
         attr RootCauseAnalysis
@@ -288,6 +294,7 @@ erDiagram
         calc DaysToStartInvestigation
         calc DaysToClose
         calc AgeBand
+        calc Url
     }
     "Investigation Team Fact" {
     }
@@ -339,6 +346,7 @@ erDiagram
         calc DaysToStartInvestigation
         calc DaysToClose
         calc AgeBand
+        calc Url
     }
     "Unit" {
     }
@@ -370,6 +378,7 @@ erDiagram
         calc DaysToStartInvestigation
         calc DaysToClose
         calc AgeBand
+        calc Url
     }
     "Date Time Question" {
         attr Question
@@ -410,6 +419,7 @@ erDiagram
         calc DaysToStartInvestigation
         calc DaysToClose
         calc AgeBand
+        calc Url
     }
     "Signature Contact" {
         attr ContactName
@@ -463,6 +473,7 @@ erDiagram
         calc DaysToStartInvestigation
         calc DaysToClose
         calc AgeBand
+        calc Url
     }
     "Issue Measures" {
         measure Issues

@@ -73,6 +73,21 @@
               "queryRef": "Action.Target Reference",
               "nativeQueryRef": "Reference",
               "displayName": "Reference"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Action"
+                    }
+                  },
+                  "Property": "Url"
+                }
+              },
+              "queryRef": "Action.Url",
+              "nativeQueryRef": "Link",
+              "displayName": "Link"
             }
           ]
         }
@@ -96,13 +111,26 @@
       }
     },
     "objects": {
+      "values": [
+        {
+          "properties": {
+            "urlIcon": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ],
       "columnWidth": [
         {
           "properties": {
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "137D"
+                  "Value": "126D"
                 }
               }
             }
@@ -116,7 +144,7 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "87D"
+                  "Value": "80D"
                 }
               }
             }
@@ -130,7 +158,7 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "299D"
+                  "Value": "275D"
                 }
               }
             }
@@ -144,13 +172,27 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "99D"
+                  "Value": "91D"
                 }
               }
             }
           },
           "selector": {
             "metadata": "Action.Target Reference"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "50D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Action.Url"
           }
         }
       ],

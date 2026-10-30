@@ -161,6 +161,21 @@
               "queryRef": "Safety Card.Report Details",
               "nativeQueryRef": "Details",
               "displayName": "Details"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Safety Card"
+                    }
+                  },
+                  "Property": "Url"
+                }
+              },
+              "queryRef": "Safety Card.Url",
+              "nativeQueryRef": "Link",
+              "displayName": "Link"
             }
           ]
         }
@@ -185,6 +200,17 @@
     },
     "objects": {
       "values": [
+        {
+          "properties": {
+            "urlIcon": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        },
         {
           "properties": {
             "fontColorPrimary": {
@@ -222,7 +248,7 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "83D"
+                  "Value": "80D"
                 }
               }
             }
@@ -236,7 +262,7 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "119D"
+                  "Value": "114D"
                 }
               }
             }
@@ -250,7 +276,7 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "71D"
+                  "Value": "68D"
                 }
               }
             }
@@ -264,7 +290,7 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "119D"
+                  "Value": "114D"
                 }
               }
             }
@@ -278,7 +304,7 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "119D"
+                  "Value": "114D"
                 }
               }
             }
@@ -292,7 +318,7 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "119D"
+                  "Value": "114D"
                 }
               }
             }
@@ -306,7 +332,7 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "119D"
+                  "Value": "114D"
                 }
               }
             }
@@ -320,7 +346,7 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "95D"
+                  "Value": "91D"
                 }
               }
             }
@@ -334,7 +360,7 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "119D"
+                  "Value": "114D"
                 }
               }
             }
@@ -348,13 +374,27 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "227D"
+                  "Value": "217D"
                 }
               }
             }
           },
           "selector": {
             "metadata": "Safety Card.Report Details"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "50D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Safety Card.Url"
           }
         }
       ],

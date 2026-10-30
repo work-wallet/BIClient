@@ -330,6 +330,18 @@ table Permit
 
 		annotation SummarizationSetBy = Automatic
 
+	/// Opens the permit in Work Wallet (in the user's selected wallet). Blank for deleted permits.
+	column Url =
+			VAR UrlPath = IF ( RELATED ( 'Status'[PermitStatusCode] ) <> 7, "/HealthAndSafety/PermitToWork/" & LOWER ( Permit[PermitId] ) )
+			RETURN
+			    IF ( NOT ISBLANK ( UrlPath ), "https://portal.work-wallet.com" & UrlPath )
+		dataType: string
+		lineageTag: fd3101d3-2f08-5e21-abd4-3e57f2df9ada
+		dataCategory: WebUrl
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
 	partition Permit = m
 		mode: import
 		source =
