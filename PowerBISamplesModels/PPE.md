@@ -238,7 +238,7 @@ erDiagram
     "Property" }o--|| "Property Type" : "PPEPropertyType_key"
 ```
 
-## PPE - Date and measures
+## PPE - Measures
 
 ```mermaid
 ---
