@@ -16,7 +16,7 @@
                 "Entity": "Permit"
               }
             },
-            "Property": "Permit Reference"
+            "Property": "Url"
           }
         },
         "type": "Categorical",
@@ -38,7 +38,7 @@
                 "Entity": "Permit"
               }
             },
-            "Property": "Permit Reference"
+            "Property": "Url"
           }
         }
       }

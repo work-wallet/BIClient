@@ -16,7 +16,7 @@
                 "Entity": "Issue"
               }
             },
-            "Property": "Issue Reference"
+            "Property": "Url"
           }
         },
         "type": "Categorical",
@@ -38,7 +38,7 @@
                 "Entity": "Issue"
               }
             },
-            "Property": "Issue Reference"
+            "Property": "Url"
           }
         }
       }

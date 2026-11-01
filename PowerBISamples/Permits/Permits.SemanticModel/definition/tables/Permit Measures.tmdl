@@ -353,7 +353,7 @@ table 'Permit Measures'
 		lineageTag: 3398f1ec-91c1-52b3-ba6d-a47291bfb4e2
 
 	/// Text for the Permits list drillthrough button.
-	measure 'Permit Details Button Label' = IF ( HASONEVALUE ( Permit[Permit Reference] ), "View " & VALUES ( Permit[Permit Reference] ) & " details  ›", "Select a permit to view details" )
+	measure 'Permit Details Button Label' = IF ( HASONEVALUE ( Permit[Url] ), "View " & SELECTEDVALUE ( Permit[Permit Reference] ) & " details  ›", "Select a permit to view details" )
 		isHidden
 		displayFolder: Labels
 		lineageTag: 40facf91-03d2-519c-a4ce-b816bbff65b8

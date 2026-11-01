@@ -77,6 +77,21 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
+                      "Entity": "Issue"
+                    }
+                  },
+                  "Property": "Url"
+                }
+              },
+              "queryRef": "Issue.Url",
+              "nativeQueryRef": "Issue link",
+              "displayName": "Issue link"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
                       "Entity": "Action"
                     }
                   },
@@ -350,7 +365,7 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "100D"
+                  "Value": "90D"
                 }
               }
             }
@@ -364,7 +379,7 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "120D"
+                  "Value": "100D"
                 }
               }
             }
@@ -378,7 +393,21 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "198D"
+                  "Value": "60D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Issue.Url"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "168D"
                 }
               }
             }

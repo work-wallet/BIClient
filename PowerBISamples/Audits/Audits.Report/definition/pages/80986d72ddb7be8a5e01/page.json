@@ -16,49 +16,10 @@
                 "Entity": "Audit"
               }
             },
-            "Property": "Audit Reference"
+            "Property": "Url"
           }
         },
         "type": "Categorical",
-        "filter": {
-          "Version": 2,
-          "From": [
-            {
-              "Name": "a",
-              "Entity": "Audit",
-              "Type": 0
-            }
-          ],
-          "Where": [
-            {
-              "Condition": {
-                "In": {
-                  "Expressions": [
-                    {
-                      "Column": {
-                        "Expression": {
-                          "SourceRef": {
-                            "Source": "a"
-                          }
-                        },
-                        "Property": "Audit Reference"
-                      }
-                    }
-                  ],
-                  "Values": [
-                    [
-                      {
-                        "Literal": {
-                          "Value": "'WW-02592'"
-                        }
-                      }
-                    ]
-                  ]
-                }
-              }
-            }
-          ]
-        },
         "howCreated": "Drillthrough"
       }
     ]
@@ -77,7 +38,7 @@
                 "Entity": "Audit"
               }
             },
-            "Property": "Audit Reference"
+            "Property": "Url"
           }
         }
       }

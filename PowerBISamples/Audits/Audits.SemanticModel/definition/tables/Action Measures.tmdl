@@ -461,7 +461,7 @@ table 'Action Measures'
 
 	/// Text for the actions page drillthrough button to the audit details page; reflects the action selected in the table.
 	measure 'Action Audit Button Label' =
-			VAR Selected = IF ( HASONEVALUE ( Audit[Audit Reference] ), VALUES ( Audit[Audit Reference] ) )
+			VAR Selected = IF ( HASONEVALUE ( Audit[Url] ), SELECTEDVALUE ( Audit[Audit Reference] ) )
 			RETURN
 			    IF ( LEN ( Selected ) > 0, "View " & Selected & " details  ›", "Select an action to view its audit" )
 		isHidden

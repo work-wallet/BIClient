@@ -612,7 +612,7 @@ table 'Issue Measures'
 
 	/// Text for the Issues list drillthrough button; reflects the issue selected in the table.
 	measure 'Issue Details Button Label' =
-			VAR Selected = IF ( HASONEVALUE ( 'Issue'[Issue Reference] ), VALUES ( 'Issue'[Issue Reference] ) )
+			VAR Selected = IF ( HASONEVALUE ( 'Issue'[Url] ), SELECTEDVALUE ( 'Issue'[Issue Reference] ) )
 			RETURN
 			    IF ( ISBLANK ( Selected ), "Select an issue to view details", "View " & Selected & " details  ›" )
 		isHidden

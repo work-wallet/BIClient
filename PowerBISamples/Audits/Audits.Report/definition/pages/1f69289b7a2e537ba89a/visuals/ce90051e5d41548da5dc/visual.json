@@ -64,6 +64,21 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
+                      "Entity": "Audit"
+                    }
+                  },
+                  "Property": "Url"
+                }
+              },
+              "queryRef": "Audit.Url",
+              "nativeQueryRef": "Audit link",
+              "displayName": "Audit link"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
                       "Entity": "Action"
                     }
                   },
@@ -321,7 +336,21 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "240D"
+                  "Value": "60D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Audit.Url"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "180D"
                 }
               }
             }

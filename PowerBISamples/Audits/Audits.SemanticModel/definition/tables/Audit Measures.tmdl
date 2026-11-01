@@ -539,7 +539,7 @@ table 'Audit Measures'
 
 	/// Text for the Audits list drillthrough button; reflects the audit selected in the table.
 	measure 'Audit Details Button Label' =
-			VAR Selected = IF ( HASONEVALUE ( Audit[Audit Reference] ), VALUES ( Audit[Audit Reference] ) )
+			VAR Selected = IF ( HASONEVALUE ( Audit[Url] ), SELECTEDVALUE ( Audit[Audit Reference] ) )
 			RETURN
 			    IF ( ISBLANK ( Selected ), "Select an audit to view details", "View " & Selected & " details  ›" )
 		isHidden

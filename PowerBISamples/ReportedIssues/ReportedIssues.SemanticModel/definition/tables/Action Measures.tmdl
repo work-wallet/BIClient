@@ -449,7 +449,7 @@ table 'Action Measures'
 
 	/// Text for the actions page drillthrough button to the issue details page; reflects the action selected in the table.
 	measure 'Action Issue Button Label' =
-			VAR Selected = IF ( HASONEVALUE ( Issue[Issue Reference] ), VALUES ( Issue[Issue Reference] ) )
+			VAR Selected = IF ( HASONEVALUE ( Issue[Url] ), SELECTEDVALUE ( Issue[Issue Reference] ) )
 			RETURN
 			    IF ( LEN ( Selected ) > 0, "View " & Selected & " details  ›", "Select an action to view its issue" )
 		isHidden
