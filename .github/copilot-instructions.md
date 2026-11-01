@@ -67,6 +67,7 @@ When adding a new dataset or extending existing datasets with additional JSON fi
    - `.pbip` project file.
    - `.Report/` folder with visuals and definition.
    - `.SemanticModel/` folder with model definition, relationships, measures.
+   - Follow `.github/instructions/powerbi.instructions.md` and `powerbi-style.instructions.md`, and use the `powerbi-report-development` and `work-wallet-bi-reporting` skills.
 8. Regenerate `PowerBISamplesModels.md` (index) and the per-module diagram files under `PowerBISamplesModels/` (one `.md` per dataset, e.g. `Assets.md`, containing all of that dataset's diagram pages) by running `dotnet run --project Tools/WorkWallet.BI.PowerBIModelDocGenerator/WorkWallet.BI.PowerBIModelDocGenerator.csproj` (all auto-generated from the `.SemanticModel` TMDL files and `diagramLayout.json` pages — never edit them by hand, and no images need exporting). This tool is intentionally **not** referenced by `WorkWallet.BI.Client.sln` (that solution is for end users) — do not add it back. CI (`.github/workflows/ci.yml`) builds/runs it separately and fails if the generated docs are stale (`-- --check`).
 
 **Documentation Layer:**

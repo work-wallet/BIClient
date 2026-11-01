@@ -24,6 +24,9 @@ write_page() only writes the visuals it is given. Other visuals on the page are 
 Visual names (folder names) are derived from uuid5(page id + key), so re-running produces the same files.
 Output matches Power BI Desktop's saved form, so a Desktop save should leave generated files unchanged.
 After any regeneration, check `git diff` shows only the intended changes.
+
+Colours, fonts, type sizes and the theme file come from report_style.current (the Work Wallet house style by
+default; see report_style.py). The layout constants below are the canvas grid.
 """
 from __future__ import annotations
 
@@ -33,6 +36,7 @@ import uuid
 from dataclasses import dataclass, field
 from pathlib import Path
 
+import report_style as rs
 from _guard import require_clean
 
 VC_SCHEMA = "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json"
@@ -41,7 +45,7 @@ VC_SCHEMA = "https://developer.microsoft.com/json-schemas/fabric/item/report/def
 @dataclass
 class Settings:
     measures_table: str = "Measures"
-    eyebrow: str = "WORK WALLET"
+    eyebrow: str | None = None  # header eyebrow text; None uses the style's eyebrow
     namespace: uuid.UUID = field(default_factory=lambda: uuid.UUID("0b8a3c1e-52f4-4f6e-8d4e-7a1c9e2b3d47"))
 
 
@@ -62,10 +66,15 @@ BODY_H = BODY_BOTTOM - BODY_Y
 # Compact rhythm for dense pages (e.g. drillthrough detail pages with many small tables).
 COMPACT_TOP, COMPACT_SUMMARY_H, COMPACT_GAP, COMPACT_BOTTOM = 74, 72, 8, 712
 
-# Colours; keep in step with the report theme (good / neutral / bad and text colours).
-INK, INK_2, ACCENT = "#1E2B37", "#4A5568", "#C9901A"
-GOOD, MID, BAD = "#2E9E6B", "#ECB232", "#D6493A"
-SEMIBOLD = "'Segoe UI Semibold', wf_segoe-ui_semibold, helvetica, arial, sans-serif"
+# Colour names kept for build scripts (p.INK, p.BAD, ...); they read the current style when used.
+_STYLE_ALIASES = {"INK": "ink", "INK_2": "ink_2", "ACCENT": "accent", "GOOD": "good", "MID": "mid", "BAD": "bad",
+                  "SEMIBOLD": "font_stack_semibold"}
+
+
+def __getattr__(name):
+    if name in _STYLE_ALIASES:
+        return getattr(rs.current, _STYLE_ALIASES[name])
+    raise AttributeError(f"module {__name__!r} has no attribute {name!r}")
 
 
 def vid(*parts: str) -> str:
@@ -234,17 +243,19 @@ def _set_active_flags(query_state):
 
 
 def header(page, heading, subtitle, eyebrow: str | None = None, width=720):
-    """Single textbox: small accent eyebrow, 18pt title, 9pt subtitle."""
-    def run(text, size, weight=None, colour_=INK, family="Segoe UI"):
-        style = {"fontFamily": family, "fontSize": f"{size}pt", "color": colour_}
+    """Single textbox: small accent eyebrow, title and subtitle (sizes from the style)."""
+    st = rs.current
+
+    def run(text, size, weight=None, colour_=None, family=None):
+        style = {"fontFamily": family or st.font, "fontSize": f"{size}pt", "color": colour_ or st.ink}
         if weight:
             style["fontWeight"] = weight
         return {"value": text, "textStyle": style}
 
     paragraphs = [
-        {"textRuns": [run(eyebrow or settings.eyebrow, 8, "bold", ACCENT, "Segoe UI Semibold")]},
-        {"textRuns": [run(heading, 18, "bold", INK, "Segoe UI Semibold")]},
-        {"textRuns": [run(subtitle, 9, None, INK_2)]},
+        {"textRuns": [run(eyebrow or settings.eyebrow or st.eyebrow, st.eyebrow_size, "bold", st.accent, st.font_semibold)]},
+        {"textRuns": [run(heading, st.title_size, "bold", st.ink, st.font_semibold)]},
+        {"textRuns": [run(subtitle, st.subtitle_size, None, st.ink_2)]},
     ]
     return container(page, "header", "textbox", MARGIN, HEADER_Y, width, HEADER_H, 100,
                      {"objects": {"general": props(paragraphs=paragraphs)}})
@@ -278,7 +289,7 @@ def dropdown_slicer(page, key, entity, prop, display, x, w, z=3001):
     })
 
 
-def kpi_cards(page, tiles, y=KPI_Y, h=KPI_H, key="kpis", value_size=18, padding=(10, 2, 14, 10), cell_padding=GAP):
+def kpi_cards(page, tiles, y=KPI_Y, h=KPI_H, key="kpis", value_size=None, padding=(10, 2, 14, 10), cell_padding=GAP):
     """One new-style card visual (cardVisual) holding a row of KPI tiles.
 
     tiles: list of (projection, reference_label_measure, reference_colour_measure[, value_font_size]).
@@ -289,7 +300,7 @@ def kpi_cards(page, tiles, y=KPI_Y, h=KPI_H, key="kpis", value_size=18, padding=
     """
     ref_labels = [sel_props(DEFAULT, backgroundShow=b(False), paddingIndividual=b(True))]
     projections, ref_values = [], []
-    values = [sel_props(DEFAULT, fontSize=n(value_size), labelDisplayUnits=n(1))]  # 1 = no "K"/"M" abbreviation
+    values = [sel_props(DEFAULT, fontSize=n(value_size or rs.current.kpi_value_size), labelDisplayUnits=n(1))]  # 1 = no "K"/"M" abbreviation
     for tile in tiles:
         p, label_measure, colour_measure_name = tile[:3]
         projections.append(p)
@@ -525,22 +536,23 @@ def not_blank_filter(entity, prop):
 
 def score_gradient(measure_name):
     """Fixed 0% (bad) / 50% / 100% (good) colour scale for 0-1 percentage measures: no business thresholds."""
+    st = rs.current
     return {"solid": {"color": {"expr": {"FillRule": {
         "Input": meas(measure_name),
         "FillRule": {"linearGradient3": {
-            "min": {"color": s(BAD)["expr"], "value": n(0)["expr"]},
-            "mid": {"color": s(MID)["expr"], "value": n(0.5)["expr"]},
-            "max": {"color": s(GOOD)["expr"], "value": n(1)["expr"]},
+            "min": {"color": s(st.bad)["expr"], "value": n(0)["expr"]},
+            "mid": {"color": s(st.mid)["expr"], "value": n(0.5)["expr"]},
+            "max": {"color": s(st.good)["expr"], "value": n(1)["expr"]},
             "nullColoringStrategy": {"strategy": s("noColor")["expr"]}}}}}}}}
 
 
-def count_gradient(measure_name, low="#FDEBC8", high=BAD):
-    """Data-driven light-to-red scale for counts (heatmap cells)."""
+def count_gradient(measure_name, low=None, high=None):
+    """Data-driven light-to-red scale for counts (heatmap cells); defaults to the style's heat_low and bad."""
     return {"solid": {"color": {"expr": {"FillRule": {
         "Input": meas(measure_name),
         "FillRule": {"linearGradient2": {
-            "min": {"color": s(low)["expr"]},
-            "max": {"color": s(high)["expr"]},
+            "min": {"color": s(low or rs.current.heat_low)["expr"]},
+            "max": {"color": s(high or rs.current.bad)["expr"]},
             "nullColoringStrategy": {"strategy": s("noColor")["expr"]}}}}}}}}
 
 
@@ -550,12 +562,15 @@ def drillthrough_button(page, key, x, y, w, h, target_page, label_measure):
     label_measure returns e.g. 'Select an item to view details' / 'View X details  ›'.
     Do not overlap it with the table it depends on: a selected visual is drawn on top and hides it.
     """
-    states = [(DEFAULT, INK, "#FFFFFF"), ({"id": "hover"}, "#2C3B49", "#FFFFFF"), ({"id": "disabled"}, "#EEF0F3", "#8592A0")]
+    st = rs.current
+    states = [(DEFAULT, st.ink, st.surface), ({"id": "hover"}, st.button_hover, st.surface),
+              ({"id": "disabled"}, st.button_disabled, st.button_disabled_text)]
     return container(page, key, "actionButton", x, y, w, h, 6000, {
         "objects": {
             "icon": [sel_props(DEFAULT, shapeType=s("blank")), {"properties": {"show": b(False)}}],
             "text": [{"properties": {"show": b(True)}}] + [
-                sel_props(sel, text={"expr": meas(label_measure)}, fontColor=colour(tc), fontSize=n(9), fontFamily=s(SEMIBOLD))
+                sel_props(sel, text={"expr": meas(label_measure)}, fontColor=colour(tc), fontSize=n(st.drill_button_text_size),
+                          fontFamily=s(st.font_stack_semibold))
                 for sel, _, tc in states],
             "fill": [{"properties": {"show": b(True)}}] + [
                 sel_props(sel, fillColor=colour(fc), transparency=n(0)) for sel, fc, _ in states],
@@ -577,11 +592,12 @@ def back_button(page, key="back", x=W - MARGIN - 150, y=22, w=150, h=36):
 def _outlined_button_style(label):
     """White, outlined button text/outline/fill. 'show' must be set without a selector: a show inside the
     default-state entry is ignored and the button draws as a bare icon (or an empty box)."""
+    st = rs.current
     return {
         "text": [{"properties": {"show": b(True)}},
-                 sel_props(DEFAULT, text=s(label), fontColor=colour(INK), fontSize=n(10))],
-        "outline": [{"properties": {"show": b(True)}}, sel_props(DEFAULT, lineColor=colour("#C9D1DA"), weight=n(1))],
-        "fill": [{"properties": {"show": b(True)}}, sel_props(DEFAULT, fillColor=colour("#FFFFFF"))],
+                 sel_props(DEFAULT, text=s(label), fontColor=colour(st.ink), fontSize=n(st.button_text_size))],
+        "outline": [{"properties": {"show": b(True)}}, sel_props(DEFAULT, lineColor=colour(st.outline), weight=n(1))],
+        "fill": [{"properties": {"show": b(True)}}, sel_props(DEFAULT, fillColor=colour(st.surface))],
     }
 
 
@@ -673,7 +689,7 @@ def text_card(page, key, x, y, w, h, value_proj, label=None, font_size=10, z=200
                                   leftMargin=i(14), rightMargin=i(14))],
             "label": [sel_props(DEFAULT, show=b(bool(label)))],
             "value": [sel_props(DEFAULT, fontSize=n(font_size), textWrap=b(True), horizontalAlignment=s("left"),
-                                fontFamily=s("'Segoe UI', wf_segoe-ui_normal, helvetica, arial, sans-serif"))],
+                                fontFamily=s(rs.current.font_stack))],
             "accentBar": [sel_props(DEFAULT, show=b(False))],
         }})
 
@@ -740,10 +756,12 @@ def find_overlaps(page_dir: Path, tolerance: float = 0.5) -> list[str]:
     return found
 
 
-def apply_theme(report_dir: Path, theme_file: str = "WorkWallet.json", allow_dirty: bool = False,
+def apply_theme(report_dir: Path, theme_file: str | None = None, allow_dirty: bool = False,
                 copy_from: Path | None = None):
-    """Registers StaticResources/RegisteredResources/<theme_file> as the report's custom theme.
-    copy_from: a report folder that already has the theme; it is copied unchanged (keeps every copy identical)."""
+    """Registers StaticResources/RegisteredResources/<theme_file> (default: the style's theme file) as the report's
+    custom theme. copy_from: a report folder that already has the theme; it is copied unchanged (keeps every copy
+    identical)."""
+    theme_file = theme_file or rs.current.theme_file
     report_path = Path(report_dir) / "definition" / "report.json"
     require_clean(report_path, allow_dirty)
     if copy_from:

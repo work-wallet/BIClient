@@ -32,6 +32,7 @@ import uuid
 from pathlib import Path
 
 from _guard import require_clean
+import report_style as rs
 
 NS = uuid.UUID("6f1c6a3e-6c55-4d0e-9a59-4b6d1f0c2a11")
 T = "\t"
@@ -264,8 +265,10 @@ RETURN
 """
 
 
-def semantic_colours(table: MeasuresTable, good="#2E9E6B", bad="#D6493A", neutral="#4A5568"):
-    """Adds hidden Colour Good / Bad / Neutral measures (keep in step with the report theme)."""
+def semantic_colours(table: MeasuresTable, good=None, bad=None, neutral=None):
+    """Adds hidden Colour Good / Bad / Neutral measures; defaults come from the current report style, which matches
+    the report theme."""
+    good, bad, neutral = good or rs.current.good, bad or rs.current.bad, neutral or rs.current.neutral
     table.add("Colour Good", f'"{good}"', folder="Formatting", hidden=True,
               desc="Semantic colour for favourable changes; matches the theme's 'good' colour.")
     table.add("Colour Bad", f'"{bad}"', folder="Formatting", hidden=True,
