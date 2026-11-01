@@ -566,6 +566,19 @@
             "width": 290
           },
           "zIndex": 6
+        },
+        {
+          "location": {
+            "x": 1236,
+            "y": 435
+          },
+          "nodeIndex": "Date",
+          "nodeLineageTag": "9f926b70-3c67-50df-bdf9-e93c77dee92a",
+          "size": {
+            "height": 270,
+            "width": 234
+          },
+          "zIndex": 0
         }
       ],
       "name": "Main",
@@ -1068,45 +1081,32 @@
       "nodes": [
         {
           "location": {
-            "x": 0,
-            "y": 0
-          },
-          "nodeIndex": "Date",
-          "nodeLineageTag": "9f926b70-3c67-50df-bdf9-e93c77dee92a",
-          "size": {
-            "height": 260,
-            "width": 234
-          },
-          "zIndex": 0
-        },
-        {
-          "location": {
-            "x": 320,
-            "y": 0
-          },
-          "nodeIndex": "Audit",
-          "nodeLineageTag": "e2381d2a-b787-4eaa-ac59-fbb97f1243ce",
-          "size": {
-            "height": 812,
-            "width": 257
-          },
-          "zIndex": 1
-        },
-        {
-          "location": {
-            "x": 660,
+            "x": 99,
             "y": 0
           },
           "nodeIndex": "Audit Measures",
           "nodeLineageTag": "36642765-0011-5e89-913c-04c0160e93b2",
           "size": {
-            "height": 969,
+            "height": 982,
             "width": 260
           },
           "zIndex": 2
+        },
+        {
+          "location": {
+            "x": 448,
+            "y": 4
+          },
+          "nodeIndex": "Action Measures",
+          "nodeLineageTag": "e179e581-3925-5eb2-b207-0ba1b499bd51",
+          "size": {
+            "height": 973,
+            "width": 234
+          },
+          "zIndex": 0
         }
       ],
-      "name": "Date and Measures",
+      "name": "Measures",
       "zoomValue": 100,
       "pinKeyFieldsToTop": false,
       "showExtraHeaderInfo": false,
@@ -1180,7 +1180,7 @@
           "nodeIndex": "Action Date",
           "nodeLineageTag": "f6456972-4ec7-5449-b28e-ee5c911aa574",
           "size": {
-            "height": 300,
+            "height": 262,
             "width": 234
           },
           "zIndex": 4
@@ -1197,19 +1197,6 @@
             "width": 257
           },
           "zIndex": 5
-        },
-        {
-          "location": {
-            "x": 1332,
-            "y": 0
-          },
-          "nodeIndex": "Action Measures",
-          "nodeLineageTag": "e179e581-3925-5eb2-b207-0ba1b499bd51",
-          "size": {
-            "height": 994,
-            "width": 234
-          },
-          "zIndex": 7
         }
       ],
       "name": "Actions",

@@ -460,39 +460,6 @@ table 'Audit Measures'
 		displayFolder: Formatting
 		lineageTag: 4b2b0fd5-9f63-51fd-9b38-cdfc089635b6
 
-	/// Type of the selected audit. Read through the audit row, so it is right however the page was reached (drillthrough from any page, or a URL filter); blank unless one audit is selected.
-	measure 'Selected Audit Type' = IF ( HASONEVALUE ( Audit[Audit_key] ), MAXX ( Audit, RELATED ( 'Audit Type'[Audit Type] ) ) )
-		isHidden
-		displayFolder: Details
-		lineageTag: 09df9609-d671-557d-9893-a88481703934
-
-	/// Location of the selected audit. Read through the audit row, so it is right however the page was reached (drillthrough from any page, or a URL filter); blank unless one audit is selected.
-	measure 'Selected Audit Location' = IF ( HASONEVALUE ( Audit[Audit_key] ), MAXX ( Audit, RELATED ( Location[Location] ) ) )
-		isHidden
-		displayFolder: Details
-		lineageTag: 3d66a9cb-336b-53d0-8874-28b4e004ec71
-
-	/// Status of the selected audit. Read through the audit row, so it is right however the page was reached (drillthrough from any page, or a URL filter); blank unless one audit is selected.
-	measure 'Selected Audit Status' = IF ( HASONEVALUE ( Audit[Audit_key] ), MAXX ( Audit, RELATED ( 'Audit Status'[Audit Status] ) ) )
-		isHidden
-		displayFolder: Details
-		lineageTag: b3294f8b-efed-58df-9ddc-8e154ab6ae96
-
-	/// Grading of the selected audit. Read through the audit row, so it is right however the page was reached (drillthrough from any page, or a URL filter); blank unless one audit is selected.
-	measure 'Selected Audit Grading' = IF ( HASONEVALUE ( Audit[Audit_key] ), MAXX ( Audit, RELATED ( 'Audit Grading Set Option'[Audit Grading] ) ) )
-		isHidden
-		displayFolder: Details
-		lineageTag: 1a042fd6-dd52-5a8f-bef9-38f6afb88085
-
-	/// The wallet's own colour for the selected audit's grading, read through the audit row (for its details page; lists use Audit Grading Colour).
-	measure 'Selected Audit Grading Colour' =
-			VAR GradingColour = IF ( HASONEVALUE ( Audit[Audit_key] ), MAXX ( Audit, RELATED ( 'Audit Grading Set Option'[Audit Grading Colour] ) ) )
-			RETURN
-			    IF ( LEN ( GradingColour ) = 7, GradingColour, "#1E2B37" )
-		isHidden
-		displayFolder: Formatting
-		lineageTag: bad6fb49-d09b-5b4f-8400-bbcb116e7322
-
 	/// In-cell bar showing a section, tag or audit percentage score, coloured with the row's grading colour.
 	measure 'Score Bar' =
 			VAR Pct =
@@ -584,6 +551,39 @@ table 'Audit Measures'
 		isHidden
 		displayFolder: Links
 		lineageTag: 3ae229c3-b2c0-59c3-8000-5d3a356a0ba2
+
+	/// Type of the selected audit. Read through the audit row, so it is right however the page was reached (drillthrough from any page, or a URL filter); blank unless one audit is selected.
+	measure 'Selected Audit Type' = IF ( HASONEVALUE ( Audit[Audit_key] ), MAXX ( Audit, RELATED ( 'Audit Type'[Audit Type] ) ) )
+		isHidden
+		displayFolder: Details
+		lineageTag: 09df9609-d671-557d-9893-a88481703934
+
+	/// Location of the selected audit. Read through the audit row, so it is right however the page was reached (drillthrough from any page, or a URL filter); blank unless one audit is selected.
+	measure 'Selected Audit Location' = IF ( HASONEVALUE ( Audit[Audit_key] ), MAXX ( Audit, RELATED ( Location[Location] ) ) )
+		isHidden
+		displayFolder: Details
+		lineageTag: 3d66a9cb-336b-53d0-8874-28b4e004ec71
+
+	/// Status of the selected audit. Read through the audit row, so it is right however the page was reached (drillthrough from any page, or a URL filter); blank unless one audit is selected.
+	measure 'Selected Audit Status' = IF ( HASONEVALUE ( Audit[Audit_key] ), MAXX ( Audit, RELATED ( 'Audit Status'[Audit Status] ) ) )
+		isHidden
+		displayFolder: Details
+		lineageTag: b3294f8b-efed-58df-9ddc-8e154ab6ae96
+
+	/// Grading of the selected audit. Read through the audit row, so it is right however the page was reached (drillthrough from any page, or a URL filter); blank unless one audit is selected.
+	measure 'Selected Audit Grading' = IF ( HASONEVALUE ( Audit[Audit_key] ), MAXX ( Audit, RELATED ( 'Audit Grading Set Option'[Audit Grading] ) ) )
+		isHidden
+		displayFolder: Details
+		lineageTag: 1a042fd6-dd52-5a8f-bef9-38f6afb88085
+
+	/// The wallet's own colour for the selected audit's grading, read through the audit row (for its details page; lists use Audit Grading Colour).
+	measure 'Selected Audit Grading Colour' =
+			VAR GradingColour = IF ( HASONEVALUE ( Audit[Audit_key] ), MAXX ( Audit, RELATED ( 'Audit Grading Set Option'[Audit Grading Colour] ) ) )
+			RETURN
+			    IF ( LEN ( GradingColour ) = 7, GradingColour, "#1E2B37" )
+		isHidden
+		displayFolder: Formatting
+		lineageTag: bad6fb49-d09b-5b4f-8400-bbcb116e7322
 
 	column Value
 		dataType: int64

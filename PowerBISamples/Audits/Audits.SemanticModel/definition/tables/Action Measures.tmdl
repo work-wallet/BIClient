@@ -61,12 +61,6 @@ table 'Action Measures'
 		displayFolder: Actions
 		lineageTag: bdf8058c-a4e6-5d66-b14b-c85d2bc4f701
 
-	/// Open actions on each audit, for audit lists: shows – when there are none (blank where there is no audit, so lists don't gain empty rows).
-	measure 'Audit Open Actions' = IF ( NOT ISEMPTY ( Audit ), [Open Actions] + 0 )
-		formatString: "#,0;-#,0;""–"""
-		displayFolder: Actions
-		lineageTag: 51e9f919-625f-5fb3-a076-d8417b56ffc3
-
 	/// Distinct people with actions assigned.
 	measure Assignees = CALCULATE ( DISTINCTCOUNT ( 'Action'[Assignee] ), KEEPFILTERS ( 'Action'[Assignee] <> "(Unassigned)" ) )
 		formatString: #,0
@@ -421,18 +415,6 @@ table 'Action Measures'
 		displayFolder: Formatting
 		lineageTag: 7bfaeb74-04d6-5a19-bc63-bfdbf1ab896b
 
-	/// Text colour for Audit Open Actions: red if any are overdue, amber if open, grey if none.
-	measure 'Audit Open Actions Colour' =
-			SWITCH (
-			    TRUE (),
-			    [Overdue Actions] > 0, [Colour Bad],
-			    [Open Actions] > 0, "#C9901A",
-			    [Colour Neutral]
-			)
-		isHidden
-		displayFolder: Formatting
-		lineageTag: 0be49b4d-e0bf-5ad8-8b3d-caf7a739ac58
-
 	/// Average days from raised to closed, for closed actions raised in the period (Work Wallet's 'Average close out days'). Actions closed without a closing update have no close date and are left out.
 	measure 'Average Close Out Days' = CALCULATE ( AVERAGE ( 'Action'[Days To Close] ), KEEPFILTERS ( 'Action Status'[ActionStatusCode] = 4 ) )
 		formatString: #,0
@@ -446,6 +428,36 @@ table 'Action Measures'
 		isHidden
 		displayFolder: Labels
 		lineageTag: 357c368f-5061-5bec-8be7-76215f9ec107
+
+	/// Audits with at least one action raised in the period (only audits in the data).
+	measure 'Audits With Actions' = CALCULATE ( DISTINCTCOUNT ( 'Action'[Audit_key] ), KEEPFILTERS ( NOT ISBLANK ( 'Action'[Audit_key] ) ) )
+		formatString: #,0
+		displayFolder: Actions
+		lineageTag: f80f20f2-f7e2-52f1-8a75-c07ae9544586
+
+	/// Audits with at least one action still Open or In Progress.
+	measure 'Audits With Open Actions' = CALCULATE ( [Audits With Actions], KEEPFILTERS ( 'Action Status'[ActionStatusCode] IN { 1, 2 } ) )
+		formatString: #,0
+		displayFolder: Actions
+		lineageTag: 9e749eee-21ea-5896-a3a4-6501e8cbd012
+
+	/// Open actions on each audit, for audit lists: shows – when there are none (blank where there is no audit, so lists don't gain empty rows).
+	measure 'Audit Open Actions' = IF ( NOT ISEMPTY ( Audit ), [Open Actions] + 0 )
+		formatString: #,0;-#,0;"–"
+		displayFolder: Actions
+		lineageTag: 51e9f919-625f-5fb3-a076-d8417b56ffc3
+
+	/// Text colour for Audit Open Actions: red if any are overdue, amber if open, grey if none.
+	measure 'Audit Open Actions Colour' =
+			SWITCH (
+			    TRUE (),
+			    [Overdue Actions] > 0, [Colour Bad],
+			    [Open Actions] > 0, "#C9901A",
+			    [Colour Neutral]
+			)
+		isHidden
+		displayFolder: Formatting
+		lineageTag: 0be49b4d-e0bf-5ad8-8b3d-caf7a739ac58
 
 	/// Text for the actions page drillthrough button to the audit details page; reflects the action selected in the table.
 	measure 'Action Audit Button Label' =
@@ -469,18 +481,6 @@ table 'Action Measures'
 		isHidden
 		displayFolder: Labels
 		lineageTag: 1cde91e0-87c4-5719-b87c-65efc710c8dd
-
-	/// Audits with at least one action raised in the period (only audits in the data).
-	measure 'Audits With Actions' = CALCULATE ( DISTINCTCOUNT ( 'Action'[Audit_key] ), KEEPFILTERS ( NOT ISBLANK ( 'Action'[Audit_key] ) ) )
-		formatString: #,0
-		displayFolder: Actions
-		lineageTag: f80f20f2-f7e2-52f1-8a75-c07ae9544586
-
-	/// Audits with at least one action still Open or In Progress.
-	measure 'Audits With Open Actions' = CALCULATE ( [Audits With Actions], KEEPFILTERS ( 'Action Status'[ActionStatusCode] IN { 1, 2 } ) )
-		formatString: #,0
-		displayFolder: Actions
-		lineageTag: 9e749eee-21ea-5896-a3a4-6501e8cbd012
 
 	column Value
 		dataType: int64

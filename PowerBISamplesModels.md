@@ -57,7 +57,7 @@ inactive relationship. Each column is prefixed with its kind instead of its data
 * [Audits - Date Time Answer](PowerBISamplesModels/Audits.md#audits---date-time-answer)
 * [Audits - Checklist Answer](PowerBISamplesModels/Audits.md#audits---checklist-answer)
 * [Audits - Branch Option](PowerBISamplesModels/Audits.md#audits---branch-option)
-* [Audits - Date and Measures](PowerBISamplesModels/Audits.md#audits---date-and-measures)
+* [Audits - Measures](PowerBISamplesModels/Audits.md#audits---measures)
 * [Audits - Actions](PowerBISamplesModels/Audits.md#audits---actions)
 
 ## Inductions
