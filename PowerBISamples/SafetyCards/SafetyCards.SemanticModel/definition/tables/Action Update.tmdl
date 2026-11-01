@@ -1,0 +1,111 @@
+/// Updates recorded on the actions in the Action table.
+table 'Action Update'
+	lineageTag: 892ced04-19c4-56c0-a425-99b0f7b5e95e
+
+	column ActionUpdate_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 7d4ea237-6753-520d-9499-aa477f1c5ad6
+		summarizeBy: none
+		sourceColumn: ActionUpdate_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column ActionUpdateId
+		dataType: string
+		isHidden
+		lineageTag: 9965ae3b-de66-52fd-98e3-1e9ba65fe91c
+		summarizeBy: none
+		sourceColumn: ActionUpdateId
+
+		annotation SummarizationSetBy = Automatic
+
+	column Action_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 0eb90d5c-c10f-50b2-a513-50bf04d8a658
+		summarizeBy: none
+		sourceColumn: Action_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column Comments
+		dataType: string
+		lineageTag: efe7412f-f0f1-5171-b758-7dd07e93da6b
+		summarizeBy: none
+		sourceColumn: Comments
+
+		annotation SummarizationSetBy = Automatic
+
+	column ActionStatus_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: c0f6eac0-12d4-5861-953d-aef23be2cceb
+		summarizeBy: none
+		sourceColumn: ActionStatus_key
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Whether the update was deleted.
+	column Deleted
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 7939fa50-d46d-5387-bcd4-fdb177b48c6b
+		summarizeBy: none
+		sourceColumn: Deleted
+
+		annotation SummarizationSetBy = Automatic
+
+	/// When the update was recorded.
+	column 'Created On'
+		dataType: dateTime
+		formatString: dd/mm/yyyy hh:nn
+		lineageTag: cf096aee-0a0b-570b-8d42-d4f44966cfba
+		summarizeBy: none
+		sourceColumn: Created On
+
+		annotation SummarizationSetBy = Automatic
+
+	column Wallet_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 80416180-f751-54d6-895c-2672870d6104
+		summarizeBy: none
+		sourceColumn: Wallet_key
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Status the update set the action to.
+	column 'Action Update Status' = LOOKUPVALUE ( 'Action Status'[Action Status], 'Action Status'[ActionStatus_key], 'Action Update'[ActionStatus_key] )
+		dataType: string
+		lineageTag: b1a2142e-b148-5d1c-9f54-65432191f9d5
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Action Update' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("demo-workwalletbi.database.windows.net", "demo-workwalletbi"),
+				    mart_ActionUpdate = Source{[Schema="mart",Item="ActionUpdate"]}[Data],
+				    mart_Action = Source{[Schema="mart",Item="Action"]}[Data],
+				    mart_ActionType = Source{[Schema="mart",Item="ActionType"]}[Data],
+				    // Only actions raised on safety cards (ActionTypeCode 4), without deleted or orphaned actions
+				    #"Action Type Key" = Table.SelectRows(mart_ActionType, each [ActionTypeCode] = 4){0}[ActionType_key],
+				    #"Actions" = Table.SelectColumns(Table.SelectRows(mart_Action, each [ActionType_key] = #"Action Type Key" and [IsDeleted] = false and [IsOrphaned] = false), {"Action_key"}),
+				    // Updates on the actions in the Action table
+				    #"Merged Actions" = Table.NestedJoin(mart_ActionUpdate, {"Action_key"}, #"Actions", {"Action_key"}, "Action", JoinKind.Inner),
+				    #"Removed Columns" = Table.RemoveColumns(#"Merged Actions",{"Action", "_created", "_edited"}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"CreatedOn", "Created On"}})
+				in
+				    #"Renamed Columns"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

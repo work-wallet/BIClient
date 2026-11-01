@@ -164,6 +164,21 @@
             },
             {
               "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Action Measures"
+                    }
+                  },
+                  "Property": "Safety Card Open Actions"
+                }
+              },
+              "queryRef": "Action Measures.Safety Card Open Actions",
+              "nativeQueryRef": "Open actions",
+              "displayName": "Open actions"
+            },
+            {
+              "field": {
                 "Column": {
                   "Expression": {
                     "SourceRef": {
@@ -240,6 +255,36 @@
             ],
             "metadata": "Type.Type"
           }
+        },
+        {
+          "properties": {
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Action Measures"
+                        }
+                      },
+                      "Property": "Safety Card Open Actions Colour"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "selector": {
+            "data": [
+              {
+                "dataViewWildcard": {
+                  "matchingOption": 1
+                }
+              }
+            ],
+            "metadata": "Action Measures.Safety Card Open Actions"
+          }
         }
       ],
       "columnWidth": [
@@ -262,7 +307,7 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "114D"
+                  "Value": "111D"
                 }
               }
             }
@@ -360,7 +405,7 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "114D"
+                  "Value": "100D"
                 }
               }
             }
@@ -374,13 +419,27 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "217D"
+                  "Value": "170D"
                 }
               }
             }
           },
           "selector": {
             "metadata": "Safety Card.Report Details"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "70D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Action Measures.Safety Card Open Actions"
           }
         },
         {
