@@ -37,41 +37,31 @@
             },
             {
               "field": {
-                "Aggregation": {
+                "Measure": {
                   "Expression": {
-                    "Column": {
-                      "Expression": {
-                        "SourceRef": {
-                          "Entity": "Audit Type"
-                        }
-                      },
-                      "Property": "Audit Type"
+                    "SourceRef": {
+                      "Entity": "Audit Measures"
                     }
                   },
-                  "Function": 3
+                  "Property": "Selected Audit Type"
                 }
               },
-              "queryRef": "Min(Audit Type.Audit Type)",
+              "queryRef": "Audit Measures.Selected Audit Type",
               "nativeQueryRef": "Audit type",
               "displayName": "Audit type"
             },
             {
               "field": {
-                "Aggregation": {
+                "Measure": {
                   "Expression": {
-                    "Column": {
-                      "Expression": {
-                        "SourceRef": {
-                          "Entity": "Location"
-                        }
-                      },
-                      "Property": "Location"
+                    "SourceRef": {
+                      "Entity": "Audit Measures"
                     }
                   },
-                  "Function": 3
+                  "Property": "Selected Audit Location"
                 }
               },
-              "queryRef": "Min(Location.Location)",
+              "queryRef": "Audit Measures.Selected Audit Location",
               "nativeQueryRef": "Location",
               "displayName": "Location"
             },
@@ -117,41 +107,31 @@
             },
             {
               "field": {
-                "Aggregation": {
+                "Measure": {
                   "Expression": {
-                    "Column": {
-                      "Expression": {
-                        "SourceRef": {
-                          "Entity": "Audit Status"
-                        }
-                      },
-                      "Property": "Audit Status"
+                    "SourceRef": {
+                      "Entity": "Audit Measures"
                     }
                   },
-                  "Function": 3
+                  "Property": "Selected Audit Status"
                 }
               },
-              "queryRef": "Min(Audit Status.Audit Status)",
+              "queryRef": "Audit Measures.Selected Audit Status",
               "nativeQueryRef": "Status",
               "displayName": "Status"
             },
             {
               "field": {
-                "Aggregation": {
+                "Measure": {
                   "Expression": {
-                    "Column": {
-                      "Expression": {
-                        "SourceRef": {
-                          "Entity": "Audit Grading Set Option"
-                        }
-                      },
-                      "Property": "Audit Grading"
+                    "SourceRef": {
+                      "Entity": "Audit Measures"
                     }
                   },
-                  "Function": 3
+                  "Property": "Selected Audit Grading"
                 }
               },
-              "queryRef": "Min(Audit Grading Set Option.Audit Grading)",
+              "queryRef": "Audit Measures.Selected Audit Grading",
               "nativeQueryRef": "Grading",
               "displayName": "Grading"
             }
@@ -286,7 +266,7 @@
                           "Entity": "Audit Measures"
                         }
                       },
-                      "Property": "Audit Grading Colour"
+                      "Property": "Selected Audit Grading Colour"
                     }
                   }
                 }
@@ -294,7 +274,7 @@
             }
           },
           "selector": {
-            "metadata": "Min(Audit Grading Set Option.Audit Grading)"
+            "metadata": "Audit Measures.Selected Audit Grading"
           }
         }
       ],
