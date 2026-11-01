@@ -121,6 +121,21 @@
             },
             {
               "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Action Measures"
+                    }
+                  },
+                  "Property": "Audit Open Actions"
+                }
+              },
+              "queryRef": "Action Measures.Audit Open Actions",
+              "nativeQueryRef": "Open actions",
+              "displayName": "Open actions"
+            },
+            {
+              "field": {
                 "Column": {
                   "Expression": {
                     "SourceRef": {
@@ -202,6 +217,36 @@
             ],
             "metadata": "Audit Grading Set Option.Audit Grading"
           }
+        },
+        {
+          "properties": {
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Action Measures"
+                        }
+                      },
+                      "Property": "Audit Open Actions Colour"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "selector": {
+            "data": [
+              {
+                "dataViewWildcard": {
+                  "matchingOption": 1
+                }
+              }
+            ],
+            "metadata": "Action Measures.Audit Open Actions"
+          }
         }
       ],
       "columnWidth": [
@@ -238,7 +283,7 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "211D"
+                  "Value": "185D"
                 }
               }
             }
@@ -252,7 +297,7 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "192D"
+                  "Value": "180D"
                 }
               }
             }
@@ -294,13 +339,27 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "288D"
+                  "Value": "234D"
                 }
               }
             }
           },
           "selector": {
             "metadata": "Location.Location"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "86D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Action Measures.Audit Open Actions"
           }
         },
         {

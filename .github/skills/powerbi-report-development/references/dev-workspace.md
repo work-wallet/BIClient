@@ -42,5 +42,6 @@ After every model change:
   - card tiles are `.small-multiples-grid-cell-content`, tables are `[role="grid"]`.
 - **Full canvas**: `page.setViewportSize({ width: 1700, height: 1000 })` shows the whole canvas.
 - **Test interactions** with Playwright: click a table row (`getByText(...).click()` or `page.mouse.click(x, y)`), click buttons, and right-click → Drill through. A button's own label can intercept locator clicks; click it by position instead.
+  - The service zooms the canvas to fit (e.g. "Report zoomed to 76%"), and `getBoundingClientRect` positions don't match `page.mouse` coordinates, so position clicks can miss. To press a drillthrough or other button, focus it and press Enter: `page.locator('visual-container:has-text("View X details") [role=button]').focus()`, then `page.keyboard.press('Enter')`.
   - Clicking a selected row again deselects it, and clicking a header re-sorts the table. Click a body cell once (locate it with `[role=gridcell][data-query-ref="Table.Column"]`), then check the button text changed before clicking it.
 - **Links that leave the report** (link columns, web URL buttons) open a new tab, which Playwright clicks inside the report frame don't capture reliably. Check the URL with DAX instead (`SELECTEDVALUE` of the `Url` column for one record), then open that URL directly.

@@ -612,6 +612,7 @@ erDiagram
         measure AverageDaysOverdue
         measure OldestOverdueDays
         measure ActionsWithoutDueDate
+        measure AuditOpenActions
         measure Assignees
         measure MonthlyAverageActions
         measure MonthlyAverageActionsLine

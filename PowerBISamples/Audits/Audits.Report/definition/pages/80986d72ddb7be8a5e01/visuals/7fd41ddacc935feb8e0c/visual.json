@@ -45,7 +45,7 @@
               {
                 "textRuns": [
                   {
-                    "value": "Full results for the audit selected on the Audits list.",
+                    "value": "Full results and actions for the selected audit.",
                     "textStyle": {
                       "fontFamily": "Segoe UI",
                       "fontSize": "9pt",

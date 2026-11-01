@@ -20,13 +20,13 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Action"
+                      "Entity": "Audit"
                     }
                   },
-                  "Property": "Target Reference"
+                  "Property": "Audit Reference"
                 }
               },
-              "queryRef": "Action.Target Reference",
+              "queryRef": "Audit.Audit Reference",
               "nativeQueryRef": "Audit",
               "displayName": "Audit"
             },
@@ -285,7 +285,7 @@
             }
           },
           "selector": {
-            "metadata": "Action.Target Reference"
+            "metadata": "Audit.Audit Reference"
           }
         },
         {
