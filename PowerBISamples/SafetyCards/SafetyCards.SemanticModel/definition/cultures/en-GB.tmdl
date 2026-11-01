@@ -621,6 +621,27 @@ cultureInfo en-GB
 			          }
 			        }
 			      ]
+			    },
+			    "safety_card.url": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Safety Card",
+			          "ConceptualProperty": "Url"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Link": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
 			    }
 			  }
 			}

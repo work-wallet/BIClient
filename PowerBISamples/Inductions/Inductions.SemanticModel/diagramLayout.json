@@ -154,7 +154,7 @@
           "nodeIndex": "Induction",
           "nodeLineageTag": "6e1a15d5-e594-42b4-bf1b-14886a90b2b5",
           "size": {
-            "height": 399,
+            "height": 422.33333333333326,
             "width": 234
           },
           "zIndex": 2
@@ -167,7 +167,7 @@
           "nodeIndex": "Taken By",
           "nodeLineageTag": "d1c39eb9-26d7-4578-8a92-f5277ee0bc30",
           "size": {
-            "height": 635.7756062251176,
+            "height": 657.99782844733977,
             "width": 254
           },
           "zIndex": 7

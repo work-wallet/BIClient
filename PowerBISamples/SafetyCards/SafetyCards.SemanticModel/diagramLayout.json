@@ -155,15 +155,15 @@
         {
           "location": {
             "x": 369.5555555555556,
-            "y": 250.88888888888891
+            "y": 231.88888888888891
           },
           "nodeIndex": "Safety Card",
           "nodeLineageTag": "53255aa4-be37-4d64-b53e-1b27126e4ad1",
           "size": {
-            "height": 774,
+            "height": 793,
             "width": 266.22222222222229
           },
-          "zIndex": 6
+          "zIndex": 7
         },
         {
           "location": {
@@ -193,8 +193,8 @@
         },
         {
           "location": {
-            "x": 608.57003257329,
-            "y": 61.263843648208478
+            "x": 578.57003257329,
+            "y": 30.263843648208478
           },
           "nodeIndex": "Type",
           "nodeLineageTag": "11f39b7f-717b-4c60-8580-56918dd88a5c",
@@ -202,7 +202,7 @@
             "height": 152,
             "width": 234
           },
-          "zIndex": 7
+          "zIndex": 6
         },
         {
           "location": {
@@ -279,7 +279,7 @@
           "nodeIndex": "Safety Card Measures",
           "nodeLineageTag": "16fe85e6-0685-55f7-9c5d-569f731e0a12",
           "size": {
-            "height": 966,
+            "height": 1000,
             "width": 260
           },
           "zIndex": 1
@@ -292,7 +292,7 @@
           "nodeIndex": "Safety Card",
           "nodeLineageTag": "53255aa4-be37-4d64-b53e-1b27126e4ad1",
           "size": {
-            "height": 751,
+            "height": 780,
             "width": 260
           },
           "zIndex": 2

@@ -20723,6 +20723,27 @@ cultureInfo en-GB
 			          }
 			        }
 			      ]
+			    },
+			    "issue.url": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Issue",
+			          "ConceptualProperty": "Url"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Link": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
 			    }
 			  },
 			  "Relationships": {

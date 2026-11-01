@@ -435,7 +435,7 @@
           "nodeIndex": "Issue",
           "nodeLineageTag": "ab79b25f-fd82-4d1a-a3dc-b16162ac25df",
           "size": {
-            "height": 776.61290322580635,
+            "height": 812.61290322580635,
             "width": 266.258064516129
           },
           "zIndex": 1
@@ -528,7 +528,7 @@
           "nodeIndex": "Issue",
           "nodeLineageTag": "ab79b25f-fd82-4d1a-a3dc-b16162ac25df",
           "size": {
-            "height": 782,
+            "height": 813,
             "width": 277
           },
           "zIndex": 4
@@ -595,7 +595,7 @@
           "nodeIndex": "Issue",
           "nodeLineageTag": "ab79b25f-fd82-4d1a-a3dc-b16162ac25df",
           "size": {
-            "height": 792,
+            "height": 817,
             "width": 267
           },
           "zIndex": 3
@@ -649,7 +649,7 @@
           "nodeIndex": "Issue",
           "nodeLineageTag": "ab79b25f-fd82-4d1a-a3dc-b16162ac25df",
           "size": {
-            "height": 791,
+            "height": 812,
             "width": 272
           },
           "zIndex": 0
@@ -697,16 +697,16 @@
       "nodes": [
         {
           "location": {
-            "x": 63,
-            "y": 179
+            "x": 61,
+            "y": 123
           },
           "nodeIndex": "Issue",
           "nodeLineageTag": "ab79b25f-fd82-4d1a-a3dc-b16162ac25df",
           "size": {
-            "height": 781,
+            "height": 816,
             "width": 256
           },
-          "zIndex": 1
+          "zIndex": 5
         },
         {
           "location": {
@@ -719,7 +719,7 @@
             "height": 459,
             "width": 335
           },
-          "zIndex": 2
+          "zIndex": 1
         },
         {
           "location": {
@@ -732,7 +732,7 @@
             "height": 269,
             "width": 234
           },
-          "zIndex": 5
+          "zIndex": 4
         },
         {
           "location": {
@@ -745,7 +745,7 @@
             "height": 160,
             "width": 318
           },
-          "zIndex": 3
+          "zIndex": 2
         },
         {
           "location": {
@@ -758,7 +758,7 @@
             "height": 275,
             "width": 234
           },
-          "zIndex": 4
+          "zIndex": 3
         }
       ],
       "name": "Person",
@@ -966,12 +966,12 @@
         {
           "location": {
             "x": 221,
-            "y": 201
+            "y": 174
           },
           "nodeIndex": "Issue",
           "nodeLineageTag": "ab79b25f-fd82-4d1a-a3dc-b16162ac25df",
           "size": {
-            "height": 784,
+            "height": 811,
             "width": 274
           },
           "zIndex": 1
@@ -1020,12 +1020,12 @@
         {
           "location": {
             "x": 317,
-            "y": 125
+            "y": 104
           },
           "nodeIndex": "Issue",
           "nodeLineageTag": "ab79b25f-fd82-4d1a-a3dc-b16162ac25df",
           "size": {
-            "height": 801,
+            "height": 822,
             "width": 297
           },
           "zIndex": 4
@@ -1118,7 +1118,7 @@
           "nodeIndex": "Issue Measures",
           "nodeLineageTag": "8734a904-8766-5ee0-b00e-a08d679d321d",
           "size": {
-            "height": 942,
+            "height": 1000,
             "width": 280
           },
           "zIndex": 2
