@@ -182,7 +182,7 @@
         },
         {
           "properties": {
-            "fontColorPrimary": {
+            "fontColor": {
               "solid": {
                 "color": {
                   "expr": {

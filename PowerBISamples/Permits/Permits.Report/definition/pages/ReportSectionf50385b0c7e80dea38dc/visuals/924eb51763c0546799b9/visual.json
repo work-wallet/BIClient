@@ -208,7 +208,7 @@
         },
         {
           "properties": {
-            "fontColorPrimary": {
+            "fontColor": {
               "solid": {
                 "color": {
                   "expr": {
@@ -238,7 +238,7 @@
         },
         {
           "properties": {
-            "fontColorPrimary": {
+            "fontColor": {
               "solid": {
                 "color": {
                   "expr": {
