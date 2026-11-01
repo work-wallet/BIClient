@@ -46,6 +46,7 @@
 - Read the record's attributes with measures such as `IF ( HASONEVALUE ( Fact[Key] ), MAXX ( Fact, RELATED ( Dim[Name] ) ) )`, not `MIN ( Dim[Name] )`. With single-direction relationships a dimension isn't filtered by the record, so `MIN` shows the right value only when a drillthrough happens to pass that column too (and is wrong from a URL filter or another source visual).
 - Tables built only from dimension columns aren't tied to the record either, and list every dimension row. Add a measure filter (`pbir.measure_filter`, e.g. `[Issues] > 0`) unless the relationships cross-filter both ways.
 - Keep record-level measures (and their colour measures) for the record's tiles only. Measures used for conditional formatting are part of a table's query, so keep table colour measures cheap (`SELECTEDVALUE` of the grouped column). A colour measure that read the fact row made a register table with several dimension columns evaluate every combination and fail with "Query has exceeded the available resources".
+- **A table grouped by a name can cover several codes** when names repeat (e.g. Inductions 'Passed' is codes 1 and 4), and `SELECTEDVALUE` of the code is then blank. Colour by the set of codes instead: `ISEMPTY ( EXCEPT ( VALUES ( Dim[Code] ), { … } ) )`.
 
 ## In-cell SVG measures (bars, badges)
 

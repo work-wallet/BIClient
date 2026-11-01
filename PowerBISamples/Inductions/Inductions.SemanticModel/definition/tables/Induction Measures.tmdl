@@ -474,11 +474,17 @@ table 'Induction Measures'
 		displayFolder: Formatting
 		lineageTag: 817ab019-8b8b-5f48-811b-e332b02e28a3
 
-	/// Text colour for a result: passed or completed (green), failed or rejected (red), other (grey).
+	/// Text colour for a result: passed or completed (green), failed or rejected (red), other (grey). Works on rows that cover several codes (e.g. 'Passed' is both Passed and Passed Expiring Soon).
 	measure 'Result Colour' =
-			VAR Code = SELECTEDVALUE ( 'Taken Status'[InductionTakenStatusCode] )
+			VAR Codes = VALUES ( 'Taken Status'[InductionTakenStatusCode] )
 			RETURN
-			    SWITCH ( TRUE (), Code IN { 1, 2, 4, 5, 6 }, "#2E9E6B", Code IN { 3, 8 }, "#D6493A", "#4A5568" )
+			    SWITCH (
+			        TRUE (),
+			        ISEMPTY ( Codes ), "#4A5568",
+			        ISEMPTY ( EXCEPT ( Codes, { 1, 2, 4, 5, 6 } ) ), "#2E9E6B",
+			        ISEMPTY ( EXCEPT ( Codes, { 3, 8 } ) ), "#D6493A",
+			        "#4A5568"
+			    )
 		isHidden
 		displayFolder: Formatting
 		lineageTag: 76d1800b-0aa1-5bb9-9f86-9df382b12a28
