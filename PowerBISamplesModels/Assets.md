@@ -196,10 +196,19 @@ erDiagram
         attr InspectionGradingSetIsPercentage
         attr InspectionGradingSetIsScore
     }
+    "Date" {
+        attr Date
+        calc Year
+        calc Month
+        calc MonthStart
+        calc YearMonth
+        calc SlicerDate
+    }
     "Inspection" }o--|| "Asset" : "Asset_key"
     "Inspection" }o--|| "Inspection Status" : "AssetInspectionStatus_key"
     "Inspection" }o--|| "Inspection Type" : "AssetInspectionType_key"
     "Inspection" }o--|| "Inspection Grading Set Option" : "GradingSetOption_key"
+    "Inspection" }o--|| "Date" : "Inspected Date"
 ```
 
 ## Assets - Observation
@@ -258,12 +267,22 @@ erDiagram
         attr Email
         attr Company
     }
+    "Date" {
+        attr Date
+        calc Year
+        calc Month
+        calc MonthStart
+        calc YearMonth
+        calc SlicerDate
+    }
     "Observation" }o--|| "Observation Status" : "AssetObservationStatus_key"
     "Observation" }o--|| "Asset" : "Asset_key"
     "Observation" }o..|| "Contact" : "ClosedByContact_key"
     "Observation" }o--|| "Contact" : "ObservedByContact_key"
     "Observation Note" }o..|| "Contact" : "CreatedByContact_key"
     "Observation Note" }o--|| "Observation" : "AssetObservation_key"
+    "Observation" }o--|| "Date" : "Observed Date"
+    "Observation" }o..|| "Date" : "Closed Date"
 ```
 
 ## Assets - Inspection Observation
@@ -721,7 +740,7 @@ erDiagram
     "Branch Option Fact" }o--|| "Inspection" : "AssetInspection_key"
 ```
 
-## Assets - Date and measures
+## Assets - Measures
 
 ```mermaid
 ---
@@ -729,14 +748,6 @@ config:
   theme: neutral
 ---
 erDiagram
-    "Date" {
-        attr Date
-        calc Year
-        calc Month
-        calc MonthStart
-        calc YearMonth
-        calc SlicerDate
-    }
     "Asset Measures" {
         measure Assets
         measure AssetsAnyStatus
@@ -787,46 +798,34 @@ erDiagram
         measure Properties
         measure SharedProperties
     }
-    "Inspection" {
-        calc InspectionCount
-        calc DefectsRaised
-        attr InspectedOn
-        agg Score
-        agg PotentialScore
-        attr AverageScore
-        attr AveragePotentialScore
-        attr PercentageScore
-        agg Defects
-        attr Passed
-        attr ExternalIdentifier
-        attr InspectedByCompany
-        attr InProgressStatusDate
-        attr ReadyForReviewStatusDate
-        attr CompleteStatusDate
-        attr ArchivedStatusDate
-        calc ScoreDisplay
-        calc InspectedBy
-        calc Url
+    "Action Measures" {
+        measure Actions
+        measure OpenActions
+        measure ClosedActions
+        measure DraftActions
+        measure OverdueActions
+        measure SeriousOverdueActions
+        measure SeriousOpenActions
+        measure AverageDaysOverdue
+        measure OldestOverdueDays
+        measure ActionsWithoutDueDate
+        measure AssetOpenActions
+        measure Assignees
+        measure MonthlyAverageActions
+        measure MonthlyAverageActionsLine
+        measure MostOverdueAssignee
+        measure ActionsClosed
+        measure ActionAverageDaysToClose
+        measure ClosedOnTime
+        measure ClosedWithDueDate
+        measure OnTimeRate
+        measure ClosureRate
+        measure Updates
+        measure ActionsWithUpdates
+        measure AverageCloseOutDays
+        measure AssetsWithActions
+        measure AssetsWithOpenActions
     }
-    "Observation" {
-        attr ObservedOn
-        attr ClosedOn
-        attr ClosureNotes
-        calc ObservationCount
-        calc OpenDefectCount
-        calc ClosedDefectCount
-        calc DefectCount
-        attr Deleted
-        calc ObservationNotes
-        attr IsFinalised
-        calc NewDefectCount
-        calc DaysOpen
-        calc OpenAgeBand
-        calc TimesSeenAgain
-    }
-    "Inspection" }o--|| "Date" : "Inspected Date"
-    "Observation" }o--|| "Date" : "Observed Date"
-    "Observation" }o..|| "Date" : "Closed Date"
 ```
 
 ## Assets - Actions
@@ -890,34 +889,6 @@ erDiagram
         calc Url
         calc DaysSinceInspection
         calc InspectionBand
-    }
-    "Action Measures" {
-        measure Actions
-        measure OpenActions
-        measure ClosedActions
-        measure DraftActions
-        measure OverdueActions
-        measure SeriousOverdueActions
-        measure SeriousOpenActions
-        measure AverageDaysOverdue
-        measure OldestOverdueDays
-        measure ActionsWithoutDueDate
-        measure AssetOpenActions
-        measure Assignees
-        measure MonthlyAverageActions
-        measure MonthlyAverageActionsLine
-        measure MostOverdueAssignee
-        measure ActionsClosed
-        measure ActionAverageDaysToClose
-        measure ClosedOnTime
-        measure ClosedWithDueDate
-        measure OnTimeRate
-        measure ClosureRate
-        measure Updates
-        measure ActionsWithUpdates
-        measure AverageCloseOutDays
-        measure AssetsWithActions
-        measure AssetsWithOpenActions
     }
     "Action" }o--|| "Asset" : "Asset_key"
     "Action" }o--|| "Action Priority" : "ActionPriority_key"

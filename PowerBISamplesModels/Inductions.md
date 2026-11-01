@@ -53,22 +53,6 @@ erDiagram
         attr Email
         attr Company
     }
-    "Induction" }o--|| "Induction Status" : "InductionStatus_key"
-    "Custom Question Fact" }o--|| "Custom Question" : "InductionCustomQuestion_key"
-    "Custom Question Fact" }o--|| "Taken By" : "InductionTaken_key"
-    "Taken By" }o--|| "Induction" : "Induction_key"
-    "Taken By" }o--|| "Taken Status" : "InductionTakenStatus_key"
-    "Taken By" }o--|| "Contact" : "Contact_key"
-```
-
-## Inductions - Date and measures
-
-```mermaid
----
-config:
-  theme: neutral
----
-erDiagram
     "Date" {
         attr Date
         calc Year
@@ -77,6 +61,23 @@ erDiagram
         calc YearMonth
         calc SlicerDate
     }
+    "Induction" }o--|| "Induction Status" : "InductionStatus_key"
+    "Custom Question Fact" }o--|| "Custom Question" : "InductionCustomQuestion_key"
+    "Custom Question Fact" }o--|| "Taken By" : "InductionTaken_key"
+    "Taken By" }o--|| "Induction" : "Induction_key"
+    "Taken By" }o--|| "Taken Status" : "InductionTakenStatus_key"
+    "Taken By" }o--|| "Contact" : "Contact_key"
+    "Taken By" }o--|| "Date" : "Taken Date"
+```
+
+## Inductions - Measures
+
+```mermaid
+---
+config:
+  theme: neutral
+---
+erDiagram
     "Induction Measures" {
         measure InductionsTaken
         measure SuccessfulInductions
@@ -103,19 +104,4 @@ erDiagram
         measure MostAnsweredQuestion
         measure InvalidInductions
     }
-    "Taken By" {
-        attr Person
-        attr Company
-        attr TakenOn
-        agg CorrectTestQuestionCount
-        calc TakenByCount
-        calc IsSuccessful
-        calc ValidUntil
-        calc IsLatestAttempt
-        calc DaysUntilExpiry
-        calc CurrentStatus
-        calc TestScore
-        calc Url
-    }
-    "Taken By" }o--|| "Date" : "Taken Date"
 ```

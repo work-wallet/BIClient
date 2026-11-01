@@ -10,8 +10,8 @@
       "nodes": [
         {
           "location": {
-            "x": 50,
-            "y": 191.02894286302353
+            "x": 833.18120733542867,
+            "y": 695.395858371139
           },
           "nodeIndex": "Location",
           "nodeLineageTag": "187194fd-4417-4e1b-955b-f5ceb409025f",
@@ -23,8 +23,8 @@
         },
         {
           "location": {
-            "x": 308.78651702880791,
-            "y": 549.48701316852589
+            "x": 687.68476531421879,
+            "y": 422.41032187847475
           },
           "nodeIndex": "Wallet",
           "size": {
@@ -35,8 +35,8 @@
         },
         {
           "location": {
-            "x": 336.58917169570424,
-            "y": 7.3338839692723923
+            "x": 974.6629902274675,
+            "y": 226.69950294061061
           },
           "nodeIndex": "Category",
           "nodeLineageTag": "33416e20-5919-4d5b-b859-9f313e8f5f3a",
@@ -48,8 +48,8 @@
         },
         {
           "location": {
-            "x": 629.43879193434509,
-            "y": -50
+            "x": 1407.2698288271126,
+            "y": 781.49047728991366
           },
           "nodeIndex": "Occupation Role",
           "nodeLineageTag": "872828d3-e36a-4f6e-9c46-e18a28b223b9",
@@ -61,8 +61,8 @@
         },
         {
           "location": {
-            "x": 600.83487251013435,
-            "y": 283.48700644150813
+            "x": 1120.1789336095237,
+            "y": 479.89482852613617
           },
           "nodeIndex": "Safety Card",
           "nodeLineageTag": "53255aa4-be37-4d64-b53e-1b27126e4ad1",
@@ -74,8 +74,8 @@
         },
         {
           "location": {
-            "x": 893.70908535062881,
-            "y": 261.74001276558397
+            "x": 1407.3337617194957,
+            "y": 571.53108441617235
           },
           "nodeIndex": "Status",
           "nodeLineageTag": "84425ed7-13f5-4c96-83b9-b4fd8e59bc9d",
@@ -87,8 +87,8 @@
         },
         {
           "location": {
-            "x": 600.88146228251208,
-            "y": 754.59575618590111
+            "x": 1120.2736856667698,
+            "y": 996.69463956343725
           },
           "nodeIndex": "Type",
           "nodeLineageTag": "11f39b7f-717b-4c60-8580-56918dd88a5c",
@@ -100,8 +100,8 @@
         },
         {
           "location": {
-            "x": 194.25623599188287,
-            "y": 757.46168227583348
+            "x": 1167.8651542991911,
+            "y": -50
           },
           "nodeIndex": "Contact",
           "nodeLineageTag": "0bcb1684-b7e9-4ba0-a4e3-49e638de96ae",
@@ -113,8 +113,8 @@
         },
         {
           "location": {
-            "x": 893.67180109993069,
-            "y": 477.34884387638164
+            "x": 1407.2574654310556,
+            "y": 271.36042058683972
           },
           "nodeIndex": "Date",
           "nodeLineageTag": "9f926b70-3c67-50df-bdf9-e93c77dee92a",
@@ -126,8 +126,8 @@
         },
         {
           "location": {
-            "x": 1127.7090853506286,
-            "y": 365.73084113791674
+            "x": 1641.3337617194954,
+            "y": 449.34731978171862
           },
           "nodeIndex": "Safety Card Measures",
           "nodeLineageTag": "16fe85e6-0685-55f7-9c5d-569f731e0a12",
@@ -139,73 +139,73 @@
         },
         {
           "location": {
-            "x": 3000,
-            "y": 1200
+            "x": 336.20441405604447,
+            "y": 178.05695684940054
           },
           "nodeIndex": "Action Update",
           "nodeLineageTag": "892ced04-19c4-56c0-a425-99b0f7b5e95e",
           "size": {
-            "height": 330,
+            "height": 296,
             "width": 234
           },
           "zIndex": 3
         },
         {
           "location": {
-            "x": 3000,
-            "y": 1600
+            "x": 400.63128385382277,
+            "y": 527.753875002707
           },
           "nodeIndex": "Action",
           "nodeLineageTag": "8d39ac02-a2fc-5978-a82d-5747ae2dce57",
           "size": {
-            "height": 700,
-            "width": 257
+            "height": 300,
+            "width": 234
           },
           "zIndex": 4
         },
         {
           "location": {
-            "x": 3000,
-            "y": 0
+            "x": 50,
+            "y": 440.59302539105079
           },
           "nodeIndex": "Action Status",
           "nodeLineageTag": "d807a62f-b73e-5dc1-918d-e109bf06dd98",
           "size": {
-            "height": 160,
+            "height": 152,
             "width": 234
           },
           "zIndex": 5
         },
         {
           "location": {
-            "x": 3000,
-            "y": 400
+            "x": 262.60997007022638,
+            "y": 944.33309362203215
           },
           "nodeIndex": "Action Priority",
           "nodeLineageTag": "6e95c4d1-eb6e-525e-8ff8-6ad5a73036c3",
           "size": {
-            "height": 160,
+            "height": 152,
             "width": 234
           },
           "zIndex": 6
         },
         {
           "location": {
-            "x": 3000,
-            "y": 800
+            "x": 113.58969967847679,
+            "y": 644.46873349593193
           },
           "nodeIndex": "Action Date",
           "nodeLineageTag": "f6456972-4ec7-5449-b28e-ee5c911aa574",
           "size": {
-            "height": 300,
+            "height": 248,
             "width": 234
           },
           "zIndex": 7
         },
         {
           "location": {
-            "x": 3000,
-            "y": 1200
+            "x": 1925.3337617194954,
+            "y": 449.34731978171862
           },
           "nodeIndex": "Action Measures",
           "nodeLineageTag": "e179e581-3925-5eb2-b207-0ba1b499bd51",
@@ -217,7 +217,7 @@
         }
       ],
       "name": "All tables",
-      "zoomValue": 100,
+      "zoomValue": 84.74305587351941,
       "pinKeyFieldsToTop": false,
       "showExtraHeaderInfo": false,
       "hideKeyFieldsWhenCollapsed": false,
@@ -227,7 +227,7 @@
       "ordinal": 1,
       "scrollPosition": {
         "x": 0,
-        "y": 13.888888888888914
+        "y": 3
       },
       "nodes": [
         {
@@ -245,7 +245,7 @@
         },
         {
           "location": {
-            "x": 65.9558450959102,
+            "x": 20.955845095910206,
             "y": 272.32102786825914
           },
           "nodeIndex": "Location",
@@ -258,8 +258,8 @@
         },
         {
           "location": {
-            "x": 111.18458197611287,
-            "y": 88.858487151646784
+            "x": 82.184581976112867,
+            "y": 57.858487151646784
           },
           "nodeIndex": "Status",
           "nodeLineageTag": "84425ed7-13f5-4c96-83b9-b4fd8e59bc9d",
@@ -271,8 +271,8 @@
         },
         {
           "location": {
-            "x": 578.57003257329,
-            "y": 30.263843648208478
+            "x": 779.57003257329006,
+            "y": 68.263843648208478
           },
           "nodeIndex": "Type",
           "nodeLineageTag": "11f39b7f-717b-4c60-8580-56918dd88a5c",
@@ -284,8 +284,8 @@
         },
         {
           "location": {
-            "x": 680.33622873688023,
-            "y": 720.16612377850151
+            "x": 706.33622873688023,
+            "y": 801.16612377850151
           },
           "nodeIndex": "Category",
           "nodeLineageTag": "33416e20-5919-4d5b-b859-9f313e8f5f3a",
@@ -297,8 +297,8 @@
         },
         {
           "location": {
-            "x": 798.42996742671016,
-            "y": 226.08360477741587
+            "x": 466.42996742671016,
+            "y": 0
           },
           "nodeIndex": "Occupation Role",
           "nodeLineageTag": "872828d3-e36a-4f6e-9c46-e18a28b223b9",
@@ -310,8 +310,8 @@
         },
         {
           "location": {
-            "x": 815.37604053564951,
-            "y": 427.42996742671005
+            "x": 923.37604053564951,
+            "y": 293.42996742671005
           },
           "nodeIndex": "Contact",
           "nodeLineageTag": "0bcb1684-b7e9-4ba0-a4e3-49e638de96ae",
@@ -320,6 +320,19 @@
             "width": 234
           },
           "zIndex": 3
+        },
+        {
+          "location": {
+            "x": 990,
+            "y": 579
+          },
+          "nodeIndex": "Date",
+          "nodeLineageTag": "9f926b70-3c67-50df-bdf9-e93c77dee92a",
+          "size": {
+            "height": 281,
+            "width": 234
+          },
+          "zIndex": 0
         }
       ],
       "name": "Main",
@@ -338,45 +351,32 @@
       "nodes": [
         {
           "location": {
-            "x": 481,
-            "y": 151
-          },
-          "nodeIndex": "Date",
-          "nodeLineageTag": "9f926b70-3c67-50df-bdf9-e93c77dee92a",
-          "size": {
-            "height": 276,
-            "width": 220
-          },
-          "zIndex": 0
-        },
-        {
-          "location": {
-            "x": 807,
+            "x": 149,
             "y": 0
           },
           "nodeIndex": "Safety Card Measures",
           "nodeLineageTag": "16fe85e6-0685-55f7-9c5d-569f731e0a12",
           "size": {
             "height": 1000,
-            "width": 260
+            "width": 337
           },
           "zIndex": 1
         },
         {
           "location": {
-            "x": 59,
-            "y": 85
+            "x": 597,
+            "y": 8
           },
-          "nodeIndex": "Safety Card",
-          "nodeLineageTag": "53255aa4-be37-4d64-b53e-1b27126e4ad1",
+          "nodeIndex": "Action Measures",
+          "nodeLineageTag": "e179e581-3925-5eb2-b207-0ba1b499bd51",
           "size": {
-            "height": 780,
-            "width": 260
+            "height": 991,
+            "width": 298
           },
-          "zIndex": 2
+          "zIndex": 0
         }
       ],
-      "name": "Date and measures",
+      "name": "Measures",
       "zoomValue": 100,
       "pinKeyFieldsToTop": false,
       "showExtraHeaderInfo": false,
@@ -392,7 +392,7 @@
       "nodes": [
         {
           "location": {
-            "x": 0,
+            "x": 766,
             "y": 0
           },
           "nodeIndex": "Action Update",
@@ -405,21 +405,21 @@
         },
         {
           "location": {
-            "x": 300,
-            "y": 0
+            "x": 400,
+            "y": 94
           },
           "nodeIndex": "Action",
           "nodeLineageTag": "8d39ac02-a2fc-5978-a82d-5747ae2dce57",
           "size": {
-            "height": 700,
-            "width": 257
+            "height": 797,
+            "width": 281
           },
           "zIndex": 1
         },
         {
           "location": {
-            "x": 640,
-            "y": 0
+            "x": 1027,
+            "y": 306
           },
           "nodeIndex": "Action Status",
           "nodeLineageTag": "d807a62f-b73e-5dc1-918d-e109bf06dd98",
@@ -431,8 +431,8 @@
         },
         {
           "location": {
-            "x": 640,
-            "y": 200
+            "x": 1004,
+            "y": 598
           },
           "nodeIndex": "Action Priority",
           "nodeLineageTag": "6e95c4d1-eb6e-525e-8ff8-6ad5a73036c3",
@@ -444,8 +444,8 @@
         },
         {
           "location": {
-            "x": 640,
-            "y": 400
+            "x": 736,
+            "y": 747
           },
           "nodeIndex": "Action Date",
           "nodeLineageTag": "f6456972-4ec7-5449-b28e-ee5c911aa574",
@@ -457,29 +457,16 @@
         },
         {
           "location": {
-            "x": 960,
-            "y": 0
+            "x": 0,
+            "y": 127
           },
           "nodeIndex": "Safety Card",
           "nodeLineageTag": "53255aa4-be37-4d64-b53e-1b27126e4ad1",
           "size": {
-            "height": 500,
-            "width": 257
+            "height": 800,
+            "width": 290
           },
           "zIndex": 5
-        },
-        {
-          "location": {
-            "x": 0,
-            "y": 380
-          },
-          "nodeIndex": "Action Measures",
-          "nodeLineageTag": "e179e581-3925-5eb2-b207-0ba1b499bd51",
-          "size": {
-            "height": 300,
-            "width": 234
-          },
-          "zIndex": 6
         }
       ],
       "name": "Actions",

@@ -437,6 +437,19 @@
             "width": 234
           },
           "zIndex": 1
+        },
+        {
+          "location": {
+            "x": 1113,
+            "y": 723
+          },
+          "nodeIndex": "Date",
+          "nodeLineageTag": "9f926b70-3c67-50df-bdf9-e93c77dee92a",
+          "size": {
+            "height": 279,
+            "width": 234
+          },
+          "zIndex": 0
         }
       ],
       "name": "Stock History",
@@ -468,21 +481,21 @@
         },
         {
           "location": {
-            "x": 405,
-            "y": 266
+            "x": 403,
+            "y": 324
           },
           "nodeIndex": "Assignment",
           "nodeLineageTag": "4cd4c7b8-78ce-4f8e-927e-e92f949db79b",
           "size": {
-            "height": 606,
+            "height": 692,
             "width": 327
           },
           "zIndex": 1
         },
         {
           "location": {
-            "x": 861.59612983770285,
-            "y": 234.88514357053685
+            "x": 793.59612983770285,
+            "y": 19.885143570536854
           },
           "nodeIndex": "Assignment History",
           "nodeLineageTag": "f13c365b-f484-4874-9dad-268ce4e01777",
@@ -507,7 +520,7 @@
         },
         {
           "location": {
-            "x": 748,
+            "x": 1180,
             "y": 0
           },
           "nodeIndex": "PPE Action",
@@ -533,8 +546,8 @@
         },
         {
           "location": {
-            "x": 861.16354556804,
-            "y": 723.24001248439458
+            "x": 1158.16354556804,
+            "y": 669.24001248439458
           },
           "nodeIndex": "Assigned To Contact",
           "nodeLineageTag": "eff9a1d0-5fd9-43fb-a398-29f9e7684c26",
@@ -546,8 +559,8 @@
         },
         {
           "location": {
-            "x": 1244.25,
-            "y": 501.25
+            "x": 844.25,
+            "y": 492.25
           },
           "nodeIndex": "Actioned By Contact",
           "nodeLineageTag": "95740707-1076-48f7-b6d7-b7ccaf696a49",
@@ -556,6 +569,19 @@
             "width": 234
           },
           "zIndex": 8
+        },
+        {
+          "location": {
+            "x": 1178,
+            "y": 232
+          },
+          "nodeIndex": "Date",
+          "nodeLineageTag": "9f926b70-3c67-50df-bdf9-e93c77dee92a",
+          "size": {
+            "height": 290,
+            "width": 234
+          },
+          "zIndex": 0
         }
       ],
       "name": "Assignments",
@@ -654,55 +680,16 @@
       "nodes": [
         {
           "location": {
-            "x": 465,
-            "y": 159
-          },
-          "nodeIndex": "Date",
-          "nodeLineageTag": "9f926b70-3c67-50df-bdf9-e93c77dee92a",
-          "size": {
-            "height": 400,
-            "width": 210
-          },
-          "zIndex": 1
-        },
-        {
-          "location": {
-            "x": 1168,
+            "x": 154,
             "y": 0
           },
           "nodeIndex": "PPE Measures",
           "nodeLineageTag": "c22e7b23-9a4d-52f1-ab41-ac897ab8a7b1",
           "size": {
             "height": 992,
-            "width": 260
+            "width": 343
           },
           "zIndex": 2
-        },
-        {
-          "location": {
-            "x": 58,
-            "y": 159
-          },
-          "nodeIndex": "Assignment History",
-          "nodeLineageTag": "f13c365b-f484-4874-9dad-268ce4e01777",
-          "size": {
-            "height": 400,
-            "width": 267
-          },
-          "zIndex": 3
-        },
-        {
-          "location": {
-            "x": 821,
-            "y": 95
-          },
-          "nodeIndex": "Stock History",
-          "nodeLineageTag": "5f547d8f-0fbd-45e3-b10a-b114ab53ed5c",
-          "size": {
-            "height": 529,
-            "width": 275
-          },
-          "zIndex": 4
         }
       ],
       "name": "Date and measures",

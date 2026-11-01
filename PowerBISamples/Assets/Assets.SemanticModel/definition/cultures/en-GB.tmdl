@@ -691,6 +691,16 @@ cultureInfo en-GB
 			            },
 			            "Weight": 0.466
 			          }
+			        },
+			        {
+			          "Asset": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
 			        }
 			      ],
 			      "NameType": "Identifier"
@@ -46687,6 +46697,16 @@ cultureInfo en-GB
 			            },
 			            "Weight": 0.9
 			          }
+			        },
+			        {
+			          "Asset link": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
 			        }
 			      ]
 			    },
@@ -48778,6 +48798,279 @@ cultureInfo en-GB
 			      "Terms": [
 			        {
 			          "Status": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "action_measures.asset_open_actions": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Action Measures",
+			          "ConceptualProperty": "Asset Open Actions"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Open actions": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "action_measures.actions": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Action Measures",
+			          "ConceptualProperty": "Actions"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Actions raised": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "action_measures.open_actions": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Action Measures",
+			          "ConceptualProperty": "Open Actions"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Open actions": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "action_measures.overdue_actions": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Action Measures",
+			          "ConceptualProperty": "Overdue Actions"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Overdue actions": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "action_measures.average_close_out_days": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Action Measures",
+			          "ConceptualProperty": "Average Close Out Days"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Average close out days": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "action_date.slicer_date": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Action Date",
+			          "ConceptualProperty": "Slicer Date"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Raised on": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "action_priority.action_priority": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Action Priority",
+			          "ConceptualProperty": "Action Priority"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Priority": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "action_status.action_status": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Action Status",
+			          "ConceptualProperty": "Action Status"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Status": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "action.assignee": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Action",
+			          "ConceptualProperty": "Assignee"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Assigned to": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "action.created_on": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Action",
+			          "ConceptualProperty": "Created On"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Raised on": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "action.due_date": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Action",
+			          "ConceptualProperty": "Due Date"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Due": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "action.days_overdue": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Action",
+			          "ConceptualProperty": "Days Overdue"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Days overdue": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "action.url": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Action",
+			          "ConceptualProperty": "Url"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Link": {
 			            "State": "Suggested",
 			            "Source": {
 			              "Type": "External",

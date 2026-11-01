@@ -61,11 +61,20 @@ erDiagram
         attr Email
         attr Company
     }
+    "Date" {
+        attr Date
+        calc Year
+        calc Month
+        calc MonthStart
+        calc YearMonth
+        calc SlicerDate
+    }
     "Permit" }o--|| "Location" : "Location_key"
     "Permit" }o--|| "Category" : "PermitCategory_key"
     "Permit" }o--|| "Status" : "PermitStatus_key"
     "Assignee Fact" }o--|| "Contact" : "Contact_key"
     "Assignee Fact" }o--|| "Permit" : "Permit_key"
+    "Permit" }o--|| "Date" : "Issued Date"
 ```
 
 ## Permits - Numeric Answer
@@ -299,7 +308,7 @@ erDiagram
     "Signature Fact" }o--|| "Signed By Contact" : "Contact_key"
 ```
 
-## Permits - Date and measures
+## Permits - Measures
 
 ```mermaid
 ---
@@ -307,14 +316,6 @@ config:
   theme: neutral
 ---
 erDiagram
-    "Date" {
-        attr Date
-        calc Year
-        calc Month
-        calc MonthStart
-        calc YearMonth
-        calc SlicerDate
-    }
     "Permit Measures" {
         measure Permits
         measure LivePermits
@@ -336,26 +337,4 @@ erDiagram
         measure Signatures
         measure Assignees
     }
-    "Permit" {
-        attr PermitReference
-        attr Permit
-        attr IssuedToCompany
-        attr IssuedOn
-        attr IssuedForMinutes
-        attr IssuedExpiry
-        attr ClosedOn
-        attr HasBeenExpired
-        attr HasBeenClosed
-        calc PermitCount
-        attr HasBeenExtended
-        calc Assignees
-        calc Signatories
-        calc Issued
-        calc Expires
-        calc Closed
-        calc HoursOpen
-        calc Outcome
-        calc Url
-    }
-    "Permit" }o--|| "Date" : "Issued Date"
 ```

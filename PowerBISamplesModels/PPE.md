@@ -100,11 +100,20 @@ erDiagram
         attr Email
         attr Company
     }
+    "Date" {
+        attr Date
+        calc Year
+        calc Month
+        calc MonthStart
+        calc YearMonth
+        calc SlicerDate
+    }
     "Stock" }o--|| "PPE Type" : "PPEType_key"
     "Stock History" }o--|| "PPE Action" : "PPEAction_key"
     "Stock History" }o--|| "Stock" : "PPEStock_key"
     "Stock History" }o..|| "Stock" : "TransferredFromPPEStock_key"
     "Stock History" }o--|| "Actioned By Contact" : "ActionedByContact_key"
+    "Stock History" }o--|| "Date" : "Actioned Date"
 ```
 
 ## PPE - Assignments
@@ -169,6 +178,14 @@ erDiagram
         attr Email
         attr Company
     }
+    "Date" {
+        attr Date
+        calc Year
+        calc Month
+        calc MonthStart
+        calc YearMonth
+        calc SlicerDate
+    }
     "Assignment" }o--|| "PPE Status" : "PPEStatus_key"
     "Assignment" }o..|| "Stock" : "AssignedFromPPEStock_key"
     "Assignment" }o..|| "Stock" : "ReplacementRequestedFromPPEStock_key"
@@ -181,6 +198,7 @@ erDiagram
     "Assignment" }o--|| "Assigned To Contact" : "AssignedToContact_key"
     "Assignment" }o..|| "Actioned By Contact" : "AssignedToContact_key"
     "Assignment History" }o..|| "Assigned To Contact" : "ActionedByContact_key"
+    "Assignment History" }o--|| "Date" : "Actioned Date"
 ```
 
 ## PPE - Properties
@@ -228,14 +246,6 @@ config:
   theme: neutral
 ---
 erDiagram
-    "Date" {
-        attr Date
-        calc Year
-        calc Month
-        calc MonthStart
-        calc YearMonth
-        calc SlicerDate
-    }
     "PPE Measures" {
         measure PPEIssued
         measure ReplacementDue
@@ -277,21 +287,4 @@ erDiagram
         measure PPETypesWithProperties
         measure Properties
     }
-    "Assignment History" {
-        attr ActionedOn
-        calc From
-        calc To
-        calc AssignmentHistoryCount
-    }
-    "Stock History" {
-        agg StockQuantity
-        attr ActionedOn
-        attr Notes
-        calc StockLocation
-        calc TransferredFromStockLocation
-        calc StockSite
-        calc Value
-    }
-    "Assignment History" }o--|| "Date" : "Actioned Date"
-    "Stock History" }o--|| "Date" : "Actioned Date"
 ```

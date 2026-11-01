@@ -58,22 +58,6 @@ erDiagram
         attr Email
         attr Company
     }
-    "Safety Card" }o--|| "Location" : "Location_key"
-    "Safety Card" }o--|| "Category" : "SafetyCardCategory_key"
-    "Safety Card" }o--|| "Occupation Role" : "SafetyCardOccupationRole_key"
-    "Safety Card" }o--|| "Status" : "SafetyCardStatus_key"
-    "Safety Card" }o--|| "Type" : "SafetyCardType_key"
-    "Safety Card" }o--|| "Contact" : "EmployeeContact_key"
-```
-
-## Safety Cards - Date and measures
-
-```mermaid
----
-config:
-  theme: neutral
----
-erDiagram
     "Date" {
         attr Date
         calc Year
@@ -82,6 +66,23 @@ erDiagram
         calc YearMonth
         calc SlicerDate
     }
+    "Safety Card" }o--|| "Location" : "Location_key"
+    "Safety Card" }o--|| "Category" : "SafetyCardCategory_key"
+    "Safety Card" }o--|| "Occupation Role" : "SafetyCardOccupationRole_key"
+    "Safety Card" }o--|| "Status" : "SafetyCardStatus_key"
+    "Safety Card" }o--|| "Type" : "SafetyCardType_key"
+    "Safety Card" }o--|| "Contact" : "EmployeeContact_key"
+    "Safety Card" }o--|| "Date" : "Reported Date"
+```
+
+## Safety Cards - Measures
+
+```mermaid
+---
+config:
+  theme: neutral
+---
+erDiagram
     "Safety Card Measures" {
         measure SafetyCards
         measure GreenCards
@@ -102,24 +103,34 @@ erDiagram
         measure MostCommonCategory
         measure MostCommonWarningCategory
     }
-    "Safety Card" {
-        attr Reference
-        attr ReportedByUser
-        attr ReportedTime
-        attr Employer
-        attr Employee
-        attr InductionNumber
-        attr ReportDetails
-        attr HasSignature
-        attr SignatureDate
-        attr Occupation
-        attr ExternalIdentifier
-        calc SignedOn
-        calc RecipientCompany
-        calc Recipient
-        calc Url
+    "Action Measures" {
+        measure Actions
+        measure OpenActions
+        measure ClosedActions
+        measure DraftActions
+        measure OverdueActions
+        measure SeriousOverdueActions
+        measure SeriousOpenActions
+        measure AverageDaysOverdue
+        measure OldestOverdueDays
+        measure ActionsWithoutDueDate
+        measure SafetyCardOpenActions
+        measure Assignees
+        measure MonthlyAverageActions
+        measure MonthlyAverageActionsLine
+        measure MostOverdueAssignee
+        measure ActionsClosed
+        measure AverageDaysToClose
+        measure ClosedOnTime
+        measure ClosedWithDueDate
+        measure OnTimeRate
+        measure ClosureRate
+        measure Updates
+        measure ActionsWithUpdates
+        measure AverageCloseOutDays
+        measure SafetyCardsWithActions
+        measure SafetyCardsWithOpenActions
     }
-    "Safety Card" }o--|| "Date" : "Reported Date"
 ```
 
 ## Safety Cards - Actions
@@ -182,34 +193,6 @@ erDiagram
         calc RecipientCompany
         calc Recipient
         calc Url
-    }
-    "Action Measures" {
-        measure Actions
-        measure OpenActions
-        measure ClosedActions
-        measure DraftActions
-        measure OverdueActions
-        measure SeriousOverdueActions
-        measure SeriousOpenActions
-        measure AverageDaysOverdue
-        measure OldestOverdueDays
-        measure ActionsWithoutDueDate
-        measure SafetyCardOpenActions
-        measure Assignees
-        measure MonthlyAverageActions
-        measure MonthlyAverageActionsLine
-        measure MostOverdueAssignee
-        measure ActionsClosed
-        measure AverageDaysToClose
-        measure ClosedOnTime
-        measure ClosedWithDueDate
-        measure OnTimeRate
-        measure ClosureRate
-        measure Updates
-        measure ActionsWithUpdates
-        measure AverageCloseOutDays
-        measure SafetyCardsWithActions
-        measure SafetyCardsWithOpenActions
     }
     "Action" }o--|| "Safety Card" : "SafetyCard_key"
     "Action" }o--|| "Action Priority" : "ActionPriority_key"

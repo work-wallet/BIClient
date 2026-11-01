@@ -58,12 +58,21 @@ erDiagram
         attr Email
         attr Company
     }
+    "Date" {
+        attr Date
+        calc Year
+        calc Month
+        calc MonthStart
+        calc YearMonth
+        calc SlicerDate
+    }
     "Issue" }o--|| "Location" : "Location_key"
     "Issue" }o--|| "Category" : "ReportedIssueCategory_key"
     "Issue" }o--|| "Severity" : "ReportedIssueSeverity_key"
     "Issue" }o--|| "Status" : "ReportedIssueStatus_key"
     "Issue" }o--|| "Contact" : "ReportedByContact_key"
     "Issue" }o..|| "Contact" : "LeadInvestigatorContact_key"
+    "Issue" }o--|| "Date" : "Occurred Date"
 ```
 
 ## Reported Issues - Body Part
@@ -442,7 +451,7 @@ erDiagram
     "Signature Fact" }o--|| "Signature Person Option Type" : "ReportedIssuePersonOptionType_key"
 ```
 
-## Reported Issues - Date and Measures
+## Reported Issues - Measures
 
 ```mermaid
 ---
@@ -450,31 +459,6 @@ config:
   theme: neutral
 ---
 erDiagram
-    "Date" {
-        attr Date
-        calc Year
-        calc Month
-        calc MonthStart
-        calc YearMonth
-        calc SlicerDate
-    }
-    "Issue" {
-        attr IssueReference
-        attr OccurredOn
-        attr ReportedOn
-        attr IssueOverview
-        attr CloseDate
-        calc IssueCount
-        calc ReportedBy
-        attr UnderInvestigationDate
-        calc InvestigationStartedOn
-        calc ClosedOn
-        calc HoursToReport
-        calc DaysToStartInvestigation
-        calc DaysToClose
-        calc AgeBand
-        calc Url
-    }
     "Issue Measures" {
         measure Issues
         measure OpenIssues
@@ -519,7 +503,34 @@ erDiagram
         measure AwaitingSignature
         measure AverageDaysToSign
     }
-    "Issue" }o--|| "Date" : "Occurred Date"
+    "Action Measures" {
+        measure Actions
+        measure OpenActions
+        measure ClosedActions
+        measure DraftActions
+        measure OverdueActions
+        measure SeriousOverdueActions
+        measure SeriousOpenActions
+        measure AverageDaysOverdue
+        measure OldestOverdueDays
+        measure ActionsWithoutDueDate
+        measure IssueOpenActions
+        measure Assignees
+        measure MonthlyAverageActions
+        measure MonthlyAverageActionsLine
+        measure MostOverdueAssignee
+        measure ActionsClosed
+        measure ActionAverageDaysToClose
+        measure ClosedOnTime
+        measure ClosedWithDueDate
+        measure OnTimeRate
+        measure ActionClosureRate
+        measure Updates
+        measure ActionsWithUpdates
+        measure AverageCloseOutDays
+        measure IssuesWithActions
+        measure IssuesWithOpenActions
+    }
 ```
 
 ## Reported Issues - Actions
@@ -582,34 +593,6 @@ erDiagram
         calc DaysToClose
         calc AgeBand
         calc Url
-    }
-    "Action Measures" {
-        measure Actions
-        measure OpenActions
-        measure ClosedActions
-        measure DraftActions
-        measure OverdueActions
-        measure SeriousOverdueActions
-        measure SeriousOpenActions
-        measure AverageDaysOverdue
-        measure OldestOverdueDays
-        measure ActionsWithoutDueDate
-        measure IssueOpenActions
-        measure Assignees
-        measure MonthlyAverageActions
-        measure MonthlyAverageActionsLine
-        measure MostOverdueAssignee
-        measure ActionsClosed
-        measure ActionAverageDaysToClose
-        measure ClosedOnTime
-        measure ClosedWithDueDate
-        measure OnTimeRate
-        measure ActionClosureRate
-        measure Updates
-        measure ActionsWithUpdates
-        measure AverageCloseOutDays
-        measure IssuesWithActions
-        measure IssuesWithOpenActions
     }
     "Action" }o--|| "Issue" : "ReportedIssue_key"
     "Action" }o--|| "Action Priority" : "ActionPriority_key"

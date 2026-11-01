@@ -22,7 +22,7 @@ inactive relationship. Each column is prefixed with its kind instead of its data
 [Actions diagrams](PowerBISamplesModels/Actions.md)
 
 * [Actions - Main](PowerBISamplesModels/Actions.md#actions---main)
-* [Actions - Date and measures](PowerBISamplesModels/Actions.md#actions---date-and-measures)
+* [Actions - Measures](PowerBISamplesModels/Actions.md#actions---measures)
 
 ## Assets
 
@@ -42,7 +42,7 @@ inactive relationship. Each column is prefixed with its kind instead of its data
 * [Assets - Date Time Answer](PowerBISamplesModels/Assets.md#assets---date-time-answer)
 * [Assets - Checklist Answer](PowerBISamplesModels/Assets.md#assets---checklist-answer)
 * [Assets - Branch Option](PowerBISamplesModels/Assets.md#assets---branch-option)
-* [Assets - Date and measures](PowerBISamplesModels/Assets.md#assets---date-and-measures)
+* [Assets - Measures](PowerBISamplesModels/Assets.md#assets---measures)
 * [Assets - Actions](PowerBISamplesModels/Assets.md#assets---actions)
 
 ## Audits
@@ -66,7 +66,7 @@ inactive relationship. Each column is prefixed with its kind instead of its data
 [Inductions diagrams](PowerBISamplesModels/Inductions.md)
 
 * [Inductions - Main](PowerBISamplesModels/Inductions.md#inductions---main)
-* [Inductions - Date and measures](PowerBISamplesModels/Inductions.md#inductions---date-and-measures)
+* [Inductions - Measures](PowerBISamplesModels/Inductions.md#inductions---measures)
 
 ## Permits
 
@@ -78,7 +78,7 @@ inactive relationship. Each column is prefixed with its kind instead of its data
 * [Permits - Checklist Answer](PowerBISamplesModels/Permits.md#permits---checklist-answer)
 * [Permits - Branch Option](PowerBISamplesModels/Permits.md#permits---branch-option)
 * [Permits - Signed By](PowerBISamplesModels/Permits.md#permits---signed-by)
-* [Permits - Date and measures](PowerBISamplesModels/Permits.md#permits---date-and-measures)
+* [Permits - Measures](PowerBISamplesModels/Permits.md#permits---measures)
 
 ## PPE
 
@@ -104,7 +104,7 @@ inactive relationship. Each column is prefixed with its kind instead of its data
 * [Reported Issues - Numeric Answer](PowerBISamplesModels/ReportedIssues.md#reported-issues---numeric-answer)
 * [Reported Issues - Date Time Answer](PowerBISamplesModels/ReportedIssues.md#reported-issues---date-time-answer)
 * [Reported Issues - Signature](PowerBISamplesModels/ReportedIssues.md#reported-issues---signature)
-* [Reported Issues - Date and Measures](PowerBISamplesModels/ReportedIssues.md#reported-issues---date-and-measures)
+* [Reported Issues - Measures](PowerBISamplesModels/ReportedIssues.md#reported-issues---measures)
 * [Reported Issues - Actions](PowerBISamplesModels/ReportedIssues.md#reported-issues---actions)
 
 ## Safety Cards
@@ -112,7 +112,7 @@ inactive relationship. Each column is prefixed with its kind instead of its data
 [Safety Cards diagrams](PowerBISamplesModels/SafetyCards.md)
 
 * [Safety Cards - Main](PowerBISamplesModels/SafetyCards.md#safety-cards---main)
-* [Safety Cards - Date and measures](PowerBISamplesModels/SafetyCards.md#safety-cards---date-and-measures)
+* [Safety Cards - Measures](PowerBISamplesModels/SafetyCards.md#safety-cards---measures)
 * [Safety Cards - Actions](PowerBISamplesModels/SafetyCards.md#safety-cards---actions)
 
 ## For Maintainers

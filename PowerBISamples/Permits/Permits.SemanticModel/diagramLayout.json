@@ -351,6 +351,19 @@
             "width": 234
           },
           "zIndex": 2
+        },
+        {
+          "location": {
+            "x": 914,
+            "y": 742
+          },
+          "nodeIndex": "Date",
+          "nodeLineageTag": "9f926b70-3c67-50df-bdf9-e93c77dee92a",
+          "size": {
+            "height": 280,
+            "width": 234
+          },
+          "zIndex": 0
         }
       ],
       "name": "Main",
@@ -652,45 +665,19 @@
       "nodes": [
         {
           "location": {
-            "x": 418,
-            "y": 277
-          },
-          "nodeIndex": "Date",
-          "nodeLineageTag": "9f926b70-3c67-50df-bdf9-e93c77dee92a",
-          "size": {
-            "height": 271,
-            "width": 260
-          },
-          "zIndex": 0
-        },
-        {
-          "location": {
-            "x": 777,
+            "x": 250,
             "y": 0
           },
           "nodeIndex": "Permit Measures",
           "nodeLineageTag": "2b19f96c-e9fc-5be1-8b06-c5067179dedc",
           "size": {
-            "height": 968,
-            "width": 260
+            "height": 989,
+            "width": 301
           },
           "zIndex": 1
-        },
-        {
-          "location": {
-            "x": 28,
-            "y": 85
-          },
-          "nodeIndex": "Permit",
-          "nodeLineageTag": "7d107b65-6f34-4409-a98a-c8bfe9c4b7fb",
-          "size": {
-            "height": 816,
-            "width": 260
-          },
-          "zIndex": 2
         }
       ],
-      "name": "Date and measures",
+      "name": "Measures",
       "zoomValue": 100,
       "pinKeyFieldsToTop": false,
       "showExtraHeaderInfo": false,

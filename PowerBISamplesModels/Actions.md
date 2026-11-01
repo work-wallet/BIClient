@@ -47,21 +47,6 @@ erDiagram
         calc ActionUpdateStatus
         calc ActionUpdateCount
     }
-    "Action" }o--|| "Priority" : "ActionPriority_key"
-    "Action" }o--|| "Status" : "ActionStatus_key"
-    "Action" }o--|| "Type" : "ActionType_key"
-    "Action Update" }o--|| "Action" : "Action_key"
-    "Action Update" }o..|| "Status" : "ActionStatus_key"
-```
-
-## Actions - Date and measures
-
-```mermaid
----
-config:
-  theme: neutral
----
-erDiagram
     "Date" {
         attr Date
         calc Year
@@ -70,6 +55,23 @@ erDiagram
         calc YearMonth
         calc SlicerDate
     }
+    "Action" }o--|| "Priority" : "ActionPriority_key"
+    "Action" }o--|| "Status" : "ActionStatus_key"
+    "Action" }o--|| "Type" : "ActionType_key"
+    "Action Update" }o--|| "Action" : "Action_key"
+    "Action Update" }o..|| "Status" : "ActionStatus_key"
+    "Action" }o--|| "Date" : "Raised Date"
+    "Action" }o..|| "Date" : "Closed Date"
+```
+
+## Actions - Measures
+
+```mermaid
+---
+config:
+  theme: neutral
+---
+erDiagram
     "Action Measures" {
         measure Actions
         measure OpenActions
@@ -96,27 +98,4 @@ erDiagram
         measure ActionsWithUpdates
         measure AverageCloseOutDays
     }
-    "Action" {
-        attr TargetReference
-        attr Title
-        attr Description
-        attr Name
-        attr DueOn
-        attr CreatedOn
-        calc ActionCount
-        attr Email
-        calc AssignedTo
-        attr IsDeleted
-        attr IsOrphaned
-        calc DueDate
-        calc ClosedOn
-        calc DaysToClose
-        calc ClosedOnTime
-        calc DaysOverdue
-        calc OverdueBand
-        calc Assignee
-        calc Url
-    }
-    "Action" }o--|| "Date" : "Raised Date"
-    "Action" }o..|| "Date" : "Closed Date"
 ```
