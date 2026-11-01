@@ -601,9 +601,6 @@ erDiagram
         attr ClosedStatusDate
         calc Url
     }
-    "Wallet" {
-        attr Wallet
-    }
     "Action Measures" {
         measure Actions
         measure OpenActions
@@ -631,14 +628,11 @@ erDiagram
         measure AuditsWithActions
         measure AuditsWithOpenActions
     }
-    "Audit" }o--|| "Wallet" : "Wallet_key"
     "Action" }o--|| "Audit" : "Audit_key"
     "Action" }o--|| "Action Priority" : "ActionPriority_key"
     "Action" }o--|| "Action Status" : "ActionStatus_key"
     "Action Update" }o--|| "Action" : "Action_key"
     "Action Update" }o..|| "Action Status" : "ActionStatus_key"
-    "Action" }o..|| "Wallet" : "Wallet_key"
-    "Action Update" }o..|| "Wallet" : "Wallet_key"
     "Action" }o--|| "Action Date" : "Raised Date"
     "Action" }o..|| "Action Date" : "Closed Date"
 ```
