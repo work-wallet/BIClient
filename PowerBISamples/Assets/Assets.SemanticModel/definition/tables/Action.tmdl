@@ -1,0 +1,321 @@
+/// Actions raised on assets. Deleted and orphaned actions are left out.
+table Action
+	lineageTag: 8d39ac02-a2fc-5978-a82d-5747ae2dce57
+
+	column Action_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: c245c092-783b-5eee-aa10-a7a50268f07f
+		summarizeBy: none
+		sourceColumn: Action_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column ActionId
+		dataType: string
+		isHidden
+		lineageTag: 231b0293-bcbd-537c-a33e-7954e0695d10
+		summarizeBy: none
+		sourceColumn: ActionId
+
+		annotation SummarizationSetBy = Automatic
+
+	column TargetId
+		dataType: string
+		isHidden
+		lineageTag: 7258752a-990c-5558-8f00-c98494a61e59
+		summarizeBy: none
+		sourceColumn: TargetId
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Reference of the asset the action was raised on.
+	column 'Target Reference'
+		dataType: string
+		lineageTag: ba51a974-8bb6-5f82-88b4-71a6e168b935
+		summarizeBy: none
+		sourceColumn: Target Reference
+
+		annotation SummarizationSetBy = Automatic
+
+	column Asset_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 618b8398-f323-5860-9013-aa7c4c57023a
+		summarizeBy: none
+		sourceColumn: Asset_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column Title
+		dataType: string
+		lineageTag: faa05cd7-60bb-57c3-a12b-89b818ee454b
+		summarizeBy: none
+		sourceColumn: Title
+
+		annotation SummarizationSetBy = Automatic
+
+	column Description
+		dataType: string
+		lineageTag: 40ae39a7-dc36-585a-adca-6831c307e04e
+		summarizeBy: none
+		sourceColumn: Description
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Name of the person the action is assigned to (blank if unassigned).
+	column Name
+		dataType: string
+		lineageTag: ba74c55a-7d98-5220-8ced-fbfb9aae3bb0
+		summarizeBy: none
+		sourceColumn: Name
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Email of the person the action is assigned to, if captured.
+	column Email
+		dataType: string
+		lineageTag: fa7f477f-e7da-56d2-a05e-a50b83c6808f
+		summarizeBy: none
+		sourceColumn: Email
+
+		annotation SummarizationSetBy = Automatic
+
+	column ActionPriority_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: cc588735-775c-5c7f-916a-08486bc55bb6
+		summarizeBy: none
+		sourceColumn: ActionPriority_key
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Due date as stored (30/12/1899 when there is none); use Due Date.
+	column 'Due On'
+		dataType: dateTime
+		isHidden
+		formatString: dd/mm/yyyy
+		lineageTag: f37a9f1f-9396-55cb-af95-2136c4b3957b
+		summarizeBy: none
+		sourceColumn: Due On
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Original Due On'
+		dataType: dateTime
+		isHidden
+		formatString: dd/mm/yyyy
+		lineageTag: 63e30971-b92a-57b4-b339-fc41ad0345c5
+		summarizeBy: none
+		sourceColumn: Original Due On
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column ActionStatus_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: e7e87198-b302-56ca-8354-4a9510fec66e
+		summarizeBy: none
+		sourceColumn: ActionStatus_key
+
+		annotation SummarizationSetBy = Automatic
+
+	/// When the action was raised.
+	column 'Created On'
+		dataType: dateTime
+		formatString: dd/mm/yyyy
+		lineageTag: 3c193915-d28e-5f6a-a418-7e23067110af
+		summarizeBy: none
+		sourceColumn: Created On
+
+		annotation SummarizationSetBy = Automatic
+
+	column Wallet_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: d4037440-3352-54c8-8b04-50ae813053e4
+		summarizeBy: none
+		sourceColumn: Wallet_key
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Date part of Created On; relates actions to the Action Date table.
+	column 'Raised Date' = DATE ( YEAR ( 'Action'[Created On] ), MONTH ( 'Action'[Created On] ), DAY ( 'Action'[Created On] ) )
+		dataType: dateTime
+		isHidden
+		formatString: dd/mm/yyyy
+		lineageTag: 1c673f6a-2c50-5733-b9ef-7d1e87e3bfd9
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Due date, blank when the action has no due date (Work Wallet stores 30/12/1899 for 'no date').
+	column 'Due Date' = IF ( 'Action'[Due On] > DATE ( 1900, 1, 1 ), 'Action'[Due On] )
+		dataType: dateTime
+		formatString: dd/mm/yyyy
+		lineageTag: 3d1ef024-b66b-5321-ad4f-0c03cda1183b
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Open or In Progress.
+	column 'Is Open' = RELATED ( 'Action Status'[ActionStatusCode] ) IN { 1, 2 }
+		dataType: boolean
+		isHidden
+		lineageTag: 88658e4a-1916-57d9-8793-dfec87b05a3f
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	/// When the action was closed: the latest update that set it to Closed (actions have no closed date of their own). Blank while open, or if the action was closed without a closing update; such actions are left out of days to close and the on-time rate.
+	column 'Closed On' =
+			VAR ActionKey = 'Action'[Action_key]
+			VAR ClosedKeys =
+			    CALCULATETABLE ( VALUES ( 'Action Status'[ActionStatus_key] ), 'Action Status'[ActionStatusCode] = 4, REMOVEFILTERS () )
+			RETURN
+			    IF (
+			        RELATED ( 'Action Status'[ActionStatusCode] ) = 4,
+			        MAXX (
+			            FILTER (
+			                'Action Update',
+			                'Action Update'[Action_key] = ActionKey
+			                    && NOT 'Action Update'[Deleted]
+			                    && 'Action Update'[ActionStatus_key] IN ClosedKeys
+			            ),
+			            'Action Update'[Created On]
+			        )
+			    )
+		dataType: dateTime
+		formatString: dd/mm/yyyy hh:nn
+		lineageTag: 58a8bb39-e84f-5d75-9c42-cfbdd0ea9d20
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Date part of Closed On; inactive relationship to the Action Date table for 'closed in period'.
+	column 'Closed Date' = IF ( NOT ISBLANK ( 'Action'[Closed On] ), DATE ( YEAR ( 'Action'[Closed On] ), MONTH ( 'Action'[Closed On] ), DAY ( 'Action'[Closed On] ) ) )
+		dataType: dateTime
+		isHidden
+		formatString: dd/mm/yyyy
+		lineageTag: e6876959-834f-5eb4-9477-ec18738577b1
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Days from the action being raised to being closed.
+	column 'Days To Close' = IF ( NOT ISBLANK ( 'Action'[Closed On] ), ROUND ( ( 'Action'[Closed On] - 'Action'[Created On] ) * 1.0, 1 ) )
+		dataType: double
+		formatString: #,0
+		lineageTag: 5d4bdbf3-4717-5659-9e39-051dc25b067d
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Whether a closed action was closed on or before its due date (blank if not closed or no due date).
+	column 'Closed On Time' =
+			IF (
+			    NOT ISBLANK ( 'Action'[Closed Date] ) && NOT ISBLANK ( 'Action'[Due Date] ),
+			    'Action'[Closed Date] <= 'Action'[Due Date]
+			)
+		dataType: boolean
+		lineageTag: 6666a46f-d793-5165-8f76-33952cbd7fe5
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	/// For open actions past their due date and time (as Work Wallet counts overdue, so an action due today is overdue, 0 days): whole days overdue, as at the last data refresh.
+	column 'Days Overdue' =
+			IF (
+			    'Action'[Is Open] && NOT ISBLANK ( 'Action'[Due Date] ) && 'Action'[Due Date] < NOW (),
+			    INT ( NOW () - 'Action'[Due Date] )
+			)
+		dataType: int64
+		formatString: #,0
+		lineageTag: 32a97ade-126b-5be8-a4ee-cb613bd36cc8
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Sort order for Overdue Band.
+	column 'Overdue Band Order' =
+			VAR Days = 'Action'[Days Overdue]
+			RETURN
+			    IF ( NOT ISBLANK ( Days ), SWITCH ( TRUE (), Days <= 7, 1, Days <= 30, 2, Days <= 90, 3, Days <= 365, 4, 5 ) )
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: e44a7b44-81ed-548b-acf2-7e532d059bcf
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	/// How long an open action has been overdue, as at the last data refresh.
+	column 'Overdue Band' = SWITCH ( 'Action'[Overdue Band Order], 1, "Up to 7 days", 2, "8–30 days", 3, "31–90 days", 4, "91–365 days", 5, "Over a year" )
+		dataType: string
+		lineageTag: 6b8ec8ce-6e6b-5a72-9a84-3c428fe4f242
+		summarizeBy: none
+		sortByColumn: 'Overdue Band Order'
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Person the action is assigned to (name and email, so people with the same name are kept apart), or '(Unassigned)'.
+	column Assignee =
+			IF (
+			    LEN ( 'Action'[Name] ) > 0,
+			    IF (
+			        'Action'[Email] = "[not captured when downloaded]" || 'Action'[Email] = "",
+			        'Action'[Name],
+			        'Action'[Name] & " (" & 'Action'[Email] & ")"
+			    ),
+			    "(Unassigned)"
+			)
+		dataType: string
+		lineageTag: 042c73ec-90bc-55da-9556-eb3d71437da2
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Opens the action in Work Wallet: the actions tab of the asset it was raised on, scrolled to the action. Work Wallet has no page for a single action.
+	column Url =
+			VAR UrlPath = IF ( LEN ( 'Action'[TargetId] ) > 0, "/Company/Assets/" & LOWER ( 'Action'[TargetId] ) & "/Detail?tab=actions#" & LOWER ( 'Action'[ActionId] ) )
+			RETURN
+			    IF ( NOT ISBLANK ( UrlPath ), "https://portal.work-wallet.com" & UrlPath )
+		dataType: string
+		lineageTag: 47077846-01ab-5df9-ba21-474f9490b521
+		dataCategory: WebUrl
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Action = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("demo-workwalletbi.database.windows.net", "demo-workwalletbi"),
+				    mart_Action = Source{[Schema="mart",Item="Action"]}[Data],
+				    mart_ActionType = Source{[Schema="mart",Item="ActionType"]}[Data],
+				    // Only actions raised on assets (ActionTypeCode 8), without deleted or orphaned actions
+				    #"Action Type Key" = Table.SelectRows(mart_ActionType, each [ActionTypeCode] = 8){0}[ActionType_key],
+				    #"Filtered Rows" = Table.SelectRows(mart_Action, each [ActionType_key] = #"Action Type Key" and [IsDeleted] = false and [IsOrphaned] = false),
+				    // Asset_key of the asset each action was raised on (blank when that asset isn't in the data)
+				    mart_Asset = Source{[Schema="mart",Item="Asset"]}[Data],
+				    #"Merged Asset" = Table.NestedJoin(#"Filtered Rows", {"TargetId", "Wallet_key"}, mart_Asset, {"AssetId", "Wallet_key"}, "Asset", JoinKind.LeftOuter),
+				    #"Expanded Asset" = Table.ExpandTableColumn(#"Merged Asset", "Asset", {"Asset_key"}),
+				    #"Removed Columns" = Table.RemoveColumns(#"Expanded Asset",{"_created", "_edited", "Deleted", "ActionType_key", "IsDeleted", "IsOrphaned"}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"TargetReference", "Target Reference"}, {"AssignedTo", "Name"}, {"DueOn", "Due On"}, {"CreatedOn", "Created On"}, {"OriginalDueOn", "Original Due On"}, {"AssignedToEmail", "Email"}})
+				in
+				    #"Renamed Columns"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

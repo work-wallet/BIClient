@@ -142,6 +142,21 @@
             },
             {
               "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Action Measures"
+                    }
+                  },
+                  "Property": "Asset Open Actions"
+                }
+              },
+              "queryRef": "Action Measures.Asset Open Actions",
+              "nativeQueryRef": "Open actions",
+              "displayName": "Open actions"
+            },
+            {
+              "field": {
                 "Column": {
                   "Expression": {
                     "SourceRef": {
@@ -218,6 +233,36 @@
             ],
             "metadata": "Asset Status.Asset Status"
           }
+        },
+        {
+          "properties": {
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Action Measures"
+                        }
+                      },
+                      "Property": "Asset Open Actions Colour"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "selector": {
+            "data": [
+              {
+                "dataViewWildcard": {
+                  "matchingOption": 1
+                }
+              }
+            ],
+            "metadata": "Action Measures.Asset Open Actions"
+          }
         }
       ],
       "columnWidth": [
@@ -240,7 +285,7 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "239D"
+                  "Value": "200D"
                 }
               }
             }
@@ -254,7 +299,7 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "155D"
+                  "Value": "148D"
                 }
               }
             }
@@ -282,7 +327,7 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "179D"
+                  "Value": "150D"
                 }
               }
             }
@@ -331,6 +376,20 @@
           },
           "selector": {
             "metadata": "Sum(Asset.Open Defects)"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "80D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Action Measures.Asset Open Actions"
           }
         },
         {

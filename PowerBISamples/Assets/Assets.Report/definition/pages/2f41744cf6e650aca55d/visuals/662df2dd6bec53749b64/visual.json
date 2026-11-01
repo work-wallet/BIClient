@@ -45,7 +45,7 @@
               {
                 "textRuns": [
                   {
-                    "value": "Inspections, defects, assignments and properties for the asset selected on the Asset register.",
+                    "value": "Inspections, defects, actions, assignments and properties for the selected asset.",
                     "textStyle": {
                       "fontFamily": "Segoe UI",
                       "fontSize": "9pt",
