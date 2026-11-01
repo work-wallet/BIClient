@@ -45,7 +45,7 @@
               {
                 "textRuns": [
                   {
-                    "value": "Full record for the issue selected on the Issues list.",
+                    "value": "Full record and actions for the selected issue.",
                     "textStyle": {
                       "fontFamily": "Segoe UI",
                       "fontSize": "9pt",

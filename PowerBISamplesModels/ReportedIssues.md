@@ -521,3 +521,101 @@ erDiagram
     }
     "Issue" }o--|| "Date" : "Occurred Date"
 ```
+
+## Reported Issues - Actions
+
+```mermaid
+---
+config:
+  theme: neutral
+---
+erDiagram
+    "Action Update" {
+        attr Comments
+        attr Deleted
+        attr CreatedOn
+        calc ActionUpdateStatus
+    }
+    "Action" {
+        attr TargetReference
+        attr Title
+        attr Description
+        attr Name
+        attr Email
+        attr CreatedOn
+        calc DueDate
+        calc ClosedOn
+        calc DaysToClose
+        calc ClosedOnTime
+        calc DaysOverdue
+        calc OverdueBand
+        calc Assignee
+        calc Url
+    }
+    "Action Status" {
+        attr ActionStatus
+    }
+    "Action Priority" {
+        attr ActionPriority
+    }
+    "Action Date" {
+        attr Date
+        calc Year
+        calc Month
+        calc MonthStart
+        calc YearMonth
+        calc SlicerDate
+    }
+    "Issue" {
+        attr IssueReference
+        attr OccurredOn
+        attr ReportedOn
+        attr IssueOverview
+        attr CloseDate
+        calc IssueCount
+        calc ReportedBy
+        attr UnderInvestigationDate
+        calc InvestigationStartedOn
+        calc ClosedOn
+        calc HoursToReport
+        calc DaysToStartInvestigation
+        calc DaysToClose
+        calc AgeBand
+        calc Url
+    }
+    "Action Measures" {
+        measure Actions
+        measure OpenActions
+        measure ClosedActions
+        measure DraftActions
+        measure OverdueActions
+        measure SeriousOverdueActions
+        measure SeriousOpenActions
+        measure AverageDaysOverdue
+        measure OldestOverdueDays
+        measure ActionsWithoutDueDate
+        measure IssueOpenActions
+        measure Assignees
+        measure MonthlyAverageActions
+        measure MonthlyAverageActionsLine
+        measure MostOverdueAssignee
+        measure ActionsClosed
+        measure ActionAverageDaysToClose
+        measure ClosedOnTime
+        measure ClosedWithDueDate
+        measure OnTimeRate
+        measure ActionClosureRate
+        measure Updates
+        measure ActionsWithUpdates
+        measure AverageCloseOutDays
+        measure IssuesWithActions
+        measure IssuesWithOpenActions
+    }
+    "Action" }o--|| "Issue" : "ReportedIssue_key"
+    "Action" }o--|| "Action Priority" : "ActionPriority_key"
+    "Action" }o--|| "Action Status" : "ActionStatus_key"
+    "Action Update" }o--|| "Action" : "Action_key"
+    "Action Update" }o..|| "Action Status" : "ActionStatus_key"
+    "Action" }o--|| "Action Date" : "Raised Date"
+    "Action" }o..|| "Action Date" : "Closed Date"
+```
