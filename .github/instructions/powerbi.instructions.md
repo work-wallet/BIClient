@@ -13,8 +13,9 @@ applyTo: "PowerBISamples/**, Tools/PowerBI/**"
 | [`powerbi-style.instructions.md`](powerbi-style.instructions.md) | Work Wallet house style: layout, colours, fonts, wording | Yes, or replace it with a customer's style |
 | `powerbi-report-development` skill | How to build and check PBIP reports and models; the `Tools/PowerBI` helpers | Yes |
 | `work-wallet-bi-reporting` skill | Work Wallet data, module behaviour, portal figures and links | Yes |
+| `/powerbi-change` prompt (`.github/prompts/powerbi-change.prompt.md`) | Starts a report change with all of the above loaded | Yes, with the links adjusted |
 
-Load the skills for any report or model change (they are in `.github/skills/`).
+Load the skills for any report or model change (they are in `.github/skills/`). The easiest way is to start the request with `/powerbi-change`, e.g. `/powerbi-change Permits: add a page showing permits closed late by company`.
 
 ## Purpose
 
