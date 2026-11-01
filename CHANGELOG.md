@@ -4,16 +4,16 @@ All notable changes to this project will be documented in this file.
 
 The format loosely follows Keep a Changelog principles (dates in YYYY-MM-DD). Version numbers align with assembly versions unless otherwise noted.
 
-## [Unreleased]
+## [5.2.1] - 2026-11-01
 
-### Added (Unreleased)
+### Changed (5.2.1)
 
-- Power BI samples: the Audits, Reported Issues, Safety Cards and Assets reports each have a new actions page (Audit actions, Issue actions, Safety card actions, Asset actions) showing the actions raised on that module's records, with the headline figures (actions raised, open, overdue and average close out days) and a list linking each action back to Work Wallet. Each record list shows its open actions (red when any are overdue). In the Audits, Reported Issues and Assets reports you can select an action to drill through to its record's details, and the details page lists the record's actions. Each semantic model now includes these actions, linked to their records, with their own date table and a ready-made set of action measures. No database deploy or data reload is needed; open the updated `.pbip` projects and refresh.
-
-### Changed (Unreleased)
-
-- Power BI samples: every sample report has had a significant makeover, with a fresh Work Wallet look and feel, consistent and easier-to-read page layouts, headline KPIs showing the trend against the previous period, and a quicker route from a list to a record's full details. Lists and detail pages now link straight to the record in Work Wallet.
-- The sample semantic models are enhanced to support the new reports, with a shared date table and a set of ready-made measures. The measures work with any wallet's data, so the samples remain a solid starting point for your own reports.
+- Power BI samples: a major refresh of the sample reports and semantic models.
+  - Reports and styling: every report has been comprehensively overhauled, with a consistent Work Wallet look and feel, clearer page layouts, headline KPIs that show the trend against the previous period, and a quicker route from a list to a record's full details.
+  - Measures: each semantic model includes a suite of ready-made calculated measures (counts, trends, rates, labels and colours) that enrich the reports. They work with any wallet's data, so the samples remain a solid starting point for your own reports.
+  - Links to Work Wallet: lists and detail pages link straight back to the record in the Work Wallet portal.
+  - Actions: the Audits, Reported Issues, Safety Cards and Assets reports now include the actions raised on their records, with an actions page in each, open actions shown against each record, and links between actions and the records they were raised on.
+- Tooling: the repository now includes guidance and helper scripts for working on the Power BI samples with AI coding assistants such as GitHub Copilot and Claude Code.
 - No database deploy or data reload is needed. Open the updated `.pbip` projects and refresh to see the changes. Reports you have already customised are unaffected.
 
 ## [5.2.0] - 2026-10-16
