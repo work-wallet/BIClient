@@ -27,6 +27,7 @@ How report features work in the PBIR files and the Power BI service. What they l
 - Fix table column widths (`widths=`) to fit the container (about its width minus 36px), so there's no horizontal scrollbar.
 - Size in-cell images with table `grid` `imageWidth` / `imageHeight`, and make the column about 15px wider than the image.
 - **Conditional colour from a measure** ("field value") is `{"solid": {"color": {"expr": {"Measure": …}}}}` (`pbir.colour_measure`). Fixed colours for fixed lists are set per value (`series_colours`, `pbir.series_colour`).
+- **Table and matrix cell colours** ("Cell elements" font colour) go in `values` as `fontColor` with a `{"data": [{"dataViewWildcard": {"matchingOption": 1}}], "metadata": "<queryRef>"}` selector. `fontColorPrimary` is the plain "Text color" setting: the service ignores a measure there and shows the default colour. Check the colour on the rendered page (`getComputedStyle` on the `[role=gridcell]`).
 - **Open matrix row levels by default** (`pbir.matrix(..., expanded=True)`, or a number of levels). A collapsed matrix shows a few top-level rows and a lot of empty space. Both parts of Desktop's "expand all down" form are needed, or the service shows the matrix collapsed:
   - `"active": true` on every shown `Rows` projection;
   - `expansionStates` with one entry per row level (`isCollapsed: true` only on levels left closed, `identityKeys` on all but the last) and `"root": {}`.

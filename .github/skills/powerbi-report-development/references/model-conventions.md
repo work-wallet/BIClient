@@ -7,6 +7,7 @@
 - Date slicers, monthly axes (`Date[Year Month]`, sorted by `Month Start`) and previous-period measures all use it.
 - Relative date slicers use `Date[Slicer Date]` (`MIN ( Date, TODAY () )`). Future dates count as today, so "Last 12 months" also includes upcoming, future-dated records (e.g. planned audits). Charts keep using the real date columns.
 - **Several fact tables can share one Date table** (e.g. inspections by inspected date and defects by raised date). Each relationship must have only one filter path from `Date`. A both-directions relationship between the facts (or via a shared dimension) makes the new relationship ambiguous, and Power BI rejects it. Make the fact-to-dimension relationship single-direction first, and check the pages that relied on it.
+- **A fact related to another dated fact needs its own date table.** E.g. actions related to their audit: `Date → Audit → Action` is already a path, so `Action → Date` would be ambiguous. Add a role-playing date table (`tmdl.write_date_table(..., name="Action Date")`, previous periods with `tmdl.previous_period(..., date_table="Action Date")`) and give its slicer its own sync group. Pages for that fact must not have a `Date` slicer, which would filter it through the related fact.
 - Add a second date (e.g. closed date) as an **inactive** relationship and use it in measures with `USERELATIONSHIP` ("closed in the period").
 - **Current-state pages** (registers, open items, current assignments) aren't filtered by date, so they have no date slicer (`page_header(..., date_display=None)`). Their age bands and "as at" values are calculated columns, evaluated at refresh.
 
@@ -16,6 +17,7 @@
 - Hide helper measures: previous-period values, KPI labels, colours, links.
 - Give every visible measure a `///` description.
 - Avoid `%` and other symbols in measure names; documentation generators turn them into `_`.
+- **Measure names are unique across the whole model**, not per table. When adding a second measures table (e.g. `Action Measures` in the Audits model), reuse existing helpers such as `Colour Good` and rename clashes (e.g. `Monthly Average Actions Line`).
 
 ## Previous period and trend labels
 

@@ -114,7 +114,8 @@ class MeasuresTable:
 
 # ------------------------------------------------------------------------------- Date table
 def date_table(first_expr: str, last_expr: str,
-               comment: str = "Whole calendar years spanning the data, extended to today so relative date slicers always work.") -> str:
+               comment: str = "Whole calendar years spanning the data, extended to today so relative date slicers always work.",
+               name: str = "Date") -> str:
     """Calculated, marked Date table: Date (key), Year, Month Number (hidden), Month, Month Start, Year Month,
     Slicer Date.
 
@@ -124,8 +125,13 @@ def date_table(first_expr: str, last_expr: str,
 
     Slicer Date is the field for relative date slicers ('Last 12 months'). Future dates count as today, so the
     slicer also includes upcoming (future-dated) records. TODAY () is evaluated at refresh.
+
+    name: another name (e.g. 'Action Date') gives a role-playing date table for a second fact table that can't
+    share 'Date' without an ambiguous filter path.
     """
-    L = ["table Date", f"{T}lineageTag: {tag('Date')}", f"{T}dataCategory: Time", ""]
+    q = f"'{name}'"
+    table_name = name
+    L = [f"table {_quote(name)}", f"{T}lineageTag: {tag(name)}", f"{T}dataCategory: Time", ""]
 
     def col(name, expr=None, dtype="dateTime", fmt=None, hidden=False, sort_by=None, key=False, category=None, desc=None):
         if desc:
@@ -138,7 +144,7 @@ def date_table(first_expr: str, last_expr: str,
             L.append(f"{T}{T}isHidden")
         if fmt:
             L.append(f"{T}{T}formatString: {fmt}")
-        L.append(f"{T}{T}lineageTag: {tag('Date/' + name)}")
+        L.append(f"{T}{T}lineageTag: {tag(table_name + '/' + name)}")
         if category:
             L.append(f"{T}{T}dataCategory: {category}")
         L.append(f"{T}{T}summarizeBy: none")
@@ -150,15 +156,15 @@ def date_table(first_expr: str, last_expr: str,
         L.extend(["", f"{T}{T}annotation SummarizationSetBy = Automatic", ""])
 
     col("Date", dtype="dateTime", fmt="dd/mm/yyyy", key=True)
-    col("Year", "YEAR ( 'Date'[Date] )", dtype="int64", fmt="0", category="Years")
-    col("Month Number", "MONTH ( 'Date'[Date] )", dtype="int64", fmt="0", hidden=True, category="MonthOfYear")
-    col("Month", 'FORMAT ( \'Date\'[Date], "mmm" )', dtype="string", sort_by="'Month Number'", category="Months")
-    col("Month Start", "DATE ( YEAR ( 'Date'[Date] ), MONTH ( 'Date'[Date] ), 1 )", dtype="dateTime", fmt="mmm yyyy")
-    col("Year Month", 'FORMAT ( \'Date\'[Date], "mmm yyyy" )', dtype="string", sort_by="'Month Start'")
-    col("Slicer Date", "MIN ( 'Date'[Date], TODAY () )", dtype="dateTime", fmt="dd/mm/yyyy",
+    col("Year", f"YEAR ( {q}[Date] )", dtype="int64", fmt="0", category="Years")
+    col("Month Number", f"MONTH ( {q}[Date] )", dtype="int64", fmt="0", hidden=True, category="MonthOfYear")
+    col("Month", f'FORMAT ( {q}[Date], "mmm" )', dtype="string", sort_by="'Month Number'", category="Months")
+    col("Month Start", f"DATE ( YEAR ( {q}[Date] ), MONTH ( {q}[Date] ), 1 )", dtype="dateTime", fmt="mmm yyyy")
+    col("Year Month", f'FORMAT ( {q}[Date], "mmm yyyy" )', dtype="string", sort_by="'Month Start'")
+    col("Slicer Date", f"MIN ( {q}[Date], TODAY () )", dtype="dateTime", fmt="dd/mm/yyyy",
         desc="Date for relative date slicers: future dates count as today, so 'Last N months' also includes upcoming records.")
 
-    L += [f"{T}partition Date = calculated", f"{T}{T}mode: import", f"{T}{T}source =", *dax_block(f"""
+    L += [f"{T}partition {_quote(name)} = calculated", f"{T}{T}mode: import", f"{T}{T}source =", *dax_block(f"""
 // {comment}
 VAR FirstData = {first_expr}
 VAR LastData = {last_expr}
@@ -171,20 +177,22 @@ RETURN
 
 
 def write_date_table(tables_dir: Path, first_expr: str, last_expr: str, overwrite: bool = False,
-                     allow_dirty: bool = False, **kw):
-    _write(Path(tables_dir) / "Date.tmdl", date_table(first_expr, last_expr, **kw), overwrite, allow_dirty)
+                     allow_dirty: bool = False, name: str = "Date", **kw):
+    _write(Path(tables_dir) / f"{name}.tmdl", date_table(first_expr, last_expr, name=name, **kw), overwrite, allow_dirty)
 
 
 # ----------------------------------------------------------------------------- DAX patterns
-def previous_period(base: str) -> str:
-    """base for the same number of days immediately before the selected 'Date' range (blank if none).
-    The selected range is capped at today, so upcoming records included via 'Slicer Date' don't lengthen it."""
+def previous_period(base: str, date_table: str = "Date") -> str:
+    """base for the same number of days immediately before the selected date range (blank if none).
+    The selected range is capped at today, so upcoming records included via 'Slicer Date' don't lengthen it.
+    date_table: the date table the period is selected on (e.g. a role-playing 'Action Date')."""
+    d = f"'{date_table}'"
     return f"""
-VAR FirstDay = MIN ( 'Date'[Date] )
-VAR LastDay = MIN ( MAX ( 'Date'[Date] ), TODAY () )
+VAR FirstDay = MIN ( {d}[Date] )
+VAR LastDay = MIN ( MAX ( {d}[Date] ), TODAY () )
 VAR Days = LastDay - FirstDay + 1
 RETURN
-    CALCULATE ( {base}, DATESBETWEEN ( 'Date'[Date], FirstDay - Days, FirstDay - 1 ) )
+    CALCULATE ( {base}, DATESBETWEEN ( {d}[Date], FirstDay - Days, FirstDay - 1 ) )
 """
 
 
@@ -465,7 +473,8 @@ def add_relationship(relationships_tmdl: Path, from_ref: str, to_ref: str, extra
 
 def add_diagram_page(semantic_model_dir: Path, page_name: str, tables: list[str], layout: dict | None = None):
     """Adds a model diagram page (used by the model doc generator) and puts any new tables on 'All tables'.
-    Existing number formatting is preserved. layout: optional {table: (x, y, w, h)}."""
+    Existing number formatting is preserved. layout: optional {table: (x, y, w, h)}. Each node's lineage tag is
+    read from the table's .tmdl file, so tables Desktop created (with random tags) are matched too."""
     import json
     import re
     path = Path(semantic_model_dir) / "diagramLayout.json"
@@ -473,9 +482,17 @@ def add_diagram_page(semantic_model_dir: Path, page_name: str, tables: list[str]
         raw = fh.read()
     d = json.loads(raw, parse_float=lambda s: "__NUM__" + s)
 
+    def table_tag(name):
+        tmdl_file = Path(semantic_model_dir) / "definition" / "tables" / f"{name}.tmdl"
+        if tmdl_file.exists():
+            found = re.search(r"^\tlineageTag: (\S+)", tmdl_file.read_text(encoding="utf-8"), re.M)
+            if found:
+                return found.group(1)
+        return tag(name)
+
     def node(name, i):
         x, y, w, h = (layout or {}).get(name, (i * 300, 0, 260, 400))
-        return {"location": {"x": x, "y": y}, "nodeIndex": name, "nodeLineageTag": tag(name),
+        return {"location": {"x": x, "y": y}, "nodeIndex": name, "nodeLineageTag": table_tag(name),
                 "size": {"height": h, "width": w}, "zIndex": i}
 
     all_tables = d["diagrams"][0]
