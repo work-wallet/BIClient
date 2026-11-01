@@ -1,0 +1,48 @@
+/// Action priorities: Low, Medium, High, Critical.
+table 'Action Priority'
+	lineageTag: 6e95c4d1-eb6e-525e-8ff8-6ad5a73036c3
+
+	column ActionPriority_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: f2e2f5bd-e6be-533b-9a9f-8711269e8383
+		summarizeBy: none
+		sourceColumn: ActionPriority_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column ActionPriorityCode
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 9b901cb7-3515-5140-86b3-6ceff6f8a5af
+		summarizeBy: none
+		sourceColumn: ActionPriorityCode
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Action Priority'
+		dataType: string
+		lineageTag: 36751cb2-5334-5449-94b1-962ca4919348
+		summarizeBy: none
+		sourceColumn: Action Priority
+		sortByColumn: ActionPriorityCode
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Action Priority' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("demo-workwalletbi.database.windows.net", "demo-workwalletbi"),
+				    mart_ActionPriority = Source{[Schema="mart",Item="ActionPriority"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(mart_ActionPriority,{"_created", "_edited"}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"ActionPriority", "Action Priority"}})
+				in
+				    #"Renamed Columns"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

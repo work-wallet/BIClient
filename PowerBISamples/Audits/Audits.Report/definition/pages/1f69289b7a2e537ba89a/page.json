@@ -1,0 +1,8 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/page/2.0.0/schema.json",
+  "name": "1f69289b7a2e537ba89a",
+  "displayName": "Audit actions",
+  "displayOption": "FitToPage",
+  "height": 720,
+  "width": 1280
+}

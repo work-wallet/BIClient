@@ -6,6 +6,10 @@ The format loosely follows Keep a Changelog principles (dates in YYYY-MM-DD). Ve
 
 ## [Unreleased]
 
+### Added (Unreleased)
+
+- Power BI samples: the Audits report has a new Audit actions page showing the actions raised on audits, with the headline figures (actions raised, open, overdue and average close out days) and a list linking each action back to Work Wallet. The Audits semantic model now includes these actions, linked to their audits, with their own date table and a ready-made set of action measures. No database deploy or data reload is needed; open the updated `.pbip` project and refresh.
+
 ### Changed (Unreleased)
 
 - Power BI samples: every sample report has had a significant makeover, with a fresh Work Wallet look and feel, consistent and easier-to-read page layouts, headline KPIs showing the trend against the previous period, and a quicker route from a list to a record's full details. Lists and detail pages now link straight to the record in Work Wallet.

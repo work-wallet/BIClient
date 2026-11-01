@@ -535,3 +535,110 @@ erDiagram
     }
     "Audit" }o--|| "Date" : "Inspected Date"
 ```
+
+## Audits - Actions
+
+```mermaid
+---
+config:
+  theme: neutral
+---
+erDiagram
+    "Action Update" {
+        attr Comments
+        attr Deleted
+        attr CreatedOn
+        calc ActionUpdateStatus
+    }
+    "Action" {
+        attr TargetReference
+        attr Title
+        attr Description
+        attr Name
+        attr Email
+        attr CreatedOn
+        calc DueDate
+        calc ClosedOn
+        calc DaysToClose
+        calc ClosedOnTime
+        calc DaysOverdue
+        calc OverdueBand
+        calc Assignee
+        calc Url
+    }
+    "Action Status" {
+        attr ActionStatus
+    }
+    "Action Priority" {
+        attr ActionPriority
+    }
+    "Action Date" {
+        attr Date
+        calc Year
+        calc Month
+        calc MonthStart
+        calc YearMonth
+        calc SlicerDate
+    }
+    "Audit" {
+        attr Reference
+        attr AuditReference
+        attr InspectedOn
+        agg Score
+        agg PotentialScore
+        attr AverageScore
+        attr AveragePotentialScore
+        attr PercentageScore
+        agg Flags
+        attr ExternalIdentifier
+        calc ConductedBy
+        calc ScoreDisplay
+        calc AuditCount
+        attr PlannedStatusDate
+        attr ReportInProgressStatusDate
+        attr ReadyForReviewStatusDate
+        attr CompleteStatusDate
+        attr ClosedStatusDate
+        calc Url
+    }
+    "Wallet" {
+        attr Wallet
+    }
+    "Action Measures" {
+        measure Actions
+        measure OpenActions
+        measure ClosedActions
+        measure DraftActions
+        measure OverdueActions
+        measure SeriousOverdueActions
+        measure SeriousOpenActions
+        measure AverageDaysOverdue
+        measure OldestOverdueDays
+        measure ActionsWithoutDueDate
+        measure Assignees
+        measure MonthlyAverageActions
+        measure MonthlyAverageActionsLine
+        measure MostOverdueAssignee
+        measure ActionsClosed
+        measure AverageDaysToClose
+        measure ClosedOnTime
+        measure ClosedWithDueDate
+        measure OnTimeRate
+        measure ClosureRate
+        measure Updates
+        measure ActionsWithUpdates
+        measure AverageCloseOutDays
+        measure AuditsWithActions
+        measure AuditsWithOpenActions
+    }
+    "Audit" }o--|| "Wallet" : "Wallet_key"
+    "Action" }o--|| "Audit" : "Audit_key"
+    "Action" }o--|| "Action Priority" : "ActionPriority_key"
+    "Action" }o--|| "Action Status" : "ActionStatus_key"
+    "Action Update" }o--|| "Action" : "Action_key"
+    "Action Update" }o..|| "Action Status" : "ActionStatus_key"
+    "Action" }o..|| "Wallet" : "Wallet_key"
+    "Action Update" }o..|| "Wallet" : "Wallet_key"
+    "Action" }o--|| "Action Date" : "Raised Date"
+    "Action" }o..|| "Action Date" : "Closed Date"
+```

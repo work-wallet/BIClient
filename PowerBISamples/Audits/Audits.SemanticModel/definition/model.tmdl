@@ -6,7 +6,7 @@ model Model
 		legacyRedirects
 		returnErrorValuesAsNull
 
-annotation PBI_QueryOrder = ["Location","Wallet","Audit","Branch Option","Branch Option Fact","Checklist Answer Fact","Checklist Option","Date Time Answer Fact","Date Time Question","Grading Set Option","Audit Group","Inspected By Fact","Numeric Answer Fact","Numeric Question","Scored Response","Scored Response Fact","Score Section","Score Section Fact","Score Tag","Score Tag Fact","Audit Status","Audit Type","Contact","Unit","Audit Grading Set Option","Score Tag Grading Set Option","Score Section Grading Set Option","Scored Response Grading Set Option"]
+annotation PBI_QueryOrder = ["Location","Wallet","Audit","Branch Option","Branch Option Fact","Checklist Answer Fact","Checklist Option","Date Time Answer Fact","Date Time Question","Grading Set Option","Audit Group","Inspected By Fact","Numeric Answer Fact","Numeric Question","Scored Response","Scored Response Fact","Score Section","Score Section Fact","Score Tag","Score Tag Fact","Audit Status","Audit Type","Contact","Unit","Audit Grading Set Option","Score Tag Grading Set Option","Score Section Grading Set Option","Scored Response Grading Set Option","Action","Action Update","Action Priority","Action Status"]
 
 annotation __PBI_TimeIntelligenceEnabled = 1
 
@@ -51,6 +51,12 @@ ref table LocalDateTable_9ed60e5b-72de-44e1-ac21-bcec5f161ce0
 ref table LocalDateTable_82e4754d-c2c2-4548-acbf-270c54686ffc
 ref table Date
 ref table 'Audit Measures'
+ref table Action
+ref table 'Action Update'
+ref table 'Action Priority'
+ref table 'Action Status'
+ref table 'Action Date'
+ref table 'Action Measures'
 
 ref cultureInfo en-GB
 

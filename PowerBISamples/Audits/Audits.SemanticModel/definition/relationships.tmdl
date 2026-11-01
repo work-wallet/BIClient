@@ -355,3 +355,44 @@ relationship 0016647c-9010-50e7-ae80-4e53e981f8d4
 	fromColumn: Audit.'Inspected Date'
 	toColumn: Date.Date
 
+relationship ba54d236-93aa-55c6-bbed-d1fe91789ee3
+	fromColumn: Action.Audit_key
+	toColumn: Audit.Audit_key
+
+relationship 2874c37f-05d6-5d1d-aac2-b41f5f99bb43
+	fromColumn: Action.ActionPriority_key
+	toColumn: 'Action Priority'.ActionPriority_key
+
+relationship 687139aa-be94-5a95-8d47-3368b74a190e
+	fromColumn: Action.ActionStatus_key
+	toColumn: 'Action Status'.ActionStatus_key
+
+relationship 80c5575a-2a7d-56a3-8a90-862ab6731fe7
+	crossFilteringBehavior: bothDirections
+	fromColumn: 'Action Update'.Action_key
+	toColumn: Action.Action_key
+
+relationship d6616864-4593-5cec-8e77-51f4385a6c90
+	isActive: false
+	fromColumn: 'Action Update'.ActionStatus_key
+	toColumn: 'Action Status'.ActionStatus_key
+
+relationship 568bd9af-23c0-5b9d-afb7-a742cde5a4ac
+	isActive: false
+	fromColumn: Action.Wallet_key
+	toColumn: Wallet.Wallet_key
+
+relationship 28130de4-1ad6-5316-b0c4-de4b36d96f1d
+	isActive: false
+	fromColumn: 'Action Update'.Wallet_key
+	toColumn: Wallet.Wallet_key
+
+relationship f232e84b-a266-5210-88f5-cf126d7bed8e
+	fromColumn: Action.'Raised Date'
+	toColumn: 'Action Date'.Date
+
+relationship 67e28220-18ca-5576-a9ba-e71ed09f6fa5
+	isActive: false
+	fromColumn: Action.'Closed Date'
+	toColumn: 'Action Date'.Date
+

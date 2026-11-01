@@ -395,6 +395,84 @@
             "width": 234
           },
           "zIndex": 26
+        },
+        {
+          "location": {
+            "x": 3000,
+            "y": 800
+          },
+          "nodeIndex": "Action Update",
+          "nodeLineageTag": "892ced04-19c4-56c0-a425-99b0f7b5e95e",
+          "size": {
+            "height": 330,
+            "width": 234
+          },
+          "zIndex": 27
+        },
+        {
+          "location": {
+            "x": 3000,
+            "y": 1200
+          },
+          "nodeIndex": "Action",
+          "nodeLineageTag": "8d39ac02-a2fc-5978-a82d-5747ae2dce57",
+          "size": {
+            "height": 700,
+            "width": 257
+          },
+          "zIndex": 28
+        },
+        {
+          "location": {
+            "x": 3000,
+            "y": 1600
+          },
+          "nodeIndex": "Action Status",
+          "nodeLineageTag": "d807a62f-b73e-5dc1-918d-e109bf06dd98",
+          "size": {
+            "height": 160,
+            "width": 234
+          },
+          "zIndex": 29
+        },
+        {
+          "location": {
+            "x": 3000,
+            "y": 0
+          },
+          "nodeIndex": "Action Priority",
+          "nodeLineageTag": "6e95c4d1-eb6e-525e-8ff8-6ad5a73036c3",
+          "size": {
+            "height": 160,
+            "width": 234
+          },
+          "zIndex": 30
+        },
+        {
+          "location": {
+            "x": 3000,
+            "y": 400
+          },
+          "nodeIndex": "Action Date",
+          "nodeLineageTag": "f6456972-4ec7-5449-b28e-ee5c911aa574",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 31
+        },
+        {
+          "location": {
+            "x": 3000,
+            "y": 800
+          },
+          "nodeIndex": "Action Measures",
+          "nodeLineageTag": "e179e581-3925-5eb2-b207-0ba1b499bd51",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 32
         }
       ],
       "name": "All tables",
@@ -1029,6 +1107,125 @@
         }
       ],
       "name": "Date and Measures",
+      "zoomValue": 100,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    },
+    {
+      "ordinal": 11,
+      "scrollPosition": {
+        "x": 0,
+        "y": 0
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 0,
+            "y": 0
+          },
+          "nodeIndex": "Action Update",
+          "nodeLineageTag": "892ced04-19c4-56c0-a425-99b0f7b5e95e",
+          "size": {
+            "height": 330,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 300,
+            "y": 0
+          },
+          "nodeIndex": "Action",
+          "nodeLineageTag": "8d39ac02-a2fc-5978-a82d-5747ae2dce57",
+          "size": {
+            "height": 700,
+            "width": 257
+          },
+          "zIndex": 1
+        },
+        {
+          "location": {
+            "x": 640,
+            "y": 0
+          },
+          "nodeIndex": "Action Status",
+          "nodeLineageTag": "d807a62f-b73e-5dc1-918d-e109bf06dd98",
+          "size": {
+            "height": 160,
+            "width": 234
+          },
+          "zIndex": 2
+        },
+        {
+          "location": {
+            "x": 640,
+            "y": 200
+          },
+          "nodeIndex": "Action Priority",
+          "nodeLineageTag": "6e95c4d1-eb6e-525e-8ff8-6ad5a73036c3",
+          "size": {
+            "height": 160,
+            "width": 234
+          },
+          "zIndex": 3
+        },
+        {
+          "location": {
+            "x": 640,
+            "y": 400
+          },
+          "nodeIndex": "Action Date",
+          "nodeLineageTag": "f6456972-4ec7-5449-b28e-ee5c911aa574",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 4
+        },
+        {
+          "location": {
+            "x": 960,
+            "y": 0
+          },
+          "nodeIndex": "Audit",
+          "nodeLineageTag": "e2381d2a-b787-4eaa-ac59-fbb97f1243ce",
+          "size": {
+            "height": 500,
+            "width": 257
+          },
+          "zIndex": 5
+        },
+        {
+          "location": {
+            "x": 960,
+            "y": 540
+          },
+          "nodeIndex": "Wallet",
+          "nodeLineageTag": "c5071c3c-bb18-4bf8-af75-410c48a300ed",
+          "size": {
+            "height": 160,
+            "width": 234
+          },
+          "zIndex": 6
+        },
+        {
+          "location": {
+            "x": 0,
+            "y": 380
+          },
+          "nodeIndex": "Action Measures",
+          "nodeLineageTag": "e179e581-3925-5eb2-b207-0ba1b499bd51",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 7
+        }
+      ],
+      "name": "Actions",
       "zoomValue": 100,
       "pinKeyFieldsToTop": false,
       "showExtraHeaderInfo": false,
