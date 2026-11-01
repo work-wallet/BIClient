@@ -43,6 +43,7 @@ inactive relationship. Each column is prefixed with its kind instead of its data
 * [Assets - Checklist Answer](PowerBISamplesModels/Assets.md#assets---checklist-answer)
 * [Assets - Branch Option](PowerBISamplesModels/Assets.md#assets---branch-option)
 * [Assets - Date and measures](PowerBISamplesModels/Assets.md#assets---date-and-measures)
+* [Assets - Actions](PowerBISamplesModels/Assets.md#assets---actions)
 
 ## Audits
 
@@ -104,6 +105,7 @@ inactive relationship. Each column is prefixed with its kind instead of its data
 * [Reported Issues - Date Time Answer](PowerBISamplesModels/ReportedIssues.md#reported-issues---date-time-answer)
 * [Reported Issues - Signature](PowerBISamplesModels/ReportedIssues.md#reported-issues---signature)
 * [Reported Issues - Date and Measures](PowerBISamplesModels/ReportedIssues.md#reported-issues---date-and-measures)
+* [Reported Issues - Actions](PowerBISamplesModels/ReportedIssues.md#reported-issues---actions)
 
 ## Safety Cards
 
@@ -111,6 +113,7 @@ inactive relationship. Each column is prefixed with its kind instead of its data
 
 * [Safety Cards - Main](PowerBISamplesModels/SafetyCards.md#safety-cards---main)
 * [Safety Cards - Date and measures](PowerBISamplesModels/SafetyCards.md#safety-cards---date-and-measures)
+* [Safety Cards - Actions](PowerBISamplesModels/SafetyCards.md#safety-cards---actions)
 
 ## For Maintainers
 

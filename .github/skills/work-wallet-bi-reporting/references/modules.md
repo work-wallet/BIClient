@@ -9,6 +9,7 @@ Product behaviour that affects how a report should count or judge records. Statu
 - There is no closed-date field. The best source is the latest update that closed the action. Actions closed without an update have no close date, so time-to-close and on-time measures leave them out; say so on the page.
 - An action belongs to the record it was raised on (`TargetId`, by `ActionTypeCode`: audit, issue, safety card, asset, briefing).
 - Exclude deleted (`Is Deleted`) and orphaned (`Is Orphaned`, the parent record is gone) actions.
+- **In a module's report** (the Audits, ReportedIssues, SafetyCards and Assets samples have an `Action` table), relate actions to the record by `TargetId` = the record's id (e.g. `AuditId`) and wallet, not by `TargetReference`: references can repeat. Older actions can point at records the module's extract doesn't hold (e.g. audits and safety cards from before the current module), so they have no record. Report-level filters on the record (e.g. Active safety cards or assets) also filter its actions.
 
 ## Assets
 

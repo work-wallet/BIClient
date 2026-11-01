@@ -8,7 +8,7 @@ The format loosely follows Keep a Changelog principles (dates in YYYY-MM-DD). Ve
 
 ### Added (Unreleased)
 
-- Power BI samples: the Audits report has a new Audit actions page showing the actions raised on audits, with the headline figures (actions raised, open, overdue and average close out days) and a list linking each action back to Work Wallet. Select an action to drill through to its audit's details. The Audits list shows each audit's open actions (red when any are overdue), and the Audit details page lists the audit's actions. The Audits semantic model now includes these actions, linked to their audits, with their own date table and a ready-made set of action measures. No database deploy or data reload is needed; open the updated `.pbip` project and refresh.
+- Power BI samples: the Audits, Reported Issues, Safety Cards and Assets reports each have a new actions page (Audit actions, Issue actions, Safety card actions, Asset actions) showing the actions raised on that module's records, with the headline figures (actions raised, open, overdue and average close out days) and a list linking each action back to Work Wallet. Each record list shows its open actions (red when any are overdue). In the Audits, Reported Issues and Assets reports you can select an action to drill through to its record's details, and the details page lists the record's actions. Each semantic model now includes these actions, linked to their records, with their own date table and a ready-made set of action measures. No database deploy or data reload is needed; open the updated `.pbip` projects and refresh.
 
 ### Changed (Unreleased)
 
