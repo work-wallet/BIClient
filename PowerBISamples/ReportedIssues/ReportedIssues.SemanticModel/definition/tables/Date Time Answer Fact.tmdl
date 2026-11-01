@@ -50,7 +50,7 @@ table 'Date Time Answer Fact'
 
 	column 'Date and Time Answer'
 		dataType: dateTime
-		formatString: General Date
+		formatString: dd/mm/yyyy hh:nn
 		lineageTag: 777401ac-f6d9-45a9-9016-f94dbc2fb6bc
 		summarizeBy: none
 		sourceColumn: Date and Time Answer
@@ -64,7 +64,7 @@ table 'Date Time Answer Fact'
 
 	column 'Date Answer'
 		dataType: dateTime
-		formatString: Long Date
+		formatString: dd/mm/yyyy
 		lineageTag: a038e2d6-487c-44f0-8d71-ddda2318af87
 		summarizeBy: none
 		sourceColumn: Date Answer

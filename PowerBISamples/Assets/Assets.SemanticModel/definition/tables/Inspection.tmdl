@@ -334,6 +334,16 @@ table Inspection
 
 		annotation SummarizationSetBy = Automatic
 
+	/// Date part of Inspected On; relates inspections to the Date table.
+	column 'Inspected Date' = DATE ( YEAR ( Inspection[Inspected On] ), MONTH ( Inspection[Inspected On] ), DAY ( Inspection[Inspected On] ) )
+		dataType: dateTime
+		isHidden
+		formatString: dd/mm/yyyy
+		lineageTag: ea1f5460-3a5f-5005-8933-2ac8002ed872
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
 	partition Inspection = m
 		mode: import
 		source =

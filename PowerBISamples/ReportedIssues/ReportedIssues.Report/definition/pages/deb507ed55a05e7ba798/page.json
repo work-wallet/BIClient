@@ -1,0 +1,48 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/page/2.0.0/schema.json",
+  "name": "deb507ed55a05e7ba798",
+  "displayName": "Issue details",
+  "displayOption": "FitToPage",
+  "height": 720,
+  "width": 1280,
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "a3655a2b06e35664acc7",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Issue"
+              }
+            },
+            "Property": "Url"
+          }
+        },
+        "type": "Categorical",
+        "howCreated": "Drillthrough"
+      }
+    ]
+  },
+  "pageBinding": {
+    "name": "31b218488a1f52d3b78b",
+    "type": "Drillthrough",
+    "parameters": [
+      {
+        "name": "373229d1f4ba535285fe",
+        "boundFilter": "a3655a2b06e35664acc7",
+        "fieldExpr": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Issue"
+              }
+            },
+            "Property": "Url"
+          }
+        }
+      }
+    ]
+  },
+  "visibility": "HiddenInViewMode"
+}

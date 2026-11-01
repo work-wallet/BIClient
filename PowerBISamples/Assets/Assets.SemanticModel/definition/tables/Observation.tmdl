@@ -206,6 +206,97 @@ table Observation
 
 		annotation SummarizationSetBy = Automatic
 
+	/// Date part of Observed On; relates observations to the Date table.
+	column 'Observed Date' = DATE ( YEAR ( Observation[Observed On] ), MONTH ( Observation[Observed On] ), DAY ( Observation[Observed On] ) )
+		dataType: dateTime
+		isHidden
+		formatString: dd/mm/yyyy
+		lineageTag: c04491e3-83fc-5ff6-9ae1-05eabe7f57c3
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Date part of Closed On (blank when not closed); inactive relationship to the Date table for 'closed in period'.
+	column 'Closed Date' =
+			IF (
+			    Observation[Closed On] > DATE ( 1900, 1, 1 ),
+			    DATE ( YEAR ( Observation[Closed On] ), MONTH ( Observation[Closed On] ), DAY ( Observation[Closed On] ) )
+			)
+		dataType: dateTime
+		isHidden
+		formatString: dd/mm/yyyy
+		lineageTag: 84b77351-2191-5188-a2a6-4f8afadd5499
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	/// For defects: days from being raised to being closed, or, if still open, to the last data refresh.
+	column 'Days Open' =
+			VAR Code = RELATED ( 'Observation Status'[AssetObservationStatusCode] )
+			RETURN
+			    SWITCH (
+			        TRUE (),
+			        Code = 32 && Observation[Closed On] > DATE ( 1900, 1, 1 ), ROUND ( ( Observation[Closed On] - Observation[Observed On] ) * 1.0, 1 ),
+			        Code = 1, ROUND ( ( NOW () - Observation[Observed On] ) * 1.0, 1 )
+			    )
+		dataType: double
+		formatString: #,0
+		lineageTag: 7f32d35e-3b38-5fa7-b929-b109e6515e31
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Sort order for Open Age Band.
+	column 'Open Age Band Order' =
+			VAR Days = Observation[Days Open]
+			RETURN
+			    IF (
+			        RELATED ( 'Observation Status'[AssetObservationStatusCode] ) = 1,
+			        SWITCH ( TRUE (), Days <= 7, 1, Days <= 30, 2, Days <= 90, 3, Days <= 365, 4, 5 )
+			    )
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: d85ff4ab-960f-59b7-b4f1-41e2d31c31ac
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	/// How long an open defect has been open, as at the last data refresh.
+	column 'Open Age Band' =
+			SWITCH (
+			    Observation[Open Age Band Order],
+			    1, "0–7 days",
+			    2, "8–30 days",
+			    3, "31–90 days",
+			    4, "91–365 days",
+			    5, "Over a year"
+			)
+		dataType: string
+		lineageTag: 8a1111a5-db63-51d5-bc0a-15d60df1c58d
+		summarizeBy: none
+		sortByColumn: 'Open Age Band Order'
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Number of later inspections that recorded this observation again (e.g. a defect still present).
+	column 'Times Seen Again' =
+			VAR ObservationKey = Observation[AssetObservation_key]
+			RETURN
+			    COUNTROWS (
+			        FILTER (
+			            'Inspection Observation Fact',
+			            'Inspection Observation Fact'[AssetObservation_key] = ObservationKey
+			                && 'Inspection Observation Fact'[New] = FALSE ()
+			        )
+			    ) + 0
+		dataType: int64
+		formatString: #,0
+		lineageTag: 60d92fbb-b45d-5d0a-b1c9-dfeb2af62fd6
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
 	partition Observation = m
 		mode: import
 		source =

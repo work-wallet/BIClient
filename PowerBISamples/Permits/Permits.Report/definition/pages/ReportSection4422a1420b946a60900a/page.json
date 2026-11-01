@@ -1,14 +1,14 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/page/2.1.0/schema.json",
   "name": "ReportSection4422a1420b946a60900a",
-  "displayName": "Workflow Answers",
+  "displayName": "Permit details",
   "displayOption": "FitToPage",
   "height": 720,
   "width": 1280,
   "filterConfig": {
     "filters": [
       {
-        "name": "50a42caf920434b42e2d",
+        "name": "5f1fc8e8765b5bfbbd17",
         "field": {
           "Column": {
             "Expression": {
@@ -16,60 +16,21 @@
                 "Entity": "Permit"
               }
             },
-            "Property": "Permit Reference"
+            "Property": "Url"
           }
         },
         "type": "Categorical",
-        "filter": {
-          "Version": 2,
-          "From": [
-            {
-              "Name": "p",
-              "Entity": "Permit",
-              "Type": 0
-            }
-          ],
-          "Where": [
-            {
-              "Condition": {
-                "In": {
-                  "Expressions": [
-                    {
-                      "Column": {
-                        "Expression": {
-                          "SourceRef": {
-                            "Source": "p"
-                          }
-                        },
-                        "Property": "Permit Reference"
-                      }
-                    }
-                  ],
-                  "Values": [
-                    [
-                      {
-                        "Literal": {
-                          "Value": "'WW-00927'"
-                        }
-                      }
-                    ]
-                  ]
-                }
-              }
-            }
-          ]
-        },
         "howCreated": "Drillthrough"
       }
     ]
   },
   "pageBinding": {
-    "name": "53b7ac4d3f778d2f8251",
+    "name": "eab3938308a65356b6a4",
     "type": "Drillthrough",
     "parameters": [
       {
-        "name": "571104569aee708c39ea",
-        "boundFilter": "50a42caf920434b42e2d",
+        "name": "d27c4c0e329d5ff6bcc7",
+        "boundFilter": "5f1fc8e8765b5bfbbd17",
         "fieldExpr": {
           "Column": {
             "Expression": {
@@ -77,25 +38,11 @@
                 "Entity": "Permit"
               }
             },
-            "Property": "Permit Reference"
+            "Property": "Url"
           }
         }
       }
     ]
   },
-  "objects": {
-    "outspacePane": [
-      {
-        "properties": {
-          "width": {
-            "expr": {
-              "Literal": {
-                "Value": "331L"
-              }
-            }
-          }
-        }
-      }
-    ]
-  }
+  "visibility": "HiddenInViewMode"
 }

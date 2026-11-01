@@ -25,6 +25,686 @@ cultureInfo en-GB
 			          }
 			        }
 			      ]
+			    },
+			    "permit_measures.permits": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Permit Measures",
+			          "ConceptualProperty": "Permits"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Permits issued": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        },
+			        {
+			          "Permits": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "permit_measures.live_permits": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Permit Measures",
+			          "ConceptualProperty": "Live Permits"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Live now": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "permit_measures.closeout_rate": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Permit Measures",
+			          "ConceptualProperty": "Close-out Rate"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Closed out on time": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        },
+			        {
+			          "Close-out rate": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "permit_measures.expired_not_closed": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Permit Measures",
+			          "ConceptualProperty": "Expired Not Closed"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Expired, not closed out": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        },
+			        {
+			          "Expired, not closed": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "permit_measures.monthly_average_line": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Permit Measures",
+			          "ConceptualProperty": "Monthly Average Line"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Monthly average": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "permit_measures.monthly_average_permits": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Permit Measures",
+			          "ConceptualProperty": "Monthly Average Permits"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Monthly average": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "permit_measures.most_common_category_text": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Permit Measures",
+			          "ConceptualProperty": "Most Common Category Text"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Most common category": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "permit_measures.closed_after_expiry": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Permit Measures",
+			          "ConceptualProperty": "Closed After Expiry"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Closed after expiry": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        },
+			        {
+			          "Closed late": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "permit_measures.average_hours_open": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Permit Measures",
+			          "ConceptualProperty": "Average Hours Open"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Average hours open": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        },
+			        {
+			          "Avg hours open": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "permit_measures.companies_issued_to": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Permit Measures",
+			          "ConceptualProperty": "Companies Issued To"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Companies": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "permit_measures.signatures": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Permit Measures",
+			          "ConceptualProperty": "Signatures"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Signatures": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "permit_measures.most_expired_category_text": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Permit Measures",
+			          "ConceptualProperty": "Most Expired Category Text"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Most expired category": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "permit_measures.ended_on_time": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Permit Measures",
+			          "ConceptualProperty": "Ended On Time"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Ended on time": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "permit_measures.permit_category": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Permit Measures",
+			          "ConceptualProperty": "Permit Category"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Category": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "permit_measures.permit_status": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Permit Measures",
+			          "ConceptualProperty": "Permit Status"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Status": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "permit_measures.permit_location": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Permit Measures",
+			          "ConceptualProperty": "Permit Location"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Location": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "permit_measures.permit_issued_to": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Permit Measures",
+			          "ConceptualProperty": "Permit Issued To"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Issued to": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "date.slicer_date": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Date",
+			          "ConceptualProperty": "Slicer Date"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Issued on": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "date.year_month": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Date",
+			          "ConceptualProperty": "Year Month"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Month": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "status.status": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Status",
+			          "ConceptualProperty": "Status"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Status": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "permit.issued_to_company": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Permit",
+			          "ConceptualProperty": "Issued To Company"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Issued to": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "category.category": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Category",
+			          "ConceptualProperty": "Category"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Category": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "location.site": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Location",
+			          "ConceptualProperty": "Site"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Site": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "contact.contact_name": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Contact",
+			          "ConceptualProperty": "Contact Name"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Name": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "branch_option.option": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Branch Option",
+			          "ConceptualProperty": "Option"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Answer": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "signature_fact.signature_description": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Signature Fact",
+			          "ConceptualProperty": "Signature Description"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Signature": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "signature_fact.signed_by": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Signature Fact",
+			          "ConceptualProperty": "Signed By"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Signed by": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "signature_fact.job_title": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Signature Fact",
+			          "ConceptualProperty": "Job Title"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Job title": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "signature_fact.signed_at": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Signature Fact",
+			          "ConceptualProperty": "Signed At"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Signed at": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "permit.url": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Permit",
+			          "ConceptualProperty": "Url"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Link": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
 			    }
 			  }
 			}

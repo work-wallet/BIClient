@@ -1,0 +1,721 @@
+table 'PPE Measures'
+	lineageTag: c22e7b23-9a4d-52f1-ab41-ac897ab8a7b1
+
+	/// Items of PPE currently issued (status Assigned).
+	measure 'PPE Issued' = CALCULATE ( COUNTROWS ( Assignment ), KEEPFILTERS ( 'PPE Status'[PPEStatusCode] = 1 ) )
+		formatString: #,0
+		displayFolder: Issued PPE
+		lineageTag: 9f4ed470-351a-56a8-b000-76aced0ab1fc
+
+	/// Issued PPE past the end of its lifespan, or with a replacement requested (as at the last data refresh).
+	measure 'Replacement Due' = CALCULATE ( [PPE Issued], KEEPFILTERS ( Assignment[Expiry Status Order] IN { 1, 2 } ) )
+		formatString: #,0
+		displayFolder: Issued PPE
+		lineageTag: a777bdb5-9b74-5739-8602-188e3ce00c22
+
+	/// Issued PPE with a replacement requested.
+	measure 'Replacement Requested' = CALCULATE ( [PPE Issued], KEEPFILTERS ( Assignment[Expiry Status Order] = 1 ) )
+		formatString: #,0
+		displayFolder: Issued PPE
+		lineageTag: 8c10cba4-c7aa-54a5-bd92-ec08c11b51f2
+
+	/// Issued PPE past the end of its lifespan, with no replacement requested yet.
+	measure 'Expired PPE' = CALCULATE ( [PPE Issued], KEEPFILTERS ( Assignment[Expiry Status Order] = 2 ) )
+		formatString: #,0
+		displayFolder: Issued PPE
+		lineageTag: 87419e65-b354-57d0-9d8a-f9efd0aae752
+
+	/// Issued PPE reaching the end of its lifespan within 30 days.
+	measure 'Expiring Soon' = CALCULATE ( [PPE Issued], KEEPFILTERS ( Assignment[Expiry Status Order] = 3 ) )
+		formatString: #,0
+		displayFolder: Issued PPE
+		lineageTag: ef90e726-1fbf-5659-9a26-1cad6863aa65
+
+	/// Distinct people with PPE currently issued.
+	measure 'People With PPE' = CALCULATE ( DISTINCTCOUNT ( Assignment[AssignedToContact_key] ), KEEPFILTERS ( 'PPE Status'[PPEStatusCode] = 1 ) )
+		formatString: #,0
+		displayFolder: Issued PPE
+		lineageTag: fc67a01e-a776-54e5-8f62-18db77da8325
+
+	/// Distinct people with at least one item of PPE due for replacement.
+	measure 'People Needing Replacements' = CALCULATE ( DISTINCTCOUNT ( Assignment[AssignedToContact_key] ), 'PPE Status'[PPEStatusCode] = 1, Assignment[Expiry Status Order] IN { 1, 2 } )
+		formatString: #,0
+		displayFolder: Issued PPE
+		lineageTag: 80331288-e557-5c98-b273-f9f1e25db200
+
+	/// Distinct companies whose people have PPE currently issued.
+	measure 'Companies With PPE' = CALCULATE ( DISTINCTCOUNT ( 'Assigned To Contact'[Company] ), KEEPFILTERS ( 'PPE Status'[PPEStatusCode] = 1 ), Assignment )
+		formatString: #,0
+		displayFolder: Issued PPE
+		lineageTag: bd480890-f63c-5d04-b1c9-acec94400b7e
+
+	/// PPE with the most items due for replacement; ties are reported.
+	measure 'Most Common Replacement' =
+			VAR Items = FILTER ( ADDCOLUMNS ( VALUES ( 'PPE Type'[PPE] ), "@Value", [Replacement Due] ), NOT ISBLANK ( [@Value] ) )
+			VAR Target = MAXX ( Items, [@Value] )
+			VAR Leaders = FILTER ( Items, [@Value] = Target )
+			VAR LeaderCount = COUNTROWS ( Leaders )
+			VAR FirstLeader = MINX ( Leaders, 'PPE Type'[PPE] )
+			RETURN
+			    IF ( LeaderCount > 1, FirstLeader & " (+" & ( LeaderCount - 1 ) & " tied)", FirstLeader )
+		displayFolder: Issued PPE
+		lineageTag: d37c6ee4-0634-5807-aec5-5422643916bd
+
+	/// Days since the longest-expired issued item reached the end of its lifespan.
+	measure 'Oldest Expired Days' = CALCULATE ( - MIN ( Assignment[Days To Expiry] ), 'PPE Status'[PPEStatusCode] = 1, Assignment[Expiry Status Order] = 2 )
+		formatString: #,0
+		displayFolder: Issued PPE
+		lineageTag: ea68563d-aa23-505f-a12f-70a437878b55
+
+	/// Items of PPE in stock.
+	measure 'Stock On Hand' = SUM ( Stock[Stock Quantity] )
+		formatString: #,0
+		displayFolder: Stock
+		lineageTag: e9692d8e-e150-525d-9887-aeb505be1b0c
+
+	/// Stock records (a PPE type and variant at a stock location).
+	measure 'Stock Lines' = COUNTROWS ( Stock )
+		formatString: #,0
+		displayFolder: Stock
+		lineageTag: 486ed70b-d59c-5164-85b6-e6c84f7f6936
+
+	/// Stock records at or below their warning quantity.
+	measure 'Low Stock Lines' = CALCULATE ( [Stock Lines], KEEPFILTERS ( Stock[Stock Level Order] = 2 ) )
+		formatString: #,0
+		displayFolder: Stock
+		lineageTag: 332e2cc7-7d32-5934-8f88-240b874a14fd
+
+	/// Stock records with no stock.
+	measure 'Out Of Stock Lines' = CALCULATE ( [Stock Lines], KEEPFILTERS ( Stock[Stock Level Order] = 1 ) )
+		formatString: #,0
+		displayFolder: Stock
+		lineageTag: 2f60f00f-eb21-581e-9cfa-79d57c1007a6
+
+	/// Locations holding stock.
+	measure 'Stock Locations' = CALCULATE ( DISTINCTCOUNT ( Stock[Location_key] ), KEEPFILTERS ( Stock[Stock Quantity] > 0 ) )
+		formatString: #,0
+		displayFolder: Stock
+		lineageTag: f40c3842-ef18-5854-a51f-06d1102219b8
+
+	/// Warning (reorder) quantity set in Work Wallet.
+	measure 'Warning Quantity' = SUM ( Stock[Warning Quantity] )
+		formatString: #,0
+		displayFolder: Stock
+		lineageTag: e426c861-db02-569f-ba5c-35de46ffa115
+
+	/// Items of PPE issued (Assigned actions).
+	measure 'PPE Issued In Period' = CALCULATE ( COUNTROWS ( 'Assignment History' ), KEEPFILTERS ( 'PPE Action'[PPEActionCode] = 4 ) )
+		formatString: #,0
+		displayFolder: Activity
+		lineageTag: 9d5dc582-7be2-593f-a926-48148bc024ac
+
+	/// Items of PPE returned to stock.
+	measure 'PPE Returned' = CALCULATE ( COUNTROWS ( 'Assignment History' ), KEEPFILTERS ( 'PPE Action'[PPEActionCode] = 2 ) )
+		formatString: #,0
+		displayFolder: Activity
+		lineageTag: 96b7257c-f56f-5a12-8641-6d5cb2df2888
+
+	/// Items of PPE replaced.
+	measure 'PPE Replaced' = CALCULATE ( COUNTROWS ( 'Assignment History' ), KEEPFILTERS ( 'PPE Action'[PPEActionCode] = 3 ) )
+		formatString: #,0
+		displayFolder: Activity
+		lineageTag: 00daccdf-7bdd-5f76-aae2-4be9463e81b5
+
+	/// Items of PPE removed (taken out of use, not returned to stock).
+	measure 'PPE Removed' = CALCULATE ( COUNTROWS ( 'Assignment History' ), KEEPFILTERS ( 'PPE Action'[PPEActionCode] = 1 ) )
+		formatString: #,0
+		displayFolder: Activity
+		lineageTag: f6f6041a-1089-5136-ae04-128a4bd80d72
+
+	/// Assignment actions (issued, returned, replaced, removed).
+	measure 'Assignment Actions' = COUNTROWS ( 'Assignment History' )
+		formatString: #,0
+		displayFolder: Activity
+		lineageTag: e365944a-d3b0-58f3-a79b-154819041255
+
+	/// Average items issued per month, over months in context with at least one issued.
+	measure 'Monthly Average Issued' = AVERAGEX ( VALUES ( 'Date'[Month Start] ), [PPE Issued In Period] )
+		formatString: #,0
+		displayFolder: Activity
+		lineageTag: 2ab36961-1fa2-5a82-bbe4-962a760fe199
+
+	/// Monthly average over the whole selected period, for a reference line on monthly charts.
+	measure 'Monthly Average Line' = IF ( MIN ( 'Date'[Date] ) <= TODAY (), CALCULATE ( [Monthly Average Issued], ALLSELECTED ( 'Date' ) ) )
+		formatString: #,0
+		displayFolder: Activity
+		lineageTag: e6d9d9ec-9b42-5f04-bb54-9d5195cc2baf
+
+	/// PPE issued most often in the period; ties are reported.
+	measure 'Most Issued PPE' =
+			VAR Items = FILTER ( ADDCOLUMNS ( VALUES ( 'PPE Type'[PPE] ), "@Value", [PPE Issued In Period] ), NOT ISBLANK ( [@Value] ) )
+			VAR Target = MAXX ( Items, [@Value] )
+			VAR Leaders = FILTER ( Items, [@Value] = Target )
+			VAR LeaderCount = COUNTROWS ( Leaders )
+			VAR FirstLeader = MINX ( Leaders, 'PPE Type'[PPE] )
+			RETURN
+			    IF ( LeaderCount > 1, FirstLeader & " (+" & ( LeaderCount - 1 ) & " tied)", FirstLeader )
+		displayFolder: Activity
+		lineageTag: ff905f8e-b92c-57ae-b279-60dcb0865883
+
+	/// Items added to stock (Stock Created actions).
+	measure 'Stock Added' = CALCULATE ( SUM ( 'Stock History'[Stock Quantity] ), KEEPFILTERS ( 'PPE Action'[PPEActionCode] = 7 ) )
+		formatString: #,0
+		displayFolder: Activity
+		lineageTag: ef9ab218-5241-5987-9c8b-05066611ce03
+
+	/// Items transferred between stock locations.
+	measure 'Stock Transferred' = CALCULATE ( SUM ( 'Stock History'[Stock Quantity] ), KEEPFILTERS ( 'PPE Action'[PPEActionCode] = 6 ) )
+		formatString: #,0
+		displayFolder: Activity
+		lineageTag: 70e83ee7-6664-598d-87b5-e7cc2e9c86ed
+
+	/// Items removed from stock (e.g. damaged or out of date), as a positive number.
+	measure 'Stock Removed' = CALCULATE ( - SUM ( 'Stock History'[Stock Quantity] ), KEEPFILTERS ( 'PPE Action'[PPEActionCode] = 5 ) )
+		formatString: #,0
+		displayFolder: Activity
+		lineageTag: 297f22b8-ea46-5487-9d6a-1fb92949cd34
+
+	/// Stock actions (added, transferred, removed).
+	measure 'Stock Movements' = COUNTROWS ( 'Stock History' )
+		formatString: #,0
+		displayFolder: Activity
+		lineageTag: 8e86cf92-cee5-5be8-85a6-1337540688c2
+
+	/// Quantity moved, as a positive number for every action (removals are stored as negative).
+	measure 'Movement Quantity' = SUMX ( 'Stock History', ABS ( 'Stock History'[Stock Quantity] ) )
+		formatString: #,0
+		displayFolder: Activity
+		lineageTag: ab126a80-9a90-51e3-9653-16ec55838a70
+
+	/// Value of PPE in stock (quantity × the PPE type's value).
+	measure 'Stock Value' = SUM ( Stock[Value] )
+		formatString: #,0.00
+		displayFolder: Value
+		lineageTag: f31d8119-cba6-5196-beb7-4542c4a036c3
+
+	/// Value of PPE currently issued.
+	measure 'Issued Value' = CALCULATE ( SUM ( Assignment[Value] ), KEEPFILTERS ( 'PPE Status'[PPEStatusCode] = 1 ) )
+		formatString: #,0.00
+		displayFolder: Value
+		lineageTag: ddfe4790-4f95-5e87-b0d4-55a91a3d5cc2
+
+	/// Value of issued PPE that was removed (taken out of use).
+	measure 'Removed Value' = CALCULATE ( SUM ( Assignment[Value] ), KEEPFILTERS ( 'PPE Status'[PPEStatusCode] = 4 ) )
+		formatString: #,0.00
+		displayFolder: Value
+		lineageTag: 699c06dd-937f-550c-aeda-15471971c90b
+
+	/// Value of stock removed (by date removed).
+	measure 'Stock Removed Value' = CALCULATE ( - SUM ( 'Stock History'[Value] ), KEEPFILTERS ( 'PPE Action'[PPEActionCode] = 5 ) )
+		formatString: #,0.00
+		displayFolder: Value
+		lineageTag: ef6a28c2-9b13-5084-ab1d-18f2bbb957b0
+
+	/// PPE types and variants with a value set in Work Wallet.
+	measure 'PPE Types With Value' = COUNTROWS ( FILTER ( 'PPE Type', 'PPE Type'[Value] > 0 ) ) + 0
+		formatString: #,0
+		displayFolder: Value
+		lineageTag: 24839fb0-e90b-58b7-8ab7-f0cd1b414d01
+
+	/// Value of one item of the selected PPE type.
+	measure 'Unit Value' = IF ( HASONEVALUE ( 'PPE Type'[PPEType_key] ), MAX ( 'PPE Type'[Value] ) )
+		formatString: #,0.00
+		displayFolder: Value
+		lineageTag: 4c714b01-618a-5004-80d6-fe4de2379dac
+
+	/// PPE types set up in Work Wallet.
+	measure 'PPE Types' = COUNTROWS ( 'PPE Type Master' )
+		formatString: #,0
+		displayFolder: Properties
+		lineageTag: f9d93284-7434-5a6e-bd68-8422c3233b3b
+
+	/// Property values recorded on PPE types.
+	measure 'Property Values' = COUNTROWS ( 'Property Fact' )
+		formatString: #,0
+		displayFolder: Properties
+		lineageTag: 90eeff48-a43e-5530-a4b7-f75213c3f2b3
+
+	/// PPE types with at least one property value.
+	measure 'PPE Types With Properties' = DISTINCTCOUNT ( 'Property Fact'[PPETypeId] )
+		formatString: #,0
+		displayFolder: Properties
+		lineageTag: 5337e5bc-1785-52d2-a987-cb63594ad6ca
+
+	/// Distinct properties with values recorded.
+	measure Properties = CALCULATE ( DISTINCTCOUNT ( 'Property'[Property] ), 'Property Fact' )
+		formatString: #,0
+		displayFolder: Properties
+		lineageTag: c56a36e3-d734-5ae9-b331-c3fb031d8dc7
+
+	/// PPE Issued In Period for the same-length period immediately before the selected dates.
+	measure 'PPE Issued In Period PP' =
+			VAR FirstDay = MIN ( 'Date'[Date] )
+			VAR LastDay = MIN ( MAX ( 'Date'[Date] ), TODAY () )
+			VAR Days = LastDay - FirstDay + 1
+			RETURN
+			    CALCULATE ( [PPE Issued In Period], DATESBETWEEN ( 'Date'[Date], FirstDay - Days, FirstDay - 1 ) )
+		formatString: #,0
+		isHidden
+		displayFolder: Previous Period
+		lineageTag: 335255da-a290-54af-83a1-a26c3c7f75e8
+
+	/// PPE Returned for the same-length period immediately before the selected dates.
+	measure 'PPE Returned PP' =
+			VAR FirstDay = MIN ( 'Date'[Date] )
+			VAR LastDay = MIN ( MAX ( 'Date'[Date] ), TODAY () )
+			VAR Days = LastDay - FirstDay + 1
+			RETURN
+			    CALCULATE ( [PPE Returned], DATESBETWEEN ( 'Date'[Date], FirstDay - Days, FirstDay - 1 ) )
+		formatString: #,0
+		isHidden
+		displayFolder: Previous Period
+		lineageTag: 030552f6-ecea-51c5-8204-9c21cc2c5f9a
+
+	/// PPE Replaced for the same-length period immediately before the selected dates.
+	measure 'PPE Replaced PP' =
+			VAR FirstDay = MIN ( 'Date'[Date] )
+			VAR LastDay = MIN ( MAX ( 'Date'[Date] ), TODAY () )
+			VAR Days = LastDay - FirstDay + 1
+			RETURN
+			    CALCULATE ( [PPE Replaced], DATESBETWEEN ( 'Date'[Date], FirstDay - Days, FirstDay - 1 ) )
+		formatString: #,0
+		isHidden
+		displayFolder: Previous Period
+		lineageTag: 61f3bfdd-05e9-5434-a54e-df2d639ad654
+
+	/// PPE Removed for the same-length period immediately before the selected dates.
+	measure 'PPE Removed PP' =
+			VAR FirstDay = MIN ( 'Date'[Date] )
+			VAR LastDay = MIN ( MAX ( 'Date'[Date] ), TODAY () )
+			VAR Days = LastDay - FirstDay + 1
+			RETURN
+			    CALCULATE ( [PPE Removed], DATESBETWEEN ( 'Date'[Date], FirstDay - Days, FirstDay - 1 ) )
+		formatString: #,0
+		isHidden
+		displayFolder: Previous Period
+		lineageTag: 168511c3-6d89-515b-8d3d-d3ce45f7972b
+
+	/// Stock Added for the same-length period immediately before the selected dates.
+	measure 'Stock Added PP' =
+			VAR FirstDay = MIN ( 'Date'[Date] )
+			VAR LastDay = MIN ( MAX ( 'Date'[Date] ), TODAY () )
+			VAR Days = LastDay - FirstDay + 1
+			RETURN
+			    CALCULATE ( [Stock Added], DATESBETWEEN ( 'Date'[Date], FirstDay - Days, FirstDay - 1 ) )
+		formatString: #,0
+		isHidden
+		displayFolder: Previous Period
+		lineageTag: ffccff8b-9896-5a3b-a235-be3f8f153fd1
+
+	/// Stock Removed for the same-length period immediately before the selected dates.
+	measure 'Stock Removed PP' =
+			VAR FirstDay = MIN ( 'Date'[Date] )
+			VAR LastDay = MIN ( MAX ( 'Date'[Date] ), TODAY () )
+			VAR Days = LastDay - FirstDay + 1
+			RETURN
+			    CALCULATE ( [Stock Removed], DATESBETWEEN ( 'Date'[Date], FirstDay - Days, FirstDay - 1 ) )
+		formatString: #,0
+		isHidden
+		displayFolder: Previous Period
+		lineageTag: 5729532b-127c-5d06-8854-7d1c77072c6d
+
+	/// Stock Transferred for the same-length period immediately before the selected dates.
+	measure 'Stock Transferred PP' =
+			VAR FirstDay = MIN ( 'Date'[Date] )
+			VAR LastDay = MIN ( MAX ( 'Date'[Date] ), TODAY () )
+			VAR Days = LastDay - FirstDay + 1
+			RETURN
+			    CALCULATE ( [Stock Transferred], DATESBETWEEN ( 'Date'[Date], FirstDay - Days, FirstDay - 1 ) )
+		formatString: #,0
+		isHidden
+		displayFolder: Previous Period
+		lineageTag: 1b0802fe-4c38-5b89-bb0d-76c5e1af35c8
+
+	measure 'Issued Trend Label' =
+			VAR Cur = [PPE Issued In Period]
+			VAR Prev = [PPE Issued In Period PP]
+			VAR Change = DIVIDE ( Cur - Prev, Prev )
+			RETURN
+			    IF (
+			        ISBLANK ( Prev ) || Prev = 0,
+			        "No earlier period to compare",
+			        IF ( Change >= 0, "▲ ", "▼ " ) & FORMAT ( ABS ( Change ), "0%" ) & " vs previous period"
+			    )
+		isHidden
+		displayFolder: Labels
+		lineageTag: a8d96094-bc27-5666-b360-9d4b1d6ed007
+
+	measure 'Returned Trend Label' =
+			VAR Cur = [PPE Returned]
+			VAR Prev = [PPE Returned PP]
+			VAR Change = DIVIDE ( Cur - Prev, Prev )
+			RETURN
+			    IF (
+			        ISBLANK ( Prev ) || Prev = 0,
+			        "No earlier period to compare",
+			        IF ( Change >= 0, "▲ ", "▼ " ) & FORMAT ( ABS ( Change ), "0%" ) & " vs previous period"
+			    )
+		isHidden
+		displayFolder: Labels
+		lineageTag: 9949b169-4052-5ebd-9799-60cee004bd74
+
+	measure 'Replaced Trend Label' =
+			VAR Cur = [PPE Replaced]
+			VAR Prev = [PPE Replaced PP]
+			VAR Change = DIVIDE ( Cur - Prev, Prev )
+			RETURN
+			    IF (
+			        ISBLANK ( Prev ) || Prev = 0,
+			        "No earlier period to compare",
+			        IF ( Change >= 0, "▲ ", "▼ " ) & FORMAT ( ABS ( Change ), "0%" ) & " vs previous period"
+			    )
+		isHidden
+		displayFolder: Labels
+		lineageTag: 533bfe74-8be5-5f1e-9009-c778281ca2bb
+
+	measure 'Removed Trend Label' =
+			VAR Cur = [PPE Removed]
+			VAR Prev = [PPE Removed PP]
+			VAR Change = DIVIDE ( Cur - Prev, Prev )
+			RETURN
+			    IF (
+			        ISBLANK ( Prev ) || Prev = 0,
+			        "No earlier period to compare",
+			        IF ( Change >= 0, "▲ ", "▼ " ) & FORMAT ( ABS ( Change ), "0%" ) & " vs previous period"
+			    )
+		isHidden
+		displayFolder: Labels
+		lineageTag: 222d6711-f366-53a6-8ec6-af62fbe9c812
+
+	measure 'Stock Added Trend Label' =
+			VAR Cur = [Stock Added]
+			VAR Prev = [Stock Added PP]
+			VAR Change = DIVIDE ( Cur - Prev, Prev )
+			RETURN
+			    IF (
+			        ISBLANK ( Prev ) || Prev = 0,
+			        "No earlier period to compare",
+			        IF ( Change >= 0, "▲ ", "▼ " ) & FORMAT ( ABS ( Change ), "0%" ) & " vs previous period"
+			    )
+		isHidden
+		displayFolder: Labels
+		lineageTag: 25579d6f-98e3-5e91-b632-20b943f66804
+
+	measure 'Stock Removed Trend Label' =
+			VAR Cur = [Stock Removed]
+			VAR Prev = [Stock Removed PP]
+			VAR Change = DIVIDE ( Cur - Prev, Prev )
+			RETURN
+			    IF (
+			        ISBLANK ( Prev ) || Prev = 0,
+			        "No earlier period to compare",
+			        IF ( Change >= 0, "▲ ", "▼ " ) & FORMAT ( ABS ( Change ), "0%" ) & " vs previous period"
+			    )
+		isHidden
+		displayFolder: Labels
+		lineageTag: 4337f396-8e2c-54a9-b463-900f95624f0d
+
+	measure 'Stock Transferred Trend Label' =
+			VAR Cur = [Stock Transferred]
+			VAR Prev = [Stock Transferred PP]
+			VAR Change = DIVIDE ( Cur - Prev, Prev )
+			RETURN
+			    IF (
+			        ISBLANK ( Prev ) || Prev = 0,
+			        "No earlier period to compare",
+			        IF ( Change >= 0, "▲ ", "▼ " ) & FORMAT ( ABS ( Change ), "0%" ) & " vs previous period"
+			    )
+		isHidden
+		displayFolder: Labels
+		lineageTag: 13dbd68d-b91a-5ca3-8934-8a1a4b6d5126
+
+	measure 'Replacement Due Label' =
+			VAR IssuedCount = [PPE Issued]
+			RETURN
+			    IF ( IssuedCount > 0, FORMAT ( DIVIDE ( [Replacement Due] + 0, IssuedCount ), "0%" ) & " of issued PPE" )
+		isHidden
+		displayFolder: Labels
+		lineageTag: 2deb2ae6-39d4-5968-82d8-4a416794240a
+
+	measure 'People Needing Replacements Label' =
+			VAR PeopleCount = [People Needing Replacements] + 0
+			RETURN
+			    IF ( NOT ISBLANK ( [PPE Issued] ), FORMAT ( PeopleCount, "#,0" ) & IF ( PeopleCount = 1, " person affected", " people affected" ) )
+		isHidden
+		displayFolder: Labels
+		lineageTag: 8472e708-e461-530a-9fcc-57884f76c108
+
+	measure 'Issued Label' =
+			VAR PeopleCount = [People With PPE] + 0
+			RETURN
+			    IF ( NOT ISBLANK ( [PPE Issued] ), "To " & FORMAT ( PeopleCount, "#,0" ) & IF ( PeopleCount = 1, " person", " people" ) )
+		isHidden
+		displayFolder: Labels
+		lineageTag: a487fd78-310e-5473-b8be-01cefbd0b5b4
+
+	measure 'Companies Label' =
+			VAR CompanyCount = [Companies With PPE] + 0
+			RETURN
+			    IF ( NOT ISBLANK ( [PPE Issued] ), "Across " & FORMAT ( CompanyCount, "#,0" ) & IF ( CompanyCount = 1, " company", " companies" ) )
+		isHidden
+		displayFolder: Labels
+		lineageTag: d37849e7-a2ae-5ae6-8cd3-f775deebf834
+
+	measure 'Expiring Soon Label' = "Reaching the end of their lifespan within 30 days"
+		isHidden
+		displayFolder: Labels
+		lineageTag: d6d07135-3df3-5714-87da-ff5d45540b66
+
+	measure 'Expired Label' =
+			VAR Oldest = [Oldest Expired Days]
+			RETURN
+			    IF ( NOT ISBLANK ( Oldest ), "Oldest expired " & FORMAT ( Oldest, "#,0" ) & " days ago", "None past their lifespan" )
+		isHidden
+		displayFolder: Labels
+		lineageTag: 8fb9eddc-ca4c-5812-b758-28500e1cc134
+
+	measure 'Replacement Requested Label' = "Requested in Work Wallet, not yet replaced"
+		isHidden
+		displayFolder: Labels
+		lineageTag: 483a515a-9412-5f1c-8b46-3178e60d3a28
+
+	measure 'Most Common Replacement Text' =
+			VAR LabelText = [Most Common Replacement]
+			RETURN
+			    SWITCH (
+			        TRUE (),
+			        ISBLANK ( LabelText ), "No replacements due",
+			        LEN ( LabelText ) > 40, LEFT ( LabelText, 39 ) & "…",
+			        LabelText
+			    )
+		isHidden
+		displayFolder: Labels
+		lineageTag: 8c521f0e-8010-54a8-8afb-ea0e88b79d35
+
+	measure 'Most Common Replacement Label' =
+			VAR Types = ADDCOLUMNS ( VALUES ( 'PPE Type'[PPE] ), "@Due", [Replacement Due] )
+			VAR Highest = MAXX ( Types, [@Due] )
+			RETURN
+			    IF ( Highest > 0, FORMAT ( Highest, "#,0" ) & " due for replacement" )
+		isHidden
+		displayFolder: Labels
+		lineageTag: 208c5a85-964a-589f-9436-ade9bb9507df
+
+	measure 'Stock On Hand Label' =
+			VAR LocationCount = [Stock Locations] + 0
+			RETURN
+			    IF ( NOT ISBLANK ( [Stock Lines] ), "At " & FORMAT ( LocationCount, "#,0" ) & IF ( LocationCount = 1, " location", " locations" ) )
+		isHidden
+		displayFolder: Labels
+		lineageTag: 066779b7-c745-5157-ae66-f24d1638f54d
+
+	measure 'Low Stock Label' =
+			VAR WithWarning = CALCULATE ( [Stock Lines], KEEPFILTERS ( Stock[Warning Quantity] > 0 ) ) + 0
+			RETURN
+			    IF ( NOT ISBLANK ( [Stock Lines] ), "Of " & FORMAT ( WithWarning, "#,0" ) & " with a warning quantity set" )
+		isHidden
+		displayFolder: Labels
+		lineageTag: 7559e8d0-aab5-59e8-b6fa-318f109a75dd
+
+	measure 'Out Of Stock Label' =
+			VAR LineCount = [Stock Lines]
+			RETURN
+			    IF ( LineCount > 0, FORMAT ( DIVIDE ( [Out Of Stock Lines] + 0, LineCount ), "0%" ) & " of stock records" )
+		isHidden
+		displayFolder: Labels
+		lineageTag: 0a6a5c61-c0c1-5ec0-8324-8d4711feaee8
+
+	measure 'Stock Value Label' =
+			VAR WithValue = [PPE Types With Value]
+			VAR TypeCount = COUNTROWS ( 'PPE Type' )
+			RETURN
+			    IF ( TypeCount > 0, FORMAT ( WithValue, "#,0" ) & " of " & FORMAT ( TypeCount, "#,0" ) & " PPE types have a value set" )
+		isHidden
+		displayFolder: Labels
+		lineageTag: ee09e967-b34d-5272-8a60-a6cb365ddd81
+
+	measure 'Issued Value Label' =
+			VAR IssuedCount = [PPE Issued]
+			RETURN
+			    IF ( IssuedCount > 0, "For " & FORMAT ( IssuedCount, "#,0" ) & " items issued" )
+		isHidden
+		displayFolder: Labels
+		lineageTag: 1eb405f4-7123-59b3-9268-756a751cdc4f
+
+	measure 'Removed Value Label' = "Issued PPE taken out of use"
+		isHidden
+		displayFolder: Labels
+		lineageTag: 451d76b0-3e77-510a-a248-a8906de165e9
+
+	measure 'Stock Removed Value Label' = "Stock removed from stores"
+		isHidden
+		displayFolder: Labels
+		lineageTag: de93e0a0-12c0-5e4f-a7b9-a1cb50bfa4ec
+
+	measure 'PPE Types Label' = "Types set up in Work Wallet"
+		isHidden
+		displayFolder: Labels
+		lineageTag: 8fb3c047-fb3d-55d3-a407-d2f022ea37cc
+
+	measure 'Peak Month Label' =
+			VAR Months = ADDCOLUMNS ( VALUES ( 'Date'[Month Start] ), "@Issued", [PPE Issued In Period] )
+			VAR Peak = MAXX ( Months, [@Issued] )
+			VAR PeakMonth = MAXX ( FILTER ( Months, [@Issued] = Peak ), 'Date'[Month Start] )
+			RETURN
+			    IF ( NOT ISBLANK ( Peak ), "Peak " & FORMAT ( Peak, "#,0" ) & " in " & FORMAT ( PeakMonth, "mmm yyyy" ) )
+		isHidden
+		displayFolder: Labels
+		lineageTag: 6418b474-d581-5468-9e9c-a94e5bab993a
+
+	measure 'Most Issued PPE Text' =
+			VAR LabelText = [Most Issued PPE]
+			RETURN
+			    SWITCH (
+			        TRUE (),
+			        ISBLANK ( LabelText ), "None issued in this period",
+			        LEN ( LabelText ) > 40, LEFT ( LabelText, 39 ) & "…",
+			        LabelText
+			    )
+		isHidden
+		displayFolder: Labels
+		lineageTag: af6eca2e-db8f-56b0-93d4-689e31675165
+
+	measure 'Most Issued PPE Label' =
+			VAR Types = ADDCOLUMNS ( VALUES ( 'PPE Type'[PPE] ), "@Issued", [PPE Issued In Period] )
+			VAR Highest = MAXX ( Types, [@Issued] )
+			RETURN
+			    IF ( Highest > 0, FORMAT ( Highest, "#,0" ) & " issued" )
+		isHidden
+		displayFolder: Labels
+		lineageTag: ff2133f1-cc3b-5c46-b551-27dce45cee9e
+
+	/// Subtitle for the properties table that explains an empty table.
+	measure 'Properties Subtitle' = IF ( ISBLANK ( [Property Values] ), "No PPE properties recorded in Work Wallet", "Property values recorded on each PPE type and variant" )
+		isHidden
+		displayFolder: Labels
+		lineageTag: 987a423d-30be-570f-9da4-c12b7803aa18
+
+	measure 'Property Values Label' = "Recorded on PPE types"
+		isHidden
+		displayFolder: Labels
+		lineageTag: ef7d4b61-2434-5343-9e6e-771c545fca35
+
+	measure 'PPE Types With Properties Label' = "With at least one property value"
+		isHidden
+		displayFolder: Labels
+		lineageTag: 8a6fa4e5-30d5-5d4a-aba2-8708b76e4582
+
+	measure 'Properties Label' = "Distinct properties with values"
+		isHidden
+		displayFolder: Labels
+		lineageTag: 2928c852-8736-54cd-9c82-7d4030adf77c
+
+	/// Text for the drillthrough button to a person's PPE; reflects the person selected in the table.
+	measure 'Person Details Button Label' =
+			IF (
+			    HASONEVALUE ( 'Assigned To Contact'[Contact] ),
+			    "View " & SELECTEDVALUE ( 'Assigned To Contact'[Contact Name] ) & "'s PPE  ›",
+			    "Select a person to view their PPE"
+			)
+		isHidden
+		displayFolder: Labels
+		lineageTag: c97f3eae-b0d9-5a01-a310-bd67edc293b4
+
+	/// Name of the selected person.
+	measure 'Person Name' = IF ( HASONEVALUE ( 'Assigned To Contact'[Contact] ), MAX ( 'Assigned To Contact'[Contact Name] ) )
+		isHidden
+		displayFolder: Labels
+		lineageTag: b2546f1e-dcd8-5ac5-8a5c-8e97ce3350b3
+
+	/// Company (or companies, if the person is a contact at several) of the selected person.
+	measure 'Person Company' =
+			IF (
+			    HASONEVALUE ( 'Assigned To Contact'[Contact] ),
+			    VAR Companies = FILTER ( VALUES ( 'Assigned To Contact'[Company] ), LEN ( 'Assigned To Contact'[Company] ) > 0 )
+			    RETURN
+			        IF ( ISEMPTY ( Companies ), "(No company)", CONCATENATEX ( Companies, 'Assigned To Contact'[Company], ", ", 'Assigned To Contact'[Company], ASC ) )
+			)
+		isHidden
+		displayFolder: Labels
+		lineageTag: 5c6596e2-3cd4-5c71-996d-df625b3898b5
+
+	/// Date PPE was last issued to the selected person.
+	measure 'Person Last Issued' =
+			VAR LastIssued = CALCULATE ( MAX ( Assignment[Assigned On] ) )
+			RETURN
+			    IF ( NOT ISBLANK ( LastIssued ), FORMAT ( LastIssued, "dd/mm/yyyy" ), "Never issued" )
+		isHidden
+		displayFolder: Labels
+		lineageTag: 7302fc21-bbe5-51f9-afd1-45ac38ec268d
+
+	/// Semantic colour for favourable changes; matches the theme's 'good' colour.
+	measure 'Colour Good' = "#2E9E6B"
+		isHidden
+		displayFolder: Formatting
+		lineageTag: 728fa389-d9ea-5eb9-8ee4-831a340458cd
+
+	/// Semantic colour for unfavourable changes; matches the theme's 'bad' colour.
+	measure 'Colour Bad' = "#D6493A"
+		isHidden
+		displayFolder: Formatting
+		lineageTag: 0b264724-d5b7-5755-bcdb-293ff9d271e1
+
+	/// Semantic colour for no change or no comparison; matches the theme's secondary text colour.
+	measure 'Colour Neutral' = "#4A5568"
+		isHidden
+		displayFolder: Formatting
+		lineageTag: 38d8b5bb-0567-5dea-aa44-299cf5896c48
+
+	/// Issuing more PPE isn't good or bad in itself, so the trend is neutral.
+	measure 'Issued Trend Colour' = [Colour Neutral]
+		isHidden
+		displayFolder: Formatting
+		lineageTag: 4e1f694e-aa22-5207-bd01-5ef730ab025d
+
+	measure 'Replacement Due Colour' = IF ( [Replacement Due] > 0, [Colour Bad], [Colour Neutral] )
+		isHidden
+		displayFolder: Formatting
+		lineageTag: efda7868-66db-5cbb-873f-422a8d5e4eb5
+
+	measure 'Low Stock Colour' = IF ( [Low Stock Lines] + [Out Of Stock Lines] > 0, [Colour Bad], [Colour Neutral] )
+		isHidden
+		displayFolder: Formatting
+		lineageTag: 46749281-7f83-50e6-82cc-501f86dd973f
+
+	/// Text colour for an expiry status (replacement due, expires soon, in date).
+	measure 'Expiry Status Colour' =
+			SWITCH (
+			    SELECTEDVALUE ( Assignment[Expiry Status Order] ),
+			    1, "#D6493A",
+			    2, "#D6493A",
+			    3, "#C9901A",
+			    4, "#2E9E6B",
+			    "#4A5568"
+			)
+		isHidden
+		displayFolder: Formatting
+		lineageTag: 06efd521-7a57-5d8e-90d2-d1e6f91d8efd
+
+	/// Text colour for a stock level (out of stock, at or below warning level).
+	measure 'Stock Level Colour' = SWITCH ( SELECTEDVALUE ( Stock[Stock Level Order] ), 1, "#D6493A", 2, "#C9901A", "#4A5568" )
+		isHidden
+		displayFolder: Formatting
+		lineageTag: 735a108b-366a-5982-a29c-2babc06d9168
+
+	column Value
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 55b529cd-90c8-5c51-8af3-739f3cb1baec
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Value]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'PPE Measures' = calculated
+		mode: import
+		source = { 1 }
+
+	annotation PBI_Id = 32592013614f5d3eb2f7d75b73c10622
+

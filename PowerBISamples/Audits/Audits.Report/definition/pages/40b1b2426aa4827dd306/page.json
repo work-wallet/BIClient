@@ -1,7 +1,7 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/page/2.0.0/schema.json",
   "name": "40b1b2426aa4827dd306",
-  "displayName": "Audits Completed",
+  "displayName": "Audits completed",
   "displayOption": "FitToPage",
   "height": 720,
   "width": 1280,

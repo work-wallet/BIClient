@@ -9,6 +9,15 @@
         "page": "2.3.0"
       },
       "type": "SharedResources"
+    },
+    "customTheme": {
+      "name": "WorkWallet.json",
+      "reportVersionAtImport": {
+        "visual": "2.4.0",
+        "report": "3.0.0",
+        "page": "2.3.0"
+      },
+      "type": "RegisteredResources"
     }
   },
   "filterConfig": {
@@ -45,8 +54,7 @@
         }
       },
       {
-        "name": "1dd804a4264469c1fb38",
-        "ordinal": 1,
+        "name": "7429f29c36a4549b8a80",
         "field": {
           "Column": {
             "Expression": {
@@ -62,7 +70,7 @@
           "Version": 2,
           "From": [
             {
-              "Name": "a",
+              "Name": "r",
               "Entity": "Asset Status",
               "Type": 0
             }
@@ -76,7 +84,7 @@
                       "Column": {
                         "Expression": {
                           "SourceRef": {
-                            "Source": "a"
+                            "Source": "r"
                           }
                         },
                         "Property": "Asset Status"
@@ -97,14 +105,181 @@
             }
           ]
         },
-        "howCreated": "User",
-        "objects": {
-          "general": [
+        "howCreated": "User"
+      },
+      {
+        "name": "13033c4d77815085b687",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Asset Status"
+              }
+            },
+            "Property": "Asset Status"
+          }
+        },
+        "type": "Categorical",
+        "filter": {
+          "Version": 2,
+          "From": [
             {
-              "properties": {}
+              "Name": "r",
+              "Entity": "Asset Status",
+              "Type": 0
+            }
+          ],
+          "Where": [
+            {
+              "Condition": {
+                "Not": {
+                  "Expression": {
+                    "In": {
+                      "Expressions": [
+                        {
+                          "Column": {
+                            "Expression": {
+                              "SourceRef": {
+                                "Source": "r"
+                              }
+                            },
+                            "Property": "Asset Status"
+                          }
+                        }
+                      ],
+                      "Values": [
+                        [
+                          {
+                            "Literal": {
+                              "Value": "'Deleted'"
+                            }
+                          }
+                        ]
+                      ]
+                    }
+                  }
+                }
+              }
             }
           ]
-        }
+        },
+        "howCreated": "User"
+      },
+      {
+        "name": "d1ae052914d251e6a549",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Inspection Status"
+              }
+            },
+            "Property": "Inspection Status"
+          }
+        },
+        "type": "Categorical",
+        "filter": {
+          "Version": 2,
+          "From": [
+            {
+              "Name": "r",
+              "Entity": "Inspection Status",
+              "Type": 0
+            }
+          ],
+          "Where": [
+            {
+              "Condition": {
+                "Not": {
+                  "Expression": {
+                    "In": {
+                      "Expressions": [
+                        {
+                          "Column": {
+                            "Expression": {
+                              "SourceRef": {
+                                "Source": "r"
+                              }
+                            },
+                            "Property": "Inspection Status"
+                          }
+                        }
+                      ],
+                      "Values": [
+                        [
+                          {
+                            "Literal": {
+                              "Value": "'Deleted'"
+                            }
+                          }
+                        ]
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        },
+        "howCreated": "User"
+      },
+      {
+        "name": "ef23cc71d97459ccbe4f",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Observation"
+              }
+            },
+            "Property": "Deleted"
+          }
+        },
+        "type": "Categorical",
+        "filter": {
+          "Version": 2,
+          "From": [
+            {
+              "Name": "r",
+              "Entity": "Observation",
+              "Type": 0
+            }
+          ],
+          "Where": [
+            {
+              "Condition": {
+                "Not": {
+                  "Expression": {
+                    "In": {
+                      "Expressions": [
+                        {
+                          "Column": {
+                            "Expression": {
+                              "SourceRef": {
+                                "Source": "r"
+                              }
+                            },
+                            "Property": "Deleted"
+                          }
+                        }
+                      ],
+                      "Values": [
+                        [
+                          {
+                            "Literal": {
+                              "Value": "true"
+                            }
+                          }
+                        ]
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        },
+        "howCreated": "User"
       }
     ],
     "filterSortOrder": "Custom"
@@ -146,6 +321,17 @@
           "name": "CY25SU11",
           "path": "BaseThemes/CY25SU11.json",
           "type": "BaseTheme"
+        }
+      ]
+    },
+    {
+      "name": "RegisteredResources",
+      "type": "RegisteredResources",
+      "items": [
+        {
+          "name": "WorkWallet.json",
+          "path": "WorkWallet.json",
+          "type": "CustomTheme"
         }
       ]
     }

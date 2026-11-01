@@ -122,7 +122,7 @@ table Assignment
 
 	column 'Replacement Requested On'
 		dataType: dateTime
-		formatString: General Date
+		formatString: dd/mm/yyyy hh:nn
 		lineageTag: 195c30fc-3d43-415d-a2bc-e1b0b48c7329
 		summarizeBy: none
 		sourceColumn: Replacement Requested On
@@ -226,6 +226,53 @@ table Assignment
 			)
 		lineageTag: 19bdd8c5-452f-4ee9-9820-1f52dd050317
 		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Days until the item reaches the end of its lifespan (negative once expired), as at the last data refresh.
+	column 'Days To Expiry' =
+			IF (
+			    NOT ISBLANK ( Assignment[Expired On] ) && Assignment[Expired On] > DATE ( 1900, 1, 1 ),
+			    INT ( Assignment[Expired On] - TODAY () )
+			)
+		dataType: int64
+		formatString: #,0
+		lineageTag: 8192f3ba-7e08-5f50-bd90-ee27f2d65869
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Sort order for Expiry Status.
+	column 'Expiry Status Order' =
+			VAR Requested = NOT ISBLANK ( Assignment[Replacement Requested On] ) && Assignment[Replacement Requested On] > DATE ( 1900, 1, 1 )
+			VAR Days = Assignment[Days To Expiry]
+			RETURN
+			    IF (
+			        RELATED ( 'PPE Status'[PPEStatusCode] ) = 1,
+			        SWITCH ( TRUE (), Requested, 1, ISBLANK ( Days ), 5, Days <= 0, 2, Days <= 30, 3, 4 )
+			    )
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 924e25af-20cd-511b-b4b4-54413139cd73
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	/// For PPE currently issued: whether it needs replacing (requested or past its lifespan), expires within 30 days, or is in date. As at the last data refresh.
+	column 'Expiry Status' =
+			SWITCH (
+			    Assignment[Expiry Status Order],
+			    1, "Replacement requested",
+			    2, "Expired",
+			    3, "Expires within 30 days",
+			    4, "In date",
+			    5, "No expiry date"
+			)
+		dataType: string
+		lineageTag: fe3ff4c7-3893-524d-82f4-a9ed6ab93c32
+		summarizeBy: none
+		sortByColumn: 'Expiry Status Order'
 
 		annotation SummarizationSetBy = Automatic
 

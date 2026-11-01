@@ -226,3 +226,7 @@ relationship 04565500-6280-c638-8526-3332dddd0a07
 	fromColumn: 'Signature Fact'.Contact_key
 	toColumn: 'Signed By Contact'.Contact_key
 
+relationship 6809f92c-faad-596b-b7a4-c6ac26601f51
+	fromColumn: Permit.'Issued Date'
+	toColumn: Date.Date
+

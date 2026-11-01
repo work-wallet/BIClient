@@ -23,6 +23,8 @@ ref table LocalDateTable_705796de-106f-48c0-811d-f11b3483f209
 ref table 'Taken Status'
 ref table Wallet
 ref table Contact
+ref table Date
+ref table 'Induction Measures'
 
 ref cultureInfo en-GB
 

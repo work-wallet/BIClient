@@ -141,7 +141,7 @@ table Asset
 			    MAXX(
 			        FILTER(
 			            RELATEDTABLE(Inspection),
-			            RELATED('Inspection Status'[Inspection Status]) = "Complete"
+			            RELATED('Inspection Status'[InspectionStatusCode]) = 0
 			        ),
 			        Inspection[Inspected On]
 			    ),
@@ -198,6 +198,45 @@ table Asset
 		lineageTag: 241ca1cd-bded-47e6-a047-7e9bbc3a9ed3
 		dataCategory: WebUrl
 		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Days since the asset's last completed inspection, as at the last data refresh. Blank if never inspected.
+	column 'Days Since Inspection' = IF ( NOT ISBLANK ( Asset[Last Inspection Date] ), INT ( TODAY () - Asset[Last Inspection Date] ) )
+		dataType: int64
+		formatString: #,0
+		lineageTag: 29c96552-c58a-5646-b49d-87a054dc04d8
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Sort order for Inspection Band.
+	column 'Inspection Band Order' =
+			VAR Days = Asset[Days Since Inspection]
+			RETURN
+			    SWITCH ( TRUE (), ISBLANK ( Days ), 5, Days <= 30, 1, Days <= 90, 2, Days <= 365, 3, 4 )
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 95dc92ed-d4d3-5c80-b04e-2db1ce1a0b37
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	/// How long ago the asset was last inspected (completed inspections), as at the last data refresh.
+	column 'Inspection Band' =
+			SWITCH (
+			    Asset[Inspection Band Order],
+			    1, "Within 30 days",
+			    2, "31–90 days",
+			    3, "91–365 days",
+			    4, "Over a year",
+			    "Never inspected"
+			)
+		dataType: string
+		lineageTag: 8ddd0626-e2b6-5f29-ba79-6c010c296f9b
+		summarizeBy: none
+		sortByColumn: 'Inspection Band Order'
 
 		annotation SummarizationSetBy = Automatic
 

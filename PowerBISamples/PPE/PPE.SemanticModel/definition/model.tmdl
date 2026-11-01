@@ -36,6 +36,8 @@ ref table 'Property Fact'
 ref table 'PPE Type Master'
 ref table Group
 ref table 'Group Fact'
+ref table Date
+ref table 'PPE Measures'
 
 ref cultureInfo en-GB
 

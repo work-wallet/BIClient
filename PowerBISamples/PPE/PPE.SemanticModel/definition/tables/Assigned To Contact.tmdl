@@ -60,10 +60,14 @@ table 'Assigned To Contact'
 
 		annotation SummarizationSetBy = User
 
+	/// The person, for lists and the Person's PPE page: name and email, so the same person's PPE at different companies is shown together and people with the same name are kept apart. Without an email, name and company (the most specific identity available).
 	column Contact = ```
 			
 			    IF('Assigned To Contact'[Email] = "",
-			        'Assigned To Contact'[Contact Name],
+			        IF('Assigned To Contact'[Company] = "",
+			            'Assigned To Contact'[Contact Name],
+			            'Assigned To Contact'[Contact Name] & " (" & 'Assigned To Contact'[Company] & ")"
+			        ),
 			        'Assigned To Contact'[Contact Name] & " (" & 'Assigned To Contact'[Email] & ")"
 			    )
 			```

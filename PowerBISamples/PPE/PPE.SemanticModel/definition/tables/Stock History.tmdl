@@ -155,6 +155,16 @@ table 'Stock History'
 
 		annotation SummarizationSetBy = User
 
+	/// Date part of Actioned On; relates the table to the Date table.
+	column 'Actioned Date' = DATE ( YEAR ( 'Stock History'[Actioned On] ), MONTH ( 'Stock History'[Actioned On] ), DAY ( 'Stock History'[Actioned On] ) )
+		dataType: dateTime
+		isHidden
+		formatString: dd/mm/yyyy
+		lineageTag: 0b9fbb31-05f8-5081-aeb4-e64e20b7fce9
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
 	partition 'Stock History' = m
 		mode: import
 		source =

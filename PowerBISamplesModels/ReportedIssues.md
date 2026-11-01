@@ -19,6 +19,13 @@ erDiagram
         calc IssueCount
         calc ReportedBy
         attr UnderInvestigationDate
+        calc InvestigationStartedOn
+        calc ClosedOn
+        calc HoursToReport
+        calc DaysToStartInvestigation
+        calc DaysToClose
+        calc AgeBand
+        calc Url
     }
     "Location" {
         attr LocationType
@@ -31,6 +38,8 @@ erDiagram
         attr LocationExternalIdentifier
         attr AllDepartments
         attr SiteStatus
+        calc CompanyName
+        calc SiteName
     }
     "Severity" {
         attr Severity
@@ -49,12 +58,21 @@ erDiagram
         attr Email
         attr Company
     }
+    "Date" {
+        attr Date
+        calc Year
+        calc Month
+        calc MonthStart
+        calc YearMonth
+        calc SlicerDate
+    }
     "Issue" }o--|| "Location" : "Location_key"
     "Issue" }o--|| "Category" : "ReportedIssueCategory_key"
     "Issue" }o--|| "Severity" : "ReportedIssueSeverity_key"
     "Issue" }o--|| "Status" : "ReportedIssueStatus_key"
     "Issue" }o--|| "Contact" : "ReportedByContact_key"
     "Issue" }o..|| "Contact" : "LeadInvestigatorContact_key"
+    "Issue" }o--|| "Date" : "Occurred Date"
 ```
 
 ## Reported Issues - Body Part
@@ -74,6 +92,13 @@ erDiagram
         calc IssueCount
         calc ReportedBy
         attr UnderInvestigationDate
+        calc InvestigationStartedOn
+        calc ClosedOn
+        calc HoursToReport
+        calc DaysToStartInvestigation
+        calc DaysToClose
+        calc AgeBand
+        calc Url
     }
     "Body Part Fact" {
         calc BodyPartCount
@@ -108,6 +133,13 @@ erDiagram
         calc IssueCount
         calc ReportedBy
         attr UnderInvestigationDate
+        calc InvestigationStartedOn
+        calc ClosedOn
+        calc HoursToReport
+        calc DaysToStartInvestigation
+        calc DaysToClose
+        calc AgeBand
+        calc Url
     }
     "Branch Option Fact" {
         calc BranchOptionCount
@@ -138,6 +170,13 @@ erDiagram
         calc IssueCount
         calc ReportedBy
         attr UnderInvestigationDate
+        calc InvestigationStartedOn
+        calc ClosedOn
+        calc HoursToReport
+        calc DaysToStartInvestigation
+        calc DaysToClose
+        calc AgeBand
+        calc Url
     }
     "Option Select Fact" {
         calc OptionSelectCount
@@ -169,6 +208,13 @@ erDiagram
         calc IssueCount
         calc ReportedBy
         attr UnderInvestigationDate
+        calc InvestigationStartedOn
+        calc ClosedOn
+        calc HoursToReport
+        calc DaysToStartInvestigation
+        calc DaysToClose
+        calc AgeBand
+        calc Url
     }
     "Person Fact" {
         calc PersonCount
@@ -215,6 +261,13 @@ erDiagram
         calc IssueCount
         calc ReportedBy
         attr UnderInvestigationDate
+        calc InvestigationStartedOn
+        calc ClosedOn
+        calc HoursToReport
+        calc DaysToStartInvestigation
+        calc DaysToClose
+        calc AgeBand
+        calc Url
     }
     "Root Cause Analysis Fact" {
         attr RootCauseAnalysis
@@ -244,6 +297,13 @@ erDiagram
         calc IssueCount
         calc ReportedBy
         attr UnderInvestigationDate
+        calc InvestigationStartedOn
+        calc ClosedOn
+        calc HoursToReport
+        calc DaysToStartInvestigation
+        calc DaysToClose
+        calc AgeBand
+        calc Url
     }
     "Investigation Team Fact" {
     }
@@ -289,6 +349,13 @@ erDiagram
         calc IssueCount
         calc ReportedBy
         attr UnderInvestigationDate
+        calc InvestigationStartedOn
+        calc ClosedOn
+        calc HoursToReport
+        calc DaysToStartInvestigation
+        calc DaysToClose
+        calc AgeBand
+        calc Url
     }
     "Unit" {
     }
@@ -314,6 +381,13 @@ erDiagram
         calc IssueCount
         calc ReportedBy
         attr UnderInvestigationDate
+        calc InvestigationStartedOn
+        calc ClosedOn
+        calc HoursToReport
+        calc DaysToStartInvestigation
+        calc DaysToClose
+        calc AgeBand
+        calc Url
     }
     "Date Time Question" {
         attr Question
@@ -348,6 +422,13 @@ erDiagram
         calc IssueCount
         calc ReportedBy
         attr UnderInvestigationDate
+        calc InvestigationStartedOn
+        calc ClosedOn
+        calc HoursToReport
+        calc DaysToStartInvestigation
+        calc DaysToClose
+        calc AgeBand
+        calc Url
     }
     "Signature Contact" {
         attr ContactName
@@ -368,4 +449,156 @@ erDiagram
     "Signature Fact" }o--|| "Issue" : "ReportedIssue_key"
     "Signature Fact" }o--|| "Signature Contact" : "Contact_key"
     "Signature Fact" }o--|| "Signature Person Option Type" : "ReportedIssuePersonOptionType_key"
+```
+
+## Reported Issues - Measures
+
+```mermaid
+---
+config:
+  theme: neutral
+---
+erDiagram
+    "Issue Measures" {
+        measure Issues
+        measure OpenIssues
+        measure UnderInvestigation
+        measure ClosedIssues
+        measure ClosureRate
+        measure SeriousIssues
+        measure SeriousShare
+        measure MonthlyAverageIssues
+        measure MonthlyAverageLine
+        measure MostCommonCategory
+        measure LocationsWithIssues
+        measure TopLocation
+        measure MedianHoursToReport
+        measure AverageDaysToStartInvestigation
+        measure AverageDaysToClose
+        measure OpenOver30Days
+        measure SeriousAwaitingInvestigation
+        measure IssuesWithRootCauseAnalysis
+        measure RootCauseIssues
+        measure ImmediateCauseIssues
+        measure TopRootCause
+        measure TopImmediateCause
+        measure InjuryReports
+        measure InjuredBodyParts
+        measure SeriousInjuryReports
+        measure MostAffectedBodyPart
+        measure MostAffectedBodyArea
+        measure PeopleRecorded
+        measure IssuesWithPeople
+        measure PeopleTypedInShare
+        measure MostCommonPersonQuestion
+        measure NumericAnswers
+        measure NumericTotal
+        measure NumericAverage
+        measure NumericHighest
+        measure IssuesWithNumericAnswers
+        measure DateTimeAnswers
+        measure AverageHoursAfterOccurrence
+        measure Signatures
+        measure Signed
+        measure AwaitingSignature
+        measure AverageDaysToSign
+    }
+    "Action Measures" {
+        measure Actions
+        measure OpenActions
+        measure ClosedActions
+        measure DraftActions
+        measure OverdueActions
+        measure SeriousOverdueActions
+        measure SeriousOpenActions
+        measure AverageDaysOverdue
+        measure OldestOverdueDays
+        measure ActionsWithoutDueDate
+        measure IssueOpenActions
+        measure Assignees
+        measure MonthlyAverageActions
+        measure MonthlyAverageActionsLine
+        measure MostOverdueAssignee
+        measure ActionsClosed
+        measure ActionAverageDaysToClose
+        measure ClosedOnTime
+        measure ClosedWithDueDate
+        measure OnTimeRate
+        measure ActionClosureRate
+        measure Updates
+        measure ActionsWithUpdates
+        measure AverageCloseOutDays
+        measure IssuesWithActions
+        measure IssuesWithOpenActions
+    }
+```
+
+## Reported Issues - Actions
+
+```mermaid
+---
+config:
+  theme: neutral
+---
+erDiagram
+    "Action Update" {
+        attr Comments
+        attr Deleted
+        attr CreatedOn
+        calc ActionUpdateStatus
+    }
+    "Action" {
+        attr TargetReference
+        attr Title
+        attr Description
+        attr Name
+        attr Email
+        attr CreatedOn
+        calc DueDate
+        calc ClosedOn
+        calc DaysToClose
+        calc ClosedOnTime
+        calc DaysOverdue
+        calc OverdueBand
+        calc Assignee
+        calc Url
+    }
+    "Action Status" {
+        attr ActionStatus
+    }
+    "Action Priority" {
+        attr ActionPriority
+    }
+    "Action Date" {
+        attr Date
+        calc Year
+        calc Month
+        calc MonthStart
+        calc YearMonth
+        calc SlicerDate
+    }
+    "Issue" {
+        attr IssueReference
+        attr OccurredOn
+        attr ReportedOn
+        attr IssueOverview
+        attr CloseDate
+        calc IssueCount
+        calc ReportedBy
+        attr UnderInvestigationDate
+        calc InvestigationStartedOn
+        calc ClosedOn
+        calc HoursToReport
+        calc DaysToStartInvestigation
+        calc DaysToClose
+        calc AgeBand
+        calc Url
+    }
+    "Action" }o--|| "Issue" : "ReportedIssue_key"
+    "Action" }o--|| "Action Priority" : "ActionPriority_key"
+    "Action" }o--|| "Action Status" : "ActionStatus_key"
+    "Action Update" }o--|| "Action" : "Action_key"
+    "Action Update" }o..|| "Action Status" : "ActionStatus_key"
+    "Action" }o--|| "Action Date" : "Raised Date"
+    "Action" }o..|| "Action Date" : "Closed Date"
 ```

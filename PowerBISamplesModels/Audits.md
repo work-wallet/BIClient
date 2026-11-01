@@ -29,6 +29,7 @@ erDiagram
         attr ReadyForReviewStatusDate
         attr CompleteStatusDate
         attr ClosedStatusDate
+        calc Url
     }
     "Audit Type" {
         attr AuditType
@@ -71,11 +72,20 @@ erDiagram
         attr AuditGradingSetIsPercentage
         attr AuditGradingSetIsScore
     }
+    "Date" {
+        attr Date
+        calc Year
+        calc Month
+        calc MonthStart
+        calc YearMonth
+        calc SlicerDate
+    }
     "Audit" }o--|| "Audit Group" : "AuditGroup_key"
     "Audit" }o--|| "Audit Status" : "AuditStatus_key"
     "Audit" }o--|| "Audit Type" : "AuditType_key"
     "Audit" }o--|| "Location" : "Location_key"
     "Audit" }o--|| "Audit Grading Set Option" : "GradingSetOption_key"
+    "Audit" }o--|| "Date" : "Inspected Date"
 ```
 
 ## Audits - Inspected By
@@ -105,6 +115,7 @@ erDiagram
         attr ReadyForReviewStatusDate
         attr CompleteStatusDate
         attr ClosedStatusDate
+        calc Url
     }
     "Inspected By Fact" {
         calc InspectedByCount
@@ -145,6 +156,7 @@ erDiagram
         attr ReadyForReviewStatusDate
         attr CompleteStatusDate
         attr ClosedStatusDate
+        calc Url
     }
     "Scored Response" {
         attr ScoredResponseQuestion
@@ -201,6 +213,7 @@ erDiagram
         attr ReadyForReviewStatusDate
         attr CompleteStatusDate
         attr ClosedStatusDate
+        calc Url
     }
     "Score Section Fact" {
         agg Score
@@ -256,6 +269,7 @@ erDiagram
         attr ReadyForReviewStatusDate
         attr CompleteStatusDate
         attr ClosedStatusDate
+        calc Url
     }
     "Score Tag Fact" {
         agg Score
@@ -310,6 +324,7 @@ erDiagram
         attr ReadyForReviewStatusDate
         attr CompleteStatusDate
         attr ClosedStatusDate
+        calc Url
     }
     "Numeric Answer Fact" {
         agg NumericAnswer
@@ -358,6 +373,7 @@ erDiagram
         attr ReadyForReviewStatusDate
         attr CompleteStatusDate
         attr ClosedStatusDate
+        calc Url
     }
     "Date Time Answer Fact" {
         attr DateandTimeAnswer
@@ -404,6 +420,7 @@ erDiagram
         attr ReadyForReviewStatusDate
         attr CompleteStatusDate
         attr ClosedStatusDate
+        calc Url
     }
     "Checklist Answer Fact" {
         calc ChecklistAnswerCount
@@ -447,6 +464,7 @@ erDiagram
         attr ReadyForReviewStatusDate
         attr CompleteStatusDate
         attr ClosedStatusDate
+        calc Url
     }
     "Branch Option Fact" {
         calc BranchOptionCount
@@ -460,4 +478,141 @@ erDiagram
     }
     "Branch Option Fact" }o--|| "Audit" : "Audit_key"
     "Branch Option Fact" }o--|| "Branch Option" : "AuditBranchOption_key"
+```
+
+## Audits - Measures
+
+```mermaid
+---
+config:
+  theme: neutral
+---
+erDiagram
+    "Audit Measures" {
+        measure Audits
+        measure CompletedAudits
+        measure OpenAudits
+        measure CompletionRate
+        measure Auditors
+        measure MonthlyAverageAudits
+        measure MonthlyAverageLine
+        measure MostCommonAuditType
+        measure AverageScore
+        measure ScoredAudits
+        measure BestLocation
+        measure LowestLocation
+        measure LocationsAudited
+        measure ResponseScore
+        measure FlaggedResponses
+        measure IssueResponses
+        measure AuditsWithIssues
+        measure AuditsWithIssuesShare
+        measure TopIssue
+        measure TopIssueShare
+        measure RepeatIssues
+        measure ScoreBar
+        measure GradingBadge
+    }
+    "Action Measures" {
+        measure Actions
+        measure OpenActions
+        measure ClosedActions
+        measure DraftActions
+        measure OverdueActions
+        measure SeriousOverdueActions
+        measure SeriousOpenActions
+        measure AverageDaysOverdue
+        measure OldestOverdueDays
+        measure ActionsWithoutDueDate
+        measure Assignees
+        measure MonthlyAverageActions
+        measure MonthlyAverageActionsLine
+        measure MostOverdueAssignee
+        measure ActionsClosed
+        measure AverageDaysToClose
+        measure ClosedOnTime
+        measure ClosedWithDueDate
+        measure OnTimeRate
+        measure ClosureRate
+        measure Updates
+        measure ActionsWithUpdates
+        measure AverageCloseOutDays
+        measure AuditsWithActions
+        measure AuditsWithOpenActions
+        measure AuditOpenActions
+    }
+```
+
+## Audits - Actions
+
+```mermaid
+---
+config:
+  theme: neutral
+---
+erDiagram
+    "Action Update" {
+        attr Comments
+        attr Deleted
+        attr CreatedOn
+        calc ActionUpdateStatus
+    }
+    "Action" {
+        attr TargetReference
+        attr Title
+        attr Description
+        attr Name
+        attr Email
+        attr CreatedOn
+        calc DueDate
+        calc ClosedOn
+        calc DaysToClose
+        calc ClosedOnTime
+        calc DaysOverdue
+        calc OverdueBand
+        calc Assignee
+        calc Url
+    }
+    "Action Status" {
+        attr ActionStatus
+    }
+    "Action Priority" {
+        attr ActionPriority
+    }
+    "Action Date" {
+        attr Date
+        calc Year
+        calc Month
+        calc MonthStart
+        calc YearMonth
+        calc SlicerDate
+    }
+    "Audit" {
+        attr Reference
+        attr AuditReference
+        attr InspectedOn
+        agg Score
+        agg PotentialScore
+        attr AverageScore
+        attr AveragePotentialScore
+        attr PercentageScore
+        agg Flags
+        attr ExternalIdentifier
+        calc ConductedBy
+        calc ScoreDisplay
+        calc AuditCount
+        attr PlannedStatusDate
+        attr ReportInProgressStatusDate
+        attr ReadyForReviewStatusDate
+        attr CompleteStatusDate
+        attr ClosedStatusDate
+        calc Url
+    }
+    "Action" }o--|| "Audit" : "Audit_key"
+    "Action" }o--|| "Action Priority" : "ActionPriority_key"
+    "Action" }o--|| "Action Status" : "ActionStatus_key"
+    "Action Update" }o--|| "Action" : "Action_key"
+    "Action Update" }o..|| "Action Status" : "ActionStatus_key"
+    "Action" }o--|| "Action Date" : "Raised Date"
+    "Action" }o..|| "Action Date" : "Closed Date"
 ```

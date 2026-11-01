@@ -1,0 +1,459 @@
+table 'Safety Card Measures'
+	lineageTag: 16fe85e6-0685-55f7-9c5d-569f731e0a12
+
+	/// Safety cards issued.
+	measure 'Safety Cards' = COUNTROWS ( 'Safety Card' )
+		formatString: #,0
+		displayFolder: Safety Cards
+		lineageTag: 094ca2cf-6387-5567-a4be-26a5fc7df62f
+
+	/// Green cards: positive recognition of safe behaviour.
+	measure 'Green Cards' = CALCULATE ( [Safety Cards], KEEPFILTERS ( 'Type'[SafetyCardTypeCode] = 0 ) )
+		formatString: #,0
+		displayFolder: Safety Cards
+		lineageTag: 055f0378-c6a6-5cd6-b548-c01c74806650
+
+	/// Yellow cards: warnings for unsafe behaviour.
+	measure 'Yellow Cards' = CALCULATE ( [Safety Cards], KEEPFILTERS ( 'Type'[SafetyCardTypeCode] = 1 ) )
+		formatString: #,0
+		displayFolder: Safety Cards
+		lineageTag: ae0c4ce1-5408-5b1b-9390-f467da7ef5e5
+
+	/// Red cards: serious unsafe behaviour.
+	measure 'Red Cards' = CALCULATE ( [Safety Cards], KEEPFILTERS ( 'Type'[SafetyCardTypeCode] = 2 ) )
+		formatString: #,0
+		displayFolder: Safety Cards
+		lineageTag: 725eef2f-2e9c-5178-84e8-3396a58aa9d9
+
+	/// Yellow and red cards.
+	measure 'Warning Cards' = [Yellow Cards] + [Red Cards]
+		formatString: #,0
+		displayFolder: Safety Cards
+		lineageTag: fa3699d4-d47d-5f1d-8f35-8738364b7e95
+
+	/// Share of cards that were green (positive recognition).
+	measure 'Positive Share' = DIVIDE ( [Green Cards], [Safety Cards] )
+		formatString: 0%
+		displayFolder: Safety Cards
+		lineageTag: a457d642-e3f5-5ca2-bcee-0f533d3ac953
+
+	/// Share of cards that were red.
+	measure 'Red Share' = DIVIDE ( [Red Cards], [Safety Cards] )
+		formatString: 0%
+		displayFolder: Safety Cards
+		lineageTag: df48f8ff-2017-5f7b-acd7-4a12fa3b90b0
+
+	/// Cards signed by the recipient.
+	measure 'Signed Cards' = CALCULATE ( [Safety Cards], KEEPFILTERS ( 'Safety Card'[Has Signature] = TRUE () ) )
+		formatString: #,0
+		displayFolder: Safety Cards
+		lineageTag: d3f70c66-cc4d-5ad6-b516-d12772babab7
+
+	/// Share of cards signed by the recipient.
+	measure 'Signed Share' = DIVIDE ( [Signed Cards], [Safety Cards] )
+		formatString: 0%
+		displayFolder: Safety Cards
+		lineageTag: 65d5549b-7446-5692-b376-7f0f331d4928
+
+	/// Distinct people who received a card (matched by Work Wallet contact; names typed on the card by name and employer).
+	measure 'People Carded' = DISTINCTCOUNT ( 'Safety Card'[Recipient Key] )
+		formatString: #,0
+		displayFolder: People
+		lineageTag: e3a6edce-50e6-5f78-9992-7c3ce6a0e0d1
+
+	/// People who received two or more yellow or red cards (matched by Work Wallet contact; names typed on the card by name and employer).
+	measure 'Repeat Recipients' = COUNTROWS ( FILTER ( VALUES ( 'Safety Card'[Recipient Key] ), [Warning Cards] >= 2 ) ) + 0
+		formatString: #,0
+		displayFolder: People
+		lineageTag: 02c06f4f-cd00-59e5-9fb5-4dda811e6959
+
+	/// Distinct employers of the people carded.
+	measure Employers = DISTINCTCOUNT ( 'Safety Card'[Employer] )
+		formatString: #,0
+		displayFolder: People
+		lineageTag: 37eab557-5b20-59e7-92ac-31180ee2a668
+
+	/// Distinct people issuing cards.
+	measure Reporters = DISTINCTCOUNT ( 'Safety Card'[Reported By User] )
+		formatString: #,0
+		displayFolder: People
+		lineageTag: fa66bd5d-0de9-5ade-9d61-5451ecfbb684
+
+	/// Date of the most recent card.
+	measure 'Last Card' = MAX ( 'Safety Card'[Reported Time] )
+		formatString: dd/mm/yyyy
+		displayFolder: People
+		lineageTag: 75297494-97e7-5bf0-aac8-16f211a8482f
+
+	/// Average cards per month, over months in context with at least one.
+	measure 'Monthly Average Cards' = AVERAGEX ( VALUES ( 'Date'[Month Start] ), [Safety Cards] )
+		formatString: #,0
+		displayFolder: Safety Cards
+		lineageTag: da3114d4-3983-51c1-badb-662dfc161d64
+
+	/// Monthly average over the selected period, for a reference line on monthly charts.
+	measure 'Monthly Average Line' = IF ( MIN ( 'Date'[Date] ) <= TODAY (), CALCULATE ( [Monthly Average Cards], ALLSELECTED ( 'Date' ) ) )
+		formatString: #,0
+		displayFolder: Safety Cards
+		lineageTag: b4f711f5-bf4e-558b-acc1-8cefecddbc01
+
+	/// Category with the most cards; ties are reported.
+	measure 'Most Common Category' =
+			VAR Items = FILTER ( ADDCOLUMNS ( VALUES ( Category[Category] ), "@Value", [Safety Cards] ), NOT ISBLANK ( [@Value] ) )
+			VAR Target = MAXX ( Items, [@Value] )
+			VAR Leaders = FILTER ( Items, [@Value] = Target )
+			VAR LeaderCount = COUNTROWS ( Leaders )
+			VAR FirstLeader = MINX ( Leaders, Category[Category] )
+			RETURN
+			    IF ( LeaderCount > 1, FirstLeader & " (+" & ( LeaderCount - 1 ) & " tied)", FirstLeader )
+		displayFolder: Safety Cards
+		lineageTag: 4fd6203c-5762-546c-892d-e735b0792176
+
+	/// Category with the most yellow and red cards; ties are reported.
+	measure 'Most Common Warning Category' =
+			VAR Items = FILTER ( ADDCOLUMNS ( VALUES ( Category[Category] ), "@Value", [Warning Cards] ), NOT ISBLANK ( [@Value] ) )
+			VAR Target = MAXX ( Items, [@Value] )
+			VAR Leaders = FILTER ( Items, [@Value] = Target )
+			VAR LeaderCount = COUNTROWS ( Leaders )
+			VAR FirstLeader = MINX ( Leaders, Category[Category] )
+			RETURN
+			    IF ( LeaderCount > 1, FirstLeader & " (+" & ( LeaderCount - 1 ) & " tied)", FirstLeader )
+		displayFolder: Safety Cards
+		lineageTag: 452d9f0f-b91f-505e-bc86-befab63027da
+
+	/// Safety Cards for the same-length period immediately before the selected dates.
+	measure 'Safety Cards PP' =
+			VAR FirstDay = MIN ( 'Date'[Date] )
+			VAR LastDay = MIN ( MAX ( 'Date'[Date] ), TODAY () )
+			VAR Days = LastDay - FirstDay + 1
+			RETURN
+			    CALCULATE ( [Safety Cards], DATESBETWEEN ( 'Date'[Date], FirstDay - Days, FirstDay - 1 ) )
+		formatString: #,0
+		isHidden
+		displayFolder: Previous Period
+		lineageTag: d1a6a11c-14e0-5444-b8b6-5b47e62248fa
+
+	/// Green Cards for the same-length period immediately before the selected dates.
+	measure 'Green Cards PP' =
+			VAR FirstDay = MIN ( 'Date'[Date] )
+			VAR LastDay = MIN ( MAX ( 'Date'[Date] ), TODAY () )
+			VAR Days = LastDay - FirstDay + 1
+			RETURN
+			    CALCULATE ( [Green Cards], DATESBETWEEN ( 'Date'[Date], FirstDay - Days, FirstDay - 1 ) )
+		formatString: #,0
+		isHidden
+		displayFolder: Previous Period
+		lineageTag: 5eb12d6f-c6cb-581f-861f-7a06228f0710
+
+	/// Yellow Cards for the same-length period immediately before the selected dates.
+	measure 'Yellow Cards PP' =
+			VAR FirstDay = MIN ( 'Date'[Date] )
+			VAR LastDay = MIN ( MAX ( 'Date'[Date] ), TODAY () )
+			VAR Days = LastDay - FirstDay + 1
+			RETURN
+			    CALCULATE ( [Yellow Cards], DATESBETWEEN ( 'Date'[Date], FirstDay - Days, FirstDay - 1 ) )
+		formatString: #,0
+		isHidden
+		displayFolder: Previous Period
+		lineageTag: 0d817d8d-4ab0-59bf-8dec-5e6ff9a4b090
+
+	/// Red Cards for the same-length period immediately before the selected dates.
+	measure 'Red Cards PP' =
+			VAR FirstDay = MIN ( 'Date'[Date] )
+			VAR LastDay = MIN ( MAX ( 'Date'[Date] ), TODAY () )
+			VAR Days = LastDay - FirstDay + 1
+			RETURN
+			    CALCULATE ( [Red Cards], DATESBETWEEN ( 'Date'[Date], FirstDay - Days, FirstDay - 1 ) )
+		formatString: #,0
+		isHidden
+		displayFolder: Previous Period
+		lineageTag: 3c6f7274-5cf0-589e-bbe2-3d1060a6dfb8
+
+	/// Positive Share for the same-length period immediately before the selected dates.
+	measure 'Positive Share PP' =
+			VAR FirstDay = MIN ( 'Date'[Date] )
+			VAR LastDay = MIN ( MAX ( 'Date'[Date] ), TODAY () )
+			VAR Days = LastDay - FirstDay + 1
+			RETURN
+			    CALCULATE ( [Positive Share], DATESBETWEEN ( 'Date'[Date], FirstDay - Days, FirstDay - 1 ) )
+		formatString: 0%
+		isHidden
+		displayFolder: Previous Period
+		lineageTag: 999648e1-1bd9-5650-b11e-b8c077dbacc6
+
+	measure 'Cards Trend Label' =
+			VAR Cur = [Safety Cards]
+			VAR Prev = [Safety Cards PP]
+			VAR Change = DIVIDE ( Cur - Prev, Prev )
+			RETURN
+			    IF (
+			        ISBLANK ( Prev ) || Prev = 0,
+			        "No earlier period to compare",
+			        IF ( Change >= 0, "▲ ", "▼ " ) & FORMAT ( ABS ( Change ), "0%" ) & " vs previous period"
+			    )
+		isHidden
+		displayFolder: Labels
+		lineageTag: df3b3d82-d81d-5044-8d19-97565020306c
+
+	measure 'Green Trend Label' =
+			VAR Cur = [Green Cards]
+			VAR Prev = [Green Cards PP]
+			VAR Change = DIVIDE ( Cur - Prev, Prev )
+			RETURN
+			    IF (
+			        ISBLANK ( Prev ) || Prev = 0,
+			        "No earlier period to compare",
+			        IF ( Change >= 0, "▲ ", "▼ " ) & FORMAT ( ABS ( Change ), "0%" ) & " vs previous period"
+			    )
+		isHidden
+		displayFolder: Labels
+		lineageTag: f4053ea0-2913-5d18-b0ea-5cda51635d33
+
+	measure 'Yellow Trend Label' =
+			VAR Cur = [Yellow Cards]
+			VAR Prev = [Yellow Cards PP]
+			VAR Change = DIVIDE ( Cur - Prev, Prev )
+			RETURN
+			    IF (
+			        ISBLANK ( Prev ) || Prev = 0,
+			        "No earlier period to compare",
+			        IF ( Change >= 0, "▲ ", "▼ " ) & FORMAT ( ABS ( Change ), "0%" ) & " vs previous period"
+			    )
+		isHidden
+		displayFolder: Labels
+		lineageTag: 68e4d4cf-021d-5394-a3a9-a8588e92475f
+
+	measure 'Red Trend Label' =
+			VAR Cur = [Red Cards]
+			VAR Prev = [Red Cards PP]
+			VAR Change = DIVIDE ( Cur - Prev, Prev )
+			RETURN
+			    IF (
+			        ISBLANK ( Prev ) || Prev = 0,
+			        "No earlier period to compare",
+			        IF ( Change >= 0, "▲ ", "▼ " ) & FORMAT ( ABS ( Change ), "0%" ) & " vs previous period"
+			    )
+		isHidden
+		displayFolder: Labels
+		lineageTag: bcbe4fff-6a2a-576d-9bab-4b6451134c96
+
+	measure 'Positive Trend Label' =
+			VAR Cur = [Positive Share]
+			VAR Prev = [Positive Share PP]
+			RETURN
+			    IF (
+			        ISBLANK ( Prev ) || ISBLANK ( Cur ),
+			        "No earlier period to compare",
+			        IF ( Cur >= Prev, "▲ ", "▼ " ) & FORMAT ( ABS ( Cur - Prev ) * 100, "0.0" ) & " pts vs previous period"
+			    )
+		isHidden
+		displayFolder: Labels
+		lineageTag: ac0fdfe6-d3bf-5e79-83cd-fd48426c9ad2
+
+	measure 'Positive Share Label' =
+			VAR Share = [Positive Share]
+			RETURN
+			    IF ( NOT ISBLANK ( [Safety Cards] ), FORMAT ( Share + 0, "0%" ) & " of cards were positive" )
+		isHidden
+		displayFolder: Labels
+		lineageTag: d55f494c-7a97-560d-b9a4-9727700ec7a9
+
+	measure 'Red Share Label' =
+			VAR Share = [Red Share]
+			RETURN
+			    IF ( NOT ISBLANK ( [Safety Cards] ), FORMAT ( Share + 0, "0%" ) & " of cards" )
+		isHidden
+		displayFolder: Labels
+		lineageTag: df8ffb1e-a8b3-56f1-9c69-a7b55e0bd87f
+
+	measure 'Peak Month Label' =
+			VAR Months = ADDCOLUMNS ( VALUES ( 'Date'[Month Start] ), "@Cards", [Safety Cards] )
+			VAR Peak = MAXX ( Months, [@Cards] )
+			VAR PeakMonth = MAXX ( FILTER ( Months, [@Cards] = Peak ), 'Date'[Month Start] )
+			RETURN
+			    IF ( NOT ISBLANK ( Peak ), "Peak " & FORMAT ( Peak, "#,0" ) & " in " & FORMAT ( PeakMonth, "mmm yyyy" ) )
+		isHidden
+		displayFolder: Labels
+		lineageTag: b4ead500-7bae-52e8-a71f-293362436397
+
+	measure 'Most Common Category Text' =
+			VAR LabelText = [Most Common Category]
+			RETURN
+			    SWITCH (
+			        TRUE (),
+			        ISBLANK ( LabelText ), "None in this period",
+			        LEN ( LabelText ) > 32, LEFT ( LabelText, 31 ) & "…",
+			        LabelText
+			    )
+		isHidden
+		displayFolder: Labels
+		lineageTag: bac59f59-b262-5e0a-8d51-06a5c106f2f3
+
+	measure 'Most Common Category Label' =
+			VAR CardCount = [Safety Cards]
+			VAR Items = ADDCOLUMNS ( VALUES ( Category[Category] ), "@Cards", [Safety Cards] )
+			RETURN
+			    IF ( CardCount > 0, FORMAT ( DIVIDE ( MAXX ( Items, [@Cards] ), CardCount ), "0%" ) & " of cards" )
+		isHidden
+		displayFolder: Labels
+		lineageTag: dff37ef9-c831-566b-9b00-d9198a2f63ad
+
+	measure 'Most Common Warning Category Text' =
+			VAR LabelText = [Most Common Warning Category]
+			RETURN
+			    SWITCH (
+			        TRUE (),
+			        ISBLANK ( LabelText ), "No warnings in this period",
+			        LEN ( LabelText ) > 32, LEFT ( LabelText, 31 ) & "…",
+			        LabelText
+			    )
+		isHidden
+		displayFolder: Labels
+		lineageTag: 18122220-1298-5eaf-b9e2-4130854b9b2f
+
+	measure 'Most Common Warning Category Label' =
+			VAR Items = ADDCOLUMNS ( VALUES ( Category[Category] ), "@Warnings", [Warning Cards] )
+			VAR Highest = MAXX ( Items, [@Warnings] )
+			RETURN
+			    IF ( Highest > 0, FORMAT ( Highest, "#,0" ) & " yellow or red cards" )
+		isHidden
+		displayFolder: Labels
+		lineageTag: e58b9787-fcd9-5b68-ba5d-acb4a2f9df99
+
+	measure 'People Carded Label' =
+			VAR EmployerCount = [Employers] + 0
+			RETURN
+			    IF ( NOT ISBLANK ( [Safety Cards] ), "From " & FORMAT ( EmployerCount, "#,0" ) & IF ( EmployerCount = 1, " employer", " employers" ) )
+		isHidden
+		displayFolder: Labels
+		lineageTag: ce905ed6-3cde-5177-92ec-785dfa732262
+
+	measure 'Repeat Recipients Label' = "Received 2+ yellow or red cards"
+		isHidden
+		displayFolder: Labels
+		lineageTag: a4ca4f61-0cb1-51c4-b0e5-1f74303ca4a6
+
+	measure 'Reporters Label' =
+			VAR ReporterCount = [Reporters]
+			RETURN
+			    IF ( ReporterCount > 0, "Avg " & FORMAT ( DIVIDE ( [Safety Cards], ReporterCount ), "#,0.0" ) & " cards each" )
+		isHidden
+		displayFolder: Labels
+		lineageTag: 45da7e51-95d1-5d66-8f57-24fa40ab5a2d
+
+	measure 'Signed Label' =
+			VAR CardCount = [Safety Cards]
+			RETURN
+			    IF ( CardCount > 0, FORMAT ( [Signed Cards] + 0, "#,0" ) & " of " & FORMAT ( CardCount, "#,0" ) & " signed by the recipient" )
+		isHidden
+		displayFolder: Labels
+		lineageTag: e982a5b2-8305-5ff4-9547-94a1e598ba24
+
+	/// Semantic colour for favourable changes; matches the theme's 'good' colour.
+	measure 'Colour Good' = "#2E9E6B"
+		isHidden
+		displayFolder: Formatting
+		lineageTag: fd05b4ef-931e-503b-b171-f49cc5047899
+
+	/// Semantic colour for unfavourable changes; matches the theme's 'bad' colour.
+	measure 'Colour Bad' = "#D6493A"
+		isHidden
+		displayFolder: Formatting
+		lineageTag: c98cdadf-4b09-5c1e-82d8-759e4c73268a
+
+	/// Semantic colour for no change or no comparison; matches the theme's secondary text colour.
+	measure 'Colour Neutral' = "#4A5568"
+		isHidden
+		displayFolder: Formatting
+		lineageTag: f29ce54c-9893-5249-83a7-505efcd7b5fa
+
+	/// More cards isn't good or bad in itself (it can reflect active safety observation).
+	measure 'Cards Trend Colour' = [Colour Neutral]
+		isHidden
+		displayFolder: Formatting
+		lineageTag: 1ddfddee-6d11-5038-a83d-9726ed59bef0
+
+	measure 'Green Trend Colour' =
+			VAR Cur = [Green Cards]
+			VAR Prev = [Green Cards PP]
+			RETURN
+			    SWITCH (
+			        TRUE (),
+			        ISBLANK ( Prev ) || Prev = 0 || Cur = Prev, [Colour Neutral],
+			        Cur > Prev, [Colour Good],
+			        [Colour Bad]
+			    )
+		isHidden
+		displayFolder: Formatting
+		lineageTag: 5f906a2e-22f0-5383-8c0d-4ee5cbca1dbc
+
+	measure 'Yellow Trend Colour' =
+			VAR Cur = [Yellow Cards]
+			VAR Prev = [Yellow Cards PP]
+			RETURN
+			    SWITCH (
+			        TRUE (),
+			        ISBLANK ( Prev ) || Prev = 0 || Cur = Prev, [Colour Neutral],
+			        Cur > Prev, [Colour Bad],
+			        [Colour Good]
+			    )
+		isHidden
+		displayFolder: Formatting
+		lineageTag: 28546f19-c6fb-58a2-8842-4eb2e2634793
+
+	measure 'Red Trend Colour' =
+			VAR Cur = [Red Cards]
+			VAR Prev = [Red Cards PP]
+			RETURN
+			    SWITCH (
+			        TRUE (),
+			        ISBLANK ( Prev ) || Prev = 0 || Cur = Prev, [Colour Neutral],
+			        Cur > Prev, [Colour Bad],
+			        [Colour Good]
+			    )
+		isHidden
+		displayFolder: Formatting
+		lineageTag: 36eba9d2-3341-5050-94d0-b49df19dcc6b
+
+	measure 'Positive Trend Colour' =
+			VAR Cur = [Positive Share]
+			VAR Prev = [Positive Share PP]
+			RETURN
+			    SWITCH (
+			        TRUE (),
+			        ISBLANK ( Prev ) || ISBLANK ( Cur ) || Cur = Prev, [Colour Neutral],
+			        Cur > Prev, [Colour Good],
+			        [Colour Bad]
+			    )
+		isHidden
+		displayFolder: Formatting
+		lineageTag: b279c5a3-3897-526d-a683-cca1c51da148
+
+	measure 'Repeat Colour' = IF ( [Repeat Recipients] > 0, [Colour Bad], [Colour Neutral] )
+		isHidden
+		displayFolder: Formatting
+		lineageTag: 763833ba-5d97-5651-9f52-9212e59a8da8
+
+	/// Text colour for a card type code (green, yellow, red); card types are a fixed list in Work Wallet.
+	measure 'Card Type Colour' = SWITCH ( SELECTEDVALUE ( 'Type'[SafetyCardTypeCode] ), 0, "#2E9E6B", 1, "#C9901A", 2, "#D6493A", "#4A5568" )
+		isHidden
+		displayFolder: Formatting
+		lineageTag: f837cb54-9fa2-5cd9-9db7-e426d1f4477a
+
+	column Value
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 055d839d-7cdd-5c1f-9d86-9216c789590b
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Value]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Safety Card Measures' = calculated
+		mode: import
+		source = { 1 }
+
+	annotation PBI_Id = a63c5f913fef522da53a277e2dfe0c86
+

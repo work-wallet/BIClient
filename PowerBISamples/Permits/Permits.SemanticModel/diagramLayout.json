@@ -10,8 +10,8 @@
       "nodes": [
         {
           "location": {
-            "x": 1025.51373175264,
-            "y": -50
+            "x": 654.58181528082594,
+            "y": 1092.4703221812274
           },
           "nodeIndex": "Location",
           "nodeLineageTag": "187194fd-4417-4e1b-955b-f5ceb409025f",
@@ -23,8 +23,8 @@
         },
         {
           "location": {
-            "x": 1015.9617830673344,
-            "y": 553.50186177819614
+            "x": 370.19678732649629,
+            "y": 1308.873933399633
           },
           "nodeIndex": "Permit",
           "size": {
@@ -35,8 +35,8 @@
         },
         {
           "location": {
-            "x": 692.78959525963865,
-            "y": 223.28388950055296
+            "x": 622.67299906110145,
+            "y": 739.26112304763819
           },
           "nodeIndex": "Category",
           "size": {
@@ -47,8 +47,8 @@
         },
         {
           "location": {
-            "x": 1531.9091261448402,
-            "y": 373.78027202400153
+            "x": 656.14229801866611,
+            "y": 1645.3433452870004
           },
           "nodeIndex": "Status",
           "size": {
@@ -59,8 +59,8 @@
         },
         {
           "location": {
-            "x": 761.92316209405135,
-            "y": 904.31951700414288
+            "x": 124.44638787203394,
+            "y": 1800.5412046745678
           },
           "nodeIndex": "Wallet",
           "size": {
@@ -71,8 +71,8 @@
         },
         {
           "location": {
-            "x": 1906.0813756698294,
-            "y": 932.11744507950812
+            "x": 51.572169479849208,
+            "y": 438.40808512942431
           },
           "nodeIndex": "Branch Option",
           "nodeLineageTag": "a172f50f-8315-48d6-bd47-5acf3e796d5e",
@@ -84,8 +84,8 @@
         },
         {
           "location": {
-            "x": 1619.4990674336175,
-            "y": 925.30219818705893
+            "x": 876.58089956086667,
+            "y": 248.5879174570598
           },
           "nodeIndex": "Branch Option Fact",
           "nodeLineageTag": "8b34dc55-f937-404e-8caf-baeca11ddb5b",
@@ -97,8 +97,8 @@
         },
         {
           "location": {
-            "x": 1536.3875382937574,
-            "y": 577.90572176630008
+            "x": 908.71017595386434,
+            "y": 751.22007748626675
           },
           "nodeIndex": "Checklist Answer Fact",
           "nodeLineageTag": "85685a26-4860-4aa5-af79-e396ebb40c0d",
@@ -110,8 +110,8 @@
         },
         {
           "location": {
-            "x": 1823.1872406030366,
-            "y": 572.23455920675929
+            "x": 1162.823149357095,
+            "y": 400.5988049739035
           },
           "nodeIndex": "Checklist Option",
           "nodeLineageTag": "f5bb8971-e971-47f0-b917-9aeae664eef9",
@@ -123,8 +123,8 @@
         },
         {
           "location": {
-            "x": 1333.4727973584249,
-            "y": 1123.3763891556828
+            "x": 336.972183023976,
+            "y": 759.905251961028
           },
           "nodeIndex": "Date Time Answer Fact",
           "nodeLineageTag": "a32245ff-dfe5-4efb-a022-de22841c74c8",
@@ -136,8 +136,8 @@
         },
         {
           "location": {
-            "x": 1046.707392399609,
-            "y": 1143.5634542568794
+            "x": 941.03882869417384,
+            "y": 1431.6427568372956
           },
           "nodeIndex": "Numeric Answer Fact",
           "nodeLineageTag": "de7d7fcc-013b-48e2-8c69-a2aae9ced051",
@@ -149,8 +149,8 @@
         },
         {
           "location": {
-            "x": 1038.924148923184,
-            "y": 1396.8017006520809
+            "x": 1200.6609507156397,
+            "y": 1079.477646481095
           },
           "nodeIndex": "Numeric Question",
           "nodeLineageTag": "eb129f4e-4e1d-46ea-9c79-89457a87d9d2",
@@ -162,8 +162,8 @@
         },
         {
           "location": {
-            "x": 1727.5805234910256,
-            "y": 1285.8632701104293
+            "x": 50,
+            "y": 941.33336152453307
           },
           "nodeIndex": "Date Time Question",
           "size": {
@@ -174,8 +174,8 @@
         },
         {
           "location": {
-            "x": 979.333667924147,
-            "y": 301.04636792292217
+            "x": 1381.0343307449712,
+            "y": 828.10352430277885
           },
           "nodeIndex": "Unit",
           "nodeLineageTag": "4a2e3c96-a773-49bb-9b38-48294025e6e2",
@@ -187,8 +187,8 @@
         },
         {
           "location": {
-            "x": 476.33822288241049,
-            "y": 1108.6638254777417
+            "x": 1033.1219454250393,
+            "y": 2173.7707698319705
           },
           "nodeIndex": "Contact",
           "size": {
@@ -199,8 +199,8 @@
         },
         {
           "location": {
-            "x": 761.85407602631585,
-            "y": 1167.0430564072487
+            "x": 577.60621902914636,
+            "y": 1959.4220918813244
           },
           "nodeIndex": "Assignee Fact",
           "size": {
@@ -211,8 +211,8 @@
         },
         {
           "location": {
-            "x": 334.81554541059575,
-            "y": 784.16190629925336
+            "x": 863.75865302234092,
+            "y": 1848.6262023996437
           },
           "nodeIndex": "Signature Fact",
           "size": {
@@ -223,8 +223,8 @@
         },
         {
           "location": {
-            "x": 50,
-            "y": 724.58560612090673
+            "x": 83.560643557229412,
+            "y": 1525.4228737373105
           },
           "nodeIndex": "Signed By Contact",
           "size": {
@@ -232,10 +232,36 @@
             "width": 234
           },
           "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 608.6272197504901,
+            "y": -50
+          },
+          "nodeIndex": "Date",
+          "nodeLineageTag": "9f926b70-3c67-50df-bdf9-e93c77dee92a",
+          "size": {
+            "height": 248,
+            "width": 234
+          },
+          "zIndex": 8
+        },
+        {
+          "location": {
+            "x": 1615.0343307449712,
+            "y": 1073.8853849159852
+          },
+          "nodeIndex": "Permit Measures",
+          "nodeLineageTag": "2b19f96c-e9fc-5be1-8b06-c5067179dedc",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 9
         }
       ],
       "name": "All tables",
-      "zoomValue": 62.865439185488434,
+      "zoomValue": 45.569248762382557,
       "pinKeyFieldsToTop": false,
       "showExtraHeaderInfo": false,
       "hideKeyFieldsWhenCollapsed": false,
@@ -250,20 +276,20 @@
       "nodes": [
         {
           "location": {
-            "x": 577.88888888888891,
-            "y": 254.22222222222217
+            "x": 579.88888888888891,
+            "y": 219.22222222222217
           },
           "nodeIndex": "Permit",
           "nodeLineageTag": "7d107b65-6f34-4409-a98a-c8bfe9c4b7fb",
           "size": {
-            "height": 602.66666666666674,
+            "height": 805.66666666666674,
             "width": 234
           },
           "zIndex": 4
         },
         {
           "location": {
-            "x": 634.33333333333337,
+            "x": 635.33333333333337,
             "y": 0
           },
           "nodeIndex": "Status",
@@ -325,6 +351,19 @@
             "width": 234
           },
           "zIndex": 2
+        },
+        {
+          "location": {
+            "x": 914,
+            "y": 742
+          },
+          "nodeIndex": "Date",
+          "nodeLineageTag": "9f926b70-3c67-50df-bdf9-e93c77dee92a",
+          "size": {
+            "height": 280,
+            "width": 234
+          },
+          "zIndex": 0
         }
       ],
       "name": "Main",
@@ -382,13 +421,13 @@
         },
         {
           "location": {
-            "x": 0,
-            "y": 134
+            "x": 3,
+            "y": 14
           },
           "nodeIndex": "Permit",
           "nodeLineageTag": "7d107b65-6f34-4409-a98a-c8bfe9c4b7fb",
           "size": {
-            "height": 602,
+            "height": 811,
             "width": 234
           },
           "zIndex": 0
@@ -410,13 +449,13 @@
       "nodes": [
         {
           "location": {
-            "x": 0,
-            "y": 148
+            "x": 19,
+            "y": 55
           },
           "nodeIndex": "Permit",
           "nodeLineageTag": "7d107b65-6f34-4409-a98a-c8bfe9c4b7fb",
           "size": {
-            "height": 614,
+            "height": 822,
             "width": 234
           },
           "zIndex": 0
@@ -464,13 +503,13 @@
       "nodes": [
         {
           "location": {
-            "x": 0,
-            "y": 146
+            "x": 2,
+            "y": 83
           },
           "nodeIndex": "Permit",
           "nodeLineageTag": "7d107b65-6f34-4409-a98a-c8bfe9c4b7fb",
           "size": {
-            "height": 620,
+            "height": 810,
             "width": 234
           },
           "zIndex": 0
@@ -544,13 +583,13 @@
         },
         {
           "location": {
-            "x": 0,
-            "y": 72
+            "x": 6,
+            "y": 9
           },
           "nodeIndex": "Permit",
           "nodeLineageTag": "7d107b65-6f34-4409-a98a-c8bfe9c4b7fb",
           "size": {
-            "height": 617,
+            "height": 810,
             "width": 253
           },
           "zIndex": 0
@@ -572,16 +611,16 @@
       "nodes": [
         {
           "location": {
-            "x": 130,
-            "y": 166
+            "x": 182,
+            "y": 136
           },
           "nodeIndex": "Permit",
           "nodeLineageTag": "7d107b65-6f34-4409-a98a-c8bfe9c4b7fb",
           "size": {
-            "height": 617,
+            "height": 814,
             "width": 234
           },
-          "zIndex": 1
+          "zIndex": 3
         },
         {
           "location": {
@@ -594,7 +633,7 @@
             "height": 239,
             "width": 234
           },
-          "zIndex": 2
+          "zIndex": 1
         },
         {
           "location": {
@@ -607,10 +646,38 @@
             "height": 327,
             "width": 234
           },
-          "zIndex": 3
+          "zIndex": 2
         }
       ],
       "name": "Signed By",
+      "zoomValue": 100,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    },
+    {
+      "ordinal": 7,
+      "scrollPosition": {
+        "x": 0,
+        "y": 0
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 250,
+            "y": 0
+          },
+          "nodeIndex": "Permit Measures",
+          "nodeLineageTag": "2b19f96c-e9fc-5be1-8b06-c5067179dedc",
+          "size": {
+            "height": 989,
+            "width": 301
+          },
+          "zIndex": 1
+        }
+      ],
+      "name": "Measures",
       "zoomValue": 100,
       "pinKeyFieldsToTop": false,
       "showExtraHeaderInfo": false,

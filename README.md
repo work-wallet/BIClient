@@ -554,6 +554,10 @@ Click Refresh (Home ribbon). Data is on-demand unless you publish to a service (
 
 Ensure any default filters (e.g. date, site, status) reflect values present in your Wallet or visuals may appear blank.
 
+#### 5.9.4 Links to Work Wallet
+
+Lists of records (actions, audits, inductions, permits, issues, safety cards and assets) have a **Link** column, and record detail pages have an **Open in Work Wallet** button, that open the record in the Work Wallet portal. The portal opens them in the wallet you currently have selected, so if you belong to several wallets, select the right one first. Deleted records have no link.
+
 ### 5.10 Troubleshooting
 
 | Symptom | Cause | Resolution |

@@ -93,7 +93,7 @@ table Action
 
 	column 'Due On'
 		dataType: dateTime
-		formatString: Short Date
+		formatString: dd/mm/yyyy
 		lineageTag: 31b505e6-1007-4021-b14c-dfa9e57120d8
 		summarizeBy: none
 		sourceColumn: Due On
@@ -121,7 +121,7 @@ table Action
 
 	column 'Created On'
 		dataType: dateTime
-		formatString: Short Date
+		formatString: dd/mm/yyyy
 		lineageTag: 2628d251-a6dc-49c3-a177-0504ccad9d6f
 		summarizeBy: none
 		sourceColumn: Created On
@@ -155,7 +155,7 @@ table Action
 	column 'Original Due On'
 		dataType: dateTime
 		isHidden
-		formatString: Short Date
+		formatString: dd/mm/yyyy
 		lineageTag: fe6f5270-45c5-423e-bbf1-d779d1bdf4ff
 		summarizeBy: none
 		sourceColumn: Original Due On
@@ -200,6 +200,155 @@ table Action
 		lineageTag: 531f1be0-b605-4e97-84ac-503e6c6e67e4
 		summarizeBy: none
 		sourceColumn: Is Orphaned
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Date part of Created On; relates actions to the Date table.
+	column 'Raised Date' = DATE ( YEAR ( 'Action'[Created On] ), MONTH ( 'Action'[Created On] ), DAY ( 'Action'[Created On] ) )
+		dataType: dateTime
+		isHidden
+		formatString: dd/mm/yyyy
+		lineageTag: 1c673f6a-2c50-5733-b9ef-7d1e87e3bfd9
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Due date, blank when the action has no due date (Work Wallet stores 30/12/1899 for 'no date').
+	column 'Due Date' = IF ( 'Action'[Due On] > DATE ( 1900, 1, 1 ), 'Action'[Due On] )
+		dataType: dateTime
+		formatString: dd/mm/yyyy
+		lineageTag: 3d1ef024-b66b-5321-ad4f-0c03cda1183b
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Open or In Progress.
+	column 'Is Open' = RELATED ( 'Status'[ActionStatusCode] ) IN { 1, 2 }
+		dataType: boolean
+		isHidden
+		lineageTag: 88658e4a-1916-57d9-8793-dfec87b05a3f
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	/// When the action was closed: the latest update that set it to Closed (actions have no closed date of their own). Blank while open, or if the action was closed without a closing update; such actions are left out of days to close and the on-time rate.
+	column 'Closed On' =
+			VAR ActionKey = 'Action'[Action_key]
+			VAR ClosedKeys =
+			    CALCULATETABLE ( VALUES ( 'Status'[ActionStatus_key] ), 'Status'[ActionStatusCode] = 4, REMOVEFILTERS () )
+			RETURN
+			    IF (
+			        RELATED ( 'Status'[ActionStatusCode] ) = 4,
+			        MAXX (
+			            FILTER (
+			                'Action Update',
+			                'Action Update'[Action_key] = ActionKey
+			                    && NOT 'Action Update'[Deleted]
+			                    && 'Action Update'[ActionStatus_key] IN ClosedKeys
+			            ),
+			            'Action Update'[Created On]
+			        )
+			    )
+		dataType: dateTime
+		formatString: dd/mm/yyyy hh:nn
+		lineageTag: 58a8bb39-e84f-5d75-9c42-cfbdd0ea9d20
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Date part of Closed On; inactive relationship to the Date table for 'closed in period'.
+	column 'Closed Date' = IF ( NOT ISBLANK ( 'Action'[Closed On] ), DATE ( YEAR ( 'Action'[Closed On] ), MONTH ( 'Action'[Closed On] ), DAY ( 'Action'[Closed On] ) ) )
+		dataType: dateTime
+		isHidden
+		formatString: dd/mm/yyyy
+		lineageTag: e6876959-834f-5eb4-9477-ec18738577b1
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Days from the action being raised to being closed.
+	column 'Days To Close' = IF ( NOT ISBLANK ( 'Action'[Closed On] ), ROUND ( ( 'Action'[Closed On] - 'Action'[Created On] ) * 1.0, 1 ) )
+		dataType: double
+		formatString: #,0
+		lineageTag: 5d4bdbf3-4717-5659-9e39-051dc25b067d
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Whether a closed action was closed on or before its due date (blank if not closed or no due date).
+	column 'Closed On Time' =
+			IF (
+			    NOT ISBLANK ( 'Action'[Closed Date] ) && NOT ISBLANK ( 'Action'[Due Date] ),
+			    'Action'[Closed Date] <= 'Action'[Due Date]
+			)
+		dataType: boolean
+		lineageTag: 6666a46f-d793-5165-8f76-33952cbd7fe5
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	/// For open actions past their due date and time (as Work Wallet counts overdue, so an action due today is overdue, 0 days): whole days overdue, as at the last data refresh.
+	column 'Days Overdue' =
+			IF (
+			    'Action'[Is Open] && NOT ISBLANK ( 'Action'[Due Date] ) && 'Action'[Due Date] < NOW (),
+			    INT ( NOW () - 'Action'[Due Date] )
+			)
+		dataType: int64
+		formatString: #,0
+		lineageTag: 32a97ade-126b-5be8-a4ee-cb613bd36cc8
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Sort order for Overdue Band.
+	column 'Overdue Band Order' =
+			VAR Days = 'Action'[Days Overdue]
+			RETURN
+			    IF ( NOT ISBLANK ( Days ), SWITCH ( TRUE (), Days <= 7, 1, Days <= 30, 2, Days <= 90, 3, Days <= 365, 4, 5 ) )
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: e44a7b44-81ed-548b-acf2-7e532d059bcf
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	/// How long an open action has been overdue, as at the last data refresh.
+	column 'Overdue Band' = SWITCH ( 'Action'[Overdue Band Order], 1, "Up to 7 days", 2, "8–30 days", 3, "31–90 days", 4, "91–365 days", 5, "Over a year" )
+		dataType: string
+		lineageTag: 6b8ec8ce-6e6b-5a72-9a84-3c428fe4f242
+		summarizeBy: none
+		sortByColumn: 'Overdue Band Order'
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Person the action is assigned to (name and email), or '(Unassigned)'.
+	column Assignee = IF ( LEN ( 'Action'[Name] ) > 0, 'Action'[Assigned To], "(Unassigned)" )
+		dataType: string
+		lineageTag: 042c73ec-90bc-55da-9556-eb3d71437da2
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Opens the action in Work Wallet: the actions tab of the record it was raised on (audit, issue, safety card, asset or briefing), scrolled to the action. Work Wallet has no page for a single action. Blank for deleted or orphaned actions.
+	column Url =
+			VAR UrlPath = IF (
+			    NOT 'Action'[Is Deleted] && NOT 'Action'[Is Orphaned] && LEN ( 'Action'[TargetId] ) > 0,
+			    SWITCH (
+			        RELATED ( 'Type'[ActionTypeCode] ),
+			        1, "/HealthAndSafety/Audit/" & LOWER ( 'Action'[TargetId] ) & "?tab=actions#" & LOWER ( 'Action'[ActionId] ),
+			        2, "/HealthAndSafety/IssueReporting/" & LOWER ( 'Action'[TargetId] ) & "?tab=actions#" & LOWER ( 'Action'[ActionId] ),
+			        4, "/Users/SafetyCardReporting/" & LOWER ( 'Action'[TargetId] ) & "/Detail#" & LOWER ( 'Action'[ActionId] ),
+			        8, "/Company/Assets/" & LOWER ( 'Action'[TargetId] ) & "/Detail?tab=actions#" & LOWER ( 'Action'[ActionId] ),
+			        16, "/Users/Briefings/" & LOWER ( 'Action'[TargetId] ) & "/Detail?tab=actions#" & LOWER ( 'Action'[ActionId] )
+			    )
+			)
+			RETURN
+			    IF ( NOT ISBLANK ( UrlPath ), "https://portal.work-wallet.com" & UrlPath )
+		dataType: string
+		lineageTag: 47077846-01ab-5df9-ba21-474f9490b521
+		dataCategory: WebUrl
+		summarizeBy: none
 
 		annotation SummarizationSetBy = Automatic
 

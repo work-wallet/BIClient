@@ -37,6 +37,8 @@ ref table 'Assignee Fact'
 ref table 'Signature Fact'
 ref table LocalDateTable_0e6b3a7f-f87f-4d4f-9fb0-c41484a01042
 ref table 'Signed By Contact'
+ref table Date
+ref table 'Permit Measures'
 
 ref cultureInfo en-GB
 

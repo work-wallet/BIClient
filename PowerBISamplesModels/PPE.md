@@ -28,6 +28,7 @@ erDiagram
         calc Value
         calc StockSite
         calc StockLocation
+        calc StockLevel
     }
     "PPE Type" {
         attr PPEType
@@ -70,6 +71,7 @@ erDiagram
         calc Value
         calc StockSite
         calc StockLocation
+        calc StockLevel
     }
     "Stock History" {
         agg StockQuantity
@@ -98,11 +100,20 @@ erDiagram
         attr Email
         attr Company
     }
+    "Date" {
+        attr Date
+        calc Year
+        calc Month
+        calc MonthStart
+        calc YearMonth
+        calc SlicerDate
+    }
     "Stock" }o--|| "PPE Type" : "PPEType_key"
     "Stock History" }o--|| "PPE Action" : "PPEAction_key"
     "Stock History" }o--|| "Stock" : "PPEStock_key"
     "Stock History" }o..|| "Stock" : "TransferredFromPPEStock_key"
     "Stock History" }o--|| "Actioned By Contact" : "ActionedByContact_key"
+    "Stock History" }o--|| "Date" : "Actioned Date"
 ```
 
 ## PPE - Assignments
@@ -119,6 +130,7 @@ erDiagram
         calc Value
         calc StockSite
         calc StockLocation
+        calc StockLevel
     }
     "Assignment" {
         attr AssignedOn
@@ -129,6 +141,8 @@ erDiagram
         calc Value
         calc AssignedFromStockSite
         calc ReturnedToStockSite
+        calc DaysToExpiry
+        calc ExpiryStatus
     }
     "Assignment History" {
         attr ActionedOn
@@ -164,6 +178,14 @@ erDiagram
         attr Email
         attr Company
     }
+    "Date" {
+        attr Date
+        calc Year
+        calc Month
+        calc MonthStart
+        calc YearMonth
+        calc SlicerDate
+    }
     "Assignment" }o--|| "PPE Status" : "PPEStatus_key"
     "Assignment" }o..|| "Stock" : "AssignedFromPPEStock_key"
     "Assignment" }o..|| "Stock" : "ReplacementRequestedFromPPEStock_key"
@@ -176,6 +198,7 @@ erDiagram
     "Assignment" }o--|| "Assigned To Contact" : "AssignedToContact_key"
     "Assignment" }o..|| "Actioned By Contact" : "AssignedToContact_key"
     "Assignment History" }o..|| "Assigned To Contact" : "ActionedByContact_key"
+    "Assignment History" }o--|| "Date" : "Actioned Date"
 ```
 
 ## PPE - Properties
@@ -213,4 +236,55 @@ erDiagram
     "PPE Type" }o--|| "PPE Type Master" : "PPETypeId"
     "Property Fact" }o--|| "PPE Type Master" : "PPETypeId"
     "Property" }o--|| "Property Type" : "PPEPropertyType_key"
+```
+
+## PPE - Measures
+
+```mermaid
+---
+config:
+  theme: neutral
+---
+erDiagram
+    "PPE Measures" {
+        measure PPEIssued
+        measure ReplacementDue
+        measure ReplacementRequested
+        measure ExpiredPPE
+        measure ExpiringSoon
+        measure PeopleWithPPE
+        measure PeopleNeedingReplacements
+        measure CompaniesWithPPE
+        measure MostCommonReplacement
+        measure OldestExpiredDays
+        measure StockOnHand
+        measure StockLines
+        measure LowStockLines
+        measure OutOfStockLines
+        measure StockLocations
+        measure WarningQuantity
+        measure PPEIssuedInPeriod
+        measure PPEReturned
+        measure PPEReplaced
+        measure PPERemoved
+        measure AssignmentActions
+        measure MonthlyAverageIssued
+        measure MonthlyAverageLine
+        measure MostIssuedPPE
+        measure StockAdded
+        measure StockTransferred
+        measure StockRemoved
+        measure StockMovements
+        measure MovementQuantity
+        measure StockValue
+        measure IssuedValue
+        measure RemovedValue
+        measure StockRemovedValue
+        measure PPETypesWithValue
+        measure UnitValue
+        measure PPETypes
+        measure PropertyValues
+        measure PPETypesWithProperties
+        measure Properties
+    }
 ```

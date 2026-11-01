@@ -10,8 +10,8 @@
       "nodes": [
         {
           "location": {
-            "x": 334.2358244306389,
-            "y": 307.23368080517878
+            "x": 335.30581004710615,
+            "y": 624.84372569106972
           },
           "nodeIndex": "Induction",
           "size": {
@@ -23,7 +23,7 @@
         {
           "location": {
             "x": 50,
-            "y": 454.63812827400682
+            "y": 537.38665011895409
           },
           "nodeIndex": "Induction Status",
           "size": {
@@ -34,8 +34,8 @@
         },
         {
           "location": {
-            "x": 621.27864516413047,
-            "y": 159.48423465901215
+            "x": 684.46797531871516,
+            "y": 624.09323234103863
           },
           "nodeIndex": "Wallet",
           "size": {
@@ -46,8 +46,8 @@
         },
         {
           "location": {
-            "x": 336.06296533668376,
-            "y": -14.047044891560745
+            "x": 894.01885046528264,
+            "y": 831.54855892863429
           },
           "nodeIndex": "Custom Question",
           "size": {
@@ -58,8 +58,8 @@
         },
         {
           "location": {
-            "x": 621.44922123510287,
-            "y": 720.8896221934308
+            "x": 756.3272742050342,
+            "y": -50
           },
           "nodeIndex": "Taken Status",
           "size": {
@@ -70,8 +70,8 @@
         },
         {
           "location": {
-            "x": 908.250340404461,
-            "y": -50
+            "x": 1038.724897903267,
+            "y": 603.31993272080058
           },
           "nodeIndex": "Custom Question Fact",
           "size": {
@@ -82,8 +82,8 @@
         },
         {
           "location": {
-            "x": 621.33048392868784,
-            "y": 369.17314893542061
+            "x": 756.38605113521771,
+            "y": 250.26797746004831
           },
           "nodeIndex": "Taken By",
           "size": {
@@ -94,8 +94,8 @@
         },
         {
           "location": {
-            "x": 908.32365311486,
-            "y": 261.42466828096377
+            "x": 469.38398014451889,
+            "y": 347.54871731092743
           },
           "nodeIndex": "Contact",
           "nodeLineageTag": "1b4fe428-6d17-4739-888b-1fe8b4fcbe0d",
@@ -104,10 +104,36 @@
             "width": 234
           },
           "zIndex": 7
+        },
+        {
+          "location": {
+            "x": 1043.4181177311211,
+            "y": 3.29264601388536
+          },
+          "nodeIndex": "Date",
+          "nodeLineageTag": "9f926b70-3c67-50df-bdf9-e93c77dee92a",
+          "size": {
+            "height": 248,
+            "width": 234
+          },
+          "zIndex": 9
+        },
+        {
+          "location": {
+            "x": 1277.4181177311211,
+            "y": 378.77427946431715
+          },
+          "nodeIndex": "Induction Measures",
+          "nodeLineageTag": "0b035767-d2c9-5b81-a7f6-b6010ac837d2",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 10
         }
       ],
       "name": "All tables",
-      "zoomValue": 90.039040382974662,
+      "zoomValue": 100,
       "pinKeyFieldsToTop": false,
       "showExtraHeaderInfo": false,
       "hideKeyFieldsWhenCollapsed": false,
@@ -117,7 +143,7 @@
       "ordinal": 1,
       "scrollPosition": {
         "x": 0,
-        "y": 181.11111111111111
+        "y": 0
       },
       "nodes": [
         {
@@ -128,7 +154,7 @@
           "nodeIndex": "Induction",
           "nodeLineageTag": "6e1a15d5-e594-42b4-bf1b-14886a90b2b5",
           "size": {
-            "height": 399,
+            "height": 422.33333333333326,
             "width": 234
           },
           "zIndex": 2
@@ -141,10 +167,10 @@
           "nodeIndex": "Taken By",
           "nodeLineageTag": "d1c39eb9-26d7-4578-8a92-f5277ee0bc30",
           "size": {
-            "height": 417.99782844733977,
-            "width": 234
+            "height": 657.99782844733977,
+            "width": 254
           },
-          "zIndex": 5
+          "zIndex": 7
         },
         {
           "location": {
@@ -157,7 +183,7 @@
             "height": 152,
             "width": 234
           },
-          "zIndex": 7
+          "zIndex": 6
         },
         {
           "location": {
@@ -174,8 +200,8 @@
         },
         {
           "location": {
-            "x": 628.45928338762212,
-            "y": 416.97502714440822
+            "x": 648.45928338762212,
+            "y": 339.19724936663044
           },
           "nodeIndex": "Custom Question Fact",
           "nodeLineageTag": "6c16818b-37c8-4bb1-a2d1-ac0aa04be04c",
@@ -183,12 +209,12 @@
             "height": 207.89467969598263,
             "width": 234
           },
-          "zIndex": 6
+          "zIndex": 5
         },
         {
           "location": {
-            "x": 535.32681867535291,
-            "y": 144.14332247557002
+            "x": 840.88237423090845,
+            "y": 71.921100253347788
           },
           "nodeIndex": "Custom Question",
           "nodeLineageTag": "2cde93b0-9f3a-47bd-ae2b-296e2fa527be",
@@ -200,8 +226,8 @@
         },
         {
           "location": {
-            "x": 632.38327904451694,
-            "y": 801.61129207383283
+            "x": 627.93883460007248,
+            "y": 918.27795874049946
           },
           "nodeIndex": "Contact",
           "nodeLineageTag": "1b4fe428-6d17-4739-888b-1fe8b4fcbe0d",
@@ -210,9 +236,50 @@
             "width": 234
           },
           "zIndex": 1
+        },
+        {
+          "location": {
+            "x": 829.11111111111109,
+            "y": 614.99999999999989
+          },
+          "nodeIndex": "Date",
+          "nodeLineageTag": "9f926b70-3c67-50df-bdf9-e93c77dee92a",
+          "size": {
+            "height": 289.11111111111109,
+            "width": 234
+          },
+          "zIndex": 0
         }
       ],
       "name": "Main",
+      "zoomValue": 90,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    },
+    {
+      "ordinal": 2,
+      "scrollPosition": {
+        "x": 0,
+        "y": 0
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 293.33333333333326,
+            "y": 0
+          },
+          "nodeIndex": "Induction Measures",
+          "nodeLineageTag": "0b035767-d2c9-5b81-a7f6-b6010ac837d2",
+          "size": {
+            "height": 1000,
+            "width": 323.33333333333337
+          },
+          "zIndex": 1
+        }
+      ],
+      "name": "Measures",
       "zoomValue": 90,
       "pinKeyFieldsToTop": false,
       "showExtraHeaderInfo": false,

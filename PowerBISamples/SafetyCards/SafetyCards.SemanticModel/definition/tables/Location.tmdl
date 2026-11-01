@@ -183,6 +183,14 @@ table Location
 
 		annotation SummarizationSetBy = Automatic
 
+	/// Site for grouping; '(No site)' for locations without a site.
+	column 'Site Name' = IF ( LEN ( Location[Site] ) > 0, Location[Site], "(No site)" )
+		dataType: string
+		lineageTag: b31616cd-657e-566d-962b-0419b7b23347
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
 	hierarchy 'Company Hierarchy'
 		lineageTag: fd50f192-8bc3-462e-a9c0-f8206ec7752a
 

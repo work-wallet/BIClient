@@ -67,7 +67,7 @@ table 'Action Update'
 
 	column 'Created On'
 		dataType: dateTime
-		formatString: General Date
+		formatString: dd/mm/yyyy hh:nn
 		lineageTag: 3b7b3854-186d-4fbb-8924-d10d11fe8274
 		summarizeBy: none
 		sourceColumn: Created On

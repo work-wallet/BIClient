@@ -1,0 +1,48 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/page/2.0.0/schema.json",
+  "name": "d31c7f1f8f485acfb338",
+  "displayName": "Person's PPE",
+  "displayOption": "FitToPage",
+  "height": 720,
+  "width": 1280,
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "ab14d445468d5532aaa6",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Assigned To Contact"
+              }
+            },
+            "Property": "Contact"
+          }
+        },
+        "type": "Categorical",
+        "howCreated": "Drillthrough"
+      }
+    ]
+  },
+  "pageBinding": {
+    "name": "24ee6e075bdd55d3a860",
+    "type": "Drillthrough",
+    "parameters": [
+      {
+        "name": "d9d03f1a52f9589ead8d",
+        "boundFilter": "ab14d445468d5532aaa6",
+        "fieldExpr": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Assigned To Contact"
+              }
+            },
+            "Property": "Contact"
+          }
+        }
+      }
+    ]
+  },
+  "visibility": "HiddenInViewMode"
+}

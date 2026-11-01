@@ -1,7 +1,7 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/page/2.0.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/page/2.1.0/schema.json",
   "name": "80986d72ddb7be8a5e01",
-  "displayName": "Audit Details",
+  "displayName": "Audit details",
   "displayOption": "FitToPage",
   "height": 720,
   "width": 1280,
@@ -16,49 +16,10 @@
                 "Entity": "Audit"
               }
             },
-            "Property": "Audit Reference"
+            "Property": "Url"
           }
         },
         "type": "Categorical",
-        "filter": {
-          "Version": 2,
-          "From": [
-            {
-              "Name": "a",
-              "Entity": "Audit",
-              "Type": 0
-            }
-          ],
-          "Where": [
-            {
-              "Condition": {
-                "In": {
-                  "Expressions": [
-                    {
-                      "Column": {
-                        "Expression": {
-                          "SourceRef": {
-                            "Source": "a"
-                          }
-                        },
-                        "Property": "Audit Reference"
-                      }
-                    }
-                  ],
-                  "Values": [
-                    [
-                      {
-                        "Literal": {
-                          "Value": "'WW-02592'"
-                        }
-                      }
-                    ]
-                  ]
-                }
-              }
-            }
-          ]
-        },
         "howCreated": "Drillthrough"
       }
     ]
@@ -77,25 +38,11 @@
                 "Entity": "Audit"
               }
             },
-            "Property": "Audit Reference"
+            "Property": "Url"
           }
         }
       }
     ]
   },
-  "objects": {
-    "outspacePane": [
-      {
-        "properties": {
-          "width": {
-            "expr": {
-              "Literal": {
-                "Value": "229L"
-              }
-            }
-          }
-        }
-      }
-    ]
-  }
+  "visibility": "HiddenInViewMode"
 }

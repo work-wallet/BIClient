@@ -63,3 +63,12 @@ relationship 1515ee55-7e06-4f07-9903-a806c805fccb
 	fromColumn: Action.'Original Due On'
 	toColumn: LocalDateTable_66c8308a-662f-4b19-9254-47cf6aee52dd.Date
 
+relationship 72156d6a-6b37-5a7a-a02f-f13b726adcf6
+	fromColumn: Action.'Raised Date'
+	toColumn: Date.Date
+
+relationship a9850a82-998b-5a63-b89d-273a60a616db
+	isActive: false
+	fromColumn: Action.'Closed Date'
+	toColumn: Date.Date
+

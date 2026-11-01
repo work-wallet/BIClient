@@ -183,6 +183,22 @@ table Location
 
 		annotation SummarizationSetBy = Automatic
 
+	/// Company for grouping; '(No company)' for general locations that don't belong to a company.
+	column 'Company Name' = IF ( LEN ( 'Location'[Company] ) > 0, 'Location'[Company], "(No company)" )
+		dataType: string
+		lineageTag: 926a01ee-48e3-5de7-b3ba-fbf253f98ecd
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Site for grouping; '(No site)' for locations without a site.
+	column 'Site Name' = IF ( LEN ( 'Location'[Site] ) > 0, 'Location'[Site], "(No site)" )
+		dataType: string
+		lineageTag: b31616cd-657e-566d-962b-0419b7b23347
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
 	hierarchy 'Company Hierarchy'
 		lineageTag: 75777fbc-dcf3-4852-9ca7-1935ee7ce74d
 

@@ -2,8 +2,942 @@ cultureInfo en-GB
 
 	linguisticMetadata =
 			{
-			  "Version": "1.0.0",
-			  "Language": "en-US"
+			  "Version": "2.0.0",
+			  "Language": "en-US",
+			  "Entities": {
+			    "safety_card_measures.safety_cards": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Safety Card Measures",
+			          "ConceptualProperty": "Safety Cards"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Total safety cards": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        },
+			        {
+			          "Cards": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        },
+			        {
+			          "Safety cards": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "safety_card_measures.green_cards": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Safety Card Measures",
+			          "ConceptualProperty": "Green Cards"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Green (positive)": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        },
+			        {
+			          "Green": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "safety_card_measures.yellow_cards": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Safety Card Measures",
+			          "ConceptualProperty": "Yellow Cards"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Yellow": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "safety_card_measures.red_cards": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Safety Card Measures",
+			          "ConceptualProperty": "Red Cards"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Red cards": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        },
+			        {
+			          "Red": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "safety_card_measures.monthly_average_line": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Safety Card Measures",
+			          "ConceptualProperty": "Monthly Average Line"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Monthly average": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "safety_card_measures.positive_share": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Safety Card Measures",
+			          "ConceptualProperty": "Positive Share"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Positive cards": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "safety_card_measures.most_common_category_text": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Safety Card Measures",
+			          "ConceptualProperty": "Most Common Category Text"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Most common category": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "safety_card_measures.most_common_warning_category_text": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Safety Card Measures",
+			          "ConceptualProperty": "Most Common Warning Category Text"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Most common warning": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "safety_card_measures.warning_cards": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Safety Card Measures",
+			          "ConceptualProperty": "Warning Cards"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Warnings": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        },
+			        {
+			          "Yellow or red": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "safety_card_measures.last_card": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Safety Card Measures",
+			          "ConceptualProperty": "Last Card"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Last card": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "safety_card_measures.people_carded": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Safety Card Measures",
+			          "ConceptualProperty": "People Carded"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "People carded": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "safety_card_measures.repeat_recipients": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Safety Card Measures",
+			          "ConceptualProperty": "Repeat Recipients"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Repeat recipients": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "safety_card_measures.reporters": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Safety Card Measures",
+			          "ConceptualProperty": "Reporters"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Issued by": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "safety_card_measures.signed_share": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Safety Card Measures",
+			          "ConceptualProperty": "Signed Share"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Signed by recipient": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "safety_card.employer": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Safety Card",
+			          "ConceptualProperty": "Employer"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Employer": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "safety_card.reported_time": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Safety Card",
+			          "ConceptualProperty": "Reported Time"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Reported": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "safety_card.employee": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Safety Card",
+			          "ConceptualProperty": "Employee"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Recipient": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "safety_card.reported_by_user": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Safety Card",
+			          "ConceptualProperty": "Reported By User"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Issued by": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "safety_card.report_details": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Safety Card",
+			          "ConceptualProperty": "Report Details"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Details": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "date.slicer_date": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Date",
+			          "ConceptualProperty": "Slicer Date"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Reported on": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "date.year_month": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Date",
+			          "ConceptualProperty": "Year Month"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Month": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "type.type": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Type",
+			          "ConceptualProperty": "Type"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Card": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "location.site_name": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Location",
+			          "ConceptualProperty": "Site Name"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Site": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "occupation_role.occupation_role": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Occupation Role",
+			          "ConceptualProperty": "Occupation Role"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Role": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "category.category": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Category",
+			          "ConceptualProperty": "Category"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Category": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "safety_card.recipient": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Safety Card",
+			          "ConceptualProperty": "Recipient"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Recipient": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "safety_card.recipient_company": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Safety Card",
+			          "ConceptualProperty": "Recipient Company"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Company": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "safety_card.url": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Safety Card",
+			          "ConceptualProperty": "Url"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Link": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "safety_card.reference": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Safety Card",
+			          "ConceptualProperty": "Reference"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Safety card": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "action_measures.safety_card_open_actions": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Action Measures",
+			          "ConceptualProperty": "Safety Card Open Actions"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Open actions": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "action_measures.actions": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Action Measures",
+			          "ConceptualProperty": "Actions"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Actions raised": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "action_measures.open_actions": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Action Measures",
+			          "ConceptualProperty": "Open Actions"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Open actions": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "action_measures.overdue_actions": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Action Measures",
+			          "ConceptualProperty": "Overdue Actions"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Overdue actions": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "action_measures.average_close_out_days": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Action Measures",
+			          "ConceptualProperty": "Average Close Out Days"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Average close out days": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "action_status.action_status": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Action Status",
+			          "ConceptualProperty": "Action Status"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Status": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "action_date.slicer_date": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Action Date",
+			          "ConceptualProperty": "Slicer Date"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Raised on": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "action_priority.action_priority": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Action Priority",
+			          "ConceptualProperty": "Action Priority"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Priority": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "action.assignee": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Action",
+			          "ConceptualProperty": "Assignee"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Assigned to": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "action.created_on": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Action",
+			          "ConceptualProperty": "Created On"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Raised on": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "action.due_date": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Action",
+			          "ConceptualProperty": "Due Date"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Due": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "action.days_overdue": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Action",
+			          "ConceptualProperty": "Days Overdue"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Days overdue": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "action.url": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Action",
+			          "ConceptualProperty": "Url"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Link": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    }
+			  }
 			}
 		contentType: json
 

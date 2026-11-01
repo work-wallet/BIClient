@@ -118,6 +118,34 @@ table 'Inspection Observation Fact'
 
 		annotation SummarizationSetBy = Automatic
 
+	/// Whether the observation was raised at this inspection or was already open and recorded again.
+	column 'Recorded As' = IF ( 'Inspection Observation Fact'[New], "Raised", "Seen again" )
+		dataType: string
+		lineageTag: 7fe946a9-2fd9-585c-bcd9-ab898d628cb2
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Current status of the observation (e.g. Defect (Open), Defect (Closed)).
+	column 'Current Status' =
+			VAR StatusKey = LOOKUPVALUE ( Observation[AssetObservationStatus_key], Observation[AssetObservation_key], 'Inspection Observation Fact'[AssetObservation_key] )
+			RETURN
+			    LOOKUPVALUE ( 'Observation Status'[Observation Status], 'Observation Status'[AssetObservationStatus_key], StatusKey )
+		dataType: string
+		lineageTag: aea283fe-22b1-56f4-9b0d-f0f3aef3a813
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Whether the observation has been deleted (for filtering).
+	column 'Observation Deleted' = LOOKUPVALUE ( Observation[Deleted], Observation[AssetObservation_key], 'Inspection Observation Fact'[AssetObservation_key] )
+		dataType: boolean
+		isHidden
+		lineageTag: c881e0ad-0751-595d-a713-42d3c5717b8e
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
 	partition 'Inspection Observation Fact' = m
 		mode: import
 		source =

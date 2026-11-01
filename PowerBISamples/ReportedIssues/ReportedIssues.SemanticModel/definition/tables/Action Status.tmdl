@@ -1,0 +1,48 @@
+/// Action statuses: Open, In Progress, Closed.
+table 'Action Status'
+	lineageTag: d807a62f-b73e-5dc1-918d-e109bf06dd98
+
+	column ActionStatus_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 8398354b-05f7-565f-b493-7fcbba1b0132
+		summarizeBy: none
+		sourceColumn: ActionStatus_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column ActionStatusCode
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 686811fc-bade-5e9e-b6f1-0c01f62c6727
+		summarizeBy: none
+		sourceColumn: ActionStatusCode
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Action Status'
+		dataType: string
+		lineageTag: 2109fe3d-98ac-5add-9b4a-c2eb95e78e29
+		summarizeBy: none
+		sourceColumn: Action Status
+		sortByColumn: ActionStatusCode
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Action Status' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("demo-workwalletbi.database.windows.net", "demo-workwalletbi"),
+				    mart_ActionStatus = Source{[Schema="mart",Item="ActionStatus"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(mart_ActionStatus,{"_created", "_edited"}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"ActionStatus", "Action Status"}})
+				in
+				    #"Renamed Columns"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

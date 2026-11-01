@@ -1,0 +1,316 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
+  "name": "c88ac99eb7da570fad5c",
+  "position": {
+    "x": 24,
+    "y": 448,
+    "z": 1000,
+    "height": 256,
+    "width": 1232,
+    "tabOrder": 1000
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Induction"
+                    }
+                  },
+                  "Property": "Induction"
+                }
+              },
+              "queryRef": "Induction.Induction",
+              "nativeQueryRef": "Induction"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Induction Measures"
+                    }
+                  },
+                  "Property": "Inductions Taken"
+                }
+              },
+              "queryRef": "Induction Measures.Inductions Taken",
+              "nativeQueryRef": "Attempts",
+              "displayName": "Attempts"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Induction Measures"
+                    }
+                  },
+                  "Property": "Successful Inductions"
+                }
+              },
+              "queryRef": "Induction Measures.Successful Inductions",
+              "nativeQueryRef": "Passed or completed",
+              "displayName": "Passed or completed"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Induction Measures"
+                    }
+                  },
+                  "Property": "Failed Inductions"
+                }
+              },
+              "queryRef": "Induction Measures.Failed Inductions",
+              "nativeQueryRef": "Failed",
+              "displayName": "Failed"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Induction Measures"
+                    }
+                  },
+                  "Property": "Pass Rate"
+                }
+              },
+              "queryRef": "Induction Measures.Pass Rate",
+              "nativeQueryRef": "Pass rate",
+              "displayName": "Pass rate"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Induction Measures"
+                    }
+                  },
+                  "Property": "Average Test Score"
+                }
+              },
+              "queryRef": "Induction Measures.Average Test Score",
+              "nativeQueryRef": "Avg test score",
+              "displayName": "Avg test score"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Induction Measures"
+                    }
+                  },
+                  "Property": "People Inducted"
+                }
+              },
+              "queryRef": "Induction Measures.People Inducted",
+              "nativeQueryRef": "People inducted",
+              "displayName": "People inducted"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Induction"
+                    }
+                  },
+                  "Property": "Url"
+                }
+              },
+              "queryRef": "Induction.Url",
+              "nativeQueryRef": "Link",
+              "displayName": "Link"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "Induction Measures"
+                  }
+                },
+                "Property": "Inductions Taken"
+              }
+            },
+            "direction": "Descending"
+          }
+        ]
+      }
+    },
+    "objects": {
+      "values": [
+        {
+          "properties": {
+            "urlIcon": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "columnWidth": [
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "389D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Induction.Induction"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "114D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Induction Measures.Inductions Taken"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "148D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Induction Measures.Successful Inductions"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "103D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Induction Measures.Failed Inductions"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "114D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Induction Measures.Pass Rate"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "137D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Induction Measures.Average Test Score"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "137D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Induction Measures.People Inducted"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "50D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Induction.Url"
+          }
+        }
+      ],
+      "columnHeaders": [
+        {
+          "properties": {}
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Results by induction'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

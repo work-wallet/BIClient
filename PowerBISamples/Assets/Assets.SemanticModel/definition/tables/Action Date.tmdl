@@ -1,0 +1,80 @@
+/// Dates for actions: raised date (active) and closed date (inactive), separate from the Date table so actions can be filtered by their own dates.
+table 'Action Date'
+	lineageTag: f6456972-4ec7-5449-b28e-ee5c911aa574
+	dataCategory: Time
+
+	column Date
+		dataType: dateTime
+		isKey
+		formatString: dd/mm/yyyy
+		lineageTag: f922eee5-9c38-5ac8-8f31-ad4b784d1e36
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Date]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Year = YEAR ( 'Action Date'[Date] )
+		dataType: int64
+		formatString: 0
+		lineageTag: 820fba0e-0c5c-5276-967b-3a87984ca41f
+		dataCategory: Years
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Month Number' = MONTH ( 'Action Date'[Date] )
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 2cd319a9-16d9-5932-8a25-8cdfc5e21014
+		dataCategory: MonthOfYear
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column Month = FORMAT ( 'Action Date'[Date], "mmm" )
+		dataType: string
+		lineageTag: e16cab9e-bf3e-55eb-9dfb-aa73470e1abd
+		dataCategory: Months
+		summarizeBy: none
+		sortByColumn: 'Month Number'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Month Start' = DATE ( YEAR ( 'Action Date'[Date] ), MONTH ( 'Action Date'[Date] ), 1 )
+		dataType: dateTime
+		formatString: mmm yyyy
+		lineageTag: 90b1a369-7c61-5d4d-8ab5-cbbec8d79acd
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Year Month' = FORMAT ( 'Action Date'[Date], "mmm yyyy" )
+		dataType: string
+		lineageTag: cc08d882-bcf7-5669-af7d-9243c26db86a
+		summarizeBy: none
+		sortByColumn: 'Month Start'
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Date for relative date slicers: future dates count as today, so 'Last N months' also includes upcoming records.
+	column 'Slicer Date' = MIN ( 'Action Date'[Date], TODAY () )
+		dataType: dateTime
+		formatString: dd/mm/yyyy
+		lineageTag: 23e3ded2-b3fe-5c5c-b2bd-f0891b8feb9f
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Action Date' = calculated
+		mode: import
+		source =
+				// Whole calendar years spanning the data, extended to today so relative date slicers always work.
+				VAR FirstData = MIN ( 'Action'[Created On] )
+				VAR LastData = MAX ( 'Action'[Created On] )
+				VAR FirstDay = DATE ( YEAR ( COALESCE ( FirstData, TODAY () ) ), 1, 1 )
+				VAR LastDay = DATE ( YEAR ( MAX ( COALESCE ( LastData, TODAY () ), TODAY () ) ), 12, 31 )
+				RETURN
+				    CALENDAR ( FirstDay, LastDay )
+

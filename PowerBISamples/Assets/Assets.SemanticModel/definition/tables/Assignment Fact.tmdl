@@ -100,7 +100,7 @@ table 'Assignment Fact'
 
 		annotation SummarizationSetBy = Automatic
 
-	column Days = IF('Assignment Fact'[Is Latest] = FALSE(),'Assignment Fact'[To] - 'Assignment Fact'[From], BLANK())
+	column Days = IF('Assignment Fact'[Is Latest] = FALSE() && 'Assignment Fact'[To] > DATE(1900, 1, 1),'Assignment Fact'[To] - 'Assignment Fact'[From], BLANK())
 		dataType: double
 		formatString: 0.0
 		lineageTag: ea5a2574-8f86-4a04-b573-e1b12fd14c8e

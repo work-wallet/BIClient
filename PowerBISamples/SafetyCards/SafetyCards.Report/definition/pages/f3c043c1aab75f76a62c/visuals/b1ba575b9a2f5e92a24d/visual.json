@@ -1,0 +1,351 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
+  "name": "b1ba575b9a2f5e92a24d",
+  "position": {
+    "x": 24,
+    "y": 216,
+    "z": 1000,
+    "height": 488,
+    "width": 800,
+    "tabOrder": 1000
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Safety Card"
+                    }
+                  },
+                  "Property": "Recipient"
+                }
+              },
+              "queryRef": "Safety Card.Recipient",
+              "nativeQueryRef": "Recipient",
+              "displayName": "Recipient"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Safety Card"
+                    }
+                  },
+                  "Property": "Recipient Company"
+                }
+              },
+              "queryRef": "Safety Card.Recipient Company",
+              "nativeQueryRef": "Company",
+              "displayName": "Company"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Safety Card Measures"
+                    }
+                  },
+                  "Property": "Safety Cards"
+                }
+              },
+              "queryRef": "Safety Card Measures.Safety Cards",
+              "nativeQueryRef": "Cards",
+              "displayName": "Cards"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Safety Card Measures"
+                    }
+                  },
+                  "Property": "Green Cards"
+                }
+              },
+              "queryRef": "Safety Card Measures.Green Cards",
+              "nativeQueryRef": "Green",
+              "displayName": "Green"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Safety Card Measures"
+                    }
+                  },
+                  "Property": "Yellow Cards"
+                }
+              },
+              "queryRef": "Safety Card Measures.Yellow Cards",
+              "nativeQueryRef": "Yellow",
+              "displayName": "Yellow"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Safety Card Measures"
+                    }
+                  },
+                  "Property": "Red Cards"
+                }
+              },
+              "queryRef": "Safety Card Measures.Red Cards",
+              "nativeQueryRef": "Red",
+              "displayName": "Red"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Safety Card Measures"
+                    }
+                  },
+                  "Property": "Warning Cards"
+                }
+              },
+              "queryRef": "Safety Card Measures.Warning Cards",
+              "nativeQueryRef": "Warnings",
+              "displayName": "Warnings"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Safety Card Measures"
+                    }
+                  },
+                  "Property": "Last Card"
+                }
+              },
+              "queryRef": "Safety Card Measures.Last Card",
+              "nativeQueryRef": "Last card",
+              "displayName": "Last card"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "Safety Card Measures"
+                  }
+                },
+                "Property": "Warning Cards"
+              }
+            },
+            "direction": "Descending"
+          }
+        ]
+      }
+    },
+    "objects": {
+      "values": [
+        {
+          "properties": {
+            "fontColorPrimary": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#D6493A'"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "selector": {
+            "data": [
+              {
+                "dataViewWildcard": {
+                  "matchingOption": 1
+                }
+              }
+            ],
+            "metadata": "Safety Card Measures.Red Cards"
+          }
+        }
+      ],
+      "columnWidth": [
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "183D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Safety Card.Recipient"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "168D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Safety Card.Recipient Company"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "61D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Safety Card Measures.Safety Cards"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "61D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Safety Card Measures.Green Cards"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "61D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Safety Card Measures.Yellow Cards"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "53D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Safety Card Measures.Red Cards"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "76D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Safety Card Measures.Warning Cards"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "99D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Safety Card Measures.Last Card"
+          }
+        }
+      ],
+      "columnHeaders": [
+        {
+          "properties": {}
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Cards by recipient'"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "subTitle": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'One row per person (Work Wallet contact, or typed-in name and employer); most warnings first'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

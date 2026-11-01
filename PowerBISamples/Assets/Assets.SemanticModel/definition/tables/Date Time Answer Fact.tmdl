@@ -43,7 +43,7 @@ table 'Date Time Answer Fact'
 
 	column 'Date Answer'
 		dataType: dateTime
-		formatString: Short Date
+		formatString: dd/mm/yyyy
 		lineageTag: 0bdaee86-9944-4d74-9e29-8e6a1342111f
 		summarizeBy: none
 		sourceColumn: Date Answer

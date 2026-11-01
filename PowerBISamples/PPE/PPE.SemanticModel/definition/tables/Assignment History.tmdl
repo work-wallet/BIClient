@@ -131,6 +131,16 @@ table 'Assignment History'
 
 		annotation SummarizationSetBy = Automatic
 
+	/// Date part of Actioned On; relates the table to the Date table.
+	column 'Actioned Date' = DATE ( YEAR ( 'Assignment History'[Actioned On] ), MONTH ( 'Assignment History'[Actioned On] ), DAY ( 'Assignment History'[Actioned On] ) )
+		dataType: dateTime
+		isHidden
+		formatString: dd/mm/yyyy
+		lineageTag: 3ec10a88-792b-5a6a-9777-73b65893978e
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
 	partition 'Assignment History' = m
 		mode: import
 		source =

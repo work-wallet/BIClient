@@ -1,0 +1,1105 @@
+table 'Asset Measures'
+	lineageTag: ba4bd339-186c-593e-b84c-e4c2eabab620
+
+	/// Number of assets.
+	measure Assets = COUNTROWS ( Asset )
+		formatString: #,0
+		displayFolder: Assets
+		lineageTag: 186c1035-c708-558f-a08f-514ef703f24d
+
+	/// Assets of any status except Deleted, ignoring status filters (e.g. the report's default Active filter).
+	measure 'Assets Any Status' = CALCULATE ( [Assets], REMOVEFILTERS ( 'Asset Status' ), KEEPFILTERS ( 'Asset Status'[AssetStatusCode] <> 3 ) )
+		formatString: #,0
+		displayFolder: Assets
+		lineageTag: f8e63ddf-e741-5ead-b4ab-00e82507301b
+
+	/// Assets with status Active.
+	measure 'Active Assets' = CALCULATE ( [Assets], KEEPFILTERS ( 'Asset Status'[AssetStatusCode] = 0 ) )
+		formatString: #,0
+		displayFolder: Assets
+		lineageTag: d22788e6-ad20-57df-8706-7eab0081ce25
+
+	/// Assets with status Out of Service.
+	measure 'Out Of Service Assets' = CALCULATE ( [Assets], KEEPFILTERS ( 'Asset Status'[AssetStatusCode] = 1 ) )
+		formatString: #,0
+		displayFolder: Assets
+		lineageTag: 0f955f8c-192f-5cb0-a12c-974c60e58357
+
+	/// Active assets with no completed inspection.
+	measure 'Active Assets Never Inspected' = CALCULATE ( [Active Assets], KEEPFILTERS ( Asset[Inspection Band Order] = 5 ) )
+		formatString: #,0
+		displayFolder: Assets
+		lineageTag: 4d9b2e45-fd74-54ba-8da7-adad1d5d3500
+
+	/// Active assets last inspected over a year ago, or never inspected (as at the last data refresh).
+	measure 'Active Assets Not Inspected In A Year' = CALCULATE ( [Active Assets], KEEPFILTERS ( Asset[Inspection Band Order] >= 4 ) )
+		formatString: #,0
+		displayFolder: Assets
+		lineageTag: 1cdefd79-24e7-5d07-9a78-9a76b9be68ee
+
+	/// Assets with at least one open defect (as at the last data refresh).
+	measure 'Assets With Open Defects' = CALCULATE ( [Assets], KEEPFILTERS ( Asset[Open Defects] > 0 ) )
+		formatString: #,0
+		displayFolder: Assets
+		lineageTag: 465fa918-059e-5edf-a080-3e321da2a3f2
+
+	/// Distinct asset types.
+	measure 'Asset Types' = DISTINCTCOUNT ( Asset[Asset Type] )
+		formatString: #,0
+		displayFolder: Assets
+		lineageTag: 11713db3-6317-5c20-8caf-f27b029eed7f
+
+	/// Asset type with the most assets; ties are reported.
+	measure 'Most Common Asset Type' =
+			VAR Items = FILTER ( ADDCOLUMNS ( VALUES ( Asset[Asset Type] ), "@Value", [Assets] ), NOT ISBLANK ( [@Value] ) )
+			VAR Target = MAXX ( Items, [@Value] )
+			VAR Leaders = FILTER ( Items, [@Value] = Target )
+			VAR LeaderCount = COUNTROWS ( Leaders )
+			VAR FirstLeader = MINX ( Leaders, Asset[Asset Type] )
+			RETURN
+			    IF ( LeaderCount > 1, FirstLeader & " (+" & ( LeaderCount - 1 ) & " tied)", FirstLeader )
+		displayFolder: Assets
+		lineageTag: 5bcc5eb2-e7fe-5d76-8de9-c3bb96a24e93
+
+	/// Number of inspections.
+	measure Inspections = COUNTROWS ( Inspection )
+		formatString: #,0
+		displayFolder: Inspections
+		lineageTag: 97a7e200-7d22-50cd-8a82-e94315f9e236
+
+	/// Inspections with status Complete.
+	measure 'Completed Inspections' = CALCULATE ( [Inspections], KEEPFILTERS ( 'Inspection Status'[InspectionStatusCode] = 0 ) )
+		formatString: #,0
+		displayFolder: Inspections
+		lineageTag: 191d081f-37f1-5c9f-94f3-14a7e1fbc188
+
+	/// Inspections in progress or ready for review.
+	measure 'Open Inspections' = CALCULATE ( [Inspections], KEEPFILTERS ( 'Inspection Status'[InspectionStatusCode] IN { 2, 4 } ) )
+		formatString: #,0
+		displayFolder: Inspections
+		lineageTag: 770f81ea-1b53-5ee7-bdf9-979baa8ccb18
+
+	/// Completed inspections that raised at least one new defect.
+	measure 'Inspections With Defects' = CALCULATE ( [Completed Inspections], KEEPFILTERS ( Inspection[Defects Raised] > 0 ) )
+		formatString: #,0
+		displayFolder: Inspections
+		lineageTag: f654f00e-b972-53d9-b1d3-d196e2b64d77
+
+	/// Share of completed inspections that raised at least one new defect.
+	measure 'Defect Find Rate' = DIVIDE ( [Inspections With Defects], [Completed Inspections] )
+		formatString: 0%
+		displayFolder: Inspections
+		lineageTag: bf919181-c430-59b4-aac1-34dc265a852a
+
+	/// Distinct assets with a completed inspection.
+	measure 'Assets Inspected' = CALCULATE ( DISTINCTCOUNT ( Inspection[Asset_key] ), KEEPFILTERS ( 'Inspection Status'[InspectionStatusCode] = 0 ) )
+		formatString: #,0
+		displayFolder: Inspections
+		lineageTag: d39703b7-097f-5424-b46c-90b3fc13a627
+
+	/// Distinct active assets with a completed inspection.
+	measure 'Active Assets Inspected' = CALCULATE ( [Assets Inspected], KEEPFILTERS ( 'Asset Status'[AssetStatusCode] = 0 ) )
+		formatString: #,0
+		displayFolder: Inspections
+		lineageTag: da2602ba-cb0a-5fb5-80f3-ae5bd4667be8
+
+	/// Share of active assets with at least one completed inspection in the selected period.
+	measure 'Inspection Coverage' = DIVIDE ( [Active Assets Inspected], [Active Assets] )
+		formatString: 0%
+		displayFolder: Inspections
+		lineageTag: cc16248b-a08a-5d84-a576-c5f7d7af9b0f
+
+	/// Distinct people who carried out the inspections in context.
+	measure Inspectors = CALCULATE ( DISTINCTCOUNT ( 'Inspected By Fact'[Contact_key] ), Inspection )
+		formatString: #,0
+		displayFolder: Inspections
+		lineageTag: 1fdde6fa-99c3-5a61-9577-63fcc3ad88dc
+
+	/// Average completed inspections per month, over months in context that have at least one.
+	measure 'Monthly Average Inspections' = AVERAGEX ( VALUES ( 'Date'[Month Start] ), [Completed Inspections] )
+		formatString: #,0
+		displayFolder: Inspections
+		lineageTag: 7ae86dd5-a5f4-5243-bf0b-d1d016c1036b
+
+	/// Monthly average over the whole selected period, for a constant reference line on monthly charts (blank for future months, so they don't appear on the axis).
+	measure 'Monthly Average Line' = IF ( MIN ( 'Date'[Date] ) <= TODAY (), CALCULATE ( [Monthly Average Inspections], ALLSELECTED ( 'Date' ) ) )
+		formatString: #,0
+		displayFolder: Inspections
+		lineageTag: d3ebf9f2-828f-5fd0-90c8-a335404940e8
+
+	/// Inspection type with the most completed inspections; ties are reported.
+	measure 'Most Common Inspection Type' =
+			VAR Items = FILTER ( ADDCOLUMNS ( VALUES ( 'Inspection Type'[Inspection Type] ), "@Value", [Completed Inspections] ), NOT ISBLANK ( [@Value] ) )
+			VAR Target = MAXX ( Items, [@Value] )
+			VAR Leaders = FILTER ( Items, [@Value] = Target )
+			VAR LeaderCount = COUNTROWS ( Leaders )
+			VAR FirstLeader = MINX ( Leaders, 'Inspection Type'[Inspection Type] )
+			RETURN
+			    IF ( LeaderCount > 1, FirstLeader & " (+" & ( LeaderCount - 1 ) & " tied)", FirstLeader )
+		displayFolder: Inspections
+		lineageTag: 1f13fff1-3992-5eec-9ff7-66def8df54fd
+
+	/// Average percentage score of scored inspections (inspections without a score, -1, are excluded).
+	measure 'Average Score' = CALCULATE ( AVERAGE ( Inspection[Percentage Score] ), KEEPFILTERS ( Inspection[Percentage Score] >= 0 ) )
+		formatString: 0%
+		displayFolder: Inspections
+		lineageTag: 9c6f39ef-f1fc-5ac0-8eee-463b9198a493
+
+	/// Defects raised (open or closed). Draft (not finalised) and deleted observations are excluded.
+	measure 'Defects Raised' = CALCULATE ( COUNTROWS ( Observation ), KEEPFILTERS ( 'Observation Status'[AssetObservationStatusCode] IN { 1, 32 } ), KEEPFILTERS ( Observation[IsFinalised] = TRUE () ), KEEPFILTERS ( Observation[Deleted] = FALSE () ) )
+		formatString: #,0
+		displayFolder: Defects
+		lineageTag: b0575f39-eca2-5d6f-9ae3-43409974e621
+
+	/// Defects still open, raised in the period in context.
+	measure 'Open Defects' = CALCULATE ( [Defects Raised], KEEPFILTERS ( 'Observation Status'[AssetObservationStatusCode] = 1 ) )
+		formatString: #,0
+		displayFolder: Defects
+		lineageTag: 592de991-5fb3-5c97-837a-f03d152bbc45
+
+	/// All defects open as at the last data refresh, whenever they were raised.
+	measure 'Open Defects Now' = CALCULATE ( [Open Defects], REMOVEFILTERS ( 'Date' ) )
+		formatString: #,0
+		displayFolder: Defects
+		lineageTag: b6ac9702-f0bd-5bd0-8379-147abc44582c
+
+	/// Defects closed in the period in context (by close date).
+	measure 'Closed Defects' = CALCULATE ( [Defects Raised], KEEPFILTERS ( 'Observation Status'[AssetObservationStatusCode] = 32 ), USERELATIONSHIP ( 'Date'[Date], Observation[Closed Date] ) )
+		formatString: #,0
+		displayFolder: Defects
+		lineageTag: 5b0187f6-2674-58e3-aa30-9b774d9e1d43
+
+	/// Average days from a defect being raised to being closed, for defects closed in the period.
+	measure 'Average Days To Close' =
+			CALCULATE (
+			    AVERAGE ( Observation[Days Open] ),
+			    KEEPFILTERS ( 'Observation Status'[AssetObservationStatusCode] IN { 1, 32 } ), KEEPFILTERS ( Observation[IsFinalised] = TRUE () ), KEEPFILTERS ( Observation[Deleted] = FALSE () ),
+			    KEEPFILTERS ( 'Observation Status'[AssetObservationStatusCode] = 32 ),
+			    USERELATIONSHIP ( 'Date'[Date], Observation[Closed Date] )
+			)
+		formatString: #,0
+		displayFolder: Defects
+		lineageTag: 0e326487-e5cd-5a93-9376-b54fe465a351
+
+	/// Average days open, for defects still open (as at the last data refresh).
+	measure 'Average Open Defect Age' =
+			CALCULATE (
+			    AVERAGE ( Observation[Days Open] ),
+			    KEEPFILTERS ( 'Observation Status'[AssetObservationStatusCode] IN { 1, 32 } ), KEEPFILTERS ( Observation[IsFinalised] = TRUE () ), KEEPFILTERS ( Observation[Deleted] = FALSE () ),
+			    KEEPFILTERS ( 'Observation Status'[AssetObservationStatusCode] = 1 )
+			)
+		formatString: #,0
+		displayFolder: Defects
+		lineageTag: aefc80b2-aa87-5fab-bae2-6680f07e098f
+
+	/// Days open of the oldest open defect.
+	measure 'Oldest Open Defect Days' =
+			CALCULATE (
+			    MAX ( Observation[Days Open] ),
+			    KEEPFILTERS ( 'Observation Status'[AssetObservationStatusCode] IN { 1, 32 } ), KEEPFILTERS ( Observation[IsFinalised] = TRUE () ), KEEPFILTERS ( Observation[Deleted] = FALSE () ),
+			    KEEPFILTERS ( 'Observation Status'[AssetObservationStatusCode] = 1 )
+			)
+		formatString: #,0
+		displayFolder: Defects
+		lineageTag: 8e6fc073-c169-5c87-9e02-266e5d3edc1f
+
+	/// Open defects raised more than 90 days ago (as at the last data refresh).
+	measure 'Open Defects Over 90 Days' = CALCULATE ( [Open Defects], KEEPFILTERS ( Observation[Open Age Band Order] >= 4 ) )
+		formatString: #,0
+		displayFolder: Defects
+		lineageTag: de017e1e-f79a-5322-bfd4-62147a8a4396
+
+	/// Open defects recorded again by at least one later inspection: known and still not fixed.
+	measure 'Defects Seen Again' = CALCULATE ( [Open Defects], KEEPFILTERS ( Observation[Times Seen Again] > 0 ) )
+		formatString: #,0
+		displayFolder: Defects
+		lineageTag: dd7ec7d4-e6b4-5b99-aec2-84cbafa79a78
+
+	/// Asset type with the most defects raised; ties are reported.
+	measure 'Most Affected Asset Type' =
+			VAR Items = FILTER ( ADDCOLUMNS ( VALUES ( Asset[Asset Type] ), "@Value", [Defects Raised] ), NOT ISBLANK ( [@Value] ) )
+			VAR Target = MAXX ( Items, [@Value] )
+			VAR Leaders = FILTER ( Items, [@Value] = Target )
+			VAR LeaderCount = COUNTROWS ( Leaders )
+			VAR FirstLeader = MINX ( Leaders, Asset[Asset Type] )
+			RETURN
+			    IF ( LeaderCount > 1, FirstLeader & " (+" & ( LeaderCount - 1 ) & " tied)", FirstLeader )
+		displayFolder: Defects
+		lineageTag: 7d2de8da-0622-504d-9d34-87898e27fbd8
+
+	/// New defects recorded against inspection checklist items (by inspection date); used to rank defect components.
+	measure 'Defects Recorded' =
+			VAR Recorded = SUM ( 'Inspection Observation Fact'[Recorded Defect Count] )
+			RETURN
+			    IF ( Recorded > 0, Recorded )
+		formatString: #,0
+		displayFolder: Defects
+		lineageTag: a8e643d5-c042-5afc-aa1f-efb0a2aa6669
+
+	/// Inspection item (e.g. Tyres) with the most new defects; ties are reported.
+	measure 'Top Defect Component' =
+			VAR Items = FILTER ( ADDCOLUMNS ( VALUES ( 'Inspection Observation Fact'[Workflow Component] ), "@Value", [Defects Recorded] ), NOT ISBLANK ( [@Value] ) )
+			VAR Target = MAXX ( Items, [@Value] )
+			VAR Leaders = FILTER ( Items, [@Value] = Target )
+			VAR LeaderCount = COUNTROWS ( Leaders )
+			VAR FirstLeader = MINX ( Leaders, 'Inspection Observation Fact'[Workflow Component] )
+			RETURN
+			    IF ( LeaderCount > 1, FirstLeader & " (+" & ( LeaderCount - 1 ) & " tied)", FirstLeader )
+		displayFolder: Defects
+		lineageTag: 5a415966-2fa4-5f2d-a39c-d9fad63edd68
+
+	/// Share of new defects belonging to the inspection item with the most defects.
+	measure 'Top Defect Component Share' =
+			VAR Components = ADDCOLUMNS ( VALUES ( 'Inspection Observation Fact'[Workflow Component] ), "@Defects", [Defects Recorded] )
+			RETURN
+			    DIVIDE ( MAXX ( Components, [@Defects] ), [Defects Recorded] )
+		formatString: 0%
+		displayFolder: Defects
+		lineageTag: 255455c6-9e84-5727-bb13-532f2fe762db
+
+	/// Inspection items with new defects in three or more different months.
+	measure 'Repeat Defect Components' =
+			COUNTROWS (
+			    FILTER (
+			        VALUES ( 'Inspection Observation Fact'[Workflow Component] ),
+			        COUNTROWS ( FILTER ( VALUES ( 'Date'[Month Start] ), [Defects Recorded] > 0 ) ) >= 3
+			    )
+			) + 0
+		formatString: #,0
+		displayFolder: Defects
+		lineageTag: aca0992f-f5ed-5e19-aba7-45c1bdebd6b3
+
+	/// Assets currently assigned to a site.
+	measure 'Assets Assigned To Sites' = CALCULATE ( [Assets], KEEPFILTERS ( 'Assignment Fact'[Is Latest] = TRUE () ), KEEPFILTERS ( 'Assignment Type'[Assignment Type] = "Site" ) )
+		formatString: #,0
+		displayFolder: Assignments
+		lineageTag: a0c64ba3-a214-5968-92fd-15a10f38bced
+
+	/// Assets currently assigned to a person (Work Wallet user).
+	measure 'Assets Assigned To People' = CALCULATE ( [Assets], KEEPFILTERS ( 'Assignment Fact'[Is Latest] = TRUE () ), KEEPFILTERS ( 'Assignment Type'[Assignment Type] = "User" ) )
+		formatString: #,0
+		displayFolder: Assignments
+		lineageTag: ea122fec-b460-5ed7-8b78-9f0bed9e786e
+
+	/// Assets with no current site or person assignment.
+	measure 'Assets Not Assigned' = [Assets] - [Assets Assigned To Sites] - [Assets Assigned To People]
+		formatString: #,0
+		displayFolder: Assignments
+		lineageTag: ebe30f1e-f8fc-552e-b82d-38a98d9c1366
+
+	/// Distinct sites with assets currently assigned.
+	measure 'Sites With Assets' = CALCULATE ( DISTINCTCOUNT ( Assignment[Site] ), KEEPFILTERS ( 'Assignment Fact'[Is Latest] = TRUE () ), KEEPFILTERS ( 'Assignment Type'[Assignment Type] = "Site" ) )
+		formatString: #,0
+		displayFolder: Assignments
+		lineageTag: 47a3ecdc-5c3e-5aa4-b01d-ab6ee67944c1
+
+	/// Distinct people with assets currently assigned.
+	measure 'People With Assets' = CALCULATE ( DISTINCTCOUNT ( Assignment[Assigned To] ), KEEPFILTERS ( 'Assignment Fact'[Is Latest] = TRUE () ), KEEPFILTERS ( 'Assignment Type'[Assignment Type] = "User" ) )
+		formatString: #,0
+		displayFolder: Assignments
+		lineageTag: fd1bc9a5-16ed-5b8b-be83-f49b35737ea8
+
+	/// Assignment records (current and past).
+	measure Assignments = COUNTROWS ( 'Assignment Fact' )
+		formatString: #,0
+		displayFolder: Assignments
+		lineageTag: 357ed5e4-4b25-5bfe-a0b9-7eaaab9c8201
+
+	/// Assets that have had more than one assignment.
+	measure 'Assets Reassigned' = COUNTROWS ( FILTER ( VALUES ( 'Assignment Fact'[Asset_key] ), CALCULATE ( COUNTROWS ( 'Assignment Fact' ) ) > 1 ) ) + 0
+		formatString: #,0
+		displayFolder: Assignments
+		lineageTag: 4b9f1020-5a83-54a7-8760-a89d2cadd392
+
+	/// Average length of past (ended) assignments, in days. Assignments without an end date are excluded.
+	measure 'Average Days Per Assignment' =
+			AVERAGEX (
+			    FILTER ( 'Assignment Fact', 'Assignment Fact'[To] > DATE ( 1900, 1, 1 ) && 'Assignment Fact'[Days] >= 0 ),
+			    'Assignment Fact'[Days]
+			)
+		formatString: #,0
+		displayFolder: Assignments
+		lineageTag: 940a74d1-14bf-5f9d-b610-bdc4be0e8df6
+
+	/// Property values recorded on assets.
+	measure 'Property Values' = COUNTROWS ( 'Property Fact' )
+		formatString: #,0
+		displayFolder: Properties
+		lineageTag: 311c06f1-79b8-55a1-a892-342332510f37
+
+	/// Distinct assets with at least one property value.
+	measure 'Assets With Properties' = DISTINCTCOUNT ( 'Property Fact'[Asset_key] )
+		formatString: #,0
+		displayFolder: Properties
+		lineageTag: c9350236-d575-59d0-8095-73c81c7fb31b
+
+	/// Distinct properties with values recorded.
+	measure Properties = CALCULATE ( DISTINCTCOUNT ( 'Property'[Property] ), 'Property Fact' )
+		formatString: #,0
+		displayFolder: Properties
+		lineageTag: 426e8dc5-a6b5-5635-a1bc-bff31c972c2d
+
+	/// Distinct shared properties (used across asset types) with values recorded.
+	measure 'Shared Properties' = CALCULATE ( DISTINCTCOUNT ( 'Property'[Property] ), 'Property Fact', KEEPFILTERS ( 'Property'[Is Shared Property] = TRUE () ) )
+		formatString: #,0
+		displayFolder: Properties
+		lineageTag: 8d301f2e-5114-5951-a74d-36040b49500d
+
+	/// Completed Inspections for the same-length period immediately before the selected dates.
+	measure 'Completed Inspections PP' =
+			VAR FirstDay = MIN ( 'Date'[Date] )
+			VAR LastDay = MIN ( MAX ( 'Date'[Date] ), TODAY () )
+			VAR Days = LastDay - FirstDay + 1
+			RETURN
+			    CALCULATE ( [Completed Inspections], DATESBETWEEN ( 'Date'[Date], FirstDay - Days, FirstDay - 1 ) )
+		formatString: #,0
+		isHidden
+		displayFolder: Previous Period
+		lineageTag: b7849457-e69d-5c33-8509-1b3c93013d4d
+
+	/// Defects Raised for the same-length period immediately before the selected dates.
+	measure 'Defects Raised PP' =
+			VAR FirstDay = MIN ( 'Date'[Date] )
+			VAR LastDay = MIN ( MAX ( 'Date'[Date] ), TODAY () )
+			VAR Days = LastDay - FirstDay + 1
+			RETURN
+			    CALCULATE ( [Defects Raised], DATESBETWEEN ( 'Date'[Date], FirstDay - Days, FirstDay - 1 ) )
+		formatString: #,0
+		isHidden
+		displayFolder: Previous Period
+		lineageTag: 06c4d7e6-327d-58a1-8ed5-f4f9a3c0e2fd
+
+	/// Closed Defects for the same-length period immediately before the selected dates.
+	measure 'Closed Defects PP' =
+			VAR FirstDay = MIN ( 'Date'[Date] )
+			VAR LastDay = MIN ( MAX ( 'Date'[Date] ), TODAY () )
+			VAR Days = LastDay - FirstDay + 1
+			RETURN
+			    CALCULATE ( [Closed Defects], DATESBETWEEN ( 'Date'[Date], FirstDay - Days, FirstDay - 1 ) )
+		formatString: #,0
+		isHidden
+		displayFolder: Previous Period
+		lineageTag: acf61589-91ee-5d8a-8287-6152a542388f
+
+	/// Average Days To Close for the same-length period immediately before the selected dates.
+	measure 'Average Days To Close PP' =
+			VAR FirstDay = MIN ( 'Date'[Date] )
+			VAR LastDay = MIN ( MAX ( 'Date'[Date] ), TODAY () )
+			VAR Days = LastDay - FirstDay + 1
+			RETURN
+			    CALCULATE ( [Average Days To Close], DATESBETWEEN ( 'Date'[Date], FirstDay - Days, FirstDay - 1 ) )
+		formatString: #,0
+		isHidden
+		displayFolder: Previous Period
+		lineageTag: 38e5d840-80c0-5bb2-8d0c-e93895417aa2
+
+	/// Defect Find Rate for the same-length period immediately before the selected dates.
+	measure 'Defect Find Rate PP' =
+			VAR FirstDay = MIN ( 'Date'[Date] )
+			VAR LastDay = MIN ( MAX ( 'Date'[Date] ), TODAY () )
+			VAR Days = LastDay - FirstDay + 1
+			RETURN
+			    CALCULATE ( [Defect Find Rate], DATESBETWEEN ( 'Date'[Date], FirstDay - Days, FirstDay - 1 ) )
+		formatString: 0%
+		isHidden
+		displayFolder: Previous Period
+		lineageTag: 60d4d373-53be-5ec6-965b-efdc216ae1f9
+
+	/// Defects Recorded for the same-length period immediately before the selected dates.
+	measure 'Defects Recorded PP' =
+			VAR FirstDay = MIN ( 'Date'[Date] )
+			VAR LastDay = MIN ( MAX ( 'Date'[Date] ), TODAY () )
+			VAR Days = LastDay - FirstDay + 1
+			RETURN
+			    CALCULATE ( [Defects Recorded], DATESBETWEEN ( 'Date'[Date], FirstDay - Days, FirstDay - 1 ) )
+		formatString: #,0
+		isHidden
+		displayFolder: Previous Period
+		lineageTag: 97f9dbd8-6cf1-534d-bc76-4d8a7c344f5f
+
+	/// Inspection Coverage for the same-length period immediately before the selected dates.
+	measure 'Inspection Coverage PP' =
+			VAR FirstDay = MIN ( 'Date'[Date] )
+			VAR LastDay = MIN ( MAX ( 'Date'[Date] ), TODAY () )
+			VAR Days = LastDay - FirstDay + 1
+			RETURN
+			    CALCULATE ( [Inspection Coverage], DATESBETWEEN ( 'Date'[Date], FirstDay - Days, FirstDay - 1 ) )
+		formatString: 0%
+		isHidden
+		displayFolder: Previous Period
+		lineageTag: 1e6e4eca-c14d-5c82-8afe-4410acd5eac8
+
+	measure 'Completed Trend Label' =
+			VAR Cur = [Completed Inspections]
+			VAR Prev = [Completed Inspections PP]
+			VAR Change = DIVIDE ( Cur - Prev, Prev )
+			RETURN
+			    IF (
+			        ISBLANK ( Prev ) || Prev = 0,
+			        "No earlier period to compare",
+			        IF ( Change >= 0, "▲ ", "▼ " ) & FORMAT ( ABS ( Change ), "0%" ) & " vs previous period"
+			    )
+		isHidden
+		displayFolder: Labels
+		lineageTag: 068d3a24-a861-585f-b6eb-2cec781592b6
+
+	measure 'Defects Trend Label' =
+			VAR Cur = [Defects Raised]
+			VAR Prev = [Defects Raised PP]
+			VAR Change = DIVIDE ( Cur - Prev, Prev )
+			RETURN
+			    IF (
+			        ISBLANK ( Prev ) || Prev = 0,
+			        "No earlier period to compare",
+			        IF ( Change >= 0, "▲ ", "▼ " ) & FORMAT ( ABS ( Change ), "0%" ) & " vs previous period"
+			    )
+		isHidden
+		displayFolder: Labels
+		lineageTag: 76b5f23d-32a2-5fc8-91af-0cd3836f25e8
+
+	measure 'Closed Trend Label' =
+			VAR Cur = [Closed Defects]
+			VAR Prev = [Closed Defects PP]
+			VAR Change = DIVIDE ( Cur - Prev, Prev )
+			RETURN
+			    IF (
+			        ISBLANK ( Prev ) || Prev = 0,
+			        "No earlier period to compare",
+			        IF ( Change >= 0, "▲ ", "▼ " ) & FORMAT ( ABS ( Change ), "0%" ) & " vs previous period"
+			    )
+		isHidden
+		displayFolder: Labels
+		lineageTag: 05eb0f6e-d0bf-5b6c-a85e-423dd611dd5b
+
+	measure 'Days To Close Trend Label' =
+			VAR Cur = [Average Days To Close]
+			VAR Prev = [Average Days To Close PP]
+			VAR Change = DIVIDE ( Cur - Prev, Prev )
+			RETURN
+			    IF (
+			        ISBLANK ( Prev ) || Prev = 0,
+			        "No earlier period to compare",
+			        IF ( Change >= 0, "▲ ", "▼ " ) & FORMAT ( ABS ( Change ), "0%" ) & " vs previous period"
+			    )
+		isHidden
+		displayFolder: Labels
+		lineageTag: 816bdf46-ac11-57c6-befe-3c86610f4195
+
+	measure 'Find Rate Trend Label' =
+			VAR Cur = [Defect Find Rate]
+			VAR Prev = [Defect Find Rate PP]
+			RETURN
+			    IF (
+			        ISBLANK ( Prev ) || ISBLANK ( Cur ),
+			        "No earlier period to compare",
+			        IF ( Cur >= Prev, "▲ ", "▼ " ) & FORMAT ( ABS ( Cur - Prev ) * 100, "0.0" ) & " pts vs previous period"
+			    )
+		isHidden
+		displayFolder: Labels
+		lineageTag: e0cbbaf8-b595-5e77-b446-958e58a1e298
+
+	measure 'Recorded Trend Label' =
+			VAR Cur = [Defects Recorded]
+			VAR Prev = [Defects Recorded PP]
+			VAR Change = DIVIDE ( Cur - Prev, Prev )
+			RETURN
+			    IF (
+			        ISBLANK ( Prev ) || Prev = 0,
+			        "No earlier period to compare",
+			        IF ( Change >= 0, "▲ ", "▼ " ) & FORMAT ( ABS ( Change ), "0%" ) & " vs previous period"
+			    )
+		isHidden
+		displayFolder: Labels
+		lineageTag: 1d11d4c8-97eb-5091-97c4-8b4465e4e1ff
+
+	measure 'Coverage Trend Label' =
+			VAR Cur = [Inspection Coverage]
+			VAR Prev = [Inspection Coverage PP]
+			RETURN
+			    IF (
+			        ISBLANK ( Prev ) || ISBLANK ( Cur ),
+			        "No earlier period to compare",
+			        IF ( Cur >= Prev, "▲ ", "▼ " ) & FORMAT ( ABS ( Cur - Prev ) * 100, "0.0" ) & " pts vs previous period"
+			    )
+		isHidden
+		displayFolder: Labels
+		lineageTag: 79394ba8-d477-56e9-bd6b-5a5f9df68418
+
+	/// Says how many assets the status filter hides (by default the report shows Active assets, as the Work Wallet portal does).
+	measure 'Active Assets Label' =
+			VAR OtherStatuses = [Assets Any Status] - [Assets]
+			RETURN
+			    SWITCH (
+			        TRUE (),
+			        ISBLANK ( [Assets Any Status] ), BLANK (),
+			        OtherStatuses > 0, FORMAT ( OtherStatuses, "#,0" ) & " more with other statuses (see Filters)",
+			        "All statuses shown"
+			    )
+		isHidden
+		displayFolder: Labels
+		lineageTag: c9d0babe-6d25-5c6c-8c81-500752c70e5a
+
+	measure 'Coverage Label' =
+			VAR Active = [Active Assets]
+			RETURN
+			    IF ( Active > 0, FORMAT ( [Active Assets Inspected] + 0, "#,0" ) & " of " & FORMAT ( Active, "#,0" ) & " active assets inspected" )
+		isHidden
+		displayFolder: Labels
+		lineageTag: 88de316f-8478-5877-9bee-809e80ff961a
+
+	measure 'Open Defects Label' =
+			VAR AssetCount = [Assets With Open Defects] + 0
+			RETURN
+			    IF ( NOT ISBLANK ( [Assets] ), "On " & FORMAT ( AssetCount, "#,0" ) & IF ( AssetCount = 1, " asset", " assets" ) )
+		isHidden
+		displayFolder: Labels
+		lineageTag: 06393edf-8bc1-5316-8e55-3fd01c0defbf
+
+	measure 'Never Inspected Label' =
+			VAR Active = [Active Assets]
+			RETURN
+			    IF ( Active > 0, FORMAT ( DIVIDE ( [Active Assets Never Inspected] + 0, Active ), "0%" ) & " of active assets" )
+		isHidden
+		displayFolder: Labels
+		lineageTag: 73eb4123-b8e9-50ac-86a6-efcde6fc445b
+
+	measure 'Not Inspected In A Year Label' =
+			VAR Active = [Active Assets]
+			RETURN
+			    IF ( Active > 0, FORMAT ( DIVIDE ( [Active Assets Not Inspected In A Year] + 0, Active ), "0%" ) & " of active assets, including never inspected" )
+		isHidden
+		displayFolder: Labels
+		lineageTag: 174da63a-68c7-5727-bbc3-ea42515c5bb7
+
+	measure 'Open Defect Age Label' =
+			VAR Oldest = [Oldest Open Defect Days]
+			RETURN
+			    IF ( NOT ISBLANK ( Oldest ), "Oldest open for " & FORMAT ( Oldest, "#,0" ) & " days", "No open defects" )
+		isHidden
+		displayFolder: Labels
+		lineageTag: 739c2e1e-dfea-5e4d-bef3-4c6ccb087c79
+
+	measure 'Over 90 Days Label' =
+			VAR OpenCount = [Open Defects]
+			RETURN
+			    IF ( OpenCount > 0, FORMAT ( DIVIDE ( [Open Defects Over 90 Days] + 0, OpenCount ), "0%" ) & " of open defects" )
+		isHidden
+		displayFolder: Labels
+		lineageTag: b5d92826-dd48-59c1-8e78-d7a39fb63f43
+
+	measure 'Seen Again Label' = "Recorded again by a later inspection"
+		isHidden
+		displayFolder: Labels
+		lineageTag: 07ae3d98-485c-582b-9e94-2c1d3d58f700
+
+	measure 'Open Inspections Label' =
+			VAR InspectionCount = [Inspections]
+			RETURN
+			    IF ( InspectionCount > 0, FORMAT ( DIVIDE ( [Open Inspections] + 0, InspectionCount ), "0%" ) & " in progress or ready for review" )
+		isHidden
+		displayFolder: Labels
+		lineageTag: 6167b51b-4cd4-5083-bc19-0347ad8c99e9
+
+	measure 'Find Rate Label' =
+			VAR Completed = [Completed Inspections]
+			RETURN
+			    IF ( Completed > 0, FORMAT ( [Inspections With Defects] + 0, "#,0" ) & " of " & FORMAT ( Completed, "#,0" ) & " inspections raised defects" )
+		isHidden
+		displayFolder: Labels
+		lineageTag: 5949dcb1-8c4e-5496-a200-f6b411ad5a99
+
+	measure 'Peak Month Label' =
+			VAR Months = ADDCOLUMNS ( VALUES ( 'Date'[Month Start] ), "@Inspections", [Completed Inspections] )
+			VAR Peak = MAXX ( Months, [@Inspections] )
+			VAR PeakMonth = MAXX ( FILTER ( Months, [@Inspections] = Peak ), 'Date'[Month Start] )
+			RETURN
+			    IF ( NOT ISBLANK ( Peak ), "Peak " & FORMAT ( Peak, "#,0" ) & " in " & FORMAT ( PeakMonth, "mmm yyyy" ) )
+		isHidden
+		displayFolder: Labels
+		lineageTag: 4bca1967-893a-5ae6-aef2-65bdd9c3e03d
+
+	measure 'Most Common Inspection Type Label' =
+			VAR Completed = [Completed Inspections]
+			VAR Types = ADDCOLUMNS ( VALUES ( 'Inspection Type'[Inspection Type] ), "@Inspections", [Completed Inspections] )
+			RETURN
+			    IF ( Completed > 0, FORMAT ( DIVIDE ( MAXX ( Types, [@Inspections] ), Completed ), "0%" ) & " of inspections" )
+		isHidden
+		displayFolder: Labels
+		lineageTag: 199ac669-b686-52fe-9520-7af4e4cb4089
+
+	/// Most common inspection type, shortened to fit a KPI tile.
+	measure 'Most Common Inspection Type Text' =
+			VAR LabelText = [Most Common Inspection Type]
+			RETURN
+			    SWITCH (
+			        TRUE (),
+			        ISBLANK ( LabelText ), "None in this period",
+			        LEN ( LabelText ) > 40, LEFT ( LabelText, 39 ) & "…",
+			        LabelText
+			    )
+		isHidden
+		displayFolder: Labels
+		lineageTag: 4b00a060-5199-5f53-9d9e-254f724ca558
+
+	measure 'Inspectors Label' =
+			VAR InspectorCount = [Inspectors]
+			RETURN
+			    IF ( InspectorCount > 0, "Avg " & FORMAT ( DIVIDE ( [Completed Inspections], InspectorCount ), "#,0" ) & " inspections each" )
+		isHidden
+		displayFolder: Labels
+		lineageTag: 3f649387-d324-52d2-a5be-9b34cc2c8ebf
+
+	/// Top defect component, shortened to fit a KPI tile.
+	measure 'Top Defect Component Text' =
+			VAR LabelText = [Top Defect Component]
+			RETURN
+			    SWITCH (
+			        TRUE (),
+			        ISBLANK ( LabelText ), "No defects in this period",
+			        LEN ( LabelText ) > 40, LEFT ( LabelText, 39 ) & "…",
+			        LabelText
+			    )
+		isHidden
+		displayFolder: Labels
+		lineageTag: 3ad2d1d4-22a3-50be-935f-406e9186d143
+
+	measure 'Top Defect Component Label' =
+			VAR Share = [Top Defect Component Share]
+			RETURN
+			    IF ( NOT ISBLANK ( Share ), FORMAT ( Share, "0%" ) & " of new defects" )
+		isHidden
+		displayFolder: Labels
+		lineageTag: 881ef5fa-16a7-5366-8b5f-e21835626b46
+
+	measure 'Most Affected Asset Type Label' =
+			VAR Types = ADDCOLUMNS ( VALUES ( Asset[Asset Type] ), "@Defects", [Defects Raised] )
+			VAR Highest = MAXX ( Types, [@Defects] )
+			RETURN
+			    IF ( Highest > 0, FORMAT ( Highest, "#,0" ) & " defects raised" )
+		isHidden
+		displayFolder: Labels
+		lineageTag: 53efe517-5bb4-595e-b50a-9783d2280ffa
+
+	measure 'Most Affected Asset Type Text' =
+			VAR LabelText = [Most Affected Asset Type]
+			RETURN
+			    SWITCH (
+			        TRUE (),
+			        ISBLANK ( LabelText ), "No defects in this period",
+			        LEN ( LabelText ) > 40, LEFT ( LabelText, 39 ) & "…",
+			        LabelText
+			    )
+		isHidden
+		displayFolder: Labels
+		lineageTag: be223bf7-ac86-571f-bb8b-abd3cde0f63c
+
+	measure 'Repeat Components Label' = "Items with defects in 3+ different months"
+		isHidden
+		displayFolder: Labels
+		lineageTag: eccff7de-c49b-56c1-a91c-167014cc4574
+
+	measure 'Sites Label' =
+			VAR SiteCount = [Sites With Assets] + 0
+			RETURN
+			    IF ( NOT ISBLANK ( [Assets] ), "Across " & FORMAT ( SiteCount, "#,0" ) & IF ( SiteCount = 1, " site", " sites" ) )
+		isHidden
+		displayFolder: Labels
+		lineageTag: bb08069c-37d2-5a0c-9443-7498c248ebe8
+
+	measure 'People Label' =
+			VAR PeopleCount = [People With Assets] + 0
+			RETURN
+			    IF ( NOT ISBLANK ( [Assets] ), "Across " & FORMAT ( PeopleCount, "#,0" ) & IF ( PeopleCount = 1, " person", " people" ) )
+		isHidden
+		displayFolder: Labels
+		lineageTag: cff2dec8-71e9-54c6-ab10-f3e7f95c193d
+
+	measure 'Not Assigned Label' =
+			VAR AssetCount = [Assets]
+			RETURN
+			    IF ( AssetCount > 0, FORMAT ( DIVIDE ( [Assets Not Assigned], AssetCount ), "0%" ) & " of assets" )
+		isHidden
+		displayFolder: Labels
+		lineageTag: eb91d801-e5d4-58ba-8aad-b5f40c399c7a
+
+	measure 'Assets Reassigned Label' =
+			VAR AssetCount = CALCULATE ( DISTINCTCOUNT ( 'Assignment Fact'[Asset_key] ) )
+			RETURN
+			    IF ( AssetCount > 0, FORMAT ( DIVIDE ( [Assets Reassigned], AssetCount ), "0%" ) & " of assigned assets" )
+		isHidden
+		displayFolder: Labels
+		lineageTag: f80e8b5b-441e-5daf-af89-614e796c7c3b
+
+	measure 'Average Days Per Assignment Label' = "For assignments that have ended"
+		isHidden
+		displayFolder: Labels
+		lineageTag: ba23920c-e9b2-5c07-9767-6b3a49d67da9
+
+	measure 'Assignments Label' =
+			VAR AssetCount = CALCULATE ( DISTINCTCOUNT ( 'Assignment Fact'[Asset_key] ) )
+			RETURN
+			    IF ( AssetCount > 0, "Across " & FORMAT ( AssetCount, "#,0" ) & IF ( AssetCount = 1, " asset", " assets" ) )
+		isHidden
+		displayFolder: Labels
+		lineageTag: e1e9b675-6313-5e15-8260-8dff4f016fe9
+
+	measure 'Current Assignments Label' =
+			VAR CurrentCount = CALCULATE ( [Assignments], KEEPFILTERS ( 'Assignment Fact'[Is Latest] = TRUE () ) )
+			RETURN
+			    IF ( NOT ISBLANK ( [Assignments] ), FORMAT ( CurrentCount + 0, "#,0" ) & " current" )
+		isHidden
+		displayFolder: Labels
+		lineageTag: 69aa739b-7de0-545c-a2f4-2819a2bd7d43
+
+	measure 'Assets With Properties Label' =
+			VAR AssetCount = [Assets]
+			RETURN
+			    IF ( AssetCount > 0, FORMAT ( DIVIDE ( [Assets With Properties] + 0, AssetCount ), "0%" ) & " of assets" )
+		isHidden
+		displayFolder: Labels
+		lineageTag: dbbd5280-f2cb-5c4b-9a8f-ea564f5595bd
+
+	measure 'Property Values Label' =
+			VAR AssetCount = [Assets With Properties]
+			RETURN
+			    IF ( AssetCount > 0, "Avg " & FORMAT ( DIVIDE ( [Property Values], AssetCount ), "#,0.0" ) & " per asset" )
+		isHidden
+		displayFolder: Labels
+		lineageTag: 25b312d6-620b-5dec-b2ad-342340782493
+
+	measure 'Properties Label' = "Distinct properties with values"
+		isHidden
+		displayFolder: Labels
+		lineageTag: da96ebcb-deb4-51d3-b1c3-3b0215536ac6
+
+	measure 'Shared Properties Label' = "Used across asset types"
+		isHidden
+		displayFolder: Labels
+		lineageTag: f3c898d2-622e-5c5a-8ab2-a71d7238c2ef
+
+	measure 'Most Common Asset Type Text' =
+			VAR LabelText = [Most Common Asset Type]
+			RETURN
+			    SWITCH (
+			        TRUE (),
+			        ISBLANK ( LabelText ), "No assets",
+			        LEN ( LabelText ) > 40, LEFT ( LabelText, 39 ) & "…",
+			        LabelText
+			    )
+		isHidden
+		displayFolder: Labels
+		lineageTag: fbbc573c-5470-58bb-9937-4a18cedb926f
+
+	measure 'Most Common Asset Type Label' =
+			VAR AssetCount = [Assets]
+			VAR Types = ADDCOLUMNS ( VALUES ( Asset[Asset Type] ), "@Assets", [Assets] )
+			RETURN
+			    IF ( AssetCount > 0, FORMAT ( DIVIDE ( MAXX ( Types, [@Assets] ), AssetCount ), "0%" ) & " of assets" )
+		isHidden
+		displayFolder: Labels
+		lineageTag: 6d20e619-491a-5717-90ca-071533a2a953
+
+	measure 'Asset Types Label' = "Distinct asset types"
+		isHidden
+		displayFolder: Labels
+		lineageTag: a67d461d-92a2-5119-8b55-07e8f433dee4
+
+	/// Subtitle for the inspections-by-month chart that explains an empty period.
+	measure 'No Inspections Subtitle' = IF ( ISBLANK ( [Completed Inspections] ), "No completed inspections in this period", "Completed inspections by month; dashed line shows the monthly average" )
+		isHidden
+		displayFolder: Labels
+		lineageTag: 12dda9ae-2b85-598a-a190-a7136755d613
+
+	/// Text for the Inspections list drillthrough button; reflects the inspection selected in the table.
+	measure 'Inspection Details Button Label' =
+			IF (
+			    HASONEVALUE ( Inspection[Url] ),
+			    "View " & MAXX ( Inspection, RELATED ( Asset[Reference] ) ) & " inspection details  ›",
+			    "Select an inspection to view details"
+			)
+		isHidden
+		displayFolder: Labels
+		lineageTag: f6701ed8-8a38-515e-b0a1-73a297721c50
+
+	/// Text for the Asset register drillthrough button; reflects the asset selected in the table.
+	measure 'Asset Details Button Label' =
+			IF (
+			    HASONEVALUE ( Asset[Url] ),
+			    "View " & SELECTEDVALUE ( Asset[Reference] ) & " details  ›",
+			    "Select an asset to view details"
+			)
+		isHidden
+		displayFolder: Labels
+		lineageTag: fd47b6fa-c4f4-5807-93d0-773065ec8444
+
+	/// Reference and name of the inspected asset.
+	measure 'Inspected Asset' = IF ( HASONEVALUE ( Inspection[Url] ), MAXX ( Inspection, RELATED ( Asset[Reference] ) & " · " & RELATED ( Asset[Asset Name] ) ) )
+		isHidden
+		displayFolder: Labels
+		lineageTag: 9d57190f-876b-5c38-9105-1df17e703de9
+
+	/// Asset type of the inspected asset.
+	measure 'Inspected Asset Type' = IF ( HASONEVALUE ( Inspection[Url] ), MAXX ( Inspection, RELATED ( Asset[Asset Type] ) ) )
+		isHidden
+		displayFolder: Labels
+		lineageTag: a8512da9-3a59-5636-856f-67e3dfc498df
+
+	/// Current assignment of the inspected asset.
+	measure 'Inspected Asset Assigned To' = IF ( HASONEVALUE ( Inspection[Url] ), MAXX ( Inspection, IF ( LEN ( RELATED ( Asset[Latest Assigned To] ) ) > 0, RELATED ( Asset[Latest Assigned To] ), "Not assigned" ) ) )
+		isHidden
+		displayFolder: Labels
+		lineageTag: 4b9ab5da-68a4-503b-8788-af9fdeb71865
+
+	/// Score of the selected inspection, or 'Not scored'.
+	measure 'Inspection Score' = IF ( HASONEVALUE ( Inspection[Url] ), MAXX ( Inspection, IF ( RELATED ( 'Inspection Type'[Scoring Enabled] ) && LEN ( Inspection[Score Display] ) > 0, Inspection[Score Display], "Not scored" ) ) )
+		isHidden
+		displayFolder: Labels
+		lineageTag: 979e806b-b509-5405-9b5f-01cb8462b80b
+
+	/// Status of the selected asset, read from the asset's own row.
+	measure 'Asset Status Name' = IF ( HASONEVALUE ( Asset[Url] ), MAXX ( Asset, RELATED ( 'Asset Status'[Asset Status] ) ) )
+		isHidden
+		displayFolder: Labels
+		lineageTag: eda8c118-29d7-53b1-9d3a-f716b5aacae7
+
+	/// Last completed inspection date of the selected asset, or 'Never inspected'.
+	measure 'Asset Last Inspected Text' =
+			IF (
+			    HASONEVALUE ( Asset[Url] ),
+			    VAR LatestInspection = MAX ( Asset[Last Inspection Date] )
+			    RETURN
+			        IF ( ISBLANK ( LatestInspection ), "Never inspected", FORMAT ( LatestInspection, "dd/mm/yyyy" ) )
+			)
+		isHidden
+		displayFolder: Labels
+		lineageTag: d3da6729-3730-54bd-9d1d-54ed9a35ab83
+
+	/// Current assignment of the selected asset, or 'Not assigned'.
+	measure 'Asset Assigned To Text' =
+			IF (
+			    HASONEVALUE ( Asset[Url] ),
+			    VAR AssignedTo = MAX ( Asset[Latest Assigned To] )
+			    RETURN
+			        IF ( LEN ( AssignedTo ) > 0, AssignedTo, "Not assigned" )
+			)
+		isHidden
+		displayFolder: Labels
+		lineageTag: 43ef3cb9-0103-54cd-aa70-5ce0e529039e
+
+	/// Notes for the selected asset.
+	measure 'Asset Notes Text' =
+			IF (
+			    HASONEVALUE ( Asset[Url] ),
+			    VAR Notes = MAX ( Asset[Asset Notes] )
+			    RETURN
+			        IF ( LEN ( Notes ) > 0, Notes, "No notes recorded." )
+			)
+		isHidden
+		displayFolder: Labels
+		lineageTag: bc7bbdda-9e7b-5f1e-8b36-7bb9f65ec80b
+
+	/// Semantic colour for favourable changes; matches the theme's 'good' colour.
+	measure 'Colour Good' = "#2E9E6B"
+		isHidden
+		displayFolder: Formatting
+		lineageTag: 7d1fe818-07b0-50ce-95c3-80667770fb01
+
+	/// Semantic colour for unfavourable changes; matches the theme's 'bad' colour.
+	measure 'Colour Bad' = "#D6493A"
+		isHidden
+		displayFolder: Formatting
+		lineageTag: 5f972cf2-dde0-5084-811b-5f4ed466f944
+
+	/// Semantic colour for no change or no comparison; matches the theme's secondary text colour.
+	measure 'Colour Neutral' = "#4A5568"
+		isHidden
+		displayFolder: Formatting
+		lineageTag: 2c70deb0-8606-5604-9216-c5c94a7a2d57
+
+	measure 'Completed Trend Colour' =
+			VAR Cur = [Completed Inspections]
+			VAR Prev = [Completed Inspections PP]
+			RETURN
+			    SWITCH (
+			        TRUE (),
+			        ISBLANK ( Prev ) || Prev = 0 || Cur = Prev, [Colour Neutral],
+			        Cur > Prev, [Colour Good],
+			        [Colour Bad]
+			    )
+		isHidden
+		displayFolder: Formatting
+		lineageTag: 574e0f1e-a769-5df5-8f27-2b7bdc1b3eef
+
+	measure 'Defects Trend Colour' =
+			VAR Cur = [Defects Raised]
+			VAR Prev = [Defects Raised PP]
+			RETURN
+			    SWITCH (
+			        TRUE (),
+			        ISBLANK ( Prev ) || Prev = 0 || Cur = Prev, [Colour Neutral],
+			        Cur > Prev, [Colour Bad],
+			        [Colour Good]
+			    )
+		isHidden
+		displayFolder: Formatting
+		lineageTag: f3f353cf-18d4-59ea-b591-875dda9ab00f
+
+	measure 'Closed Trend Colour' =
+			VAR Cur = [Closed Defects]
+			VAR Prev = [Closed Defects PP]
+			RETURN
+			    SWITCH (
+			        TRUE (),
+			        ISBLANK ( Prev ) || Prev = 0 || Cur = Prev, [Colour Neutral],
+			        Cur > Prev, [Colour Good],
+			        [Colour Bad]
+			    )
+		isHidden
+		displayFolder: Formatting
+		lineageTag: d00bb9a3-8275-5bbf-8b92-0330f0de0a2e
+
+	measure 'Days To Close Trend Colour' =
+			VAR Cur = [Average Days To Close]
+			VAR Prev = [Average Days To Close PP]
+			RETURN
+			    SWITCH (
+			        TRUE (),
+			        ISBLANK ( Prev ) || Prev = 0 || Cur = Prev, [Colour Neutral],
+			        Cur > Prev, [Colour Bad],
+			        [Colour Good]
+			    )
+		isHidden
+		displayFolder: Formatting
+		lineageTag: f7c6dd4f-3f14-5bf6-b96e-36380c0750ae
+
+	measure 'Find Rate Trend Colour' =
+			VAR Cur = [Defect Find Rate]
+			VAR Prev = [Defect Find Rate PP]
+			RETURN
+			    SWITCH (
+			        TRUE (),
+			        ISBLANK ( Prev ) || ISBLANK ( Cur ) || Cur = Prev, [Colour Neutral],
+			        Cur > Prev, [Colour Bad],
+			        [Colour Good]
+			    )
+		isHidden
+		displayFolder: Formatting
+		lineageTag: c6f265cf-fef1-5917-8cbd-7e217d4c5449
+
+	measure 'Recorded Trend Colour' =
+			VAR Cur = [Defects Recorded]
+			VAR Prev = [Defects Recorded PP]
+			RETURN
+			    SWITCH (
+			        TRUE (),
+			        ISBLANK ( Prev ) || Prev = 0 || Cur = Prev, [Colour Neutral],
+			        Cur > Prev, [Colour Bad],
+			        [Colour Good]
+			    )
+		isHidden
+		displayFolder: Formatting
+		lineageTag: 99d0b1c4-85ef-5e5b-99dc-66c7f663f89b
+
+	measure 'Coverage Trend Colour' =
+			VAR Cur = [Inspection Coverage]
+			VAR Prev = [Inspection Coverage PP]
+			RETURN
+			    SWITCH (
+			        TRUE (),
+			        ISBLANK ( Prev ) || ISBLANK ( Cur ) || Cur = Prev, [Colour Neutral],
+			        Cur > Prev, [Colour Good],
+			        [Colour Bad]
+			    )
+		isHidden
+		displayFolder: Formatting
+		lineageTag: a64167e3-2d40-52d2-9977-715a6a7cab78
+
+	/// Reference-label colour for the open defects tile.
+	measure 'Open Defects Colour' = IF ( [Open Defects Now] > 0, [Colour Bad], [Colour Neutral] )
+		isHidden
+		displayFolder: Formatting
+		lineageTag: bcd0c4d7-9114-58f3-8870-e0398dc24e8a
+
+	/// Text colour for an asset status code (Active, Out of Service, Ordered, other); statuses are a fixed list in Work Wallet.
+	measure 'Asset Status Colour' =
+			SWITCH (
+			    SELECTEDVALUE ( 'Asset Status'[AssetStatusCode] ),
+			    0, "#2E9E6B",
+			    1, "#D6493A",
+			    4, "#2F6F8F",
+			    "#4A5568"
+			)
+		isHidden
+		displayFolder: Formatting
+		lineageTag: 5bb82bc6-5649-5bee-9c74-0a68d06e4d94
+
+	/// Asset status colour for the selected asset (Asset details tiles), read from the asset's own row.
+	measure 'Selected Asset Status Colour' =
+			IF (
+			    HASONEVALUE ( Asset[Url] ),
+			    SWITCH (
+			        MAXX ( Asset, RELATED ( 'Asset Status'[AssetStatusCode] ) ),
+			        0, "#2E9E6B",
+			        1, "#D6493A",
+			        4, "#2F6F8F",
+			        "#4A5568"
+			    )
+			)
+		isHidden
+		displayFolder: Formatting
+		lineageTag: c40ce862-dfd4-52e7-bd15-3b7a50081ccd
+
+	/// Text colour for an inspection status code (Complete, InProgress, ReadyForReview); statuses are a fixed list in Work Wallet.
+	measure 'Inspection Status Colour' =
+			SWITCH (
+			    SELECTEDVALUE ( 'Inspection Status'[InspectionStatusCode] ),
+			    0, "#2E9E6B",
+			    2, "#C9901A",
+			    4, "#2F6F8F",
+			    "#4A5568"
+			)
+		isHidden
+		displayFolder: Formatting
+		lineageTag: 20bc2f00-8451-5fa0-9c21-d8159562d0b1
+
+	/// Text colour for an observation status code (Defect (Open), Defect (Closed), Observation); a fixed list in Work Wallet.
+	measure 'Observation Status Colour' =
+			SWITCH (
+			    SELECTEDVALUE ( 'Observation Status'[AssetObservationStatusCode] ),
+			    1, "#D6493A",
+			    32, "#2E9E6B",
+			    "#4A5568"
+			)
+		isHidden
+		displayFolder: Formatting
+		lineageTag: 57dcb10a-916c-5cc4-9e1c-f1c867f0b2a6
+
+	/// Work Wallet link for the selected asset, for the 'Open in Work Wallet' button on its details page.
+	measure 'Asset Link' = SELECTEDVALUE ( Asset[Url] )
+		isHidden
+		displayFolder: Links
+		lineageTag: 3d7c433f-1a18-5e4b-9324-f5fa2316b9b0
+
+	/// Work Wallet link for the selected inspection, for the 'Open in Work Wallet' button on its details page.
+	measure 'Inspection Link' = SELECTEDVALUE ( Inspection[Url] )
+		isHidden
+		displayFolder: Links
+		lineageTag: be04fff3-76b0-5e8f-92ce-b700815301f9
+
+	column Value
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: bf8b56eb-9474-51ab-aaff-81118864387b
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Value]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Asset Measures' = calculated
+		mode: import
+		source = { 1 }
+
+	annotation PBI_Id = 39b0f50ef71b543ab34726ca4c0e7763
+

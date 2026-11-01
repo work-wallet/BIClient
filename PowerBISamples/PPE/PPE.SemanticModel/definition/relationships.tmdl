@@ -76,7 +76,6 @@ relationship 13e80013-77c4-4fdb-9162-c318ea433d8b
 	annotation PBI_IsFromSource = FS
 
 relationship f28da94d-2c2a-4eb5-bde2-ff6b72ce8c4e
-	crossFilteringBehavior: bothDirections
 	fromColumn: 'Stock History'.PPEAction_key
 	toColumn: 'PPE Action'.PPEAction_key
 
@@ -254,4 +253,12 @@ relationship 7ebfa17b-bcc1-d846-4316-effa534dadcb
 	crossFilteringBehavior: bothDirections
 	fromColumn: 'Group Fact'.PPETypeId
 	toColumn: 'PPE Type Master'.PPETypeId
+
+relationship 4bfbf687-5a79-5f4a-a0af-1995960fdeec
+	fromColumn: 'Assignment History'.'Actioned Date'
+	toColumn: Date.Date
+
+relationship 735a83d3-c8c8-549a-aa50-19243ea11cd0
+	fromColumn: 'Stock History'.'Actioned Date'
+	toColumn: Date.Date
 

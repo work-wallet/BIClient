@@ -1,0 +1,520 @@
+table 'Induction Measures'
+	lineageTag: 0b035767-d2c9-5b81-a7f6-b6010ac837d2
+
+	/// Induction attempts.
+	measure 'Inductions Taken' = COUNTROWS ( 'Taken By' )
+		formatString: #,0
+		displayFolder: Inductions Taken
+		lineageTag: 719371f4-3d97-569c-b38f-ec2b09c944a0
+
+	/// Attempts that passed or were completed.
+	measure 'Successful Inductions' = CALCULATE ( [Inductions Taken], KEEPFILTERS ( 'Taken By'[Is Successful] = TRUE () ) )
+		formatString: #,0
+		displayFolder: Inductions Taken
+		lineageTag: ac8f541f-4931-5d08-b0b5-a80d368cdf1f
+
+	/// Attempts that failed the induction test.
+	measure 'Failed Inductions' = CALCULATE ( [Inductions Taken], KEEPFILTERS ( 'Taken Status'[InductionTakenStatusCode] = 3 ) )
+		formatString: #,0
+		displayFolder: Inductions Taken
+		lineageTag: b2bab4b7-df08-5759-b4bd-ab9d37cb0160
+
+	/// Share of attempts that passed or completed.
+	measure 'Pass Rate' = DIVIDE ( [Successful Inductions], [Successful Inductions] + [Failed Inductions] )
+		formatString: 0%
+		displayFolder: Inductions Taken
+		lineageTag: cc0acbd9-d47b-5561-ba1a-d2f5a059acf6
+
+	/// Distinct people with at least one successful induction.
+	measure 'People Inducted' = CALCULATE ( DISTINCTCOUNT ( 'Taken By'[ContactId] ), KEEPFILTERS ( 'Taken By'[Is Successful] = TRUE () ) )
+		formatString: #,0
+		displayFolder: Inductions Taken
+		lineageTag: 0b90ac45-cdf0-5fc0-930f-768d26116cfc
+
+	/// Distinct people who attempted an induction.
+	measure 'People Attempting' = DISTINCTCOUNT ( 'Taken By'[ContactId] )
+		formatString: #,0
+		displayFolder: Inductions Taken
+		lineageTag: 79258c8c-ac95-5d49-ac5b-7017cfecdbc1
+
+	/// Distinct companies of the people taking inductions.
+	measure Companies = DISTINCTCOUNT ( 'Taken By'[Company] )
+		formatString: #,0
+		displayFolder: Inductions Taken
+		lineageTag: 21ca73a0-9e7c-5bc7-bd4d-da5c33956150
+
+	/// Average share of test questions answered correctly, for inductions with a test.
+	measure 'Average Test Score' = AVERAGE ( 'Taken By'[Test Score] )
+		formatString: 0%
+		displayFolder: Inductions Taken
+		lineageTag: 055dfd02-3b77-5991-93f7-fa3a912bd664
+
+	/// Average attempts per person.
+	measure 'Attempts Per Person' = DIVIDE ( [Inductions Taken], [People Attempting] )
+		formatString: #,0.0
+		displayFolder: Inductions Taken
+		lineageTag: e9e0297f-50e9-56e0-a049-ef338d35cc06
+
+	/// Average attempts per month, over months in context with at least one.
+	measure 'Monthly Average Inductions' = AVERAGEX ( VALUES ( 'Date'[Month Start] ), [Inductions Taken] )
+		formatString: #,0
+		displayFolder: Inductions Taken
+		lineageTag: b6a04792-6a7c-58e3-b544-11ca772a68d9
+
+	/// Monthly average over the selected period, for a reference line on monthly charts.
+	measure 'Monthly Average Line' = IF ( MIN ( 'Date'[Date] ) <= TODAY (), CALCULATE ( [Monthly Average Inductions], ALLSELECTED ( 'Date' ) ) )
+		formatString: #,0
+		displayFolder: Inductions Taken
+		lineageTag: c50d86b4-5a78-5c7b-8dba-a2272792db0e
+
+	/// Induction with the most attempts; ties are reported.
+	measure 'Most Taken Induction' =
+			VAR Items = FILTER ( ADDCOLUMNS ( VALUES ( Induction[Induction] ), "@Value", [Inductions Taken] ), NOT ISBLANK ( [@Value] ) )
+			VAR Target = MAXX ( Items, [@Value] )
+			VAR Leaders = FILTER ( Items, [@Value] = Target )
+			VAR LeaderCount = COUNTROWS ( Leaders )
+			VAR FirstLeader = MINX ( Leaders, Induction[Induction] )
+			RETURN
+			    IF ( LeaderCount > 1, FirstLeader & " (+" & ( LeaderCount - 1 ) & " tied)", FirstLeader )
+		displayFolder: Inductions Taken
+		lineageTag: 20f2738b-db5f-550c-bbd8-8ea99f45d854
+
+	/// Induction with the most failed attempts; ties are reported.
+	measure 'Most Failed Induction' =
+			VAR Items = FILTER ( ADDCOLUMNS ( VALUES ( Induction[Induction] ), "@Value", [Failed Inductions] ), NOT ISBLANK ( [@Value] ) )
+			VAR Target = MAXX ( Items, [@Value] )
+			VAR Leaders = FILTER ( Items, [@Value] = Target )
+			VAR LeaderCount = COUNTROWS ( Leaders )
+			VAR FirstLeader = MINX ( Leaders, Induction[Induction] )
+			RETURN
+			    IF ( LeaderCount > 1, FirstLeader & " (+" & ( LeaderCount - 1 ) & " tied)", FirstLeader )
+		displayFolder: Inductions Taken
+		lineageTag: a5da4804-5e50-5a32-b0d5-9fcf42f9e678
+
+	/// People and inductions, one row per person per induction (their latest attempt).
+	measure 'Current Inductions' = CALCULATE ( [Inductions Taken], KEEPFILTERS ( 'Taken By'[Is Latest Attempt] = TRUE () ), REMOVEFILTERS ( 'Date' ) )
+		formatString: #,0
+		displayFolder: Current Status
+		lineageTag: 90106cf0-c225-563d-9d0a-e64ef1e6c021
+
+	/// Latest attempt successful and not expiring within 30 days. As at the last data refresh.
+	measure 'Valid Inductions' = CALCULATE ( [Inductions Taken], KEEPFILTERS ( 'Taken By'[Is Latest Attempt] = TRUE () ), REMOVEFILTERS ( 'Date' ), KEEPFILTERS ( 'Taken By'[Induction Status Order] = 1 ) )
+		formatString: #,0
+		displayFolder: Current Status
+		lineageTag: 7fc70a2c-e81a-5e61-a1d8-1f7035be0f34
+
+	/// Latest attempt successful, expiring within 30 days. As at the last data refresh.
+	measure 'Expiring Inductions' = CALCULATE ( [Inductions Taken], KEEPFILTERS ( 'Taken By'[Is Latest Attempt] = TRUE () ), REMOVEFILTERS ( 'Date' ), KEEPFILTERS ( 'Taken By'[Induction Status Order] = 2 ) )
+		formatString: #,0
+		displayFolder: Current Status
+		lineageTag: 9873e1d7-667d-5206-95db-5c1821288f91
+
+	/// Latest attempt successful but now expired: the person needs re-inducting. As at the last data refresh.
+	measure 'Expired Inductions' = CALCULATE ( [Inductions Taken], KEEPFILTERS ( 'Taken By'[Is Latest Attempt] = TRUE () ), REMOVEFILTERS ( 'Date' ), KEEPFILTERS ( 'Taken By'[Induction Status Order] = 3 ) )
+		formatString: #,0
+		displayFolder: Current Status
+		lineageTag: 21086db7-ba29-5f72-a55b-0ac6a26e06a3
+
+	/// Latest attempt failed or was rejected: the person has not been inducted. As at the last data refresh.
+	measure 'Not Passed Inductions' = CALCULATE ( [Inductions Taken], KEEPFILTERS ( 'Taken By'[Is Latest Attempt] = TRUE () ), REMOVEFILTERS ( 'Date' ), KEEPFILTERS ( 'Taken By'[Induction Status Order] = 4 ) )
+		formatString: #,0
+		displayFolder: Current Status
+		lineageTag: cd9fe00c-5a8d-5df0-bf2f-92d4fc3feb08
+
+	/// Share of people and inductions currently valid (including expiring soon).
+	measure 'Valid Share' = DIVIDE ( [Valid Inductions] + [Expiring Inductions], [Current Inductions] )
+		formatString: 0%
+		displayFolder: Current Status
+		lineageTag: 9650365c-7d93-5628-9dd7-4e9fc1b998f4
+
+	/// Answers to induction custom questions.
+	measure 'Custom Question Answers' = COUNTROWS ( 'Custom Question Fact' )
+		formatString: #,0
+		displayFolder: Custom Questions
+		lineageTag: 49e786bf-1059-5190-8f9a-ee5a004198ec
+
+	/// Distinct custom questions answered.
+	measure 'Custom Questions' = CALCULATE ( DISTINCTCOUNT ( 'Custom Question'[Question] ), 'Custom Question Fact' )
+		formatString: #,0
+		displayFolder: Custom Questions
+		lineageTag: d633f1a8-4d8b-5d42-b473-705609262eba
+
+	/// Distinct people who answered custom questions.
+	measure 'People Answering' = CALCULATE ( DISTINCTCOUNT ( 'Taken By'[ContactId] ), 'Custom Question Fact' )
+		formatString: #,0
+		displayFolder: Custom Questions
+		lineageTag: ecf8dd02-93a8-517e-a6a8-d18d3ff8c850
+
+	/// Custom question with the most answers; ties are reported.
+	measure 'Most Answered Question' =
+			VAR Items = FILTER ( ADDCOLUMNS ( VALUES ( 'Custom Question'[Question] ), "@Value", [Custom Question Answers] ), NOT ISBLANK ( [@Value] ) )
+			VAR Target = MAXX ( Items, [@Value] )
+			VAR Leaders = FILTER ( Items, [@Value] = Target )
+			VAR LeaderCount = COUNTROWS ( Leaders )
+			VAR FirstLeader = MINX ( Leaders, 'Custom Question'[Question] )
+			RETURN
+			    IF ( LeaderCount > 1, FirstLeader & " (+" & ( LeaderCount - 1 ) & " tied)", FirstLeader )
+		displayFolder: Custom Questions
+		lineageTag: 1c95011b-0199-5bf9-9044-8c6b8c18be15
+
+	/// Inductions Taken for the same-length period immediately before the selected dates.
+	measure 'Inductions Taken PP' =
+			VAR FirstDay = MIN ( 'Date'[Date] )
+			VAR LastDay = MIN ( MAX ( 'Date'[Date] ), TODAY () )
+			VAR Days = LastDay - FirstDay + 1
+			RETURN
+			    CALCULATE ( [Inductions Taken], DATESBETWEEN ( 'Date'[Date], FirstDay - Days, FirstDay - 1 ) )
+		formatString: #,0
+		isHidden
+		displayFolder: Previous Period
+		lineageTag: 9a34d066-b436-5cf7-a57f-93179bb259a5
+
+	/// Pass Rate for the same-length period immediately before the selected dates.
+	measure 'Pass Rate PP' =
+			VAR FirstDay = MIN ( 'Date'[Date] )
+			VAR LastDay = MIN ( MAX ( 'Date'[Date] ), TODAY () )
+			VAR Days = LastDay - FirstDay + 1
+			RETURN
+			    CALCULATE ( [Pass Rate], DATESBETWEEN ( 'Date'[Date], FirstDay - Days, FirstDay - 1 ) )
+		formatString: 0%
+		isHidden
+		displayFolder: Previous Period
+		lineageTag: 9cf07352-76aa-5cd2-85f6-296d5e1840d9
+
+	/// People Inducted for the same-length period immediately before the selected dates.
+	measure 'People Inducted PP' =
+			VAR FirstDay = MIN ( 'Date'[Date] )
+			VAR LastDay = MIN ( MAX ( 'Date'[Date] ), TODAY () )
+			VAR Days = LastDay - FirstDay + 1
+			RETURN
+			    CALCULATE ( [People Inducted], DATESBETWEEN ( 'Date'[Date], FirstDay - Days, FirstDay - 1 ) )
+		formatString: #,0
+		isHidden
+		displayFolder: Previous Period
+		lineageTag: bd488754-e294-5e5c-8490-962ba941b32e
+
+	/// Failed Inductions for the same-length period immediately before the selected dates.
+	measure 'Failed Inductions PP' =
+			VAR FirstDay = MIN ( 'Date'[Date] )
+			VAR LastDay = MIN ( MAX ( 'Date'[Date] ), TODAY () )
+			VAR Days = LastDay - FirstDay + 1
+			RETURN
+			    CALCULATE ( [Failed Inductions], DATESBETWEEN ( 'Date'[Date], FirstDay - Days, FirstDay - 1 ) )
+		formatString: #,0
+		isHidden
+		displayFolder: Previous Period
+		lineageTag: dc952a5d-16b4-51d0-9f5a-f4ee5c8cab3d
+
+	measure 'Taken Trend Label' =
+			VAR Cur = [Inductions Taken]
+			VAR Prev = [Inductions Taken PP]
+			VAR Change = DIVIDE ( Cur - Prev, Prev )
+			RETURN
+			    IF (
+			        ISBLANK ( Prev ) || Prev = 0,
+			        "No earlier period to compare",
+			        IF ( Change >= 0, "▲ ", "▼ " ) & FORMAT ( ABS ( Change ), "0%" ) & " vs previous period"
+			    )
+		isHidden
+		displayFolder: Labels
+		lineageTag: 0c0ea7de-7067-5783-bfaf-22523114dd46
+
+	measure 'Pass Rate Trend Label' =
+			VAR Cur = [Pass Rate]
+			VAR Prev = [Pass Rate PP]
+			RETURN
+			    IF (
+			        ISBLANK ( Prev ) || ISBLANK ( Cur ),
+			        "No earlier period to compare",
+			        IF ( Cur >= Prev, "▲ ", "▼ " ) & FORMAT ( ABS ( Cur - Prev ) * 100, "0.0" ) & " pts vs previous period"
+			    )
+		isHidden
+		displayFolder: Labels
+		lineageTag: 5d6d5649-f290-591a-8532-6926e5c449ce
+
+	measure 'People Inducted Trend Label' =
+			VAR Cur = [People Inducted]
+			VAR Prev = [People Inducted PP]
+			VAR Change = DIVIDE ( Cur - Prev, Prev )
+			RETURN
+			    IF (
+			        ISBLANK ( Prev ) || Prev = 0,
+			        "No earlier period to compare",
+			        IF ( Change >= 0, "▲ ", "▼ " ) & FORMAT ( ABS ( Change ), "0%" ) & " vs previous period"
+			    )
+		isHidden
+		displayFolder: Labels
+		lineageTag: 8ef048c6-ba48-526d-947c-3783dc91c5a1
+
+	measure 'Failed Trend Label' =
+			VAR Cur = [Failed Inductions]
+			VAR Prev = [Failed Inductions PP]
+			VAR Change = DIVIDE ( Cur - Prev, Prev )
+			RETURN
+			    IF (
+			        ISBLANK ( Prev ) || Prev = 0,
+			        "No earlier period to compare",
+			        IF ( Change >= 0, "▲ ", "▼ " ) & FORMAT ( ABS ( Change ), "0%" ) & " vs previous period"
+			    )
+		isHidden
+		displayFolder: Labels
+		lineageTag: 13dc00e0-8a17-5e06-9c2e-bb4833676500
+
+	measure 'Pass Rate Label' =
+			VAR Attempts = [Successful Inductions] + [Failed Inductions]
+			RETURN
+			    IF ( Attempts > 0, FORMAT ( [Successful Inductions] + 0, "#,0" ) & " of " & FORMAT ( Attempts, "#,0" ) & " attempts" )
+		isHidden
+		displayFolder: Labels
+		lineageTag: 3642fbd3-618d-5ecc-bdca-ede8a6dd200b
+
+	measure 'People Inducted Label' =
+			VAR CompanyCount = [Companies] + 0
+			RETURN
+			    IF ( NOT ISBLANK ( [Inductions Taken] ), "From " & FORMAT ( CompanyCount, "#,0" ) & IF ( CompanyCount = 1, " company", " companies" ) )
+		isHidden
+		displayFolder: Labels
+		lineageTag: dfc1e37d-adf0-5d71-a7ec-2fc24ef6e161
+
+	measure 'Peak Month Label' =
+			VAR Months = ADDCOLUMNS ( VALUES ( 'Date'[Month Start] ), "@Taken", [Inductions Taken] )
+			VAR Peak = MAXX ( Months, [@Taken] )
+			VAR PeakMonth = MAXX ( FILTER ( Months, [@Taken] = Peak ), 'Date'[Month Start] )
+			RETURN
+			    IF ( NOT ISBLANK ( Peak ), "Peak " & FORMAT ( Peak, "#,0" ) & " in " & FORMAT ( PeakMonth, "mmm yyyy" ) )
+		isHidden
+		displayFolder: Labels
+		lineageTag: 049cdca4-4b75-5b5e-9115-4ab477645d34
+
+	measure 'Most Taken Induction Text' =
+			VAR LabelText = [Most Taken Induction]
+			RETURN
+			    SWITCH (
+			        TRUE (),
+			        ISBLANK ( LabelText ), "None in this period",
+			        LEN ( LabelText ) > 40, LEFT ( LabelText, 39 ) & "…",
+			        LabelText
+			    )
+		isHidden
+		displayFolder: Labels
+		lineageTag: b39b6184-8060-5776-bfbf-302a043cc6da
+
+	measure 'Most Taken Induction Label' =
+			VAR Taken = [Inductions Taken]
+			VAR Items = ADDCOLUMNS ( VALUES ( Induction[Induction] ), "@Taken", [Inductions Taken] )
+			RETURN
+			    IF ( Taken > 0, FORMAT ( DIVIDE ( MAXX ( Items, [@Taken] ), Taken ), "0%" ) & " of attempts" )
+		isHidden
+		displayFolder: Labels
+		lineageTag: b10fb34e-6c6e-5f8b-8bea-6190a0e5e843
+
+	measure 'Most Failed Induction Text' =
+			VAR LabelText = [Most Failed Induction]
+			RETURN
+			    SWITCH (
+			        TRUE (),
+			        ISBLANK ( LabelText ), "No failed attempts",
+			        LEN ( LabelText ) > 40, LEFT ( LabelText, 39 ) & "…",
+			        LabelText
+			    )
+		isHidden
+		displayFolder: Labels
+		lineageTag: a8825ff3-c5e0-5e1b-8619-4310c9b810f8
+
+	measure 'Most Failed Induction Label' =
+			VAR Items = ADDCOLUMNS ( VALUES ( Induction[Induction] ), "@Failed", [Failed Inductions] )
+			VAR Highest = MAXX ( Items, [@Failed] )
+			RETURN
+			    IF ( Highest > 0, FORMAT ( Highest, "#,0" ) & " failed attempts" )
+		isHidden
+		displayFolder: Labels
+		lineageTag: 631334c5-7056-56c3-9008-372123f7f7f6
+
+	measure 'Average Test Score Label' =
+			VAR Attempts = CALCULATE ( [Inductions Taken], KEEPFILTERS ( NOT ISBLANK ( 'Taken By'[Test Score] ) ) )
+			RETURN
+			    IF ( Attempts > 0, "Across " & FORMAT ( Attempts, "#,0" ) & " attempts with a test" )
+		isHidden
+		displayFolder: Labels
+		lineageTag: 0f0f8aad-3a59-5cc6-8be4-58991bb5c38c
+
+	measure 'Attempts Label' =
+			VAR PeopleCount = [People Attempting] + 0
+			RETURN
+			    IF ( NOT ISBLANK ( [Inductions Taken] ), "By " & FORMAT ( PeopleCount, "#,0" ) & IF ( PeopleCount = 1, " person", " people" ) )
+		isHidden
+		displayFolder: Labels
+		lineageTag: fe537441-701a-5328-87fd-1567adb862a8
+
+	measure 'Valid Label' =
+			VAR Total = [Current Inductions]
+			RETURN
+			    IF ( Total > 0, FORMAT ( [Valid Share], "0%" ) & " of people and inductions are current" )
+		isHidden
+		displayFolder: Labels
+		lineageTag: c006f309-584a-5343-86f5-526e21cfdbe7
+
+	measure 'Expiring Label' = "Re-induction due within 30 days"
+		isHidden
+		displayFolder: Labels
+		lineageTag: 5160c8d0-0bf7-562a-8994-ddc1961858f1
+
+	measure 'Expired Label' = "Need re-inducting"
+		isHidden
+		displayFolder: Labels
+		lineageTag: 161ad838-6728-5c72-b991-105a8225e008
+
+	measure 'Not Passed Label' =
+			VAR InvalidCount = [Invalid Inductions] + 0
+			RETURN
+			    IF ( InvalidCount > 0, "Failed or rejected; " & FORMAT ( InvalidCount, "#,0" ) & " more invalidated by a new version", "Latest attempt failed or rejected" )
+		isHidden
+		displayFolder: Labels
+		lineageTag: 77caf516-fbec-5954-8ab8-40ad67145985
+
+	measure 'Custom Answers Label' =
+			VAR PeopleCount = [People Answering] + 0
+			RETURN
+			    IF ( NOT ISBLANK ( [Custom Question Answers] ), "From " & FORMAT ( PeopleCount, "#,0" ) & IF ( PeopleCount = 1, " person", " people" ) )
+		isHidden
+		displayFolder: Labels
+		lineageTag: 8c6f0911-e4c6-572d-84c2-b802084862d5
+
+	measure 'Custom Questions Label' = "Distinct questions answered"
+		isHidden
+		displayFolder: Labels
+		lineageTag: 26cec51e-66a5-571c-bd29-dc5f121715b1
+
+	measure 'Most Answered Question Text' =
+			VAR LabelText = [Most Answered Question]
+			RETURN
+			    SWITCH (
+			        TRUE (),
+			        ISBLANK ( LabelText ), "No answers in this period",
+			        LEN ( LabelText ) > 32, LEFT ( LabelText, 31 ) & "…",
+			        LabelText
+			    )
+		isHidden
+		displayFolder: Labels
+		lineageTag: bcb1ad8c-57d9-5d9c-97d1-0bf851e320ea
+
+	measure 'Most Answered Question Label' =
+			VAR Items = ADDCOLUMNS ( VALUES ( 'Custom Question'[Question] ), "@Answers", [Custom Question Answers] )
+			VAR Highest = MAXX ( Items, [@Answers] )
+			RETURN
+			    IF ( Highest > 0, FORMAT ( Highest, "#,0" ) & " answers" )
+		isHidden
+		displayFolder: Labels
+		lineageTag: 32e490e0-3770-5f75-83b4-78940e829617
+
+	measure 'Custom Questions Subtitle' = IF ( ISBLANK ( [Custom Question Answers] ), "No custom question answers in this period", "Answers to each question; expand a question to see its answers" )
+		isHidden
+		displayFolder: Labels
+		lineageTag: 441f70a8-6245-56b7-a4f7-6c824da6f849
+
+	/// Semantic colour for favourable changes; matches the theme's 'good' colour.
+	measure 'Colour Good' = "#2E9E6B"
+		isHidden
+		displayFolder: Formatting
+		lineageTag: 9f373cf8-221a-5400-ac42-a0ddb2abd022
+
+	/// Semantic colour for unfavourable changes; matches the theme's 'bad' colour.
+	measure 'Colour Bad' = "#D6493A"
+		isHidden
+		displayFolder: Formatting
+		lineageTag: 12a37328-b8fd-5f9a-a10f-2f9a615e85ab
+
+	/// Semantic colour for no change or no comparison; matches the theme's secondary text colour.
+	measure 'Colour Neutral' = "#4A5568"
+		isHidden
+		displayFolder: Formatting
+		lineageTag: de4dea45-7700-5fdd-980b-cf6a90e73957
+
+	/// More inductions isn't good or bad in itself, so the trend is neutral.
+	measure 'Taken Trend Colour' = [Colour Neutral]
+		isHidden
+		displayFolder: Formatting
+		lineageTag: 89357968-3a8b-548d-b6fe-d37ed9381027
+
+	measure 'Pass Rate Trend Colour' =
+			VAR Cur = [Pass Rate]
+			VAR Prev = [Pass Rate PP]
+			RETURN
+			    SWITCH (
+			        TRUE (),
+			        ISBLANK ( Prev ) || ISBLANK ( Cur ) || Cur = Prev, [Colour Neutral],
+			        Cur > Prev, [Colour Good],
+			        [Colour Bad]
+			    )
+		isHidden
+		displayFolder: Formatting
+		lineageTag: d45d69e6-9dc2-574a-a58a-5c2b12de9097
+
+	measure 'People Inducted Trend Colour' = [Colour Neutral]
+		isHidden
+		displayFolder: Formatting
+		lineageTag: 79972f69-382b-5c84-930f-d3f08cdad4da
+
+	measure 'Failed Trend Colour' =
+			VAR Cur = [Failed Inductions]
+			VAR Prev = [Failed Inductions PP]
+			RETURN
+			    SWITCH (
+			        TRUE (),
+			        ISBLANK ( Prev ) || Prev = 0 || Cur = Prev, [Colour Neutral],
+			        Cur > Prev, [Colour Bad],
+			        [Colour Good]
+			    )
+		isHidden
+		displayFolder: Formatting
+		lineageTag: bbfe98d8-5ae9-578a-8188-4f2df5a4d73b
+
+	measure 'Attention Colour' = IF ( [Expired Inductions] + [Not Passed Inductions] + [Invalid Inductions] > 0, [Colour Bad], [Colour Neutral] )
+		isHidden
+		displayFolder: Formatting
+		lineageTag: 817ab019-8b8b-5f48-811b-e332b02e28a3
+
+	/// Text colour for a result: passed or completed (green), failed or rejected (red), other (grey). Works on rows that cover several codes (e.g. 'Passed' is both Passed and Passed Expiring Soon).
+	measure 'Result Colour' =
+			VAR Codes = VALUES ( 'Taken Status'[InductionTakenStatusCode] )
+			RETURN
+			    SWITCH (
+			        TRUE (),
+			        ISEMPTY ( Codes ), "#4A5568",
+			        ISEMPTY ( EXCEPT ( Codes, { 1, 2, 4, 5, 6 } ) ), "#2E9E6B",
+			        ISEMPTY ( EXCEPT ( Codes, { 3, 8 } ) ), "#D6493A",
+			        "#4A5568"
+			    )
+		isHidden
+		displayFolder: Formatting
+		lineageTag: 76d1800b-0aa1-5bb9-9f86-9df382b12a28
+
+	/// Text colour for a current status: valid (green), expiring (amber), expired, not passed or invalid (red).
+	measure 'Current Status Colour' = SWITCH ( SELECTEDVALUE ( 'Taken By'[Induction Status Order] ), 1, "#2E9E6B", 2, "#C9901A", 3, "#D6493A", 4, "#D6493A", 5, "#D6493A", "#4A5568" )
+		isHidden
+		displayFolder: Formatting
+		lineageTag: 2219237f-c14b-5ac3-ae98-df5576079e8e
+
+	/// Latest attempt invalidated by a newer version of the induction: the person needs to take it again. As at the last data refresh.
+	measure 'Invalid Inductions' = CALCULATE ( [Inductions Taken], KEEPFILTERS ( 'Taken By'[Is Latest Attempt] = TRUE () ), REMOVEFILTERS ( 'Date' ), KEEPFILTERS ( 'Taken By'[Induction Status Order] = 5 ) )
+		formatString: #,0
+		displayFolder: Current Status
+		lineageTag: 7cec5fd1-e7a8-5702-850e-2751c26632f6
+
+	column Value
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: dfec2b66-7c54-50ea-8888-ee8a9540739e
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Value]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Induction Measures' = calculated
+		mode: import
+		source = { 1 }
+
+	annotation PBI_Id = d3d3945293c355bcbdec5ce7040fdba0
+

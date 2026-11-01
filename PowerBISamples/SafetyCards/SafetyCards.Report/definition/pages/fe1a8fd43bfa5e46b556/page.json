@@ -1,0 +1,8 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/page/2.0.0/schema.json",
+  "name": "fe1a8fd43bfa5e46b556",
+  "displayName": "Sites and roles",
+  "displayOption": "FitToPage",
+  "height": 720,
+  "width": 1280
+}

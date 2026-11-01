@@ -1,0 +1,295 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
+  "name": "9c98862cbd2a5372acd1",
+  "position": {
+    "x": 24,
+    "y": 216,
+    "z": 1000,
+    "height": 488,
+    "width": 760,
+    "tabOrder": 1000
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Permit"
+                    }
+                  },
+                  "Property": "Issued To Company"
+                }
+              },
+              "queryRef": "Permit.Issued To Company",
+              "nativeQueryRef": "Issued to",
+              "displayName": "Issued to"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Permit Measures"
+                    }
+                  },
+                  "Property": "Permits"
+                }
+              },
+              "queryRef": "Permit Measures.Permits",
+              "nativeQueryRef": "Permits",
+              "displayName": "Permits"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Permit Measures"
+                    }
+                  },
+                  "Property": "Ended On Time"
+                }
+              },
+              "queryRef": "Permit Measures.Ended On Time",
+              "nativeQueryRef": "Ended on time",
+              "displayName": "Ended on time"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Permit Measures"
+                    }
+                  },
+                  "Property": "Closed After Expiry"
+                }
+              },
+              "queryRef": "Permit Measures.Closed After Expiry",
+              "nativeQueryRef": "Closed late",
+              "displayName": "Closed late"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Permit Measures"
+                    }
+                  },
+                  "Property": "Expired Not Closed"
+                }
+              },
+              "queryRef": "Permit Measures.Expired Not Closed",
+              "nativeQueryRef": "Expired, not closed",
+              "displayName": "Expired, not closed"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Permit Measures"
+                    }
+                  },
+                  "Property": "Close-out Rate"
+                }
+              },
+              "queryRef": "Permit Measures.Close-out Rate",
+              "nativeQueryRef": "Close-out rate",
+              "displayName": "Close-out rate"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Permit Measures"
+                    }
+                  },
+                  "Property": "Average Hours Open"
+                }
+              },
+              "queryRef": "Permit Measures.Average Hours Open",
+              "nativeQueryRef": "Avg hours open",
+              "displayName": "Avg hours open"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "Permit Measures"
+                  }
+                },
+                "Property": "Permits"
+              }
+            },
+            "direction": "Descending"
+          }
+        ]
+      }
+    },
+    "objects": {
+      "columnWidth": [
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "202D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Permit.Issued To Company"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "72D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Permit Measures.Permits"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "86D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Permit Measures.Ended On Time"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "72D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Permit Measures.Closed After Expiry"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "101D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Permit Measures.Expired Not Closed"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "86D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Permit Measures.Close-out Rate"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "101D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Permit Measures.Average Hours Open"
+          }
+        }
+      ],
+      "columnHeaders": [
+        {
+          "properties": {}
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'By company issued to'"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "subTitle": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Blank = issued to individuals rather than a company'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

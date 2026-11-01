@@ -1,14 +1,14 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/page/2.1.0/schema.json",
   "name": "2421489578220be5a078",
-  "displayName": "Asset Inspection Details",
+  "displayName": "Inspection details",
   "displayOption": "FitToPage",
   "height": 720,
   "width": 1280,
   "filterConfig": {
     "filters": [
       {
-        "name": "9f60e7b074ab4b988dcd",
+        "name": "808eb1848b6f5b4abdf0",
         "field": {
           "Column": {
             "Expression": {
@@ -25,14 +25,12 @@
     ]
   },
   "pageBinding": {
-    "name": "cab77600077333587b2e",
+    "name": "6136806bc2de5c759c4f",
     "type": "Drillthrough",
     "parameters": [
       {
-        "name": "55bba555749acca6b7d2",
-        "boundFilter": "9f60e7b074ab4b988dcd",
-        "asAggregation": false,
-        "qnaSingleSelectRequired": false,
+        "name": "78e7e820a5275db1ae3c",
+        "boundFilter": "808eb1848b6f5b4abdf0",
         "fieldExpr": {
           "Column": {
             "Expression": {
@@ -44,7 +42,7 @@
           }
         }
       }
-    ],
-    "acceptsFilterContext": "None"
-  }
+    ]
+  },
+  "visibility": "HiddenInViewMode"
 }

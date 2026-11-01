@@ -23,6 +23,8 @@ ref table 'Action Update'
 ref table LocalDateTable_b400b2e2-7e47-4c0d-b8da-bd1adbaec555
 ref table Wallet
 ref table LocalDateTable_66c8308a-662f-4b19-9254-47cf6aee52dd
+ref table Date
+ref table 'Action Measures'
 
 ref cultureInfo en-GB
 

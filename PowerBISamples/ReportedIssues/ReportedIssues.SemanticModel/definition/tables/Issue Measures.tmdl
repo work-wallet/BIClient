@@ -1,0 +1,850 @@
+table 'Issue Measures'
+	lineageTag: 8734a904-8766-5ee0-b00e-a08d679d321d
+
+	/// Reported issues in context, excluding deleted issues.
+	measure Issues = CALCULATE ( COUNTROWS ( 'Issue' ), KEEPFILTERS ( NOT 'Status'[ReportedIssueStatusCode] IN { 8 } ) )
+		formatString: #,0
+		displayFolder: Issues
+		lineageTag: 0f10e741-34c8-52fd-b869-41ae35a23270
+
+	/// Issues still open: Reported or Under Investigation.
+	measure 'Open Issues' = CALCULATE ( [Issues], KEEPFILTERS ( 'Status'[ReportedIssueStatusCode] IN { 2, 3 } ) )
+		formatString: #,0
+		displayFolder: Issues
+		lineageTag: 90673ca8-d137-59a8-9917-821a5009b06b
+
+	/// Issues with status Under Investigation.
+	measure 'Under Investigation' = CALCULATE ( [Issues], KEEPFILTERS ( 'Status'[ReportedIssueStatusCode] = 3 ) )
+		formatString: #,0
+		displayFolder: Issues
+		lineageTag: 544c74f4-e68b-562c-95be-03bd33a177dc
+
+	/// Issues with status Closed or Closed (Archived).
+	measure 'Closed Issues' = CALCULATE ( [Issues], KEEPFILTERS ( 'Status'[ReportedIssueStatusCode] IN { 4, 6 } ) )
+		formatString: #,0
+		displayFolder: Issues
+		lineageTag: 732d6f4c-c78f-5549-8319-990a773552dd
+
+	/// Closed issues as a share of all (non-deleted) issues.
+	measure 'Closure Rate' = DIVIDE ( [Closed Issues], [Issues] )
+		formatString: 0%
+		displayFolder: Issues
+		lineageTag: 97f3e1e6-5e6f-5cf9-85b6-a080562e3c3f
+
+	/// Issues with severity High or Critical.
+	measure 'Serious Issues' = CALCULATE ( [Issues], KEEPFILTERS ( 'Severity'[ReportedIssueSeverityCode] IN { 4, 8 } ) )
+		formatString: #,0
+		displayFolder: Issues
+		lineageTag: f58a094d-5e6a-587a-81a0-edc109d3b92d
+
+	/// Serious (High or Critical) issues as a share of all issues.
+	measure 'Serious Share' = DIVIDE ( [Serious Issues], [Issues] )
+		formatString: 0%
+		displayFolder: Issues
+		lineageTag: 238add9c-e80a-5d0c-be2c-1d39a0c62341
+
+	/// Average issues per month, over months in context that have at least one issue.
+	measure 'Monthly Average Issues' = AVERAGEX ( VALUES ( 'Date'[Month Start] ), [Issues] )
+		formatString: #,0
+		displayFolder: Issues
+		lineageTag: 09e45ca4-a67f-5ebc-b3af-86504732aa27
+
+	/// Monthly average over the whole selected period, for a constant reference line on monthly charts.
+	measure 'Monthly Average Line' = CALCULATE ( [Monthly Average Issues], ALLSELECTED ( 'Date' ) )
+		formatString: #,0
+		displayFolder: Issues
+		lineageTag: bb871444-e1b5-5829-a7d1-3d38c52489b5
+
+	/// Category with the most issues; ties are reported rather than picked arbitrarily.
+	measure 'Most Common Category' =
+			VAR Items = FILTER ( ADDCOLUMNS ( VALUES ( 'Category'[Category] ), "@Value", [Issues] ), NOT ISBLANK ( [@Value] ) )
+			VAR Target = MAXX ( Items, [@Value] )
+			VAR Leaders = FILTER ( Items, [@Value] = Target )
+			VAR LeaderCount = COUNTROWS ( Leaders )
+			VAR FirstLeader = MINX ( Leaders, 'Category'[Category] )
+			RETURN
+			    IF ( LeaderCount > 1, FirstLeader & " (+" & ( LeaderCount - 1 ) & " tied)", FirstLeader )
+		displayFolder: Issues
+		lineageTag: 79d0d8b5-e219-5839-a54a-7e7df0d3f265
+
+	/// Locations with at least one issue.
+	measure 'Locations With Issues' = COUNTROWS ( FILTER ( VALUES ( 'Location'[Location] ), [Issues] > 0 ) ) + 0
+		formatString: #,0
+		displayFolder: Issues
+		lineageTag: a248daca-de9a-5374-88e8-c70483f787ca
+
+	/// Location with the most issues; ties are reported.
+	measure 'Top Location' =
+			VAR Items = FILTER ( ADDCOLUMNS ( VALUES ( 'Location'[Location] ), "@Value", [Issues] ), NOT ISBLANK ( [@Value] ) )
+			VAR Target = MAXX ( Items, [@Value] )
+			VAR Leaders = FILTER ( Items, [@Value] = Target )
+			VAR LeaderCount = COUNTROWS ( Leaders )
+			VAR FirstLeader = MINX ( Leaders, 'Location'[Location] )
+			RETURN
+			    IF ( LeaderCount > 1, FirstLeader & " (+" & ( LeaderCount - 1 ) & " tied)", FirstLeader )
+		displayFolder: Issues
+		lineageTag: 5330afde-672c-5d3b-91ec-6889c82f44fa
+
+	/// Median hours from an issue occurring to it being reported. The median is used so a few late reports don't dominate.
+	measure 'Median Hours To Report' = CALCULATE ( MEDIAN ( 'Issue'[Hours To Report] ), KEEPFILTERS ( NOT 'Status'[ReportedIssueStatusCode] IN { 8 } ) )
+		formatString: #,0.0
+		displayFolder: Timeliness
+		lineageTag: 41e5e485-6c7a-50de-b2a2-9e3453ef7f97
+
+	/// Average days from report to investigation start, for issues whose investigation has started.
+	measure 'Average Days To Start Investigation' = CALCULATE ( AVERAGE ( 'Issue'[Days To Start Investigation] ), KEEPFILTERS ( NOT 'Status'[ReportedIssueStatusCode] IN { 8 } ) )
+		formatString: #,0.0
+		displayFolder: Timeliness
+		lineageTag: a258c85a-5536-5750-9340-d8aa0eaac29a
+
+	/// Average days from report to close, for closed issues.
+	measure 'Average Days To Close' = CALCULATE ( AVERAGE ( 'Issue'[Days To Close] ), KEEPFILTERS ( NOT 'Status'[ReportedIssueStatusCode] IN { 8 } ) )
+		formatString: #,0.0
+		displayFolder: Timeliness
+		lineageTag: 1db2ce76-04ee-5bb4-82f3-af0d003eef89
+
+	/// Open issues reported more than 30 days ago (as at the last data refresh).
+	measure 'Open Over 30 Days' = CALCULATE ( [Open Issues], KEEPFILTERS ( 'Issue'[Age Band Order] >= 3 ) )
+		formatString: #,0
+		displayFolder: Timeliness
+		lineageTag: 99432b7e-dc69-5bd6-956c-a0e51e89d1c1
+
+	/// Serious (High or Critical) issues still at Reported status: no investigation started.
+	measure 'Serious Awaiting Investigation' = CALCULATE ( [Serious Issues], KEEPFILTERS ( 'Status'[ReportedIssueStatusCode] = 2 ) ) + 0
+		formatString: #,0
+		displayFolder: Timeliness
+		lineageTag: c8ee3ec1-b4f5-50a8-b468-34ae48593fce
+
+	/// Issues with at least one root or immediate cause recorded.
+	measure 'Issues With Root Cause Analysis' = CALCULATE ( [Issues], 'Root Cause Analysis Fact' )
+		formatString: #,0
+		displayFolder: Root Causes
+		lineageTag: 681c885f-44fb-50cd-82d9-d0658107d60b
+
+	/// Issues with the selected root cause (type Root Cause).
+	measure 'Root Cause Issues' = CALCULATE ( [Issues], KEEPFILTERS ( 'Root Cause Analysis Type'[ReportedIssueRootCauseAnalysisTypeCode] = 1 ) )
+		formatString: #,0
+		displayFolder: Root Causes
+		lineageTag: 652acdee-688d-5590-8947-7cd8c3187f5f
+
+	/// Issues with the selected immediate cause (type Immediate Cause).
+	measure 'Immediate Cause Issues' = CALCULATE ( [Issues], KEEPFILTERS ( 'Root Cause Analysis Type'[ReportedIssueRootCauseAnalysisTypeCode] = 2 ) )
+		formatString: #,0
+		displayFolder: Root Causes
+		lineageTag: d92e02dd-2cb6-5279-b0f4-50f64ebfc782
+
+	/// Most recorded root cause; ties are reported.
+	measure 'Top Root Cause' =
+			VAR Items = FILTER ( ADDCOLUMNS ( VALUES ( 'Root Cause Analysis Fact'[Root Cause Analysis] ), "@Value", [Root Cause Issues] ), NOT ISBLANK ( [@Value] ) )
+			VAR Target = MAXX ( Items, [@Value] )
+			VAR Leaders = FILTER ( Items, [@Value] = Target )
+			VAR LeaderCount = COUNTROWS ( Leaders )
+			VAR FirstLeader = MINX ( Leaders, 'Root Cause Analysis Fact'[Root Cause Analysis] )
+			RETURN
+			    IF ( LeaderCount > 1, FirstLeader & " (+" & ( LeaderCount - 1 ) & " tied)", FirstLeader )
+		displayFolder: Root Causes
+		lineageTag: 10e66e9b-15e9-522a-824e-9aea751365fa
+
+	/// Most recorded immediate cause; ties are reported.
+	measure 'Top Immediate Cause' =
+			VAR Items = FILTER ( ADDCOLUMNS ( VALUES ( 'Root Cause Analysis Fact'[Root Cause Analysis] ), "@Value", [Immediate Cause Issues] ), NOT ISBLANK ( [@Value] ) )
+			VAR Target = MAXX ( Items, [@Value] )
+			VAR Leaders = FILTER ( Items, [@Value] = Target )
+			VAR LeaderCount = COUNTROWS ( Leaders )
+			VAR FirstLeader = MINX ( Leaders, 'Root Cause Analysis Fact'[Root Cause Analysis] )
+			RETURN
+			    IF ( LeaderCount > 1, FirstLeader & " (+" & ( LeaderCount - 1 ) & " tied)", FirstLeader )
+		displayFolder: Root Causes
+		lineageTag: a1c1604d-952c-5b99-8e01-bd6c8b9dd351
+
+	/// Issues with at least one injured body part recorded.
+	measure 'Injury Reports' = CALCULATE ( [Issues], 'Body Part Fact' )
+		formatString: #,0
+		displayFolder: Injuries
+		lineageTag: b1b1c6b2-d42b-5b22-a0d6-e45badddf281
+
+	/// Injured body parts recorded (an issue can record several).
+	measure 'Injured Body Parts' = CALCULATE ( COUNTROWS ( 'Body Part Fact' ), KEEPFILTERS ( NOT 'Status'[ReportedIssueStatusCode] IN { 8 } ) )
+		formatString: #,0
+		displayFolder: Injuries
+		lineageTag: 5bae6ad2-bb82-5daa-8485-a1c24c0b56df
+
+	/// Injury reports with severity High or Critical.
+	measure 'Serious Injury Reports' = CALCULATE ( [Injury Reports], KEEPFILTERS ( 'Severity'[ReportedIssueSeverityCode] IN { 4, 8 } ) )
+		formatString: #,0
+		displayFolder: Injuries
+		lineageTag: 420ca532-acf1-576a-90e5-a527ea0de56a
+
+	/// Body part injured most often; ties are reported.
+	measure 'Most Affected Body Part' =
+			VAR Items = FILTER ( ADDCOLUMNS ( VALUES ( 'Body Part Enum'[Body Part] ), "@Value", [Injured Body Parts] ), NOT ISBLANK ( [@Value] ) )
+			VAR Target = MAXX ( Items, [@Value] )
+			VAR Leaders = FILTER ( Items, [@Value] = Target )
+			VAR LeaderCount = COUNTROWS ( Leaders )
+			VAR FirstLeader = MINX ( Leaders, 'Body Part Enum'[Body Part] )
+			RETURN
+			    IF ( LeaderCount > 1, FirstLeader & " (+" & ( LeaderCount - 1 ) & " tied)", FirstLeader )
+		displayFolder: Injuries
+		lineageTag: d7ca1a5b-84da-5d71-b674-8f33df5fec60
+
+	/// Body area (e.g. Upper Body) injured most often; ties are reported.
+	measure 'Most Affected Body Area' =
+			VAR Items = FILTER ( ADDCOLUMNS ( VALUES ( 'Body Part Enum'[Body Part Group] ), "@Value", [Injured Body Parts] ), NOT ISBLANK ( [@Value] ) )
+			VAR Target = MAXX ( Items, [@Value] )
+			VAR Leaders = FILTER ( Items, [@Value] = Target )
+			VAR LeaderCount = COUNTROWS ( Leaders )
+			VAR FirstLeader = MINX ( Leaders, 'Body Part Enum'[Body Part Group] )
+			RETURN
+			    IF ( LeaderCount > 1, FirstLeader & " (+" & ( LeaderCount - 1 ) & " tied)", FirstLeader )
+		displayFolder: Injuries
+		lineageTag: a18643c0-a4aa-5a25-9922-aa4a71918db6
+
+	/// People recorded against issues (e.g. who was injured, witnesses), across all person questions.
+	measure 'People Recorded' = CALCULATE ( COUNTROWS ( 'Person Fact' ), KEEPFILTERS ( NOT 'Status'[ReportedIssueStatusCode] IN { 8 } ) )
+		formatString: #,0
+		displayFolder: People
+		lineageTag: ff4e0091-3555-5d8b-a3c5-32c64c0614c4
+
+	/// Issues with at least one person recorded.
+	measure 'Issues With People' = CALCULATE ( [Issues], 'Person Fact' )
+		formatString: #,0
+		displayFolder: People
+		lineageTag: 493e375a-faac-570c-b124-f393f026dc71
+
+	/// Share of people typed in by name rather than picked as a contact or user.
+	measure 'People Typed In Share' = DIVIDE ( CALCULATE ( [People Recorded], KEEPFILTERS ( 'Person Option Type'[PersonOptionTypeCode] = 1 ) ), [People Recorded] )
+		formatString: 0%
+		displayFolder: People
+		lineageTag: c9515bd8-c2f2-5b0c-9bfa-5cbd28ce79dd
+
+	/// Person question with the most people recorded; ties are reported.
+	measure 'Most Common Person Question' =
+			VAR Items = FILTER ( ADDCOLUMNS ( VALUES ( 'Person'[Person Question] ), "@Value", [People Recorded] ), NOT ISBLANK ( [@Value] ) )
+			VAR Target = MAXX ( Items, [@Value] )
+			VAR Leaders = FILTER ( Items, [@Value] = Target )
+			VAR LeaderCount = COUNTROWS ( Leaders )
+			VAR FirstLeader = MINX ( Leaders, 'Person'[Person Question] )
+			RETURN
+			    IF ( LeaderCount > 1, FirstLeader & " (+" & ( LeaderCount - 1 ) & " tied)", FirstLeader )
+		displayFolder: People
+		lineageTag: 635d0933-76f3-5c2b-a8b9-cbbfe1994b49
+
+	/// Answers to numeric questions (e.g. days lost, cost of damage).
+	measure 'Numeric Answers' = CALCULATE ( COUNTROWS ( 'Numeric Answer Fact' ), KEEPFILTERS ( NOT 'Status'[ReportedIssueStatusCode] IN { 8 } ) )
+		formatString: #,0
+		displayFolder: Investigation Answers
+		lineageTag: e27557c9-7f98-5063-b956-e0b865a4b738
+
+	/// Total of numeric answers. Only meaningful for a single question (one unit).
+	measure 'Numeric Total' = CALCULATE ( SUM ( 'Numeric Answer Fact'[Numeric Answer] ), KEEPFILTERS ( NOT 'Status'[ReportedIssueStatusCode] IN { 8 } ) )
+		formatString: #,0.##
+		displayFolder: Investigation Answers
+		lineageTag: 5d45d681-15a6-5501-8209-d0b5bedf35d9
+
+	/// Average numeric answer. Only meaningful for a single question (one unit).
+	measure 'Numeric Average' = CALCULATE ( AVERAGE ( 'Numeric Answer Fact'[Numeric Answer] ), KEEPFILTERS ( NOT 'Status'[ReportedIssueStatusCode] IN { 8 } ) )
+		formatString: #,0.##
+		displayFolder: Investigation Answers
+		lineageTag: fb7cf9c9-8016-514f-8ace-f9d2a1373626
+
+	/// Highest numeric answer for the question.
+	measure 'Numeric Highest' = CALCULATE ( MAX ( 'Numeric Answer Fact'[Numeric Answer] ), KEEPFILTERS ( NOT 'Status'[ReportedIssueStatusCode] IN { 8 } ) )
+		formatString: #,0.##
+		displayFolder: Investigation Answers
+		lineageTag: c8ab6373-fd30-5ef7-8c1d-bde9b4c2d62e
+
+	/// Issues with at least one numeric answer.
+	measure 'Issues With Numeric Answers' = CALCULATE ( [Issues], 'Numeric Answer Fact' )
+		formatString: #,0
+		displayFolder: Investigation Answers
+		lineageTag: 982e5d25-c608-53c8-8470-55c091d8fac8
+
+	/// Answers to date/time questions (e.g. when the area was made safe).
+	measure 'Date Time Answers' = CALCULATE ( COUNTROWS ( 'Date Time Answer Fact' ), KEEPFILTERS ( NOT 'Status'[ReportedIssueStatusCode] IN { 8 } ) )
+		formatString: #,0
+		displayFolder: Investigation Answers
+		lineageTag: 20d46210-4604-5ea4-8c91-17157d377031
+
+	/// Average hours from the issue occurring to the date/time given in the answer (questions with a date and time only), e.g. how long until the area was made safe.
+	measure 'Average Hours After Occurrence' =
+			CALCULATE (
+			    AVERAGEX (
+			        FILTER ( 'Date Time Answer Fact', NOT ISBLANK ( 'Date Time Answer Fact'[Date and Time Answer] ) ),
+			        ( 'Date Time Answer Fact'[Date and Time Answer] - RELATED ( 'Issue'[Occurred On] ) ) * 24
+			    ),
+			    KEEPFILTERS ( NOT 'Status'[ReportedIssueStatusCode] IN { 8 } )
+			)
+		formatString: #,0.0
+		displayFolder: Investigation Answers
+		lineageTag: c2a69c70-e7df-561c-95cf-1d9b4d69656d
+
+	/// Sign-off signatures requested by the investigation process.
+	measure Signatures = CALCULATE ( COUNTROWS ( 'Signature Fact' ), KEEPFILTERS ( NOT 'Status'[ReportedIssueStatusCode] IN { 8 } ) )
+		formatString: #,0
+		displayFolder: Investigation Answers
+		lineageTag: ac758aad-a544-5a19-a0df-5b81c6b6827f
+
+	/// Signatures that have been signed.
+	measure Signed = CALCULATE ( [Signatures], KEEPFILTERS ( NOT ISBLANK ( 'Signature Fact'[Signed On] ) ) )
+		formatString: #,0
+		displayFolder: Investigation Answers
+		lineageTag: d3e39798-dd32-5dff-a477-76fd64399750
+
+	/// Signatures not yet signed (e.g. on an investigation still in progress).
+	measure 'Awaiting Signature' = [Signatures] - [Signed]
+		formatString: #,0
+		displayFolder: Investigation Answers
+		lineageTag: 13c678f4-03cb-5764-b643-d51a6bc68325
+
+	/// Average days from the issue being reported to each signature.
+	measure 'Average Days To Sign' =
+			CALCULATE (
+			    AVERAGEX (
+			        FILTER ( 'Signature Fact', NOT ISBLANK ( 'Signature Fact'[Signed On] ) ),
+			        ( 'Signature Fact'[Signed On] - RELATED ( 'Issue'[Reported On] ) ) * 1.0
+			    ),
+			    KEEPFILTERS ( NOT 'Status'[ReportedIssueStatusCode] IN { 8 } )
+			)
+		formatString: #,0.0
+		displayFolder: Investigation Answers
+		lineageTag: 6f2722ee-1e2c-5c76-acd1-c2a138b01694
+
+	/// Issues for the same-length period immediately before the selected dates.
+	measure 'Issues PP' =
+			VAR FirstDay = MIN ( 'Date'[Date] )
+			VAR LastDay = MIN ( MAX ( 'Date'[Date] ), TODAY () )
+			VAR Days = LastDay - FirstDay + 1
+			RETURN
+			    CALCULATE ( [Issues], DATESBETWEEN ( 'Date'[Date], FirstDay - Days, FirstDay - 1 ) )
+		formatString: #,0
+		isHidden
+		displayFolder: Previous Period
+		lineageTag: 30e75ef4-9538-56e0-9cc8-434251ad9ae5
+
+	/// Serious Issues for the same-length period immediately before the selected dates.
+	measure 'Serious Issues PP' =
+			VAR FirstDay = MIN ( 'Date'[Date] )
+			VAR LastDay = MIN ( MAX ( 'Date'[Date] ), TODAY () )
+			VAR Days = LastDay - FirstDay + 1
+			RETURN
+			    CALCULATE ( [Serious Issues], DATESBETWEEN ( 'Date'[Date], FirstDay - Days, FirstDay - 1 ) )
+		formatString: #,0
+		isHidden
+		displayFolder: Previous Period
+		lineageTag: 70bf164c-aea8-539d-b6cf-50224e5612fa
+
+	/// Injury Reports for the same-length period immediately before the selected dates.
+	measure 'Injury Reports PP' =
+			VAR FirstDay = MIN ( 'Date'[Date] )
+			VAR LastDay = MIN ( MAX ( 'Date'[Date] ), TODAY () )
+			VAR Days = LastDay - FirstDay + 1
+			RETURN
+			    CALCULATE ( [Injury Reports], DATESBETWEEN ( 'Date'[Date], FirstDay - Days, FirstDay - 1 ) )
+		formatString: #,0
+		isHidden
+		displayFolder: Previous Period
+		lineageTag: 38f22faf-f910-56f4-964a-3be3712c0da7
+
+	/// Average Days To Close for the same-length period immediately before the selected dates.
+	measure 'Average Days To Close PP' =
+			VAR FirstDay = MIN ( 'Date'[Date] )
+			VAR LastDay = MIN ( MAX ( 'Date'[Date] ), TODAY () )
+			VAR Days = LastDay - FirstDay + 1
+			RETURN
+			    CALCULATE ( [Average Days To Close], DATESBETWEEN ( 'Date'[Date], FirstDay - Days, FirstDay - 1 ) )
+		formatString: #,0.0
+		isHidden
+		displayFolder: Previous Period
+		lineageTag: 1919c531-f8be-561c-afef-0b47c329ed59
+
+	measure 'Issues Trend Label' =
+			VAR Cur = [Issues]
+			VAR Prev = [Issues PP]
+			VAR Change = DIVIDE ( Cur - Prev, Prev )
+			RETURN
+			    IF (
+			        ISBLANK ( Prev ) || Prev = 0,
+			        "No earlier period to compare",
+			        IF ( Change >= 0, "▲ ", "▼ " ) & FORMAT ( ABS ( Change ), "0%" ) & " vs previous period"
+			    )
+		isHidden
+		displayFolder: Labels
+		lineageTag: df998058-ffff-57ca-9f68-18481689fc46
+
+	measure 'Serious Trend Label' =
+			VAR Cur = [Serious Issues]
+			VAR Prev = [Serious Issues PP]
+			VAR Change = DIVIDE ( Cur - Prev, Prev )
+			RETURN
+			    IF (
+			        ISBLANK ( Prev ) || Prev = 0,
+			        "No earlier period to compare",
+			        IF ( Change >= 0, "▲ ", "▼ " ) & FORMAT ( ABS ( Change ), "0%" ) & " vs previous period"
+			    )
+		isHidden
+		displayFolder: Labels
+		lineageTag: 62735b6e-c513-5783-b2da-c6ac776d0e83
+
+	measure 'Injury Trend Label' =
+			VAR Cur = [Injury Reports]
+			VAR Prev = [Injury Reports PP]
+			VAR Change = DIVIDE ( Cur - Prev, Prev )
+			RETURN
+			    IF (
+			        ISBLANK ( Prev ) || Prev = 0,
+			        "No earlier period to compare",
+			        IF ( Change >= 0, "▲ ", "▼ " ) & FORMAT ( ABS ( Change ), "0%" ) & " vs previous period"
+			    )
+		isHidden
+		displayFolder: Labels
+		lineageTag: 77f4773f-69b7-52b7-9bcd-c39ae2e477d9
+
+	measure 'Days To Close Trend Label' =
+			VAR Cur = [Average Days To Close]
+			VAR Prev = [Average Days To Close PP]
+			VAR Change = DIVIDE ( Cur - Prev, Prev )
+			RETURN
+			    IF (
+			        ISBLANK ( Prev ) || Prev = 0,
+			        "No earlier period to compare",
+			        IF ( Change >= 0, "▲ ", "▼ " ) & FORMAT ( ABS ( Change ), "0%" ) & " vs previous period"
+			    )
+		isHidden
+		displayFolder: Labels
+		lineageTag: 1a49ae5f-b8da-5801-a5ff-e7d2605d035a
+
+	measure 'Open Issues Label' =
+			VAR IssueCount = [Issues]
+			RETURN
+			    IF ( IssueCount > 0, FORMAT ( DIVIDE ( [Open Issues], IssueCount ), "0%" ) & " of issues still open" )
+		isHidden
+		displayFolder: Labels
+		lineageTag: 6b78b1ef-fb29-5917-8009-36d2697f9e10
+
+	measure 'Serious Share Label' =
+			VAR Share = [Serious Share]
+			RETURN
+			    IF ( NOT ISBLANK ( Share ), FORMAT ( Share, "0%" ) & " of issues are High or Critical" )
+		isHidden
+		displayFolder: Labels
+		lineageTag: 65f88209-a105-513d-b136-fa90da46ca1f
+
+	measure 'Closure Rate Label' =
+			VAR Rate = [Closure Rate]
+			RETURN
+			    IF ( NOT ISBLANK ( Rate ), FORMAT ( Rate, "0%" ) & " of issues closed" )
+		isHidden
+		displayFolder: Labels
+		lineageTag: 49255805-4667-57bd-82ab-5902a0ca8bfa
+
+	measure 'Peak Month Label' =
+			VAR Months = ADDCOLUMNS ( VALUES ( 'Date'[Month Start] ), "@Issues", [Issues] )
+			VAR Peak = MAXX ( Months, [@Issues] )
+			VAR PeakMonth = MAXX ( FILTER ( Months, [@Issues] = Peak ), 'Date'[Month Start] )
+			RETURN
+			    IF ( Peak > 0, "Peak " & FORMAT ( Peak, "#,0" ) & " in " & FORMAT ( PeakMonth, "mmm yyyy" ) )
+		isHidden
+		displayFolder: Labels
+		lineageTag: 714fd221-e1e9-515a-99b8-47d88fadfebc
+
+	measure 'Most Common Category Label' =
+			VAR IssueCount = [Issues]
+			VAR Categories = ADDCOLUMNS ( VALUES ( 'Category'[Category] ), "@Issues", [Issues] )
+			RETURN
+			    IF ( IssueCount > 0, FORMAT ( DIVIDE ( MAXX ( Categories, [@Issues] ), IssueCount ), "0%" ) & " of issues" )
+		isHidden
+		displayFolder: Labels
+		lineageTag: aadd7769-2091-5ac5-ba92-58af4a398885
+
+	measure 'Top Location Label' =
+			VAR IssueCount = [Issues]
+			VAR Locations = ADDCOLUMNS ( VALUES ( 'Location'[Location] ), "@Issues", [Issues] )
+			VAR TopValue = MAXX ( Locations, [@Issues] )
+			RETURN
+			    IF ( TopValue > 0, FORMAT ( TopValue, "#,0" ) & " issues (" & FORMAT ( DIVIDE ( TopValue, IssueCount ), "0%" ) & ")" )
+		isHidden
+		displayFolder: Labels
+		lineageTag: f54caf20-f61e-5506-89a7-a458b2204fff
+
+	measure 'Locations Label' = "With at least one issue"
+		isHidden
+		displayFolder: Labels
+		lineageTag: 02bc85ce-aff4-5555-ad06-063495909a37
+
+	measure 'Median Hours To Report Label' = IF ( NOT ISBLANK ( [Median Hours To Report] ), "Median hours from occurrence to report" )
+		isHidden
+		displayFolder: Labels
+		lineageTag: cb79806d-cbee-5720-b042-d727a6e77e62
+
+	measure 'Days To Start Investigation Label' = IF ( NOT ISBLANK ( [Average Days To Start Investigation] ), "Average days from report to investigation" )
+		isHidden
+		displayFolder: Labels
+		lineageTag: 664675f8-282b-5744-8e21-fda35c8d93b6
+
+	measure 'Open Over 30 Days Label' =
+			VAR OpenCount = [Open Issues]
+			RETURN
+			    IF ( OpenCount > 0, FORMAT ( DIVIDE ( [Open Over 30 Days], OpenCount ), "0%" ) & " of open issues" )
+		isHidden
+		displayFolder: Labels
+		lineageTag: 65bff25c-6244-535a-83f3-49ae53d29c0e
+
+	measure 'Serious Awaiting Label' = IF ( [Serious Issues] > 0, "High or Critical, not yet under investigation" )
+		isHidden
+		displayFolder: Labels
+		lineageTag: 6855264f-aeca-5606-87fd-d545fa58e5cd
+
+	measure 'Root Cause Coverage Label' =
+			VAR IssueCount = [Issues]
+			RETURN
+			    IF ( IssueCount > 0, FORMAT ( DIVIDE ( [Issues With Root Cause Analysis], IssueCount ), "0%" ) & " of issues" )
+		isHidden
+		displayFolder: Labels
+		lineageTag: 82a8a5d9-2db7-51bc-8bcf-5dab2c6df917
+
+	measure 'Top Root Cause Label' =
+			VAR Causes = ADDCOLUMNS ( VALUES ( 'Root Cause Analysis Fact'[Root Cause Analysis] ), "@Issues", [Root Cause Issues] )
+			VAR TopValue = MAXX ( Causes, [@Issues] )
+			RETURN
+			    IF ( TopValue > 0, FORMAT ( TopValue, "#,0" ) & " issues", "None recorded in this period" )
+		isHidden
+		displayFolder: Labels
+		lineageTag: 8c499c5e-3062-592a-81a7-effdbbe32044
+
+	measure 'Top Immediate Cause Label' =
+			VAR Causes = ADDCOLUMNS ( VALUES ( 'Root Cause Analysis Fact'[Root Cause Analysis] ), "@Issues", [Immediate Cause Issues] )
+			VAR TopValue = MAXX ( Causes, [@Issues] )
+			RETURN
+			    IF ( TopValue > 0, FORMAT ( TopValue, "#,0" ) & " issues", "None recorded in this period" )
+		isHidden
+		displayFolder: Labels
+		lineageTag: 74d61eb9-d028-5218-b9c7-7bbc64c3ce16
+
+	measure 'Injury Share Label' =
+			VAR IssueCount = [Issues]
+			RETURN
+			    IF ( IssueCount > 0, FORMAT ( DIVIDE ( [Injury Reports], IssueCount ), "0%" ) & " of issues" )
+		isHidden
+		displayFolder: Labels
+		lineageTag: bcb75bd0-7872-5617-94f3-70d0de556f00
+
+	measure 'Most Affected Body Part Label' =
+			VAR Parts = ADDCOLUMNS ( VALUES ( 'Body Part Enum'[Body Part] ), "@Count", [Injured Body Parts] )
+			VAR TopValue = MAXX ( Parts, [@Count] )
+			RETURN
+			    IF ( TopValue > 0, FORMAT ( TopValue, "#,0" ) & " injuries", "None recorded in this period" )
+		isHidden
+		displayFolder: Labels
+		lineageTag: fcf015c9-9fb7-59e7-9e80-b06b60608f6f
+
+	measure 'Most Affected Body Area Label' =
+			VAR Total = [Injured Body Parts]
+			VAR Areas = ADDCOLUMNS ( VALUES ( 'Body Part Enum'[Body Part Group] ), "@Count", [Injured Body Parts] )
+			RETURN
+			    IF ( Total > 0, FORMAT ( DIVIDE ( MAXX ( Areas, [@Count] ), Total ), "0%" ) & " of injuries" )
+		isHidden
+		displayFolder: Labels
+		lineageTag: 9934b9c4-4e6f-59b1-ab4d-93279f5767c8
+
+	measure 'Serious Injury Label' =
+			VAR Injuries = [Injury Reports]
+			RETURN
+			    IF ( Injuries > 0, FORMAT ( DIVIDE ( [Serious Injury Reports], Injuries ), "0%" ) & " of injury reports" )
+		isHidden
+		displayFolder: Labels
+		lineageTag: d539e3b5-03e1-5ac9-9e6c-632c4bbe6773
+
+	measure 'People Recorded Label' =
+			VAR IssuesWith = [Issues With People]
+			RETURN
+			    IF ( IssuesWith > 0, "Across " & FORMAT ( IssuesWith, "#,0" ) & " issues", "None recorded in this period" )
+		isHidden
+		displayFolder: Labels
+		lineageTag: 6149aab2-bc00-5d07-974f-bd9e4e2efbd7
+
+	measure 'People Typed In Label' = IF ( NOT ISBLANK ( [People Typed In Share] ), "Typed in by name (not a contact or user)" )
+		isHidden
+		displayFolder: Labels
+		lineageTag: 910835b3-86f4-5f51-a733-4ba714454b44
+
+	measure 'Most Common Person Question Label' =
+			VAR Questions = ADDCOLUMNS ( VALUES ( 'Person'[Person Question] ), "@People", [People Recorded] )
+			VAR TopValue = MAXX ( Questions, [@People] )
+			RETURN
+			    IF ( TopValue > 0, FORMAT ( TopValue, "#,0" ) & " people" )
+		isHidden
+		displayFolder: Labels
+		lineageTag: 7011b741-e18c-5ac1-bd3c-90185fb3727d
+
+	measure 'Numeric Answers Label' =
+			VAR IssuesWith = [Issues With Numeric Answers]
+			RETURN
+			    IF ( IssuesWith > 0, "Across " & FORMAT ( IssuesWith, "#,0" ) & " issues", "None recorded in this period" )
+		isHidden
+		displayFolder: Labels
+		lineageTag: 893e3c43-abf2-5a3b-b6a8-00fb7280306e
+
+	measure 'Date Time Answers Label' =
+			VAR Hours = [Average Hours After Occurrence]
+			RETURN
+			    SWITCH (
+			        TRUE (),
+			        [Date Time Answers] = 0 || ISBLANK ( [Date Time Answers] ), "None recorded in this period",
+			        ISBLANK ( Hours ), "Date-only answers",
+			        "Avg " & FORMAT ( Hours, "#,0.0" ) & " hrs after occurrence"
+			    )
+		isHidden
+		displayFolder: Labels
+		lineageTag: 21389616-c8bf-5116-a34d-a0f193f59535
+
+	measure 'Signatures Label' =
+			VAR SignatureCount = [Signatures]
+			RETURN
+			    IF ( SignatureCount > 0, FORMAT ( DIVIDE ( [Signed], SignatureCount ), "0%" ) & " signed", "None requested in this period" )
+		isHidden
+		displayFolder: Labels
+		lineageTag: bcb79836-f568-5e5b-9fc1-267816484eac
+
+	measure 'Awaiting Signature Label' = IF ( [Signatures] > 0, "Requested but not yet signed", "None requested in this period" )
+		isHidden
+		displayFolder: Labels
+		lineageTag: c540642c-b113-5eaf-bf46-78e55cd3ba78
+
+	/// Text for the Issues list drillthrough button; reflects the issue selected in the table.
+	measure 'Issue Details Button Label' =
+			VAR Selected = IF ( HASONEVALUE ( 'Issue'[Url] ), SELECTEDVALUE ( 'Issue'[Issue Reference] ) )
+			RETURN
+			    IF ( ISBLANK ( Selected ), "Select an issue to view details", "View " & Selected & " details  ›" )
+		isHidden
+		displayFolder: Labels
+		lineageTag: 56d61e46-47e8-5009-8885-69e4891d64e5
+
+	/// The selected issue's overview, for the details page.
+	measure 'Issue Overview Text' =
+			VAR Overview = SELECTEDVALUE ( 'Issue'[Issue Overview] )
+			RETURN
+			    IF ( LEN ( Overview ) > 0, Overview, "No overview recorded." )
+		isHidden
+		displayFolder: Labels
+		lineageTag: 40e3b472-caad-553b-a052-a49a78ee7cf4
+
+	/// One-line timeline for the selected issue: who reported it and the time to report, to investigation and to close.
+	measure 'Issue Timeline' =
+			VAR ReportedBy = SELECTEDVALUE ( 'Issue'[Reported By] )
+			VAR HoursToReport = SELECTEDVALUE ( 'Issue'[Hours To Report] )
+			VAR DaysToInvestigate = SELECTEDVALUE ( 'Issue'[Days To Start Investigation] )
+			VAR DaysToClose = SELECTEDVALUE ( 'Issue'[Days To Close] )
+			VAR Reported =
+			    "Reported "
+			        & IF ( LEN ( ReportedBy ) > 0, "by " & ReportedBy & " " )
+			        & SWITCH (
+			            TRUE (),
+			            ISBLANK ( HoursToReport ), "(time not recorded)",
+			            HoursToReport < 1, "within an hour of occurring",
+			            HoursToReport < 2, "within 2 hours of occurring",
+			            HoursToReport < 48, FORMAT ( HoursToReport, "#,0" ) & " hours after it occurred",
+			            FORMAT ( HoursToReport / 24, "#,0" ) & " days after it occurred"
+			        )
+			VAR Investigated =
+			    SWITCH (
+			        TRUE (),
+			        ISBLANK ( DaysToInvestigate ), "investigation not started",
+			        DaysToInvestigate < 1, "investigation started the same day",
+			        DaysToInvestigate < 2, "investigation started the next day",
+			        "investigation started " & FORMAT ( DaysToInvestigate, "#,0" ) & " days after report"
+			    )
+			VAR Closed =
+			    SWITCH (
+			        TRUE (),
+			        ISBLANK ( DaysToClose ), "not closed",
+			        DaysToClose < 1, "closed the same day",
+			        DaysToClose < 2, "closed the next day",
+			        "closed " & FORMAT ( DaysToClose, "#,0" ) & " days after report"
+			    )
+			RETURN
+			    IF ( HASONEVALUE ( 'Issue'[ReportedIssue_key] ), Reported & " · " & Investigated & " · " & Closed )
+		isHidden
+		displayFolder: Labels
+		lineageTag: 0523a3e5-86b3-5b5e-ada4-dba31566c5e0
+
+	/// Category of the selected issue, read from the issue's own row so it is right however the page is filtered.
+	measure 'Issue Category' = IF ( HASONEVALUE ( 'Issue'[ReportedIssue_key] ), MAXX ( 'Issue', RELATED ( 'Category'[Category] ) ) )
+		isHidden
+		displayFolder: Labels
+		lineageTag: ff852852-a4ba-566e-b374-8c6406d784b8
+
+	/// Severity of the selected issue, read from the issue's own row.
+	measure 'Issue Severity' = IF ( HASONEVALUE ( 'Issue'[ReportedIssue_key] ), MAXX ( 'Issue', RELATED ( 'Severity'[Severity] ) ) )
+		isHidden
+		displayFolder: Labels
+		lineageTag: 596e6939-f4e3-5a10-9998-20cdca6577a2
+
+	/// Status of the selected issue, read from the issue's own row.
+	measure 'Issue Status' = IF ( HASONEVALUE ( 'Issue'[ReportedIssue_key] ), MAXX ( 'Issue', RELATED ( 'Status'[Status] ) ) )
+		isHidden
+		displayFolder: Labels
+		lineageTag: 18518b22-92d5-553f-aea1-6cf0c48675be
+
+	/// Location of the selected issue, read from the issue's own row.
+	measure 'Issue Location' = IF ( HASONEVALUE ( 'Issue'[ReportedIssue_key] ), MAXX ( 'Issue', RELATED ( 'Location'[Location] ) ) )
+		isHidden
+		displayFolder: Labels
+		lineageTag: 38456006-6b73-51be-9d88-f9337d9a68ba
+
+	/// Lead investigator of the selected issue, read from the issue's own row.
+	measure 'Issue Lead Investigator' = IF ( HASONEVALUE ( 'Issue'[ReportedIssue_key] ), MAXX ( 'Issue', RELATED ( 'Lead Investigator Contact'[Contact Name] ) ) )
+		isHidden
+		displayFolder: Labels
+		lineageTag: ebc77a1e-19c6-566f-8d7c-06b61d438439
+
+	/// Semantic colour for favourable changes; matches the theme's 'good' colour.
+	measure 'Colour Good' = "#2E9E6B"
+		isHidden
+		displayFolder: Formatting
+		lineageTag: 0cd0c551-e769-5a0d-ad7e-c75e39be19c1
+
+	/// Semantic colour for unfavourable changes; matches the theme's 'bad' colour.
+	measure 'Colour Bad' = "#D6493A"
+		isHidden
+		displayFolder: Formatting
+		lineageTag: 03beb3f0-1632-5526-b72e-8a6d6995d372
+
+	/// Semantic colour for no change or no comparison; matches the theme's secondary text colour.
+	measure 'Colour Neutral' = "#4A5568"
+		isHidden
+		displayFolder: Formatting
+		lineageTag: 588872ad-7328-503a-88e1-d3ad46bc2c8c
+
+	/// More reports isn't necessarily bad (it can reflect a healthy reporting culture), so the issue count trend is shown in a neutral colour.
+	measure 'Issues Trend Colour' = [Colour Neutral]
+		isHidden
+		displayFolder: Formatting
+		lineageTag: 986c9eb0-c16e-5934-b2c4-3802bdaeaf08
+
+	measure 'Serious Trend Colour' =
+			VAR Cur = [Serious Issues]
+			VAR Prev = [Serious Issues PP]
+			RETURN
+			    SWITCH (
+			        TRUE (),
+			        ISBLANK ( Prev ) || Prev = 0 || Cur = Prev, [Colour Neutral],
+			        Cur > Prev, [Colour Bad],
+			        [Colour Good]
+			    )
+		isHidden
+		displayFolder: Formatting
+		lineageTag: c182c871-ba03-579c-87b8-14fed0fbb195
+
+	measure 'Injury Trend Colour' =
+			VAR Cur = [Injury Reports]
+			VAR Prev = [Injury Reports PP]
+			RETURN
+			    SWITCH (
+			        TRUE (),
+			        ISBLANK ( Prev ) || Prev = 0 || Cur = Prev, [Colour Neutral],
+			        Cur > Prev, [Colour Bad],
+			        [Colour Good]
+			    )
+		isHidden
+		displayFolder: Formatting
+		lineageTag: 95589c5b-e282-59d4-94bf-2005e72a12f5
+
+	measure 'Days To Close Trend Colour' =
+			VAR Cur = [Average Days To Close]
+			VAR Prev = [Average Days To Close PP]
+			RETURN
+			    SWITCH (
+			        TRUE (),
+			        ISBLANK ( Prev ) || Prev = 0 || Cur = Prev, [Colour Neutral],
+			        Cur > Prev, [Colour Bad],
+			        [Colour Good]
+			    )
+		isHidden
+		displayFolder: Formatting
+		lineageTag: 0ca16fa7-b13c-548d-bd56-b50cf618c448
+
+	/// Colour for a severity code (Critical, High, Medium, Low, not set); severities are a fixed list in Work Wallet.
+	measure 'Severity Colour' =
+			SWITCH (
+			    SELECTEDVALUE ( 'Severity'[ReportedIssueSeverityCode] ),
+			    8, "#D6493A",
+			    4, "#E07B39",
+			    2, "#ECB232",
+			    1, "#2E9E6B",
+			    "#A7B4C2"
+			)
+		isHidden
+		displayFolder: Formatting
+		lineageTag: cf2e5565-6715-5812-98d3-2fa7a8de1de0
+
+	/// Text colour for a status code (Reported, Under Investigation, Closed); statuses are a fixed list in Work Wallet.
+	measure 'Status Colour' =
+			SWITCH (
+			    SELECTEDVALUE ( 'Status'[ReportedIssueStatusCode] ),
+			    2, "#C9901A",
+			    3, "#2F6F8F",
+			    4, "#2E9E6B",
+			    6, "#2E9E6B",
+			    "#4A5568"
+			)
+		isHidden
+		displayFolder: Formatting
+		lineageTag: 348be001-8885-515a-a8e0-30b53bdcaa5a
+
+	/// Severity colour for the selected issue (Issue details tiles), read from the issue's own row.
+	measure 'Issue Severity Colour' =
+			IF (
+			    HASONEVALUE ( 'Issue'[ReportedIssue_key] ),
+			    SWITCH (
+			        MAXX ( 'Issue', RELATED ( 'Severity'[ReportedIssueSeverityCode] ) ),
+			        8, "#D6493A",
+			        4, "#E07B39",
+			        2, "#ECB232",
+			        1, "#2E9E6B",
+			        "#A7B4C2"
+			    )
+			)
+		isHidden
+		displayFolder: Formatting
+		lineageTag: ca5ac7db-a1b4-5e60-a952-433440b62709
+
+	/// Status colour for the selected issue (Issue details tiles), read from the issue's own row.
+	measure 'Issue Status Colour' =
+			IF (
+			    HASONEVALUE ( 'Issue'[ReportedIssue_key] ),
+			    SWITCH (
+			        MAXX ( 'Issue', RELATED ( 'Status'[ReportedIssueStatusCode] ) ),
+			        2, "#C9901A",
+			        3, "#2F6F8F",
+			        4, "#2E9E6B",
+			        6, "#2E9E6B",
+			        "#4A5568"
+			    )
+			)
+		isHidden
+		displayFolder: Formatting
+		lineageTag: a2de4b47-c000-5f04-9231-7133b0dfd002
+
+	/// Work Wallet link for the selected issue, for the 'Open in Work Wallet' button on its details page.
+	measure 'Issue Link' = SELECTEDVALUE ( Issue[Url] )
+		isHidden
+		displayFolder: Links
+		lineageTag: 9e8055fa-e43c-57c2-b310-c6d7ca5240fc
+
+	column Value
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 65c6ae15-bf2a-5e13-ac54-1d21382d7598
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Value]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Issue Measures' = calculated
+		mode: import
+		source = { 1 }
+
+	annotation PBI_Id = 30d1ab00287b5efea5955aebf7d4be6b
+

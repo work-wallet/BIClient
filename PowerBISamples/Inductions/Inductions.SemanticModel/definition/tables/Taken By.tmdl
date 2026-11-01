@@ -131,6 +131,135 @@ table 'Taken By'
 
 		annotation SummarizationSetBy = User
 
+	/// Date part of Taken On; relates inductions taken to the Date table.
+	column 'Taken Date' = DATE ( YEAR ( 'Taken By'[Taken On] ), MONTH ( 'Taken By'[Taken On] ), DAY ( 'Taken By'[Taken On] ) )
+		dataType: dateTime
+		isHidden
+		formatString: dd/mm/yyyy
+		lineageTag: 596d2e13-c0ad-58b4-8677-807d0b2e838d
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Induction name (all versions), used to find each person's latest attempt.
+	column 'Induction Name' = RELATED ( Induction[Induction] )
+		dataType: string
+		isHidden
+		lineageTag: 241cbfe6-4f6d-52b0-b97a-fcce47d84e3d
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Passed or completed (including the 'expiring soon' and 'expired' statuses, which are passes whose validity is running or has run out).
+	column 'Is Successful' = RELATED ( 'Taken Status'[InductionTakenStatusCode] ) IN { 1, 2, 4, 5, 6 }
+		dataType: boolean
+		lineageTag: 29410cfc-b70c-5287-9b1d-1d05ee9e9197
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	/// For a successful attempt: the date the induction expires (taken date plus the induction's 'valid for' days).
+	column 'Valid Until' = IF ( 'Taken By'[Is Successful], DATE ( YEAR ( 'Taken By'[Taken On] ), MONTH ( 'Taken By'[Taken On] ), DAY ( 'Taken By'[Taken On] ) ) + RELATED ( Induction[Valid For Days] ) )
+		dataType: dateTime
+		formatString: dd/mm/yyyy
+		lineageTag: 67c8fd6a-e299-5f6f-b32e-46be5561f9c0
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Whether this is the person's latest attempt at the induction (any version, by taken date), ignoring deleted attempts, as Work Wallet does.
+	column 'Is Latest Attempt' =
+			VAR Person = 'Taken By'[ContactId]
+			VAR InductionName = 'Taken By'[Induction Name]
+			VAR DeletedKeys = CALCULATETABLE ( VALUES ( 'Taken Status'[InductionTakenStatus_key] ), 'Taken Status'[InductionTakenStatusCode] = 9, REMOVEFILTERS () )
+			VAR Latest =
+			    MAXX (
+			        FILTER (
+			            'Taken By',
+			            'Taken By'[ContactId] = Person && 'Taken By'[Induction Name] = InductionName
+			                && NOT 'Taken By'[InductionTakenStatus_key] IN DeletedKeys
+			        ),
+			        'Taken By'[Taken On]
+			    )
+			RETURN
+			    'Taken By'[Taken On] = Latest && RELATED ( 'Taken Status'[InductionTakenStatusCode] ) <> 9
+		dataType: boolean
+		lineageTag: aefce27e-af91-5a03-b6ba-09e6cba2ddbd
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Days until a successful attempt expires (negative once expired), as at the last data refresh.
+	column 'Days Until Expiry' = IF ( NOT ISBLANK ( 'Taken By'[Valid Until] ), INT ( 'Taken By'[Valid Until] - TODAY () ) )
+		dataType: int64
+		formatString: #,0
+		lineageTag: be2ffb16-dec1-5190-bb26-44b06aae8b67
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Sort order for Current Status.
+	column 'Induction Status Order' =
+			IF (
+			    'Taken By'[Is Latest Attempt],
+			    SWITCH (
+			        TRUE (),
+			        RELATED ( 'Taken Status'[InductionTakenStatusCode] ) = 7, 5,
+			        NOT 'Taken By'[Is Successful], 4,
+			        'Taken By'[Days Until Expiry] < 0, 3,
+			        'Taken By'[Days Until Expiry] <= 30, 2,
+			        1
+			    )
+			)
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 9881f681-cfc3-5f61-b2a5-f3d6e8161eb6
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	/// For a person's latest attempt at an induction: valid, expiring within 30 days, expired (valid until is before today), not passed (failed or rejected), or invalid (a later version of the induction invalidated earlier attempts). Only passed or completed attempts count as currently inducted. As at the last data refresh.
+	column 'Current Status' =
+			SWITCH (
+			    'Taken By'[Induction Status Order],
+			    1, "Valid",
+			    2, "Expires within 30 days",
+			    3, "Expired",
+			    4, "Not passed",
+			    5, "Invalid (newer version)"
+			)
+		dataType: string
+		lineageTag: d9bd0633-82fc-5040-b30a-8aaae0a4ac77
+		summarizeBy: none
+		sortByColumn: 'Induction Status Order'
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Share of test questions answered correctly (blank for inductions without a test).
+	column 'Test Score' =
+			VAR Questions = RELATED ( Induction[Test Question Count] )
+			RETURN
+			    IF ( Questions > 0, DIVIDE ( 'Taken By'[Correct Test Question Count], Questions ) )
+		dataType: double
+		formatString: 0%
+		lineageTag: 5c9bd010-90e3-5d46-8083-19d19632f8d2
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Opens this attempt's review page in Work Wallet (in the user's selected wallet). Blank for deleted attempts or inductions.
+	column Url =
+			VAR UrlPath = IF ( RELATED ( 'Taken Status'[InductionTakenStatusCode] ) <> 9 && RELATED ( 'Induction Status'[InductionStatusCode] ) <> 3, "/Users/Inductions/Detail/" & LOWER ( RELATED ( Induction[InductionId] ) ) & "/ReviewInduction/" & LOWER ( 'Taken By'[InductionTakenId] ) )
+			RETURN
+			    IF ( NOT ISBLANK ( UrlPath ), "https://portal.work-wallet.com" & UrlPath )
+		dataType: string
+		lineageTag: eb0687b1-32fa-519d-a239-c6ab4e4b8d4e
+		dataCategory: WebUrl
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
 	partition 'Taken By' = m
 		mode: import
 		source =

@@ -1,0 +1,499 @@
+table 'Permit Measures'
+	lineageTag: 2b19f96c-e9fc-5be1-8b06-c5067179dedc
+
+	/// Permits (issued in the period, by issue date).
+	measure Permits = COUNTROWS ( Permit )
+		formatString: #,0
+		displayFolder: Permits
+		lineageTag: 3d3d412b-9950-575d-aeec-d9ff9a756a70
+
+	/// Permits active or extended now, whenever they were issued (as at the last data refresh).
+	measure 'Live Permits' = CALCULATE ( [Permits], KEEPFILTERS ( Permit[Outcome Order] = 1 ), REMOVEFILTERS ( 'Date' ) ) + 0
+		formatString: #,0
+		displayFolder: Permits
+		lineageTag: 4ac3cef3-f5b0-5457-90d6-5d9f1b9e43ce
+
+	/// Permits closed out on or before their expiry.
+	measure 'Closed Before Expiry' = CALCULATE ( [Permits], KEEPFILTERS ( Permit[Outcome Order] = 2 ) )
+		formatString: #,0
+		displayFolder: Close-out
+		lineageTag: 6e368c50-e32b-5004-96cc-1a261ce13280
+
+	/// Time-limited (Timelapse) permits that ended at their expiry, as designed.
+	measure 'Ended At Expiry' = CALCULATE ( [Permits], KEEPFILTERS ( Permit[Outcome Order] = 3 ) )
+		formatString: #,0
+		displayFolder: Close-out
+		lineageTag: 66267ec1-ee28-54c2-b261-ff3764038d08
+
+	/// Close-out-required permits closed out after their expiry: work may have continued without a valid permit.
+	measure 'Closed After Expiry' = CALCULATE ( [Permits], KEEPFILTERS ( Permit[Outcome Order] = 4 ) )
+		formatString: #,0
+		displayFolder: Close-out
+		lineageTag: 570d63a3-9eff-5bdd-ba43-d8bf4959530e
+
+	/// Close-out-required permits that expired without being closed out: the area may not have been made safe or handed back.
+	measure 'Expired Not Closed' = CALCULATE ( [Permits], KEEPFILTERS ( Permit[Outcome Order] = 5 ) )
+		formatString: #,0
+		displayFolder: Close-out
+		lineageTag: e907ab26-7871-5c42-9533-f42c84d0c556
+
+	/// Permits closed out before expiry, or time-limited permits that ended at expiry.
+	measure 'Ended On Time' = [Closed Before Expiry] + [Ended At Expiry]
+		formatString: #,0
+		displayFolder: Close-out
+		lineageTag: 7c819141-dfe0-597b-99ec-6aa3fef59ab1
+
+	/// Permits that have ended (closed out or expired).
+	measure 'Finished Permits' = [Ended On Time] + [Closed After Expiry] + [Expired Not Closed]
+		formatString: #,0
+		displayFolder: Close-out
+		lineageTag: ba1f8fbf-28e5-57e3-b900-240b6861489a
+
+	/// Share of ended permits that ended correctly: closed out before expiry, or time-limited permits ending at expiry.
+	measure 'Close-out Rate' = DIVIDE ( [Ended On Time], [Finished Permits] )
+		formatString: 0%
+		displayFolder: Close-out
+		lineageTag: 9e446aff-c08f-51c2-80c6-3c9d50c0062f
+
+	/// Permits that were extended.
+	measure 'Extended Permits' = CALCULATE ( [Permits], KEEPFILTERS ( Permit[Has Been Extended] = TRUE () ) )
+		formatString: #,0
+		displayFolder: Permits
+		lineageTag: 6d593996-2f25-5b53-bac1-78e78c828951
+
+	/// Average hours from issue to close-out, for closed permits.
+	measure 'Average Hours Open' = AVERAGE ( Permit[Hours Open] )
+		formatString: #,0.0
+		displayFolder: Close-out
+		lineageTag: fc5ccab8-7ddc-52e5-ad87-020fbbb2f7e8
+
+	/// Distinct companies permits were issued to.
+	measure 'Companies Issued To' = CALCULATE ( DISTINCTCOUNT ( Permit[Issued To Company] ), KEEPFILTERS ( LEN ( Permit[Issued To Company] ) > 0 ) )
+		formatString: #,0
+		displayFolder: Permits
+		lineageTag: 08f5694a-2f20-5bf0-9bb1-fb51b393acea
+
+	/// Distinct sites with permits.
+	measure Sites = CALCULATE ( DISTINCTCOUNT ( Location[Site] ), Permit )
+		formatString: #,0
+		displayFolder: Permits
+		lineageTag: 56980447-dd54-56ef-92fc-efb38409f827
+
+	/// Average permits issued per month, over months in context with at least one.
+	measure 'Monthly Average Permits' = AVERAGEX ( VALUES ( 'Date'[Month Start] ), [Permits] )
+		formatString: #,0
+		displayFolder: Permits
+		lineageTag: d345768f-d4ae-58c5-a797-2f9301a3e154
+
+	/// Monthly average over the selected period, for a reference line on monthly charts.
+	measure 'Monthly Average Line' = IF ( MIN ( 'Date'[Date] ) <= TODAY (), CALCULATE ( [Monthly Average Permits], ALLSELECTED ( 'Date' ) ) )
+		formatString: #,0
+		displayFolder: Permits
+		lineageTag: ed58e339-5490-5584-8e06-94fd87190497
+
+	/// Permit category with the most permits; ties are reported.
+	measure 'Most Common Category' =
+			VAR Items = FILTER ( ADDCOLUMNS ( VALUES ( Category[Category] ), "@Value", [Permits] ), NOT ISBLANK ( [@Value] ) )
+			VAR Target = MAXX ( Items, [@Value] )
+			VAR Leaders = FILTER ( Items, [@Value] = Target )
+			VAR LeaderCount = COUNTROWS ( Leaders )
+			VAR FirstLeader = MINX ( Leaders, Category[Category] )
+			RETURN
+			    IF ( LeaderCount > 1, FirstLeader & " (+" & ( LeaderCount - 1 ) & " tied)", FirstLeader )
+		displayFolder: Permits
+		lineageTag: 74b03c45-724c-539c-be59-b25f398414b7
+
+	/// Category with the most permits that expired without close-out; ties are reported.
+	measure 'Most Expired Category' =
+			VAR Items = FILTER ( ADDCOLUMNS ( VALUES ( Category[Category] ), "@Value", [Expired Not Closed] ), NOT ISBLANK ( [@Value] ) )
+			VAR Target = MAXX ( Items, [@Value] )
+			VAR Leaders = FILTER ( Items, [@Value] = Target )
+			VAR LeaderCount = COUNTROWS ( Leaders )
+			VAR FirstLeader = MINX ( Leaders, Category[Category] )
+			RETURN
+			    IF ( LeaderCount > 1, FirstLeader & " (+" & ( LeaderCount - 1 ) & " tied)", FirstLeader )
+		displayFolder: Close-out
+		lineageTag: edbb0da0-d26c-541b-8df8-d9df8dd3e033
+
+	/// Signatures recorded on permits.
+	measure Signatures = COUNTROWS ( 'Signature Fact' )
+		formatString: #,0
+		displayFolder: Permits
+		lineageTag: f22efefd-a207-57a4-824d-27aebe1b697f
+
+	/// People assigned to permits.
+	measure Assignees = COUNTROWS ( 'Assignee Fact' )
+		formatString: #,0
+		displayFolder: Permits
+		lineageTag: 56831422-36e7-55d2-b6b3-8d2e02f5e986
+
+	/// Permits for the same-length period immediately before the selected dates.
+	measure 'Permits PP' =
+			VAR FirstDay = MIN ( 'Date'[Date] )
+			VAR LastDay = MIN ( MAX ( 'Date'[Date] ), TODAY () )
+			VAR Days = LastDay - FirstDay + 1
+			RETURN
+			    CALCULATE ( [Permits], DATESBETWEEN ( 'Date'[Date], FirstDay - Days, FirstDay - 1 ) )
+		formatString: #,0
+		isHidden
+		displayFolder: Previous Period
+		lineageTag: e293f442-4a2e-5c46-bfe3-35fa6ddf271c
+
+	/// Close-out Rate for the same-length period immediately before the selected dates.
+	measure 'Close-out Rate PP' =
+			VAR FirstDay = MIN ( 'Date'[Date] )
+			VAR LastDay = MIN ( MAX ( 'Date'[Date] ), TODAY () )
+			VAR Days = LastDay - FirstDay + 1
+			RETURN
+			    CALCULATE ( [Close-out Rate], DATESBETWEEN ( 'Date'[Date], FirstDay - Days, FirstDay - 1 ) )
+		formatString: 0%
+		isHidden
+		displayFolder: Previous Period
+		lineageTag: 367b75e2-8275-52e6-9aac-ac75960af1ff
+
+	/// Expired Not Closed for the same-length period immediately before the selected dates.
+	measure 'Expired Not Closed PP' =
+			VAR FirstDay = MIN ( 'Date'[Date] )
+			VAR LastDay = MIN ( MAX ( 'Date'[Date] ), TODAY () )
+			VAR Days = LastDay - FirstDay + 1
+			RETURN
+			    CALCULATE ( [Expired Not Closed], DATESBETWEEN ( 'Date'[Date], FirstDay - Days, FirstDay - 1 ) )
+		formatString: #,0
+		isHidden
+		displayFolder: Previous Period
+		lineageTag: 3b534a89-2c28-5006-b0d3-ea6116c95773
+
+	/// Closed After Expiry for the same-length period immediately before the selected dates.
+	measure 'Closed After Expiry PP' =
+			VAR FirstDay = MIN ( 'Date'[Date] )
+			VAR LastDay = MIN ( MAX ( 'Date'[Date] ), TODAY () )
+			VAR Days = LastDay - FirstDay + 1
+			RETURN
+			    CALCULATE ( [Closed After Expiry], DATESBETWEEN ( 'Date'[Date], FirstDay - Days, FirstDay - 1 ) )
+		formatString: #,0
+		isHidden
+		displayFolder: Previous Period
+		lineageTag: e50f0171-a571-51a0-a5e3-fa7b4c421f15
+
+	/// Average Hours Open for the same-length period immediately before the selected dates.
+	measure 'Average Hours Open PP' =
+			VAR FirstDay = MIN ( 'Date'[Date] )
+			VAR LastDay = MIN ( MAX ( 'Date'[Date] ), TODAY () )
+			VAR Days = LastDay - FirstDay + 1
+			RETURN
+			    CALCULATE ( [Average Hours Open], DATESBETWEEN ( 'Date'[Date], FirstDay - Days, FirstDay - 1 ) )
+		formatString: #,0.0
+		isHidden
+		displayFolder: Previous Period
+		lineageTag: ad501897-5cc9-5b54-a029-d57f0c5b4141
+
+	measure 'Permits Trend Label' =
+			VAR Cur = [Permits]
+			VAR Prev = [Permits PP]
+			VAR Change = DIVIDE ( Cur - Prev, Prev )
+			RETURN
+			    IF (
+			        ISBLANK ( Prev ) || Prev = 0,
+			        "No earlier period to compare",
+			        IF ( Change >= 0, "▲ ", "▼ " ) & FORMAT ( ABS ( Change ), "0%" ) & " vs previous period"
+			    )
+		isHidden
+		displayFolder: Labels
+		lineageTag: d1526e52-4c75-53ff-a8e5-8aade5ce2b44
+
+	measure 'Close-out Trend Label' =
+			VAR Cur = [Close-out Rate]
+			VAR Prev = [Close-out Rate PP]
+			RETURN
+			    IF (
+			        ISBLANK ( Prev ) || ISBLANK ( Cur ),
+			        "No earlier period to compare",
+			        IF ( Cur >= Prev, "▲ ", "▼ " ) & FORMAT ( ABS ( Cur - Prev ) * 100, "0.0" ) & " pts vs previous period"
+			    )
+		isHidden
+		displayFolder: Labels
+		lineageTag: a730ffbc-899b-57d5-a979-1df8283424b0
+
+	measure 'Expired Trend Label' =
+			VAR Cur = [Expired Not Closed]
+			VAR Prev = [Expired Not Closed PP]
+			VAR Change = DIVIDE ( Cur - Prev, Prev )
+			RETURN
+			    IF (
+			        ISBLANK ( Prev ) || Prev = 0,
+			        "No earlier period to compare",
+			        IF ( Change >= 0, "▲ ", "▼ " ) & FORMAT ( ABS ( Change ), "0%" ) & " vs previous period"
+			    )
+		isHidden
+		displayFolder: Labels
+		lineageTag: f8d71960-ce4f-5801-9fac-94bb2c5284a3
+
+	measure 'Closed Late Trend Label' =
+			VAR Cur = [Closed After Expiry]
+			VAR Prev = [Closed After Expiry PP]
+			VAR Change = DIVIDE ( Cur - Prev, Prev )
+			RETURN
+			    IF (
+			        ISBLANK ( Prev ) || Prev = 0,
+			        "No earlier period to compare",
+			        IF ( Change >= 0, "▲ ", "▼ " ) & FORMAT ( ABS ( Change ), "0%" ) & " vs previous period"
+			    )
+		isHidden
+		displayFolder: Labels
+		lineageTag: d535ad31-8e52-541b-b578-2717c46aedb7
+
+	measure 'Hours Open Trend Label' =
+			VAR Cur = [Average Hours Open]
+			VAR Prev = [Average Hours Open PP]
+			VAR Change = DIVIDE ( Cur - Prev, Prev )
+			RETURN
+			    IF (
+			        ISBLANK ( Prev ) || Prev = 0,
+			        "No earlier period to compare",
+			        IF ( Change >= 0, "▲ ", "▼ " ) & FORMAT ( ABS ( Change ), "0%" ) & " vs previous period"
+			    )
+		isHidden
+		displayFolder: Labels
+		lineageTag: 77d82f56-67f6-5b4a-9ae8-774e0f2a8d55
+
+	measure 'Live Label' = "Active or extended now"
+		isHidden
+		displayFolder: Labels
+		lineageTag: eae080dd-8237-56d0-b6f8-bac3dc945b97
+
+	measure 'Signatures Label' = "Recorded on these permits"
+		isHidden
+		displayFolder: Labels
+		lineageTag: 75e10ff3-e8dd-5a40-b81b-4ff71caba8ca
+
+	measure 'Close-out Label' =
+			VAR Finished = [Finished Permits]
+			RETURN
+			    IF ( Finished > 0, FORMAT ( [Ended On Time] + 0, "#,0" ) & " of " & FORMAT ( Finished, "#,0" ) & " ended permits" )
+		isHidden
+		displayFolder: Labels
+		lineageTag: 80390b1e-b16f-5ce6-a45e-695b1a2769cb
+
+	measure 'Expired Label' =
+			VAR Finished = [Finished Permits]
+			RETURN
+			    IF ( Finished > 0, FORMAT ( DIVIDE ( [Expired Not Closed] + 0, Finished ), "0%" ) & " of ended permits" )
+		isHidden
+		displayFolder: Labels
+		lineageTag: 41b32b65-1e1f-5bd5-a5e7-bc2130a64df4
+
+	measure 'Closed Late Label' =
+			VAR Finished = [Finished Permits]
+			RETURN
+			    IF ( Finished > 0, FORMAT ( DIVIDE ( [Closed After Expiry] + 0, Finished ), "0%" ) & " of ended permits" )
+		isHidden
+		displayFolder: Labels
+		lineageTag: 8b44f118-313c-5c7d-a143-c3da9fa67c5f
+
+	measure 'Peak Month Label' =
+			VAR Months = ADDCOLUMNS ( VALUES ( 'Date'[Month Start] ), "@Permits", [Permits] )
+			VAR Peak = MAXX ( Months, [@Permits] )
+			VAR PeakMonth = MAXX ( FILTER ( Months, [@Permits] = Peak ), 'Date'[Month Start] )
+			RETURN
+			    IF ( NOT ISBLANK ( Peak ), "Peak " & FORMAT ( Peak, "#,0" ) & " in " & FORMAT ( PeakMonth, "mmm yyyy" ) )
+		isHidden
+		displayFolder: Labels
+		lineageTag: 118f6b77-25ae-5669-aea4-bde6d850aa49
+
+	measure 'Most Common Category Text' =
+			VAR LabelText = [Most Common Category]
+			RETURN
+			    SWITCH (
+			        TRUE (),
+			        ISBLANK ( LabelText ), "None in this period",
+			        LEN ( LabelText ) > 32, LEFT ( LabelText, 31 ) & "…",
+			        LabelText
+			    )
+		isHidden
+		displayFolder: Labels
+		lineageTag: 2c13f7ba-4851-5a53-b3b4-53151664e875
+
+	measure 'Most Common Category Label' =
+			VAR PermitCount = [Permits]
+			VAR Items = ADDCOLUMNS ( VALUES ( Category[Category] ), "@Permits", [Permits] )
+			RETURN
+			    IF ( PermitCount > 0, FORMAT ( DIVIDE ( MAXX ( Items, [@Permits] ), PermitCount ), "0%" ) & " of permits" )
+		isHidden
+		displayFolder: Labels
+		lineageTag: de1f1c5f-4bd9-53bc-a7c0-02a3ed515edb
+
+	measure 'Most Expired Category Text' =
+			VAR LabelText = [Most Expired Category]
+			RETURN
+			    SWITCH (
+			        TRUE (),
+			        ISBLANK ( LabelText ), "None expired without close-out",
+			        LEN ( LabelText ) > 32, LEFT ( LabelText, 31 ) & "…",
+			        LabelText
+			    )
+		isHidden
+		displayFolder: Labels
+		lineageTag: 8c8be28a-06ec-5563-9b55-a800106da6c3
+
+	measure 'Most Expired Category Label' =
+			VAR Items = ADDCOLUMNS ( VALUES ( Category[Category] ), "@Expired", [Expired Not Closed] )
+			VAR Highest = MAXX ( Items, [@Expired] )
+			RETURN
+			    IF ( Highest > 0, FORMAT ( Highest, "#,0" ) & " expired without close-out" )
+		isHidden
+		displayFolder: Labels
+		lineageTag: 82d66daa-c445-52ef-aa9c-0cc7e05cddb4
+
+	measure 'Companies Label' =
+			VAR SiteCount = [Sites] + 0
+			RETURN
+			    IF ( NOT ISBLANK ( [Permits] ), "At " & FORMAT ( SiteCount, "#,0" ) & IF ( SiteCount = 1, " site", " sites" ) )
+		isHidden
+		displayFolder: Labels
+		lineageTag: 3398f1ec-91c1-52b3-ba6d-a47291bfb4e2
+
+	/// Text for the Permits list drillthrough button.
+	measure 'Permit Details Button Label' = IF ( HASONEVALUE ( Permit[Url] ), "View " & SELECTEDVALUE ( Permit[Permit Reference] ) & " details  ›", "Select a permit to view details" )
+		isHidden
+		displayFolder: Labels
+		lineageTag: 40facf91-03d2-519c-a4ce-b816bbff65b8
+
+	/// Category of the selected permit. Read from the permit's own row.
+	measure 'Permit Category' = IF ( HASONEVALUE ( Permit[Permit_key] ), MAXX ( Permit, RELATED ( Category[Category] ) ) )
+		isHidden
+		displayFolder: Labels
+		lineageTag: a3e668fe-9e9f-59f8-8fc4-f0fc41287e33
+
+	/// Status of the selected permit. Read from the permit's own row.
+	measure 'Permit Status' = IF ( HASONEVALUE ( Permit[Permit_key] ), MAXX ( Permit, RELATED ( 'Status'[Status] ) ) )
+		isHidden
+		displayFolder: Labels
+		lineageTag: be47017f-8bdb-529d-8d3c-2640c71aa76d
+
+	/// Location of the selected permit. Read from the permit's own row.
+	measure 'Permit Location' = IF ( HASONEVALUE ( Permit[Permit_key] ), MAXX ( Permit, RELATED ( Location[Location] ) ) )
+		isHidden
+		displayFolder: Labels
+		lineageTag: 029acaa8-e840-548d-a179-8e2a63b7dd36
+
+	/// Company (or people) the selected permit was issued to.
+	measure 'Permit Issued To' =
+			IF (
+			    HASONEVALUE ( Permit[Permit_key] ),
+			    VAR Company = MAX ( Permit[Issued To Company] )
+			    VAR People = MAX ( Permit[Assignees] )
+			    RETURN
+			        IF ( LEN ( Company ) > 0, Company, IF ( LEN ( People ) > 0, People, "Not recorded" ) )
+			)
+		isHidden
+		displayFolder: Labels
+		lineageTag: 7c8ab570-487b-5f99-9e02-aee608bfb937
+
+	/// Semantic colour for favourable changes; matches the theme's 'good' colour.
+	measure 'Colour Good' = "#2E9E6B"
+		isHidden
+		displayFolder: Formatting
+		lineageTag: 439ab2c0-eb4f-5110-8ee2-66a6f2130ab5
+
+	/// Semantic colour for unfavourable changes; matches the theme's 'bad' colour.
+	measure 'Colour Bad' = "#D6493A"
+		isHidden
+		displayFolder: Formatting
+		lineageTag: 31a75e51-1eac-5002-8809-abb9cceef8e7
+
+	/// Semantic colour for no change or no comparison; matches the theme's secondary text colour.
+	measure 'Colour Neutral' = "#4A5568"
+		isHidden
+		displayFolder: Formatting
+		lineageTag: 6434fca9-9e56-5add-af9b-e93f9916a7e6
+
+	measure 'Permits Trend Colour' = [Colour Neutral]
+		isHidden
+		displayFolder: Formatting
+		lineageTag: a5f8451c-a092-5cbb-a8b6-424486467c7a
+
+	measure 'Close-out Trend Colour' =
+			VAR Cur = [Close-out Rate]
+			VAR Prev = [Close-out Rate PP]
+			RETURN
+			    SWITCH (
+			        TRUE (),
+			        ISBLANK ( Prev ) || ISBLANK ( Cur ) || Cur = Prev, [Colour Neutral],
+			        Cur > Prev, [Colour Good],
+			        [Colour Bad]
+			    )
+		isHidden
+		displayFolder: Formatting
+		lineageTag: 45ee9602-e334-5b57-8d21-b3b98f962c1e
+
+	measure 'Expired Trend Colour' =
+			VAR Cur = [Expired Not Closed]
+			VAR Prev = [Expired Not Closed PP]
+			RETURN
+			    SWITCH (
+			        TRUE (),
+			        ISBLANK ( Prev ) || Prev = 0 || Cur = Prev, [Colour Neutral],
+			        Cur > Prev, [Colour Bad],
+			        [Colour Good]
+			    )
+		isHidden
+		displayFolder: Formatting
+		lineageTag: 3dff9521-0b1d-53ae-8dea-b5f34dd7baa8
+
+	measure 'Closed Late Trend Colour' =
+			VAR Cur = [Closed After Expiry]
+			VAR Prev = [Closed After Expiry PP]
+			RETURN
+			    SWITCH (
+			        TRUE (),
+			        ISBLANK ( Prev ) || Prev = 0 || Cur = Prev, [Colour Neutral],
+			        Cur > Prev, [Colour Bad],
+			        [Colour Good]
+			    )
+		isHidden
+		displayFolder: Formatting
+		lineageTag: 5296d40a-3205-56ba-a47a-61ecfcb85969
+
+	measure 'Hours Open Trend Colour' = [Colour Neutral]
+		isHidden
+		displayFolder: Formatting
+		lineageTag: 647c9776-8051-5995-8659-57ccd9554ff2
+
+	/// Text colour for an outcome: live (blue), ended on time (green), closed after expiry (amber), expired not closed (red).
+	measure 'Outcome Colour' = SWITCH ( SELECTEDVALUE ( Permit[Outcome Order] ), 1, "#2F6F8F", 2, "#2E9E6B", 3, "#2E9E6B", 4, "#C9901A", 5, "#D6493A", "#4A5568" )
+		isHidden
+		displayFolder: Formatting
+		lineageTag: a001c07c-2df8-566f-87fb-917de46a2f8e
+
+	/// Text colour for a permit status code (active or extended, closed, expired); statuses are a fixed list in Work Wallet.
+	measure 'Status Colour' =
+			VAR Code = SELECTEDVALUE ( 'Status'[PermitStatusCode] )
+			RETURN
+			    SWITCH ( TRUE (), Code IN { 3, 8 }, "#2F6F8F", Code = 5, "#2E9E6B", Code = 4, "#D6493A", "#4A5568" )
+		isHidden
+		displayFolder: Formatting
+		lineageTag: bff17611-544f-5720-b488-055dc00578a3
+
+	/// Work Wallet link for the selected permit, for the 'Open in Work Wallet' button on its details page.
+	measure 'Permit Link' = SELECTEDVALUE ( Permit[Url] )
+		isHidden
+		displayFolder: Links
+		lineageTag: cb9ca11a-ef42-5f38-be86-fab2fd47d6db
+
+	column Value
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 18361b1a-33b0-53bd-befc-4f9dd8d51125
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Value]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Permit Measures' = calculated
+		mode: import
+		source = { 1 }
+
+	annotation PBI_Id = 60288f6713db534e9d530494c6754603
+

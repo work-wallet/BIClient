@@ -94,7 +94,7 @@ table 'Signature Fact'
 
 	column 'Signed On'
 		dataType: dateTime
-		formatString: General Date
+		formatString: dd/mm/yyyy hh:nn
 		lineageTag: 6a2208ac-782b-43d1-93ac-1eecfe3597b7
 		summarizeBy: none
 		sourceColumn: Signed On

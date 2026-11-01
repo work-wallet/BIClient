@@ -30,9 +30,19 @@ table Severity
 		lineageTag: ab31c865-e070-42bd-be8c-d54b22d5f0a2
 		summarizeBy: none
 		sourceColumn: Severity
-		sortByColumn: ReportedIssueSeverityCode
+		sortByColumn: 'Severity Order'
 
 		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Sort order for Severity: Low to Critical, then not set.
+	column 'Severity Order' = SWITCH ( 'Severity'[ReportedIssueSeverityCode], 1, 1, 2, 2, 4, 3, 8, 4, 99 )
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: e51ede23-04e2-5c4e-9293-74339dc3a649
+		summarizeBy: none
 
 		annotation SummarizationSetBy = Automatic
 

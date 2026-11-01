@@ -1,0 +1,79 @@
+table Date
+	lineageTag: 9f926b70-3c67-50df-bdf9-e93c77dee92a
+	dataCategory: Time
+
+	column Date
+		dataType: dateTime
+		isKey
+		formatString: dd/mm/yyyy
+		lineageTag: 01c79565-4bbb-5846-a85c-7b0a53a3c865
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Date]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Year = YEAR ( 'Date'[Date] )
+		dataType: int64
+		formatString: 0
+		lineageTag: 4bb9ecc4-66f5-5543-b462-5bd236391447
+		dataCategory: Years
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Month Number' = MONTH ( 'Date'[Date] )
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 6c9086b9-f56a-5a79-aa8b-663e4f4df9dc
+		dataCategory: MonthOfYear
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column Month = FORMAT ( 'Date'[Date], "mmm" )
+		dataType: string
+		lineageTag: 3711948d-0ed1-5d71-bb9a-aecac54014af
+		dataCategory: Months
+		summarizeBy: none
+		sortByColumn: 'Month Number'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Month Start' = DATE ( YEAR ( 'Date'[Date] ), MONTH ( 'Date'[Date] ), 1 )
+		dataType: dateTime
+		formatString: mmm yyyy
+		lineageTag: f54ce636-fb5c-5e54-a549-90f6873a8061
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Year Month' = FORMAT ( 'Date'[Date], "mmm yyyy" )
+		dataType: string
+		lineageTag: eeaa95e9-e586-596d-adfc-8d6e1bcd52ef
+		summarizeBy: none
+		sortByColumn: 'Month Start'
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Date for relative date slicers: future dates count as today, so 'Last N months' also includes upcoming records.
+	column 'Slicer Date' = MIN ( 'Date'[Date], TODAY () )
+		dataType: dateTime
+		formatString: dd/mm/yyyy
+		lineageTag: afd0a8c4-27d7-542f-8739-e32153ca00fe
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Date = calculated
+		mode: import
+		source =
+				// Whole calendar years spanning the data, extended to today so relative date slicers always work.
+				VAR FirstData = MIN ( MIN ( Inspection[Inspected On] ), MIN ( Observation[Observed On] ) )
+				VAR LastData = MAX ( MAX ( Inspection[Inspected On] ), MAX ( Observation[Observed On] ) )
+				VAR FirstDay = DATE ( YEAR ( COALESCE ( FirstData, TODAY () ) ), 1, 1 )
+				VAR LastDay = DATE ( YEAR ( MAX ( COALESCE ( LastData, TODAY () ), TODAY () ) ), 12, 31 )
+				RETURN
+				    CALENDAR ( FirstDay, LastDay )
+

@@ -1,0 +1,604 @@
+table 'Audit Measures'
+	lineageTag: 36642765-0011-5e89-913c-04c0160e93b2
+
+	/// Number of audits in the current filter context.
+	measure Audits = COUNTROWS ( Audit )
+		formatString: #,0
+		displayFolder: Audits
+		lineageTag: e41936c0-718f-5e65-9575-6510104c67e6
+
+	/// Audits with status Complete or Closed.
+	measure 'Completed Audits' = CALCULATE ( [Audits], KEEPFILTERS ( 'Audit Status'[AuditStatusCode] IN { 3, 6 } ) )
+		formatString: #,0
+		displayFolder: Audits
+		lineageTag: 1b53c371-1adf-5914-8370-a8f3ebcbc37a
+
+	/// Audits still in progress: Planned, Report In Progress or Ready For Review.
+	measure 'Open Audits' = CALCULATE ( [Audits], KEEPFILTERS ( 'Audit Status'[AuditStatusCode] IN { 0, 1, 2 } ) )
+		formatString: #,0
+		displayFolder: Audits
+		lineageTag: 81976604-7937-5e3e-9ed2-85d545afe7d6
+
+	/// Completed audits as a share of completed plus open audits (cancelled, deleted and archived audits are excluded).
+	measure 'Completion Rate' = DIVIDE ( [Completed Audits], [Completed Audits] + [Open Audits] )
+		formatString: 0%
+		displayFolder: Audits
+		lineageTag: 58caa996-02c4-5df7-bc59-c3c374a43511
+
+	/// Distinct people who conducted the audits in context.
+	measure Auditors = DISTINCTCOUNT ( 'Inspected By Fact'[Contact_key] )
+		formatString: #,0
+		displayFolder: Audits
+		lineageTag: e355cdb7-152f-5eb1-82d2-7d1a73d255ca
+
+	/// Average audits per month, over months in context that have at least one audit.
+	measure 'Monthly Average Audits' = AVERAGEX ( VALUES ( 'Date'[Month Start] ), [Audits] )
+		formatString: #,0
+		displayFolder: Audits
+		lineageTag: 263256df-969c-594d-b7db-ab35e7bf7b1b
+
+	/// Monthly average over the whole selected period, for drawing a constant reference line on monthly charts.
+	measure 'Monthly Average Line' = CALCULATE ( [Monthly Average Audits], ALLSELECTED ( 'Date' ) )
+		formatString: #,0
+		displayFolder: Audits
+		lineageTag: ad2c41ee-b004-5724-af1c-aeb4f84b6d36
+
+	/// Audit type with the most audits; ties are reported rather than picked arbitrarily.
+	measure 'Most Common Audit Type' =
+			VAR Items = FILTER ( ADDCOLUMNS ( VALUES ( 'Audit Type'[Audit Type] ), "@Value", [Audits] ), NOT ISBLANK ( [@Value] ) )
+			VAR Target = MAXX ( Items, [@Value] )
+			VAR Leaders = FILTER ( Items, [@Value] = Target )
+			VAR LeaderCount = COUNTROWS ( Leaders )
+			VAR FirstLeader = MINX ( Leaders, 'Audit Type'[Audit Type] )
+			RETURN
+			    IF ( LeaderCount > 1, FirstLeader & " (+" & ( LeaderCount - 1 ) & " tied)", FirstLeader )
+		displayFolder: Audits
+		lineageTag: ee88f4ad-4eb4-5b3f-bcb7-3e3c71d4fc22
+
+	/// Average audit percentage score. Audits without a percentage score (-1) are excluded.
+	measure 'Average Score' = CALCULATE ( AVERAGE ( Audit[Percentage Score] ), KEEPFILTERS ( Audit[Percentage Score] >= 0 ) )
+		formatString: 0%
+		displayFolder: Scores
+		lineageTag: b2a67cfa-41cc-5931-a84b-23d877ed10df
+
+	/// Audits that have a percentage score.
+	measure 'Scored Audits' = CALCULATE ( [Audits], KEEPFILTERS ( Audit[Percentage Score] >= 0 ) )
+		formatString: #,0
+		displayFolder: Scores
+		lineageTag: a0297586-6a32-5e07-9817-e3722e3f239b
+
+	/// Location with the highest average score; ties are reported.
+	measure 'Best Location' =
+			VAR Items = FILTER ( ADDCOLUMNS ( VALUES ( Location[Location] ), "@Value", [Average Score] ), NOT ISBLANK ( [@Value] ) )
+			VAR Target = MAXX ( Items, [@Value] )
+			VAR Leaders = FILTER ( Items, [@Value] = Target )
+			VAR LeaderCount = COUNTROWS ( Leaders )
+			VAR FirstLeader = MINX ( Leaders, Location[Location] )
+			RETURN
+			    IF ( LeaderCount > 1, FirstLeader & " (+" & ( LeaderCount - 1 ) & " tied)", FirstLeader )
+		displayFolder: Scores
+		lineageTag: 76957cd8-aca0-5bf6-b062-37b8cb8ca3b4
+
+	/// Location with the lowest average score; ties are reported.
+	measure 'Lowest Location' =
+			VAR Items = FILTER ( ADDCOLUMNS ( VALUES ( Location[Location] ), "@Value", [Average Score] ), NOT ISBLANK ( [@Value] ) )
+			VAR Target = MINX ( Items, [@Value] )
+			VAR Leaders = FILTER ( Items, [@Value] = Target )
+			VAR LeaderCount = COUNTROWS ( Leaders )
+			VAR FirstLeader = MINX ( Leaders, Location[Location] )
+			RETURN
+			    IF ( LeaderCount > 1, FirstLeader & " (+" & ( LeaderCount - 1 ) & " tied)", FirstLeader )
+		displayFolder: Scores
+		lineageTag: 922fb8a7-37fd-528f-8b9d-fee4af0b7e74
+
+	/// Locations with at least one scored audit.
+	measure 'Locations Audited' = COUNTROWS ( FILTER ( VALUES ( Location[Location] ), NOT ISBLANK ( [Average Score] ) ) ) + 0
+		formatString: #,0
+		displayFolder: Scores
+		lineageTag: 2233853c-62f8-59a1-b3a4-26bdc096c52f
+
+	/// Score out of potential for a scored response; '–' where the response is not scored (-1), so the row still shows in tables.
+	measure 'Response Score' =
+			VAR ScoreValue = SUM ( 'Scored Response Fact'[Score] )
+			VAR Potential = SUM ( 'Scored Response Fact'[Potential Score] )
+			RETURN
+			    SWITCH (
+			        TRUE (),
+			        ISEMPTY ( 'Scored Response Fact' ), BLANK (),
+			        MIN ( 'Scored Response Fact'[Score] ) >= 0 && Potential > 0, ScoreValue & " / " & Potential,
+			        "–"
+			    )
+		displayFolder: Scores
+		lineageTag: d4a71bdd-8293-5545-9c1c-b3dd5b432be8
+
+	/// Scored responses whose answer is configured to raise a flag in Work Wallet.
+	measure 'Flagged Responses' = CALCULATE ( COUNTROWS ( 'Scored Response Fact' ), KEEPFILTERS ( 'Scored Response Fact'[Flag] = TRUE () ) )
+		formatString: #,0
+		displayFolder: Issues
+		lineageTag: bfe70cf1-d9b0-5020-8ff0-7d78901b0c8b
+
+	/// Flagged responses by default. When answers are picked on 'Scored Response'[Response], counts responses with those answers instead.
+	measure 'Issue Responses' =
+			IF (
+			    ISFILTERED ( 'Scored Response'[Response] ),
+			    COUNTROWS ( 'Scored Response Fact' ),
+			    [Flagged Responses]
+			)
+		formatString: #,0
+		displayFolder: Issues
+		lineageTag: 988cc1c2-f421-5851-a0de-3457d7680c0e
+
+	/// Audits with at least one issue response (see Issue Responses).
+	measure 'Audits With Issues' =
+			IF (
+			    ISFILTERED ( 'Scored Response'[Response] ),
+			    [Audits],
+			    CALCULATE ( [Audits], 'Scored Response Fact'[Flag] = TRUE () )
+			)
+		formatString: #,0
+		displayFolder: Issues
+		lineageTag: 8d360263-dc6f-596d-88d5-7108d1d1b324
+
+	/// Share of audits with at least one issue response.
+	measure 'Audits With Issues Share' = DIVIDE ( [Audits With Issues], CALCULATE ( [Audits], REMOVEFILTERS ( 'Scored Response' ) ) )
+		formatString: 0%
+		displayFolder: Issues
+		lineageTag: c7c43c5f-675e-578f-8608-6ca559afeb6a
+
+	/// Question with the most issue responses; ties are reported.
+	measure 'Top Issue' =
+			VAR Items = FILTER ( ADDCOLUMNS ( VALUES ( 'Scored Response'[Scored Response Question] ), "@Value", [Issue Responses] ), NOT ISBLANK ( [@Value] ) )
+			VAR Target = MAXX ( Items, [@Value] )
+			VAR Leaders = FILTER ( Items, [@Value] = Target )
+			VAR LeaderCount = COUNTROWS ( Leaders )
+			VAR FirstLeader = MINX ( Leaders, 'Scored Response'[Scored Response Question] )
+			RETURN
+			    IF ( LeaderCount > 1, FirstLeader & " (+" & ( LeaderCount - 1 ) & " tied)", FirstLeader )
+		displayFolder: Issues
+		lineageTag: feaf09c6-684c-50a4-ac58-59cd61d83a09
+
+	/// Share of issue responses belonging to the question with the most issues.
+	measure 'Top Issue Share' =
+			VAR Questions = ADDCOLUMNS ( VALUES ( 'Scored Response'[Scored Response Question] ), "@Issues", [Issue Responses] )
+			RETURN
+			    DIVIDE ( MAXX ( Questions, [@Issues] ), [Issue Responses] )
+		formatString: 0%
+		displayFolder: Issues
+		lineageTag: e4cda38a-8fc0-5a64-abef-91949cb21f9f
+
+	/// Questions with issue responses in three or more different months.
+	measure 'Repeat Issues' =
+			COUNTROWS (
+			    FILTER (
+			        VALUES ( 'Scored Response'[Scored Response Question] ),
+			        COUNTROWS ( FILTER ( VALUES ( 'Date'[Month Start] ), [Issue Responses] > 0 ) ) >= 3
+			    )
+			) + 0
+		formatString: #,0
+		displayFolder: Issues
+		lineageTag: af9da1c0-48bf-5634-946d-3fcad25bf497
+
+	/// Audits for the same-length period immediately before the selected dates.
+	measure 'Audits PP' =
+			VAR FirstDay = MIN ( 'Date'[Date] )
+			VAR LastDay = MIN ( MAX ( 'Date'[Date] ), TODAY () )
+			VAR Days = LastDay - FirstDay + 1
+			RETURN
+			    CALCULATE ( [Audits], DATESBETWEEN ( 'Date'[Date], FirstDay - Days, FirstDay - 1 ) )
+		formatString: #,0
+		isHidden
+		displayFolder: Previous Period
+		lineageTag: a959f6f3-e610-55a1-a0a3-e5c6e35c6472
+
+	/// Completed Audits for the same-length period immediately before the selected dates.
+	measure 'Completed Audits PP' =
+			VAR FirstDay = MIN ( 'Date'[Date] )
+			VAR LastDay = MIN ( MAX ( 'Date'[Date] ), TODAY () )
+			VAR Days = LastDay - FirstDay + 1
+			RETURN
+			    CALCULATE ( [Completed Audits], DATESBETWEEN ( 'Date'[Date], FirstDay - Days, FirstDay - 1 ) )
+		formatString: #,0
+		isHidden
+		displayFolder: Previous Period
+		lineageTag: 95d22279-f225-5462-a12b-76a7e1e94906
+
+	/// Average Score for the same-length period immediately before the selected dates.
+	measure 'Average Score PP' =
+			VAR FirstDay = MIN ( 'Date'[Date] )
+			VAR LastDay = MIN ( MAX ( 'Date'[Date] ), TODAY () )
+			VAR Days = LastDay - FirstDay + 1
+			RETURN
+			    CALCULATE ( [Average Score], DATESBETWEEN ( 'Date'[Date], FirstDay - Days, FirstDay - 1 ) )
+		formatString: 0%
+		isHidden
+		displayFolder: Previous Period
+		lineageTag: 81a827c5-c391-5030-bae1-3193a0eee5f1
+
+	/// Issue Responses for the same-length period immediately before the selected dates.
+	measure 'Issue Responses PP' =
+			VAR FirstDay = MIN ( 'Date'[Date] )
+			VAR LastDay = MIN ( MAX ( 'Date'[Date] ), TODAY () )
+			VAR Days = LastDay - FirstDay + 1
+			RETURN
+			    CALCULATE ( [Issue Responses], DATESBETWEEN ( 'Date'[Date], FirstDay - Days, FirstDay - 1 ) )
+		formatString: #,0
+		isHidden
+		displayFolder: Previous Period
+		lineageTag: 905563ff-fdaf-58ad-b80e-f1ee95c148fb
+
+	measure 'Audits Trend Label' =
+			VAR Cur = [Audits]
+			VAR Prev = [Audits PP]
+			VAR Change = DIVIDE ( Cur - Prev, Prev )
+			RETURN
+			    IF (
+			        ISBLANK ( Prev ) || Prev = 0,
+			        "No earlier period to compare",
+			        IF ( Change >= 0, "▲ ", "▼ " ) & FORMAT ( ABS ( Change ), "0%" ) & " vs previous period"
+			    )
+		isHidden
+		displayFolder: Labels
+		lineageTag: e5395472-e378-5fbc-98b8-78e3d2ab628e
+
+	measure 'Completed Trend Label' =
+			VAR Cur = [Completed Audits]
+			VAR Prev = [Completed Audits PP]
+			VAR Change = DIVIDE ( Cur - Prev, Prev )
+			RETURN
+			    IF (
+			        ISBLANK ( Prev ) || Prev = 0,
+			        "No earlier period to compare",
+			        IF ( Change >= 0, "▲ ", "▼ " ) & FORMAT ( ABS ( Change ), "0%" ) & " vs previous period"
+			    )
+		isHidden
+		displayFolder: Labels
+		lineageTag: 804484ac-bb46-552c-bb66-4e848baaa74f
+
+	measure 'Issues Trend Label' =
+			VAR Cur = [Issue Responses]
+			VAR Prev = [Issue Responses PP]
+			VAR Change = DIVIDE ( Cur - Prev, Prev )
+			RETURN
+			    IF (
+			        ISBLANK ( Prev ) || Prev = 0,
+			        "No earlier period to compare",
+			        IF ( Change >= 0, "▲ ", "▼ " ) & FORMAT ( ABS ( Change ), "0%" ) & " vs previous period"
+			    )
+		isHidden
+		displayFolder: Labels
+		lineageTag: 51694f0c-e083-54ce-9fd1-77488d9b1c9e
+
+	measure 'Score Trend Label' =
+			VAR Cur = [Average Score]
+			VAR Prev = [Average Score PP]
+			RETURN
+			    IF (
+			        ISBLANK ( Prev ) || ISBLANK ( Cur ),
+			        "No earlier period to compare",
+			        IF ( Cur >= Prev, "▲ ", "▼ " ) & FORMAT ( ABS ( Cur - Prev ) * 100, "0.0" ) & " pts vs previous period"
+			    )
+		isHidden
+		displayFolder: Labels
+		lineageTag: 74e5af2e-1f89-59f5-9098-8d735b29b44f
+
+	measure 'Completion Rate Label' =
+			VAR Rate = [Completion Rate]
+			RETURN
+			    IF ( NOT ISBLANK ( Rate ), FORMAT ( Rate, "0%" ) & " completion rate" )
+		isHidden
+		displayFolder: Labels
+		lineageTag: 9d036b2e-579e-5c0b-9013-a218acea2e12
+
+	measure 'Open Audits Label' =
+			VAR AuditCount = [Audits]
+			RETURN
+			    IF ( AuditCount > 0, FORMAT ( DIVIDE ( [Open Audits], AuditCount ), "0%" ) & " of audits still open" )
+		isHidden
+		displayFolder: Labels
+		lineageTag: 3e45302d-8319-5950-87c1-72c77b2e1e53
+
+	measure 'Peak Month Label' =
+			VAR Months = ADDCOLUMNS ( VALUES ( 'Date'[Month Start] ), "@Audits", [Audits] )
+			VAR Peak = MAXX ( Months, [@Audits] )
+			VAR PeakMonth = MAXX ( FILTER ( Months, [@Audits] = Peak ), 'Date'[Month Start] )
+			RETURN
+			    IF ( NOT ISBLANK ( Peak ), "Peak " & FORMAT ( Peak, "#,0" ) & " in " & FORMAT ( PeakMonth, "mmm yyyy" ) )
+		isHidden
+		displayFolder: Labels
+		lineageTag: 5b8b1392-9d7f-5aca-bf43-2bf3b63f55f5
+
+	measure 'Most Common Audit Type Label' =
+			VAR AuditCount = [Audits]
+			VAR Types = ADDCOLUMNS ( VALUES ( 'Audit Type'[Audit Type] ), "@Audits", [Audits] )
+			RETURN
+			    IF ( AuditCount > 0, FORMAT ( DIVIDE ( MAXX ( Types, [@Audits] ), AuditCount ), "0%" ) & " of audits" )
+		isHidden
+		displayFolder: Labels
+		lineageTag: d9c9dc93-3740-524d-a721-94c81edd5537
+
+	measure 'Auditors Label' =
+			VAR AuditorCount = [Auditors]
+			RETURN
+			    IF ( AuditorCount > 0, "Avg " & FORMAT ( DIVIDE ( [Audits], AuditorCount ), "#,0" ) & " audits each" )
+		isHidden
+		displayFolder: Labels
+		lineageTag: fd971b11-7c8b-50e6-b4fc-bfd037d34280
+
+	measure 'Audits With Issues Label' =
+			VAR AuditCount = CALCULATE ( [Audits], REMOVEFILTERS ( 'Scored Response' ) )
+			RETURN
+			    IF ( AuditCount > 0, FORMAT ( [Audits With Issues] + 0, "#,0" ) & " of " & FORMAT ( AuditCount, "#,0" ) & " audits" )
+		isHidden
+		displayFolder: Labels
+		lineageTag: 91bf0d4a-bbfa-59c2-b56e-8c2ea44e1c59
+
+	/// Top issue name, shortened to fit a KPI tile.
+	measure 'Top Issue Label' =
+			VAR Issue = [Top Issue]
+			RETURN
+			    SWITCH (
+			        TRUE (),
+			        ISBLANK ( Issue ), "No issues in this period",
+			        LEN ( Issue ) > 45, LEFT ( Issue, 44 ) & "…",
+			        Issue
+			    )
+		isHidden
+		displayFolder: Labels
+		lineageTag: d2d54601-6534-58f9-96fe-2ff43279d1f9
+
+	measure 'Repeat Issues Label' = "Questions with issues in 3+ different months"
+		isHidden
+		displayFolder: Labels
+		lineageTag: 9e7c911d-d983-564d-9858-67d65e7545d4
+
+	measure 'Best Location Label' =
+			VAR BestScore = MAXX ( FILTER ( VALUES ( Location[Location] ), NOT ISBLANK ( [Average Score] ) ), [Average Score] )
+			RETURN
+			    IF ( NOT ISBLANK ( BestScore ), FORMAT ( BestScore, "0%" ) & " average score" )
+		isHidden
+		displayFolder: Labels
+		lineageTag: 3305bdaf-de51-5c9a-969b-b80eda910295
+
+	measure 'Lowest Location Label' =
+			VAR LowestScore = MINX ( FILTER ( VALUES ( Location[Location] ), NOT ISBLANK ( [Average Score] ) ), [Average Score] )
+			RETURN
+			    IF ( NOT ISBLANK ( LowestScore ), FORMAT ( LowestScore, "0%" ) & " average score" )
+		isHidden
+		displayFolder: Labels
+		lineageTag: 1e2da446-d3a4-5d19-aea9-532da90012db
+
+	measure 'Locations Audited Label' = "With scored audits in this period"
+		isHidden
+		displayFolder: Labels
+		lineageTag: afca9970-f318-53a0-9ace-92e464225df3
+
+	measure 'Scored Audits Label' = FORMAT ( [Scored Audits], "#,0" ) & " scored audits"
+		isHidden
+		displayFolder: Labels
+		lineageTag: 1a64c97c-ab58-5fb5-a860-c1cad1cef8d2
+
+	/// Semantic colour for favourable changes; matches the theme's 'good' colour.
+	measure 'Colour Good' = "#2E9E6B"
+		isHidden
+		displayFolder: Formatting
+		lineageTag: 63d2d734-23b4-549d-9ede-2683d36b16fa
+
+	/// Semantic colour for unfavourable changes; matches the theme's 'bad' colour.
+	measure 'Colour Bad' = "#D6493A"
+		isHidden
+		displayFolder: Formatting
+		lineageTag: 33b94d2f-ebf5-5822-a5e5-54bc5c694fa1
+
+	/// Semantic colour for no change or no comparison; matches the theme's secondary text colour.
+	measure 'Colour Neutral' = "#4A5568"
+		isHidden
+		displayFolder: Formatting
+		lineageTag: 3a961488-2e09-54c1-b8b5-263e9237e262
+
+	measure 'Audits Trend Colour' =
+			VAR Cur = [Audits]
+			VAR Prev = [Audits PP]
+			RETURN
+			    SWITCH (
+			        TRUE (),
+			        ISBLANK ( Prev ) || Prev = 0 || Cur = Prev, [Colour Neutral],
+			        Cur > Prev, [Colour Good],
+			        [Colour Bad]
+			    )
+		isHidden
+		displayFolder: Formatting
+		lineageTag: f5dbaeb9-fed9-5e97-8c71-d6abc5abc784
+
+	measure 'Completed Trend Colour' =
+			VAR Cur = [Completed Audits]
+			VAR Prev = [Completed Audits PP]
+			RETURN
+			    SWITCH (
+			        TRUE (),
+			        ISBLANK ( Prev ) || Prev = 0 || Cur = Prev, [Colour Neutral],
+			        Cur > Prev, [Colour Good],
+			        [Colour Bad]
+			    )
+		isHidden
+		displayFolder: Formatting
+		lineageTag: 5784f9f8-09a6-5618-9945-e7ac57789775
+
+	measure 'Score Trend Colour' =
+			VAR Cur = [Average Score]
+			VAR Prev = [Average Score PP]
+			RETURN
+			    SWITCH (
+			        TRUE (),
+			        ISBLANK ( Prev ) || ISBLANK ( Cur ) || Cur = Prev, [Colour Neutral],
+			        Cur > Prev, [Colour Good],
+			        [Colour Bad]
+			    )
+		isHidden
+		displayFolder: Formatting
+		lineageTag: e84b539f-dd73-580f-b26c-1d6569f85def
+
+	measure 'Issues Trend Colour' =
+			VAR Cur = [Issue Responses]
+			VAR Prev = [Issue Responses PP]
+			RETURN
+			    SWITCH (
+			        TRUE (),
+			        ISBLANK ( Prev ) || Prev = 0 || Cur = Prev, [Colour Neutral],
+			        Cur > Prev, [Colour Bad],
+			        [Colour Good]
+			    )
+		isHidden
+		displayFolder: Formatting
+		lineageTag: 9262d283-792a-528b-9d43-24d4a494dfbd
+
+	/// The wallet's own colour for the selected audit's grading.
+	measure 'Audit Grading Colour' =
+			VAR GradingColour = SELECTEDVALUE ( 'Audit Grading Set Option'[Audit Grading Colour] )
+			RETURN
+			    IF ( LEN ( GradingColour ) = 7, GradingColour, "#1E2B37" )
+		isHidden
+		displayFolder: Formatting
+		lineageTag: 4b2b0fd5-9f63-51fd-9b38-cdfc089635b6
+
+	/// In-cell bar showing a section, tag or audit percentage score, coloured with the row's grading colour.
+	measure 'Score Bar' =
+			VAR Pct =
+			    SWITCH (
+			        TRUE (),
+			        ISINSCOPE ( 'Score Section'[Section] ), MAX ( 'Score Section Fact'[Percentage Score] ),
+			        ISINSCOPE ( 'Score Tag'[Tag] ), MAX ( 'Score Tag Fact'[Percentage Score] ),
+			        [Average Score]
+			    )
+			VAR GradingColour =
+			    SWITCH (
+			        TRUE (),
+			        ISINSCOPE ( 'Score Section'[Section] ), SELECTEDVALUE ( 'Score Section Grading Set Option'[Score Section Grading Colour] ),
+			        ISINSCOPE ( 'Score Tag'[Tag] ), SELECTEDVALUE ( 'Score Tag Grading Set Option'[Score Tag Grading Colour] )
+			    )
+			VAR Fill = SUBSTITUTE ( IF ( LEN ( GradingColour ) = 7, GradingColour, "#1E2B37" ), "#", "%23" )
+			VAR Clamped = MAX ( 0, MIN ( 1, Pct ) )
+			VAR TrackWidth = 92
+			RETURN
+			    IF (
+			        NOT ISBLANK ( Pct ) && Pct >= 0,
+			        "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='130' height='20' viewBox='0 0 130 20'>"
+			            & "<rect x='0' y='7' width='" & TrackWidth & "' height='6' rx='3' fill='%23EEF0F3'/>"
+			            & "<rect x='0' y='7' width='" & ROUND ( TrackWidth * Clamped, 0 ) & "' height='6' rx='3' fill='" & Fill & "'/>"
+			            & "<text x='130' y='14' text-anchor='end' font-family='Segoe UI, Arial, sans-serif' font-size='10.5' font-weight='700' fill='%231E2B37'>"
+			            & ROUND ( Clamped * 100, 0 ) & "%25</text></svg>"
+			    )
+		displayFolder: Images
+		lineageTag: 2ae9a9fc-b8c7-5118-a87b-c75dd3580eac
+		dataCategory: ImageUrl
+
+	/// Pill-shaped badge showing a grading in the wallet's own grading colour.
+	measure 'Grading Badge' =
+			VAR InResponse =
+			    ISINSCOPE ( 'Scored Response'[Scored Response Question] ) || ISINSCOPE ( 'Scored Response'[Question] )
+			VAR InSection = ISINSCOPE ( 'Score Section'[Section] )
+			VAR InTag = ISINSCOPE ( 'Score Tag'[Tag] )
+			VAR Grading =
+			    SWITCH (
+			        TRUE (),
+			        InResponse, SELECTEDVALUE ( 'Scored Response Grading Set Option'[Scored Response Grading] ),
+			        InSection, SELECTEDVALUE ( 'Score Section Grading Set Option'[Score Section Grading] ),
+			        InTag, SELECTEDVALUE ( 'Score Tag Grading Set Option'[Score Tag Grading] ),
+			        SELECTEDVALUE ( 'Audit Grading Set Option'[Audit Grading] )
+			    )
+			VAR GradingColour =
+			    SWITCH (
+			        TRUE (),
+			        InResponse, SELECTEDVALUE ( 'Scored Response Grading Set Option'[Scored Response Grading Colour] ),
+			        InSection, SELECTEDVALUE ( 'Score Section Grading Set Option'[Score Section Grading Colour] ),
+			        InTag, SELECTEDVALUE ( 'Score Tag Grading Set Option'[Score Tag Grading Colour] ),
+			        SELECTEDVALUE ( 'Audit Grading Set Option'[Audit Grading Colour] )
+			    )
+			VAR HasFacts =
+			    SWITCH (
+			        TRUE (),
+			        InResponse, NOT ISEMPTY ( 'Scored Response Fact' ),
+			        InSection, NOT ISEMPTY ( 'Score Section Fact' ),
+			        InTag, NOT ISEMPTY ( 'Score Tag Fact' ),
+			        TRUE ()
+			    )
+			VAR Fill = SUBSTITUTE ( IF ( LEN ( GradingColour ) = 7, GradingColour, "#4A5568" ), "#", "%23" )
+			VAR Label = SUBSTITUTE ( SUBSTITUTE ( SUBSTITUTE ( SUBSTITUTE ( SUBSTITUTE ( Grading, "%", "%25" ), "&", "&amp;" ), "<", "&lt;" ), "#", "%23" ), "'", "&apos;" )
+			VAR Width = ROUND ( LEN ( Grading ) * 5.8 + 28, 0 )
+			RETURN
+			    IF (
+			        HasFacts && LEN ( Grading ) > 0,
+			        "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='" & Width & "' height='20' viewBox='0 0 " & Width & " 20'>"
+			            & "<rect x='0.5' y='1' width='" & ( Width - 1 ) & "' height='18' rx='9' fill='" & Fill & "' fill-opacity='0.18'/>"
+			            & "<circle cx='11' cy='10' r='3' fill='" & Fill & "'/>"
+			            & "<text x='19' y='14' font-family='Segoe UI, Arial, sans-serif' font-size='10' font-weight='600' fill='%231E2B37'>"
+			            & Label & "</text></svg>"
+			    )
+		displayFolder: Images
+		lineageTag: 6e1edcca-9a30-5377-997e-9d84b9d54110
+		dataCategory: ImageUrl
+
+	/// Text for the Audits list drillthrough button; reflects the audit selected in the table.
+	measure 'Audit Details Button Label' =
+			VAR Selected = IF ( HASONEVALUE ( Audit[Url] ), SELECTEDVALUE ( Audit[Audit Reference] ) )
+			RETURN
+			    IF ( ISBLANK ( Selected ), "Select an audit to view details", "View " & Selected & " details  ›" )
+		isHidden
+		displayFolder: Labels
+		lineageTag: 638af6ed-0f90-558b-bc90-f8358372cea7
+
+	/// Work Wallet link for the selected audit, for the 'Open in Work Wallet' button on its details page.
+	measure 'Audit Link' = SELECTEDVALUE ( Audit[Url] )
+		isHidden
+		displayFolder: Links
+		lineageTag: 3ae229c3-b2c0-59c3-8000-5d3a356a0ba2
+
+	/// Type of the selected audit. Read through the audit row, so it is right however the page was reached (drillthrough from any page, or a URL filter); blank unless one audit is selected.
+	measure 'Selected Audit Type' = IF ( HASONEVALUE ( Audit[Audit_key] ), MAXX ( Audit, RELATED ( 'Audit Type'[Audit Type] ) ) )
+		isHidden
+		displayFolder: Details
+		lineageTag: 09df9609-d671-557d-9893-a88481703934
+
+	/// Location of the selected audit. Read through the audit row, so it is right however the page was reached (drillthrough from any page, or a URL filter); blank unless one audit is selected.
+	measure 'Selected Audit Location' = IF ( HASONEVALUE ( Audit[Audit_key] ), MAXX ( Audit, RELATED ( Location[Location] ) ) )
+		isHidden
+		displayFolder: Details
+		lineageTag: 3d66a9cb-336b-53d0-8874-28b4e004ec71
+
+	/// Status of the selected audit. Read through the audit row, so it is right however the page was reached (drillthrough from any page, or a URL filter); blank unless one audit is selected.
+	measure 'Selected Audit Status' = IF ( HASONEVALUE ( Audit[Audit_key] ), MAXX ( Audit, RELATED ( 'Audit Status'[Audit Status] ) ) )
+		isHidden
+		displayFolder: Details
+		lineageTag: b3294f8b-efed-58df-9ddc-8e154ab6ae96
+
+	/// Grading of the selected audit. Read through the audit row, so it is right however the page was reached (drillthrough from any page, or a URL filter); blank unless one audit is selected.
+	measure 'Selected Audit Grading' = IF ( HASONEVALUE ( Audit[Audit_key] ), MAXX ( Audit, RELATED ( 'Audit Grading Set Option'[Audit Grading] ) ) )
+		isHidden
+		displayFolder: Details
+		lineageTag: 1a042fd6-dd52-5a8f-bef9-38f6afb88085
+
+	/// The wallet's own colour for the selected audit's grading, read through the audit row (for its details page; lists use Audit Grading Colour).
+	measure 'Selected Audit Grading Colour' =
+			VAR GradingColour = IF ( HASONEVALUE ( Audit[Audit_key] ), MAXX ( Audit, RELATED ( 'Audit Grading Set Option'[Audit Grading Colour] ) ) )
+			RETURN
+			    IF ( LEN ( GradingColour ) = 7, GradingColour, "#1E2B37" )
+		isHidden
+		displayFolder: Formatting
+		lineageTag: bad6fb49-d09b-5b4f-8400-bbcb116e7322
+
+	column Value
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 2799522b-7e73-595c-9cd8-c8d088983477
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Value]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Audit Measures' = calculated
+		mode: import
+		source = { 1 }
+
+	annotation PBI_Id = b7e8686f2b365caa8e007d3dc683b795
+

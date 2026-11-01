@@ -135,7 +135,7 @@ table 'Safety Card'
 
 	column 'Signature Date'
 		dataType: dateTime
-		formatString: General Date
+		formatString: dd/mm/yyyy hh:nn
 		lineageTag: 5f0131bc-d03e-46dd-ba19-4dec3dc786bb
 		summarizeBy: none
 		sourceColumn: Signature Date
@@ -210,6 +210,100 @@ table 'Safety Card'
 		changedProperty = IsHidden
 
 		annotation SummarizationSetBy = User
+
+	/// Date part of Reported Time; relates safety cards to the Date table.
+	column 'Reported Date' = DATE ( YEAR ( 'Safety Card'[Reported Time] ), MONTH ( 'Safety Card'[Reported Time] ), DAY ( 'Safety Card'[Reported Time] ) )
+		dataType: dateTime
+		isHidden
+		formatString: dd/mm/yyyy
+		lineageTag: eb182aad-8a0d-569e-b3da-2cec71dca1cb
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	/// When the card was signed by the recipient (blank if not signed; Work Wallet stores an 1899/1900 date for 'no date').
+	column 'Signed On' = IF ( 'Safety Card'[Signature Date] > DATE ( 1900, 1, 2 ), 'Safety Card'[Signature Date] )
+		dataType: dateTime
+		formatString: dd/mm/yyyy hh:nn
+		lineageTag: d3baec1c-56a1-57fb-978d-0a76044b6217
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Identifies the person who received the card: their Work Wallet contact, or for a name typed on the card (no contact), the name and employer. Use this, not the name, to count or match people.
+	column 'Recipient Key' =
+			IF (
+			    NOT ISBLANK ( 'Safety Card'[EmployeeContact_key] ),
+			    "C" & 'Safety Card'[EmployeeContact_key],
+			    "N|" & UPPER ( TRIM ( 'Safety Card'[Employee] ) ) & "|" & UPPER ( TRIM ( 'Safety Card'[Employer] ) )
+			)
+		dataType: string
+		isHidden
+		lineageTag: e6ce7678-9e01-56a1-9483-d5eac90d63a3
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	/// The recipient's name: the contact's current name, or the name typed on the card.
+	column 'Recipient Name' =
+			VAR ContactName = IF ( NOT ISBLANK ( 'Safety Card'[EmployeeContact_key] ), TRIM ( RELATED ( Contact[Contact Name] ) ) )
+			RETURN
+			    IF ( LEN ( ContactName ) > 0, ContactName, TRIM ( 'Safety Card'[Employee] ) )
+		dataType: string
+		isHidden
+		lineageTag: f98c649d-b5fb-5ac5-8206-7cbdc655614e
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	/// The recipient's company: the contact's current company, or the employer typed on the card.
+	column 'Recipient Company' =
+			VAR ContactCompany = IF ( NOT ISBLANK ( 'Safety Card'[EmployeeContact_key] ), TRIM ( RELATED ( Contact[Company] ) ) )
+			RETURN
+			    IF ( LEN ( ContactCompany ) > 0, ContactCompany, TRIM ( 'Safety Card'[Employer] ) )
+		dataType: string
+		lineageTag: 0e48a84a-ba46-5014-8340-351ab811060f
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	/// The person who received the card, one value per person (see Recipient Key). Where different people share a name, their company is added, then their email (or 'not a contact' for a name typed on the card), so they are never merged.
+	column Recipient =
+			VAR ThisName = 'Safety Card'[Recipient Name]
+			VAR ThisCompany = 'Safety Card'[Recipient Company]
+			VAR People = ALL ( 'Safety Card'[Recipient Key], 'Safety Card'[Recipient Name], 'Safety Card'[Recipient Company] )
+			VAR SameName = COUNTROWS ( DISTINCT ( SELECTCOLUMNS ( FILTER ( People, 'Safety Card'[Recipient Name] = ThisName ), "@Key", 'Safety Card'[Recipient Key] ) ) )
+			VAR SameNameAndCompany =
+			    COUNTROWS ( DISTINCT ( SELECTCOLUMNS ( FILTER ( People, 'Safety Card'[Recipient Name] = ThisName && 'Safety Card'[Recipient Company] = ThisCompany ), "@Key", 'Safety Card'[Recipient Key] ) ) )
+			VAR IsContact = NOT ISBLANK ( 'Safety Card'[EmployeeContact_key] )
+			VAR ThisEmail = IF ( IsContact, TRIM ( RELATED ( Contact[Email] ) ) )
+			VAR CompanyText = IF ( LEN ( ThisCompany ) > 0, ThisCompany, "no company" )
+			VAR DetailText =
+			    SWITCH ( TRUE (), NOT IsContact, "not a contact", LEN ( ThisEmail ) > 0, ThisEmail, "contact " & RIGHT ( RELATED ( Contact[ContactId] ), 4 ) )
+			RETURN
+			    SWITCH (
+			        TRUE (),
+			        SameName = 1, ThisName,
+			        SameNameAndCompany = 1, ThisName & " (" & CompanyText & ")",
+			        ThisName & " (" & CompanyText & ", " & DetailText & ")"
+			    )
+		dataType: string
+		lineageTag: 9f5a0607-6c21-5efc-b643-448c9640b64d
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Opens the safety card in Work Wallet (in the user's selected wallet). Blank for deleted cards.
+	column Url =
+			VAR UrlPath = IF ( RELATED ( 'Status'[SafetyCardStatusCode] ) <> 3, "/Users/SafetyCardReporting/" & LOWER ( 'Safety Card'[SafetyCardId] ) & "/Detail" )
+			RETURN
+			    IF ( NOT ISBLANK ( UrlPath ), "https://portal.work-wallet.com" & UrlPath )
+		dataType: string
+		lineageTag: 0a18b511-ce3c-5b40-98b3-dc4b4e941ed9
+		dataCategory: WebUrl
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
 
 	partition 'Safety Card' = m
 		mode: import

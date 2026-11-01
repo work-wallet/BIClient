@@ -319,6 +319,28 @@ table Audit
 
 		annotation PBI_FormatHint = {"isDateTimeCustom":true}
 
+	/// Date part of Inspected On; relates Audit to the Date table.
+	column 'Inspected Date' = DATE ( YEAR ( Audit[Inspected On] ), MONTH ( Audit[Inspected On] ), DAY ( Audit[Inspected On] ) )
+		dataType: dateTime
+		isHidden
+		formatString: dd/mm/yyyy
+		lineageTag: 3f0b6a52-1d7e-5c43-9a8e-2b6c4d1e7f90
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Opens the audit in Work Wallet (in the user's selected wallet). Blank for deleted audits.
+	column Url =
+			VAR UrlPath = IF ( RELATED ( 'Audit Status'[AuditStatusCode] ) <> 5, "/HealthAndSafety/Audit/" & LOWER ( Audit[AuditId] ) )
+			RETURN
+			    IF ( NOT ISBLANK ( UrlPath ), "https://portal.work-wallet.com" & UrlPath )
+		dataType: string
+		lineageTag: bf16eb32-194c-5de1-8556-599ec5d6814c
+		dataCategory: WebUrl
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
 	partition Audit = m
 		mode: import
 		source =

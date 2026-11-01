@@ -97,7 +97,7 @@ Jump to the relevant section:
 | 0 | Draft |
 | 1 | Open |
 | 2 | In Progress |
-| 3 | Closed |
+| 4 | Closed |
 
 | ActionTypeCode | ActionType |
 | --- | --- |
@@ -186,6 +186,8 @@ Jump to the relevant section:
 | 7 | Invalid |
 | 8 | Rejected |
 | 9 | Deleted |
+
+Invalid (7) is not exported: Work Wallet works it out when it displays an attempt (a later version of the induction has "previous versions invalid" set) rather than storing it. The extract has the attempt's stored status, so an attempt invalidated by a newer version still shows its original status (e.g. Passed).
 
 ## Permits
 

@@ -52,7 +52,7 @@ table Induction
 
 	column 'Created On'
 		dataType: dateTime
-		formatString: General Date
+		formatString: dd/mm/yyyy hh:nn
 		lineageTag: 9885d8b8-8212-460a-85a8-111b013854ac
 		summarizeBy: none
 		sourceColumn: Created On
@@ -119,6 +119,18 @@ table Induction
 		formatString: 0
 		lineageTag: 0fa4357d-cd2a-41ec-a774-9304a4f5a059
 		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Opens the induction in Work Wallet (in the user's selected wallet). Blank for deleted inductions.
+	column Url =
+			VAR UrlPath = IF ( RELATED ( 'Induction Status'[InductionStatusCode] ) <> 3, "/Users/Inductions/Detail/" & LOWER ( Induction[InductionId] ) )
+			RETURN
+			    IF ( NOT ISBLANK ( UrlPath ), "https://portal.work-wallet.com" & UrlPath )
+		dataType: string
+		lineageTag: 13deccf8-e123-504e-ade4-dc6ba8e50a61
+		dataCategory: WebUrl
+		summarizeBy: none
 
 		annotation SummarizationSetBy = Automatic
 

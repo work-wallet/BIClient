@@ -24,6 +24,12 @@ erDiagram
         attr HasBeenExtended
         calc Assignees
         calc Signatories
+        calc Issued
+        calc Expires
+        calc Closed
+        calc HoursOpen
+        calc Outcome
+        calc Url
     }
     "Status" {
         attr Status
@@ -55,11 +61,20 @@ erDiagram
         attr Email
         attr Company
     }
+    "Date" {
+        attr Date
+        calc Year
+        calc Month
+        calc MonthStart
+        calc YearMonth
+        calc SlicerDate
+    }
     "Permit" }o--|| "Location" : "Location_key"
     "Permit" }o--|| "Category" : "PermitCategory_key"
     "Permit" }o--|| "Status" : "PermitStatus_key"
     "Assignee Fact" }o--|| "Contact" : "Contact_key"
     "Assignee Fact" }o--|| "Permit" : "Permit_key"
+    "Permit" }o--|| "Date" : "Issued Date"
 ```
 
 ## Permits - Numeric Answer
@@ -100,6 +115,12 @@ erDiagram
         attr HasBeenExtended
         calc Assignees
         calc Signatories
+        calc Issued
+        calc Expires
+        calc Closed
+        calc HoursOpen
+        calc Outcome
+        calc Url
     }
     "Numeric Question" }o--|| "Unit" : "Unit_key"
     "Numeric Answer Fact" }o--|| "Permit" : "Permit_key"
@@ -128,6 +149,12 @@ erDiagram
         attr HasBeenExtended
         calc Assignees
         calc Signatories
+        calc Issued
+        calc Expires
+        calc Closed
+        calc HoursOpen
+        calc Outcome
+        calc Url
     }
     "Date Time Answer Fact" {
         attr DateandTimeAnswer
@@ -170,6 +197,12 @@ erDiagram
         attr HasBeenExtended
         calc Assignees
         calc Signatories
+        calc Issued
+        calc Expires
+        calc Closed
+        calc HoursOpen
+        calc Outcome
+        calc Url
     }
     "Checklist Answer Fact" {
         calc ChecklistAnswerCount
@@ -220,6 +253,12 @@ erDiagram
         attr HasBeenExtended
         calc Assignees
         calc Signatories
+        calc Issued
+        calc Expires
+        calc Closed
+        calc HoursOpen
+        calc Outcome
+        calc Url
     }
     "Branch Option Fact" }o--|| "Branch Option" : "PermitBranchOption_key"
     "Branch Option Fact" }o--|| "Permit" : "Permit_key"
@@ -247,6 +286,12 @@ erDiagram
         attr HasBeenExtended
         calc Assignees
         calc Signatories
+        calc Issued
+        calc Expires
+        calc Closed
+        calc HoursOpen
+        calc Outcome
+        calc Url
     }
     "Signed By Contact" {
         attr ContactName
@@ -261,4 +306,35 @@ erDiagram
     }
     "Signature Fact" }o--|| "Permit" : "Permit_key"
     "Signature Fact" }o--|| "Signed By Contact" : "Contact_key"
+```
+
+## Permits - Measures
+
+```mermaid
+---
+config:
+  theme: neutral
+---
+erDiagram
+    "Permit Measures" {
+        measure Permits
+        measure LivePermits
+        measure ClosedBeforeExpiry
+        measure EndedAtExpiry
+        measure ClosedAfterExpiry
+        measure ExpiredNotClosed
+        measure EndedOnTime
+        measure FinishedPermits
+        measure Close_outRate
+        measure ExtendedPermits
+        measure AverageHoursOpen
+        measure CompaniesIssuedTo
+        measure Sites
+        measure MonthlyAveragePermits
+        measure MonthlyAverageLine
+        measure MostCommonCategory
+        measure MostExpiredCategory
+        measure Signatures
+        measure Assignees
+    }
 ```

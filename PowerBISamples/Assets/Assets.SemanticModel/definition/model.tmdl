@@ -6,7 +6,7 @@ model Model
 		legacyRedirects
 		returnErrorValuesAsNull
 
-annotation PBI_QueryOrder = ["Asset","Assignment","Assignment Fact","Assignment Type","Property","Property Fact","Property Type","Asset Status","Wallet","Contact","Inspection Observation Fact","Observation","Observation Status","Inspection","Branch Option","Branch Option Fact","Checklist Answer Fact","Checklist Option","Date Time Answer Fact","Date Time Question","Inspected By Fact","Numeric Answer Fact","Numeric Question","Scored Response","Scored Response Fact","Score Section","Score Section Fact","Score Tag","Score Tag Fact","Inspection Status","Inspection Type","Observation Note","Grading Set Option","Unit","Inspection Grading Set Option","Score Tag Grading Set Option","Score Section Grading Set Option","Scored Response Grading Set Option","Inspection Workflow Component Type"]
+annotation PBI_QueryOrder = ["Asset","Assignment","Assignment Fact","Assignment Type","Property","Property Fact","Property Type","Asset Status","Wallet","Contact","Inspection Observation Fact","Observation","Observation Status","Inspection","Branch Option","Branch Option Fact","Checklist Answer Fact","Checklist Option","Date Time Answer Fact","Date Time Question","Inspected By Fact","Numeric Answer Fact","Numeric Question","Scored Response","Scored Response Fact","Score Section","Score Section Fact","Score Tag","Score Tag Fact","Inspection Status","Inspection Type","Observation Note","Grading Set Option","Unit","Inspection Grading Set Option","Score Tag Grading Set Option","Score Section Grading Set Option","Scored Response Grading Set Option","Inspection Workflow Component Type","Action","Action Update","Action Priority","Action Status"]
 
 annotation __PBI_TimeIntelligenceEnabled = 1
 
@@ -70,6 +70,14 @@ ref table 'Score Section Grading Set Option'
 ref table 'Scored Response Grading Set Option'
 ref table 'Inspection Workflow Component Type'
 ref table 'Inspected By Contact'
+ref table Date
+ref table 'Asset Measures'
+ref table Action
+ref table 'Action Update'
+ref table 'Action Priority'
+ref table 'Action Status'
+ref table 'Action Date'
+ref table 'Action Measures'
 
 ref cultureInfo en-GB
 

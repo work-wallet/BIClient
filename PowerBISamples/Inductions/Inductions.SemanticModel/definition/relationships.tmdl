@@ -76,3 +76,7 @@ relationship 64c94e2e-3669-2068-525f-5061d07d65fd
 	fromColumn: 'Taken By'.Contact_key
 	toColumn: Contact.Contact_key
 
+relationship 58d77975-f99e-596f-9d46-40ae837c204b
+	fromColumn: 'Taken By'.'Taken Date'
+	toColumn: Date.Date
+

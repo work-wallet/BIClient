@@ -227,6 +227,103 @@ table Issue
 
 		annotation PBI_FormatHint = {"isDateTimeCustom":true}
 
+	/// Date part of Occurred On; relates Issue to the Date table.
+	column 'Occurred Date' = DATE ( YEAR ( 'Issue'[Occurred On] ), MONTH ( 'Issue'[Occurred On] ), DAY ( 'Issue'[Occurred On] ) )
+		dataType: dateTime
+		isHidden
+		formatString: dd/mm/yyyy
+		lineageTag: a1b7cf96-eeb4-5f05-b39b-1b7622a4d952
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	/// When the investigation started; blank if it hasn't (the source column uses a placeholder date instead of blank).
+	column 'Investigation Started On' = IF ( 'Issue'[Under Investigation Date] > DATE ( 1900, 1, 1 ), 'Issue'[Under Investigation Date] )
+		dataType: dateTime
+		formatString: dd/mm/yyyy hh:nn
+		lineageTag: ec87cdaa-2207-5f0a-a971-209f9239dd81
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	/// When the issue was closed; blank if it hasn't been (the source column uses a placeholder date instead of blank).
+	column 'Closed On' = IF ( 'Issue'[Close Date] > DATE ( 1900, 1, 1 ), 'Issue'[Close Date] )
+		dataType: dateTime
+		formatString: dd/mm/yyyy hh:nn
+		lineageTag: e8f1fda8-cec8-5ecd-97be-2076944e1cf0
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Hours between the issue occurring and it being reported.
+	column 'Hours To Report' = ( 'Issue'[Reported On] - 'Issue'[Occurred On] ) * 24
+		dataType: double
+		formatString: #,0.0
+		lineageTag: 846b2fcb-cfe8-54e5-98b5-e2531f5b0e1d
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Days from the issue being reported to its investigation starting.
+	column 'Days To Start Investigation' = IF ( NOT ISBLANK ( 'Issue'[Investigation Started On] ), ( 'Issue'[Investigation Started On] - 'Issue'[Reported On] ) * 1.0 )
+		dataType: double
+		formatString: #,0.0
+		lineageTag: 0c260323-afbd-5812-8f59-1f9da1cc4625
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Days from the issue being reported to it being closed.
+	column 'Days To Close' = IF ( NOT ISBLANK ( 'Issue'[Closed On] ), ( 'Issue'[Closed On] - 'Issue'[Reported On] ) * 1.0 )
+		dataType: double
+		formatString: #,0.0
+		lineageTag: fe20a848-a15f-5013-b866-b3a963a18d6a
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Sort order for Age Band.
+	column 'Age Band Order' =
+			VAR IsOpen = RELATED ( 'Status'[ReportedIssueStatusCode] ) IN { 2, 3 }
+			VAR AgeDays = TODAY () - 'Issue'[Reported On]
+			RETURN
+			    IF ( IsOpen, SWITCH ( TRUE (), AgeDays <= 7, 1, AgeDays <= 30, 2, AgeDays <= 90, 3, 4 ) )
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 27f64d30-5168-567f-a7f0-f52b1f944919
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	/// How long an open issue has been open (since it was reported), as at the last data refresh. Blank for closed issues.
+	column 'Age Band' =
+			SWITCH (
+			    'Issue'[Age Band Order],
+			    1, "0–7 days",
+			    2, "8–30 days",
+			    3, "31–90 days",
+			    4, "Over 90 days"
+			)
+		dataType: string
+		lineageTag: d1018ee6-9f59-51ba-a643-92e184e5389d
+		summarizeBy: none
+		sortByColumn: 'Age Band Order'
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Opens the issue in Work Wallet (in the user's selected wallet). Blank for deleted issues.
+	column Url =
+			VAR UrlPath = IF ( RELATED ( 'Status'[ReportedIssueStatusCode] ) <> 8, "/HealthAndSafety/IssueReporting/" & LOWER ( Issue[ReportedIssueId] ) )
+			RETURN
+			    IF ( NOT ISBLANK ( UrlPath ), "https://portal.work-wallet.com" & UrlPath )
+		dataType: string
+		lineageTag: ecb7b3a7-7d1f-5839-a7ee-c1a75d47e7c7
+		dataCategory: WebUrl
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
 	partition Issue-6d9dfa8c-c90c-4cb1-a4bf-ad691525c771 = m
 		mode: import
 		source =

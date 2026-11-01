@@ -3861,7 +3861,7 @@ cultureInfo en-GB
 			          }
 			        },
 			        {
-			          "Date Issued": {
+			          "Issued on": {
 			            "State": "Suggested",
 			            "Source": {
 			              "Type": "External",
@@ -4079,7 +4079,7 @@ cultureInfo en-GB
 			          }
 			        },
 			        {
-			          "Expiry Date": {
+			          "Expires on": {
 			            "State": "Suggested",
 			            "Source": {
 			              "Type": "External",
@@ -10716,16 +10716,6 @@ cultureInfo en-GB
 			          "ppe": {
 			            "State": "Generated"
 			          }
-			        },
-			        {
-			          "PPE Type": {
-			            "State": "Suggested",
-			            "Source": {
-			              "Type": "External",
-			              "Agent": "PowerBI.VisualColumnRename"
-			            },
-			            "Weight": 0.9
-			          }
 			        }
 			      ]
 			    },
@@ -12176,16 +12166,6 @@ cultureInfo en-GB
 			          "ppe": {
 			            "State": "Generated"
 			          }
-			        },
-			        {
-			          "Type": {
-			            "State": "Suggested",
-			            "Source": {
-			              "Type": "External",
-			              "Agent": "PowerBI.VisualColumnRename"
-			            },
-			            "Weight": 0.9
-			          }
 			        }
 			      ]
 			    },
@@ -12427,16 +12407,6 @@ cultureInfo en-GB
 			        },
 			        {
 			          "Location": {
-			            "State": "Suggested",
-			            "Source": {
-			              "Type": "External",
-			              "Agent": "PowerBI.VisualColumnRename"
-			            },
-			            "Weight": 0.9
-			          }
-			        },
-			        {
-			          "To": {
 			            "State": "Suggested",
 			            "Source": {
 			              "Type": "External",
@@ -12782,16 +12752,6 @@ cultureInfo en-GB
 			            },
 			            "Weight": 0.748
 			          }
-			        },
-			        {
-			          "Original Stock Location": {
-			            "State": "Suggested",
-			            "Source": {
-			              "Type": "External",
-			              "Agent": "PowerBI.VisualColumnRename"
-			            },
-			            "Weight": 0.9
-			          }
 			        }
 			      ]
 			    },
@@ -13004,16 +12964,6 @@ cultureInfo en-GB
 			            },
 			            "Weight": 0.582
 			          }
-			        },
-			        {
-			          "Stock Location": {
-			            "State": "Suggested",
-			            "Source": {
-			              "Type": "External",
-			              "Agent": "PowerBI.VisualColumnRename"
-			            },
-			            "Weight": 0.9
-			          }
 			        }
 			      ]
 			    },
@@ -13225,16 +13175,6 @@ cultureInfo en-GB
 			              "Agent": "Thesaurus"
 			            },
 			            "Weight": 0.582
-			          }
-			        },
-			        {
-			          "Stock Location": {
-			            "State": "Suggested",
-			            "Source": {
-			              "Type": "External",
-			              "Agent": "PowerBI.VisualColumnRename"
-			            },
-			            "Weight": 0.9
 			          }
 			        }
 			      ]
@@ -15401,6 +15341,16 @@ cultureInfo en-GB
 			              "Agent": "Thesaurus"
 			            },
 			            "Weight": 0.571
+			          }
+			        },
+			        {
+			          "Person": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
 			          }
 			        }
 			      ]
@@ -18481,6 +18431,16 @@ cultureInfo en-GB
 			            },
 			            "Weight": 0.714
 			          }
+			        },
+			        {
+			          "PPE group": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
 			        }
 			      ],
 			      "NameType": "Name"
@@ -19349,6 +19309,853 @@ cultureInfo en-GB
 			              "Agent": "Thesaurus"
 			            },
 			            "Weight": 0.609
+			          }
+			        }
+			      ]
+			    },
+			    "stock.stock_level": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Stock",
+			          "ConceptualProperty": "Stock Level"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Stock level": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "ppe_measures.ppe_issued": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "PPE Measures",
+			          "ConceptualProperty": "PPE Issued"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Assigned PPE": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        },
+			        {
+			          "Issued": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        },
+			        {
+			          "Items issued": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "ppe_measures.replacement_due": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "PPE Measures",
+			          "ConceptualProperty": "Replacement Due"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Require replacement": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "ppe_measures.stock_on_hand": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "PPE Measures",
+			          "ConceptualProperty": "Stock On Hand"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Available stock": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        },
+			        {
+			          "In stock": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        },
+			        {
+			          "Available stock now": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "ppe_measures.low_stock_lines": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "PPE Measures",
+			          "ConceptualProperty": "Low Stock Lines"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Low stock": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "ppe_measures.ppe_issued_in_period": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "PPE Measures",
+			          "ConceptualProperty": "PPE Issued In Period"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Issued": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "ppe_measures.monthly_average_line": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "PPE Measures",
+			          "ConceptualProperty": "Monthly Average Line"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Monthly average": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "ppe_measures.companies_with_ppe": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "PPE Measures",
+			          "ConceptualProperty": "Companies With PPE"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Companies": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "ppe_measures.expiring_soon": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "PPE Measures",
+			          "ConceptualProperty": "Expiring Soon"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Expiring soon": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "ppe_measures.expired_ppe": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "PPE Measures",
+			          "ConceptualProperty": "Expired PPE"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Past its lifespan": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "ppe_measures.replacement_requested": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "PPE Measures",
+			          "ConceptualProperty": "Replacement Requested"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Replacement requested": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "ppe_measures.most_common_replacement_text": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "PPE Measures",
+			          "ConceptualProperty": "Most Common Replacement Text"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Most common": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "ppe_measures.out_of_stock_lines": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "PPE Measures",
+			          "ConceptualProperty": "Out Of Stock Lines"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Out of stock": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "ppe_measures.stock_value": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "PPE Measures",
+			          "ConceptualProperty": "Stock Value"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Stock value": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        },
+			        {
+			          "In stock": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "ppe_measures.stock_added": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "PPE Measures",
+			          "ConceptualProperty": "Stock Added"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Added": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "ppe_measures.stock_transferred": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "PPE Measures",
+			          "ConceptualProperty": "Stock Transferred"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Transferred": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "ppe_measures.stock_removed": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "PPE Measures",
+			          "ConceptualProperty": "Stock Removed"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Removed": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "ppe_measures.movement_quantity": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "PPE Measures",
+			          "ConceptualProperty": "Movement Quantity"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Quantity": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "ppe_measures.ppe_returned": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "PPE Measures",
+			          "ConceptualProperty": "PPE Returned"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Returned": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "ppe_measures.ppe_replaced": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "PPE Measures",
+			          "ConceptualProperty": "PPE Replaced"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Replaced": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "ppe_measures.ppe_removed": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "PPE Measures",
+			          "ConceptualProperty": "PPE Removed"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Removed": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "ppe_measures.assignment_actions": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "PPE Measures",
+			          "ConceptualProperty": "Assignment Actions"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Actions": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "ppe_measures.issued_value": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "PPE Measures",
+			          "ConceptualProperty": "Issued Value"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Issued": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        },
+			        {
+			          "Issued value": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "ppe_measures.removed_value": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "PPE Measures",
+			          "ConceptualProperty": "Removed Value"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Removed after issue": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        },
+			        {
+			          "Removed value": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "ppe_measures.stock_removed_value": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "PPE Measures",
+			          "ConceptualProperty": "Stock Removed Value"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Removed from stock": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "ppe_measures.unit_value": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "PPE Measures",
+			          "ConceptualProperty": "Unit Value"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Unit value": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "ppe_measures.ppe_types": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "PPE Measures",
+			          "ConceptualProperty": "PPE Types"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "PPE types": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "ppe_measures.ppe_types_with_properties": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "PPE Measures",
+			          "ConceptualProperty": "PPE Types With Properties"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "With properties": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "ppe_measures.property_values": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "PPE Measures",
+			          "ConceptualProperty": "Property Values"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Property values": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "ppe_measures.properties": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "PPE Measures",
+			          "ConceptualProperty": "Properties"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Properties": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "ppe_measures.person_name": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "PPE Measures",
+			          "ConceptualProperty": "Person Name"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Person": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "ppe_measures.person_last_issued": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "PPE Measures",
+			          "ConceptualProperty": "Person Last Issued"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Last issued": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "ppe_measures.person_company": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "PPE Measures",
+			          "ConceptualProperty": "Person Company"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Company": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "assignment.expiry_status": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Assignment",
+			          "ConceptualProperty": "Expiry Status"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Status": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "assignment.days_to_expiry": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Assignment",
+			          "ConceptualProperty": "Days To Expiry"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Days to expiry": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "date.year_month": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Date",
+			          "ConceptualProperty": "Year Month"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Month": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "date.slicer_date": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Date",
+			          "ConceptualProperty": "Slicer Date"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Actioned on": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
 			          }
 			        }
 			      ]

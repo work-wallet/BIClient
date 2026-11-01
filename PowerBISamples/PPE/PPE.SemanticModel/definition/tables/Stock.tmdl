@@ -101,6 +101,31 @@ table Stock
 
 		annotation SummarizationSetBy = Automatic
 
+	/// Sort order for Stock Level.
+	column 'Stock Level Order' =
+			SWITCH (
+			    TRUE (),
+			    Stock[Stock Quantity] <= 0, 1,
+			    Stock[Warning Quantity] > 0 && Stock[Stock Quantity] <= Stock[Warning Quantity], 2,
+			    3
+			)
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 0de6b503-8ecd-5294-b6f4-c29e9a7e2215
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Out of stock, at or below the warning quantity set in Work Wallet, or in stock.
+	column 'Stock Level' = SWITCH ( Stock[Stock Level Order], 1, "Out of stock", 2, "At or below warning level", "In stock" )
+		dataType: string
+		lineageTag: e3ffa77d-43a1-5dcc-a1f2-52070f7e50b0
+		summarizeBy: none
+		sortByColumn: 'Stock Level Order'
+
+		annotation SummarizationSetBy = Automatic
+
 	partition Stock = m
 		mode: import
 		source =

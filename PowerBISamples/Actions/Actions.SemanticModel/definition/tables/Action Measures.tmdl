@@ -1,0 +1,487 @@
+table 'Action Measures'
+	lineageTag: e179e581-3925-5eb2-b207-0ba1b499bd51
+
+	/// Actions raised.
+	measure Actions = COUNTROWS ( 'Action' )
+		formatString: #,0
+		displayFolder: Actions
+		lineageTag: cba784f9-dbbd-566d-8949-604a8e5bda94
+
+	/// Actions still Open or In Progress.
+	measure 'Open Actions' = CALCULATE ( [Actions], KEEPFILTERS ( 'Status'[ActionStatusCode] IN { 1, 2 } ) )
+		formatString: #,0
+		displayFolder: Actions
+		lineageTag: 1003852c-effe-5d51-8552-5775c3301f57
+
+	/// Actions raised in the period that are now closed.
+	measure 'Closed Actions' = CALCULATE ( [Actions], KEEPFILTERS ( 'Status'[ActionStatusCode] = 4 ) )
+		formatString: #,0
+		displayFolder: Actions
+		lineageTag: 4e52a049-7a3c-5125-9b0e-7edbf7a2a177
+
+	/// Actions still in draft.
+	measure 'Draft Actions' = CALCULATE ( [Actions], KEEPFILTERS ( 'Status'[ActionStatusCode] = 0 ) )
+		formatString: #,0
+		displayFolder: Actions
+		lineageTag: e05430a6-3289-5321-b27d-1c07721202be
+
+	/// Open actions past their due date (as at the last data refresh).
+	measure 'Overdue Actions' = CALCULATE ( [Actions], KEEPFILTERS ( NOT ISBLANK ( 'Action'[Days Overdue] ) ) )
+		formatString: #,0
+		displayFolder: Actions
+		lineageTag: db174ef0-4dcc-5451-baa5-0923808868b7
+
+	/// Overdue actions with High or Critical priority.
+	measure 'Serious Overdue Actions' = CALCULATE ( [Overdue Actions], KEEPFILTERS ( 'Priority'[ActionPriorityCode] IN { 4, 8 } ) )
+		formatString: #,0
+		displayFolder: Actions
+		lineageTag: 0fb0a863-df7d-5809-8b79-af61e246a9b1
+
+	/// Open actions with High or Critical priority.
+	measure 'Serious Open Actions' = CALCULATE ( [Open Actions], KEEPFILTERS ( 'Priority'[ActionPriorityCode] IN { 4, 8 } ) )
+		formatString: #,0
+		displayFolder: Actions
+		lineageTag: 3ceb13ea-e697-5ada-b6fe-84d6d959d6f3
+
+	/// Average days overdue, for overdue actions.
+	measure 'Average Days Overdue' = AVERAGE ( 'Action'[Days Overdue] )
+		formatString: #,0
+		displayFolder: Actions
+		lineageTag: 1c999b3d-79a6-5366-8200-b5413043d163
+
+	/// Days overdue of the longest-overdue action.
+	measure 'Oldest Overdue Days' = MAX ( 'Action'[Days Overdue] )
+		formatString: #,0
+		displayFolder: Actions
+		lineageTag: bdeed3aa-cc5d-5807-bf9e-4df627c71d31
+
+	/// Open actions with no due date set.
+	measure 'Actions Without Due Date' = CALCULATE ( [Open Actions], KEEPFILTERS ( ISBLANK ( 'Action'[Due Date] ) ) )
+		formatString: #,0
+		displayFolder: Actions
+		lineageTag: bdf8058c-a4e6-5d66-b14b-c85d2bc4f701
+
+	/// Distinct people with actions assigned.
+	measure Assignees = CALCULATE ( DISTINCTCOUNT ( 'Action'[Assignee] ), KEEPFILTERS ( 'Action'[Assignee] <> "(Unassigned)" ) )
+		formatString: #,0
+		displayFolder: Actions
+		lineageTag: bd1efa73-f041-54fe-957a-48c3109d22eb
+
+	/// Average actions raised per month, over months in context with at least one.
+	measure 'Monthly Average Actions' = AVERAGEX ( VALUES ( 'Date'[Month Start] ), [Actions] )
+		formatString: #,0
+		displayFolder: Actions
+		lineageTag: ed67cd0f-a094-52ad-86c6-79e526aeaaaa
+
+	/// Monthly average over the whole selected period, for a reference line on monthly charts.
+	measure 'Monthly Average Line' = IF ( MIN ( 'Date'[Date] ) <= TODAY (), CALCULATE ( [Monthly Average Actions], ALLSELECTED ( 'Date' ) ) )
+		formatString: #,0
+		displayFolder: Actions
+		lineageTag: 45ea59f7-97fe-5d22-bee4-1aff447d77df
+
+	/// Source with the most actions raised (audit, issue, …); ties are reported.
+	measure 'Most Common Type' =
+			VAR Items = FILTER ( ADDCOLUMNS ( VALUES ( 'Type'[Type] ), "@Value", [Actions] ), NOT ISBLANK ( [@Value] ) )
+			VAR Target = MAXX ( Items, [@Value] )
+			VAR Leaders = FILTER ( Items, [@Value] = Target )
+			VAR LeaderCount = COUNTROWS ( Leaders )
+			VAR FirstLeader = MINX ( Leaders, 'Type'[Type] )
+			RETURN
+			    IF ( LeaderCount > 1, FirstLeader & " (+" & ( LeaderCount - 1 ) & " tied)", FirstLeader )
+		displayFolder: Actions
+		lineageTag: 2bf89bc8-2da5-5d28-a70f-815741f69458
+
+	/// Person with the most overdue actions; ties are reported. People are matched by name and email (Assignee), so two people with the same name are not merged; the name is shown.
+	measure 'Most Overdue Assignee' =
+			VAR Items = FILTER ( ADDCOLUMNS ( FILTER ( VALUES ( 'Action'[Assignee] ), 'Action'[Assignee] <> "(Unassigned)" ), "@Value", [Overdue Actions] ), NOT ISBLANK ( [@Value] ) )
+			VAR Target = MAXX ( Items, [@Value] )
+			VAR Leaders = FILTER ( Items, [@Value] = Target )
+			VAR LeaderCount = COUNTROWS ( Leaders )
+			VAR FirstLeader = MINX ( Leaders, 'Action'[Assignee] )
+			VAR FirstLeaderName = CALCULATE ( MIN ( 'Action'[Name] ), 'Action'[Assignee] = FirstLeader )
+			RETURN
+			    IF ( LeaderCount > 1, FirstLeaderName & " (+" & ( LeaderCount - 1 ) & " tied)", FirstLeaderName )
+		displayFolder: Actions
+		lineageTag: 0fcc242e-21b7-513e-8f6a-828a530be1c6
+
+	/// Actions closed in the period (by close date).
+	measure 'Actions Closed' = CALCULATE ( COUNTROWS ( 'Action' ), KEEPFILTERS ( 'Status'[ActionStatusCode] = 4 ), USERELATIONSHIP ( 'Date'[Date], 'Action'[Closed Date] ) )
+		formatString: #,0
+		displayFolder: Closure
+		lineageTag: f621884a-28bc-540b-b89d-b4a428120458
+
+	/// Average days from raised to closed, for actions closed in the period. Actions closed without a closing update have no close date and are left out.
+	measure 'Average Days To Close' = CALCULATE ( AVERAGE ( 'Action'[Days To Close] ), KEEPFILTERS ( 'Status'[ActionStatusCode] = 4 ), USERELATIONSHIP ( 'Date'[Date], 'Action'[Closed Date] ) )
+		formatString: #,0
+		displayFolder: Closure
+		lineageTag: af89945e-d451-5b90-8aed-f810cb7e8770
+
+	/// Actions closed in the period on or before their due date.
+	measure 'Closed On Time' = CALCULATE ( COUNTROWS ( 'Action' ), KEEPFILTERS ( 'Status'[ActionStatusCode] = 4 ), KEEPFILTERS ( 'Action'[Closed On Time] = TRUE () ), USERELATIONSHIP ( 'Date'[Date], 'Action'[Closed Date] ) )
+		formatString: #,0
+		displayFolder: Closure
+		lineageTag: 3494aabd-82e3-5d7c-bea5-129a52fe1e1a
+
+	/// Actions closed in the period that had a due date.
+	measure 'Closed With Due Date' = CALCULATE ( COUNTROWS ( 'Action' ), KEEPFILTERS ( 'Status'[ActionStatusCode] = 4 ), KEEPFILTERS ( NOT ISBLANK ( 'Action'[Closed On Time] ) ), USERELATIONSHIP ( 'Date'[Date], 'Action'[Closed Date] ) )
+		formatString: #,0
+		displayFolder: Closure
+		lineageTag: 009cbc95-fb2d-574b-9d34-093075b86b9b
+
+	/// Share of actions closed in the period that were closed by their due date. Actions closed without a closing update have no close date and are left out.
+	measure 'On Time Rate' = DIVIDE ( [Closed On Time], [Closed With Due Date] )
+		formatString: 0%
+		displayFolder: Closure
+		lineageTag: 5be16425-2f62-50bf-bb3c-1951c60cd341
+
+	/// Share of actions raised in the period that are now closed.
+	measure 'Closure Rate' = DIVIDE ( [Closed Actions], [Actions] )
+		formatString: 0%
+		displayFolder: Closure
+		lineageTag: 90d885a4-b9d8-5b11-ac4d-3705e00ae99c
+
+	/// Updates recorded on actions (deleted updates excluded).
+	measure Updates = CALCULATE ( COUNTROWS ( 'Action Update' ), KEEPFILTERS ( 'Action Update'[Deleted] = FALSE () ) )
+		formatString: #,0
+		displayFolder: Updates
+		lineageTag: 65750d93-70c5-5197-9b55-e449971d21a5
+
+	/// Actions with at least one update.
+	measure 'Actions With Updates' = CALCULATE ( [Actions], 'Action Update', KEEPFILTERS ( 'Action Update'[Deleted] = FALSE () ) )
+		formatString: #,0
+		displayFolder: Updates
+		lineageTag: 4c57f3f5-52a3-5d79-aa51-423d5296bb16
+
+	/// Actions for the same-length period immediately before the selected dates.
+	measure 'Actions PP' =
+			VAR FirstDay = MIN ( 'Date'[Date] )
+			VAR LastDay = MIN ( MAX ( 'Date'[Date] ), TODAY () )
+			VAR Days = LastDay - FirstDay + 1
+			RETURN
+			    CALCULATE ( [Actions], DATESBETWEEN ( 'Date'[Date], FirstDay - Days, FirstDay - 1 ) )
+		formatString: #,0
+		isHidden
+		displayFolder: Previous Period
+		lineageTag: 977fb360-636b-5248-8804-4a3aea3e49a2
+
+	/// Actions Closed for the same-length period immediately before the selected dates.
+	measure 'Actions Closed PP' =
+			VAR FirstDay = MIN ( 'Date'[Date] )
+			VAR LastDay = MIN ( MAX ( 'Date'[Date] ), TODAY () )
+			VAR Days = LastDay - FirstDay + 1
+			RETURN
+			    CALCULATE ( [Actions Closed], DATESBETWEEN ( 'Date'[Date], FirstDay - Days, FirstDay - 1 ) )
+		formatString: #,0
+		isHidden
+		displayFolder: Previous Period
+		lineageTag: b261419c-8403-58f2-a773-1f7ae990b896
+
+	/// Average Days To Close for the same-length period immediately before the selected dates.
+	measure 'Average Days To Close PP' =
+			VAR FirstDay = MIN ( 'Date'[Date] )
+			VAR LastDay = MIN ( MAX ( 'Date'[Date] ), TODAY () )
+			VAR Days = LastDay - FirstDay + 1
+			RETURN
+			    CALCULATE ( [Average Days To Close], DATESBETWEEN ( 'Date'[Date], FirstDay - Days, FirstDay - 1 ) )
+		formatString: #,0
+		isHidden
+		displayFolder: Previous Period
+		lineageTag: bd3560b2-3df8-56eb-b7de-d638a9b74f15
+
+	/// On Time Rate for the same-length period immediately before the selected dates.
+	measure 'On Time Rate PP' =
+			VAR FirstDay = MIN ( 'Date'[Date] )
+			VAR LastDay = MIN ( MAX ( 'Date'[Date] ), TODAY () )
+			VAR Days = LastDay - FirstDay + 1
+			RETURN
+			    CALCULATE ( [On Time Rate], DATESBETWEEN ( 'Date'[Date], FirstDay - Days, FirstDay - 1 ) )
+		formatString: 0%
+		isHidden
+		displayFolder: Previous Period
+		lineageTag: d1217752-9282-5d45-9991-7400856a0d3e
+
+	measure 'Actions Trend Label' =
+			VAR Cur = [Actions]
+			VAR Prev = [Actions PP]
+			VAR Change = DIVIDE ( Cur - Prev, Prev )
+			RETURN
+			    IF (
+			        ISBLANK ( Prev ) || Prev = 0,
+			        "No earlier period to compare",
+			        IF ( Change >= 0, "▲ ", "▼ " ) & FORMAT ( ABS ( Change ), "0%" ) & " vs previous period"
+			    )
+		isHidden
+		displayFolder: Labels
+		lineageTag: d44c5c07-bef6-54b8-9738-ab3542d3874f
+
+	measure 'Closed Trend Label' =
+			VAR Cur = [Actions Closed]
+			VAR Prev = [Actions Closed PP]
+			VAR Change = DIVIDE ( Cur - Prev, Prev )
+			RETURN
+			    IF (
+			        ISBLANK ( Prev ) || Prev = 0,
+			        "No earlier period to compare",
+			        IF ( Change >= 0, "▲ ", "▼ " ) & FORMAT ( ABS ( Change ), "0%" ) & " vs previous period"
+			    )
+		isHidden
+		displayFolder: Labels
+		lineageTag: 6cae9455-2564-5e69-8e87-f6b3526a03fc
+
+	measure 'Days To Close Trend Label' =
+			VAR Cur = [Average Days To Close]
+			VAR Prev = [Average Days To Close PP]
+			VAR Change = DIVIDE ( Cur - Prev, Prev )
+			RETURN
+			    IF (
+			        ISBLANK ( Prev ) || Prev = 0,
+			        "No earlier period to compare",
+			        IF ( Change >= 0, "▲ ", "▼ " ) & FORMAT ( ABS ( Change ), "0%" ) & " vs previous period"
+			    )
+		isHidden
+		displayFolder: Labels
+		lineageTag: 47d87b04-d7a9-5311-a541-f7cdc2daf200
+
+	measure 'On Time Trend Label' =
+			VAR Cur = [On Time Rate]
+			VAR Prev = [On Time Rate PP]
+			RETURN
+			    IF (
+			        ISBLANK ( Prev ) || ISBLANK ( Cur ),
+			        "No earlier period to compare",
+			        IF ( Cur >= Prev, "▲ ", "▼ " ) & FORMAT ( ABS ( Cur - Prev ) * 100, "0.0" ) & " pts vs previous period"
+			    )
+		isHidden
+		displayFolder: Labels
+		lineageTag: 3cd4482f-d18b-5399-9308-6c9639ef20fb
+
+	measure 'Open Actions Label' =
+			VAR ActionCount = [Actions]
+			RETURN
+			    IF ( ActionCount > 0, FORMAT ( DIVIDE ( [Open Actions] + 0, ActionCount ), "0%" ) & " of actions still open" )
+		isHidden
+		displayFolder: Labels
+		lineageTag: a3b04bf8-8a38-529b-afe9-11bcf81df68d
+
+	measure 'Overdue Label' =
+			VAR OpenCount = [Open Actions]
+			RETURN
+			    IF ( OpenCount > 0, FORMAT ( DIVIDE ( [Overdue Actions] + 0, OpenCount ), "0%" ) & " of open actions" )
+		isHidden
+		displayFolder: Labels
+		lineageTag: f7a5d641-a169-5ee8-a861-ea96442cc3d8
+
+	measure 'Serious Overdue Label' =
+			VAR SeriousOpen = [Serious Open Actions] + 0
+			RETURN
+			    IF ( NOT ISBLANK ( [Actions] ), "Of " & FORMAT ( SeriousOpen, "#,0" ) & " high or critical open" )
+		isHidden
+		displayFolder: Labels
+		lineageTag: 4e587b96-a96e-52eb-9de5-8026f9200854
+
+	measure 'Oldest Overdue Label' =
+			VAR Oldest = [Oldest Overdue Days]
+			RETURN
+			    IF ( NOT ISBLANK ( Oldest ), "Oldest overdue by " & FORMAT ( Oldest, "#,0" ) & " days", "No overdue actions" )
+		isHidden
+		displayFolder: Labels
+		lineageTag: 498cdeb1-221b-5aa7-9cc9-921a918ebc73
+
+	measure 'No Due Date Label' = "Open actions with no due date set"
+		isHidden
+		displayFolder: Labels
+		lineageTag: 616d99fe-309c-5763-b659-6fa05f718e0c
+
+	measure 'Closure Rate Label' =
+			VAR Rate = [Closure Rate]
+			RETURN
+			    IF ( NOT ISBLANK ( Rate ), FORMAT ( Rate, "0%" ) & " of actions raised are closed" )
+		isHidden
+		displayFolder: Labels
+		lineageTag: f5ba126c-01d7-5cf8-bbb1-3b7f373eb54d
+
+	measure 'On Time Label' =
+			VAR WithDue = [Closed With Due Date]
+			RETURN
+			    IF ( WithDue > 0, FORMAT ( [Closed On Time] + 0, "#,0" ) & " of " & FORMAT ( WithDue, "#,0" ) & " closed by their due date" )
+		isHidden
+		displayFolder: Labels
+		lineageTag: ea34ed78-d215-55fc-99ea-9c0d38b6344a
+
+	measure 'Peak Month Label' =
+			VAR Months = ADDCOLUMNS ( VALUES ( 'Date'[Month Start] ), "@Actions", [Actions] )
+			VAR Peak = MAXX ( Months, [@Actions] )
+			VAR PeakMonth = MAXX ( FILTER ( Months, [@Actions] = Peak ), 'Date'[Month Start] )
+			RETURN
+			    IF ( NOT ISBLANK ( Peak ), "Peak " & FORMAT ( Peak, "#,0" ) & " in " & FORMAT ( PeakMonth, "mmm yyyy" ) )
+		isHidden
+		displayFolder: Labels
+		lineageTag: 154b72f3-18ff-5a37-aa56-23406075c41e
+
+	measure 'Most Common Type Label' =
+			VAR ActionCount = [Actions]
+			VAR Types = ADDCOLUMNS ( VALUES ( 'Type'[Type] ), "@Actions", [Actions] )
+			RETURN
+			    IF ( ActionCount > 0, FORMAT ( DIVIDE ( MAXX ( Types, [@Actions] ), ActionCount ), "0%" ) & " of actions" )
+		isHidden
+		displayFolder: Labels
+		lineageTag: 51ed2949-284a-5ce8-bafe-0e48bffdfbe6
+
+	measure 'Assignees Label' =
+			VAR PeopleCount = [Assignees]
+			RETURN
+			    IF ( PeopleCount > 0, "Avg " & FORMAT ( DIVIDE ( [Actions], PeopleCount ), "#,0" ) & " actions each" )
+		isHidden
+		displayFolder: Labels
+		lineageTag: 5fd99688-80c2-5f99-83b8-08f8e26a3187
+
+	measure 'Most Overdue Assignee Text' =
+			VAR LabelText = [Most Overdue Assignee]
+			RETURN
+			    SWITCH (
+			        TRUE (),
+			        ISBLANK ( LabelText ), "No overdue actions",
+			        LEN ( LabelText ) > 40, LEFT ( LabelText, 39 ) & "…",
+			        LabelText
+			    )
+		isHidden
+		displayFolder: Labels
+		lineageTag: 391f04e7-2e64-526b-bad8-e75f19e09ba6
+
+	measure 'Most Overdue Assignee Label' =
+			VAR People = ADDCOLUMNS ( FILTER ( VALUES ( 'Action'[Name] ), LEN ( 'Action'[Name] ) > 0 ), "@Overdue", [Overdue Actions] )
+			VAR Highest = MAXX ( People, [@Overdue] )
+			RETURN
+			    IF ( Highest > 0, FORMAT ( Highest, "#,0" ) & " overdue" )
+		isHidden
+		displayFolder: Labels
+		lineageTag: 6b36569b-17c5-5676-b899-3646f3bf6abc
+
+	measure 'Updates Label' =
+			VAR WithUpdates = [Actions With Updates] + 0
+			RETURN
+			    IF ( NOT ISBLANK ( [Actions] ), "On " & FORMAT ( WithUpdates, "#,0" ) & IF ( WithUpdates = 1, " action", " actions" ) )
+		isHidden
+		displayFolder: Labels
+		lineageTag: 560f9c86-b4ca-5595-8aaa-4f2ebb8df322
+
+	/// Subtitle for the updates table: explains that selecting an action filters it.
+	measure 'Updates Subtitle' = IF ( HASONEVALUE ( 'Action'[Action_key] ), "Updates on the selected action", "Select an action to see only its updates" )
+		isHidden
+		displayFolder: Labels
+		lineageTag: 4af55011-6dca-57e3-b195-ca318555b1f4
+
+	/// Semantic colour for favourable changes; matches the theme's 'good' colour.
+	measure 'Colour Good' = "#2E9E6B"
+		isHidden
+		displayFolder: Formatting
+		lineageTag: b41561a0-3b25-54e9-995d-57cf151651a4
+
+	/// Semantic colour for unfavourable changes; matches the theme's 'bad' colour.
+	measure 'Colour Bad' = "#D6493A"
+		isHidden
+		displayFolder: Formatting
+		lineageTag: e6e32ea6-cc75-5e58-b6f0-15b3b388c150
+
+	/// Semantic colour for no change or no comparison; matches the theme's secondary text colour.
+	measure 'Colour Neutral' = "#4A5568"
+		isHidden
+		displayFolder: Formatting
+		lineageTag: 8f36d4e2-009b-5256-a568-456ba57691a1
+
+	/// Raising more actions isn't good or bad in itself, so the trend is neutral.
+	measure 'Actions Trend Colour' = [Colour Neutral]
+		isHidden
+		displayFolder: Formatting
+		lineageTag: ff6480c8-2509-54d7-acb8-9be054b7b1d6
+
+	measure 'Closed Trend Colour' =
+			VAR Cur = [Actions Closed]
+			VAR Prev = [Actions Closed PP]
+			RETURN
+			    SWITCH (
+			        TRUE (),
+			        ISBLANK ( Prev ) || Prev = 0 || Cur = Prev, [Colour Neutral],
+			        Cur > Prev, [Colour Good],
+			        [Colour Bad]
+			    )
+		isHidden
+		displayFolder: Formatting
+		lineageTag: 54467050-bc24-5434-92aa-55f92585cfbb
+
+	measure 'Days To Close Trend Colour' =
+			VAR Cur = [Average Days To Close]
+			VAR Prev = [Average Days To Close PP]
+			RETURN
+			    SWITCH (
+			        TRUE (),
+			        ISBLANK ( Prev ) || Prev = 0 || Cur = Prev, [Colour Neutral],
+			        Cur > Prev, [Colour Bad],
+			        [Colour Good]
+			    )
+		isHidden
+		displayFolder: Formatting
+		lineageTag: 1bac84dc-07c2-508f-b91b-db07a25d5434
+
+	measure 'On Time Trend Colour' =
+			VAR Cur = [On Time Rate]
+			VAR Prev = [On Time Rate PP]
+			RETURN
+			    SWITCH (
+			        TRUE (),
+			        ISBLANK ( Prev ) || ISBLANK ( Cur ) || Cur = Prev, [Colour Neutral],
+			        Cur > Prev, [Colour Good],
+			        [Colour Bad]
+			    )
+		isHidden
+		displayFolder: Formatting
+		lineageTag: a3fcecaf-80a7-5702-b143-d23c535bd577
+
+	measure 'Overdue Colour' = IF ( [Overdue Actions] > 0, [Colour Bad], [Colour Neutral] )
+		isHidden
+		displayFolder: Formatting
+		lineageTag: be94fa5c-1d83-58c5-8561-1f1030eec458
+
+	/// Text colour for a priority code (Critical, High, Medium, Low); priorities are a fixed list in Work Wallet.
+	measure 'Priority Colour' = SWITCH ( SELECTEDVALUE ( 'Priority'[ActionPriorityCode] ), 8, "#D6493A", 4, "#E07B39", 2, "#C9901A", 1, "#2E9E6B", "#4A5568" )
+		isHidden
+		displayFolder: Formatting
+		lineageTag: d404d73a-8688-5603-8f42-ae16327f8387
+
+	/// Text colour for a status: open or in progress (amber), closed (green), draft (grey).
+	measure 'Status Colour' = SWITCH ( SELECTEDVALUE ( 'Status'[ActionStatusCode] ), 1, "#C9901A", 2, "#C9901A", 4, "#2E9E6B", "#4A5568" )
+		isHidden
+		displayFolder: Formatting
+		lineageTag: 7bfaeb74-04d6-5a19-bc63-bfdbf1ab896b
+
+	/// Average days from raised to closed, for closed actions raised in the period (Work Wallet's 'Average close out days'). Actions closed without a closing update have no close date and are left out.
+	measure 'Average Close Out Days' = CALCULATE ( AVERAGE ( 'Action'[Days To Close] ), KEEPFILTERS ( 'Status'[ActionStatusCode] = 4 ) )
+		formatString: #,0
+		displayFolder: Closure
+		lineageTag: 7a7513bf-3847-5693-af98-8f1909678d93
+
+	measure 'Close Out Days Label' =
+			VAR ClosedCount = CALCULATE ( COUNTROWS ( 'Action' ), KEEPFILTERS ( 'Status'[ActionStatusCode] = 4 ), KEEPFILTERS ( NOT ISBLANK ( 'Action'[Days To Close] ) ) )
+			RETURN
+			    IF ( ClosedCount > 0, "For " & FORMAT ( ClosedCount, "#,0" ) & " closed actions raised in the period" )
+		isHidden
+		displayFolder: Labels
+		lineageTag: 357c368f-5061-5bec-8be7-76215f9ec107
+
+	column Value
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 0e6055a9-9a30-51a7-9b62-f83ee9f5423f
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Value]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Action Measures' = calculated
+		mode: import
+		source = { 1 }
+
+	annotation PBI_Id = d432c2e42dd153d89fb37d5eb7e1e83f
+
